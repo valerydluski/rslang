@@ -26,7 +26,7 @@ function App() {
           <Route path="/AudioCall" component={AudioCall} />
           <Route path="/Sprint" component={Sprint} />
           <Route path="/ownGame" component={OwnGame} />
-          <Redirect to="/" />
+          <Redirect to="/LoginPage" />
         </Switch>
       </main>
     </div>

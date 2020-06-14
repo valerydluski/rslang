@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from './NavigationLink';
+import NavigationLink from './NavigationLink';
 
 export default class NavigationPanel extends React.Component {
   constructor(props) {
@@ -19,11 +19,12 @@ export default class NavigationPanel extends React.Component {
   }
 
   render() {
+    const { links } = this.state;
     return (
       <div className="navigation-panel_container">
         <ul className="navigation-panel">
-          {this.state.links.map((link) => {
-            return <Link key={link.name} link={link.link} name={link.name} />;
+          {links.map((link) => {
+            return <NavigationLink key={link.name} link={link.link} name={link.name} />;
           })}
         </ul>
       </div>
