@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import NavigationPanel from './components/NavigationPanel';
 import SpeakIT from './components/SpeakIT';
 import EnglishPuzzle from './components/EnglishPuzzle';
@@ -18,13 +18,16 @@ function App() {
         <NavigationPanel />
       </nav>
       <main>
-        <Route path="/" exact render={() => <h1>Home Page</h1>} />
-        <Route path="/SpeakIT" component={SpeakIT} />
-        <Route path="/EnglishPuzzle" component={EnglishPuzzle} />
-        <Route path="/Savannah" component={Savannah} />
-        <Route path="/AudioCall" component={AudioCall} />
-        <Route path="/Sprint" component={Sprint} />
-        <Route path="/ownGame" component={OwnGame} />
+        <Switch>
+          <Route path="/" exact render={() => <h1>Home Page</h1>} />
+          <Route path="/SpeakIT" component={SpeakIT} />
+          <Route path="/EnglishPuzzle" component={EnglishPuzzle} />
+          <Route path="/Savannah" component={Savannah} />
+          <Route path="/AudioCall" component={AudioCall} />
+          <Route path="/Sprint" component={Sprint} />
+          <Route path="/ownGame" component={OwnGame} />
+          <Redirect to="/" />
+        </Switch>
       </main>
     </div>
   );
