@@ -21,13 +21,13 @@ export default class NavigationPanel extends React.Component {
   render() {
     const { links } = this.state;
     return (
-      <div className="navigation-panel_container">
+      <nav className="navigation-panel_container">
         <ul className="navigation-panel">
           {links.map((link) => {
             return <NavigationLink key={link.name} link={link.link} name={link.name} />;
           })}
         </ul>
-      </div>
+      </nav>
     );
   }
 }

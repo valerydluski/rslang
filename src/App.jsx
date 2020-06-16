@@ -1,22 +1,20 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import NavigationPanel from './components/NavigationPanel';
-import SpeakIT from './components/SpeakIT';
-import EnglishPuzzle from './components/EnglishPuzzle';
-import Savannah from './components/Savannah';
-import AudioCall from './components/AudioCall';
-import Sprint from './components/Sprint';
-import OwnGame from './components/OwnGame';
+import NavigationPanel from './components/Navigation/NavigationPanel';
+import SpeakIT from './pages/games/SpeakIt/SpeakIT';
+import EnglishPuzzle from './pages/games/EnglishPuzzle/EnglishPuzzle';
+import Savannah from './pages/games/Savannah/Savannah';
+import AudioCall from './pages/games/AudioCall/AudioCall';
+import Sprint from './pages/games/Sprint/Sprint';
+import OwnGame from './pages/games/OwnGame/OwnGame';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>RSLANG</h1>
-      </header>
-      <nav className="nav">
         <NavigationPanel />
-      </nav>
+      </header>
       <main>
         <Switch>
           <Route path="/" exact render={() => <h1>Home Page</h1>} />
