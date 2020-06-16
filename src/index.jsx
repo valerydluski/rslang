@@ -1,12 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import SpeakITStartPage from "./components/SpeakITStartPage";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 
-ReactDOM.render(
-  <React.StrictMode>
+const application = (
+  <BrowserRouter>
     <App />
-    <SpeakITStartPage />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </BrowserRouter>
 );
+
+ReactDOM.render(application, document.getElementById('root'));
