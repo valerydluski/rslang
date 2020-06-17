@@ -1,71 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = (props) => {
-  const {
-    classes,
-    name,
-    inputMax,
-    startValue,
-    typeInput,
-    inputMin,
-    readOnlyInput,
-    placeholderInput,
-    sizeInupt,
-    onChangeInput,
-  } = props;
-
-  const [inputValue, setInputValue] = useState(startValue);
-
-  const changeInputHandler = (event) => {
-    setInputValue(event.target.value);
-    onChangeInput(event.target.value);
-  };
+  const { name, type, readOnlyInput, placeholder, sizeInput, input } = props;
 
   return (
-    <div className={classes}>
-      <label htmlFor={name}>
-        {name}
-        <input
-          type={typeInput}
-          name={name}
-          min={inputMin}
-          max={inputMax}
-          value={inputValue}
-          readOnly={readOnlyInput}
-          onChange={changeInputHandler}
-          placeholder={placeholderInput}
-          size={sizeInupt}
-        />
-      </label>
-    </div>
+    <input
+      type={type}
+      name={name}
+      readOnly={readOnlyInput}
+      placeholder={placeholder}
+      size={sizeInput}
+      {...input}
+    />
   );
 };
 
 Input.propTypes = {
-  typeInput: PropTypes.string,
+  type: PropTypes.string,
   name: PropTypes.string,
-  classes: PropTypes.string,
-  inputMax: PropTypes.string,
-  inputMin: PropTypes.string,
-  startValue: PropTypes.string,
   readOnlyInput: PropTypes.bool,
-  placeholderInput: PropTypes.string,
-  sizeInupt: PropTypes.string,
-  onChangeInput: PropTypes.func,
+  placeholder: PropTypes.string,
+  sizeInput: PropTypes.string,
 };
 
 Input.defaultProps = {
-  typeInput: 'text',
+  type: 'text',
   name: '',
-  classes: '',
-  inputMax: '',
-  inputMin: '',
-  startValue: '',
   readOnlyInput: false,
-  placeholderInput: '',
-  sizeInupt: '',
-  onChangeInput: () => {},
+  placeholder: '',
+  sizeInput: '',
 };
 
 export default Input;
