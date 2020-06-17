@@ -6,8 +6,8 @@ const AudioIconStyled = styled.img`
   position: absolute;
   top: 18px;
   left: 10px;
-  width: 45px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
 `;
 
 const AudioIcon = () => {
