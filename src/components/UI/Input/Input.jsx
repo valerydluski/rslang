@@ -23,8 +23,8 @@ const Input = (props) => {
   };
 
   return (
-    <div className={`${classes}`}>
-      <label htmlFor={`${name}`}>
+    <div className={classes}>
+      <label htmlFor={name}>
         {name}
         <input
           type={typeInput}
@@ -61,7 +61,7 @@ Input.defaultProps = {
   classes: '',
   inputMax: '',
   inputMin: '',
-  startValue: '1',
+  startValue: '',
   readOnlyInput: false,
   placeholderInput: '',
   sizeInupt: '',

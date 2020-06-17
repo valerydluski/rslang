@@ -1,11 +1,13 @@
+import { reducer as formReducer } from 'redux-form';
+import { combineReducers } from 'redux';
+
 import roundChangeReducer from './roundChangeReducer';
 import changeWordsCollectionReducer from './changeWordsCollectionReducer';
-
-const { combineReducers } = require('redux');
 
 const rootReducer = combineReducers({
   roundChange: roundChangeReducer,
   changeWordsCollection: changeWordsCollectionReducer,
+  form: formReducer,
 });
 
 export default rootReducer;

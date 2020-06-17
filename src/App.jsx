@@ -7,6 +7,7 @@ import Savannah from './pages/games/Savannah/Savannah';
 import AudioCall from './pages/games/AudioCall/AudioCall';
 import Sprint from './pages/games/Sprint/Sprint';
 import OwnGame from './pages/games/OwnGame/OwnGame';
+import Auth from './components/Auth/Auth';
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
           <Route path="/AudioCall" component={AudioCall} />
           <Route path="/Sprint" component={Sprint} />
           <Route path="/ownGame" component={OwnGame} />
-          <Redirect to="/LoginPage" />
+          <Route path="/login" component={Auth} />
+          <Redirect to="/login" />
         </Switch>
       </main>
     </div>
