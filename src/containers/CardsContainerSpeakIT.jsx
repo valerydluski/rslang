@@ -16,18 +16,24 @@ const CardsContainerSpeakITStyled = styled.div`
 `;
 
 const CardsContainerSpeakIT = (props) => {
-  const { wordsCollection } = props;
+  const { wordsCollection, cardHandler } = props;
   return (
     <CardsContainerSpeakITStyled>
       {wordsCollection.map((word) => {
-        return <WordCardSpeakIT key={word.word} word={word} />;
+        return <WordCardSpeakIT key={word.word} obj={word} wordCardHandler={cardHandler} />;
       })}
     </CardsContainerSpeakITStyled>
   );
 };
 
 CardsContainerSpeakIT.propTypes = {
-  wordsCollection: PropTypes.objectOf.isRequired,
+  wordsCollection: PropTypes.instanceOf(Array),
+  cardHandler: PropTypes.func,
+};
+
+CardsContainerSpeakIT.defaultProps = {
+  wordsCollection: [],
+  cardHandler: () => {},
 };
 
 const mapStateToProps = (state) => {
