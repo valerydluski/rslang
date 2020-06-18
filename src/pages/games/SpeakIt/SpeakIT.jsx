@@ -12,10 +12,20 @@ const SpeakIT = (props) => {
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [textForTextField, setTranslate] = useState(translate);
 
+  const audioSpeakIt = new Audio();
+
+  const playAudio = (src) => {
+    const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
+    audioSpeakIt.setAttribute('src', `${link}${src}`);
+    audioSpeakIt.load();
+    audioSpeakIt.play();
+  };
+
   const cardHandler = (obj) => {
     const link = `https://raw.githubusercontent.com/valerydluski/rslang-data/master/${obj.image}`;
     setSrcForImage(link);
     setTranslate(obj.wordTranslate);
+    playAudio(obj.audio);
   };
 
   return (
