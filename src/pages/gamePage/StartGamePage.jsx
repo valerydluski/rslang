@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { startGame } from '../../redux/action';
 
-const StartGamepage = ({ gameName, gameStart }) => {
+const StartGamePage = (props) => {
+  const { gameName, onGameStart } = props;
+
   const gameDescriptions = {
     AudioCall: 'AudioCall description. Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     EnglishPuzzle: 'EnglishPuzzle description. Lorem ipsum dolor sit amet.',
@@ -12,21 +16,26 @@ const StartGamepage = ({ gameName, gameStart }) => {
   };
 
   const gameDescription = gameDescriptions[gameName];
-
   return (
     <div className="start-game-page">
       <h3 className="start-game-page__game-name">{gameName}</h3>
       <p className="start-game-page__description">{gameDescription}</p>
-      <button type="button" onClick={gameStart}>
+      <button className="start-game-page__start-button" type="button" onClick={onGameStart}>
         Start game
       </button>
     </div>
   );
 };
 
-StartGamepage.propTypes = {
+StartGamePage.propTypes = {
   gameName: PropTypes.string.isRequired,
-  gameStart: PropTypes.func.isRequired,
+  onGameStart: PropTypes.func.isRequired,
 };
 
-export default StartGamepage;
+function mapDispatchToProps(dispatch) {
+  return {
+    onGameStart: () => dispatch(startGame()),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(StartGamePage);

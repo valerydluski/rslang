@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import SpeakIT from '../games/SpeakIt/SpeakIT';
 import EnglishPuzzle from '../games/EnglishPuzzle/EnglishPuzzle';
 import Savannah from '../games/Savannah/Savannah';
@@ -8,38 +9,35 @@ import Sprint from '../games/Sprint/Sprint';
 import OwnGame from '../games/OwnGame/OwnGame';
 import StartGamePage from './StartGamePage';
 
-export default class Gamepage extends Component {
-  constructor({ gameName }) {
-    super();
-    this.state = {
-      isGameStart: false,
-    };
-    this.gameName = gameName;
-    this.PageComponents = {
-      SpeakIT: <SpeakIT />,
-      EnglishPuzzle: <EnglishPuzzle />,
-      Savannah: <Savannah />,
-      AudioCall: <AudioCall />,
-      Sprint: <Sprint />,
-      OwnGame: <OwnGame />,
-      StartGamePage: <StartGamePage gameName={this.gameName} gameStart={this.startGame} />,
-    };
-  }
+const GamePage = (props) => {
+  const { gameName, isGameStart } = props;
 
-  startGame = () => {
-    this.setState({ isGameStart: true });
+  const pageComponents = {
+    SpeakIT: <SpeakIT />,
+    EnglishPuzzle: <EnglishPuzzle />,
+    Savannah: <Savannah />,
+    AudioCall: <AudioCall />,
+    Sprint: <Sprint />,
+    OwnGame: <OwnGame />,
+    StartGamePage: <StartGamePage gameName={gameName} />,
   };
 
-  render() {
-    const { isGameStart } = this.state;
-    return (
-      <div className="game-page">
-        {isGameStart ? this.PageComponents[this.gameName] : this.PageComponents.StartGamePage}
-      </div>
-    );
-  }
+  return (
+    <div className="game-page">
+      {isGameStart ? pageComponents[gameName] : pageComponents.StartGamePage}
+    </div>
+  );
+};
+
+GamePage.propTypes = {
+  gameName: PropTypes.string.isRequired,
+  isGameStart: PropTypes.bool.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    isGameStart: state.switchGameMode.isGameStart,
+  };
 }
 
-Gamepage.propTypes = {
-  gameName: PropTypes.string.isRequired,
-};
+export default connect(mapStateToProps)(GamePage);
