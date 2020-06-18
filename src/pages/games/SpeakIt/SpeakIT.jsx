@@ -5,6 +5,7 @@ import RoundSwitch from '../../../containers/RoundSwitch';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
 import CardsContainerSpeakIT from '../../../containers/CardsContainerSpeakIT';
+import ButtonsContainerSpeakIT from '../../../containers/ButtonsContainerSpeakIt';
 
 const SpeakIT = (props) => {
   const { Level, Page, imageSrc, translate } = props;
@@ -28,6 +29,18 @@ const SpeakIT = (props) => {
     playAudio(obj.audio);
   };
 
+  const restartHandler = () => {
+    console.log('restart');
+  };
+
+  const speakHandler = () => {
+    console.log('speak');
+  };
+
+  const finishHandler = () => {
+    console.log('finish');
+  };
+
   return (
     <div className="speak-it_container">
       <RoundSwitch />
@@ -37,6 +50,11 @@ const SpeakIT = (props) => {
       <Image src={srcForImage} />
       <TextField text={textForTextField} />
       <CardsContainerSpeakIT cardHandler={cardHandler} />
+      <ButtonsContainerSpeakIT
+        restartHandler={restartHandler}
+        speakHandler={speakHandler}
+        finishHandler={finishHandler}
+      />
     </div>
   );
 };
