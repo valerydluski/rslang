@@ -1,43 +1,39 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import SpeakIT from '../games/SpeakIt/SpeakIT';
 import EnglishPuzzle from '../games/EnglishPuzzle/EnglishPuzzle';
 import Savannah from '../games/Savannah/Savannah';
 import AudioCall from '../games/AudioCall/AudioCall';
 import Sprint from '../games/Sprint/Sprint';
 import OwnGame from '../games/OwnGame/OwnGame';
-import StartGamePage from './StartGamePage';
 
-const GamePage = (props) => {
-  const { gameName, isGameStart } = props;
-
-  const pageComponents = {
-    SpeakIT: <SpeakIT />,
-    EnglishPuzzle: <EnglishPuzzle />,
-    Savannah: <Savannah />,
-    AudioCall: <AudioCall />,
-    Sprint: <Sprint />,
-    OwnGame: <OwnGame />,
-    StartGamePage: <StartGamePage gameName={gameName} />,
-  };
-
-  return (
-    <div className="game-page">
-      {isGameStart ? pageComponents[gameName] : pageComponents.StartGamePage}
-    </div>
-  );
+const GamePage = ({ match }) => {
+  const { gameName } = match.params;
+  switch (gameName) {
+    case 'SpeakIT':
+      return <SpeakIT />;
+    case 'EnglishPuzzle':
+      return <EnglishPuzzle />;
+    case 'Savannah':
+      return <Savannah />;
+    case 'AudioCall':
+      return <AudioCall />;
+    case 'Sprint':
+      return <Sprint />;
+    case 'OwnGame':
+      return <OwnGame />;
+    default:
+      return <Redirect to="/" />;
+  }
 };
 
 GamePage.propTypes = {
-  gameName: PropTypes.string.isRequired,
-  isGameStart: PropTypes.bool.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      gameName: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    isGameStart: state.switchGameMode.isGameStart,
-  };
-}
-
-export default connect(mapStateToProps)(GamePage);
+export default GamePage;
