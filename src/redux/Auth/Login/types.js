@@ -1,0 +1,2 @@
+export const AUTH_TO_SERVER = 'AUTH_TO_SERVER';
+export const SAVE_SESSION_DATA = 'SAVE_SESSION_DATA';
