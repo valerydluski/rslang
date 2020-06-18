@@ -10,8 +10,8 @@ function App() {
       <main>
         <Switch>
           <Route path="/" exact render={() => <HomePage />} />
-          <Route path="/StartGame/:gameName" component={StartGamePage} />
-          <Route path="/Game/:gameName" component={GamePage} />
+          <Route path="/StartGame/:gameId" component={StartGamePage} />
+          <Route path="/Game/:gameId" component={GamePage} />
           <Redirect to="/LoginPage" />
         </Switch>
       </main>

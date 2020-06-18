@@ -9,8 +9,8 @@ import Sprint from '../games/Sprint/Sprint';
 import OwnGame from '../games/OwnGame/OwnGame';
 
 const GamePage = ({ match }) => {
-  const { gameName } = match.params;
-  switch (gameName) {
+  const { gameId } = match.params;
+  switch (gameId) {
     case 'SpeakIT':
       return <SpeakIT />;
     case 'EnglishPuzzle':
@@ -31,7 +31,7 @@ const GamePage = ({ match }) => {
 GamePage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      gameName: PropTypes.string.isRequired,
+      gameId: PropTypes.string.isRequired,
     }),
   }).isRequired,
 };
