@@ -24,7 +24,7 @@ const GamePage = ({ match }) => {
     case 'OwnGame':
       return <OwnGame />;
     default:
-      return <Redirect to="/" />;
+      return <Redirect to="/LoginPage" />;
   }
 };
 
