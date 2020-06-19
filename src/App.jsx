@@ -7,7 +7,7 @@ import Savannah from './pages/games/Savannah/Savannah';
 import AudioCall from './pages/games/AudioCall/AudioCall';
 import Sprint from './pages/games/Sprint/Sprint';
 import OwnGame from './pages/games/OwnGame/OwnGame';
-import Auth from './components/Auth/Auth';
+import Auth from './containers/Auth/Auth';
 
 function App() {
   return (

@@ -7,8 +7,9 @@ export function saveSessionData(data) {
   };
 }
 
-export function authToServer() {
+export function authToServer(data) {
   return {
     type: AUTH_TO_SERVER,
+    payload: data,
   };
 }

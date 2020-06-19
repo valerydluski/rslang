@@ -1,10 +1,10 @@
 import { takeLatest } from 'redux-saga/effects';
-import { submit } from 'redux-form';
+import { AUTH_TO_SERVER } from './types';
 
-function* workerSubmit() {
-  yield console.log('123');
+function* workerSubmit(action) {
+  yield console.log(action);
 }
 
 export default function* watchSubmit() {
-  yield takeLatest('@@redux-form/SET_SUBMIT_SUCCEEDED', workerSubmit);
+  yield takeLatest(AUTH_TO_SERVER, workerSubmit);
 }

@@ -12,8 +12,10 @@ const LoginInput = (props) => {
   } = props;
   return (
     <>
-      <Input type={type} placeholder={placeholder} input={input} />
-      {error && touched && <span>{error}</span>}
+      <div>
+        <Input type={type} placeholder={placeholder} input={input} />
+        {error && touched && <span>{error}</span>}
+      </div>
     </>
   );
 };
