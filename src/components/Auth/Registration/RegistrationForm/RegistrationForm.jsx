@@ -6,10 +6,11 @@ import LoginInput from '../../UI/LoginInput/LoginInput';
 import emailValidator from '../../../../utils/validators/emailValidator';
 import passwordValidator from '../../../../utils/validators/passwordValidator';
 
-const LoginForm = (props) => {
+const RegistrationForm = (props) => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
+      <Field name="name" key="name" type="text" placeholder="name" component={LoginInput} />
       <Field
         name="email"
         key="email"
@@ -27,18 +28,18 @@ const LoginForm = (props) => {
         validate={passwordValidator}
       />
       <button type="submit" aria-label="Sign In">
-        Sign In
+        Sign Up
       </button>
     </form>
   );
 };
 
-const ReduxLoginForm = reduxForm({
+const ReduxRegistrationForm = reduxForm({
   form: 'login',
-})(LoginForm);
+})(RegistrationForm);
 
-LoginForm.propTypes = {
+RegistrationForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
-export default ReduxLoginForm;
+export default ReduxRegistrationForm;

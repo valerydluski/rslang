@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 
 import roundChangeReducer from './roundChangeReducer';
 import changeWordsCollectionReducer from './changeWordsCollectionReducer';
-import saveSessionDataReducer from './Auth/Login/saveSessionDataReducer';
+import saveSessionDataReducer from './Auth/Login/reducers/saveSessionDataReducer';
 
 const rootReducer = combineReducers({
   roundChange: roundChangeReducer,

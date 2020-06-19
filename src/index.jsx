@@ -6,21 +6,23 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import rootReducer from './redux/rootReducer';
-import watchSubmit from './redux/Auth/Login/sagas';
+import watchLogin from './redux/Auth/Login/sagas';
+import watchRegistration from './redux/Auth/Registration/sagas';
 
-const sageMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
   rootReducer,
   compose(
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    applyMiddleware(sageMiddleware)
+    applyMiddleware(sagaMiddleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 /* eslint-enable */
 
-sageMiddleware.run(watchSubmit);
+sagaMiddleware.run(watchLogin);
+sagaMiddleware.run(watchRegistration);
 
 const application = (
   <Provider store={store}>

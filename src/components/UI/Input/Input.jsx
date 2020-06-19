@@ -11,6 +11,7 @@ const Input = (props) => {
       readOnly={readOnlyInput}
       placeholder={placeholder}
       size={sizeInput}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...input}
     />
   );
@@ -22,6 +23,7 @@ Input.propTypes = {
   readOnlyInput: PropTypes.bool,
   placeholder: PropTypes.string,
   sizeInput: PropTypes.string,
+  input: PropTypes.shape().isRequired,
 };
 
 Input.defaultProps = {
