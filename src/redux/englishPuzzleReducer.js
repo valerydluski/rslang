@@ -1,7 +1,10 @@
 const initialState = {
   status: {
     level: 0,
-    page: 0
+    page: 0,
+    row: 0,
+    sentenceList: null,
+    isLoading: true
   },
   tips: {
     autoSpeech: true,
