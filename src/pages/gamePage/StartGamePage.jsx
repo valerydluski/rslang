@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import gamesDescriptions from '../../assets/data/gamesDescriptions';
+import StartGamePageStyled from './Styled/StartGamePageStyled';
+import GameNameStyled from './Styled/GameNameStyled';
+import GameDescriptionStyled from './Styled/GameDescription';
 
 const StartGamePage = ({ match }) => {
   const { gameId } = match.params;
@@ -9,11 +12,13 @@ const StartGamePage = ({ match }) => {
   const { description } = gamesDescriptions[gameId].en;
 
   return (
-    <div className="start-game-page">
-      <h3 className="start-game-page__game-name">{name}</h3>
-      <p className="start-game-page__description">{description}</p>
+    <StartGamePageStyled className="start-game-page">
+      <div>
+        <GameNameStyled>GAME: {name}</GameNameStyled>
+        <GameDescriptionStyled>{description}</GameDescriptionStyled>
+      </div>
       <Link to={`/Game/${gameId}`}>Start</Link>
-    </div>
+    </StartGamePageStyled>
   );
 };
 
