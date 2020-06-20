@@ -1,17 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, compose } from 'redux';
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { Provider } from 'react-redux';
 import App from './App';
 import rootReducer from './redux/rootReducer';
 
-/* eslint-disable no-underscore-dangle */
-const store = createStore(
-  rootReducer,
-  compose(window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-);
-/* eslint-enable */
+const store = createStore(rootReducer, composeWithDevTools());
 
 const application = (
   <Provider store={store}>

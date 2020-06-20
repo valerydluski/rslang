@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import Input from '../components/UI/Input/Input';
 import { changeSpeakITLevel, changeSpeakITPage } from '../redux/action';
 
+const maxLevel = '6';
+const maxPage = '60';
+
 class RoundSwitch extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +16,7 @@ class RoundSwitch extends React.Component {
         {
           name: 'level',
           classes: 'input_level',
-          inputMax: '6',
+          inputMax: maxLevel,
           inputMin: '1',
           startValue: this.level,
           typeInput: 'number',
@@ -22,7 +25,7 @@ class RoundSwitch extends React.Component {
         {
           name: 'page',
           classes: 'input_page',
-          inputMax: '60',
+          inputMax: maxPage,
           inputMin: '1',
           startValue: this.page,
           typeInput: 'number',
