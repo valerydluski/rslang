@@ -30,7 +30,7 @@ function* workerStatus() {
     const sessionData = yield select(getLoginState);
     yield call(checkToken, sessionData);
     sessionData.isLogin = true;
-    put(sessionData(sessionData));
+    yield put(sessionData(sessionData));
   } catch (e) {
     put(resetSessionData());
   }

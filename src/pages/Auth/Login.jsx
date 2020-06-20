@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import ReduxLoginForm from './LoginForm/LoginForm';
+import ReduxLoginForm from '../../components/Auth/Login/LoginForm/LoginForm';
 
 const Login = (props) => {
   const { authToServer, isLogin, checkStatusSession } = props;

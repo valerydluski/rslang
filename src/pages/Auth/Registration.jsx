@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import ReduxRegistrationForm from './RegistrationForm/RegistrationForm';
+import ReduxRegistrationForm from '../../components/Auth/Registration/RegistrationForm/RegistrationForm';
 
 const Registration = (props) => {
   const { registerToServer, isLogin } = props;

@@ -9,6 +9,7 @@ import Sprint from './pages/games/Sprint/Sprint';
 import OwnGame from './pages/games/OwnGame/OwnGame';
 import Login from './containers/Auth/Login/Login';
 import Registration from './containers/Auth/Registration/Registration';
+import PrivateNavigationRoute from './containers/Navigation/PrivateNavigationRoute';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
               </>
             )}
           />
-          <Route path="/SpeakIT" component={SpeakIT} />
+          <PrivateNavigationRoute path="/SpeakIT" component={SpeakIT} />
           <Route path="/EnglishPuzzle" component={EnglishPuzzle} />
           <Route path="/Savannah" component={Savannah} />
           <Route path="/AudioCall" component={AudioCall} />
