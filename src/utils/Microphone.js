@@ -1,10 +1,9 @@
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 export default class Microphone {
-  constructor(setTranscript) {
+  constructor() {
     this.createrecognition();
     this.addResultListener();
-    this.setTranscript = setTranscript;
   }
 
   createrecognition() {
@@ -30,17 +29,14 @@ export default class Microphone {
     this.recognition.lang = lang;
   }
 
-  startMicrophone() {
+  startMicrophone(setTranscript) {
+    this.recognition.addEventListener('end', this.recognition.start);
     this.recognition.start();
-    this.recognition.addEventListener('end', this.restartMicrophone);
+    this.setTranscript = setTranscript;
   }
 
   stopMicrophone() {
+    this.recognition.removeEventListener('end', this.recognition.start);
     this.recognition.stop();
-    this.recognition.removeEventListener('end', this.restartMicrophone);
-  }
-
-  restartMicrophone() {
-    this.start();
   }
 }
