@@ -1,60 +1,33 @@
-import React from 'react';
-import AppState from './helpers/AppState';
-import EndPage from './hoc/Pages/EndPage/EndPage'
-import MainPage from './hoc/Pages/MainPage/MainPage'
-import StartPage from './hoc/Pages/StartPage/StartPage'
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
 
-class EnglishPuzzle extends React.Component {
-
-  state = {
-    page: AppState.start
-  }
-
-  toggleStartHandler = () => {
-    this.setState({
-      page: AppState.main
-    })
-  }
-
-  toggleEndHandler = () => {
-    this.setState({
-      page: AppState.start
-    })
-  }
-
+class EnglishPuzzle extends Component {
   render() {
-    let content;
-    switch(this.state.page) {
-      case AppState.start:
-        content = (
-          <StartPage
-            onClick={this.toggleStartHandler}
-          />
-        )
-        break;
-      case AppState.main:
-        content = (
-          <MainPage/>
-        )
-        break;
-      case AppState.end:
-        content = (
-          <EndPage
-            onClick={this.toggleEndHandler}
-          />
-        )
-        break;
-    }
-    console.log(content)
-
     return (
-      <div>
-        <main>
-          { content }
-        </main>
-      </div>
+      <h1>EnglishPuzzle</h1>
     )
   }
 }
 
-export default EnglishPuzzle;
+function mapStateToProps(state) {
+  return {
+    status: {
+      level: state.englishPuzzle.status.level,
+      page: state.englishPuzzle.status.page
+    },
+    tips: {
+      autoSpeech: state.englishPuzzle.tips.autoSpeech,
+      translation: state.englishPuzzle.tips.translation,
+      speech: state.englishPuzzle.tips.speech,
+      background: state.englishPuzzle.tips.background
+    }
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EnglishPuzzle);
