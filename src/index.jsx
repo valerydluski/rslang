@@ -6,8 +6,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import rootReducer from './redux/rootReducer';
-import watchLogin from './redux/Auth/Login/sagas';
-import watchRegistration from './redux/Auth/Registration/sagas';
+import watchSaga from './redux/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -21,8 +20,7 @@ const store = createStore(
 );
 /* eslint-enable */
 
-sagaMiddleware.run(watchLogin);
-sagaMiddleware.run(watchRegistration);
+sagaMiddleware.run(watchSaga);
 
 const application = (
   <Provider store={store}>

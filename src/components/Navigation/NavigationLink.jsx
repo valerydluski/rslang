@@ -7,7 +7,7 @@ const NavigationLink = (props) => {
   return (
     <div>
       <li>
-        <NavLink to={`/${link}`}>{name}</NavLink>
+        <NavLink to={link}>{name}</NavLink>
       </li>
     </div>
   );

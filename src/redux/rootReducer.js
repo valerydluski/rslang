@@ -3,12 +3,14 @@ import { combineReducers } from 'redux';
 
 import roundChangeReducer from './roundChangeReducer';
 import changeWordsCollectionReducer from './changeWordsCollectionReducer';
-import saveSessionDataReducer from './Auth/Login/reducers/saveSessionDataReducer';
+import loginReducer from './Auth/Login/reducer';
+import userSettingsReducer from './UserSettings/reducer';
 
 const rootReducer = combineReducers({
   roundChange: roundChangeReducer,
   changeWordsCollection: changeWordsCollectionReducer,
-  saveSessionData: saveSessionDataReducer,
+  login: loginReducer,
+  userSettings: userSettingsReducer,
   form: formReducer,
 });
 

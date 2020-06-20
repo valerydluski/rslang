@@ -3,6 +3,7 @@ export const API = {
   ENDPOINTS: {
     USERS: 'users',
     SIGNIN: 'signin',
+    WORDS: 'words',
   },
 };
 
