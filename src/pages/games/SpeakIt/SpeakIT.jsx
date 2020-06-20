@@ -26,21 +26,22 @@ const SpeakIT = (props) => {
     changeScore,
   } = props;
   let newScore = speakITScore;
+  const gameWords = wordsCollection.map((el) => {
+    return el.word.toLowerCase();
+  });
+
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [textForTextField, setTranslate] = useState(translate);
   const [isGame, setGameMode] = useState(gameMode);
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
-  const gameWords = wordsCollection.map((el) => {
-    return el.word.toLowerCase();
-  });
-  const [unspokenWords, setUnspokenWords] = useState(gameWords);
+  let unspokenWords = gameWords;
 
   const newScoreHandler = () => {
     changeScore(newScore);
   };
 
-  const createGame = (arr) => {
-    setUnspokenWords(arr);
+  const createGame = () => {
+    unspokenWords = gameWords;
     const spokenWords = document.querySelectorAll('.spoken-word');
     spokenWords.forEach((element) => {
       element.classList.remove('spoken-word');
@@ -48,6 +49,7 @@ const SpeakIT = (props) => {
     setTranscript('');
     newScore = 0;
     newScoreHandler();
+    setSrcForImage('https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg');
   };
 
   const speechResult = (transcriptResult) => {
@@ -56,8 +58,7 @@ const SpeakIT = (props) => {
       const word = wordsCollection.find((item) => item.word.toLowerCase() === transcriptResult);
       setSrcForImage(`${link}${word.image}`);
       if (unspokenWords.includes(transcriptResult)) {
-        const arr = gameWords.filter((item) => item !== transcriptResult);
-        setUnspokenWords(arr);
+        unspokenWords = unspokenWords.filter((item) => item !== transcriptResult);
         document.getElementById(transcriptResult).classList.add('spoken-word');
         newScore += 100;
         newScoreHandler();
@@ -81,21 +82,19 @@ const SpeakIT = (props) => {
   };
 
   const restartHandler = () => {
-    createGame([]);
-    microphone.stopMicrophone();
+    createGame();
   };
 
   const speakHandler = () => {
     if (isGame) {
-      setGameMode(false);
-      createGame(gameWords);
+      setGameMode(!isGame);
+      createGame();
       microphone.stopMicrophone();
     } else {
-      setGameMode(true);
-      createGame([]);
+      setGameMode(!isGame);
+      createGame();
       microphone.startMicrophone(speechResult);
     }
-    setSrcForImage('https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg');
   };
 
   const finishHandler = () => {
