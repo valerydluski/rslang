@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import MicrophoneIcon from '../components/UI/Icon/Microphone';
-import TextField from '../components/UI/TextField/TextField';
+import MicrophoneIcon from '../../components/UI/Icon/Microphone';
+import TextField from '../../components/UI/TextField/TextField';
 
 const RecognationTranscriptContainerStyled = styled.div`
   position: relative;

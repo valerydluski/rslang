@@ -2,19 +2,20 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 
 export default class Microphone {
   constructor(setTranscript) {
-    this.createRecognation();
+    this.createrecognition();
     this.addResultListener();
     this.setTranscript = setTranscript;
   }
 
-  createRecognation() {
-    this.recognation = new SpeechRecognition();
+  createrecognition() {
+    this.recognition = new SpeechRecognition();
+    this.recognition.interimResults = false;
     this.changeLanguageMicrophone();
   }
 
   addResultListener() {
     let transcript;
-    this.recognation.addEventListener('result', (e) => {
+    this.recognition.addEventListener('result', (e) => {
       transcript = Array.from(e.results)
         .map((result) => result[0])
         .map((result) => result.transcript)
@@ -26,17 +27,17 @@ export default class Microphone {
 
   changeLanguageMicrophone() {
     const lang = 'en-US';
-    this.recognation.lang = lang;
+    this.recognition.lang = lang;
   }
 
   startMicrophone() {
-    this.recognation.start();
-    this.recognation.addEventListener('end', this.restartMicrophone);
+    this.recognition.start();
+    this.recognition.addEventListener('end', this.restartMicrophone);
   }
 
   stopMicrophone() {
-    this.recognation.stop();
-    this.recognation.removeEventListener('end', this.restartMicrophone);
+    this.recognition.stop();
+    this.recognition.removeEventListener('end', this.restartMicrophone);
   }
 
   restartMicrophone() {

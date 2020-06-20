@@ -3,31 +3,53 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
-import CardsContainerSpeakIT from '../../../containers/CardsContainerSpeakIT';
-import ButtonsContainerSpeakIT from '../../../containers/ButtonsContainerSpeakIt';
-import RecognationTranscriptContainer from '../../../containers/RecognationTranscriptContainer';
+import CardsContainerSpeakIT from '../../../containers/SpeakIT/CardsContainerSpeakIT';
+import ButtonsContainerSpeakIT from '../../../containers/SpeakIT/ButtonsContainerSpeakIt';
+import RecognationTranscriptContainer from '../../../containers/SpeakIT/RecognationTranscriptContainer';
 import Microphone from '../../../utils/Microphone';
 
+const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
+
 const SpeakIT = (props) => {
-  const { Level, Page, imageSrc, translate, gameMode, transcript } = props;
+  const { Level, Page, wordsCollection, imageSrc, translate, gameMode, transcript } = props;
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [textForTextField, setTranslate] = useState(translate);
   const [isGame, setGameMode] = useState(gameMode);
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
+  const gameWords = wordsCollection.map((el) => {
+    return el.word.toLowerCase();
+  });
+  const [unspokenWords, setUnspokenWords] = useState(gameWords);
 
-  const microphone = new Microphone(setTranscript);
+  const createGame = (arr) => {
+    setUnspokenWords(arr);
+  };
+
+  const speechResult = (transcriptResult) => {
+    setTranscript(transcriptResult);
+    if (gameWords.includes(transcriptResult)) {
+      const word = wordsCollection.find((item) => item.word.toLowerCase() === transcriptResult);
+      setSrcForImage(`${link}${word.image}`);
+      if (unspokenWords.includes(transcriptResult)) {
+        const arr = gameWords.filter((item) => item !== transcriptResult);
+        setUnspokenWords(arr);
+        document.getElementById(transcriptResult).classList.add('spoken-word');
+      }
+    }
+  };
+
+  const microphone = new Microphone(speechResult);
   const audioSpeakIt = new Audio();
 
   const playAudio = (src) => {
-    const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
     audioSpeakIt.setAttribute('src', `${link}${src}`);
     audioSpeakIt.load();
     audioSpeakIt.play();
   };
 
   const cardHandler = (obj) => {
-    const link = `https://raw.githubusercontent.com/valerydluski/rslang-data/master/${obj.image}`;
-    setSrcForImage(link);
+    const url = `${link}${obj.image}`;
+    setSrcForImage(url);
     setTranslate(obj.wordTranslate);
     playAudio(obj.audio);
   };
@@ -37,14 +59,16 @@ const SpeakIT = (props) => {
   };
 
   const speakHandler = () => {
-    if (isGame) setGameMode(false);
-    else {
+    if (isGame) {
+      setGameMode(false);
+      createGame(gameWords);
+      microphone.stopMicrophone();
+    } else {
       setGameMode(true);
-      microphone.startMicrophone(setTranscript);
+      createGame([]);
+      microphone.startMicrophone();
     }
-    setSrcForImage(
-      'https://raw.githubusercontent.com/valerydluski/Images/ca230ba9ba73d437f3b80fe90d55f87aebfa7df0/defaultImage.svg'
-    );
+    setSrcForImage('https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg');
   };
 
   const finishHandler = () => {
@@ -56,7 +80,7 @@ const SpeakIT = (props) => {
       <div className="speak-it_container">
         <Image src={srcForImage} />
         <TextField text={textForTextField} />
-        <CardsContainerSpeakIT cardHandler={cardHandler} />
+        <CardsContainerSpeakIT cardHandler={cardHandler} wordsCollection={wordsCollection} />
         <ButtonsContainerSpeakIT
           restartHandler={restartHandler}
           speakHandler={speakHandler}
@@ -87,22 +111,24 @@ SpeakIT.propTypes = {
   translate: PropTypes.string,
   gameMode: PropTypes.bool,
   transcript: PropTypes.string,
+  wordsCollection: PropTypes.instanceOf(Array),
 };
 
 SpeakIT.defaultProps = {
   Level: '',
   Page: '',
-  imageSrc:
-    'https://raw.githubusercontent.com/valerydluski/Images/ca230ba9ba73d437f3b80fe90d55f87aebfa7df0/defaultImage.svg',
+  imageSrc: 'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg',
   translate: '',
   gameMode: false,
   transcript: '',
+  wordsCollection: [],
 };
 
 const mapStateToProps = (state) => {
   return {
     Level: state.roundChange.speakITLevel,
     Page: state.roundChange.speakITPage,
+    wordsCollection: state.changeWordsCollection.wordsCollection,
   };
 };
 
