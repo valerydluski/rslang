@@ -1,0 +1,19 @@
+.game_words {
+  display: flex;
+  justify-content: space-between;
+  color: brown;
+  margin: 10px;
+  font-size: 40px;
+}
+
+.english_word {
+    text-align: center;
+    color: blue;
+    margin: 20px;
+    font-size: 40px;
+  }
+
+  .exit-button {
+      width: 50px;
+      height: 20px;
+  }
