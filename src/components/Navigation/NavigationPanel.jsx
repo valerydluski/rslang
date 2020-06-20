@@ -8,12 +8,12 @@ export default class NavigationPanel extends React.Component {
     this.state = {
       links: [
         { name: 'Home', link: '' },
-        { name: 'SpeakIT', link: 'SpeakIT' },
-        { name: 'EnglishPuzzle', link: 'EnglishPuzzle' },
-        { name: 'Savannah', link: 'Savannah' },
-        { name: 'AudioCall', link: 'AudioCall' },
-        { name: 'Sprint', link: 'Sprint' },
-        { name: 'OwnGame', link: 'ownGame' },
+        { name: 'SpeakIT', link: 'StartGame/SpeakIT' },
+        { name: 'EnglishPuzzle', link: 'StartGame/EnglishPuzzle' },
+        { name: 'Savannah', link: 'StartGame/Savannah' },
+        { name: 'AudioCall', link: 'StartGame/AudioCall' },
+        { name: 'Sprint', link: 'StartGame/Sprint' },
+        { name: 'OwnGame', link: 'StartGame/OwnGame' },
       ],
     };
   }
