@@ -1,71 +1,52 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = (props) => {
   const {
-    classes,
     name,
-    inputMax,
-    startValue,
-    typeInput,
-    inputMin,
+    type,
     readOnlyInput,
-    placeholderInput,
-    sizeInupt,
-    onChangeInput,
+    placeholder,
+    sizeInput,
+    input,
+    meta: { error, touched },
   } = props;
 
-  const [inputValue, setInputValue] = useState(startValue);
-
-  const changeInputHandler = (event) => {
-    setInputValue(event.target.value);
-    onChangeInput(event.target.value);
-  };
-
   return (
-    <div className={`${classes}`}>
-      <label htmlFor={`${name}`}>
-        {name}
-        <input
-          type={typeInput}
-          name={name}
-          min={inputMin}
-          max={inputMax}
-          value={inputValue}
-          readOnly={readOnlyInput}
-          onChange={changeInputHandler}
-          placeholder={placeholderInput}
-          size={sizeInupt}
-        />
-      </label>
+    <div>
+      <input
+        type={type}
+        name={name}
+        readOnly={readOnlyInput}
+        placeholder={placeholder}
+        size={sizeInput}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...input}
+      />
+      {error && touched && <span>{error}</span>}
     </div>
   );
 };
 
 Input.propTypes = {
-  typeInput: PropTypes.string,
+  type: PropTypes.string,
   name: PropTypes.string,
-  classes: PropTypes.string,
-  inputMax: PropTypes.string,
-  inputMin: PropTypes.string,
-  startValue: PropTypes.string,
   readOnlyInput: PropTypes.bool,
-  placeholderInput: PropTypes.string,
-  sizeInupt: PropTypes.string,
-  onChangeInput: PropTypes.func,
+  placeholder: PropTypes.string,
+  sizeInput: PropTypes.string,
+  input: PropTypes.shape().isRequired,
+  touched: PropTypes.bool,
+  meta: PropTypes.shape(),
 };
 
 Input.defaultProps = {
-  typeInput: 'text',
+  type: 'text',
   name: '',
-  classes: '',
-  inputMax: '',
-  inputMin: '',
-  startValue: '1',
   readOnlyInput: false,
-  placeholderInput: '',
-  sizeInupt: '',
-  onChangeInput: () => {},
+  placeholder: '',
+  sizeInput: '',
+  touched: false,
+  meta: {},
 };
 
 export default Input;

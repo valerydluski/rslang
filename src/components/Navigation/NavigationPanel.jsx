@@ -7,13 +7,13 @@ export default class NavigationPanel extends React.Component {
 
     this.state = {
       links: [
-        { name: 'Home', link: '' },
-        { name: 'SpeakIT', link: 'StartGame/SpeakIT' },
-        { name: 'EnglishPuzzle', link: 'StartGame/EnglishPuzzle' },
-        { name: 'Savannah', link: 'StartGame/Savannah' },
-        { name: 'AudioCall', link: 'StartGame/AudioCall' },
-        { name: 'Sprint', link: 'StartGame/Sprint' },
-        { name: 'OwnGame', link: 'StartGame/OwnGame' },
+        { name: 'Home', href: '' },
+        { name: 'SpeakIT', href: '/StartGame/SpeakIT' },
+        { name: 'EnglishPuzzle', href: '/StartGame/EnglishPuzzle' },
+        { name: 'Savannah', href: '/StartGame/Savannah' },
+        { name: 'AudioCall', href: '/StartGame/AudioCall' },
+        { name: 'Sprint', href: '/StartGame/Sprint' },
+        { name: 'OwnGame', href: '/StartGame/OwnGame' },
       ],
     };
   }
@@ -24,7 +24,12 @@ export default class NavigationPanel extends React.Component {
       <nav className="navigation-panel_container">
         <ul className="navigation-panel">
           {links.map((link) => {
-            return <NavigationLink key={link.name} link={link.link} name={link.name} />;
+            const { name, href } = link;
+            return (
+              <li key={name}>
+                <NavigationLink href={href} name={name} />
+              </li>
+            );
           })}
         </ul>
       </nav>
