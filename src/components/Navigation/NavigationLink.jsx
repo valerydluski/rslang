@@ -7,9 +7,9 @@ const NavigationLink = (props) => {
   return <Link to={href}>{name}</Link>;
 };
 
-export default NavigationLink;
-
 NavigationLink.propTypes = {
   name: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
 };
+
+export default NavigationLink;

@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, withRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
@@ -11,15 +12,10 @@ import history from './utils/history';
 
 const sagaMiddleware = createSagaMiddleware();
 
-/* eslint-disable no-underscore-dangle */
 const store = createStore(
   rootReducer,
-  compose(
-    applyMiddleware(sagaMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  compose(applyMiddleware(sagaMiddleware), composeWithDevTools())
 );
-/* eslint-enable */
 
 sagaMiddleware.run(watchSaga);
 
