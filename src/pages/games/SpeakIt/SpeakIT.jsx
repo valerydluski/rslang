@@ -90,12 +90,11 @@ const SpeakIT = (props) => {
 
   const speakHandler = () => {
     if (isListening) {
-      setGameMode(!isListening);
       microphone.stopMicrophone();
     } else {
-      setGameMode(!isListening);
       microphone.startMicrophone(speechResult);
     }
+    setGameMode(!isListening);
     createGame();
   };
 
