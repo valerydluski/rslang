@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components';
+import { Draggable } from 'react-beautiful-dnd';
 
 const StyledPuzzle = styled.span`
   display: flex;
@@ -61,9 +62,18 @@ const StyledPuzzle = styled.span`
 class Puzzle extends Component {
   render() {
     return (
-      <StyledPuzzle className="playfield">
-        { this.props.children }
-      </StyledPuzzle>
+      <Draggable draggableId={this.props.id} index={this.props.index}>
+        {(provided) => (
+          <StyledPuzzle
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            className="playfield"
+          >
+            { this.props.children }
+          </StyledPuzzle>
+        )}
+      </Draggable>
     )
   }
 }
