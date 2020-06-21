@@ -11,6 +11,7 @@ import Microphone from '../../../utils/Microphone';
 import changeScoreSpeakIT from '../../../redux/SpeakIT/action';
 
 const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
+const addScore = 100;
 
 const SpeakIT = (props) => {
   const {
@@ -32,7 +33,7 @@ const SpeakIT = (props) => {
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [textForTextField, setTranslate] = useState(translate);
-  const [isListening, setGameMode] = useState(listening);
+  const [isListening, setListening] = useState(listening);
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
   let unspokenWords = gameWords.slice();
 
@@ -60,7 +61,7 @@ const SpeakIT = (props) => {
       if (unspokenWords.includes(transcriptResult)) {
         unspokenWords = unspokenWords.filter((item) => item !== transcriptResult);
         document.getElementById(transcriptResult).classList.add('spoken-word');
-        newScore += 100;
+        newScore += addScore;
         newScoreHandler();
       }
     }
@@ -94,13 +95,11 @@ const SpeakIT = (props) => {
     } else {
       microphone.startMicrophone(speechResult);
     }
-    setGameMode(!isListening);
+    setListening(!isListening);
     createGame();
   };
 
-  const finishHandler = () => {
-    console.log('finish');
-  };
+  const finishHandler = () => {};
 
   if (!isListening) {
     return (

@@ -5,12 +5,8 @@ import ButtonSpeakITStyled from './Styled/StyledButtonSpeakIT';
 const ButtonSpeakIT = (props) => {
   const { buttonHandler, text, className } = props;
 
-  const handler = () => {
-    buttonHandler();
-  };
-
   return (
-    <ButtonSpeakITStyled className={className} onClick={handler}>
+    <ButtonSpeakITStyled className={className} onClick={buttonHandler}>
       {text}
     </ButtonSpeakITStyled>
   );
