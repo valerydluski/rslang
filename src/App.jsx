@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import NavigationPanel from './components/Navigation/NavigationPanel';
 import SpeakIT from './pages/games/SpeakIt/SpeakIT';
 import EnglishPuzzle from './pages/games/EnglishPuzzle/EnglishPuzzle';
