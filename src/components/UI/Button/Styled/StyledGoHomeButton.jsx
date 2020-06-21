@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import iconExit from './icon-false.svg';
+import iconExit from '../../Icon/iconExit.svg';
 
 const StyledGoHomeButton = styled.button`
   position: absolute;

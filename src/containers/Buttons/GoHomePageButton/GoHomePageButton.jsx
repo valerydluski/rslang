@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import StyledGoHomeButton from './StyledGoHomeButton';
+import StyledGoHomeButton from '../../../components/UI/Button/Styled/StyledGoHomeButton';
 
 const GoHomePageButton = () => {
   const history = useHistory();
