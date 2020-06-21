@@ -37,7 +37,7 @@ function App() {
           <PrivateNavigationRoute path="/ownGame" component={OwnGame} />
           <Route path="/login" component={Login} />
           <Route path="/registration" component={Registration} />
-          <Redirect to="/login" />
+          <Redirect to="/" />
         </Switch>
       </main>
     </div>
