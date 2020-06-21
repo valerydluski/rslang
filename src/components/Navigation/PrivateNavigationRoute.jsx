@@ -10,7 +10,6 @@ const PrivateNavigationRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      exact
       render={(props) => (isLogin ? <Component {...props} /> : <Redirect to="/login" />)}
     />
   );

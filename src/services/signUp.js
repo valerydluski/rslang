@@ -16,9 +16,8 @@ async function signUp(user) {
       body: JSON.stringify(user),
     });
   } catch (e) {
-    console.log('User with this e-mail exists');
+    throw new Error('User with this e-mail exists');
   }
-  return null;
 }
 
 export default signUp;

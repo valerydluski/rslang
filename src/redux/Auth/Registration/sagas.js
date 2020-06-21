@@ -6,9 +6,13 @@ import signUp from '../../../services/signUp';
 
 function* workerRegistration(action) {
   const { name, ...userSettings } = action.payload;
-  yield call(signUp, userSettings);
-  yield put(authToServer(userSettings));
-  yield put(saveUserSettings(name));
+  try {
+    yield call(signUp, userSettings);
+    yield put(authToServer(userSettings));
+    yield put(saveUserSettings(name));
+  } catch (e) {
+    console.log(e.message);
+  }
 }
 
 export default function* watchRegistration() {

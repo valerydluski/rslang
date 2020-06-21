@@ -12,10 +12,7 @@ const Registration = (props) => {
   }
 
   const onSubmit = (formData) => {
-    try {
-      registerToServer(formData);
-      props.history.push('/');
-    } catch (e) {}
+    registerToServer(formData);
   };
 
   return <ReduxRegistrationForm onSubmit={onSubmit} />;
@@ -23,7 +20,6 @@ const Registration = (props) => {
 
 Registration.propTypes = {
   registerToServer: PropTypes.func.isRequired,
-  history: PropTypes.shape().isRequired,
 };
 
 export default Registration;

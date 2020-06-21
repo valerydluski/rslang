@@ -16,9 +16,8 @@ async function signIn(user) {
       body: JSON.stringify(user),
     });
   } catch (e) {
-    console.log('Incorrect login or password');
+    throw new Error('Incorrect login or password');
   }
-  return null;
 }
 
 export default signIn;

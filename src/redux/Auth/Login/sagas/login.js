@@ -5,11 +5,15 @@ import signIn from '../../../../services/signIn';
 import history from '../../../../utils/history';
 
 function* workerLogin(action) {
-  const payload = yield call(signIn, action.payload);
-  if (payload) {
-    payload.isLogin = true;
-    yield put(saveSessionData(payload));
-    yield call(history.push, '/');
+  try {
+    const payload = yield call(signIn, action.payload);
+    if (payload) {
+      payload.isLogin = true;
+      yield put(saveSessionData(payload));
+      yield call(history.push, '/');
+    }
+  } catch (e) {
+    console.log(e.message);
   }
 }
 
