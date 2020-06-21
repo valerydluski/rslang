@@ -14,7 +14,8 @@ const TextStyled = styled.p`
 const TextContainer = styled.div`
   display: flex;
   justify-content: center;
-  min-height: 54px;
+  height: 54px;
+  margin: 10px 0;
 `;
 
 const TextField = (props) => {

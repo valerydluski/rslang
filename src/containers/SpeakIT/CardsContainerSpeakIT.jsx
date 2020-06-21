@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import WordCardSpeakIT from '../components/WordCards/WordCardSpeakIT';
+import WordCardSpeakIT from '../../components/WordCards/WordCardSpeakIT';
 
 const CardsContainerSpeakITStyled = styled.div`
   margin: 0 auto;
@@ -13,6 +13,7 @@ const CardsContainerSpeakITStyled = styled.div`
   border-top: 1px solid #c4c4c4;
   border-bottom: 1px solid #c4c4c4;
   width: 80%;
+  justify-items: center;
 `;
 
 const CardsContainerSpeakIT = (props) => {
@@ -20,7 +21,14 @@ const CardsContainerSpeakIT = (props) => {
   return (
     <CardsContainerSpeakITStyled>
       {wordsCollection.map((word) => {
-        return <WordCardSpeakIT key={word.word} obj={word} wordCardHandler={cardHandler} />;
+        return (
+          <WordCardSpeakIT
+            key={word.word.toLowerCase()}
+            id={word.word.toLowerCase()}
+            obj={word}
+            wordCardHandler={cardHandler}
+          />
+        );
       })}
     </CardsContainerSpeakITStyled>
   );
