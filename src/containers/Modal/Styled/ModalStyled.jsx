@@ -10,7 +10,7 @@ const ModalStyled = styled.div`
   overflow: auto;
   flex-direction: column;
   border-radius: 20px;
-  background: linear-gradient(to bottom, rgba(0, 32, 63) 0%, rgba(0, 10, 20) 100%);
+  background-color: white;
   z-index: 6;
   transition: all 0.5s;
 `;

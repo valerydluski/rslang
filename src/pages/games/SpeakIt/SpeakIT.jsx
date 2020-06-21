@@ -105,6 +105,7 @@ const SpeakIT = (props) => {
   };
 
   const finishHandler = () => {
+    changeUnspokenWordsInStore(unspokenWords);
     const overlay = document.getElementById('overlay');
     overlay.classList.toggle('hidden');
   };
@@ -112,7 +113,10 @@ const SpeakIT = (props) => {
   if (!isListening) {
     return (
       <div className="speak-it_container">
-        <ResultModal />
+        <ResultModal
+          audioForPlay="audio"
+          showProperties={['word', 'transcription', 'wordTranslate']}
+        />
         <Image src={srcForImage} />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
@@ -128,7 +132,10 @@ const SpeakIT = (props) => {
 
   return (
     <div className="speak-it_container">
-      <ResultModal />
+      <ResultModal
+        audioForPlay="audio"
+        showProperties={['word', 'transcription', 'wordTranslate']}
+      />
       <Image src={srcForImage} />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />

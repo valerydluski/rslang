@@ -9,7 +9,7 @@ import ModalButtonsContainerStyled from './Styled/ModalButtonsContainerStyled';
 import ButtonSpeakIT from '../../components/UI/Button/ButtonSpeakIT';
 
 const ModalResult = (props) => {
-  const { imageSrc, showProperties } = props;
+  const { imageSrc, showProperties, audioForPlay } = props;
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
 
@@ -44,11 +44,13 @@ const ModalResult = (props) => {
 ModalResult.propTypes = {
   imageSrc: PropTypes.string,
   showProperties: PropTypes.instanceOf(Array),
+  audioForPlay: PropTypes.string,
 };
 
 ModalResult.defaultProps = {
   imageSrc: 'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg',
   showProperties: ['word'],
+  audioForPlay: '',
 };
 
 export default ModalResult;

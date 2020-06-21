@@ -12,14 +12,26 @@ const ModalContent = (props) => {
   const fn = () => {
     switch (iKnowWords.length) {
       case 10:
-        return <ModalWordsBlock header="i know" />;
+        return (
+          <ModalWordsBlock header="i know" words={iKnowWords} wordsCollection={wordsCollection} />
+        );
       case 0:
-        return <ModalWordsBlock header="i don't know" />;
+        return (
+          <ModalWordsBlock
+            header="i don't know"
+            words={unspokenWords}
+            wordsCollection={wordsCollection}
+          />
+        );
       default:
         return (
           <>
-            <ModalWordsBlock header="i know" />
-            <ModalWordsBlock header="i don't know" />
+            <ModalWordsBlock
+              header="i don't know"
+              words={unspokenWords}
+              wordsCollection={wordsCollection}
+            />
+            <ModalWordsBlock header="i know" words={iKnowWords} wordsCollection={wordsCollection} />
           </>
         );
     }
