@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import emailValidator from '../../../../utils/validators/emailValidator';
 import passwordValidator from '../../../../utils/validators/passwordValidator';
 import Input from '../../../UI/Input/Input';
@@ -27,7 +27,7 @@ const LoginForm = (props) => {
         validate={passwordValidator}
       />
       <div>
-        <NavLink to="/registration">Register</NavLink>
+        <Link to="/registration">Register</Link>
       </div>
       <button type="submit" aria-label="Sign In">
         Sign In
