@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
 import CardsContainerSpeakIT from '../../../containers/SpeakIT/CardsContainerSpeakIT';
-import ButtonsContainerSpeakIT from '../../../containers/SpeakIT/ButtonsContainerSpeakIt';
-import RecognationTranscriptContainer from '../../../containers/SpeakIT/RecognationTranscriptContainer';
+import ButtonsContainerSpeakIT from '../../../components/SpeakIT/ButtonsContainerSpeakIt';
+import RecognationTranscriptContainer from '../../../components/SpeakIT/RecognationTranscriptContainer';
 import ScoreContainerSpeakIT from '../../../containers/SpeakIT/ScoreContainerSpeakIT';
 import Microphone from '../../../utils/Microphone';
 import changeScoreSpeakIT from '../../../redux/SpeakIT/action';
@@ -19,7 +19,7 @@ const SpeakIT = (props) => {
     wordsCollection,
     imageSrc,
     translate,
-    gameMode,
+    listening,
     transcript,
     microphone,
     speakITScore,
@@ -32,16 +32,16 @@ const SpeakIT = (props) => {
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [textForTextField, setTranslate] = useState(translate);
-  const [isGame, setGameMode] = useState(gameMode);
+  const [isListening, setGameMode] = useState(listening);
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
-  let unspokenWords = gameWords;
+  let unspokenWords = gameWords.slice();
 
   const newScoreHandler = () => {
     changeScore(newScore);
   };
 
   const createGame = () => {
-    unspokenWords = gameWords;
+    unspokenWords = gameWords.slice();
     const spokenWords = document.querySelectorAll('.spoken-word');
     spokenWords.forEach((element) => {
       element.classList.remove('spoken-word');
@@ -82,26 +82,28 @@ const SpeakIT = (props) => {
   };
 
   const restartHandler = () => {
-    createGame();
+    if (isListening) {
+      createGame();
+      microphone.changeTranscript(speechResult);
+    }
   };
 
   const speakHandler = () => {
-    if (isGame) {
-      setGameMode(!isGame);
-      createGame();
+    if (isListening) {
+      setGameMode(!isListening);
       microphone.stopMicrophone();
     } else {
-      setGameMode(!isGame);
-      createGame();
+      setGameMode(!isListening);
       microphone.startMicrophone(speechResult);
     }
+    createGame();
   };
 
   const finishHandler = () => {
     console.log('finish');
   };
 
-  if (!isGame) {
+  if (!isListening) {
     return (
       <div className="speak-it_container">
         <Image src={srcForImage} />
@@ -138,7 +140,7 @@ SpeakIT.propTypes = {
   speakITScore: PropTypes.number,
   imageSrc: PropTypes.string,
   translate: PropTypes.string,
-  gameMode: PropTypes.bool,
+  listening: PropTypes.bool,
   transcript: PropTypes.string,
   wordsCollection: PropTypes.instanceOf(Array),
   microphone: PropTypes.instanceOf(Microphone),
@@ -151,7 +153,7 @@ SpeakIT.defaultProps = {
   speakITScore: 0,
   imageSrc: 'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg',
   translate: '',
-  gameMode: false,
+  listening: false,
   transcript: '',
   wordsCollection: [],
   microphone: new Microphone(),

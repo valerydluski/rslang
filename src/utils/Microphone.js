@@ -35,6 +35,10 @@ export default class Microphone {
     this.setTranscript = setTranscript;
   }
 
+  changeTranscript(setTranscript) {
+    this.setTranscript = setTranscript;
+  }
+
   stopMicrophone() {
     this.recognition.removeEventListener('end', this.recognition.start);
     this.recognition.stop();
