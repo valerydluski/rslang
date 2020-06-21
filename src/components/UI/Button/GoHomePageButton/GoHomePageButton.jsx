@@ -7,7 +7,7 @@ const GoHomePageButton = () => {
   function goHome() {
     history.push('/');
   }
-  return <StyledGoHomeButton type="button" className="exitGameButton" onClick={goHome} />;
+  return <StyledGoHomeButton type="button" onClick={goHome} />;
 };
 
 export default GoHomePageButton;
