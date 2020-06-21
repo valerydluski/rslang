@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import OverlayStyled from './Styled/OverlayStyled';
 import ModalStyled from './Styled/ModalStyled';
-import ModalContentStyled from './Styled/ModalContentStyled';
+import ModalContent from './ModalContent';
 import Image from '../../components/UI/Image/Image';
 import ModalButtonsContainerStyled from './Styled/ModalButtonsContainerStyled';
 import ButtonSpeakIT from '../../components/UI/Button/ButtonSpeakIT';
 
 const ModalResult = (props) => {
-  const { wordsCollection, unspokenWords, imageSrc, showProperties } = props;
+  const { imageSrc, showProperties } = props;
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
 
@@ -29,9 +29,8 @@ const ModalResult = (props) => {
   return (
     <OverlayStyled className="hidden" id="overlay">
       <ModalStyled>
-        <ModalContentStyled>
-          <Image src={srcForImage} className="small-img" />
-        </ModalContentStyled>
+        <Image src={srcForImage} className="small-img" />
+        <ModalContent showProperties={showProperties} />
         <ModalButtonsContainerStyled>
           <ButtonSpeakIT buttonHandler={returnHandler} text="return" />
           <ButtonSpeakIT buttonHandler={newGameHandler} text="new game" />
@@ -43,23 +42,13 @@ const ModalResult = (props) => {
 };
 
 ModalResult.propTypes = {
-  wordsCollection: PropTypes.instanceOf(Array),
   imageSrc: PropTypes.string,
   showProperties: PropTypes.instanceOf(Array),
-  unspokenWords: PropTypes.instanceOf(Array).isRequired,
 };
 
 ModalResult.defaultProps = {
-  wordsCollection: [],
   imageSrc: 'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg',
   showProperties: ['word'],
 };
 
-const mapStateToProps = (state) => {
-  return {
-    wordsCollection: state.changeWordsCollection.wordsCollection,
-    unspokenWords: state.changeUnspokenWords.unspokenWords,
-  };
-};
-
-export default connect(mapStateToProps, null)(ModalResult);
+export default ModalResult;
