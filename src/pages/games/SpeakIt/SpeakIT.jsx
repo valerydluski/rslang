@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ResultModal from '../../../containers/Modal/ResultModal';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
 import CardsContainerSpeakIT from '../../../containers/SpeakIT/CardsContainerSpeakIT';
@@ -10,9 +9,9 @@ import RecognationTranscriptContainer from '../../../components/SpeakIT/Recognat
 import ScoreContainerSpeakIT from '../../../containers/SpeakIT/ScoreContainerSpeakIT';
 import Microphone from '../../../utils/Microphone';
 import changeScoreSpeakIT from '../../../redux/SpeakIT/action';
-import { changeUnspokenWords } from '../../../redux/action';
 
 const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
+const addScore = 100;
 
 const SpeakIT = (props) => {
   const {
@@ -26,7 +25,6 @@ const SpeakIT = (props) => {
     microphone,
     speakITScore,
     changeScore,
-    changeUnspokenWordsInStore,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -35,7 +33,7 @@ const SpeakIT = (props) => {
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [textForTextField, setTranslate] = useState(translate);
-  const [isListening, setGameMode] = useState(listening);
+  const [isListening, setListening] = useState(listening);
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
   let unspokenWords = gameWords.slice();
 
@@ -45,7 +43,6 @@ const SpeakIT = (props) => {
 
   const createGame = () => {
     unspokenWords = gameWords.slice();
-    changeUnspokenWordsInStore(unspokenWords);
     const spokenWords = document.querySelectorAll('.spoken-word');
     spokenWords.forEach((element) => {
       element.classList.remove('spoken-word');
@@ -63,9 +60,8 @@ const SpeakIT = (props) => {
       setSrcForImage(`${link}${word.image}`);
       if (unspokenWords.includes(transcriptResult)) {
         unspokenWords = unspokenWords.filter((item) => item !== transcriptResult);
-        changeUnspokenWordsInStore(unspokenWords);
         document.getElementById(transcriptResult).classList.add('spoken-word');
-        newScore += 100;
+        newScore += addScore;
         newScoreHandler();
       }
     }
@@ -95,25 +91,19 @@ const SpeakIT = (props) => {
 
   const speakHandler = () => {
     if (isListening) {
-      setGameMode(!isListening);
       microphone.stopMicrophone();
     } else {
-      setGameMode(!isListening);
       microphone.startMicrophone(speechResult);
     }
+    setListening(!isListening);
     createGame();
   };
 
-  const finishHandler = () => {
-    changeUnspokenWordsInStore(unspokenWords);
-    const overlay = document.getElementById('overlay');
-    overlay.classList.toggle('hidden');
-  };
+  const finishHandler = () => {};
 
   if (!isListening) {
     return (
       <div className="speak-it_container">
-        <ResultModal />
         <Image src={srcForImage} />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
@@ -129,7 +119,6 @@ const SpeakIT = (props) => {
 
   return (
     <div className="speak-it_container">
-      <ResultModal />
       <Image src={srcForImage} />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
@@ -154,7 +143,6 @@ SpeakIT.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   microphone: PropTypes.instanceOf(Microphone),
   changeScore: PropTypes.func,
-  changeUnspokenWordsInStore: PropTypes.func,
 };
 
 SpeakIT.defaultProps = {
@@ -168,7 +156,6 @@ SpeakIT.defaultProps = {
   wordsCollection: [],
   microphone: new Microphone(),
   changeScore: () => {},
-  changeUnspokenWordsInStore: () => {},
 };
 
 const mapStateToProps = (state) => {
@@ -182,7 +169,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   changeScore: changeScoreSpeakIT,
-  changeUnspokenWordsInStore: changeUnspokenWords,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);
