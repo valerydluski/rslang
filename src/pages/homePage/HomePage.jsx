@@ -1,10 +1,11 @@
 import React from 'react';
 import NavigationPanel from '../../components/Navigation/NavigationPanel';
+import Logo from '../../containers/UI/Logo';
 
 const HomePage = () => (
   <div className="home-page_container">
+    <Logo />
     <nav className="home-page_navigation">
-      <h1>RSLANG</h1>
       <NavigationPanel />
     </nav>
     <div className="home-page_content">
