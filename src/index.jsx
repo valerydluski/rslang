@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Router, withRouter } from 'react-router-dom';
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import rootReducer from './redux/rootReducer';
 import watchSaga from './redux/sagas';
+import history from './utils/history';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -24,9 +25,9 @@ sagaMiddleware.run(watchSaga);
 
 const application = (
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>
 );
 
