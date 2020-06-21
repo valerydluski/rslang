@@ -13,11 +13,17 @@ const ModalContent = (props) => {
     switch (iKnowWords.length) {
       case 10:
         return (
-          <ModalWordsBlock header="i know" words={iKnowWords} wordsCollection={wordsCollection} />
+          <ModalWordsBlock
+            showProperties={showProperties}
+            header="i know"
+            words={iKnowWords}
+            wordsCollection={wordsCollection}
+          />
         );
       case 0:
         return (
           <ModalWordsBlock
+            showProperties={showProperties}
             header="i don't know"
             words={unspokenWords}
             wordsCollection={wordsCollection}
@@ -27,11 +33,17 @@ const ModalContent = (props) => {
         return (
           <>
             <ModalWordsBlock
+              showProperties={showProperties}
               header="i don't know"
               words={unspokenWords}
               wordsCollection={wordsCollection}
             />
-            <ModalWordsBlock header="i know" words={iKnowWords} wordsCollection={wordsCollection} />
+            <ModalWordsBlock
+              showProperties={showProperties}
+              header="i know"
+              words={iKnowWords}
+              wordsCollection={wordsCollection}
+            />
           </>
         );
     }

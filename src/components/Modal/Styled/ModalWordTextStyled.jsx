@@ -5,6 +5,7 @@ const ModalWordTextStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 25px;
 `;
 
 export default ModalWordTextStyled;
