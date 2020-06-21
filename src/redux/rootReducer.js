@@ -1,5 +1,6 @@
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 import roundChangeReducer from './roundChangeReducer';
 import changeWordsCollectionReducer from './changeWordsCollectionReducer';
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   userSettings: userSettingsReducer,
   form: formReducer,
+  routing: routerReducer,
 });
 
 export default rootReducer;

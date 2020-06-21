@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-
 import { NavLink } from 'react-router-dom';
-import LoginInput from '../../UI/LoginInput/LoginInput';
 import emailValidator from '../../../../utils/validators/emailValidator';
 import passwordValidator from '../../../../utils/validators/passwordValidator';
+import Input from '../../../UI/Input/Input';
 
 const LoginForm = (props) => {
   const { handleSubmit } = props;
@@ -16,7 +15,7 @@ const LoginForm = (props) => {
         key="email"
         type="text"
         placeholder="email"
-        component={LoginInput}
+        component={Input}
         validate={emailValidator}
       />
       <Field
@@ -24,7 +23,7 @@ const LoginForm = (props) => {
         key="password"
         type="password"
         placeholder="password"
-        component={LoginInput}
+        component={Input}
         validate={passwordValidator}
       />
       <div>

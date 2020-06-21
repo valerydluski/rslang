@@ -2,16 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import ReduxRegistrationForm from '../../components/Auth/Registration/RegistrationForm/RegistrationForm';
+import getLoginStatus from '../../utils/getLoginStatus';
 
 const Registration = (props) => {
-  const { registerToServer, isLogin } = props;
+  const { registerToServer } = props;
 
-  if (isLogin) {
+  if (getLoginStatus()) {
     return <Redirect to="/" />;
   }
 
   const onSubmit = (formData) => {
-    registerToServer(formData);
+    try {
+      registerToServer(formData);
+      props.history.push('/');
+    } catch (e) {}
   };
 
   return <ReduxRegistrationForm onSubmit={onSubmit} />;
@@ -19,7 +23,7 @@ const Registration = (props) => {
 
 Registration.propTypes = {
   registerToServer: PropTypes.func.isRequired,
-  isLogin: PropTypes.bool.isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default Registration;

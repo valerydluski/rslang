@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
 import NavigationPanel from './components/Navigation/NavigationPanel';
 import SpeakIT from './pages/games/SpeakIt/SpeakIT';
 import EnglishPuzzle from './pages/games/EnglishPuzzle/EnglishPuzzle';
@@ -9,7 +9,7 @@ import Sprint from './pages/games/Sprint/Sprint';
 import OwnGame from './pages/games/OwnGame/OwnGame';
 import Login from './containers/Auth/Login/Login';
 import Registration from './containers/Auth/Registration/Registration';
-import PrivateNavigationRoute from './containers/Navigation/PrivateNavigationRoute';
+import PrivateNavigationRoute from './components/Navigation/PrivateNavigationRoute';
 
 function App() {
   return (
@@ -30,11 +30,11 @@ function App() {
             )}
           />
           <PrivateNavigationRoute path="/SpeakIT" component={SpeakIT} />
-          <Route path="/EnglishPuzzle" component={EnglishPuzzle} />
-          <Route path="/Savannah" component={Savannah} />
-          <Route path="/AudioCall" component={AudioCall} />
-          <Route path="/Sprint" component={Sprint} />
-          <Route path="/ownGame" component={OwnGame} />
+          <PrivateNavigationRoute path="/EnglishPuzzle" component={EnglishPuzzle} />
+          <PrivateNavigationRoute path="/Savannah" component={Savannah} />
+          <PrivateNavigationRoute path="/AudioCall" component={AudioCall} />
+          <PrivateNavigationRoute path="/Sprint" component={Sprint} />
+          <PrivateNavigationRoute path="/ownGame" component={OwnGame} />
           <Route path="/login" component={Login} />
           <Route path="/registration" component={Registration} />
           <Redirect to="/login" />

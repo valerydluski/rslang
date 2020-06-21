@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import ReduxLoginForm from '../../components/Auth/Login/LoginForm/LoginForm';
+import getLoginStatus from '../../utils/getLoginStatus';
 
 const Login = (props) => {
-  const { authToServer, isLogin, checkStatusSession } = props;
+  const { authToServer, checkStatusSession } = props;
 
   checkStatusSession();
 
@@ -12,7 +13,7 @@ const Login = (props) => {
     await authToServer(formData);
   };
 
-  if (isLogin) {
+  if (getLoginStatus()) {
     return <Redirect to="/" />;
   }
 
@@ -22,7 +23,6 @@ const Login = (props) => {
 Login.propTypes = {
   authToServer: PropTypes.func.isRequired,
   checkStatusSession: PropTypes.func.isRequired,
-  isLogin: PropTypes.bool.isRequired,
 };
 
 export default Login;

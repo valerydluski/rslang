@@ -2,8 +2,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import getLoginStatus from '../../utils/getLoginStatus';
 
-const NavigationLink = ({ component: Component, isLogin, ...rest }) => {
+const PrivateNavigationRoute = ({ component: Component, ...rest }) => {
+  const isLogin = getLoginStatus();
+
   return (
     <Route
       {...rest}
@@ -12,9 +15,8 @@ const NavigationLink = ({ component: Component, isLogin, ...rest }) => {
   );
 };
 
-export default NavigationLink;
+export default PrivateNavigationRoute;
 
-NavigationLink.propTypes = {
-  component: PropTypes.shape().isRequired,
-  isLogin: PropTypes.bool.isRequired,
+PrivateNavigationRoute.propTypes = {
+  component: PropTypes.instanceOf(Object).isRequired,
 };
