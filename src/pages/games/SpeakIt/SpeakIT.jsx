@@ -63,7 +63,6 @@ const SpeakIT = (props) => {
       setSrcForImage(`${link}${word.image}`);
       if (unspokenWords.includes(transcriptResult)) {
         unspokenWords = unspokenWords.filter((item) => item !== transcriptResult);
-        console.log('speechResult -> unspokenWords', unspokenWords);
         changeUnspokenWordsInStore(unspokenWords);
         document.getElementById(transcriptResult).classList.add('spoken-word');
         newScore += 100;
@@ -106,6 +105,7 @@ const SpeakIT = (props) => {
   };
 
   const finishHandler = () => {
+    changeUnspokenWordsInStore(unspokenWords);
     const overlay = document.getElementById('overlay');
     overlay.classList.toggle('hidden');
   };
