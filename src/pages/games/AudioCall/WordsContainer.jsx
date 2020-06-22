@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Word from './StyledWords';
+import errorSound from '../../../assets/audio/error.mp3';
+import correctSound from '../../../assets/audio/correct.mp3';
 
 const WordsContainerStyled = styled.div`
   display: flex;
@@ -27,10 +29,17 @@ const WordsContainer = (props) => {
 
   const currentStepWords = words;
 
+  function playResultSound(isOk) {
+    const wordAudio = new Audio();
+    wordAudio.src = isOk ? correctSound : errorSound;
+    wordAudio.play();
+  }
+
   const clickHandler = (e) => {
     if (e.target.matches('[data-index]')) {
       const selectedWordIndex = +e.target.dataset.index;
       const result = currentStepWords[selectedWordIndex].word === correctWord;
+      playResultSound(result);
       const correctWordIndex = currentStepWords.findIndex((a) => a.word === correctWord);
       processUserAnswer(result, words, selectedWordIndex, correctWordIndex);
     }
