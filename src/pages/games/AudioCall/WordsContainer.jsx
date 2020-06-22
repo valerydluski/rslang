@@ -48,7 +48,7 @@ const WordsContainer = (props) => {
   const wordsCards = currentStepWords.map((word, i) => {
     if (isWordFinished) {
       let type = 'finished';
-      if (i === selectedIndex) {
+      if (i === selectedIndex && !isAutoSolved) {
         type = isCorrect ? 'correct' : 'wrong';
       }
       if ((!isCorrect && i === correctIndex) || (isAutoSolved && word.word === correctWord)) {
