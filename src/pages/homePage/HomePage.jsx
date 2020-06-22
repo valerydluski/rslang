@@ -3,12 +3,10 @@ import Logo from '../../containers/UI/Logo';
 import GameNavigationMenu from '../../containers/Navigation/GameNavigationMenu';
 
 const HomePage = () => (
-  <div className="home-page_container">
+  <div>
     <Logo />
-    <nav className="home-page_navigation">
-      <GameNavigationMenu />
-    </nav>
-    <div className="home-page_content">
+    <GameNavigationMenu />
+    <div>
       <h1>Home Page</h1>
     </div>
   </div>
