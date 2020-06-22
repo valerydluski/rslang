@@ -5,7 +5,7 @@ import ModalStyled from './Styled/ModalStyled';
 import ModalContent from './ModalContent';
 import Image from '../../components/UI/Image/Image';
 import ModalButtonsContainerStyled from './Styled/ModalButtonsContainerStyled';
-import ButtonSpeakIT from '../../components/UI/Button/ButtonSpeakIT';
+import Button from '../../components/UI/Button/Button';
 import { LINK_FOR_IMAGE } from '../../config';
 
 const ModalResult = (props) => {
@@ -37,9 +37,9 @@ const ModalResult = (props) => {
         <Image src={srcForImage} className="small-img" />
         <ModalContent showProperties={showProperties} wordHandler={wordHandler} />
         <ModalButtonsContainerStyled>
-          <ButtonSpeakIT buttonHandler={returnHandler} text="return" />
-          <ButtonSpeakIT buttonHandler={newGameHandler} text="new game" />
-          <ButtonSpeakIT buttonHandler={statisticHandler} text="statistic" />
+          <Button buttonHandler={returnHandler} text="return" />
+          <Button buttonHandler={newGameHandler} text="new game" />
+          <Button buttonHandler={statisticHandler} text="statistic" />
         </ModalButtonsContainerStyled>
       </ModalStyled>
     </OverlayStyled>
