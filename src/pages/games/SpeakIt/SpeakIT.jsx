@@ -10,7 +10,7 @@ import ScoreContainerSpeakIT from '../../../containers/SpeakIT/ScoreContainerSpe
 import Microphone from '../../../utils/Microphone';
 import changeScoreSpeakIT from '../../../redux/SpeakIT/action';
 import ResultModal from '../../../containers/Modal/ResultModal';
-import { changeUnspokenWords } from '../../../redux/Games/action';
+import { changeIDontKnowWords } from '../../../redux/Games/action';
 
 const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 const addScore = 100;
@@ -27,7 +27,7 @@ const SpeakIT = (props) => {
     microphone,
     speakITScore,
     changeScore,
-    changeUnspokenWordsInStore,
+    changeIDontKnowWordsInStore,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -38,15 +38,15 @@ const SpeakIT = (props) => {
   const [textForTextField, setTranslate] = useState(translate);
   const [isListening, setListening] = useState(listening);
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
-  let unspokenWords = gameWords.slice();
+  let IDontKnowWords = gameWords.slice();
 
   const newScoreHandler = () => {
     changeScore(newScore);
   };
 
   const createGame = () => {
-    unspokenWords = gameWords.slice();
-    changeUnspokenWordsInStore(unspokenWords);
+    IDontKnowWords = gameWords.slice();
+    changeIDontKnowWordsInStore(IDontKnowWords);
     const spokenWords = document.querySelectorAll('.spoken-word');
     spokenWords.forEach((element) => {
       element.classList.remove('spoken-word');
@@ -62,9 +62,9 @@ const SpeakIT = (props) => {
     if (gameWords.includes(transcriptResult)) {
       const word = wordsCollection.find((item) => item.word.toLowerCase() === transcriptResult);
       setSrcForImage(`${link}${word.image}`);
-      if (unspokenWords.includes(transcriptResult)) {
-        unspokenWords = unspokenWords.filter((item) => item !== transcriptResult);
-        changeUnspokenWordsInStore(unspokenWords);
+      if (IDontKnowWords.includes(transcriptResult)) {
+        IDontKnowWords = IDontKnowWords.filter((item) => item !== transcriptResult);
+        changeIDontKnowWordsInStore(IDontKnowWords);
         document.getElementById(transcriptResult).classList.add('spoken-word');
         newScore += addScore;
         newScoreHandler();
@@ -105,7 +105,7 @@ const SpeakIT = (props) => {
   };
 
   const finishHandler = () => {
-    changeUnspokenWordsInStore(unspokenWords);
+    changeIDontKnowWordsInStore(IDontKnowWords);
     const overlay = document.getElementById('overlay');
     overlay.classList.toggle('hidden');
   };
@@ -162,7 +162,7 @@ SpeakIT.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   microphone: PropTypes.instanceOf(Microphone),
   changeScore: PropTypes.func,
-  changeUnspokenWordsInStore: PropTypes.func,
+  changeIDontKnowWordsInStore: PropTypes.func,
 };
 
 SpeakIT.defaultProps = {
@@ -176,7 +176,7 @@ SpeakIT.defaultProps = {
   wordsCollection: [],
   microphone: new Microphone(),
   changeScore: () => {},
-  changeUnspokenWordsInStore: () => {},
+  changeIDontKnowWordsInStore: () => {},
 };
 
 const mapStateToProps = (state) => {
@@ -190,7 +190,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   changeScore: changeScoreSpeakIT,
-  changeUnspokenWordsInStore: changeUnspokenWords,
+  changeIDontKnowWordsInStore: changeIDontKnowWords,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);

@@ -2,7 +2,7 @@ import {
   SPEAKIT_CHANGE_LEVEL,
   SPEAKIT_CHANGE_PAGE,
   CHANGE_WORDS_COLLECTION,
-  CHANGE_UNSPOKEN_WORDS,
+  CHANGE_I_DONT_KNOW_WORDS,
 } from './types';
 
 export function changeSpeakITLevel(level) {
@@ -26,9 +26,9 @@ export function changeWordsCollection(wordsCollection) {
   };
 }
 
-export function changeUnspokenWords(unspokenWords) {
+export function changeIDontKnowWords(IDontKnowWords) {
   return {
-    type: CHANGE_UNSPOKEN_WORDS,
-    payload: unspokenWords,
+    type: CHANGE_I_DONT_KNOW_WORDS,
+    payload: IDontKnowWords,
   };
 }

@@ -5,9 +5,9 @@ import ModalContentStyled from './Styled/ModalContentStyled';
 import ModalWordsBlock from '../../components/Modal/ModalWordsBlock';
 
 const ModalContent = (props) => {
-  const { wordsCollection, unspokenWords, showProperties, wordHandler } = props;
+  const { wordsCollection, IDontKnowWords, showProperties, wordHandler } = props;
   const arr = wordsCollection.map((el) => el.word.toLowerCase());
-  const iKnowWords = arr.filter((el) => !unspokenWords.includes(el));
+  const iKnowWords = arr.filter((el) => !IDontKnowWords.includes(el));
 
   const fn = () => {
     switch (iKnowWords.length) {
@@ -26,7 +26,7 @@ const ModalContent = (props) => {
           <ModalWordsBlock
             showProperties={showProperties}
             header="i don't know"
-            words={unspokenWords}
+            words={IDontKnowWords}
             wordsCollection={wordsCollection}
             wordHandler={wordHandler}
           />
@@ -37,7 +37,7 @@ const ModalContent = (props) => {
             <ModalWordsBlock
               showProperties={showProperties}
               header="i don't know"
-              words={unspokenWords}
+              words={IDontKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
             />
@@ -59,7 +59,7 @@ const ModalContent = (props) => {
 ModalContent.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   showProperties: PropTypes.instanceOf(Array),
-  unspokenWords: PropTypes.instanceOf(Array).isRequired,
+  IDontKnowWords: PropTypes.instanceOf(Array).isRequired,
   wordHandler: PropTypes.func,
 };
 
@@ -72,7 +72,7 @@ ModalContent.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     wordsCollection: state.changeWordsCollection.wordsCollection,
-    unspokenWords: state.changeUnspokenWords.unspokenWords,
+    IDontKnowWords: state.changeIDontKnowWords.IDontKnowWords,
   };
 };
 

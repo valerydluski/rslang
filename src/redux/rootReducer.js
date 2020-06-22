@@ -5,7 +5,7 @@ import changeWordsCollectionReducer from './Games/changeWordsCollectionReducer';
 import loginReducer from './Auth/Login/reducer';
 import userSettingsReducer from './UserSettings/reducer';
 import changeScoreSpeakITReducer from './SpeakIT/scoreChangeSpeakITReducer';
-import changeUnspokenWordsReducer from './Games/changeUnspokenWordsReducer';
+import changeIDontKnowWordsReducer from './Games/changeIDontKnowReducer';
 
 const rootReducer = combineReducers({
   roundChange: roundChangeReducer,
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   userSettings: userSettingsReducer,
   form: formReducer,
   changeScoreSpeakIT: changeScoreSpeakITReducer,
-  changeUnspokenWords: changeUnspokenWordsReducer,
+  changeIDontKnowWords: changeIDontKnowWordsReducer,
 });
 
 export default rootReducer;

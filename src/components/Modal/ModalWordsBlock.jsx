@@ -5,6 +5,7 @@ import ModalWord from '../../containers/Modal/ModalWord';
 
 const ModalWordsBlock = (props) => {
   const { header, wordsCollection, words, showProperties, wordHandler } = props;
+
   return (
     <>
       <h2>{header}</h2>
