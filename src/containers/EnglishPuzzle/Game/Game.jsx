@@ -35,37 +35,33 @@ const Source = styled.div`
 
 export default class Game extends Component {
 
+//   tasks: {
+//     'task-1': {id: 'task-1', content: 'Take out the garbage'},
+//     'task-2': {id: 'task-2', content: 'Watch my favorite show'},
+//     'task-3': {id: 'task-3', content: 'Charge my phone'},
+//     'task-4': {id: 'task-4', content: 'Cook dinner'}
+//   },
+//   columns: {
+//     'column-1': {
+//       id: 'column-1',
+//       title: 'To-do',
+//       taskIds: ['task-1', 'task-2', 'task-3', 'task-4']
+//     }
+//   },
+//   columnOrder: ['column-1']
+// }
+
   state = {
-    source: [
-      {
-        word: 'like',
-        order: 3,
-      },
-      {
-        word: 'woman',
-        order: 2
-      },
-      {
-        word: 'The',
-        order: 1,
-      },
-      {
-        word: 'to',
-        order: 4
-      },
-      {
-        word: 'ride',
-        order: 5
-      },
-      {
-        word: 'a',
-        order: 6
-      },
-      {
-        word: 'bysicle',
-        order: 7
-      }
-    ],
+    data: {
+      'The_1': {id: 'The_1', word: 'The', order: 1},
+      'woman_2': {id: 'woman_2', word: 'woman', order: 2},
+      'like_3': {id: 'like_3', word: 'like', order: 3},
+      'to_4': {id: 'to_4', word: 'to', order: 4},
+      'ride_5': {id: 'ride_5', word: 'ride', order: 5},
+      'a_6': {id: 'a_6', word: 'a', order: 6},
+      'bicycle_7': {id: 'bicycle_7', word: 'bicycle', order: 7}
+    },
+    source: ['like_3', 'woman_2', 'to_4', 'ride_5', 'The_1', 'a_6', 'bicycle_7'],
     results: []
   }
 
@@ -89,7 +85,6 @@ export default class Game extends Component {
 
     if (destination.droppableId === "row" && source.droppableId === "source") {
       const item = sourceState.splice(source.index, 1);
-      console.log(item);
       resultsState.splice(destination.index, 0, ...item);
     } else if (destination.droppableId === "row" && source.droppableId === "row") {
       const item = resultsState.splice(source.index, 1);
@@ -106,8 +101,34 @@ export default class Game extends Component {
       source: sourceState,
       results: resultsState
     })
+  }
 
-    console.log(this.state);
+  transferToSource = event => {
+    const id = event.target.dataset.rbdDraggableId;
+    const results = this.state.results;
+    const source = this.state.source;
+    const index = results.findIndex(item => item === id);
+
+    results.splice(index, 1);
+    source.push(id);
+
+    this.setState({
+      source, results
+    })
+  }
+
+  transferToPlayfield = event => {
+    const id = event.target.dataset.rbdDraggableId;
+    const results = this.state.results;
+    const source = this.state.source;
+    const index = source.findIndex(item => item === id);
+
+    source.splice(index, 1);
+    results.push(id);
+
+    this.setState({
+      source, results
+    })
   }
 
   render() {
@@ -127,9 +148,19 @@ export default class Game extends Component {
                   {...provided.droppableProps}
                   isDraggingOver={snapshot.isDraggingOver}
                 >
-                  {this.state.results.map((item, index) => (
-                    <Puzzle id={item.word} key={item.order} index={index}>{item.word}</Puzzle>
-                  ))}
+                  {this.state.results.map((item, index) => {
+                    const data = this.state.data[item];
+                    return (
+                    <Puzzle
+                      id={data.id}
+                      key={data.order}
+                      index={index}
+                      onClick={this.transferToSource}
+                    >
+                      {data.word}
+                    </Puzzle>
+                    )
+                  })}
                   { provided.placeholder }
                 </PlayfieldRow>
               )}
@@ -145,9 +176,19 @@ export default class Game extends Component {
                 {...provided.droppableProps}
                 isDraggingOver={snapshot.isDraggingOver}
               >
-                {this.state.source.map((item, index) => (
-                  <Puzzle id={item.word} key={item.order} index={index}>{item.word}</Puzzle>
-                ))}
+                {this.state.source.map((item, index) => {
+                  const data = this.state.data[item];
+                  return (
+                  <Puzzle
+                    id={data.id}
+                    key={data.order}
+                    index={index}
+                    onClick={this.transferToPlayfield}
+                  >
+                    {data.word}
+                  </Puzzle>
+                  )
+                })}
                 {provided.placeholder}
               </Source>
             )}

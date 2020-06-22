@@ -62,6 +62,7 @@ class Puzzle extends Component {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
+            onClick={this.props.onClick}
           >
             { this.props.children }
           </StyledPuzzle>
