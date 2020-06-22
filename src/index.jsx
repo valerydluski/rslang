@@ -12,10 +12,7 @@ import history from './utils/history';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-  rootReducer,
-  compose(applyMiddleware(sagaMiddleware), composeWithDevTools())
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(watchSaga);
 

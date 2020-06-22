@@ -1,11 +1,11 @@
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
-import roundChangeReducer from './roundChangeReducer';
-import changeWordsCollectionReducer from './changeWordsCollectionReducer';
+import roundChangeReducer from './Games/roundChangeReducer';
+import changeWordsCollectionReducer from './Games/changeWordsCollectionReducer';
 import loginReducer from './Auth/Login/reducer';
 import userSettingsReducer from './UserSettings/reducer';
 import changeScoreSpeakITReducer from './SpeakIT/scoreChangeSpeakITReducer';
-import changeUnspokenWordsReducer from './changeUnspokenWordsReducer';
+import changeUnspokenWordsReducer from './Games/changeUnspokenWordsReducer';
 
 const rootReducer = combineReducers({
   roundChange: roundChangeReducer,

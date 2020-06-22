@@ -10,7 +10,7 @@ import ScoreContainerSpeakIT from '../../../containers/SpeakIT/ScoreContainerSpe
 import Microphone from '../../../utils/Microphone';
 import changeScoreSpeakIT from '../../../redux/SpeakIT/action';
 import ResultModal from '../../../containers/Modal/ResultModal';
-import { changeUnspokenWords } from '../../../redux/action';
+import { changeUnspokenWords } from '../../../redux/Games/action';
 
 const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 const addScore = 100;
