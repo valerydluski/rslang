@@ -17,6 +17,7 @@ const Playfield = styled.div`
 const PlayfieldRow = styled.div`
   width: 100%;
   height: 56px;
+  padding-left: 20px;
   display: flex;
 `;
 
@@ -25,6 +26,7 @@ const Source = styled.div`
   margin-top: 30px;
   width: 560px;
   height: 56px;
+  padding-left: 20px;
 `;
 
 export default class Game extends Component {

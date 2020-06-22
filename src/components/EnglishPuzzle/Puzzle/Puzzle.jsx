@@ -21,6 +21,7 @@ const StyledPuzzle = styled.span`
   color: #000000;
   position: relative;
   padding: 0 20px;
+  margin-left: -20px;
 
   &::after {
     content: "";
@@ -38,13 +39,6 @@ const StyledPuzzle = styled.span`
 
   &.active {
     cursor: pointer;
-  }
-
-  &.playfield {
-    margin-left: -20px;
-    &:first-child {
-      margin-left: 0;
-    }
   }
 
   &.source {
@@ -68,7 +62,6 @@ class Puzzle extends Component {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            className="playfield"
           >
             { this.props.children }
           </StyledPuzzle>
