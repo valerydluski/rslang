@@ -5,7 +5,7 @@ import ModalContentStyled from './Styled/ModalContentStyled';
 import ModalWordsBlock from '../../components/Modal/ModalWordsBlock';
 
 const ModalContent = (props) => {
-  const { wordsCollection, unspokenWords, showProperties } = props;
+  const { wordsCollection, unspokenWords, showProperties, wordHandler } = props;
   const arr = wordsCollection.map((el) => el.word.toLowerCase());
   const iKnowWords = arr.filter((el) => !unspokenWords.includes(el));
 
@@ -18,6 +18,7 @@ const ModalContent = (props) => {
             header="i know"
             words={iKnowWords}
             wordsCollection={wordsCollection}
+            wordHandler={wordHandler}
           />
         );
       case 0:
@@ -27,6 +28,7 @@ const ModalContent = (props) => {
             header="i don't know"
             words={unspokenWords}
             wordsCollection={wordsCollection}
+            wordHandler={wordHandler}
           />
         );
       default:
@@ -37,12 +39,14 @@ const ModalContent = (props) => {
               header="i don't know"
               words={unspokenWords}
               wordsCollection={wordsCollection}
+              wordHandler={wordHandler}
             />
             <ModalWordsBlock
               showProperties={showProperties}
               header="i know"
               words={iKnowWords}
               wordsCollection={wordsCollection}
+              wordHandler={wordHandler}
             />
           </>
         );
@@ -56,11 +60,13 @@ ModalContent.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   showProperties: PropTypes.instanceOf(Array),
   unspokenWords: PropTypes.instanceOf(Array).isRequired,
+  wordHandler: PropTypes.func,
 };
 
 ModalContent.defaultProps = {
   wordsCollection: [],
   showProperties: ['word'],
+  wordHandler: () => {},
 };
 
 const mapStateToProps = (state) => {

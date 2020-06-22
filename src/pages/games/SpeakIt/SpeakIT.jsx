@@ -114,6 +114,7 @@ const SpeakIT = (props) => {
     return (
       <div className="speak-it_container">
         <ResultModal
+          playAudio={playAudio}
           audioForPlay="audio"
           showProperties={['word', 'transcription', 'wordTranslate']}
         />
@@ -133,6 +134,7 @@ const SpeakIT = (props) => {
   return (
     <div className="speak-it_container">
       <ResultModal
+        playAudio={playAudio}
         audioForPlay="audio"
         showProperties={['word', 'transcription', 'wordTranslate']}
       />

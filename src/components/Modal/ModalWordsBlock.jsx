@@ -4,7 +4,7 @@ import ModalWordsBlockStyled from './Styled/ModalWordsBlockStyled';
 import ModalWord from './ModalWord';
 
 const ModalWordsBlock = (props) => {
-  const { header, wordsCollection, words, showProperties } = props;
+  const { header, wordsCollection, words, showProperties, wordHandler } = props;
   return (
     <>
       <h2>{header}</h2>
@@ -14,7 +14,7 @@ const ModalWordsBlock = (props) => {
           const arr = showProperties.map((prop) => {
             return word[0][`${prop}`];
           });
-          return <ModalWord text={arr.join(' ')} key={el} />;
+          return <ModalWord text={arr.join(' ')} key={el} wordHandler={wordHandler} word={word} />;
         })}
       </ModalWordsBlockStyled>
     </>
@@ -26,8 +26,11 @@ ModalWordsBlock.propTypes = {
   words: PropTypes.instanceOf(Array).isRequired,
   wordsCollection: PropTypes.instanceOf(Array).isRequired,
   showProperties: PropTypes.instanceOf(Array).isRequired,
+  wordHandler: PropTypes.func,
 };
 
-ModalWordsBlock.defaultProps = {};
+ModalWordsBlock.defaultProps = {
+  wordHandler: () => {},
+};
 
 export default ModalWordsBlock;
