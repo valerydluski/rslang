@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ModalWordStyled from './Styled/ModalWordsBlockStyled';
+import ModalWordStyled from '../../components/Modal/Styled/ModalWordsBlockStyled';
 import ModalWordTextStyled from './Styled/ModalWordTextStyled';
 
 const ModalWord = (props) => {
