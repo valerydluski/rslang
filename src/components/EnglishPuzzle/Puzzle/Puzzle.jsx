@@ -19,6 +19,7 @@ const StyledPuzzle = styled.span`
     0% 0%
   );
   background-size: 602px 340px;
+  background-position: ${props => -props.bgXOffset}px ${props => -props.bgYOffset}px;
   background-color: red;
   color: #000000;
   position: relative;
@@ -37,7 +38,19 @@ const StyledPuzzle = styled.span`
 `;
 
 class Puzzle extends Component {
-  render() {
+  renderStatic() {
+    return (
+      <StyledPuzzle
+        width={this.props.width}
+        bgXOffset={this.props.bgXOffset}
+        bgYOffset={this.props.bgYOffset}
+      >
+        { this.props.children }
+      </StyledPuzzle>
+    )
+  }
+
+  renderActive() {
     return (
       <Draggable draggableId={this.props.id} index={this.props.index}>
         {(provided) => (
@@ -47,11 +60,21 @@ class Puzzle extends Component {
             ref={provided.innerRef}
             onClick={this.props.onClick}
             width={this.props.width}
+            bgXOffset={this.props.bgXOffset}
+            bgYOffset={this.props.bgYOffset}
           >
             { this.props.children }
           </StyledPuzzle>
         )}
       </Draggable>
+    )
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        {this.props.isStatic ? this.renderStatic() : this.renderActive() }
+      </React.Fragment>
     )
   }
 }

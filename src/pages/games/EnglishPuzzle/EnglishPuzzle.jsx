@@ -28,6 +28,8 @@ class EnglishPuzzle extends Component {
           <Game/>
         </Container>
       </Content>
+      // TODO add controls
+      // TODO add results window
     )
   }
 }

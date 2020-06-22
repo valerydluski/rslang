@@ -41,44 +41,63 @@ export default class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {
-        'The_1': {id: 'The_1', word: 'The', order: 1},
-        'woman_2': {id: 'woman_2', word: 'woman', order: 2},
-        'like_3': {id: 'like_3', word: 'like', order: 3},
-        'to_4': {id: 'to_4', word: 'to', order: 4},
-        'ride_5': {id: 'ride_5', word: 'ride', order: 5},
-        'a_6': {id: 'a_6', word: 'a', order: 6},
-        'bicycle_7': {id: 'bicycle_7', word: 'bicycle', order: 7}
-      },
-      source: ['like_3', 'woman_2', 'to_4', 'ride_5', 'The_1', 'a_6', 'bicycle_7'],
-      results: []
+      data: [
+        {
+          'The_1': {id: 'The_1', word: 'The', order: 1},
+          'woman_2': {id: 'woman_2', word: 'woman', order: 2},
+          'like_3': {id: 'like_3', word: 'like', order: 3},
+          'to_4': {id: 'to_4', word: 'to', order: 4},
+          'ride_5': {id: 'ride_5', word: 'ride', order: 5},
+          'a_6': {id: 'a_6', word: 'a', order: 6},
+          'bicycle_7': {id: 'bicycle_7', word: 'bicycle', order: 7}
+        },
+        {
+          'I_1': {id: 'I_1', word: 'I', order: 1},
+          'like_2': {id: 'like_2', word: 'like', order: 2},
+          'to_3': {id: 'to_3', word: 'to', order: 3},
+          'drive_4': {id: 'drive_4', word: 'drive', order: 4},
+          'my_5': {id: 'my_5', word: 'my', order: 5},
+          'car_6': {id: 'car_6', word: 'car', order: 6}
+        },
+        {
+          'The_1': {id: 'The_1', word: 'The', order: 1},
+          'woman_2': {id: 'woman_2', word: 'woman', order: 2},
+          'like_3': {id: 'like_3', word: 'like', order: 3},
+          'to_4': {id: 'to_4', word: 'to', order: 4},
+          'ride_5': {id: 'ride_5', word: 'ride', order: 5},
+          'a_6': {id: 'a_6', word: 'a', order: 6},
+          'bicycle_7': {id: 'bicycle_7', word: 'bicycle', order: 7}
+        }
+      ],
+      source: [],
+      results: [],
+      row: 2
     }
   }
 
   calculatePuzzlesData = () => {
-    const data = {...this.state.data}
-    const keys = Object.keys(data);
+    const data = this.state.data.concat();
+    data.forEach(page => {
+      const keys = Object.keys(page);
 
-    keys.forEach(item => {
-      data[item].width = getStringWidth(data[item].word);
+      keys.forEach(item => {
+        page[item].width = getStringWidth(page[item].word);
+      })
+
+      let bgXOffset = 0;
+      const bgYOffset = 0;
+      const fullWidth = keys.reduce((width, item) => width + page[item].width, 0);
+      const freeWidth = 560 - fullWidth;
+      const extraWidth = (20 * (keys.length - 1) + freeWidth) / keys.length;
+
+      keys.forEach(item => {
+        const newWidth = page[item].width + extraWidth;
+        page[item].width = page[item].width + extraWidth;
+        page[item].bgXOffset = bgXOffset;
+        page[item].bgYOffset = bgYOffset;
+        bgXOffset += newWidth - 20;
+      })
     })
-
-    console.log(data);
-
-    let bgXOffset = 0;
-    const bgYOffset = 0;
-    const fullWidth = keys.reduce((width, item) => width + data[item].width, 0);
-    const freeWidth = 560 - fullWidth;
-    const extraWidth = (20 * (keys.length - 1) + freeWidth) / keys.length;
-
-    keys.forEach(item => {
-      const newWidth = data[item].width + extraWidth;
-      data[item].width = data[item].width + extraWidth;
-      data[item].bgXOffset = bgXOffset;
-      data[item].bgYOffset = bgYOffset;
-      bgXOffset += newWidth - 20;
-    })
-
     this.setState({
       data
     })
@@ -86,6 +105,16 @@ export default class Game extends Component {
 
   componentDidMount() {
     this.calculatePuzzlesData();
+    this.generateSource();
+    console.log(this.state);
+  }
+
+  generateSource() {
+    const source = Object.keys(this.state.data[this.state.row])
+      .sort(() => Math.random() - 0.5)
+    this.setState({
+      source
+    })
   }
 
 
@@ -155,23 +184,101 @@ export default class Game extends Component {
     })
   }
 
-  renderPuzzle = (item, index, array) => {
-    const data = this.state.data[item];
-      return (
-        <Puzzle
-          id={data.id}
-          key={data.order}
-          index={index}
-          width={data.width}
-          bgXOffset={data.bgXOffset}
-          bgYOffset={data.bgYOffset}
-          onClick={ array === this.state.results ? this.transferToSource : this.transferToPlayfield}
-          // TODO add url
-          // TODO add bgTip
-        >
-          {data.word}
-        </Puzzle>
-      )
+  renderActivePuzzle = (item, index, array) => {
+    const data = this.state.data[this.state.row][item];
+    const key = +`${this.state.row}${data.order}`
+    return (
+      <Puzzle
+        key={data.order}
+        id={data.id}
+        index={index}
+        width={data.width}
+        bgXOffset={data.bgXOffset}
+        bgYOffset={data.bgYOffset}
+        onClick={array === this.state.results ? this.transferToSource : this.transferToPlayfield}
+        // TODO add url
+        // TODO add bgTip
+      >
+        {data.word}
+      </Puzzle>
+    )
+  }
+
+  renderStaticPuzzle = (item) => {
+    return (
+      <Puzzle
+        key={item.order}
+        isStatic={true}
+        width={item.width}
+        bgXOffset={item.bgXOffset}
+        bgYOffset={item.bgYOffset}
+        // TODO add url
+      >
+        {item.word}
+      </Puzzle>
+    )
+  }
+
+  renderStaticRow = (item, row) => {
+    const keys = Object.keys(item);
+    return (
+      <PlayfieldRow
+        key={row}
+      >
+        {keys.map(key => this.renderStaticPuzzle(item[key]))}
+      </PlayfieldRow>
+    )
+  }
+
+  renderActiveRow = () => {
+    return (
+      <Droppable
+        droppableId="row"
+        direction="horizontal"
+      >
+        {(provided, snapshot) => (
+          <PlayfieldRow
+            key={this.state.row}
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            isDraggingOver={snapshot.isDraggingOver}
+          >
+            {this.state.results.map(this.renderActivePuzzle)}
+            {provided.placeholder}
+          </PlayfieldRow>
+        )}
+      </Droppable>
+    )
+  }
+
+  renderPlayfield() {
+    const {row, data} = this.state;
+    return (
+    <Playfield>
+      {data.slice(0, row).map(this.renderStaticRow)}
+      {this.renderActiveRow()}
+    </Playfield>
+    )
+  }
+
+  renderSource() {
+    return(
+      <Droppable
+        droppableId="source"
+        direction="horizontal"
+      >
+        {(provided, snapshot) => (
+          <Source
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            isDraggingOver={snapshot.isDraggingOver}
+          >
+            {this.state.source.map(this.renderActivePuzzle)}
+            {provided.placeholder}
+          </Source>
+        )}
+      </Droppable>
+    )
   }
 
   render() {
@@ -180,38 +287,8 @@ export default class Game extends Component {
         <DragDropContext
           onDragEnd={this.onDragEnd}
         >
-          <Playfield>
-            <Droppable
-              droppableId="row"
-              direction="horizontal"
-            >
-              {(provided, snapshot) => (
-                <PlayfieldRow
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  isDraggingOver={snapshot.isDraggingOver}
-                >
-                  { this.state.results.map(this.renderPuzzle) }
-                  { provided.placeholder }
-                </PlayfieldRow>
-              )}
-            </Droppable>
-          </Playfield>
-          <Droppable
-            droppableId="source"
-            direction="horizontal"
-          >
-            {(provided, snapshot) => (
-              <Source
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                isDraggingOver={snapshot.isDraggingOver}
-              >
-                { this.state.source.map(this.renderPuzzle) }
-                {provided.placeholder}
-              </Source>
-            )}
-          </Droppable>
+          {this.renderPlayfield()}
+          {this.renderSource()}
         </DragDropContext>
       </Container>
     )
