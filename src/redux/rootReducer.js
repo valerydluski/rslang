@@ -6,6 +6,7 @@ import loginReducer from './Auth/Login/reducer';
 import userSettingsReducer from './UserSettings/reducer';
 import changeScoreSpeakITReducer from './SpeakIT/scoreChangeSpeakITReducer';
 import changeIDontKnowWordsReducer from './Games/changeIDontKnowReducer';
+import loaderReducer from './Loader/loaderReducer';
 
 const rootReducer = combineReducers({
   roundChange: roundChangeReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   changeScoreSpeakIT: changeScoreSpeakITReducer,
   changeIDontKnowWords: changeIDontKnowWordsReducer,
+  loader: loaderReducer,
 });
 
 export default rootReducer;
