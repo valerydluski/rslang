@@ -8,7 +8,7 @@ async function checkToken(user) {
       ENDPOINTS: { USERS, WORDS },
     } = API;
 
-    await fetchData(`${URL}/${USERS}/${user.userId}/${WORDS}`, {
+    return await fetchData(`${URL}/${USERS}/${user.userId}/${WORDS}`, {
       method: 'GET',
       withCredentials: true,
       headers: {
@@ -17,7 +17,7 @@ async function checkToken(user) {
       },
     });
   } catch (e) {
-    throw new Error(e.message);
+    return null;
   }
 }
 

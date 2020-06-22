@@ -13,7 +13,6 @@ export function saveSessionData(data) {
 }
 
 export function authToServer(data) {
-  console.log('authToServer -> data', data);
   return {
     type: AUTH_TO_SERVER,
     payload: data,
