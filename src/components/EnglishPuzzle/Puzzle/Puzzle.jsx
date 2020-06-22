@@ -7,7 +7,9 @@ const StyledPuzzle = styled.span`
   justify-content: center;
   align-items: center;
   height: 56px;
-  width: 50px;
+  width: ${props => props.width}px;
+  box-sizing: border-box;
+  flex-shrink: 0;
   clip-path: polygon(
     calc(100% - 20px) 0%,
     100% 50%,
@@ -32,25 +34,6 @@ const StyledPuzzle = styled.span`
     width: 100%;
     height: 2px;
   }
-
-  &.drag {
-
-  }
-
-  &.active {
-    cursor: pointer;
-  }
-
-  &.source {
-    padding: 0;
-  }
-
-  &.correct {
-    &::after {
-      display: block;
-      background-color:
-    }
-  }
 `;
 
 class Puzzle extends Component {
@@ -63,6 +46,7 @@ class Puzzle extends Component {
             {...provided.dragHandleProps}
             ref={provided.innerRef}
             onClick={this.props.onClick}
+            width={this.props.width}
           >
             { this.props.children }
           </StyledPuzzle>
