@@ -7,12 +7,10 @@ import Login from './containers/Auth/Login/Login';
 import Registration from './containers/Auth/Registration/Registration';
 import PrivateNavigationRoute from './components/Navigation/PrivateNavigationRoute';
 import GlobalStyle from './styles/globalStyles';
-import Fonts from './styles/Fonts';
 
 function App() {
   return (
     <div className="App">
-      <Fonts />
       <GlobalStyle />
       <main>
         <Switch>
