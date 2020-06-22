@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import Logo from '../../containers/UI/Logo';
-import GameNavigationMenu from '../../containers/Navigation/GameNavigationMenu';
 import getLoginStatus from '../../utils/getLoginStatus';
+import LeftSideBar from '../../components/HomePage/LeftSideBar/LeftSideBar';
+import Main from '../../components/HomePage/Main';
+import RightSideBar from '../../components/HomePage/RightSideBar';
 
 function HomePage(props) {
   const { checkStatusSession } = props;
@@ -15,13 +16,11 @@ function HomePage(props) {
   }
 
   return (
-    <div>
-      <Logo />
-      <GameNavigationMenu />
-      <div>
-        <h1>Home Page</h1>
-      </div>
-    </div>
+    <>
+      <LeftSideBar />
+      <Main />
+      <RightSideBar />
+    </>
   );
 }
 
