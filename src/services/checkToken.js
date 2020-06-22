@@ -5,10 +5,10 @@ async function checkToken(user) {
   try {
     const {
       URL,
-      ENDPOINTS: { USERS, WORDS },
+      ENDPOINTS: { USERS },
     } = API;
 
-    return await fetchData(`${URL}/${USERS}/${user.userId}/${WORDS}`, {
+    return await fetchData(`${URL}/${USERS}/${user.userId}/`, {
       method: 'GET',
       withCredentials: true,
       headers: {

@@ -4,6 +4,7 @@ export const API = {
     USERS: 'users',
     SIGNIN: 'signin',
     WORDS: 'words',
+    SETTINGS: 'settings',
   },
 };
 
