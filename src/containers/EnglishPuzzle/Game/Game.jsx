@@ -19,6 +19,8 @@ const PlayfieldRow = styled.div`
   height: 56px;
   padding-left: 20px;
   display: flex;
+  box-sizing: border-box;
+  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'none')}
 `;
 
 const Source = styled.div`
@@ -27,6 +29,8 @@ const Source = styled.div`
   width: 560px;
   height: 56px;
   padding-left: 20px;
+  box-sizing: border-box;
+  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'none')}
 `;
 
 export default class Game extends Component {
@@ -117,10 +121,11 @@ export default class Game extends Component {
               droppableId="row"
               direction="horizontal"
             >
-              {(provided) => (
+              {(provided, snapshot) => (
                 <PlayfieldRow
                   ref={provided.innerRef}
                   {...provided.droppableProps}
+                  isDraggingOver={snapshot.isDraggingOver}
                 >
                   {this.state.results.map((item, index) => (
                     <Puzzle id={item.word} key={item.order} index={index}>{item.word}</Puzzle>
@@ -134,10 +139,11 @@ export default class Game extends Component {
             droppableId="source"
             direction="horizontal"
           >
-            {(provided) => (
+            {(provided, snapshot) => (
               <Source
                 ref={provided.innerRef}
                 {...provided.droppableProps}
+                isDraggingOver={snapshot.isDraggingOver}
               >
                 {this.state.source.map((item, index) => (
                   <Puzzle id={item.word} key={item.order} index={index}>{item.word}</Puzzle>
