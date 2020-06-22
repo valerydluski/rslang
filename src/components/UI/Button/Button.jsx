@@ -1,27 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ButtonSpeakITStyled from './Styled/StyledButtonSpeakIT';
+import ButtonStyled from './Styled/StyledButton';
 
-const ButtonSpeakIT = (props) => {
+const Button = (props) => {
   const { buttonHandler, text, className } = props;
 
   return (
-    <ButtonSpeakITStyled className={className} onClick={buttonHandler}>
+    <ButtonStyled className={className} onClick={buttonHandler}>
       {text}
-    </ButtonSpeakITStyled>
+    </ButtonStyled>
   );
 };
 
-ButtonSpeakIT.propTypes = {
+Button.propTypes = {
   buttonHandler: PropTypes.func,
   text: PropTypes.string,
   className: PropTypes.string,
 };
 
-ButtonSpeakIT.defaultProps = {
+Button.defaultProps = {
   buttonHandler: () => {},
   text: '',
   className: '',
 };
 
-export default ButtonSpeakIT;
+export default Button;

@@ -18,7 +18,7 @@ const pulseShrink = keyframes`
   }
 `;
 
-const ButtonSpeakITStyled = styled.button`
+const ButtonStyled = styled.button`
   position: relative;
   height: 53px;
   width: 290px;
@@ -42,4 +42,4 @@ const ButtonSpeakITStyled = styled.button`
   }
 `;
 
-export default ButtonSpeakITStyled;
+export default ButtonStyled;
