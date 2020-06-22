@@ -105,7 +105,6 @@ const SpeakIT = (props) => {
   };
 
   const finishHandler = () => {
-    changeIDontKnowWordsInStore(IDontKnowWords);
     const overlay = document.getElementById('overlay');
     overlay.classList.toggle('hidden');
   };
