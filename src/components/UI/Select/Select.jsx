@@ -59,10 +59,6 @@ const Option = styled.button`
 
 const Select = (props) => {
 
-  const clickHandler = () => {
-    props.onToggle();
-  }
-
   const options = [];
   for (let i = 1; i <= props.optionsNumber; i++) {
     options.push(i);
@@ -76,7 +72,7 @@ const Select = (props) => {
     >
       <div>
         <Button
-          onClick={clickHandler}
+          onClick={props.onToggle}
         >
           {props.openBtnName}
         </Button>
