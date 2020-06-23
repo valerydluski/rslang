@@ -9,8 +9,8 @@ import {
 export function transferToSource(event) {
   return (dispatch, getState) => {
     const id = event.target.dataset.rbdDraggableId;
-
-    const {results, source} = getState().englishPuzzle;
+    const results = getState().englishPuzzle.results.concat();
+    const source = getState().englishPuzzle.source.concat();
     const index = results.findIndex(item => item === id);
 
     results.splice(index, 1);
@@ -23,8 +23,8 @@ export function transferToSource(event) {
 export function transferToPlayfield(event) {
   return (dispatch, getState) => {
     const id = event.target.dataset.rbdDraggableId;
-
-    const {results, source} = getState().englishPuzzle;
+    const results = getState().englishPuzzle.results.concat();
+    const source = getState().englishPuzzle.source.concat();
     const index = source.findIndex(item => item === id);
 
     source.splice(index, 1);
@@ -38,8 +38,8 @@ export function onDragEnd(result) {
   return (dispatch, getState) => {
     const { destination, source } = result;
     const {TARGET_ID, SOURCE_ID} = ENGLISH_PUZZLE_CONSTANTS;
-    const sourceState = getState().englishPuzzle.source;
-    const resultsState = getState().englishPuzzle.results;
+    const sourceState = getState().englishPuzzle.source.concat();
+    const resultsState = getState().englishPuzzle.results.concat();
     if (!destination) {
       return;
     }
@@ -104,7 +104,6 @@ export function updateSource() {
 }
 
 export function updatePuzzlesPosition(results, source) {
-  console.log(123);
   return {
     type: UPDATE_PUZZLES_POSITION,
     results, source
