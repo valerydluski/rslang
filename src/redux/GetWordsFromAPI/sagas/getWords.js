@@ -2,13 +2,7 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import fetchWords from '../action';
 import { GAME_CHANGE_LEVEL, GAME_CHANGE_PAGE } from '../../Games/types';
 import { hideLoader, showLoader } from '../../Loader/action';
-
-async function wordsFetch() {
-  const response = await fetch(
-    'https://afternoon-falls-25894.herokuapp.com/words?group=0&page=2&wordsPerExampleSentenceLTE=100&wordsPerPage=10'
-  );
-  return await response.json();
-}
+import wordsFetch from '../../../services/getWordsFromAPI';
 
 function* workerGetWords() {
   try {
