@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
-import SpeechIcon from '../../../UI/Icon/SpeechIcon.jsx'
-import TextIcon from '../../../UI/Icon/TextIcon.jsx'
-import MusicIcon from '../../../UI/Icon/MusicIcon.jsx'
-import PictureIcon from '../../../UI/Icon/PictureIcon.jsx'
+import SpeechIcon from '../../../UI/Icon/SpeechIcon';
+import TextIcon from '../../../UI/Icon/TextIcon';
+import MusicIcon from '../../../UI/Icon/MusicIcon';
+import PictureIcon from '../../../UI/Icon/PictureIcon';
 
 const Menu = styled.div`
   position: absolute;
@@ -19,10 +19,11 @@ const TipButton = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #7968DC;
+  background-color: #7968dc;
   border-width: 0;
   margin-top: 5px;
-  &:focus, &:active {
+  &:focus,
+  &:active {
     outline: none;
   }
   &:first-child {
@@ -30,23 +31,23 @@ const TipButton = styled.button`
   }
 `;
 
-const TipsMenu = props => {
+const TipsMenu = () => {
   return (
     <Menu>
       <TipButton>
-        <SpeechIcon/>
+        <SpeechIcon />
       </TipButton>
       <TipButton>
-        <TextIcon/>
+        <TextIcon />
       </TipButton>
       <TipButton>
-        <MusicIcon/>
+        <MusicIcon />
       </TipButton>
       <TipButton>
-        <PictureIcon/>
+        <PictureIcon />
       </TipButton>
     </Menu>
-  )
-}
+  );
+};
 
 export default TipsMenu;

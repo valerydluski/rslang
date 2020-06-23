@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import {ENGLISH_PUZZLE_CONSTANTS} from '../../../config';
+import { ENGLISH_PUZZLE_CONSTANTS } from '../../../config';
 import {
   transferToSource,
   transferToPlayfield,
   onDragEnd,
   calculatePuzzlesData,
-  updateSource
+  updateSource,
 } from '../../../redux/EnglishPuzzle/actions';
 import Puzzle from '../../../components/EnglishPuzzle/Puzzle/Puzzle';
 
@@ -19,7 +20,7 @@ const Container = styled.div`
 const Playfield = styled.div`
   width: 560px;
   height: 560px;
-  background: #C4C4C4;
+  background: #c4c4c4;
 `;
 
 const PlayfieldRow = styled.div`
@@ -29,7 +30,7 @@ const PlayfieldRow = styled.div`
   display: flex;
   justify-content: flex-start;
   box-sizing: border-box;
-  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'none')}
+  background-color: ${(props) => (props.isDraggingOver ? 'skyblue' : 'none')};
 `;
 
 const Source = styled.div`
@@ -41,44 +42,41 @@ const Source = styled.div`
   justify-content: flex-start;
   padding-left: 20px;
   box-sizing: border-box;
-  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'none')}
+  background-color: ${(props) => (props.isDraggingOver ? 'skyblue' : 'none')};
 `;
 
 class Game extends Component {
-
   componentDidMount() {
-    this.props.calculatePuzzlesData();
-    this.props.updateSource();
-  }
-
-  componentWillReceiveProps() {
-    this.setState({})
+    const { calcPuzzlesData, updateSrc } = this.props;
+    calcPuzzlesData();
+    updateSrc();
   }
 
   renderActivePuzzle = (item, index, array) => {
-    const data = this.props.data[this.props.row][item];
+    const { data, row, results, playfieldPuzzleClick, sourcePuzzleClick } = this.props;
+    const itemData = data[row][item];
     return (
       <Puzzle
-        key={data.order}
-        id={data.id}
+        key={itemData.order}
+        id={itemData.id}
         index={index}
-        width={data.width}
-        bgXOffset={data.bgXOffset}
-        bgYOffset={data.bgYOffset}
-        onClick={array === this.props.results ? this.props.transferToSource : this.props.transferToPlayfield}
+        width={itemData.width}
+        bgXOffset={itemData.bgXOffset}
+        bgYOffset={itemData.bgYOffset}
+        onClick={array === results ? playfieldPuzzleClick : sourcePuzzleClick}
         // TODO add url
         // TODO add bgTip
       >
-        {data.word}
+        {itemData.word}
       </Puzzle>
-    )
-  }
+    );
+  };
 
   renderStaticPuzzle = (item) => {
     return (
       <Puzzle
         key={item.order}
-        isStatic={true}
+        isStatic
         width={item.width}
         bgXOffset={item.bgXOffset}
         bgYOffset={item.bgYOffset}
@@ -86,84 +84,93 @@ class Game extends Component {
       >
         {item.word}
       </Puzzle>
-    )
-  }
+    );
+  };
 
   renderStaticRow = (item, row) => {
     const keys = Object.keys(item);
     return (
-      <PlayfieldRow
-        key={row}
-      >
-        {keys.map(key => this.renderStaticPuzzle(item[key]))}
-      </PlayfieldRow>
-    )
-  }
+      <PlayfieldRow key={row}>{keys.map((key) => this.renderStaticPuzzle(item[key]))}</PlayfieldRow>
+    );
+  };
 
   renderActiveRow = () => {
+    const { results, row } = this.props;
     return (
-      <Droppable
-        droppableId={ENGLISH_PUZZLE_CONSTANTS.TARGET_ID}
-        direction="horizontal"
-      >
+      <Droppable droppableId={ENGLISH_PUZZLE_CONSTANTS.TARGET_ID} direction="horizontal">
         {(provided, snapshot) => (
           <PlayfieldRow
-            key={this.props.row}
+            key={row}
             ref={provided.innerRef}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
           >
-            {this.props.results.map(this.renderActivePuzzle)}
+            {results.map(this.renderActivePuzzle)}
             {provided.placeholder}
           </PlayfieldRow>
         )}
       </Droppable>
-    )
-  }
+    );
+  };
 
   renderPlayfield() {
-    const {row, data} = this.props;
+    const { row, data } = this.props;
     return (
-    <Playfield>
-      {data.slice(0, row).map(this.renderStaticRow)}
-      {this.renderActiveRow()}
-    </Playfield>
-    )
+      <Playfield>
+        {data.slice(0, row).map(this.renderStaticRow)}
+        {this.renderActiveRow()}
+      </Playfield>
+    );
   }
 
   renderSource() {
-    return(
-      <Droppable
-        droppableId={ENGLISH_PUZZLE_CONSTANTS.SOURCE_ID}
-        direction="horizontal"
-      >
+    const { source } = this.props;
+    return (
+      <Droppable droppableId={ENGLISH_PUZZLE_CONSTANTS.SOURCE_ID} direction="horizontal">
         {(provided, snapshot) => (
           <Source
             ref={provided.innerRef}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
           >
-            {this.props.source.map(this.renderActivePuzzle)}
+            {source.map(this.renderActivePuzzle)}
             {provided.placeholder}
           </Source>
         )}
       </Droppable>
-    )
+    );
   }
 
   render() {
+    const { onDragPuzzle } = this.props;
     return (
       <Container>
-        <DragDropContext
-          onDragEnd={this.props.onDragEnd}
-        >
+        <DragDropContext onDragEnd={onDragPuzzle}>
           {this.renderPlayfield()}
           {this.renderSource()}
         </DragDropContext>
       </Container>
-    )
+    );
   }
 }
+
+Game.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  row: PropTypes.number.isRequired,
+  source: PropTypes.arrayOf(PropTypes.string).isRequired,
+  results: PropTypes.arrayOf(PropTypes.string).isRequired,
+  autoSpeech: PropTypes.bool.isRequired,
+  translation: PropTypes.bool.isRequired,
+  speech: PropTypes.bool.isRequired,
+  background: PropTypes.bool.isRequired,
+  playfieldPuzzleClick: PropTypes.func.isRequired,
+  sourcePuzzleClick: PropTypes.func.isRequired,
+  onDragPuzzle: PropTypes.func.isRequired,
+  calcPuzzlesData: PropTypes.func.isRequired,
+  updateSrc: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
@@ -174,18 +181,18 @@ function mapStateToProps(state) {
     autoSpeech: state.englishPuzzle.autoSpeech,
     translation: state.englishPuzzle.translation,
     speech: state.englishPuzzle.speech,
-    background: state.englishPuzzle.background
-  }
+    background: state.englishPuzzle.background,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    transferToSource: event => dispatch(transferToSource(event)),
-    transferToPlayfield: event => dispatch(transferToPlayfield(event)),
-    onDragEnd: result => dispatch(onDragEnd(result)),
-    calculatePuzzlesData: () => dispatch(calculatePuzzlesData()),
-    updateSource: () => dispatch(updateSource())
-  }
+    playfieldPuzzleClick: (event) => dispatch(transferToSource(event)),
+    sourcePuzzleClick: (event) => dispatch(transferToPlayfield(event)),
+    onDragPuzzle: (result) => dispatch(onDragEnd(result)),
+    calcPuzzlesData: () => dispatch(calculatePuzzlesData()),
+    updateSrc: () => dispatch(updateSource()),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
