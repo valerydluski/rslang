@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import NextIcon from '../../../components/UI/Icon/next.svg';
+import NextIcon from '../UI/Icon/next.svg';
 
 const NextButtonStyled = styled.div`
   background-image: url(${NextIcon});

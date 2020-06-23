@@ -6,6 +6,7 @@ const AudioPlayButton = ({ src, isBig }) => {
   const wordAudio = new Audio();
   const link = 'https://raw.githubusercontent.com/kovanelly/rslang-data/master/';
   wordAudio.src = `${link}${src}`;
+
   const playWordAudio = () => {
     wordAudio.play();
   };

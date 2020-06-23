@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Word from './StyledWords';
-import errorSound from '../../../assets/audio/error.mp3';
-import correctSound from '../../../assets/audio/correct.mp3';
+import Word from '../../components/Audiocall/StyledWords';
+import errorSound from '../../assets/audio/error.mp3';
+import correctSound from '../../assets/audio/correct.mp3';
 
 const WordsContainerStyled = styled.div`
   display: flex;

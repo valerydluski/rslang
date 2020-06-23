@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import AudioIcon from '../../../components/UI/Icon/audioIco.svg';
+import AudioIcon from '../UI/Icon/audioIco.svg';
 
 const AudioPlayButtonStyled = styled.div`
   width: 52px;

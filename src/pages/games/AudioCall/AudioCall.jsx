@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
-import AudioPlayButton from './AudioPlayButtons';
-import FinishedWordInfo from './FinishedWordInfoContainer';
-import WordsContainer from './WordsContainer';
-import { DontKnowButton, NextButton } from './AudiocallControls';
+import AudioPlayButton from '../../../components/Audiocall/AudioPlayButtons';
+import FinishedWordInfo from '../../../components/Audiocall/FinishedWordInfo';
+import WordsContainer from '../../../containers/Audiocall/WordsContainer';
+import { DontKnowButton, NextButton } from '../../../components/Audiocall/AudiocallControls';
 
 const sourcesLink = 'https://raw.githubusercontent.com/kovanelly/rslang-data/master/';
 
