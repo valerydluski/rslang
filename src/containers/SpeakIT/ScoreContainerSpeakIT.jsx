@@ -23,7 +23,7 @@ ScoreContainerSpeakIT.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    score: state.changeScoreSpeakIT.speakITScore,
+    score: state.gamesReducer.gameScore,
   };
 };
 

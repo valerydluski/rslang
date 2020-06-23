@@ -8,9 +8,8 @@ import ButtonsContainerSpeakIT from '../../../components/SpeakIT/ButtonsContaine
 import RecognationTranscriptContainer from '../../../components/SpeakIT/RecognationTranscriptContainer';
 import ScoreContainerSpeakIT from '../../../containers/SpeakIT/ScoreContainerSpeakIT';
 import Microphone from '../../../utils/Microphone';
-import changeScoreSpeakIT from '../../../redux/SpeakIT/action';
 import ResultModal from '../../../containers/Modal/ResultModal';
-import { changeIDontKnowWords } from '../../../redux/Games/action';
+import { changeIDontKnowWords, changeScoreGame } from '../../../redux/Games/action';
 
 const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 const addScore = 100;
@@ -180,15 +179,15 @@ SpeakIT.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    Level: state.roundChange.speakITLevel,
-    Page: state.roundChange.speakITPage,
+    Level: state.gamesReducer.gameLevel,
+    Page: state.gamesReducer.gamePage,
     wordsCollection: state.changeWordsCollection.wordsCollection,
-    speakITScore: state.changeScoreSpeakIT.speakITScore,
+    gameScore: state.gamesReducer.gameScore,
   };
 };
 
 const mapDispatchToProps = {
-  changeScore: changeScoreSpeakIT,
+  changeScore: changeScoreGame,
   changeIDontKnowWordsInStore: changeIDontKnowWords,
 };
 
