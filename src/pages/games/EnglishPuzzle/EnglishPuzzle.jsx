@@ -36,16 +36,12 @@ class EnglishPuzzle extends Component {
 
 function mapStateToProps(state) {
   return {
-    status: {
-      level: state.englishPuzzle.status.level,
-      page: state.englishPuzzle.status.page
-    },
-    tips: {
-      autoSpeech: state.englishPuzzle.tips.autoSpeech,
-      translation: state.englishPuzzle.tips.translation,
-      speech: state.englishPuzzle.tips.speech,
-      background: state.englishPuzzle.tips.background
-    }
+    level: state.englishPuzzle.level,
+    page: state.englishPuzzle.page,
+    autoSpeech: state.englishPuzzle.autoSpeech,
+    translation: state.englishPuzzle.translation,
+    speech: state.englishPuzzle.speech,
+    background: state.englishPuzzle.background
   }
 }
 

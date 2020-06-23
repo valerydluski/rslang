@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import {ENGLISH_PUZZLE_CONSTANTS} from '../../../config';
+import {
+  transferToSource,
+  transferToPlayfield,
+  onDragEnd,
+  calculatePuzzlesData,
+  updateSource
+} from '../../../redux/EnglishPuzzle/actions';
 import Puzzle from '../../../components/EnglishPuzzle/Puzzle/Puzzle';
-import getStringWidth from '../../../utils/getStringWidth';
 
 const Container = styled.div`
   margin-top: 10px;
@@ -37,156 +44,19 @@ const Source = styled.div`
   background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'none')}
 `;
 
-export default class Game extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: [
-        {
-          'The_1': {id: 'The_1', word: 'The', order: 1},
-          'woman_2': {id: 'woman_2', word: 'woman', order: 2},
-          'like_3': {id: 'like_3', word: 'like', order: 3},
-          'to_4': {id: 'to_4', word: 'to', order: 4},
-          'ride_5': {id: 'ride_5', word: 'ride', order: 5},
-          'a_6': {id: 'a_6', word: 'a', order: 6},
-          'bicycle_7': {id: 'bicycle_7', word: 'bicycle', order: 7}
-        },
-        {
-          'I_1': {id: 'I_1', word: 'I', order: 1},
-          'like_2': {id: 'like_2', word: 'like', order: 2},
-          'to_3': {id: 'to_3', word: 'to', order: 3},
-          'drive_4': {id: 'drive_4', word: 'drive', order: 4},
-          'my_5': {id: 'my_5', word: 'my', order: 5},
-          'car_6': {id: 'car_6', word: 'car', order: 6}
-        },
-        {
-          'The_1': {id: 'The_1', word: 'The', order: 1},
-          'woman_2': {id: 'woman_2', word: 'woman', order: 2},
-          'like_3': {id: 'like_3', word: 'like', order: 3},
-          'to_4': {id: 'to_4', word: 'to', order: 4},
-          'ride_5': {id: 'ride_5', word: 'ride', order: 5},
-          'a_6': {id: 'a_6', word: 'a', order: 6},
-          'bicycle_7': {id: 'bicycle_7', word: 'bicycle', order: 7}
-        }
-      ],
-      source: [],
-      results: [],
-      row: 2
-    }
-  }
-
-  calculatePuzzlesData = () => {
-    const data = this.state.data.concat();
-    data.forEach(page => {
-      const keys = Object.keys(page);
-
-      keys.forEach(item => {
-        page[item].width = getStringWidth(page[item].word);
-      })
-
-      let bgXOffset = 0;
-      const bgYOffset = 0;
-      const fullWidth = keys.reduce((width, item) => width + page[item].width, 0);
-      const freeWidth = 560 - fullWidth;
-      const extraWidth = (20 * (keys.length - 1) + freeWidth) / keys.length;
-
-      keys.forEach(item => {
-        const newWidth = page[item].width + extraWidth;
-        page[item].width = page[item].width + extraWidth;
-        page[item].bgXOffset = bgXOffset;
-        page[item].bgYOffset = bgYOffset;
-        bgXOffset += newWidth - 20;
-      })
-    })
-    this.setState({
-      data
-    })
-  }
+class Game extends Component {
 
   componentDidMount() {
-    this.calculatePuzzlesData();
-    this.generateSource();
-    console.log(this.state);
+    this.props.calculatePuzzlesData();
+    this.props.updateSource();
   }
 
-  generateSource() {
-    const source = Object.keys(this.state.data[this.state.row])
-      .sort(() => Math.random() - 0.5)
-    this.setState({
-      source
-    })
-  }
-
-
-  onDragEnd = result => {
-    const { destination, source } = result;
-
-    if (!destination) {
-      return;
-    }
-
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return;
-    }
-
-    const sourceState = this.state.source.concat();
-    const resultsState = this.state.results.concat();
-
-    if (destination.droppableId === "row" && source.droppableId === "source") {
-      const item = sourceState.splice(source.index, 1);
-      resultsState.splice(destination.index, 0, ...item);
-    } else if (destination.droppableId === "row" && source.droppableId === "row") {
-      const item = resultsState.splice(source.index, 1);
-      resultsState.splice(destination.index, 0, ...item);
-    } else if (destination.droppableId === "source" && source.droppableId === "source") {
-      const item = sourceState.splice(source.index, 1);
-      sourceState.splice(destination.index, 0, ...item);
-    } else if (destination.droppableId === "source" && source.droppableId === "row") {
-      const item = resultsState.splice(source.index, 1);
-      sourceState.splice(destination.index, 0, ...item);
-    }
-
-    this.setState({
-      source: sourceState,
-      results: resultsState
-    })
-  }
-
-  transferToSource = event => {
-    const id = event.target.dataset.rbdDraggableId;
-    const results = this.state.results;
-    const source = this.state.source;
-    const index = results.findIndex(item => item === id);
-
-    results.splice(index, 1);
-    source.push(id);
-
-    this.setState({
-      source, results
-    })
-  }
-
-  transferToPlayfield = event => {
-    const id = event.target.dataset.rbdDraggableId;
-    const results = this.state.results;
-    const source = this.state.source;
-    const index = source.findIndex(item => item === id);
-
-    source.splice(index, 1);
-    results.push(id);
-
-    this.setState({
-      source,
-      results
-    })
+  componentWillReceiveProps() {
+    this.setState({})
   }
 
   renderActivePuzzle = (item, index, array) => {
-    const data = this.state.data[this.state.row][item];
-    const key = +`${this.state.row}${data.order}`
+    const data = this.props.data[this.props.row][item];
     return (
       <Puzzle
         key={data.order}
@@ -195,7 +65,7 @@ export default class Game extends Component {
         width={data.width}
         bgXOffset={data.bgXOffset}
         bgYOffset={data.bgYOffset}
-        onClick={array === this.state.results ? this.transferToSource : this.transferToPlayfield}
+        onClick={array === this.props.results ? this.props.transferToSource : this.props.transferToPlayfield}
         // TODO add url
         // TODO add bgTip
       >
@@ -233,17 +103,17 @@ export default class Game extends Component {
   renderActiveRow = () => {
     return (
       <Droppable
-        droppableId="row"
+        droppableId={ENGLISH_PUZZLE_CONSTANTS.TARGET_ID}
         direction="horizontal"
       >
         {(provided, snapshot) => (
           <PlayfieldRow
-            key={this.state.row}
+            key={this.props.row}
             ref={provided.innerRef}
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
           >
-            {this.state.results.map(this.renderActivePuzzle)}
+            {this.props.results.map(this.renderActivePuzzle)}
             {provided.placeholder}
           </PlayfieldRow>
         )}
@@ -252,7 +122,7 @@ export default class Game extends Component {
   }
 
   renderPlayfield() {
-    const {row, data} = this.state;
+    const {row, data} = this.props;
     return (
     <Playfield>
       {data.slice(0, row).map(this.renderStaticRow)}
@@ -264,7 +134,7 @@ export default class Game extends Component {
   renderSource() {
     return(
       <Droppable
-        droppableId="source"
+        droppableId={ENGLISH_PUZZLE_CONSTANTS.SOURCE_ID}
         direction="horizontal"
       >
         {(provided, snapshot) => (
@@ -273,7 +143,7 @@ export default class Game extends Component {
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
           >
-            {this.state.source.map(this.renderActivePuzzle)}
+            {this.props.source.map(this.renderActivePuzzle)}
             {provided.placeholder}
           </Source>
         )}
@@ -285,7 +155,7 @@ export default class Game extends Component {
     return (
       <Container>
         <DragDropContext
-          onDragEnd={this.onDragEnd}
+          onDragEnd={this.props.onDragEnd}
         >
           {this.renderPlayfield()}
           {this.renderSource()}
@@ -295,4 +165,27 @@ export default class Game extends Component {
   }
 }
 
-// TODO reducer
+function mapStateToProps(state) {
+  return {
+    data: state.englishPuzzle.data,
+    source: state.englishPuzzle.source,
+    results: state.englishPuzzle.results,
+    row: state.englishPuzzle.row,
+    autoSpeech: state.englishPuzzle.autoSpeech,
+    translation: state.englishPuzzle.translation,
+    speech: state.englishPuzzle.speech,
+    background: state.englishPuzzle.background
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    transferToSource: event => dispatch(transferToSource(event)),
+    transferToPlayfield: event => dispatch(transferToPlayfield(event)),
+    onDragEnd: result => dispatch(onDragEnd(result)),
+    calculatePuzzlesData: () => dispatch(calculatePuzzlesData()),
+    updateSource: () => dispatch(updateSource())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
