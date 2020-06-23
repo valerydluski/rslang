@@ -6,8 +6,7 @@ import AudioPlayButton from '../../../components/Audiocall/AudioPlayButtons';
 import FinishedWordInfo from '../../../components/Audiocall/FinishedWordInfo';
 import WordsContainer from '../../../containers/Audiocall/WordsContainer';
 import { DontKnowButton, NextButton } from '../../../components/Audiocall/AudiocallControls';
-
-const sourcesLink = 'https://raw.githubusercontent.com/kovanelly/rslang-data/master/';
+import { changeIDontKnowWords } from '../../../redux/Games/action';
 
 function shuffleArray(arr) {
   const shuffledArray = [...arr];
@@ -21,16 +20,18 @@ function shuffleArray(arr) {
 let currentGameWords;
 let answerResult = {};
 
-const AudioCall = ({ wordsCollection }) => {
+const AudioCall = ({ wordsCollection, addWordsWithMistakesToStore }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
+  const [isGameFinished, toggleGameMode] = useState(false);
   if (currentWordIndex === 0 && isWordFinished === false) {
     currentGameWords = shuffleArray(wordsCollection);
   }
 
   function finishGame() {
-    console.log('finish');
+    addWordsWithMistakesToStore(wrongAnsweredWords);
+    toggleGameMode(true);
   }
 
   function switchToNextWord() {
@@ -64,11 +65,12 @@ const AudioCall = ({ wordsCollection }) => {
     toggleWordStatus(true);
   }
 
-  return (
-    <div className="audio-call_container">
-      <GoToHomePageButton />
-      {isWordFinished ? (
-        <>
+  const sourcesLink = 'https://raw.githubusercontent.com/kovanelly/rslang-data/master/';
+  if (!isGameFinished) {
+    if (isWordFinished) {
+      return (
+        <div className="audio-call_container">
+          <GoToHomePageButton />
           <FinishedWordInfo
             word={currentGameWords[currentWordIndex].word}
             audioSrc={currentGameWords[currentWordIndex].audio}
@@ -84,29 +86,38 @@ const AudioCall = ({ wordsCollection }) => {
             isAutoSolved={answerResult.isAutoSolved}
           />
           <NextButton clickHandler={switchToNextWord} />
-        </>
-      ) : (
-        <>
-          <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
-          <WordsContainer
-            words={additionalWords}
-            correctWord={currentGameWords[currentWordIndex].word}
-            processUserAnswer={processUserAnswer}
-            isWordFinished={isWordFinished}
-          />
-          <DontKnowButton clickHandler={autoSolve} />
-        </>
-      )}
+        </div>
+      );
+    }
+    return (
+      <div className="audio-call_container">
+        <GoToHomePageButton />
+        <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
+        <WordsContainer
+          words={additionalWords}
+          correctWord={currentGameWords[currentWordIndex].word}
+          processUserAnswer={processUserAnswer}
+          isWordFinished={isWordFinished}
+        />
+        <DontKnowButton clickHandler={autoSolve} />
+      </div>
+    );
+  }
+  return (
+    <div className="audio-call_container">
+      <GoToHomePageButton />
+      <h1>Game finished</h1>
     </div>
   );
+};
+AudioCall.propTypes = {
+  wordsCollection: PropTypes.instanceOf(Array),
+  addWordsWithMistakesToStore: PropTypes.func,
 };
 
 AudioCall.defaultProps = {
   wordsCollection: [],
-};
-
-AudioCall.propTypes = {
-  wordsCollection: PropTypes.instanceOf(Array),
+  addWordsWithMistakesToStore: () => {},
 };
 
 const mapStateToProps = (state) => {
@@ -115,4 +126,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AudioCall);
+const mapDispatchToProps = {
+  addWordsWithMistakesToStore: changeIDontKnowWords,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AudioCall);
