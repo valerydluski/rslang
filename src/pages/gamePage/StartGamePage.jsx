@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import gamesDescriptions from '../../assets/data/gamesDescriptions';
-import { changeGamePage } from '../../redux/Games/action';
+import changeAppMode from '../../redux/AppMode/action';
 
-const StartGamePage = ({ match, changeGamePage }) => {
+const StartGamePage = ({ match }) => {
   const { gameId } = match.params;
   const { name } = gamesDescriptions[gameId].en;
   const { description } = gamesDescriptions[gameId].en;
   const startHandler = () => {
-    changeGamePage('8');
+    changeAppMode(gameId);
   };
 
   return (
@@ -32,4 +32,4 @@ StartGamePage.propTypes = {
   }).isRequired,
 };
 
-export default connect(null, { changeGamePage })(StartGamePage);
+export default connect(null, { changeAppMode })(StartGamePage);
