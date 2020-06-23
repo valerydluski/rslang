@@ -1,18 +1,20 @@
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
-import roundChangeReducer from './roundChangeReducer';
-import changeWordsCollectionReducer from './changeWordsCollectionReducer';
+import changeWordsCollectionReducer from './Games/changeWordsCollectionReducer';
 import loginReducer from './Auth/Login/reducer';
 import userSettingsReducer from './UserSettings/reducer';
-import changeScoreSpeakITReducer from './SpeakIT/scoreChangeSpeakITReducer';
+import loaderReducer from './Loader/loaderReducer';
+import getWordsFromAPIReducer from './GetWordsFromAPI/GetWordsFromAPIReducer';
+import gamesReducer from './Games/gamesReducer';
 
 const rootReducer = combineReducers({
-  roundChange: roundChangeReducer,
+  gamesReducer,
   changeWordsCollection: changeWordsCollectionReducer,
   login: loginReducer,
   userSettings: userSettingsReducer,
   form: formReducer,
-  changeScoreSpeakIT: changeScoreSpeakITReducer,
+  loader: loaderReducer,
+  getWordsFromAPI: getWordsFromAPIReducer,
 });
 
 export default rootReducer;
