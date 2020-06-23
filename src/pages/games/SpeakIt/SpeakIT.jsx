@@ -181,7 +181,7 @@ const mapStateToProps = (state) => {
   return {
     Level: state.gamesReducer.gameLevel,
     Page: state.gamesReducer.gamePage,
-    wordsCollection: state.changeWordsCollection.wordsCollection,
+    wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     gameScore: state.gamesReducer.gameScore,
   };
 };
