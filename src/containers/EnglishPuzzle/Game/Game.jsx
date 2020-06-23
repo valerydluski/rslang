@@ -19,8 +19,11 @@ const Container = styled.div`
 
 const Playfield = styled.div`
   width: 560px;
-  height: 560px;
+  height: 530px;
   background: #c4c4c4;
+  box-shadow: inset 0 0 0 5px #000000;
+  position: relative;
+  z-index: 20;
 `;
 
 const PlayfieldRow = styled.div`
@@ -31,6 +34,8 @@ const PlayfieldRow = styled.div`
   justify-content: flex-start;
   box-sizing: border-box;
   background-color: ${(props) => (props.isDraggingOver ? 'skyblue' : 'none')};
+  position: relative;
+  z-index: 10;
 `;
 
 const Source = styled.div`
@@ -58,39 +63,44 @@ class Game extends Component {
     return (
       <Puzzle
         key={itemData.order}
+        isStatic={false}
         id={itemData.id}
         index={index}
         width={itemData.width}
         bgXOffset={itemData.bgXOffset}
         bgYOffset={itemData.bgYOffset}
         onClick={array === results ? playfieldPuzzleClick : sourcePuzzleClick}
+        isFirst={itemData.order === 1}
+        isLast={itemData.order === Object.keys(data[row]).length}
+        word={itemData.word}
         // TODO add url
         // TODO add bgTip
-      >
-        {itemData.word}
-      </Puzzle>
+      />
     );
   };
 
-  renderStaticPuzzle = (item) => {
+  renderStaticPuzzle = (itemData, index) => {
     return (
       <Puzzle
-        key={item.order}
-        isStatic
-        width={item.width}
-        bgXOffset={item.bgXOffset}
-        bgYOffset={item.bgYOffset}
+        key={itemData.order}
+        width={itemData.width}
+        bgXOffset={itemData.bgXOffset}
+        bgYOffset={itemData.bgYOffset}
+        word={itemData.word}
+        isFirst={itemData.order === 1}
+        isLast={itemData.order === index + 1}
+
         // TODO add url
-      >
-        {item.word}
-      </Puzzle>
+      />
     );
   };
 
   renderStaticRow = (item, row) => {
     const keys = Object.keys(item);
     return (
-      <PlayfieldRow key={row}>{keys.map((key) => this.renderStaticPuzzle(item[key]))}</PlayfieldRow>
+      <PlayfieldRow key={row}>
+        {keys.map((key, index) => this.renderStaticPuzzle(item[key], index))}
+      </PlayfieldRow>
     );
   };
 
