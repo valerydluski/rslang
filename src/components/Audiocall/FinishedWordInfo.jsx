@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import AudioPlayButton from './AudioPlayButtons';
+import AudioPlayButton from '../../containers/Audiocall/AudioPlayButtons';
 import Image from '../UI/Image/Image';
 import TextField from '../UI/TextField/TextField';
 
