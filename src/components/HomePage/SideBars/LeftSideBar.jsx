@@ -7,14 +7,18 @@ import iconLogout from '../../UI/Icon/iconLogout.svg';
 import iconSettings from '../../UI/Icon/iconSettings.svg';
 import iconLogoutHover from '../../UI/Icon/iconLogoutHover.svg';
 import iconSettingsHover from '../../UI/Icon/iconSettingsHover.svg';
+import getRedirectFunction from '../../../utils/getRedirectFunction';
 
 export default function LeftSideBar() {
+  const handler = () => {
+    getRedirectFunction('/settings');
+  };
   return (
     <SideBarContainer>
       <Logo />
       <MainNavigationMenu />
       <div>
-        <StyledButtonWithIcon icon={iconSettings} iconHover={iconSettingsHover}>
+        <StyledButtonWithIcon onClick={handler} icon={iconSettings} iconHover={iconSettingsHover}>
           Settings
         </StyledButtonWithIcon>
         <StyledButtonWithIcon icon={iconLogout} iconHover={iconLogoutHover}>

@@ -11,7 +11,7 @@ import Promo from '../../components/HomePage/Content/Promo/Promo';
 import AboutUs from '../../components/HomePage/Content/AboutUs/AboutUs';
 import Dictionary from '../../components/HomePage/Content/Dictionary/Dictionary';
 import Statistics from '../../components/HomePage/Content/Statistics/Statistics';
-import Settings from '../../components/HomePage/Content/Settings/Settings';
+import SettingContent from '../../containers/Homepage/Content/Settings';
 
 function HomePage(props) {
   const { checkStatusSession } = props;
@@ -31,7 +31,7 @@ function HomePage(props) {
         <PrivateNavigationRoute path="/about-us" exact component={AboutUs} />
         <PrivateNavigationRoute path="/dictionary" exact component={Dictionary} />
         <PrivateNavigationRoute path="/statistics" exact component={Statistics} />
-        <PrivateNavigationRoute path="/settings" exact component={Settings} />
+        <PrivateNavigationRoute path="/settings" exact component={SettingContent} />
       </Switch>
       <RightSideBar />
     </HomePageContainer>
