@@ -78,7 +78,7 @@ WordCardSpeakIT.propTypes = {
     id: PropTypes.string,
   }),
   wordCardHandler: PropTypes.func,
-  id: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 WordCardSpeakIT.defaultProps = {

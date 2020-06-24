@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const changeAppModeReducer = (state = initialState, action) => {
-  console.log('changeAppModeReducer -> action', action);
   switch (action.type) {
     case CHANGE_APP_MODE:
       return { ...state, appMode: action.payload };
