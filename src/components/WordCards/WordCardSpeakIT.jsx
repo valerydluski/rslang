@@ -18,6 +18,10 @@ const WordCardSpeakITStyled = styled.div`
   min-height: 70px;
   margin-top: 20px;
   cursor: pointer;
+
+  &.spoken-word {
+    background-color: red;
+  }
 `;
 
 const WordAndTranscriptionContainer = styled.div`
@@ -29,7 +33,7 @@ const WordAndTranscriptionContainer = styled.div`
 `;
 
 const WordCardSpeakIT = (props) => {
-  const { obj, wordCardHandler } = props;
+  const { obj, wordCardHandler, id } = props;
   const { word, transcription, image, audio, wordTranslate } = obj;
 
   const dataForHandler = {
@@ -47,10 +51,11 @@ const WordCardSpeakIT = (props) => {
       audio={audio}
       wordTranslate={wordTranslate}
       onClick={cardHandler}
+      id={id}
     >
       <AudioIcon />
       <WordAndTranscriptionContainer>
-        <Word key={word} word={word} />
+        <Word key={word.toLowerCase()} word={word.toLowerCase()} />
         <Transcription key={`transcription${word}`} transcription={transcription} />
       </WordAndTranscriptionContainer>
     </WordCardSpeakITStyled>
@@ -70,14 +75,16 @@ WordCardSpeakIT.propTypes = {
     wordTranslate: PropTypes.string,
     textMeaningTranslate: PropTypes.string,
     textExampleTranslate: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
   }),
   wordCardHandler: PropTypes.func,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 WordCardSpeakIT.defaultProps = {
   obj: {},
   wordCardHandler: () => {},
+  id: '',
 };
 
 export default WordCardSpeakIT;
