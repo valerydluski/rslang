@@ -6,6 +6,7 @@ import userSettingsReducer from './UserSettings/reducer';
 import loaderReducer from './Loader/loaderReducer';
 import getWordsFromAPIReducer from './GetWordsFromAPI/GetWordsFromAPIReducer';
 import gamesReducer from './Games/gamesReducer';
+import changeAppModeReducer from './AppMode/AppModeReducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   loader: loaderReducer,
   getWordsFromAPI: getWordsFromAPIReducer,
+  changeAppMode: changeAppModeReducer,
 });
 
 export default rootReducer;

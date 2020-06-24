@@ -75,10 +75,10 @@ WordCardSpeakIT.propTypes = {
     wordTranslate: PropTypes.string,
     textMeaningTranslate: PropTypes.string,
     textExampleTranslate: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
   }),
   wordCardHandler: PropTypes.func,
-  id: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 WordCardSpeakIT.defaultProps = {
