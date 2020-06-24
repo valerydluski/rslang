@@ -10,17 +10,23 @@ import { changeIDontKnowWords } from '../../../redux/Games/action';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import shuffleArray from '../../../utils/shuffleArray';
 import changeAppMode from '../../../redux/AppMode/action';
+import Loader from '../../../components/Loader/Loader';
 
 let currentGameWords;
 let answerResult = {};
 
-const AudioCall = ({ wordsCollection, addWordsWithMistakesToStore, switchAppMode, loader }) => {
+const AudioCall = ({
+  wordsCollection,
+  addWordsWithMistakesToStore,
+  switchAppMode,
+  isWordsLoading,
+}) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
 
-  if (loader) return null;
+  if (isWordsLoading) return <Loader />;
   if (wordsCollection.length === 0) {
     switchAppMode('AudioCall');
     return null;
@@ -110,20 +116,20 @@ AudioCall.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   addWordsWithMistakesToStore: PropTypes.func,
   switchAppMode: PropTypes.func,
-  loader: PropTypes.bool,
+  isWordsLoading: PropTypes.bool,
 };
 
 AudioCall.defaultProps = {
   wordsCollection: [],
   addWordsWithMistakesToStore: () => {},
   switchAppMode: () => {},
-  loader: false,
+  isWordsLoading: false,
 };
 
 const mapStateToProps = (state) => {
   return {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
-    loader: state.loader.loading,
+    isWordsLoading: state.loader.loading,
   };
 };
 
