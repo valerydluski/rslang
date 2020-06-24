@@ -6,19 +6,15 @@ import AudioPlayButton from '../../../containers/Audiocall/AudioPlayButtons';
 import FinishedWordInfo from '../../../components/Audiocall/FinishedWordInfo';
 import WordsContainer from '../../../containers/Audiocall/WordsContainer';
 import { DontKnowButton, NextButton } from '../../../components/Audiocall/AudiocallControls';
-import { changeIDontKnowWords, changeGamePage } from '../../../redux/Games/action';
+import { changeIDontKnowWords } from '../../../redux/Games/action';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import shuffleArray from '../../../utils/shuffleArray';
+import changeAppMode from '../../../redux/AppMode/action';
 
 let currentGameWords;
 let answerResult = {};
 
-const AudioCall = ({
-  wordsCollection,
-  addWordsWithMistakesToStore,
-  changeGamePageNumber,
-  loader,
-}) => {
+const AudioCall = ({ wordsCollection, addWordsWithMistakesToStore, switchAppMode, loader }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
@@ -26,7 +22,7 @@ const AudioCall = ({
 
   if (loader) return null;
   if (wordsCollection.length === 0) {
-    changeGamePageNumber();
+    switchAppMode('AudioCall');
     return null;
   }
 
@@ -113,14 +109,14 @@ const AudioCall = ({
 AudioCall.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   addWordsWithMistakesToStore: PropTypes.func,
-  changeGamePageNumber: PropTypes.func,
+  switchAppMode: PropTypes.func,
   loader: PropTypes.bool,
 };
 
 AudioCall.defaultProps = {
   wordsCollection: [],
   addWordsWithMistakesToStore: () => {},
-  changeGamePageNumber: () => {},
+  switchAppMode: () => {},
   loader: false,
 };
 
@@ -133,7 +129,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addWordsWithMistakesToStore: changeIDontKnowWords,
-  changeGamePageNumber: changeGamePage,
+  switchAppMode: changeAppMode,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AudioCall);
