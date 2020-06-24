@@ -29,11 +29,26 @@ const WordsContainer = (props) => {
 
   const currentStepWords = words;
 
-  function playResultSound(isOk) {
+  const wordsCards = currentStepWords.map((word, index) => {
+    if (isWordFinished) {
+      let type = 'finished';
+      if (index === selectedIndex && !isAutoSolved) {
+        type = isCorrect ? 'correct' : 'wrong';
+      }
+      if ((!isCorrect && index === correctIndex) || (isAutoSolved && word.word === correctWord)) {
+        type = '';
+      }
+      return <Word key={word.word} wordStyleType={type} translation={word.wordTranslate} />;
+    }
+
+    return <Word key={word.word} index={index} translation={word.wordTranslate} />;
+  });
+
+  const playResultSound = (isOk) => {
     const wordAudio = new Audio();
     wordAudio.src = isOk ? correctSound : errorSound;
     wordAudio.play();
-  }
+  };
 
   const clickHandler = (e) => {
     if (e.target.matches('[data-index]')) {
@@ -44,21 +59,6 @@ const WordsContainer = (props) => {
       processUserAnswer(result, words, selectedWordIndex, correctWordIndex);
     }
   };
-
-  const wordsCards = currentStepWords.map((word, i) => {
-    if (isWordFinished) {
-      let type = 'finished';
-      if (i === selectedIndex && !isAutoSolved) {
-        type = isCorrect ? 'correct' : 'wrong';
-      }
-      if ((!isCorrect && i === correctIndex) || (isAutoSolved && word.word === correctWord)) {
-        type = 'default';
-      }
-      return <Word key={word.word} wordStyleType={type} translation={word.wordTranslate} />;
-    }
-
-    return <Word key={word.word} index={String(i)} translation={word.wordTranslate} />;
-  });
 
   return <WordsContainerStyled onClick={clickHandler}>{wordsCards}</WordsContainerStyled>;
 };

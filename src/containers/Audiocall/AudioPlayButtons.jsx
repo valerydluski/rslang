@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { AudioPlayButtonStyled, BigAudioPlayButtonStyled } from '../../components/Audiocall/StyledAudioButtons';
+import {
+  AudioPlayButtonStyled,
+  BigAudioPlayButtonStyled,
+} from '../../components/Audiocall/StyledAudioButtons';
 
 const AudioPlayButton = ({ src, isBig }) => {
   const wordAudio = new Audio();

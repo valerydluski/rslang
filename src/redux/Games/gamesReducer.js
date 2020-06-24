@@ -17,6 +17,7 @@ const gamesReducer = (state = initialState, action) => {
     case GAME_CHANGE_LEVEL:
       return { ...state, gameLevel: action.payload };
     case GAME_CHANGE_PAGE:
+      console.log(action.payload);
       return { ...state, gamePage: action.payload };
     case CHANGE_I_DONT_KNOW_WORDS:
       return { ...state, IDontKnowWords: action.payload };

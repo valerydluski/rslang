@@ -60,7 +60,7 @@ Word.defaultProps = {
 Word.propTypes = {
   translation: PropTypes.string,
   wordStyleType: PropTypes.string,
-  index: PropTypes.string,
+  index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default Word;
