@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom'
 import '../Savannah/style.css';
 import styled, { keyframes } from 'styled-components';
 import { slideInDown } from 'react-animations';
+import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
+
 
 
 const Bounce = styled.div`animation: 3s ${keyframes`${slideInDown}`}`;
@@ -37,34 +39,26 @@ const element =
     <SavannahComponent />
     </div>;
 
-class Savannah extends React.Component {
+function Savannah () {
 
-  state = {
-    gameStarted: false
-  }
+  const [gameStarted, setGameChange] = useState(false);
+  const [currentWordIndex, changeIndex] = useState(0);
+  const [isGameFinished, changeGameMode] = useState(false);
 
-    startGame = () => {
-    this.setState({
-      gameStarted: true
-    })
+    const startGame = () => {
+    setGameChange(true);
     }
 
-    exitGame = () => {
-      this.setState({
-        gameStarted: false
-      })
+    const exitGame = () => {
+      setGameChange(false);
       }     
 
-  render() {
-    const divStyle = {
-      textAlign: 'center'
-    }
    let structure;
-    if(this.state.gameStarted) {
+    if(gameStarted) {
        structure = 
       <div className="savannah_container">
     <h1>Savannah</h1>
-    <button onClick={this.exitGame}>Exit</button>
+    <button onClick={exitGame}>Exit</button>
     <div id = 'first'>
     <Bounce onAnimationEnd={extendLoad}>
     <div className="english_word">
@@ -81,20 +75,19 @@ class Savannah extends React.Component {
     </div>
     }
 
-    if(!this.state.gameStarted) {
+    if(!gameStarted) {
       structure = 
      <div className="savannah_container">
    <h1>Savannah</h1>
-   <button onClick={this.startGame}>Click here to start</button>
+   <button onClick={startGame}>Click here to start</button>
    </div>
    }
 
 return (
   <div>
+    <GoToHomePageButton />
     {structure}
   </div>
 )
-
-}
 }
 export default Savannah;
