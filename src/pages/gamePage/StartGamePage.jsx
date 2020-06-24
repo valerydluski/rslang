@@ -5,8 +5,13 @@ import { connect } from 'react-redux';
 import gamesDescriptions from '../../assets/data/gamesDescriptions';
 import changeAppMode from '../../redux/AppMode/action';
 import StartGamePageStyled from './Styled/StartGamePageStyled';
-import GameNameStyled from './Styled/GameNameStyled';
-import GameDescriptionStyled from './Styled/GameDescription';
+import GoToHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePageButton';
+import {
+  GameNameStyled,
+  GameDescriptionStyled,
+  ContainerNameAndDescription,
+  StartGamePageContent,
+} from './Styled/StartGamePageContentStyled';
 
 const StartGamePage = ({ match, changeMode }) => {
   const { gameId } = match.params;
@@ -17,14 +22,17 @@ const StartGamePage = ({ match, changeMode }) => {
   };
 
   return (
-    <StartGamePageStyled className="start-game-page">
-      <div>
-        <GameNameStyled>GAME: {name}</GameNameStyled>
-        <GameDescriptionStyled>{description}</GameDescriptionStyled>
-      </div>
-      <Link to={`/Game/${gameId}`} onClick={linkHandler}>
-        Start
-      </Link>
+    <StartGamePageStyled>
+      <GoToHomePageButton />
+      <StartGamePageContent>
+        <ContainerNameAndDescription>
+          <GameNameStyled>GAME: {name}</GameNameStyled>
+          <GameDescriptionStyled>{description}</GameDescriptionStyled>
+        </ContainerNameAndDescription>
+        <Link to={`/Game/${gameId}`} onClick={linkHandler}>
+          Start
+        </Link>
+      </StartGamePageContent>
     </StartGamePageStyled>
   );
 };
