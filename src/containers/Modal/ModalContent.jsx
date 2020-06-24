@@ -71,8 +71,8 @@ ModalContent.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    wordsCollection: state.changeWordsCollection.wordsCollection,
-    IDontKnowWords: state.changeIDontKnowWords.IDontKnowWords,
+    wordsCollection: state.getWordsFromAPI.wordsFromAPI,
+    IDontKnowWords: state.gamesReducer.IDontKnowWords,
   };
 };
 
