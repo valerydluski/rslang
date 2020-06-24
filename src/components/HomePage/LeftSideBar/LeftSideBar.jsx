@@ -8,7 +8,7 @@ import iconSettings from '../../UI/Icon/iconSettings.svg';
 import iconLogoutHover from '../../UI/Icon/iconLogoutHover.svg';
 import iconSettingsHover from '../../UI/Icon/iconSettingsHover.svg';
 
-export default function LeftSideBar(props) {
+export default function LeftSideBar() {
   return (
     <SideBarContainer>
       <Logo />
