@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AudioPlayButtonStyled,
   BigAudioPlayButtonStyled,
-} from '../../components/Audiocall/StyledAudioButtons';
+} from '../../components/Audiocall/styled/StyledAudioButtons';
 
 const AudioPlayButton = ({ src, isBig }) => {
   const wordAudio = new Audio();

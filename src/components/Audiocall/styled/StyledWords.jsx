@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import CorrectCheckmark from '../UI/Icon/checkmark.svg';
+import CorrectCheckmark from '../../UI/Icon/checkmark.svg';
 
 const WordStyled = styled.div`
   font-family: Montserrat;

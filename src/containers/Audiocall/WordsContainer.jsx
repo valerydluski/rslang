@@ -1,19 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Word from '../../components/Audiocall/StyledWords';
+import Word from '../../components/Audiocall/styled/StyledWords';
 import errorSound from '../../assets/audio/error.mp3';
 import correctSound from '../../assets/audio/correct.mp3';
-
-const WordsContainerStyled = styled.div`
-  display: flex;
-  margin: 0 auto 50px;
-  padding: 20px 30px;
-  justify-content: space-between;
-  width: 60%;
-  border-top: 1px solid #c4c4c4;
-  user-select: none;
-`;
+import WordsContainerStyled from './styled/StyledWordsContainer';
 
 const WordsContainer = (props) => {
   const {

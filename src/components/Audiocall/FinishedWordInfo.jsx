@@ -1,20 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { FinishedWordInfoStyled, FinishedWordInfoDetails } from './styled/StyledFinishedWordInfo';
 import AudioPlayButton from '../../containers/Audiocall/AudioPlayButtons';
 import Image from '../UI/Image/Image';
 import TextField from '../UI/TextField/TextField';
-
-const FinishedWordInfoStyled = styled.div`
-  margin: 50px auto 20px;
-`;
-
-const FinishedWordInfoDetails = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 25px;
-`;
 
 const FinishedWordInfo = ({ word, audioSrc, imageSrc }) => {
   return (
@@ -29,9 +18,15 @@ const FinishedWordInfo = ({ word, audioSrc, imageSrc }) => {
 };
 
 FinishedWordInfo.propTypes = {
-  word: PropTypes.string.isRequired,
-  audioSrc: PropTypes.string.isRequired,
-  imageSrc: PropTypes.string.isRequired,
+  word: PropTypes.string,
+  audioSrc: PropTypes.string,
+  imageSrc: PropTypes.string,
+};
+
+FinishedWordInfo.defaultProps = {
+  word: '',
+  audioSrc: '',
+  imageSrc: 'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg',
 };
 
 export default FinishedWordInfo;
