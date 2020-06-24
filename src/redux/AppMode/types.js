@@ -1,0 +1,3 @@
+const CHANGE_APP_MODE = 'CHANGE_APP_MODE';
+
+export default CHANGE_APP_MODE;
