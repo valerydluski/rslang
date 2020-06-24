@@ -5,7 +5,9 @@ import ModalContentStyled from './Styled/ModalContentStyled';
 import ModalWordsBlock from '../../components/Modal/ModalWordsBlock';
 
 const ModalContent = (props) => {
-  const { wordsCollection, IDontKnowWords, showProperties, wordHandler } = props;
+  const { wordsCollection, showProperties, wordHandler } = props;
+  let { IDontKnowWords } = props;
+  IDontKnowWords = IDontKnowWords.map((el) => el.toLowerCase());
   const arr = wordsCollection.map((el) => el.word.toLowerCase());
   const iKnowWords = arr.filter((el) => !IDontKnowWords.includes(el));
 

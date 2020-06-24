@@ -78,6 +78,10 @@ const SpeakIT = (props) => {
         document.getElementById(transcriptResult).classList.add('spoken-word');
         newScore += addScore;
         newScoreHandler();
+        if (IDontKnowWords.length === 0) {
+          microphone.stopMicrophone();
+          toggleGameMode(true);
+        }
       }
     }
   };
