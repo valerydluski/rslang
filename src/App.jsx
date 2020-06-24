@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <GlobalStyle />
       <Switch>
-        <PrivateNavigationRoute path="/" exact component={HomePageContainer} />
+        <PrivateNavigationRoute path="/" component={HomePageContainer} />
         <PrivateNavigationRoute path="/StartGame/:gameId" component={StartGamePage} />
         <PrivateNavigationRoute path="/Game/:gameId" component={GamePage} />
         <Route path="/login" component={Login} />
