@@ -15,7 +15,7 @@ const ModalContent = (props) => {
         return (
           <ModalWordsBlock
             showProperties={showProperties}
-            header="i know"
+            header="I know"
             words={iKnowWords}
             wordsCollection={wordsCollection}
             wordHandler={wordHandler}
@@ -25,7 +25,7 @@ const ModalContent = (props) => {
         return (
           <ModalWordsBlock
             showProperties={showProperties}
-            header="i don't know"
+            header="I don't know"
             words={IDontKnowWords}
             wordsCollection={wordsCollection}
             wordHandler={wordHandler}
@@ -36,14 +36,14 @@ const ModalContent = (props) => {
           <>
             <ModalWordsBlock
               showProperties={showProperties}
-              header="i don't know"
+              header="I don't know"
               words={IDontKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
             />
             <ModalWordsBlock
               showProperties={showProperties}
-              header="i know"
+              header="I know"
               words={iKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
