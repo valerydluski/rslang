@@ -13,11 +13,12 @@ function App() {
     <div className="App">
       <GlobalStyle />
       <Switch>
-        <PrivateNavigationRoute path="/" component={HomePageContainer} />
-        <PrivateNavigationRoute path="/StartGame/:gameId" component={StartGamePage} />
-        <PrivateNavigationRoute path="/Game/:gameId" component={GamePage} />
         <Route path="/login" component={Login} />
         <Route path="/registration" component={Registration} />
+        <PrivateNavigationRoute path="/StartGame/:gameId" exact component={StartGamePage} />
+        <PrivateNavigationRoute path="/Game/:gameId" exact component={GamePage} />
+        <PrivateNavigationRoute path="/" component={HomePageContainer} />
+
         <Redirect to="/" />
       </Switch>
     </div>

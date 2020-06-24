@@ -26,12 +26,12 @@ function HomePage(props) {
     <HomePageContainer>
       <LeftSideBar left />
       <Switch>
-        <PrivateNavigationRoute path="/" exact component={MainContainer} />
         <PrivateNavigationRoute path="/promo" exact component={Promo} />
         <PrivateNavigationRoute path="/about-us" exact component={AboutUs} />
         <PrivateNavigationRoute path="/dictionary" exact component={Dictionary} />
         <PrivateNavigationRoute path="/statistics" exact component={Statistics} />
         <PrivateNavigationRoute path="/settings" exact component={Settings} />
+        <PrivateNavigationRoute path="/" component={MainContainer} />
       </Switch>
       <RightSideBar />
     </HomePageContainer>
