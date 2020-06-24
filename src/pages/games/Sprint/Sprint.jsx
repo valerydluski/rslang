@@ -1,9 +1,13 @@
 import React from 'react';
+import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
+import SprintContainerStyled from './Styled/SprintContainerStyled';
+import SprintGameContainer from './Containers/SprintGameContainer';
 
 const Sprint = () => (
-  <div className="sprint_container">
-    <h1>Sprint</h1>
-  </div>
+  <SprintContainerStyled>
+    <GoToHomePageButton />
+    <SprintGameContainer />
+  </SprintContainerStyled>
 );
 
 export default Sprint;
