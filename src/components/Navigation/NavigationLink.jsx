@@ -1,26 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const NavigationLink = (props) => {
-  const { link, name } = props;
-  return (
-    <div>
-      <li>
-        <NavLink to={`/${link}`}>{name}</NavLink>
-      </li>
-    </div>
-  );
+  const { href, name } = props;
+  return <Link to={href}>{name}</Link>;
+};
+
+NavigationLink.propTypes = {
+  name: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
 };
 
 export default NavigationLink;
-
-NavigationLink.propTypes = {
-  name: PropTypes.string,
-  link: PropTypes.string,
-};
-
-NavigationLink.defaultProps = {
-  name: '',
-  link: '/',
-};
