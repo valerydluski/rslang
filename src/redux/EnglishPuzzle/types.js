@@ -1,3 +1,7 @@
-// TODO add types for dispatch actions
 export const UPDATE_PUZZLES_POSITION = 'UPDATE_PUZZLES_POSITION';
 export const UPDATE_DATA = 'UPDATE_DATA';
+export const UPDATE_PAGE = 'UPDATE_PAGE';
+export const UPDATE_ROW = 'UPDATE_ROW';
+export const PICK_ROW = 'PICK_ROW';
+export const CHANGE_ROW_STATUS = 'CHANGE_ROW_STATUS';
+export const CHANGE_PAGE_STATUS = 'CHANGE_PAGE_STATUS';

@@ -30,6 +30,7 @@ const StyledPuzzle = styled.span`
   padding: 0 20px;
   margin-left: -20px;
   position: relative;
+  transition: margin 0.3s;
 
   &::after {
     content: '';
@@ -41,12 +42,6 @@ const StyledPuzzle = styled.span`
     height: 2px;
   }
 `;
-
-// polygon( calc(100% - 0px) 0%, 100% 50%, calc(100% - 0px) 100%, 0% 100%, 20px 50%, 0% 0% )
-// end puzzle
-
-// polygon( calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 0% 100%, 0px 50%, 0% 0% )
-// start puzzle
 
 class Puzzle extends Component {
   renderStatic() {

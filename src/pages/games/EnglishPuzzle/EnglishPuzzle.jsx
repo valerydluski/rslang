@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import StatusMenu from '../../../components/EnglishPuzzle/Menu/StatusMenu/StatusMenu';
 import TipsMenu from '../../../components/EnglishPuzzle/Menu/TipsMenu/TipsMenu';
 import Game from '../../../containers/EnglishPuzzle/Game/Game';
+import Info from '../../../components/EnglishPuzzle/Info/Info';
 
 const Content = styled.div`
   width: 100%;
@@ -15,7 +16,7 @@ const Content = styled.div`
 
 const Container = styled.div`
   position: relative;
-  margin-top: 120px;
+  margin-top: 60px;
 `;
 
 class EnglishPuzzle extends Component {
@@ -31,6 +32,7 @@ class EnglishPuzzle extends Component {
           <StatusMenu />
           <TipsMenu />
           <Game />
+          <Info />
         </Container>
       </Content>
       // TODO add controls

@@ -15,11 +15,14 @@ import Puzzle from '../../../components/EnglishPuzzle/Puzzle/Puzzle';
 
 const Container = styled.div`
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Playfield = styled.div`
   width: 560px;
-  height: 530px;
+  height: 560px;
   background: #c4c4c4;
   box-shadow: inset 0 0 0 5px #000000;
   position: relative;
@@ -41,13 +44,16 @@ const PlayfieldRow = styled.div`
 const Source = styled.div`
   display: flex;
   margin-top: 30px;
-  width: 560px;
+  width: 680px;
   height: 56px;
   display: flex;
   justify-content: flex-start;
   padding-left: 20px;
   box-sizing: border-box;
   background-color: ${(props) => (props.isDraggingOver ? 'skyblue' : 'none')};
+  & > span:not(:last-child) {
+    margin-right: 20px;
+  }
 `;
 
 class Game extends Component {

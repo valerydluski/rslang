@@ -8,7 +8,7 @@ import PictureIcon from '../../../UI/Icon/PictureIcon';
 const Menu = styled.div`
   position: absolute;
   top: 40px;
-  right: -60px;
+  right: 0px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
