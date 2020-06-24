@@ -13,12 +13,14 @@ export default function LeftSideBar(props) {
     <SideBarContainer>
       <Logo />
       <MainNavigationMenu />
-      <StyledButtonWithIcon icon={iconSettings} iconHover={iconSettingsHover}>
-        Settings
-      </StyledButtonWithIcon>
-      <StyledButtonWithIcon icon={iconLogout} iconHover={iconLogoutHover}>
-        Log Out
-      </StyledButtonWithIcon>
+      <div>
+        <StyledButtonWithIcon icon={iconSettings} iconHover={iconSettingsHover}>
+          Settings
+        </StyledButtonWithIcon>
+        <StyledButtonWithIcon icon={iconLogout} iconHover={iconLogoutHover}>
+          Log Out
+        </StyledButtonWithIcon>
+      </div>
     </SideBarContainer>
   );
 }

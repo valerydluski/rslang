@@ -12,16 +12,14 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <main>
-        <Switch>
-          <PrivateNavigationRoute path="/" exact component={HomePageContainer} />
-          <PrivateNavigationRoute path="/StartGame/:gameId" component={StartGamePage} />
-          <PrivateNavigationRoute path="/Game/:gameId" component={GamePage} />
-          <Route path="/login" component={Login} />
-          <Route path="/registration" component={Registration} />
-          <Redirect to="/" />
-        </Switch>
-      </main>
+      <Switch>
+        <PrivateNavigationRoute path="/" exact component={HomePageContainer} />
+        <PrivateNavigationRoute path="/StartGame/:gameId" component={StartGamePage} />
+        <PrivateNavigationRoute path="/Game/:gameId" component={GamePage} />
+        <Route path="/login" component={Login} />
+        <Route path="/registration" component={Registration} />
+        <Redirect to="/" />
+      </Switch>
     </div>
   );
 }
