@@ -13,37 +13,50 @@ import {
   OWNGAME_CHANGE_LEVEL,
 } from './types';
 
-const initialState = {};
+const initialState = {
+  speakItLevel: '1',
+  speakItPage: '1',
+  englishPuzzleLevel: '1',
+  englishPuzzlePage: '1',
+  savannahLevel: '1',
+  savannahPage: '1',
+  audioCallLevel: '1',
+  audioCallPage: '1',
+  sprintLevel: '1',
+  sprintPage: '1',
+  ownGameLevel: '1',
+  ownGamePage: '1',
+};
 
-const gamesReducer = (state = initialState, action) => {
+const changeRoundReducer = (state = initialState, action) => {
   switch (action.type) {
     case SPEAKIT_CHANGE_LEVEL:
-      return { ...state, gameLevel: action.payload };
+      return { ...state, speakItLevel: action.payload };
     case SPEAKIT_CHANGE_PAGE:
-      return { ...state, gamePage: action.payload };
+      return { ...state, speakItPage: action.payload };
     case ENGLISHPUZZLE_CHANGE_PAGE:
-      return { ...state, IDontKnowWords: action.payload };
+      return { ...state, englishPuzzlePage: action.payload };
     case ENGLISHPUZZLE_CHANGE_LEVEL:
-      return { ...state, gameScore: action.payload };
+      return { ...state, englishPuzzleLevel: action.payload };
     case SAVANNAH_CHANGE_LEVEL:
-      return { ...state, gameLevel: action.payload };
+      return { ...state, savannahLevel: action.payload };
     case SAVANNAH_CHANGE_PAGE:
-      return { ...state, gamePage: action.payload };
+      return { ...state, savannahPage: action.payload };
     case AUDIOCALL_CHANGE_PAGE:
-      return { ...state, IDontKnowWords: action.payload };
+      return { ...state, audioCallPage: action.payload };
     case AUDIOCALL_CHANGE_LEVEL:
-      return { ...state, gameScore: action.payload };
+      return { ...state, audioCallLevel: action.payload };
     case SPRINT_CHANGE_PAGE:
-      return { ...state, IDontKnowWords: action.payload };
+      return { ...state, sprintPage: action.payload };
     case SPRINT_CHANGE_LEVEL:
-      return { ...state, gameScore: action.payload };
+      return { ...state, sprintLevel: action.payload };
     case OWNGAME_CHANGE_PAGE:
-      return { ...state, IDontKnowWords: action.payload };
+      return { ...state, ownGamePage: action.payload };
     case OWNGAME_CHANGE_LEVEL:
-      return { ...state, gameScore: action.payload };
+      return { ...state, ownGameLevel: action.payload };
     default:
       return state;
   }
 };
 
-export default gamesReducer;
+export default changeRoundReducer;
