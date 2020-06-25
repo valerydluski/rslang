@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledLoaderContainer = styled.div`
+const LoadingSpinnerContainerStyled = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@ const StyledLoaderContainer = styled.div`
   z-index: 2;
 `;
 
-const StyledLoader = styled.div`
+const LoadingSpinnerStyled = styled.div`
   display: inline-block;
   position: relative;
   width: 80px;
@@ -49,4 +49,4 @@ const StyledLoader = styled.div`
   }
 `;
 
-export { StyledLoaderContainer, StyledLoader };
+export { LoadingSpinnerContainerStyled, LoadingSpinnerStyled };
