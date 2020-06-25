@@ -4,7 +4,7 @@ import Option from './Styled/Option';
 import StyledSelect from './Styled/StyledSelect';
 import ToggleButton from './Styled/ToggleButton';
 import OptionsArea from './Styled/OptionsArea';
-import { DIRECTION_COLUMN } from './Styled/constants';
+import { DIRECTION_COLUMN, OPTIONS_IN_ROW } from './Styled/constants';
 
 const Select = (props) => {
   const {
@@ -55,7 +55,7 @@ Select.propTypes = {
 
 Select.defaultProps = {
   value: 1,
-  optionsNumber: 6,
+  optionsNumber: OPTIONS_IN_ROW,
   direction: DIRECTION_COLUMN,
   isOpen: false,
   position: {
