@@ -1,5 +1,4 @@
-const minWords = 1;
-const maxWords = 600;
+import { maxWordsPerDay, minWordsPerDay } from '../../config';
 
 export default (value) => {
   if (value) {
@@ -9,12 +8,12 @@ export default (value) => {
     return 'Must be a number';
   }
 
-  if (value && value < minWords) {
-    return `Must be at least ${minWords}`;
+  if (value && value < minWordsPerDay) {
+    return `Must be at least ${minWordsPerDay}`;
   }
 
-  if (value && value > maxWords) {
-    return `Must be no more ${maxWords}`;
+  if (value && value > maxWordsPerDay) {
+    return `Must be no more ${maxWordsPerDay}`;
   }
 
   return undefined;
