@@ -1,38 +1,44 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { changeIDontKnowWords } from '../../../../redux/Games/action';
-// import ResultModal from '../../../containers/Modal/ResultModal';
-// import shuffleArray from '../../../utils/shuffleArray';
 import changeAppMode from '../../../../redux/AppMode/action';
-import Loader from '../../../../components/Loader/Loader';
+import LoadingSpinner from '../../../../components/LoadingSpinner/LoadingSpinner';
 import SprintGameContainerStyled from '../Styled/SprintGameContainerStyled';
+import { WordStyled, TranslationStyled } from '../Styled/WordInfoStyled';
+import Timer from '../Timer/Timer';
+import SprintControlsContainer from './SprintControlsContainer';
+import { CorrectMarkerStyled, WrongMarkerStyled } from '../Styled/ResultMarkersStyled';
 
-const SprintGameContainer = ({
-  wordsCollection,
-  addWrongWordsToStore,
-  switchAppMode,
-  isWordsLoading,
-}) => {
-  if (isWordsLoading) return <Loader />;
+const SprintGameContainer = ({ wordsCollection, switchAppMode, isWordsLoading }) => {
+  if (isWordsLoading) return <LoadingSpinner />;
   if (wordsCollection.length === 0) {
     switchAppMode('AudioCall');
     return null;
   }
-  const currentWord = wordsCollection[0];
-  return <SprintGameContainerStyled />;
+
+  const currentWord = wordsCollection[5];
+  const isAnswerCorrect = true;
+
+  return (
+    <SprintGameContainerStyled>
+      <Timer />
+      <WordStyled>{currentWord.word}</WordStyled>
+      <TranslationStyled>{currentWord.wordTranslate}</TranslationStyled>
+      {isAnswerCorrect ? <CorrectMarkerStyled /> : <WrongMarkerStyled />}
+      <SprintControlsContainer />
+    </SprintGameContainerStyled>
+  );
 };
 
 SprintGameContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
-  addWrongWordsToStore: PropTypes.func,
   switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
 };
 
 SprintGameContainer.defaultProps = {
   wordsCollection: [],
-  addWrongWordsToStore: () => {},
   switchAppMode: () => {},
   isWordsLoading: false,
 };
