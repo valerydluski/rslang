@@ -8,10 +8,11 @@ import {
   transferToSource,
   transferToPlayfield,
   onDragEnd,
-  calculatePuzzlesData,
+  configureData,
   updateSource,
 } from '../../../redux/EnglishPuzzle/actions';
 import Puzzle from '../../../components/EnglishPuzzle/Puzzle/Puzzle';
+import baseBg from '../../../assets/img/baseBg.jpg';
 
 const Container = styled.div`
   margin-top: 10px;
@@ -24,15 +25,16 @@ const Playfield = styled.div`
   width: 560px;
   height: 560px;
   background: #c4c4c4;
-  box-shadow: inset 0 0 0 5px #000000;
   position: relative;
   z-index: 20;
+  background-image: ${(props) => (props.url ? `url('${props.url}')` : 'none')};
+  background-size: 560px 560px;
 `;
 
 const PlayfieldRow = styled.div`
   width: 100%;
   height: 56px;
-  padding-left: 20px;
+  padding-left: ${ENGLISH_PUZZLE_CONSTANTS.GEOMETRY.PUZZLE_PADDING}px;
   display: flex;
   justify-content: flex-start;
   box-sizing: border-box;
@@ -44,27 +46,33 @@ const PlayfieldRow = styled.div`
 const Source = styled.div`
   display: flex;
   margin-top: 30px;
-  width: 680px;
+  width: 560px;
   height: 56px;
-  display: flex;
-  justify-content: flex-start;
-  padding-left: 20px;
+  justify-content: ${(props) => (props.isInCenter ? 'center' : 'flex-start')};
+  padding-left: ${ENGLISH_PUZZLE_CONSTANTS.GEOMETRY.PUZZLE_PADDING}px;
   box-sizing: border-box;
   background-color: ${(props) => (props.isDraggingOver ? 'skyblue' : 'none')};
-  & > span:not(:last-child) {
-    margin-right: 20px;
-  }
 `;
 
 class Game extends Component {
   componentDidMount() {
-    const { calcPuzzlesData, updateSrc } = this.props;
-    calcPuzzlesData();
+    const { configData, updateSrc } = this.props;
+    configData();
     updateSrc();
   }
 
   renderActivePuzzle = (item, index, array) => {
-    const { data, row, results, playfieldPuzzleClick, sourcePuzzleClick } = this.props;
+    const {
+      data,
+      row,
+      results,
+      playfieldPuzzleClick,
+      sourcePuzzleClick,
+      pic,
+      background,
+      isRowCorrect,
+      isRowFill,
+    } = this.props;
     const itemData = data[row][item];
     return (
       <Puzzle
@@ -78,14 +86,16 @@ class Game extends Component {
         onClick={array === results ? playfieldPuzzleClick : sourcePuzzleClick}
         isFirst={itemData.order === 1}
         isLast={itemData.order === Object.keys(data[row]).length}
+        isCorrect={index === itemData.order - 1}
         word={itemData.word}
-        // TODO add url
-        // TODO add bgTip
+        url={background || (!background && isRowCorrect) ? pic.url : baseBg}
+        isRowFill={isRowFill}
       />
     );
   };
 
   renderStaticPuzzle = (itemData, index) => {
+    const { pic } = this.props;
     return (
       <Puzzle
         key={itemData.order}
@@ -95,8 +105,7 @@ class Game extends Component {
         word={itemData.word}
         isFirst={itemData.order === 1}
         isLast={itemData.order === index + 1}
-
-        // TODO add url
+        url={pic.url}
       />
     );
   };
@@ -131,18 +140,27 @@ class Game extends Component {
   };
 
   renderPlayfield() {
-    const { row, data } = this.props;
-    return (
-      <Playfield>
+    const { row, data, isPageFill, pic } = this.props;
+    const playfield = isPageFill ? (
+      <Playfield url={pic.url} />
+    ) : (
+      <Playfield url={isPageFill ? pic.url : null}>
         {data.slice(0, row).map(this.renderStaticRow)}
         {this.renderActiveRow()}
       </Playfield>
     );
+    return playfield;
   }
 
   renderSource() {
-    const { source } = this.props;
-    return (
+    const { source, isPageFill, pic } = this.props;
+    const content = isPageFill ? (
+      <Source isInCenter={isPageFill}>
+        <span>
+          {pic.name} - {pic.author}, {pic.year}
+        </span>
+      </Source>
+    ) : (
       <Droppable droppableId={ENGLISH_PUZZLE_CONSTANTS.SOURCE_ID} direction="horizontal">
         {(provided, snapshot) => (
           <Source
@@ -157,6 +175,7 @@ class Game extends Component {
         )}
       </Droppable>
     );
+    return content;
   }
 
   render() {
@@ -175,17 +194,23 @@ class Game extends Component {
 Game.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   row: PropTypes.number.isRequired,
+  isRowCorrect: PropTypes.bool.isRequired,
+  isRowFill: PropTypes.bool.isRequired,
+  isPageFill: PropTypes.bool.isRequired,
   source: PropTypes.arrayOf(PropTypes.string).isRequired,
   results: PropTypes.arrayOf(PropTypes.string).isRequired,
-  autoSpeech: PropTypes.bool.isRequired,
-  translation: PropTypes.bool.isRequired,
-  speech: PropTypes.bool.isRequired,
   background: PropTypes.bool.isRequired,
   playfieldPuzzleClick: PropTypes.func.isRequired,
   sourcePuzzleClick: PropTypes.func.isRequired,
   onDragPuzzle: PropTypes.func.isRequired,
-  calcPuzzlesData: PropTypes.func.isRequired,
+  configData: PropTypes.func.isRequired,
   updateSrc: PropTypes.func.isRequired,
+  pic: PropTypes.exact({
+    url: PropTypes.string,
+    name: PropTypes.string,
+    author: PropTypes.string,
+    year: PropTypes.string,
+  }).isRequired,
 };
 
 function mapStateToProps(state) {
@@ -194,10 +219,11 @@ function mapStateToProps(state) {
     source: state.englishPuzzle.source,
     results: state.englishPuzzle.results,
     row: state.englishPuzzle.row,
-    autoSpeech: state.englishPuzzle.autoSpeech,
-    translation: state.englishPuzzle.translation,
-    speech: state.englishPuzzle.speech,
+    isRowCorrect: state.englishPuzzle.isRowCorrect,
+    isRowFill: state.englishPuzzle.isRowFill,
+    isPageFill: state.englishPuzzle.isPageFill,
     background: state.englishPuzzle.background,
+    pic: state.englishPuzzle.pic,
   };
 }
 
@@ -206,7 +232,7 @@ function mapDispatchToProps(dispatch) {
     playfieldPuzzleClick: (event) => dispatch(transferToSource(event)),
     sourcePuzzleClick: (event) => dispatch(transferToPlayfield(event)),
     onDragPuzzle: (result) => dispatch(onDragEnd(result)),
-    calcPuzzlesData: () => dispatch(calculatePuzzlesData()),
+    configData: () => dispatch(configureData()),
     updateSrc: () => dispatch(updateSource()),
   };
 }

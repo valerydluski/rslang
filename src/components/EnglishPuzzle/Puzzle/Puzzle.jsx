@@ -23,19 +23,21 @@ const StyledPuzzle = styled.span`
     ${(props) => (props.isFirst ? 0 : PUZZLE_PADDING)}px 50%,
     0% 0%
   );
-  background-size: 602px 340px;
+  background-size: 560px 560px;
+  background-image: url('${(props) => props.url}');
   background-position: ${(props) => -props.bgXOffset}px ${(props) => -props.bgYOffset}px;
-  background-color: red;
   color: #000000;
-  padding: 0 20px;
-  margin-left: -20px;
+  text-shadow: 1px 1px 2px #ffffff,
+  -1px -1px 2px #ffffff;
+  padding: 0 ${PUZZLE_PADDING}px;
+  margin-left: -${PUZZLE_PADDING}px;
   position: relative;
-  transition: margin 0.3s;
 
   &::after {
     content: '';
-    display: none;
+    display: ${(props) => (props.isRowFill ? 'block' : 'none')};
     position: absolute;
+    background-color: ${(props) => (props.isCorrect ? 'green' : 'red')};
     left: 0;
     bottom: 0;
     width: 100%;
@@ -45,7 +47,7 @@ const StyledPuzzle = styled.span`
 
 class Puzzle extends Component {
   renderStatic() {
-    const { width, bgXOffset, bgYOffset, word, isFirst, isLast } = this.props;
+    const { width, bgXOffset, bgYOffset, word, isFirst, isLast, url } = this.props;
 
     return (
       <StyledPuzzle
@@ -54,6 +56,7 @@ class Puzzle extends Component {
         bgYOffset={bgYOffset}
         isFirst={isFirst}
         isLast={isLast}
+        url={url}
       >
         {word}
       </StyledPuzzle>
@@ -61,7 +64,20 @@ class Puzzle extends Component {
   }
 
   renderActive() {
-    const { id, index, onClick, width, bgXOffset, bgYOffset, word, isFirst, isLast } = this.props;
+    const {
+      id,
+      index,
+      onClick,
+      width,
+      bgXOffset,
+      bgYOffset,
+      word,
+      isFirst,
+      isLast,
+      url,
+      isRowFill,
+      isCorrect,
+    } = this.props;
     return (
       <Draggable draggableId={id} index={index}>
         {(provided) => (
@@ -75,6 +91,9 @@ class Puzzle extends Component {
             bgYOffset={bgYOffset}
             isFirst={isFirst}
             isLast={isLast}
+            url={url}
+            isRowFill={isRowFill}
+            isCorrect={isCorrect}
           >
             {word}
           </StyledPuzzle>
@@ -97,9 +116,12 @@ Puzzle.propTypes = {
   bgXOffset: PropTypes.number,
   bgYOffset: PropTypes.number,
   isStatic: PropTypes.bool,
+  isRowFill: PropTypes.bool,
+  isCorrect: PropTypes.bool,
   isFirst: PropTypes.bool.isRequired,
   isLast: PropTypes.bool.isRequired,
   word: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 Puzzle.defaultProps = {
@@ -110,6 +132,8 @@ Puzzle.defaultProps = {
   width: 100,
   bgXOffset: 0,
   bgYOffset: 0,
+  isRowFill: false,
+  isCorrect: true,
 };
 
 export default Puzzle;

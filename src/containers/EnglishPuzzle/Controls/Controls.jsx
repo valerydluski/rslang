@@ -13,6 +13,11 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  &:active,
+  &:focus {
+    outline: 0;
+  }
 `;
 
 const Container = styled.div`

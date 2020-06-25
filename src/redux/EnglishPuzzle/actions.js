@@ -6,8 +6,14 @@ import {
   UPDATE_DATA,
   UPDATE_ROW,
   UPDATE_PAGE,
+  UPDATE_AUDIOS,
+  UPDATE_TRANSLATIONS,
   CHANGE_ROW_STATUS,
   CHANGE_PAGE_STATUS,
+  SWITCH_AUTOSPEECH,
+  SWITCH_TRANSLATION,
+  SWITCH_SPEECH,
+  SWITCH_BACKGROUND,
 } from './types';
 
 export function updatePuzzlesPosition(results, source) {
@@ -29,6 +35,20 @@ export function updateRow(row) {
   return {
     type: UPDATE_ROW,
     row,
+  };
+}
+
+export function updateTranslations(translations) {
+  return {
+    type: UPDATE_TRANSLATIONS,
+    translations,
+  };
+}
+
+export function updateAudios(audios) {
+  return {
+    type: UPDATE_AUDIOS,
+    audios,
   };
 }
 
@@ -54,6 +74,30 @@ export function changePageStatus(isPageFill) {
   };
 }
 
+export function switchAutoSpeech() {
+  return {
+    type: SWITCH_AUTOSPEECH,
+  };
+}
+
+export function switchTranslation() {
+  return {
+    type: SWITCH_TRANSLATION,
+  };
+}
+
+export function switchSpeech() {
+  return {
+    type: SWITCH_SPEECH,
+  };
+}
+
+export function switchBackground() {
+  return {
+    type: SWITCH_BACKGROUND,
+  };
+}
+
 export function updateSource() {
   return (dispatch, getState) => {
     const { data, row } = getState().englishPuzzle;
@@ -65,7 +109,6 @@ export function updateSource() {
 
 export function updatePageStatus(row) {
   return (dispatch) => {
-    console.log(dispatch, row);
     if (row === ENGLISH_PUZZLE_CONSTANTS.ROWS_IN_PAGE) {
       const isPageFill = true;
       dispatch(changePageStatus(isPageFill));
@@ -155,29 +198,56 @@ export function onDragEnd(result) {
   };
 }
 
-export function calculatePuzzlesData() {
-  return (dispatch, getState) => {
-    const { data } = getState().englishPuzzle;
-    const { PUZZLE_PADDING, PUZZLE_HEIGHT, PLAYFIELD_WIDTH } = ENGLISH_PUZZLE_CONSTANTS.GEOMETRY;
-    data.forEach((page, index) => {
-      const pageKeys = Object.keys(page);
-      pageKeys.forEach((key) => {
-        page[key].width = getStringWidth(page[key].word);
-      });
-      let bgXOffset = 0;
-      const bgYOffset = index * PUZZLE_HEIGHT;
-      const fullWidth = pageKeys.reduce((acc, key) => acc + page[key].width, 0);
-      const freeWidth = PLAYFIELD_WIDTH - fullWidth;
-      const extraWidth = (PUZZLE_PADDING * (pageKeys.length - 1) + freeWidth) / pageKeys.length;
+export function calculatePuzzlesData(data) {
+  const newData = data;
+  const { PUZZLE_PADDING, PUZZLE_HEIGHT, PLAYFIELD_WIDTH } = ENGLISH_PUZZLE_CONSTANTS.GEOMETRY;
 
-      pageKeys.forEach((key) => {
-        const newWidth = page[key].width + extraWidth;
-        page[key].width = page[key].width + extraWidth;
-        page[key].bgXOffset = bgXOffset;
-        page[key].bgYOffset = bgYOffset;
-        bgXOffset += newWidth - PUZZLE_PADDING;
-      });
+  newData.forEach((page, index) => {
+    const pageKeys = Object.keys(page);
+    pageKeys.forEach((key) => {
+      page[key].width = getStringWidth(page[key].word);
     });
+
+    let bgXOffset = 0;
+    const bgYOffset = index * PUZZLE_HEIGHT;
+    const fullWidth = pageKeys.reduce((acc, key) => acc + page[key].width, 0);
+    const freeWidth = PLAYFIELD_WIDTH - fullWidth;
+    const extraWidth = (PUZZLE_PADDING * (pageKeys.length - 1) + freeWidth) / pageKeys.length;
+
+    pageKeys.forEach((key) => {
+      const newWidth = page[key].width + extraWidth;
+      page[key].width = page[key].width + extraWidth;
+      page[key].bgXOffset = bgXOffset;
+      page[key].bgYOffset = bgYOffset;
+      bgXOffset += newWidth - PUZZLE_PADDING;
+    });
+  });
+
+  return data;
+}
+
+export function configureData() {
+  return (dispatch, getState) => {
+    const { wordsData } = getState().englishPuzzle;
+    let data = [];
+    const translations = [];
+    const audios = [];
+    wordsData.forEach((item) => {
+      const dataElem = {};
+      item.textExample.split(' ').forEach((word, index) => {
+        dataElem[`${word}_${index + 1}`] = {
+          id: `${word}_${index + 1}`,
+          word,
+          order: index + 1,
+        };
+      });
+      data.push(dataElem);
+      translations.push(item.textExampleTranslate);
+      audios.push(item.audioExample);
+    });
+    data = calculatePuzzlesData(data);
     dispatch(updateData(data));
+    dispatch(updateTranslations(translations));
+    dispatch(updateAudios(audios));
   };
 }
