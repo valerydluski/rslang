@@ -10,7 +10,7 @@ import { changeIDontKnowWords } from '../../../redux/Games/action';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import shuffleArray from '../../../utils/shuffleArray';
 import changeAppMode from '../../../redux/AppMode/action';
-import Loader from '../../../components/Loader/Loader';
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 
 let currentGameWords;
 let answerResult = {};
@@ -26,7 +26,7 @@ const AudioCall = ({
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
 
-  if (isWordsLoading) return <Loader />;
+  if (isWordsLoading) return <LoadingSpinner />;
   if (wordsCollection.length === 0) {
     switchAppMode('AudioCall');
     return null;

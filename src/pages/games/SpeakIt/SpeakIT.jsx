@@ -11,7 +11,7 @@ import Microphone from '../../../utils/Microphone';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import { changeIDontKnowWords, changeScoreGame } from '../../../redux/Games/action';
 import changeAppMode from '../../../redux/AppMode/action';
-import Loader from '../../../components/Loader/Loader';
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 
 const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
@@ -45,7 +45,7 @@ const SpeakIT = (props) => {
   const [isGameFinished, toggleGameMode] = useState(false);
   let IDontKnowWords = gameWords.slice();
 
-  if (isWordsLoading) return <Loader />;
+  if (isWordsLoading) return <LoadingSpinner />;
   if (wordsCollection.length === 0) {
     switchAppMode('SpeakIT');
   }
