@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import ButtonSpeakIT from '../UI/Button/ButtonSpeakIT';
+import Button from '../UI/Button/Button';
 
 const ButtonsContainerSpeakITStyled = styled.div`
   position: relative;
@@ -15,9 +15,9 @@ const ButtonsContainerSpeakIT = (props) => {
   const { restartHandler, speakHandler, finishHandler } = props;
   return (
     <ButtonsContainerSpeakITStyled>
-      <ButtonSpeakIT text="restart" buttonHandler={restartHandler} />
-      <ButtonSpeakIT text="speak please" className="big-button" buttonHandler={speakHandler} />
-      <ButtonSpeakIT text="finish" buttonHandler={finishHandler} />
+      <Button text="restart" buttonHandler={restartHandler} />
+      <Button text="speak please" className="big-button" buttonHandler={speakHandler} />
+      <Button text="finish" buttonHandler={finishHandler} />
     </ButtonsContainerSpeakITStyled>
   );
 };

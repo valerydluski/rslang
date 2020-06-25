@@ -7,6 +7,11 @@ const ImageStyled = styled.img`
   height: 200px;
   border-radius: 100%;
   margin: 0 auto;
+
+  &.small-img {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -15,16 +20,21 @@ const ImageContainer = styled.div`
 `;
 
 const Image = (props) => {
-  const { src } = props;
+  const { src, className } = props;
   return (
     <ImageContainer>
-      <ImageStyled src={src} alt="img" />
+      <ImageStyled src={src} alt="img" className={className} />
     </ImageContainer>
   );
 };
 
 Image.propTypes = {
   src: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
+Image.defaultProps = {
+  className: '',
 };
 
 export default Image;

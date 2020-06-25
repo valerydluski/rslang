@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Input from '../components/UI/Input/Input';
-import { changeSpeakITLevel, changeSpeakITPage } from '../redux/action';
+import { changeGameLevel, changeGamePage } from '../redux/Games/action';
 
 const maxLevel = '6';
 const maxPage = '60';
@@ -76,14 +76,14 @@ class RoundSwitch extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    level: state.roundChange.speakITLevel,
-    page: state.roundChange.speakITPage,
+    level: state.roundChange.gameLevel,
+    page: state.roundChange.gamePage,
   };
 };
 
 const mapDispatchToProps = {
-  changeLevel: changeSpeakITLevel,
-  changePage: changeSpeakITPage,
+  changeLevel: changeGameLevel,
+  changePage: changeGamePage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoundSwitch);
