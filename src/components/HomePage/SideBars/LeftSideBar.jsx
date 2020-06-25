@@ -10,15 +10,16 @@ import iconSettingsHover from '../../UI/Icon/iconSettingsHover.svg';
 import getRedirectFunction from '../../../utils/getRedirectFunction';
 
 export default function LeftSideBar() {
-  const handler = () => {
-    getRedirectFunction('/settings');
-  };
   return (
     <SideBarContainer>
       <Logo />
       <MainNavigationMenu />
       <div>
-        <StyledButtonWithIcon onClick={handler} icon={iconSettings} iconHover={iconSettingsHover}>
+        <StyledButtonWithIcon
+          icon={iconSettings}
+          iconHover={iconSettingsHover}
+          onClick={getRedirectFunction('/settings')}
+        >
           Settings
         </StyledButtonWithIcon>
         <StyledButtonWithIcon icon={iconLogout} iconHover={iconLogoutHover}>
