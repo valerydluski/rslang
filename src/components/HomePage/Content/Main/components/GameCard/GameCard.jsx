@@ -19,7 +19,7 @@ export default function GameCard(props) {
 }
 
 GameCard.propTypes = {
-  poster: PropTypes.shape().isRequired,
+  poster: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
