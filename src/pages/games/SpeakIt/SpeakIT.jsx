@@ -47,7 +47,7 @@ const SpeakIT = (props) => {
 
   if (isWordsLoading) return <LoadingSpinner />;
   if (wordsCollection.length === 0) {
-    switchAppMode('SpeakIT');
+    switchAppMode('speakIT');
   }
 
   const newScoreHandler = () => {

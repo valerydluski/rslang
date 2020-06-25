@@ -8,6 +8,7 @@ import wordsFetch from '../../../services/getWordsFromAPI';
 function* workerGetWords() {
   try {
     const state = yield select();
+    console.log('function*workerGetWords -> state', state);
     yield put(showLoader());
     const payload = yield call(wordsFetch, state);
     yield put(fetchWords(payload));

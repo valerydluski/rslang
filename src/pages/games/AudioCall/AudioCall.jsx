@@ -28,7 +28,7 @@ const AudioCall = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
   if (wordsCollection.length === 0) {
-    switchAppMode('AudioCall');
+    switchAppMode('audioCall');
     return null;
   }
 
