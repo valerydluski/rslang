@@ -3,24 +3,37 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import gamesDescriptions from '../../assets/data/gamesDescriptions';
-import { changeGamePage } from '../../redux/Games/action';
+import changeAppMode from '../../redux/AppMode/action';
+import StartGamePageStyled from './Styled/StartGamePageStyled';
+import GoToHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePageButton';
+import {
+  GameNameStyled,
+  GameDescriptionStyled,
+  ContainerNameAndDescription,
+  StartGamePageContent,
+} from './Styled/StartGamePageContentStyled';
 
-const StartGamePage = ({ match, changeGamePage }) => {
+const StartGamePage = ({ match, changeMode }) => {
   const { gameId } = match.params;
   const { name } = gamesDescriptions[gameId].en;
   const { description } = gamesDescriptions[gameId].en;
-  const startHandler = () => {
-    changeGamePage('8');
+  const linkHandler = () => {
+    changeMode(gameId);
   };
 
   return (
-    <div className="start-game-page">
-      <h3 className="start-game-page__game-name">{name}</h3>
-      <p className="start-game-page__description">{description}</p>
-      <Link to={`/Game/${gameId}`} onClick={startHandler}>
-        Start
-      </Link>
-    </div>
+    <StartGamePageStyled>
+      <GoToHomePageButton />
+      <StartGamePageContent>
+        <ContainerNameAndDescription>
+          <GameNameStyled>GAME: {name}</GameNameStyled>
+          <GameDescriptionStyled>{description}</GameDescriptionStyled>
+        </ContainerNameAndDescription>
+        <Link to={`/Game/${gameId}`} onClick={linkHandler}>
+          Start
+        </Link>
+      </StartGamePageContent>
+    </StartGamePageStyled>
   );
 };
 
@@ -30,6 +43,11 @@ StartGamePage.propTypes = {
       gameId: PropTypes.string.isRequired,
     }),
   }).isRequired,
+  changeMode: PropTypes.func.isRequired,
 };
 
-export default connect(null, { changeGamePage })(StartGamePage);
+const mapDispatchToProps = {
+  changeMode: changeAppMode,
+};
+
+export default connect(null, mapDispatchToProps)(StartGamePage);
