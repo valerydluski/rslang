@@ -11,6 +11,8 @@ import ResultModal from '../../../containers/Modal/ResultModal';
 import shuffleArray from '../../../utils/shuffleArray';
 import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
+import { checkStatusSession } from '../../../redux/Auth/Login/actions';
+import { LINK_FOR_IMAGE } from '../../../config';
 
 let currentGameWords;
 let answerResult = {};
@@ -20,14 +22,17 @@ const AudioCall = ({
   addWordsWithMistakesToStore,
   switchAppMode,
   isWordsLoading,
+  currentAppMode,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
 
+  checkStatusSession();
+
   if (isWordsLoading) return <LoadingSpinner />;
-  if (wordsCollection.length === 0) {
+  if (currentAppMode !== 'AudioCall') {
     switchAppMode('AudioCall');
     return null;
   }
@@ -72,8 +77,6 @@ const AudioCall = ({
     toggleWordStatus(true);
   }
 
-  const sourcesLink = 'https://raw.githubusercontent.com/kovanelly/rslang-data/master/';
-
   return (
     <div className="audio-call_container">
       <GoToHomePageButton />
@@ -82,7 +85,7 @@ const AudioCall = ({
           <FinishedWordInfo
             word={currentGameWords[currentWordIndex].word}
             audioSrc={currentGameWords[currentWordIndex].audio}
-            imageSrc={`${sourcesLink}${currentGameWords[currentWordIndex].image}`}
+            imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
           />
           <WordsContainer
             isWordFinished={isWordFinished}
@@ -117,6 +120,7 @@ AudioCall.propTypes = {
   addWordsWithMistakesToStore: PropTypes.func,
   switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
+  currentAppMode: PropTypes.string,
 };
 
 AudioCall.defaultProps = {
@@ -124,12 +128,14 @@ AudioCall.defaultProps = {
   addWordsWithMistakesToStore: () => {},
   switchAppMode: () => {},
   isWordsLoading: false,
+  currentAppMode: '',
 };
 
 const mapStateToProps = (state) => {
   return {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     isWordsLoading: state.loader.loading,
+    currentAppMode: state.changeAppMode.appMode,
   };
 };
 
