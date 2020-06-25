@@ -28,7 +28,7 @@ const AudioCall = ({
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
-
+  console.log('wordsCollection', wordsCollection);
   checkStatusSession();
 
   if (isWordsLoading) return <LoadingSpinner />;
