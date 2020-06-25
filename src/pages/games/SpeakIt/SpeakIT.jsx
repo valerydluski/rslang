@@ -10,6 +10,9 @@ import ScoreContainerSpeakIT from '../../../containers/SpeakIT/ScoreContainerSpe
 import Microphone from '../../../utils/Microphone';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import { changeIDontKnowWords, changeScoreGame } from '../../../redux/Games/action';
+import changeAppMode from '../../../redux/AppMode/action';
+import Loader from '../../../components/Loader/Loader';
+import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 
 const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 const addScore = 100;
@@ -27,6 +30,8 @@ const SpeakIT = (props) => {
     speakITScore,
     changeScore,
     changeIDontKnowWordsInStore,
+    switchAppMode,
+    isWordsLoading,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -37,7 +42,13 @@ const SpeakIT = (props) => {
   const [textForTextField, setTranslate] = useState(translate);
   const [isListening, setListening] = useState(listening);
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
+  const [isGameFinished, toggleGameMode] = useState(false);
   let IDontKnowWords = gameWords.slice();
+
+  if (isWordsLoading) return <Loader />;
+  if (wordsCollection.length === 0) {
+    switchAppMode('SpeakIT');
+  }
 
   const newScoreHandler = () => {
     changeScore(newScore);
@@ -67,6 +78,10 @@ const SpeakIT = (props) => {
         document.getElementById(transcriptResult).classList.add('spoken-word');
         newScore += addScore;
         newScoreHandler();
+        if (IDontKnowWords.length === 0) {
+          microphone.stopMicrophone();
+          toggleGameMode(true);
+        }
       }
     }
   };
@@ -93,6 +108,14 @@ const SpeakIT = (props) => {
     }
   };
 
+  const restartGame = () => {
+    toggleGameMode(false);
+  };
+
+  const newGame = () => {
+    toggleGameMode(false);
+  };
+
   const speakHandler = () => {
     if (isListening) {
       microphone.stopMicrophone();
@@ -104,18 +127,22 @@ const SpeakIT = (props) => {
   };
 
   const finishHandler = () => {
-    const overlay = document.getElementById('overlay');
-    overlay.classList.toggle('hidden');
+    toggleGameMode(true);
   };
 
   if (!isListening) {
     return (
       <div className="speak-it_container">
-        <ResultModal
-          playAudio={playAudio}
-          audioForPlay="audio"
-          showProperties={['word', 'transcription', 'wordTranslate']}
-        />
+        <GoToHomePageButton />
+        {isGameFinished ? (
+          <ResultModal
+            playAudio={playAudio}
+            audioForPlay="audio"
+            showProperties={['word', 'transcription', 'wordTranslate']}
+            restartGame={restartGame}
+            newGame={newGame}
+          />
+        ) : null}
         <Image src={srcForImage} />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
@@ -131,11 +158,16 @@ const SpeakIT = (props) => {
 
   return (
     <div className="speak-it_container">
-      <ResultModal
-        playAudio={playAudio}
-        audioForPlay="audio"
-        showProperties={['word', 'transcription', 'wordTranslate']}
-      />
+      <GoToHomePageButton />
+      {isGameFinished ? (
+        <ResultModal
+          playAudio={playAudio}
+          audioForPlay="audio"
+          showProperties={['word', 'transcription', 'wordTranslate']}
+          restartGame={restartGame}
+          newGame={newGame}
+        />
+      ) : null}
       <Image src={srcForImage} />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
@@ -161,6 +193,8 @@ SpeakIT.propTypes = {
   microphone: PropTypes.instanceOf(Microphone),
   changeScore: PropTypes.func,
   changeIDontKnowWordsInStore: PropTypes.func,
+  switchAppMode: PropTypes.func.isRequired,
+  isWordsLoading: PropTypes.bool,
 };
 
 SpeakIT.defaultProps = {
@@ -175,6 +209,7 @@ SpeakIT.defaultProps = {
   microphone: new Microphone(),
   changeScore: () => {},
   changeIDontKnowWordsInStore: () => {},
+  isWordsLoading: false,
 };
 
 const mapStateToProps = (state) => {
@@ -183,12 +218,14 @@ const mapStateToProps = (state) => {
     Page: state.gamesReducer.gamePage,
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     gameScore: state.gamesReducer.gameScore,
+    isWordsLoading: state.loader.loading,
   };
 };
 
 const mapDispatchToProps = {
   changeScore: changeScoreGame,
   changeIDontKnowWordsInStore: changeIDontKnowWords,
+  switchAppMode: changeAppMode,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);

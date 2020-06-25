@@ -10,22 +10,27 @@ import GoToHomePageButton from '../Buttons/GoHomePageButton/GoHomePageButton';
 import { LINK_FOR_IMAGE } from '../../config';
 
 const ModalResult = (props) => {
-  const { imageSrc, showProperties, audioForPlay, isChangeImage, playAudio } = props;
+  const {
+    imageSrc,
+    showProperties,
+    audioForPlay,
+    isChangeImage,
+    playAudio,
+    restartGame,
+    newGame,
+  } = props;
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
 
   const restartHandler = () => {
-    const overlay = document.getElementById('overlay');
-    overlay.classList.toggle('hidden');
+    restartGame();
   };
 
   const newGameHandler = () => {
-    restartHandler();
+    newGame();
   };
 
-  const statisticHandler = () => {
-    console.log('тут могла быть ваша реклама');
-  };
+  const statisticHandler = () => {};
 
   const wordHandler = (obj) => {
     if (isChangeImage) setSrcForImage(`${LINK_FOR_IMAGE}${obj.image}`);
@@ -34,8 +39,8 @@ const ModalResult = (props) => {
 
   return (
     <OverlayStyled id="overlay">
+      <GoToHomePageButton />
       <ModalStyled>
-        <GoToHomePageButton />
         <Image src={srcForImage} className="small-img" />
         <ModalContent showProperties={showProperties} wordHandler={wordHandler} />
         <ModalButtonsContainerStyled>
@@ -54,6 +59,8 @@ ModalResult.propTypes = {
   audioForPlay: PropTypes.string,
   isChangeImage: PropTypes.bool,
   playAudio: PropTypes.func,
+  restartGame: PropTypes.func,
+  newGame: PropTypes.func,
 };
 
 ModalResult.defaultProps = {
@@ -62,6 +69,8 @@ ModalResult.defaultProps = {
   audioForPlay: '',
   isChangeImage: true,
   playAudio: () => {},
+  restartGame: () => {},
+  newGame: () => {},
 };
 
 export default ModalResult;
