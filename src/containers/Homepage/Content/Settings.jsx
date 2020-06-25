@@ -1,17 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ReduxSettingsForm from '../../../components/HomePage/Content/Settings/SettingsForm';
+import saveUserSettings from '../../../redux/UserSettings/actions';
 
-export default function SettingContent() {
-  const onSubmit = async (formData) => {
-    console.log(formData);
+function SettingContent(props) {
+  const { saveSettings } = props;
+  const onSubmit = (formData) => {
+    saveSettings(formData);
   };
   return (
     <>
       <h3>Application settings</h3>
-      <ReduxSettingsForm handleSubmit={onSubmit} />
+      <ReduxSettingsForm onSubmit={onSubmit} />
       <div>
         <h3>language</h3>
-        <h3>user name</h3>
         <h3>words per day</h3>
         <h3>maximum cards per day</h3>
         <h3>info in cards</h3>
@@ -22,3 +25,13 @@ export default function SettingContent() {
     </>
   );
 }
+
+SettingContent.propTypes = {
+  saveSettings: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = {
+  saveSettings: saveUserSettings,
+};
+
+export default connect(null, mapDispatchToProps)(SettingContent);

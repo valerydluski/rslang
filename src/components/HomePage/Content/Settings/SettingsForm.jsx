@@ -7,7 +7,7 @@ const SettingsForm = (props) => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="user name" key="name" type="text" placeholder="user name" component={Input} />
+      <Field name="name" key="name" type="text" placeholder="user name" component={Input} />
       <button type="submit" aria-label="Save">
         Save
       </button>
