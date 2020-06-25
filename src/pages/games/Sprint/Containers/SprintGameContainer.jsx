@@ -10,19 +10,25 @@ import Timer from '../Timer/Timer';
 import SprintControlsContainer from './SprintControlsContainer';
 import { CorrectMarkerStyled, WrongMarkerStyled } from '../Styled/ResultMarkersStyled';
 
-const SprintGameContainer = ({ wordsCollection, switchAppMode, isWordsLoading }) => {
+const SprintGameContainer = ({
+  wordsCollection,
+  switchAppMode,
+  isWordsLoading,
+  secondsForGuessing,
+  currentAppMode,
+}) => {
   if (isWordsLoading) return <LoadingSpinner />;
-  if (wordsCollection.length === 0) {
-    switchAppMode('AudioCall');
+  if (currentAppMode !== 'Sprint') {
+    switchAppMode('Sprint');
     return null;
   }
-
-  const currentWord = wordsCollection[5];
+  const currentWordPosition = 0;
+  const currentWord = wordsCollection[currentWordPosition];
   const isAnswerCorrect = true;
 
   return (
     <SprintGameContainerStyled>
-      <Timer />
+      <Timer initialTime={secondsForGuessing} />
       <WordStyled>{currentWord.word}</WordStyled>
       <TranslationStyled>{currentWord.wordTranslate}</TranslationStyled>
       {isAnswerCorrect ? <CorrectMarkerStyled /> : <WrongMarkerStyled />}
@@ -35,18 +41,24 @@ SprintGameContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
+  secondsForGuessing: PropTypes.number,
+  currentAppMode: PropTypes.string,
 };
 
 SprintGameContainer.defaultProps = {
   wordsCollection: [],
   switchAppMode: () => {},
   isWordsLoading: false,
+  secondsForGuessing: 20,
+  currentAppMode: '',
 };
 
 const mapStateToProps = (state) => {
   return {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     isWordsLoading: state.loader.loading,
+    secondsForGuessing: state.appSettings,
+    currentAppMode: state.changeAppMode.appMode,
   };
 };
 
