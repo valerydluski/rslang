@@ -2,14 +2,18 @@ import { takeLatest, select, put, call } from 'redux-saga/effects';
 import { CHECK_SESSION_STATUS } from '../types';
 import { resetSessionData } from '../actions';
 import checkToken from '../../../../services/checkToken';
+import history from '../../../../utils/history';
 
 function* workerStatus() {
-  try {
-    const getLoginState = (state) => state.login;
-    const sessionData = yield select(getLoginState);
-    yield call(checkToken, sessionData);
-  } catch (e) {
-    put(resetSessionData());
+  const getLoginState = (state) => state.login;
+  const sessionData = yield select(getLoginState);
+  const data = yield call(checkToken, sessionData);
+  if (!data) {
+    yield put(resetSessionData());
+    const { pathname } = history.location;
+    if (pathname !== '/login' && pathname !== '/registration') {
+      yield call(history.push, '/');
+    }
   }
 }
 
