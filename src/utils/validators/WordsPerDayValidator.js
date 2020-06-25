@@ -1,10 +1,21 @@
-export default (value) => {
-  const required = () => (value ? undefined : 'Required');
-  const number = () => (value && Number.isNaN(Number(value)) ? 'Must be a number' : undefined);
-  const minValue = (min) => () => (value && value < min ? `Must be at least ${min}` : undefined);
-  const maxValue = (max) => () => (value && value > max ? `Must be no more ${max}` : undefined);
-  const minValueCheck = minValue(1);
-  const maxValueCheck = maxValue(600);
+const minWords = 1;
+const maxWords = 600;
 
-  return [required, number, minValueCheck, maxValueCheck];
+export default (value) => {
+  if (value) {
+    return 'Required';
+  }
+  if (value && Number.isNaN(Number(value))) {
+    return 'Must be a number';
+  }
+
+  if (value && value < minWords) {
+    return `Must be at least ${minWords}`;
+  }
+
+  if (value && value > maxWords) {
+    return `Must be no more ${maxWords}`;
+  }
+
+  return undefined;
 };

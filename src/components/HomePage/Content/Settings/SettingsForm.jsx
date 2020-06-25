@@ -18,7 +18,7 @@ const SettingsForm = (props) => {
         name="WordsPerDay"
         type="number"
         placeholder="Words per day"
-        // validate={WordsPerDayValidator}
+        validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
       />
@@ -27,7 +27,7 @@ const SettingsForm = (props) => {
         type="number"
         component={Input}
         placeholder="Cards per day"
-        // validate={WordsPerDayValidator}
+        validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
       />
       <RadioButton
@@ -35,7 +35,7 @@ const SettingsForm = (props) => {
         headerText="delete button"
         buttonsValue={[
           { value: 'active', text: 'show' },
-          { value: 'unActive', text: 'not show' },
+          { value: 'inActive', text: 'not show' },
         ]}
       />
       <RadioButton
@@ -43,7 +43,7 @@ const SettingsForm = (props) => {
         headerText="addDificultWords button"
         buttonsValue={[
           { value: 'active', text: 'show' },
-          { value: 'unActive', text: 'not show' },
+          { value: 'inActive', text: 'not show' },
         ]}
       />
       <RadioButton
@@ -67,6 +67,7 @@ const ReduxSettingsForm = reduxForm({
 
 SettingsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  AppSettingsRadioButtons: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default ReduxSettingsForm;
