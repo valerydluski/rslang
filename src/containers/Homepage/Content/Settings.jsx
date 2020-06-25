@@ -14,13 +14,7 @@ function SettingContent(props) {
       <h3>Application settings</h3>
       <ReduxSettingsForm onSubmit={onSubmit} />
       <div>
-        <h3>language</h3>
-        <h3>words per day</h3>
-        <h3>maximum cards per day</h3>
         <h3>info in cards</h3>
-        <h3>show delete button</h3>
-        <h3>add in category Difficult words</h3>
-        <h3>how to learn words</h3>
       </div>
     </>
   );
