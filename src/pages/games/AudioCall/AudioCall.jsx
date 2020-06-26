@@ -28,10 +28,10 @@ const AudioCall = ({
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
-
   checkStatusSession();
 
   if (isWordsLoading) return <LoadingSpinner />;
+
   if (currentAppMode !== 'AudioCall') {
     switchAppMode('AudioCall');
     return null;
