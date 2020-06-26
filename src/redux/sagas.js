@@ -3,6 +3,7 @@ import watchLogin from './Auth/Login/sagas/login';
 import watchRegistration from './Auth/Registration/sagas';
 import watchStatus from './Auth/Login/sagas/watchLoginStatus';
 import watchGetWords from './GetWordsFromAPI/sagas/getWords';
+import watchLogout from './Auth/Login/sagas/logout';
 import watchMaxPage from './DefineMaxPagePerLevel/sagas/DefineMaxPagePerLevelSaga';
 
 export default function* watchSaga() {
@@ -11,6 +12,7 @@ export default function* watchSaga() {
     fork(watchRegistration),
     fork(watchStatus),
     fork(watchGetWords),
+    fork(watchLogout),
     fork(watchMaxPage),
   ]);
 }

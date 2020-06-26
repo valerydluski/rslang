@@ -3,6 +3,7 @@ import { CHECK_SESSION_STATUS } from '../types';
 import { resetSessionData } from '../actions';
 import checkToken from '../../../../services/checkToken';
 import history from '../../../../utils/history';
+import checkHistoryLocation from '../../../../utils/checkHistoryLocation';
 
 function* workerStatus() {
   const getLoginState = (state) => state.login;
@@ -10,8 +11,7 @@ function* workerStatus() {
   const data = yield call(checkToken, sessionData);
   if (!data) {
     yield put(resetSessionData());
-    const { pathname } = history.location;
-    if (pathname !== '/login' && pathname !== '/registration') {
+    if (!checkHistoryLocation(['/login', '/registration'])) {
       yield call(history.push, '/');
     }
   }
