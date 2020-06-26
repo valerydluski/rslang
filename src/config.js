@@ -51,3 +51,6 @@ export const gamesList = [
     onClick: getRedirectFunction('/StartGame/Sprint/'),
   },
 ];
+
+export const MIN_WORDS_PER_DAY = 1;
+export const MAX_WORDS_PER_DAY = 600;

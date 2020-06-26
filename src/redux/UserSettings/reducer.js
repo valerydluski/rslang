@@ -1,7 +1,15 @@
 import SAVE_USER_SETTINGS from './types';
 
 const initialState = {
-  name: '',
+  settings: {
+    name: '',
+    language: 'en',
+    WordsPerDay: 1,
+    CardsPerDay: 1,
+    deleteButton: 'active',
+    addDificultWordsButton: 'active',
+    howToLearnWords: 'newWords',
+  },
 };
 
 function userSettingsReducer(state = initialState, action) {
@@ -9,7 +17,7 @@ function userSettingsReducer(state = initialState, action) {
     case SAVE_USER_SETTINGS:
       return {
         ...state,
-        name: action.payload,
+        settings: action.payload,
       };
     default:
       return state;
