@@ -1,8 +1,8 @@
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
-const { URL } = API;
-const LINK_FOR_WORDS = 'words';
+const { URL, ENDPOINTS } = API;
+const { WORDS } = ENDPOINTS;
 const fixNumberForLink = 1;
 const wordsPerSentenceGames = 100;
 const wordsPerSentencePuzzle = 10;
@@ -19,7 +19,7 @@ async function wordsFetch({ changeRound, changeAppMode }) {
       wordsPerSentence = `wordsPerExampleSentenceLTE=${wordsPerSentencePuzzle}`;
     } else wordsPerSentence = `wordsPerExampleSentenceLTE=${wordsPerSentenceGames}`;
     const wordsPerPage = `wordsPerPage=${wordsPerSentencePuzzle}`;
-    const link = `${URL}/${LINK_FOR_WORDS}?${linkLevel}$${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
+    const link = `${URL}/${WORDS}?${linkLevel}$${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
     return await fetchData(link);
   } catch (e) {
     throw new Error('problem with API');
