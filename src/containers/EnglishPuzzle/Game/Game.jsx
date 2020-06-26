@@ -65,6 +65,7 @@ class Game extends Component {
       isRowFill,
     } = this.props;
     const itemData = data[row][item];
+    console.log(itemData);
     return (
       <Puzzle
         key={itemData.order}

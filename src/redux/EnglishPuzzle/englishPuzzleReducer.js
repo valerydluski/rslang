@@ -2,7 +2,6 @@ import {
   UPDATE_PUZZLES_POSITION,
   UPDATE_DATA,
   UPDATE_ROW,
-  UPDATE_PAGE,
   UPDATE_AUDIOS,
   UPDATE_TRANSLATIONS,
   UPDATE_STATE,
@@ -55,6 +54,10 @@ const englishPuzzleReducer = (state = initialState, action) => {
         translations: action.translations,
         pic: action.pic,
         isPageFill: false,
+        isRowFill: false,
+        isRowCorrect: false,
+        source: [],
+        results: [],
         row: 0,
       };
     }
@@ -69,12 +72,6 @@ const englishPuzzleReducer = (state = initialState, action) => {
         row: action.row,
         isRowFill: false,
         isRowCorrect: false,
-      };
-    case UPDATE_PAGE:
-      return {
-        ...state,
-        page: action.page,
-        isLoading: true,
       };
     case CHANGE_PAGE_STATUS:
       return {

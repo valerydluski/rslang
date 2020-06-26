@@ -4,7 +4,6 @@ import {
   UPDATE_PUZZLES_POSITION,
   UPDATE_DATA,
   UPDATE_ROW,
-  UPDATE_PAGE,
   UPDATE_AUDIOS,
   UPDATE_TRANSLATIONS,
   UPDATE_PIC,
@@ -50,13 +49,6 @@ export function updateAudios(audios) {
   return {
     type: UPDATE_AUDIOS,
     audios,
-  };
-}
-
-export function updatePage(page) {
-  return {
-    type: UPDATE_PAGE,
-    page,
   };
 }
 
