@@ -8,8 +8,8 @@ const TimerStyled = styled.div`
   }
 
   .timer {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     margin: 0 auto;
     position: relative;
     background: white;
@@ -29,7 +29,7 @@ const TimerStyled = styled.div`
     border-right: none;
     animation: rota ${(props) => props.animationDuration}s linear infinite;
   }
-  animationDuration .spinner:after {
+  .spinner:after {
     position: absolute;
     width: 10px;
     height: 10px;
@@ -54,13 +54,14 @@ const TimerStyled = styled.div`
 
   .mask {
     width: calc(50% + 1px);
-    height: 100%;
+    height: calc(100% + 1px);
     position: absolute;
     background: inherit;
     opacity: 1;
     z-index: 3;
     animation: mask ${(props) => props.animationDuration}s steps(1, end) infinite;
     margin-left: -1px;
+    margin-top: -1px;
   }
 
   @keyframes rota {

@@ -1,17 +1,42 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TrueButtonStyled, FalseButtonStyled } from '../Styled/AnswerButtonsStyled';
 import ControlContainerStyled from '../Styled/ControlContainerStyled';
+import errorSound from '../../../../assets/audio/error.mp3';
+import correctSound from '../../../../assets/audio/correct.mp3';
+import SprintResultMarker from './SprintResultMarker';
 
-const SprintControlsContainer = () => {
+const SprintControlsContainer = ({ clickHandler, isAnswerCorrect, isWordFinished }) => {
   const buttonTrueText = 'true';
   const buttonFalseText = 'false';
 
+  const playResultSound = (isOk) => {
+    const wordAudio = new Audio();
+    wordAudio.src = isOk ? correctSound : errorSound;
+    wordAudio.play();
+  };
+
+  if (isWordFinished) playResultSound(isAnswerCorrect);
+
   return (
     <ControlContainerStyled>
-      <FalseButtonStyled>{buttonTrueText}</FalseButtonStyled>
-      <TrueButtonStyled>{buttonFalseText}</TrueButtonStyled>
+      {isWordFinished ? <SprintResultMarker isAnswerCorrect={isAnswerCorrect} /> : null}
+      <FalseButtonStyled onClick={() => clickHandler(false)}>{buttonFalseText}</FalseButtonStyled>
+      <TrueButtonStyled onClick={() => clickHandler(true)}>{buttonTrueText}</TrueButtonStyled>
     </ControlContainerStyled>
   );
+};
+
+SprintControlsContainer.propTypes = {
+  isAnswerCorrect: PropTypes.bool,
+  clickHandler: PropTypes.func,
+  isWordFinished: PropTypes.bool,
+};
+
+SprintControlsContainer.defaultProps = {
+  isAnswerCorrect: false,
+  clickHandler: () => {},
+  isWordFinished: false,
 };
 
 export default SprintControlsContainer;
