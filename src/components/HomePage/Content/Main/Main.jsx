@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MainContainer from './styled/MainContainer';
 import Title from './components/Title/Title';
 import TitleWithUnderline from './components/Title/styled/TitleWithUnderline';
 import GameCard from './components/GameCard/GameCard';
 import GamesContainer from './styled/GamesContainer';
+import ContentContainer from '../ContentContainer';
 
 export default function Main(props) {
   const { games } = props;
   return (
-    <MainContainer>
+    <ContentContainer>
       <Title userName="User" />
       <TitleWithUnderline>Let&#39;s play!</TitleWithUnderline>
       <GamesContainer>
@@ -26,7 +26,7 @@ export default function Main(props) {
           );
         })}
       </GamesContainer>
-    </MainContainer>
+    </ContentContainer>
   );
 }
 
