@@ -28,6 +28,13 @@ const Text = styled.span`
 `;
 
 class Translation extends Component {
+  componentDidUpdate() {
+    const { autoSpeech, isRowCorrect } = this.props;
+    if ((autoSpeech && !isRowCorrect) || (!autoSpeech && isRowCorrect)) {
+      this.play();
+    }
+  }
+
   onClick = () => {
     this.play();
   };
@@ -65,9 +72,6 @@ class Translation extends Component {
     const { isPageFill, autoSpeech, isRowCorrect } = this.props;
     if (isPageFill) {
       return null;
-    }
-    if ((autoSpeech && !isRowCorrect) || (!autoSpeech && isRowCorrect)) {
-      this.play();
     }
     return (
       <Container>
