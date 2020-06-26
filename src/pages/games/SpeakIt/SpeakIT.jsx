@@ -13,6 +13,7 @@ import { changeIDontKnowWords, changeScoreGame } from '../../../redux/Games/acti
 import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
+import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 
 const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 const addScore = 100;
@@ -46,6 +47,7 @@ const SpeakIT = (props) => {
   const [isGameFinished, toggleGameMode] = useState(false);
   let IDontKnowWords = gameWords.slice();
 
+  checkStatusSession();
   if (isWordsLoading) return <LoadingSpinner />;
   if (currentAppMode !== 'SpeakIT') {
     switchAppMode('SpeakIT');
@@ -217,7 +219,7 @@ SpeakIT.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     Level: state.changeRound.SpeakITLevel,
-    Page: state.changeRound.SpeakITLevelPage,
+    Page: state.changeRound.SpeakITPage,
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
