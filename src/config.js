@@ -52,5 +52,5 @@ export const gamesList = [
   },
 ];
 
-export const minWordsPerDay = 1;
-export const maxWordsPerDay = 600;
+export const MIN_WORDS_PER_DAY = 1;
+export const MAX_WORDS_PER_DAY = 600;

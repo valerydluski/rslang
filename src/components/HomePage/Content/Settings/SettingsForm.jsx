@@ -67,7 +67,6 @@ const ReduxSettingsForm = reduxForm({
 
 SettingsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  AppSettingsRadioButtons: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default ReduxSettingsForm;
