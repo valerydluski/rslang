@@ -107,6 +107,17 @@ export function updateSource() {
   };
 }
 
+export function updateState({ data, audios, translations }) {
+  return (dispatch) => {
+    dispatch(updateData(data));
+    dispatch(updateAudios(audios));
+    dispatch(updateTranslations(translations));
+    dispatch(updateSource());
+    dispatch(changePageStatus(false));
+    dispatch(updateRow(0));
+  };
+}
+
 export function updatePageStatus(row) {
   return (dispatch) => {
     if (row === ENGLISH_PUZZLE_CONSTANTS.ROWS_IN_PAGE) {
@@ -195,59 +206,5 @@ export function onDragEnd(result) {
     }
     dispatch(updatePuzzlesPosition(resultsState, sourceState));
     dispatch(checkPuzzlesPosition());
-  };
-}
-
-export function calculatePuzzlesData(data) {
-  const newData = data;
-  const { PUZZLE_PADDING, PUZZLE_HEIGHT, PLAYFIELD_WIDTH } = ENGLISH_PUZZLE_CONSTANTS.GEOMETRY;
-
-  newData.forEach((page, index) => {
-    const pageKeys = Object.keys(page);
-    pageKeys.forEach((key) => {
-      page[key].width = getStringWidth(page[key].word);
-    });
-
-    let bgXOffset = 0;
-    const bgYOffset = index * PUZZLE_HEIGHT;
-    const fullWidth = pageKeys.reduce((acc, key) => acc + page[key].width, 0);
-    const freeWidth = PLAYFIELD_WIDTH - fullWidth;
-    const extraWidth = (PUZZLE_PADDING * (pageKeys.length - 1) + freeWidth) / pageKeys.length;
-
-    pageKeys.forEach((key) => {
-      const newWidth = page[key].width + extraWidth;
-      page[key].width = page[key].width + extraWidth;
-      page[key].bgXOffset = bgXOffset;
-      page[key].bgYOffset = bgYOffset;
-      bgXOffset += newWidth - PUZZLE_PADDING;
-    });
-  });
-
-  return data;
-}
-
-export function configureData() {
-  return (dispatch, getState) => {
-    const { wordsCollection } = getState().changeWordsCollection;
-    let data = [];
-    const translations = [];
-    const audios = [];
-    wordsCollection.forEach((item) => {
-      const dataElem = {};
-      item.textExample.split(' ').forEach((word, index) => {
-        dataElem[`${word}_${index + 1}`] = {
-          id: `${word}_${index + 1}`,
-          word,
-          order: index + 1,
-        };
-      });
-      data.push(dataElem);
-      translations.push(item.textExampleTranslate);
-      audios.push(item.audioExample);
-    });
-    data = calculatePuzzlesData(data);
-    dispatch(updateData(data));
-    dispatch(updateTranslations(translations));
-    dispatch(updateAudios(audios));
   };
 }

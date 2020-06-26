@@ -8,8 +8,6 @@ import {
   transferToSource,
   transferToPlayfield,
   onDragEnd,
-  configureData,
-  updateSource,
 } from '../../../redux/EnglishPuzzle/actions';
 import Puzzle from '../../../components/EnglishPuzzle/Puzzle/Puzzle';
 import baseBg from '../../../assets/img/baseBg.jpg';
@@ -55,12 +53,6 @@ const Source = styled.div`
 `;
 
 class Game extends Component {
-  componentDidMount() {
-    const { configData, updateSrc } = this.props;
-    configData();
-    updateSrc();
-  }
-
   renderActivePuzzle = (item, index, array) => {
     const {
       data,
@@ -203,8 +195,6 @@ Game.propTypes = {
   playfieldPuzzleClick: PropTypes.func.isRequired,
   sourcePuzzleClick: PropTypes.func.isRequired,
   onDragPuzzle: PropTypes.func.isRequired,
-  configData: PropTypes.func.isRequired,
-  updateSrc: PropTypes.func.isRequired,
   pic: PropTypes.exact({
     url: PropTypes.string,
     name: PropTypes.string,
@@ -232,8 +222,6 @@ function mapDispatchToProps(dispatch) {
     playfieldPuzzleClick: (event) => dispatch(transferToSource(event)),
     sourcePuzzleClick: (event) => dispatch(transferToPlayfield(event)),
     onDragPuzzle: (result) => dispatch(onDragEnd(result)),
-    configData: () => dispatch(configureData()),
-    updateSrc: () => dispatch(updateSource()),
   };
 }
 
