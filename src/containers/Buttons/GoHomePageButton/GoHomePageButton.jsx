@@ -5,7 +5,7 @@ import StyledGoHomeButton from '../../../components/UI/Button/Styled/StyledGoHom
 const GoHomePageButton = () => {
   const history = useHistory();
   function goHome() {
-    history.push('/');
+    history.push('/home');
   }
   return <StyledGoHomeButton type="button" onClick={goHome} />;
 };

@@ -1,23 +1,28 @@
-import { LINK_FOR_WORDS } from '../config';
+import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
+const {
+  URL,
+  ENDPOINTS: { WORDS },
+} = API;
 const fixNumberForLink = 1;
 const wordsPerSentenceGames = 100;
 const wordsPerSentencePuzzle = 10;
 
-async function wordsFetch({ gamesReducer, changeAppMode }) {
+async function wordsFetch({ changeRound, changeAppMode }) {
   try {
-    const { gameLevel, gamePage } = gamesReducer;
     const { appMode } = changeAppMode;
-    const linkLevel = `group=${gameLevel - fixNumberForLink}&`;
-    const linkPage = `page=${gamePage - fixNumberForLink}&`;
+    const gameLevel = changeRound[`${appMode}Level`];
+    const gamePage = changeRound[`${appMode}Page`];
+    const linkLevel = `group=${gameLevel - fixNumberForLink}`;
+    const linkPage = `page=${gamePage - fixNumberForLink}`;
     let wordsPerSentence;
     if (appMode === 'EnglishPuzzle') {
-      wordsPerSentence = `wordsPerExampleSentenceLTE=${wordsPerSentencePuzzle}&`;
-    } else wordsPerSentence = `wordsPerExampleSentenceLTE=${wordsPerSentenceGames}&`;
+      wordsPerSentence = `wordsPerExampleSentenceLTE=${wordsPerSentencePuzzle}`;
+    } else wordsPerSentence = `wordsPerExampleSentenceLTE=${wordsPerSentenceGames}`;
     const wordsPerPage = `wordsPerPage=${wordsPerSentencePuzzle}`;
-    const URL = `${LINK_FOR_WORDS}${linkLevel}${linkPage}${wordsPerSentence}${wordsPerPage}`;
-    return await fetchData(URL);
+    const link = `${URL}/${WORDS}?${linkLevel}$${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
+    return await fetchData(link);
   } catch (e) {
     throw new Error('problem with API');
   }

@@ -5,7 +5,7 @@ import Logo from '../../components/UI/Logo/Logo';
 export default function LogoContainer() {
   const history = useHistory();
   const goHome = () => {
-    history.push('/');
+    history.push('/home');
   };
 
   return <Logo onClick={goHome} />;

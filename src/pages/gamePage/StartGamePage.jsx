@@ -13,13 +13,10 @@ import {
   StartGamePageContent,
 } from './Styled/StartGamePageContentStyled';
 
-const StartGamePage = ({ match, changeMode }) => {
+const StartGamePage = ({ match }) => {
   const { gameId } = match.params;
   const { name } = gamesDescriptions[gameId].en;
   const { description } = gamesDescriptions[gameId].en;
-  const linkHandler = () => {
-    changeMode(gameId);
-  };
 
   return (
     <StartGamePageStyled>
@@ -29,9 +26,7 @@ const StartGamePage = ({ match, changeMode }) => {
           <GameNameStyled>GAME: {name}</GameNameStyled>
           <GameDescriptionStyled>{description}</GameDescriptionStyled>
         </ContainerNameAndDescription>
-        <Link to={`/Game/${gameId}`} onClick={linkHandler}>
-          Start
-        </Link>
+        <Link to={`/Game/${gameId}`}>Start</Link>
       </StartGamePageContent>
     </StartGamePageStyled>
   );
@@ -43,7 +38,6 @@ StartGamePage.propTypes = {
       gameId: PropTypes.string.isRequired,
     }),
   }).isRequired,
-  changeMode: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = {
