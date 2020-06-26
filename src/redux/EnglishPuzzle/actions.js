@@ -1,5 +1,4 @@
 import { ENGLISH_PUZZLE_CONSTANTS } from '../../config';
-import getStringWidth from '../../utils/getStringWidth';
 
 import {
   UPDATE_PUZZLES_POSITION,
@@ -8,6 +7,8 @@ import {
   UPDATE_PAGE,
   UPDATE_AUDIOS,
   UPDATE_TRANSLATIONS,
+  UPDATE_PIC,
+  UPDATE_STATE,
   CHANGE_ROW_STATUS,
   CHANGE_PAGE_STATUS,
   SWITCH_AUTOSPEECH,
@@ -59,6 +60,13 @@ export function updatePage(page) {
   };
 }
 
+export function updatePic(pic) {
+  return {
+    type: UPDATE_PIC,
+    pic,
+  };
+}
+
 export function changeRowStatus(isRowFill, isRowCorrect) {
   return {
     type: CHANGE_ROW_STATUS,
@@ -107,14 +115,13 @@ export function updateSource() {
   };
 }
 
-export function updateState({ data, audios, translations }) {
-  return (dispatch) => {
-    dispatch(updateData(data));
-    dispatch(updateAudios(audios));
-    dispatch(updateTranslations(translations));
-    dispatch(updateSource());
-    dispatch(changePageStatus(false));
-    dispatch(updateRow(0));
+export function updateState({ data, audios, translations, pic }) {
+  return {
+    type: UPDATE_STATE,
+    data,
+    audios,
+    translations,
+    pic,
   };
 }
 

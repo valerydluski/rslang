@@ -18,7 +18,7 @@ import CHANGE_APP_MODE from '../../AppMode/types';
 import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';
-import { updateState } from '../../EnglishPuzzle/actions';
+import { updateState, updateSource } from '../../EnglishPuzzle/actions';
 
 function* workerGetWords() {
   try {
@@ -28,8 +28,10 @@ function* workerGetWords() {
     const payload = yield call(wordsFetch, state);
     yield put(fetchWords(payload));
     if (appMode === 'EnglishPuzzle') {
-      const data = yield call(configureData, payload);
+      const { EnglishPuzzleLevel, EnglishPuzzlePage } = state.changeRound;
+      const data = yield call(configureData, payload, EnglishPuzzleLevel, EnglishPuzzlePage);
       yield put(updateState(data));
+      yield put(updateSource());
     }
     yield put(hideLoader());
   } catch (e) {

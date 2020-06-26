@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { ENGLISH_PUZZLE_CONSTANTS } from '../../../config';
+import { ENGLISH_PUZZLE_CONSTANTS, LINK_FOR_ENGLISH_PUZZLE_IMAGE } from '../../../config';
 import {
   transferToSource,
   transferToPlayfield,
   onDragEnd,
 } from '../../../redux/EnglishPuzzle/actions';
 import Puzzle from '../../../components/EnglishPuzzle/Puzzle/Puzzle';
-import baseBg from '../../../assets/img/baseBg.jpg';
 
 const Container = styled.div`
   margin-top: 10px;
@@ -80,7 +79,11 @@ class Game extends Component {
         isLast={itemData.order === Object.keys(data[row]).length}
         isCorrect={index === itemData.order - 1}
         word={itemData.word}
-        url={background || (!background && isRowCorrect) ? pic.url : baseBg}
+        url={
+          background || (!background && isRowCorrect)
+            ? `${LINK_FOR_ENGLISH_PUZZLE_IMAGE}${pic.cutSrc}`
+            : `${LINK_FOR_ENGLISH_PUZZLE_IMAGE}PuzzleBg.jpg`
+        }
         isRowFill={isRowFill}
       />
     );
@@ -97,7 +100,7 @@ class Game extends Component {
         word={itemData.word}
         isFirst={itemData.order === 1}
         isLast={itemData.order === index + 1}
-        url={pic.url}
+        url={`${LINK_FOR_ENGLISH_PUZZLE_IMAGE}${pic.cutSrc}`}
       />
     );
   };
@@ -134,9 +137,9 @@ class Game extends Component {
   renderPlayfield() {
     const { row, data, isPageFill, pic } = this.props;
     const playfield = isPageFill ? (
-      <Playfield url={pic.url} />
+      <Playfield url={`${LINK_FOR_ENGLISH_PUZZLE_IMAGE}${pic.cutSrc}`} />
     ) : (
-      <Playfield url={isPageFill ? pic.url : null}>
+      <Playfield>
         {data.slice(0, row).map(this.renderStaticRow)}
         {this.renderActiveRow()}
       </Playfield>
@@ -171,7 +174,8 @@ class Game extends Component {
   }
 
   render() {
-    const { onDragPuzzle } = this.props;
+    const { onDragPuzzle, isWordsLoading } = this.props;
+    if (isWordsLoading) return null;
     return (
       <Container>
         <DragDropContext onDragEnd={onDragPuzzle}>
@@ -196,11 +200,18 @@ Game.propTypes = {
   sourcePuzzleClick: PropTypes.func.isRequired,
   onDragPuzzle: PropTypes.func.isRequired,
   pic: PropTypes.exact({
-    url: PropTypes.string,
+    id: PropTypes.string,
+    imageSrc: PropTypes.string,
+    cutSrc: PropTypes.string,
     name: PropTypes.string,
     author: PropTypes.string,
     year: PropTypes.string,
   }).isRequired,
+  isWordsLoading: PropTypes.bool,
+};
+
+Game.defaultProps = {
+  isWordsLoading: false,
 };
 
 function mapStateToProps(state) {
@@ -214,6 +225,7 @@ function mapStateToProps(state) {
     isPageFill: state.englishPuzzle.isPageFill,
     background: state.englishPuzzle.background,
     pic: state.englishPuzzle.pic,
+    isWordsLoading: state.loader.loading,
   };
 }
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Sound from '../../../utils/Sound';
 import SpeechIconBlack from '../../../components/UI/Icon/SpeechIconBlack';
 
 const Container = styled.div`
@@ -30,7 +29,15 @@ const Text = styled.span`
 
 class Translation extends Component {
   onClick = () => {
-    const { sound } = this.props;
+    this.play();
+  };
+
+  play = () => {
+    const { audios, row } = this.props;
+    const sound = audios[row];
+    if (row !== 0) {
+      audios[row - 1].pause();
+    }
     sound.play();
   };
 
@@ -55,13 +62,12 @@ class Translation extends Component {
   }
 
   render() {
-    const { audios, row, sound, autoSpeech, isRowCorrect, isPageFill } = this.props;
-    sound.update(audios[row]);
+    const { isPageFill, autoSpeech, isRowCorrect } = this.props;
     if (isPageFill) {
       return null;
     }
     if ((autoSpeech && !isRowCorrect) || (!autoSpeech && isRowCorrect)) {
-      sound.play();
+      this.play();
     }
     return (
       <Container>
@@ -74,18 +80,13 @@ class Translation extends Component {
 
 Translation.propTypes = {
   row: PropTypes.number.isRequired,
-  audios: PropTypes.arrayOf(PropTypes.string).isRequired,
+  audios: PropTypes.arrayOf(PropTypes.instanceOf(Audio)).isRequired,
   translations: PropTypes.arrayOf(PropTypes.string).isRequired,
-  sound: PropTypes.instanceOf(Sound),
   autoSpeech: PropTypes.bool.isRequired,
   translation: PropTypes.bool.isRequired,
   speech: PropTypes.bool.isRequired,
   isRowCorrect: PropTypes.bool.isRequired,
   isPageFill: PropTypes.bool.isRequired,
-};
-
-Translation.defaultProps = {
-  sound: new Sound(),
 };
 
 function mapStateToProps(state) {

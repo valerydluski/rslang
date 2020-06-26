@@ -36,8 +36,8 @@ const EnglishPuzzle = (props) => {
 
   return (
     <Content>
+      <GoToHomePageButton />
       <Container>
-        <GoToHomePageButton />
         <StatusMenu />
         <TipsMenu />
         <Game />

@@ -5,38 +5,38 @@ import {
   UPDATE_PAGE,
   UPDATE_AUDIOS,
   UPDATE_TRANSLATIONS,
+  UPDATE_STATE,
   CHANGE_ROW_STATUS,
   CHANGE_PAGE_STATUS,
   SWITCH_AUTOSPEECH,
   SWITCH_TRANSLATION,
   SWITCH_SPEECH,
   SWITCH_BACKGROUND,
+  UPDATE_PIC,
 } from './types';
 
 const initialState = {
   data: [],
   translations: [],
-  audios: [],
+  audios: [new Audio()],
   source: [],
   results: [],
   pic: {
-    url:
-      'https://raw.githubusercontent.com/tarasdemidovich1995/rslang_data_paintings/master/level1/waterfal.jpg',
-    name: 'lorem',
-    author: 'lorem',
-    year: 'lorem',
+    id: '',
+    imageSrc: '',
+    cutSrc: '',
+    name: '',
+    author: '',
+    year: '',
   },
   row: 0,
   isRowFill: false,
   isRowCorrect: false,
-  level: 0,
-  page: 0,
   isPageFill: false,
-  isLoading: true,
-  autoSpeech: false,
+  autoSpeech: true,
   translation: true,
   speech: true,
-  background: false,
+  background: true,
 };
 
 const englishPuzzleReducer = (state = initialState, action) => {
@@ -47,6 +47,17 @@ const englishPuzzleReducer = (state = initialState, action) => {
         results: action.results,
         source: action.source,
       };
+    case UPDATE_STATE: {
+      return {
+        ...state,
+        data: action.data,
+        audios: action.audios,
+        translations: action.translations,
+        pic: action.pic,
+        isPageFill: false,
+        row: 0,
+      };
+    }
     case UPDATE_DATA:
       return {
         ...state,
@@ -85,6 +96,11 @@ const englishPuzzleReducer = (state = initialState, action) => {
       return {
         ...state,
         translations: action.translations,
+      };
+    case UPDATE_PIC:
+      return {
+        ...state,
+        pic: action.pic,
       };
     case SWITCH_AUTOSPEECH:
       return {

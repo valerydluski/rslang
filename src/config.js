@@ -39,6 +39,8 @@ export const ENGLISH_PUZZLE_CONSTANTS = {
 };
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
+export const LINK_FOR_ENGLISH_PUZZLE_IMAGE =
+  'https://raw.githubusercontent.com/valerydluski/Images/master/';
 
 export const GAME_LIST = [
   {

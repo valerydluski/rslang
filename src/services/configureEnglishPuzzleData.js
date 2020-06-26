@@ -1,5 +1,8 @@
 import getStringWidth from '../utils/getStringWidth';
-import { ENGLISH_PUZZLE_CONSTANTS } from '../config';
+import { ENGLISH_PUZZLE_CONSTANTS, LINK_FOR_ENGLISH_PUZZLE_IMAGE, LINK_FOR_IMAGE } from '../config';
+import paintings from '../assets/data/paintings';
+import loadImage from './loadImage';
+import loadAudio from './loadAudio';
 
 const findTagExp = /<\w+>|<\/\w+>/g;
 
@@ -24,14 +27,14 @@ export function calculatePuzzleData(page, index) {
     newPage[key].bgYOffset = bgYOffset;
     bgXOffset += newWidth - PUZZLE_PADDING;
   });
-
   return newPage;
 }
 
-export function configureData(wordsList) {
+export async function configureData(wordsList, level, page) {
   const data = [];
   const translations = [];
-  const audios = [];
+  const audiosSrc = [];
+  const pic = paintings[level - 1][page - 1];
   wordsList.forEach((item) => {
     const dataElem = {};
     item.textExample
@@ -46,11 +49,17 @@ export function configureData(wordsList) {
       });
     data.push(dataElem);
     translations.push(item.textExampleTranslate);
-    audios.push(item.audioExample);
+    audiosSrc.push(item.audioExample);
   });
+  await loadImage(`${LINK_FOR_ENGLISH_PUZZLE_IMAGE}${pic.cutSrc}`);
+  await loadImage(`${LINK_FOR_ENGLISH_PUZZLE_IMAGE}PuzzleBg.jpg`);
+  const audios = await Promise.all(
+    audiosSrc.map((audio) => loadAudio(`${LINK_FOR_IMAGE}${audio}`))
+  );
   return {
     data: data.map(calculatePuzzleData),
-    translations,
     audios,
+    translations,
+    pic,
   };
 }

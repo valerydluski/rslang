@@ -26,9 +26,9 @@ const Container = styled.div`
 
 class Controls extends Component {
   onClick = () => {
-    const { isRowCorrect, isPageFill, row, page, updateRow, updatePage, pickRow } = this.props;
+    const { isRowCorrect, isPageFill, row, updateRow, updatePage, pickRow } = this.props;
     if (isPageFill) {
-      updatePage(page + 1);
+      // updatePage(page + 1);
     } else if (isRowCorrect) {
       updateRow(row + 1);
     } else {
@@ -53,7 +53,6 @@ Controls.propTypes = {
   isRowFill: PropTypes.bool.isRequired,
   isPageFill: PropTypes.bool.isRequired,
   row: PropTypes.number.isRequired,
-  page: PropTypes.number.isRequired,
   updateRow: PropTypes.func.isRequired,
   updatePage: PropTypes.func.isRequired,
   pickRow: PropTypes.func.isRequired,
@@ -65,7 +64,6 @@ function mapStateToProps(state) {
     isRowFill: state.englishPuzzle.isRowFill,
     isPageFill: state.englishPuzzle.isPageFill,
     row: state.englishPuzzle.row,
-    page: state.englishPuzzle.page,
   };
 }
 
