@@ -13,6 +13,16 @@ export const API = {
     WORDS: 'words',
     SETTINGS: 'settings',
   },
+
+  QUERIES: {
+    WORDS: {
+      GROUP: 'group',
+      PAGE: 'page',
+      WORDS_PER_SENTENCE: 'wordsPerExampleSentenceLTE',
+      WORDS_PER_PAGE: 'wordsPerPage',
+      COUNT: 'count',
+    },
+  },
 };
 
 export const DEFAULT_LANGUAGE = 'ru';
@@ -30,7 +40,7 @@ export const ENGLISH_PUZZLE_CONSTANTS = {
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 
-export const gamesList = [
+export const GAME_LIST = [
   {
     title: 'Savannah',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',

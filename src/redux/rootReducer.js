@@ -8,6 +8,7 @@ import getWordsFromAPIReducer from './GetWordsFromAPI/GetWordsFromAPIReducer';
 import gamesReducer from './Games/gamesReducer';
 import changeAppModeReducer from './AppMode/AppModeReducer';
 import changeRoundReducer from './ChangeRounds/changeRoundReducer';
+import DefineMaxPagePerLevelReducer from './DefineMaxPagePerLevel/DefineMaxPagePerLevelReducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   getWordsFromAPI: getWordsFromAPIReducer,
   changeAppMode: changeAppModeReducer,
   changeRound: changeRoundReducer,
+  maxPage: DefineMaxPagePerLevelReducer,
 });
 
 export default rootReducer;
