@@ -9,7 +9,7 @@ const initialState = {
     deleteButton: 'active',
     addDificultWordsButton: 'active',
     howToLearnWords: 'newWords',
-    SpeakITWordsPerPage: '10',
+    SpeakITWordsPerPage: '15',
     SavannahWordsPerPage: '10',
     AudioCallWordsPerPage: '10',
     SprintWordsPerPage: '10',
