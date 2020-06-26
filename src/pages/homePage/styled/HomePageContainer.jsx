@@ -4,7 +4,7 @@ const HomePageContainer = styled.div`
   width: 100%;
   min-height: 100%;
   display: grid;
-  grid-template-columns: 15% 60% 25%;
+  grid-template-columns: 2fr 6fr 3fr;
 `;
 
 export default HomePageContainer;
