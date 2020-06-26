@@ -13,8 +13,9 @@ import { changeIDontKnowWords, changeScoreGame } from '../../../redux/Games/acti
 import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
+import { checkStatusSession } from '../../../redux/Auth/Login/actions';
+import { LINK_FOR_IMAGE } from '../../../config';
 
-const link = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 const addScore = 100;
 
 const SpeakIT = (props) => {
@@ -46,6 +47,7 @@ const SpeakIT = (props) => {
   const [isGameFinished, toggleGameMode] = useState(false);
   let IDontKnowWords = gameWords.slice();
 
+  checkStatusSession();
   if (isWordsLoading) return <LoadingSpinner />;
   if (currentAppMode !== 'SpeakIT') {
     switchAppMode('SpeakIT');
@@ -72,7 +74,7 @@ const SpeakIT = (props) => {
     setTranscript(transcriptResult);
     if (gameWords.includes(transcriptResult)) {
       const word = wordsCollection.find((item) => item.word.toLowerCase() === transcriptResult);
-      setSrcForImage(`${link}${word.image}`);
+      setSrcForImage(`${LINK_FOR_IMAGE}${word.image}`);
       if (IDontKnowWords.includes(transcriptResult)) {
         IDontKnowWords = IDontKnowWords.filter((item) => item !== transcriptResult);
         changeIDontKnowWordsInStore(IDontKnowWords);
@@ -90,13 +92,13 @@ const SpeakIT = (props) => {
   const audioSpeakIt = new Audio();
 
   const playAudio = (src) => {
-    audioSpeakIt.setAttribute('src', `${link}${src}`);
+    audioSpeakIt.setAttribute('src', `${LINK_FOR_IMAGE}${src}`);
     audioSpeakIt.load();
     audioSpeakIt.play();
   };
 
   const cardHandler = (obj) => {
-    const url = `${link}${obj.image}`;
+    const url = `${LINK_FOR_IMAGE}${obj.image}`;
     setSrcForImage(url);
     setTranslate(obj.wordTranslate);
     playAudio(obj.audio);
@@ -217,7 +219,7 @@ SpeakIT.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     Level: state.changeRound.SpeakITLevel,
-    Page: state.changeRound.SpeakITLevelPage,
+    Page: state.changeRound.SpeakITPage,
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,

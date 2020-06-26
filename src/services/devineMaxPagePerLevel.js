@@ -5,7 +5,7 @@ const {
   URL,
   ENDPOINTS: { WORDS },
   QUERIES: {
-    WORDS: { GROUP, PAGE, WORDS_PER_SENTENCE, WORDS_PER_PAGE },
+    WORDS: { COUNT, GROUP, PAGE, WORDS_PER_SENTENCE, WORDS_PER_PAGE },
   },
 } = API;
 const fixNumberForLink = 1;
@@ -36,14 +36,14 @@ const createData = ({ changeRound, changeAppMode, userSettings }) => {
   };
 };
 
-async function wordsFetch(state) {
+async function maxPage(state) {
   try {
     const { linkLevel, linkPage, wordsPerSentence, wordsPerPage } = createData(state);
-    const link = `${URL}/${WORDS}?${linkLevel}$${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
+    const link = `${URL}/${WORDS}/${COUNT}?${linkLevel}$${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
     return await fetchData(link);
   } catch (e) {
     throw new Error('problem with API');
   }
 }
 
-export default wordsFetch;
+export default maxPage;
