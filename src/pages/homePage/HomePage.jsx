@@ -31,7 +31,8 @@ function HomePage(props) {
         <PrivateNavigationRoute path="/dictionary" exact component={Dictionary} />
         <PrivateNavigationRoute path="/statistics" exact component={Statistics} />
         <PrivateNavigationRoute path="/settings" exact component={Settings} />
-        <PrivateNavigationRoute path="/" component={MainContainer} />
+        <PrivateNavigationRoute path="/home" exact component={MainContainer} />
+        <Redirect to="/home" />
       </Switch>
       <RightSideBar />
     </HomePageContainer>
