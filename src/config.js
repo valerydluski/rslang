@@ -29,7 +29,7 @@ export const DEFAULT_LANGUAGE = 'ru';
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 
-export const GamesList = [
+export const GAME_LIST = [
   {
     title: 'Savannah',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
