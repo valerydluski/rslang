@@ -1,8 +1,10 @@
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
-const { URL, ENDPOINTS } = API;
-const { WORDS } = ENDPOINTS;
+const {
+  URL,
+  ENDPOINTS: { WORDS },
+} = API;
 const fixNumberForLink = 1;
 const wordsPerSentenceGames = 100;
 const wordsPerSentencePuzzle = 10;
