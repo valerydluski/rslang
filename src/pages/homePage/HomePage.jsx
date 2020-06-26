@@ -24,14 +24,15 @@ function HomePage(props) {
 
   return (
     <HomePageContainer>
-      <LeftSideBar left />
+      <LeftSideBar />
       <Switch>
         <PrivateNavigationRoute path="/promo" exact component={Promo} />
         <PrivateNavigationRoute path="/about-us" exact component={AboutUs} />
         <PrivateNavigationRoute path="/dictionary" exact component={Dictionary} />
         <PrivateNavigationRoute path="/statistics" exact component={Statistics} />
         <PrivateNavigationRoute path="/settings" exact component={Settings} />
-        <PrivateNavigationRoute path="/" component={MainContainer} />
+        <PrivateNavigationRoute path="/home" exact component={MainContainer} />
+        <Redirect to="/home" />
       </Switch>
       <RightSideBar />
     </HomePageContainer>

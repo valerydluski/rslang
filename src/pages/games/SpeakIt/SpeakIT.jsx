@@ -32,6 +32,7 @@ const SpeakIT = (props) => {
     changeIDontKnowWordsInStore,
     switchAppMode,
     isWordsLoading,
+    currentAppMode,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -46,7 +47,7 @@ const SpeakIT = (props) => {
   let IDontKnowWords = gameWords.slice();
 
   if (isWordsLoading) return <LoadingSpinner />;
-  if (wordsCollection.length === 0) {
+  if (currentAppMode !== 'SpeakIT') {
     switchAppMode('SpeakIT');
   }
 
@@ -195,6 +196,7 @@ SpeakIT.propTypes = {
   changeIDontKnowWordsInStore: PropTypes.func,
   switchAppMode: PropTypes.func.isRequired,
   isWordsLoading: PropTypes.bool,
+  currentAppMode: PropTypes.string.isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -214,11 +216,12 @@ SpeakIT.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    Level: state.gamesReducer.gameLevel,
-    Page: state.gamesReducer.gamePage,
+    Level: state.changeRound.SpeakITLevel,
+    Page: state.changeRound.SpeakITLevelPage,
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
+    currentAppMode: state.changeAppMode.appMode,
   };
 };
 

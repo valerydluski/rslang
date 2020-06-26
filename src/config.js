@@ -18,7 +18,6 @@ export const API = {
 export const DEFAULT_LANGUAGE = 'ru';
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
-export const LINK_FOR_WORDS = 'https://afternoon-falls-25894.herokuapp.com/words?';
 
 export const gamesList = [
   {
@@ -52,3 +51,6 @@ export const gamesList = [
     onClick: getRedirectFunction('/StartGame/Sprint/'),
   },
 ];
+
+export const MIN_WORDS_PER_DAY = 1;
+export const MAX_WORDS_PER_DAY = 600;
