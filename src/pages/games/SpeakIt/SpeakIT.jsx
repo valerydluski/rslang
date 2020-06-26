@@ -47,8 +47,8 @@ const SpeakIT = (props) => {
   let IDontKnowWords = gameWords.slice();
 
   if (isWordsLoading) return <LoadingSpinner />;
-  if (currentAppMode !== 'speakIt') {
-    switchAppMode('speakIt');
+  if (currentAppMode !== 'SpeakIT') {
+    switchAppMode('SpeakIT');
   }
 
   const newScoreHandler = () => {
@@ -216,8 +216,8 @@ SpeakIT.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    Level: state.changeRound.speakItLevel,
-    Page: state.changeRound.speakItLevelPage,
+    Level: state.changeRound.SpeakITLevel,
+    Page: state.changeRound.SpeakITLevelPage,
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,

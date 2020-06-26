@@ -14,46 +14,46 @@ import {
 } from './types';
 
 const initialState = {
-  speakItLevel: '1',
-  speakItPage: '1',
-  englishPuzzleLevel: '1',
-  englishPuzzlePage: '1',
-  savannahLevel: '1',
-  savannahPage: '1',
-  audioCallLevel: '1',
-  audioCallPage: '1',
-  sprintLevel: '1',
-  sprintPage: '1',
-  ownGameLevel: '1',
-  ownGamePage: '1',
+  SpeakITLevel: '1',
+  SpeakITPage: '1',
+  EnglishPuzzleLevel: '1',
+  EnglishPuzzlePage: '1',
+  SavannahLevel: '1',
+  SavannahPage: '1',
+  AudioCallLevel: '1',
+  AudioCallPage: '1',
+  SprintLevel: '1',
+  SprintPage: '1',
+  OwnGameLevel: '1',
+  OwnGamePage: '1',
 };
 
 const changeRoundReducer = (state = initialState, action) => {
   switch (action.type) {
     case SPEAKIT_CHANGE_LEVEL:
-      return { ...state, speakItLevel: action.payload };
+      return { ...state, SpeakITLevel: action.payload };
     case SPEAKIT_CHANGE_PAGE:
-      return { ...state, speakItPage: action.payload };
+      return { ...state, SpeakITPage: action.payload };
     case ENGLISHPUZZLE_CHANGE_PAGE:
-      return { ...state, englishPuzzlePage: action.payload };
+      return { ...state, EnglishPuzzlePage: action.payload };
     case ENGLISHPUZZLE_CHANGE_LEVEL:
-      return { ...state, englishPuzzleLevel: action.payload };
+      return { ...state, EnglishPuzzleLevel: action.payload };
     case SAVANNAH_CHANGE_LEVEL:
-      return { ...state, savannahLevel: action.payload };
+      return { ...state, SavannahLevel: action.payload };
     case SAVANNAH_CHANGE_PAGE:
-      return { ...state, savannahPage: action.payload };
+      return { ...state, SavannahPage: action.payload };
     case AUDIOCALL_CHANGE_PAGE:
-      return { ...state, audioCallPage: action.payload };
+      return { ...state, AudioCallPage: action.payload };
     case AUDIOCALL_CHANGE_LEVEL:
-      return { ...state, audioCallLevel: action.payload };
+      return { ...state, AudioCallLevel: action.payload };
     case SPRINT_CHANGE_PAGE:
-      return { ...state, sprintPage: action.payload };
+      return { ...state, SprintPage: action.payload };
     case SPRINT_CHANGE_LEVEL:
-      return { ...state, sprintLevel: action.payload };
+      return { ...state, SprintLevel: action.payload };
     case OWNGAME_CHANGE_PAGE:
-      return { ...state, ownGamePage: action.payload };
+      return { ...state, OwnGamePage: action.payload };
     case OWNGAME_CHANGE_LEVEL:
-      return { ...state, ownGameLevel: action.payload };
+      return { ...state, OwnGameLevel: action.payload };
     default:
       return state;
   }

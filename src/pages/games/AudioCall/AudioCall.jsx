@@ -32,8 +32,8 @@ const AudioCall = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (currentAppMode !== 'audioCall') {
-    switchAppMode('audioCall');
+  if (currentAppMode !== 'AudioCall') {
+    switchAppMode('AudioCall');
     return null;
   }
 
