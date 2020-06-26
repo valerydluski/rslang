@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux';
 
 const wordsArr = ['man', 'woman', 'rookie', 'chance'];
 const translations = ['мужчина', 'женщина', 'новичок', 'шанс'];
@@ -22,7 +23,7 @@ const WordToGuess = (props) => {
   
     return <div onClick={clickHandler}>
       <p>
-        {props.words}
+        {words.word}
       </p>
     </div>;
   };
@@ -30,7 +31,7 @@ const WordToGuess = (props) => {
   
   const SavannahComponent = (props) => {
     const {
-      words,
+      wordsForRender,
       correctWord,
       UserAnswer,
       isWordFinished,
@@ -40,9 +41,11 @@ const WordToGuess = (props) => {
       translations
     } = props;
   
-    const wordsCards = wordsArr.map((word, index) => {
-      return <p key={word} index={index} translation={word.wordTranslate}>
-       {word}
+    console.log(wordsForRender);
+
+    const wordsCards = wordsForRender.map((word, index) => {
+      return <p key={word} index={index}>
+       {word.wordTranslate} {word.word}
         </p>;
     });
   
@@ -54,5 +57,6 @@ const WordToGuess = (props) => {
     console.log(event.key);
     }
   })
+
 
   export {SavannahComponent, WordToGuess, clickHandler, wordsArr, translations}
