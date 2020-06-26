@@ -13,6 +13,15 @@ export const API = {
     WORDS: 'words',
     SETTINGS: 'settings',
   },
+
+  QUERIES: {
+    WORDS: {
+      GROUP: 'group',
+      PAGE: 'page',
+      WORDS_PER_SENTENCE: 'wordsPerExampleSentenceLTE',
+      WORDS_PER_PAGE: 'wordsPerPage',
+    },
+  },
 };
 
 export const DEFAULT_LANGUAGE = 'ru';

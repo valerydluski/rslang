@@ -4,6 +4,9 @@ import fetchData from '../utils/fetchData';
 const {
   URL,
   ENDPOINTS: { WORDS },
+  QUERIES: {
+    WORDS: { GROUP, PAGE, WORDS_PER_SENTENCE, WORDS_PER_PAGE },
+  },
 } = API;
 const fixNumberForLink = 1;
 const wordsPerSentenceGames = 100;
@@ -14,16 +17,16 @@ const createData = ({ changeRound, changeAppMode, userSettings }) => {
   const gameWordsPerPage = userSettings.settings[`${appMode}WordsPerPage`];
   const gameLevel = changeRound[`${appMode}Level`];
   const gamePage = changeRound[`${appMode}Page`];
-  const linkLevel = `group=${gameLevel - fixNumberForLink}`;
-  const linkPage = `page=${gamePage - fixNumberForLink}`;
+  const linkLevel = `${GROUP}=${gameLevel - fixNumberForLink}`;
+  const linkPage = `${PAGE}=${gamePage - fixNumberForLink}`;
   let wordsPerSentence;
   let wordsPerPage;
   if (appMode === 'EnglishPuzzle') {
-    wordsPerSentence = `wordsPerExampleSentenceLTE=${wordsPerSentencePuzzle}`;
-    wordsPerPage = `wordsPerPage=${wordsPerSentencePuzzle}`;
+    wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentencePuzzle}`;
+    wordsPerPage = `${WORDS_PER_PAGE}=${wordsPerSentencePuzzle}`;
   } else {
-    wordsPerSentence = `wordsPerExampleSentenceLTE=${wordsPerSentenceGames}`;
-    wordsPerPage = `wordsPerPage=${gameWordsPerPage}`;
+    wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentenceGames}`;
+    wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;
   }
   return {
     linkLevel,
