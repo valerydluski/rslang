@@ -228,11 +228,11 @@ export function calculatePuzzlesData(data) {
 
 export function configureData() {
   return (dispatch, getState) => {
-    const { wordsData } = getState().englishPuzzle;
+    const { wordsCollection } = getState().changeWordsCollection;
     let data = [];
     const translations = [];
     const audios = [];
-    wordsData.forEach((item) => {
+    wordsCollection.forEach((item) => {
       const dataElem = {};
       item.textExample.split(' ').forEach((word, index) => {
         dataElem[`${word}_${index + 1}`] = {
