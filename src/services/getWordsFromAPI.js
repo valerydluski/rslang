@@ -39,11 +39,8 @@ const createData = ({ changeRound, changeAppMode, userSettings }) => {
 async function wordsFetch(state) {
   try {
     const { linkLevel, linkPage, wordsPerSentence, wordsPerPage } = createData(state);
-    const link = `${URL}/${WORDS}?${linkLevel}$${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
-    console.log(link);
-    const response = await fetchData(link);
-    console.log(response);
-    return response;
+    const link = `${URL}/${WORDS}?${linkLevel}&${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
+    return await fetchData(link);
   } catch (e) {
     throw new Error('problem with API');
   }
