@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Logo from '../../../containers/UI/Logo';
 import SideBarContainer from './styled/SideBarContainer';
 import MainNavigationMenu from '../../../containers/Navigation/MainNavigationMenu';
@@ -9,7 +10,8 @@ import iconLogoutHover from '../../UI/Icon/iconLogoutHover.svg';
 import iconSettingsHover from '../../UI/Icon/iconSettingsHover.svg';
 import getRedirectFunction from '../../../utils/getRedirectFunction';
 
-export default function LeftSideBar() {
+export default function LeftSideBar(props) {
+  const { resetSessionData } = props;
   return (
     <SideBarContainer>
       <Logo />
@@ -22,10 +24,18 @@ export default function LeftSideBar() {
         >
           Settings
         </StyledButtonWithIcon>
-        <StyledButtonWithIcon icon={iconLogout} iconHover={iconLogoutHover}>
+        <StyledButtonWithIcon
+          icon={iconLogout}
+          iconHover={iconLogoutHover}
+          onClick={resetSessionData}
+        >
           Log Out
         </StyledButtonWithIcon>
       </div>
     </SideBarContainer>
   );
 }
+
+LeftSideBar.propTypes = {
+  resetSessionData: PropTypes.func.isRequired,
+};

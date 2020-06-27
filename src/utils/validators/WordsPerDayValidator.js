@@ -1,7 +1,7 @@
 import { MAX_WORDS_PER_DAY, MIN_WORDS_PER_DAY } from '../../config';
 
 export default (value) => {
-  if (value) {
+  if (!value) {
     return 'Required';
   }
   if (value && Number.isNaN(Number(value))) {

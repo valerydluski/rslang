@@ -11,11 +11,7 @@ function SettingContent(props) {
   };
   return (
     <>
-      <h3>Application settings</h3>
       <ReduxSettingsForm onSubmit={onSubmit} />
-      <div>
-        <h3>info in cards</h3>
-      </div>
     </>
   );
 }
