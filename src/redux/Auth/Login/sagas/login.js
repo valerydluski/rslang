@@ -14,7 +14,7 @@ function* workerLogin(action) {
       yield call(history.push, '/home');
     }
   } catch (e) {
-    toast('error');
+    toast.error('error');
   }
 }
 

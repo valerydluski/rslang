@@ -27,7 +27,7 @@ function* workerGetWords() {
     yield put(fetchWords(payload));
     yield put(hideLoader());
   } catch (e) {
-    toast('error');
+    toast.error('error');
     yield put(hideLoader());
   }
 }

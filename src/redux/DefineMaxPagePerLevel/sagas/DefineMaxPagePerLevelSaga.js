@@ -21,7 +21,7 @@ function* workerDefineMaxPagePerLevel() {
     yield put(fetchMaxPage(payload));
     yield put(hideLoader());
   } catch (e) {
-    toast('error');
+    toast.error('error');
     yield put(hideLoader());
   }
 }

@@ -140,7 +140,7 @@ const SpeakIT = (props) => {
 
   const finishHandler = () => {
     if (!isListening) {
-      toast('you did not start the game');
+      toast.info('you did not start the game');
     } else {
       toggleGameMode(true);
       microphone.stopMicrophone();

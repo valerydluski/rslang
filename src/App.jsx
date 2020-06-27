@@ -8,6 +8,7 @@ import Registration from './containers/Auth/Registration/Registration';
 import PrivateNavigationRoute from './components/Navigation/PrivateNavigationRoute';
 import GlobalStyle from './styles/globalStyles';
 import HomePageContainer from './containers/Homepage/HomePageContainer';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Redirect to="/home" />
       </Switch>
       <ToastContainer
-        position="top-right"
+        position="bottom-right"
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop={false}
