@@ -1,28 +1,13 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { pickRow, updatePageStatus } from '../../../redux/EnglishPuzzle/actions';
+import StyledRectangleButton from '../../../components/UI/Button/Styled/StyledRectangleButton';
 import {
   changeEnglishPuzzleLevel,
   changeEnglishPuzzlePage,
 } from '../../../redux/ChangeRounds/action';
-
-const Button = styled.button`
-  width: 170px;
-  height: 50px;
-  border-width: 0;
-  background-color: #7968dc;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  &:active,
-  &:focus {
-    outline: 0;
-  }
-`;
 
 const Container = styled.div`
   display: flex;
@@ -59,26 +44,33 @@ class Controls extends Component {
     const { isRowCorrect, isRowFill } = this.props;
     return (
       <Container>
-        <Button onClick={this.onClick}>
+        <StyledRectangleButton onClick={this.onClick}>
           {isRowCorrect && isRowFill ? 'Следующий' : 'Не знаю'}
-        </Button>
+        </StyledRectangleButton>
       </Container>
     );
   }
 }
 
 Controls.propTypes = {
+  maxPage: PropTypes.number,
+  level: PropTypes.string,
+  page: PropTypes.string,
+  row: PropTypes.number,
   isRowCorrect: PropTypes.bool.isRequired,
   isRowFill: PropTypes.bool.isRequired,
   isPageFill: PropTypes.bool.isRequired,
-  row: PropTypes.number.isRequired,
-  level: PropTypes.string.isRequired,
-  page: PropTypes.string.isRequired,
-  maxPage: PropTypes.number.isRequired,
   updateRow: PropTypes.func.isRequired,
   updatePage: PropTypes.func.isRequired,
   updateLevel: PropTypes.func.isRequired,
   fillRow: PropTypes.func.isRequired,
+};
+
+Controls.defaultProps = {
+  level: '1',
+  page: '1',
+  row: 0,
+  maxPage: 60,
 };
 
 function mapStateToProps(state) {

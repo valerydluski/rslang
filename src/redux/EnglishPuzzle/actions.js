@@ -1,4 +1,4 @@
-import { ENGLISH_PUZZLE_CONSTANTS } from '../../config';
+import { TARGET_ID, SOURCE_ID, ROWS_IN_PAGE } from '../../containers/EnglishPuzzle/Game/constants';
 
 import {
   UPDATE_PUZZLES_POSITION,
@@ -119,7 +119,7 @@ export function updateState({ data, audios, translations, pic }) {
 
 export function updatePageStatus(row) {
   return (dispatch) => {
-    if (row === ENGLISH_PUZZLE_CONSTANTS.ROWS_IN_PAGE) {
+    if (row === ROWS_IN_PAGE) {
       const isPageFill = true;
       dispatch(changePageStatus(isPageFill));
     } else {
@@ -181,7 +181,6 @@ export function transferToPlayfield(event) {
 export function onDragEnd(result) {
   return (dispatch, getState) => {
     const { destination, source } = result;
-    const { TARGET_ID, SOURCE_ID } = ENGLISH_PUZZLE_CONSTANTS;
     const sourceState = getState().englishPuzzle.source.concat();
     const resultsState = getState().englishPuzzle.results.concat();
     if (!destination) {

@@ -1,5 +1,10 @@
 import getStringWidth from '../utils/getStringWidth';
-import { ENGLISH_PUZZLE_CONSTANTS, LINK_FOR_ENGLISH_PUZZLE_IMAGE, LINK_FOR_IMAGE } from '../config';
+import { LINK_FOR_IMAGE, LINK_FOR_ENGLISH_PUZZLE_IMAGE } from '../config';
+import {
+  PUZZLE_PADDING,
+  PUZZLE_HEIGHT,
+  PLAYFIELD_WIDTH,
+} from '../containers/EnglishPuzzle/Game/constants';
 import paintings from '../assets/data/paintings';
 import loadImage from './loadImage';
 import loadAudio from './loadAudio';
@@ -7,7 +12,6 @@ import loadAudio from './loadAudio';
 const findTagExp = /<\w+>|<\/\w+>/g;
 
 export function calculatePuzzleData(page, index) {
-  const { PUZZLE_PADDING, PUZZLE_HEIGHT, PLAYFIELD_WIDTH } = ENGLISH_PUZZLE_CONSTANTS.GEOMETRY;
   const newPage = { ...page };
   const rowKeys = Object.keys(newPage);
   rowKeys.forEach((key) => {

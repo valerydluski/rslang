@@ -1,55 +1,19 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { ENGLISH_PUZZLE_CONSTANTS, LINK_FOR_ENGLISH_PUZZLE_IMAGE } from '../../../config';
+import { LINK_FOR_ENGLISH_PUZZLE_IMAGE } from '../../../config';
+import { TARGET_ID, SOURCE_ID } from './constants';
 import {
   transferToSource,
   transferToPlayfield,
   onDragEnd,
 } from '../../../redux/EnglishPuzzle/actions';
 import Puzzle from '../../../components/EnglishPuzzle/Puzzle/Puzzle';
-
-const Container = styled.div`
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Playfield = styled.div`
-  width: 560px;
-  height: 560px;
-  background: #c4c4c4;
-  position: relative;
-  z-index: 20;
-  background-image: ${(props) => (props.url ? `url('${props.url}')` : 'none')};
-  background-size: 560px 560px;
-`;
-
-const PlayfieldRow = styled.div`
-  width: 100%;
-  height: 56px;
-  padding-left: ${ENGLISH_PUZZLE_CONSTANTS.GEOMETRY.PUZZLE_PADDING}px;
-  display: flex;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  background-color: ${(props) => (props.isDraggingOver ? 'skyblue' : 'none')};
-  position: relative;
-  z-index: 10;
-`;
-
-const Source = styled.div`
-  display: flex;
-  margin-top: 30px;
-  width: 560px;
-  height: 56px;
-  justify-content: ${(props) => (props.isInCenter ? 'center' : 'flex-start')};
-  padding-left: ${ENGLISH_PUZZLE_CONSTANTS.GEOMETRY.PUZZLE_PADDING}px;
-  box-sizing: border-box;
-  background-color: ${(props) => (props.isDraggingOver ? 'skyblue' : 'none')};
-`;
+import Container from './Styled/Container';
+import Playfield from './Styled/Playfield';
+import PlayfieldRow from './Styled/PlayfieldRow';
+import Source from './Styled/Source';
 
 class Game extends Component {
   renderActivePuzzle = (item, index, array) => {
@@ -65,7 +29,6 @@ class Game extends Component {
       isRowFill,
     } = this.props;
     const itemData = data[row][item];
-    console.log(itemData);
     return (
       <Puzzle
         key={itemData.order}
@@ -118,11 +81,12 @@ class Game extends Component {
   renderActiveRow = () => {
     const { results, row } = this.props;
     return (
-      <Droppable droppableId={ENGLISH_PUZZLE_CONSTANTS.TARGET_ID} direction="horizontal">
+      <Droppable droppableId={TARGET_ID} direction="horizontal">
         {(provided, snapshot) => (
           <PlayfieldRow
             key={row}
             ref={provided.innerRef}
+            // пока так)
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
@@ -157,10 +121,11 @@ class Game extends Component {
         </span>
       </Source>
     ) : (
-      <Droppable droppableId={ENGLISH_PUZZLE_CONSTANTS.SOURCE_ID} direction="horizontal">
+      <Droppable droppableId={SOURCE_ID} direction="horizontal">
         {(provided, snapshot) => (
           <Source
             ref={provided.innerRef}
+            // пока так)
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
@@ -189,11 +154,12 @@ class Game extends Component {
 }
 
 Game.propTypes = {
+  row: PropTypes.number,
+  isWordsLoading: PropTypes.bool,
+  isRowCorrect: PropTypes.bool,
+  isRowFill: PropTypes.bool,
+  isPageFill: PropTypes.bool,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  row: PropTypes.number.isRequired,
-  isRowCorrect: PropTypes.bool.isRequired,
-  isRowFill: PropTypes.bool.isRequired,
-  isPageFill: PropTypes.bool.isRequired,
   source: PropTypes.arrayOf(PropTypes.string).isRequired,
   results: PropTypes.arrayOf(PropTypes.string).isRequired,
   background: PropTypes.bool.isRequired,
@@ -208,11 +174,14 @@ Game.propTypes = {
     author: PropTypes.string,
     year: PropTypes.string,
   }).isRequired,
-  isWordsLoading: PropTypes.bool,
 };
 
 Game.defaultProps = {
+  row: 0,
   isWordsLoading: false,
+  isRowCorrect: false,
+  isRowFill: false,
+  isPageFill: false,
 };
 
 function mapStateToProps(state) {

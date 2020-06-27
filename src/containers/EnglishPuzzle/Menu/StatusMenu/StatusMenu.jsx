@@ -64,11 +64,17 @@ const StatusMenu = (props) => {
 };
 
 StatusMenu.propTypes = {
-  level: PropTypes.string.isRequired,
-  page: PropTypes.string.isRequired,
-  maxPage: PropTypes.number.isRequired,
+  level: PropTypes.string,
+  page: PropTypes.string,
+  maxPage: PropTypes.number,
   updatePage: PropTypes.func.isRequired,
   updateLevel: PropTypes.func.isRequired,
+};
+
+StatusMenu.defaultProps = {
+  level: '1',
+  page: '1',
+  maxPage: 60,
 };
 
 function mapStateToProps(state) {

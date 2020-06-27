@@ -27,17 +27,6 @@ export const API = {
 
 export const DEFAULT_LANGUAGE = 'ru';
 
-export const ENGLISH_PUZZLE_CONSTANTS = {
-  TARGET_ID: 'TARGET_ID',
-  SOURCE_ID: 'SOURCE_ID',
-  ROWS_IN_PAGE: 10,
-  GEOMETRY: {
-    PUZZLE_PADDING: 10,
-    PUZZLE_HEIGHT: 56,
-    PLAYFIELD_WIDTH: 560,
-  },
-};
-
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 export const LINK_FOR_ENGLISH_PUZZLE_IMAGE =
   'https://raw.githubusercontent.com/valerydluski/Images/master/';
