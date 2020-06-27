@@ -138,6 +138,8 @@ const SpeakIT = (props) => {
 
   const finishHandler = () => {
     toggleGameMode(true);
+    microphone.stopMicrophone();
+    setListening(false);
   };
 
   if (!isListening) {
