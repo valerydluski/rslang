@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
 import CardsContainerSpeakIT from '../../../containers/SpeakIT/CardsContainerSpeakIT';
@@ -137,9 +138,13 @@ const SpeakIT = (props) => {
   };
 
   const finishHandler = () => {
-    toggleGameMode(true);
-    microphone.stopMicrophone();
-    setListening(false);
+    if (!isListening) {
+      toast('you did not start the game');
+    } else {
+      toggleGameMode(true);
+      microphone.stopMicrophone();
+      setListening(false);
+    }
   };
 
   if (!isListening) {
