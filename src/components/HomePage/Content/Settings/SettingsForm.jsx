@@ -1,58 +1,54 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
+import AppSettings from './AppSettings/AppSettings';
 import Input from '../../../UI/Input/Input';
-import WordsPerDayValidator from '../../../../utils/validators/WordsPerDayValidator';
-import RadioButton from '../../../UI/RadioButton/RadioButton';
+import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageValidator';
 
 const SettingsForm = (props) => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="name" key="name" type="text" placeholder="user name" component={Input} />
-      <Field name="language" component="select">
-        <option value="en">English</option>
-        <option value="ru">Russian</option>
-      </Field>
+      <AppSettings />
+      <h3>AudioCall</h3>
       <Field
-        name="WordsPerDay"
+        name="AudioCallWordsPerPage"
+        key="AudioCallWordsPerPage"
         type="number"
-        placeholder="Words per day"
-        validate={WordsPerDayValidator}
+        placeholder="Audio call - words per page"
+        validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
       />
+      <h3>Savannah</h3>
       <Field
-        name="CardsPerDay"
+        name="SavannahWordsPerPage"
+        key="SavannahWordsPerPage"
         type="number"
-        component={Input}
-        placeholder="Cards per day"
-        validate={WordsPerDayValidator}
+        placeholder="Savannah - words per page"
+        validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
+        component={Input}
       />
-      <RadioButton
-        name="deleteButton"
-        headerText="delete button"
-        buttonsValue={[
-          { value: 'active', text: 'show' },
-          { value: 'inActive', text: 'not show' },
-        ]}
+      <h3>SpeakIT</h3>
+      <Field
+        name="SpeakITWordsPerPage"
+        key="SpeakITWordsPerPage"
+        type="number"
+        placeholder="SpeakIT - words per page"
+        validate={WordsPerPageValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
       />
-      <RadioButton
-        name="addDificultWordsButton"
-        headerText="addDificultWords button"
-        buttonsValue={[
-          { value: 'active', text: 'show' },
-          { value: 'inActive', text: 'not show' },
-        ]}
-      />
-      <RadioButton
-        name="howToLearnWords"
-        headerText="how to learn words"
-        buttonsValue={[
-          { value: 'newWords', text: 'only new' },
-          { value: 'repeat', text: 'repeat' },
-        ]}
+      <h3>Sprint</h3>
+      <Field
+        name="SprintWordsPerPage"
+        key="SprintWordsPerPage"
+        type="number"
+        placeholder="Sprint - words per page"
+        validate={WordsPerPageValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
       />
       <button type="submit" aria-label="Save">
         Save
