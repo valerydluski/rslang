@@ -7,6 +7,7 @@ import Registration from './containers/Auth/Registration/Registration';
 import PrivateNavigationRoute from './components/Navigation/PrivateNavigationRoute';
 import GlobalStyle from './styles/globalStyles';
 import HomePageContainer from './containers/Homepage/HomePageContainer';
+import LearnWords from './components/LearnWords/LearnWords';
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
         <Route path="/registration" exact component={Registration} />
         <PrivateNavigationRoute path="/StartGame/:gameId" exact component={StartGamePage} />
         <PrivateNavigationRoute path="/Game/:gameId" exact component={GamePage} />
+        <PrivateNavigationRoute path="/learn" exact component={LearnWords} />
         <PrivateNavigationRoute path="/" component={HomePageContainer} />
-
         <Redirect to="/home" />
       </Switch>
     </div>
