@@ -1,7 +1,7 @@
 import React from 'react';
 import Main from '../../../components/HomePage/Content/Main/Main';
-import { gamesList } from '../../../config';
+import { GAME_LIST } from '../../../config';
 
 export default function MainContainer() {
-  return <Main games={gamesList} />;
+  return <Main games={GAME_LIST} />;
 }

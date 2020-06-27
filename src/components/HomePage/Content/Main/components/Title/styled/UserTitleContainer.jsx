@@ -5,6 +5,7 @@ const UserTitleContainer = styled.div`
   height: 205px;
   background-image: url(${(props) => props.bg});
   position: relative;
+  background-size: cover;
 
   h2 {
     margin: 0;
