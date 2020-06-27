@@ -5,23 +5,30 @@ import ReduxSettingsForm from '../../../components/HomePage/Content/Settings/Set
 import saveUserSettings from '../../../redux/UserSettings/actions';
 
 function SettingContent(props) {
-  const { saveSettings } = props;
+  const { saveSettings, initialValues } = props;
   const onSubmit = (formData) => {
     saveSettings(formData);
   };
   return (
     <>
-      <ReduxSettingsForm onSubmit={onSubmit} />
+      <ReduxSettingsForm initialValues={initialValues} onSubmit={onSubmit} />
     </>
   );
 }
 
 SettingContent.propTypes = {
   saveSettings: PropTypes.func.isRequired,
+  initialValues: PropTypes.instanceOf(Object).isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    initialValues: state.userSettings.settings,
+  };
 };
 
 const mapDispatchToProps = {
   saveSettings: saveUserSettings,
 };
 
-export default connect(null, mapDispatchToProps)(SettingContent);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingContent);
