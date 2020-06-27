@@ -7,7 +7,7 @@ import Registration from './containers/Auth/Registration/Registration';
 import PrivateNavigationRoute from './components/Navigation/PrivateNavigationRoute';
 import GlobalStyle from './styles/globalStyles';
 import HomePageContainer from './containers/Homepage/HomePageContainer';
-import LearnWords from './components/LearnWords/LearnWords';
+import LearnWords from './pages/LearnWords/LearnWords';
 
 function App() {
   return (

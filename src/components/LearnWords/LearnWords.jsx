@@ -1,20 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LearnWordsContainer from './styled/LearnWordsContainer';
 import LearnWordCardContainer from './styled/LearnWordCardContainer';
-import StyledRoundButton from '../UI/Button/Styled/StyledRoundButton';
 import GoHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePageButton';
+import ReduxLearnWordsForm from './LearnWordsForm';
 
-export default function LearnWords() {
+export default function LearnWords(props) {
+  const { onSubmit } = props;
   return (
     <LearnWordsContainer>
       <GoHomePageButton />
       <LearnWordCardContainer>
-        <p>She is a nice</p>
-        <input />
-        <hr />
-        <p>Она хороший человек.</p>
-        <StyledRoundButton>Next</StyledRoundButton>
+        <ReduxLearnWordsForm onSubmit={onSubmit} />
       </LearnWordCardContainer>
     </LearnWordsContainer>
   );
 }
+
+LearnWords.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
