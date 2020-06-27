@@ -11,13 +11,14 @@ const Option = styled.button`
   color: ${(props) => (props.isBehind ? '#000000' : '#c4c4c4')};
   background-color: #ffffff;
   box-sizing: content-box;
-  font-size: 0.5rem;
   display: flex;
   justify-content: ${(props) => (props.direction === DIRECTION_ROW ? `center` : 'flex-start')};
   align-items: center;
-  border: 0px;
+  border: 0;
+  outline: 0;
   border-top: 1px solid #c4c4c4;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: bold;
   cursor: pointer;
   &:hover {
     text-decoration: underline;

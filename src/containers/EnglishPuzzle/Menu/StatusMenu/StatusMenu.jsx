@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   changeEnglishPuzzleLevel,
   changeEnglishPuzzlePage,
 } from '../../../../redux/ChangeRounds/action';
+import Menu from './Styled/Menu';
+import MenuItem from './Styled/MenuItem';
+import Title from './Styled/Title';
+import SelectContainer from './Styled/SelectContainer';
+import Overlay from './Styled/Overlay';
 import Select from '../../../../components/UI/Select/Select';
 import { DIRECTION_ROW } from '../../../../components/UI/Select/Styled/constants';
-
-const Menu = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  height: 50px;
-`;
+import { ITEM_PAGE, ITEM_LEVEL } from './constants';
 
 const StatusMenu = (props) => {
   const { level, page, maxPage, updateLevel, updatePage } = props;
@@ -40,25 +38,41 @@ const StatusMenu = (props) => {
     updatePage(`${value}`);
   };
 
+  const closeAll = () => {
+    toggleLevel(false);
+    togglePage(false);
+  };
+
   return (
     <Menu>
-      <Select
-        isOpen={isLevelOpen}
-        onToggle={switchLevel}
-        openBtnName="Выберите уровень"
-        onOptionClick={onLevelOptionClick}
-        value={+level}
-      />
-      <Select
-        isOpen={isPageOpen}
-        position={{ top: 0, left: 150 }}
-        optionsNumber={maxPage}
-        onToggle={switchPage}
-        openBtnName="Выберите страницу"
-        onOptionClick={onPageOptionClick}
-        direction={DIRECTION_ROW}
-        value={+page}
-      />
+      <MenuItem type={ITEM_LEVEL}>
+        <Title>level</Title>
+        <SelectContainer>
+          <Select
+            isOpen={isLevelOpen}
+            onToggle={switchLevel}
+            optionsNumber={6}
+            openBtnName="Выбрать"
+            onOptionClick={onLevelOptionClick}
+            value={+level}
+          />
+        </SelectContainer>
+      </MenuItem>
+      <MenuItem type={ITEM_PAGE}>
+        <Title>page</Title>
+        <SelectContainer>
+          <Select
+            isOpen={isPageOpen}
+            optionsNumber={maxPage}
+            onToggle={switchPage}
+            openBtnName="Выбрать"
+            onOptionClick={onPageOptionClick}
+            direction={DIRECTION_ROW}
+            value={+page}
+          />
+        </SelectContainer>
+      </MenuItem>
+      {isPageOpen || isLevelOpen ? <Overlay onClick={closeAll} /> : null}
     </Menu>
   );
 };

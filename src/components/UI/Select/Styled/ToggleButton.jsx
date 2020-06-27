@@ -9,6 +9,7 @@ const ToggleButton = styled.button`
   width: 100%;
   text-align: left;
   font-size: 10px;
+  font-weight: bold;
   color: #c4c4c4;
   background-color: transparent;
   padding: 0;

@@ -20,7 +20,7 @@ const Select = (props) => {
   const options = Array.from({ length: optionsNumber }, (v, k) => k + 1);
   return (
     <StyledSelect direction={direction} isOpen={isOpen} position={position} number={optionsNumber}>
-      <ToggleButton onClick={onToggle}>Choose</ToggleButton>
+      <ToggleButton onClick={onToggle}>{openBtnName}</ToggleButton>
       <OptionsArea direction={direction}>
         {options.map((number) => {
           return (

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Content from './Styled/Content';
 import Container from './Styled/Container';
+import Main from './Styled/Main';
 import StatusMenu from '../../../containers/EnglishPuzzle/Menu/StatusMenu/StatusMenu';
 import TipsMenu from '../../../containers/EnglishPuzzle/Menu/TipsMenu/TipsMenu';
 import Game from '../../../containers/EnglishPuzzle/Game/Game';
@@ -25,8 +26,10 @@ const EnglishPuzzle = (props) => {
       <GoToHomePageButton />
       <Container>
         <StatusMenu />
-        <TipsMenu />
-        <Game />
+        <Main>
+          <Game />
+          <TipsMenu />
+        </Main>
         <Info />
       </Container>
     </Content>

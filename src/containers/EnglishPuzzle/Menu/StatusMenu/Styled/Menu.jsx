@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
 const Menu = styled.div`
-  position: absolute;
-  top: 0;
-  right: -60px;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
+  width: 100%;
+  height: 26px;
 `;
 
 export default Menu;
