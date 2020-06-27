@@ -39,6 +39,7 @@ const SpeakIT = (props) => {
     currentAppMode,
     changePage,
     changeLevel,
+    maxPage,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -122,7 +123,7 @@ const SpeakIT = (props) => {
 
   const newGame = () => {
     toggleGameMode(false);
-    const { newLevel, newPage } = newRound(Level, Page);
+    const { newLevel, newPage } = newRound(Level, Page, maxPage);
     if (newLevel !== Level) changeLevel(newLevel);
     if (newPage !== Page) changePage(newPage);
   };
@@ -215,6 +216,7 @@ SpeakIT.propTypes = {
   currentAppMode: PropTypes.string.isRequired,
   changeLevel: PropTypes.func.isRequired,
   changePage: PropTypes.func.isRequired,
+  maxPage: PropTypes.number,
 };
 
 SpeakIT.defaultProps = {
@@ -230,6 +232,7 @@ SpeakIT.defaultProps = {
   changeScore: () => {},
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
+  maxPage: 60,
 };
 
 const mapStateToProps = (state) => {
@@ -240,6 +243,7 @@ const mapStateToProps = (state) => {
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
+    maxPage: state.maxPage.maxPage.count,
   };
 };
 
