@@ -40,8 +40,8 @@ const AppSettings = () => {
         key="deleteButton"
         headerText="delete button"
         buttonsValue={[
-          { value: 'active', text: 'show', key: 'deleteButton_show' },
-          { value: 'inActive', text: 'not show', key: 'deleteButton_not' },
+          { value: 'active', text: 'show' },
+          { value: 'inActive', text: 'not show' },
         ]}
       />
       <RadioButton
@@ -49,8 +49,8 @@ const AppSettings = () => {
         key="addDificultWordsButton"
         headerText="addDificultWords button"
         buttonsValue={[
-          { value: 'active', text: 'show', key: 'addDificultWordsButton_show' },
-          { value: 'inActive', text: 'not show', key: 'addDificultWordsButton_not' },
+          { value: 'active', text: 'show' },
+          { value: 'inActive', text: 'not show' },
         ]}
       />
       <RadioButton
@@ -58,8 +58,8 @@ const AppSettings = () => {
         headerText="how to learn words"
         key="howToLearnWords"
         buttonsValue={[
-          { value: 'newWords', text: 'only new', key: 'howToLearnWords_show' },
-          { value: 'repeat', text: 'repeat', key: 'howToLearnWords_not' },
+          { value: 'newWords', text: 'only new' },
+          { value: 'repeat', text: 'repeat' },
         ]}
       />
       <h3>info in cards</h3>
