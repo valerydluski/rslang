@@ -20,7 +20,8 @@ const StyledSelect = styled.div`
   position: absolute;
   top: ${(props) => props.position.top}px;
   left: ${(props) => props.position.left}px;
-  border: 1px solid #000000;
+  border: 1px solid #c4c4c4;
+  background-color: #ffffff;
   z-index: 100;
   transition: height 0.3s;
 `;

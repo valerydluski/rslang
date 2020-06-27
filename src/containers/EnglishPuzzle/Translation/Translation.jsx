@@ -25,6 +25,7 @@ class Translation extends Component {
     if (row !== 0) {
       audios[row - 1].pause();
     }
+    sound.pause();
     sound.play();
   };
 

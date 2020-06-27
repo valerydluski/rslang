@@ -13,6 +13,9 @@ const StyledPuzzleRoundButton = styled.button`
   border-radius: 50%;
   cursor: pointer;
   transition: 0.3s linear;
+  &:first-child {
+    margin-top: 0;
+  }
 `;
 
 export default StyledPuzzleRoundButton;
