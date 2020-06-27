@@ -63,6 +63,35 @@ const AppSettings = () => {
         ]}
       />
       <h3>info in cards</h3>
+      <Field name="translate" id="translate" component={Input} type="checkbox" label="translate" />
+      <Field
+        name="textMeaning"
+        id="textMeaning"
+        component={Input}
+        type="checkbox"
+        label="textMeaning"
+      />
+      <Field
+        name="textExample"
+        id="textExample"
+        component={Input}
+        type="checkbox"
+        label="textExample"
+      />
+      <Field
+        name="transcription"
+        id="transcription"
+        component={Input}
+        type="checkbox"
+        label="transcription"
+      />
+      <Field
+        name="imageAssociation"
+        id="imageAssociation"
+        component={Input}
+        type="checkbox"
+        label="imageAssociation"
+      />
     </>
   );
 };

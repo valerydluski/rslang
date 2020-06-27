@@ -17,8 +17,8 @@ const RadioButton = (props) => {
               component={Input}
               type="radio"
               value={el.value}
+              label={name}
             />
-            <span>{el.text}</span>
           </div>
         );
       })}
