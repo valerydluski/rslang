@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TimerStyled from './TimerStyled';
-import SecondsContainer from './SecondsContainer';
+import TimerStyled from './Styled/TimerStyled';
+import SecondsContainer from '../../containers/Sprint/SecondsContainer';
 
 const Timer = ({ initialTime, timeIsUpHandler }) => {
   return (

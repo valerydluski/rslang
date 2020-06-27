@@ -27,7 +27,7 @@ const TimerStyled = styled.div`
     border-radius: 100% 0 0 100% / 50% 0 0 50%;
     z-index: 2;
     border-right: none;
-    animation: rota ${(props) => props.animationDuration}s linear infinite;
+    animation: rota ${(props) => props.animationDuration}s linear forwards;
   }
   .spinner:after {
     position: absolute;
@@ -48,7 +48,7 @@ const TimerStyled = styled.div`
     left: 50%;
     opacity: 0;
     z-index: 1;
-    animation: fill ${(props) => props.animationDuration}s steps(1, end) infinite;
+    animation: fill ${(props) => props.animationDuration}s steps(1, end) forwards;
     border-left: none;
   }
 
@@ -59,7 +59,7 @@ const TimerStyled = styled.div`
     background: inherit;
     opacity: 1;
     z-index: 3;
-    animation: mask ${(props) => props.animationDuration}s steps(1, end) infinite;
+    animation: mask ${(props) => props.animationDuration}s steps(1, end) forwards;
     margin-left: -1px;
     margin-top: -1px;
   }

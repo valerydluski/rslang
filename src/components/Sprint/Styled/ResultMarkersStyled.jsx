@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import CorrectIcon from '../../../../components/UI/Icon/checkmark.svg';
-import WrongIcon from '../../../../components/UI/Icon/icon-false.svg';
+import CorrectIcon from '../../UI/Icon/checkmark.svg';
+import WrongIcon from '../../UI/Icon/icon-false.svg';
 
 const MarkerStyled = styled.div`
   width: 50px;

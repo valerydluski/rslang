@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TrueButtonStyled, FalseButtonStyled } from '../Styled/AnswerButtonsStyled';
-import ControlContainerStyled from '../Styled/ControlContainerStyled';
-import errorSound from '../../../../assets/audio/error.mp3';
-import correctSound from '../../../../assets/audio/correct.mp3';
-import SprintResultMarker from './SprintResultMarker';
+import { TrueButtonStyled, FalseButtonStyled } from './Styled/AnswerButtonsStyled';
+import ControlContainerStyled from './Styled/ControlContainerStyled';
+import errorSound from '../../assets/audio/error.mp3';
+import correctSound from '../../assets/audio/correct.mp3';
+import SprintResultMarker from '../../components/Sprint/SprintResultMarker';
 
 const SprintControlsContainer = ({ clickHandler, isAnswerCorrect, isWordFinished }) => {
   const buttonTrueText = 'true';
   const buttonFalseText = 'false';
 
   const playResultSound = (isOk) => {
-    const wordAudio = new Audio();
-    wordAudio.src = isOk ? correctSound : errorSound;
-    wordAudio.play();
+    const resultAudio = new Audio();
+    resultAudio.src = isOk ? correctSound : errorSound;
+    resultAudio.play();
   };
 
   if (isWordFinished) playResultSound(isAnswerCorrect);
