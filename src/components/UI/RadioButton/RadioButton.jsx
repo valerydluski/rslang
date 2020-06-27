@@ -8,22 +8,20 @@ const RadioButton = (props) => {
   return (
     <div>
       <p>{headerText}</p>
-      <div>
-        {buttonsValue.map((el) => {
-          return (
-            <>
-              <Field
-                key={`${name}_${el.value}`}
-                name={name}
-                component={Input}
-                type="radio"
-                value={el.value}
-              />
-              <span>{el.text}</span>
-            </>
-          );
-        })}
-      </div>
+      {buttonsValue.map((el) => {
+        return (
+          <div key={`${name}_${el.value}`}>
+            <Field
+              key={`${name}_${el.value}`}
+              name={name}
+              component={Input}
+              type="radio"
+              value={el.value}
+            />
+            <span>{el.text}</span>
+          </div>
+        );
+      })}
     </div>
   );
 };
