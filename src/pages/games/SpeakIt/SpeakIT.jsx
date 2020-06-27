@@ -15,6 +15,8 @@ import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import { LINK_FOR_IMAGE } from '../../../config';
+import newRound from '../../../utils/newRound';
+import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 
 const addScore = 100;
 
@@ -34,6 +36,8 @@ const SpeakIT = (props) => {
     switchAppMode,
     isWordsLoading,
     currentAppMode,
+    changePage,
+    changeLevel,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -117,6 +121,9 @@ const SpeakIT = (props) => {
 
   const newGame = () => {
     toggleGameMode(false);
+    const { newLevel, newPage } = newRound(Level, Page);
+    if (newLevel !== Level) changeLevel(newLevel);
+    if (newPage !== Page) changePage(newPage);
   };
 
   const speakHandler = () => {
@@ -199,6 +206,8 @@ SpeakIT.propTypes = {
   switchAppMode: PropTypes.func.isRequired,
   isWordsLoading: PropTypes.bool,
   currentAppMode: PropTypes.string.isRequired,
+  changeLevel: PropTypes.func.isRequired,
+  changePage: PropTypes.func.isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -231,6 +240,8 @@ const mapDispatchToProps = {
   changeScore: changeScoreGame,
   changeIDontKnowWordsInStore: changeIDontKnowWords,
   switchAppMode: changeAppMode,
+  changeLevel: changeSpeakItLevel,
+  changePage: changeSpeakItPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);
