@@ -1,31 +1,11 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SpeechIconBlack from '../../../components/UI/Icon/SpeechIconBlack';
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Button = styled.button`
-  width: 20px;
-  height: 20px;
-  border-width: 0;
-  &:focus,
-  &:active {
-    outline: none;
-  }
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
-
-const Text = styled.span`
-  margin-left: 20px;
-`;
+import speechIcon from '../../../components/UI/Icon/speechIcoBlack.svg';
+import Icon from '../../../components/UI/Icon/Icon';
+import Button from '../../../components/UI/Button/Styled/StyledPuzzleRoundWhiteButton';
+import Container from './Styled/Container';
+import Text from './Styled/Text';
 
 class Translation extends Component {
   componentDidUpdate() {
@@ -53,7 +33,7 @@ class Translation extends Component {
     if (speech || (!speech && isRowCorrect)) {
       return (
         <Button onClick={this.onClick}>
-          <SpeechIconBlack />
+          <Icon src={speechIcon} />
         </Button>
       );
     }
@@ -69,7 +49,7 @@ class Translation extends Component {
   }
 
   render() {
-    const { isPageFill, autoSpeech, isRowCorrect } = this.props;
+    const { isPageFill } = this.props;
     if (isPageFill) {
       return null;
     }

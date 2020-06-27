@@ -1,11 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SpeechIcon from '../../../../components/UI/Icon/SpeechIcon';
-import TextIcon from '../../../../components/UI/Icon/TextIcon';
-import MusicIcon from '../../../../components/UI/Icon/MusicIcon';
-import PictureIcon from '../../../../components/UI/Icon/PictureIcon';
+import Icon from '../../../../components/UI/Icon/Icon';
+import speechIcon from '../../../../components/UI/Icon/speechIco.svg';
+import translationIcon from '../../../../components/UI/Icon/translationIco.svg';
+import musicIcon from '../../../../components/UI/Icon/musicIco.svg';
+import pictureIcon from '../../../../components/UI/Icon/pictureIco.svg';
+import textIcon from '../../../../components/UI/Icon/textIco.svg';
+import Button from '../../../../components/UI/Button/Styled/StyledPuzzleRoundButton';
+import RedButton from '../../../../components/UI/Button/Styled/StyledPuzzleRoundRedButton';
+import Menu from './Styled/Menu';
 import {
   switchAutoSpeech,
   switchTranslation,
@@ -13,38 +17,13 @@ import {
   switchBackground,
 } from '../../../../redux/EnglishPuzzle/actions';
 
-const Menu = styled.div`
-  position: absolute;
-  top: 40px;
-  right: -60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-
-const TipButton = styled.button`
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: ${(props) => (props.isActive ? '#7968dc' : '#cecece')};
-  border-width: 0;
-  margin-top: 5px;
-  &:focus,
-  &:active {
-    outline: none;
-  }
-  &:first-child {
-    margin-top: 0;
-  }
-`;
-
 const TipsMenu = (props) => {
   const {
     autoSpeech,
     translation,
     speech,
     background,
+    isPageFill,
     toggleAutoSpeech,
     toggleTranslation,
     toggleSpeech,
@@ -52,18 +31,21 @@ const TipsMenu = (props) => {
   } = props;
   return (
     <Menu>
-      <TipButton onClick={toggleAutoSpeech} isActive={autoSpeech}>
-        <SpeechIcon />
-      </TipButton>
-      <TipButton onClick={toggleTranslation} isActive={translation}>
-        <TextIcon />
-      </TipButton>
-      <TipButton onClick={toggleSpeech} isActive={speech}>
-        <MusicIcon />
-      </TipButton>
-      <TipButton onClick={toggleBackground} isActive={background}>
-        <PictureIcon />
-      </TipButton>
+      <Button onClick={toggleAutoSpeech} isActive={autoSpeech}>
+        <Icon src={speechIcon} />
+      </Button>
+      <Button onClick={toggleTranslation} isActive={translation}>
+        <Icon src={translationIcon} />
+      </Button>
+      <Button onClick={toggleSpeech} isActive={speech}>
+        <Icon src={musicIcon} />
+      </Button>
+      <Button onClick={toggleBackground} isActive={background}>
+        <Icon src={pictureIcon} />
+      </Button>
+      <RedButton isActive={isPageFill}>
+        <Icon src={textIcon} />
+      </RedButton>
     </Menu>
   );
 };
@@ -73,6 +55,7 @@ TipsMenu.propTypes = {
   translation: PropTypes.bool.isRequired,
   speech: PropTypes.bool.isRequired,
   background: PropTypes.bool.isRequired,
+  isPageFill: PropTypes.bool.isRequired,
   toggleAutoSpeech: PropTypes.func.isRequired,
   toggleTranslation: PropTypes.func.isRequired,
   toggleSpeech: PropTypes.func.isRequired,
@@ -85,6 +68,7 @@ function mapStateToProps(state) {
     translation: state.englishPuzzle.translation,
     speech: state.englishPuzzle.speech,
     background: state.englishPuzzle.background,
+    isPageFill: state.englishPuzzle.isPageFill,
   };
 }
 

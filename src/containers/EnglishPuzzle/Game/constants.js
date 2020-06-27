@@ -1,7 +1,7 @@
-export const PLAYFIELD_WIDTH = 560;
-export const PLAYFIELD_HEIGHT = 560;
-export const PUZZLE_PADDING = 10;
-export const PUZZLE_HEIGHT = PLAYFIELD_WIDTH / 10;
+export const PLAYFIELD_WIDTH = 720;
+export const PLAYFIELD_HEIGHT = 404;
+export const PUZZLE_PADDING = 15;
+export const PUZZLE_HEIGHT = PLAYFIELD_HEIGHT / 10;
 export const ROWS_IN_PAGE = 10;
 
 export const TARGET_ID = 'TARGET_ID';

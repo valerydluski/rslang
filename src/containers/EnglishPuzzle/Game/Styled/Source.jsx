@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { PUZZLE_PADDING, PUZZLE_HEIGHT } from '../constants';
+import { PUZZLE_PADDING, PUZZLE_HEIGHT, PLAYFIELD_WIDTH } from '../constants';
 
 const Source = styled.div`
   display: flex;
   margin-top: 30px;
-  width: 560px;
+  width: ${PLAYFIELD_WIDTH}px;
   height: ${PUZZLE_HEIGHT}px;
   justify-content: ${(props) => (props.isInCenter ? 'center' : 'flex-start')};
   padding-left: ${PUZZLE_PADDING}px;

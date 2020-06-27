@@ -79,7 +79,7 @@ Puzzle.propTypes = {
   isCorrect: PropTypes.bool,
   isFirst: PropTypes.bool,
   isLast: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   word: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
 };
@@ -88,6 +88,7 @@ Puzzle.defaultProps = {
   index: null,
   id: null,
   isStatic: true,
+  onClick: () => {},
   width: 100,
   bgXOffset: 0,
   bgYOffset: 0,
