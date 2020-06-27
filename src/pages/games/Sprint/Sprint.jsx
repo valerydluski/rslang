@@ -2,25 +2,15 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
-import { changeIDontKnowWords } from '../../../redux/Games/action';
 import changeAppMode from '../../../redux/AppMode/action';
 import SprintContainerStyled from '../../../containers/Sprint/Styled/SprintContainerStyled';
 import SprintGameContainer from '../../../containers/Sprint/SprintGameContainer';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
-import ResultModal from '../../../containers/Modal/ResultModal';
 import Timer from '../../../components/Sprint/Timer';
 
 const Sprint = (props) => {
-  const {
-    wordsCollection,
-    switchAppMode,
-    isWordsLoading,
-    currentAppMode,
-    addWrongWordsToStore,
-  } = props;
-
+  const { wordsCollection, switchAppMode, isWordsLoading, currentAppMode } = props;
   const [isGameFinished, toggleGameMode] = useState(false);
-  const [wrongAnsweredWords, addWordToWrong] = useState([]);
 
   if (isWordsLoading) return <LoadingSpinner />;
 
@@ -28,7 +18,6 @@ const Sprint = (props) => {
   const secondsForGuessing = wordsCollection.length * secondsForOneWord;
 
   const finishGameHandler = () => {
-    addWrongWordsToStore(wrongAnsweredWords);
     toggleGameMode(true);
   };
 
@@ -41,18 +30,18 @@ const Sprint = (props) => {
     return null;
   }
 
-  if (isGameFinished) return <ResultModal showProperties={['word', 'wordTranslate']} />;
-
   return (
     <SprintContainerStyled>
       <GoToHomePageButton />
-      <Timer initialTime={secondsForGuessing} timeIsUpHandler={timeIsUpHandler} />
+      <Timer
+        initialTime={secondsForGuessing}
+        timeIsUpHandler={timeIsUpHandler}
+        isGameFinished={isGameFinished}
+      />
       <SprintGameContainer
         isGameFinished={isGameFinished}
         wordsCollection={wordsCollection}
         finishGameHandler={finishGameHandler}
-        wrongAnsweredWords={wrongAnsweredWords}
-        addWordToWrong={addWordToWrong}
       />
     </SprintContainerStyled>
   );
@@ -63,7 +52,6 @@ Sprint.propTypes = {
   switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
   currentAppMode: PropTypes.string,
-  addWrongWordsToStore: PropTypes.func,
 };
 
 Sprint.defaultProps = {
@@ -71,7 +59,6 @@ Sprint.defaultProps = {
   switchAppMode: () => {},
   isWordsLoading: false,
   currentAppMode: '',
-  addWrongWordsToStore: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -83,7 +70,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  addWrongWordsToStore: changeIDontKnowWords,
   switchAppMode: changeAppMode,
 };
 
