@@ -85,7 +85,7 @@ export function changeSprintPage(page) {
 
 export function changeOwnGameLevel(level) {
   return {
-    type: OWNGAME_CHANGE_PAGE,
+    type: OWNGAME_CHANGE_LEVEL,
     payload: level,
   };
 }

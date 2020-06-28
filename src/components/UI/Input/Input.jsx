@@ -11,6 +11,7 @@ const Input = (props) => {
     input,
     autoFocus,
     meta: { error, touched },
+    label,
   } = props;
 
   return (
@@ -27,6 +28,7 @@ const Input = (props) => {
         {...input}
       />
       {error && touched && <span>{error}</span>}
+      {label && <label htmlFor={label}>{label}</label>}
     </div>
   );
 };
@@ -41,6 +43,7 @@ Input.propTypes = {
   touched: PropTypes.bool,
   meta: PropTypes.shape(),
   autoFocus: PropTypes.bool,
+  label: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -52,6 +55,7 @@ Input.defaultProps = {
   touched: false,
   meta: {},
   autoFocus: false,
+  label: '',
 };
 
 export default Input;

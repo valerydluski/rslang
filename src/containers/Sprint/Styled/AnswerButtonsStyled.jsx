@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import FalseAnswerIcon from '../../../../components/UI/Icon/false-answer.svg';
-import TrueAnswerIcon from '../../../../components/UI/Icon/true-answer.svg';
+import FalseAnswerIcon from '../../../components/UI/Icon/false-answer.svg';
+import TrueAnswerIcon from '../../../components/UI/Icon/true-answer.svg';
 
 const AnswerButton = styled.div`
   width: 140px;
