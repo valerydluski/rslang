@@ -8,6 +8,7 @@ import watchMaxPage from './DefineMaxPagePerLevel/sagas/DefineMaxPagePerLevelSag
 import correctWatcher from './LearnWords/sagas/correctSaga';
 import addNewWordSagaWatcher from './LearnWords/sagas/addNewWordSaga';
 import watchPutSettings from './UserSettings/sagas/putSettings';
+import saveUserWordsSagaWatcher from './Dictionary/sagas/saveUserWordsSaga';
 
 export default function* watchSaga() {
   yield all([
@@ -20,5 +21,6 @@ export default function* watchSaga() {
     fork(correctWatcher),
     fork(addNewWordSagaWatcher),
     fork(watchPutSettings),
+    fork(saveUserWordsSagaWatcher),
   ]);
 }

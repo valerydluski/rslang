@@ -11,6 +11,7 @@ import changeRoundReducer from './ChangeRounds/changeRoundReducer';
 import DefineMaxPagePerLevelReducer from './DefineMaxPagePerLevel/DefineMaxPagePerLevelReducer';
 import isCorrectReducer from './LearnWords/reducers/correctReducer';
 import newLearnCardShow from './LearnWords/reducers/newCardShowReducer';
+import saveUserWordsReducer from './Dictionary/reducers/saveUserWordsReducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   maxPage: DefineMaxPagePerLevelReducer,
   correctLearnCard: isCorrectReducer,
   newLearnCardShow,
+  userWords: saveUserWordsReducer,
 });
 
 export default rootReducer;

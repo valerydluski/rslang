@@ -11,7 +11,6 @@ import {
 import CHANGE_APP_MODE from '../../AppMode/types';
 import maxPage from '../../../services/devineMaxPagePerLevel';
 import fetchMaxPage from '../action';
-import { hideLoader } from '../../Loader/action';
 
 function* workerDefineMaxPagePerLevel() {
   try {

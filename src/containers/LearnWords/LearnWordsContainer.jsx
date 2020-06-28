@@ -6,6 +6,7 @@ import changeAppModeAction from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { LINK_FOR_IMAGE } from '../../config';
 import { correctCard, showNewCard } from '../../redux/LearnWords/actions';
+import { checkStatusSession } from '../../redux/Auth/Login/actions';
 
 function getWord(arr) {
   const w = arr.shift();
@@ -22,14 +23,19 @@ function LearnWordCardContainer(props) {
     correctCardHandler,
     isCorrect,
     showNewCardHandler,
+    checkStatusSessionHandler,
   } = props;
   const [currentWord, setCurrentWord] = useState();
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   const audio = new Audio();
 
-  if (isWordsLoading) return <LoadingSpinner />;
+  if (isWordsLoading) {
+    checkStatusSessionHandler();
+    return <LoadingSpinner />;
+  }
   if (appMode !== 'Savannah') {
+    checkStatusSessionHandler();
     changeAppMode('Savannah');
     return <LoadingSpinner />;
   }
@@ -71,6 +77,7 @@ LearnWordCardContainer.propTypes = {
   correctCardHandler: PropTypes.func.isRequired,
   showNewCardHandler: PropTypes.func.isRequired,
   isCorrect: PropTypes.bool,
+  checkStatusSessionHandler: PropTypes.func.isRequired,
 };
 
 LearnWordCardContainer.defaultProps = {
@@ -90,6 +97,7 @@ const mapDispatchToProps = {
   changeAppMode: changeAppModeAction,
   correctCardHandler: correctCard,
   showNewCardHandler: showNewCard,
+  checkStatusSessionHandler: checkStatusSession,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearnWordCardContainer);
