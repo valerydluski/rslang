@@ -28,6 +28,8 @@ export const API = {
 export const DEFAULT_LANGUAGE = 'ru';
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
+export const LINK_FOR_ENGLISH_PUZZLE_IMAGE =
+  'https://raw.githubusercontent.com/valerydluski/Images/master/';
 
 export const GAME_LIST = [
   {
@@ -66,3 +68,14 @@ export const MIN_WORDS_PER_DAY = 1;
 export const MAX_WORDS_PER_DAY = 600;
 export const MAX_WORDS_PER_PAGE = 25;
 export const MIN_WORDS_PER_PAGE = 5;
+
+export const GAME_MAX_PAGE = 60;
+export const GAME_MAX_LEVEL = 6;
+
+export const CHECKBOXES = [
+  'textExample',
+  'textMeaning',
+  'transcription',
+  'translate',
+  'imageAssociation',
+];
