@@ -13,6 +13,7 @@ import Overlay from './Styled/Overlay';
 import Select from '../../../UI/Select/Select';
 import { DIRECTION_ROW } from '../../../UI/Select/Styled/constants';
 import { ITEM_PAGE, ITEM_LEVEL } from './constants';
+import { GAME_MAX_PAGE, GAME_MAX_LEVEL } from '../../../../config';
 
 const StatusMenu = (props) => {
   const { level, page, maxPage, updateLevel, updatePage } = props;
@@ -51,7 +52,7 @@ const StatusMenu = (props) => {
           <Select
             isOpen={isLevelOpen}
             onToggle={switchLevel}
-            optionsNumber={6}
+            optionsNumber={GAME_MAX_LEVEL}
             openBtnName="Выбрать"
             onOptionClick={onLevelOptionClick}
             value={+level}
@@ -88,7 +89,7 @@ StatusMenu.propTypes = {
 StatusMenu.defaultProps = {
   level: '1',
   page: '1',
-  maxPage: 60,
+  maxPage: GAME_MAX_PAGE,
 };
 
 function mapStateToProps(state) {
