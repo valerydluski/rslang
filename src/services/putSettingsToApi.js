@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
-async function putSettings(user, settings) {
+async function putSettingsToApi(settings, user) {
   try {
     const {
       URL,
@@ -25,4 +25,4 @@ async function putSettings(user, settings) {
   }
 }
 
-export default putSettings;
+export default putSettingsToApi;
