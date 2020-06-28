@@ -14,8 +14,8 @@ function* workerLogin(action) {
     if (payload) {
       payload.isLogin = true;
       yield put(saveSessionData(payload));
-      yield call(history.push, '/home');
       yield put(saveUserSettings(settings));
+      yield call(history.push, '/home');
     }
   } catch (e) {
     toast.error('error');

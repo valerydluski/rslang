@@ -12,8 +12,8 @@ function* workerRegistration(action) {
     const settings = yield select(getSettings);
     settings.name = name;
     yield call(signUp, userSettings);
-    yield put(authToServer(userSettings));
     yield put(saveUserName(settings));
+    yield put(authToServer(userSettings));
   } catch (e) {
     toast.error('error');
   }
