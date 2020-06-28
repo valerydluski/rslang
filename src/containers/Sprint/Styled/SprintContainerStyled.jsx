@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import sprintBackgroud from '../../../../assets/img/sprint-back.svg';
+import sprintBackgroud from '../../../assets/img/sprint-back.svg';
 
 const SprintContainerStyled = styled.div`
   width: 100%;
