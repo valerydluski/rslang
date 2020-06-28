@@ -4,7 +4,7 @@ import { AUTH_TO_SERVER } from '../types';
 import { saveSessionData } from '../actions';
 import signIn from '../../../../services/signIn';
 import history from '../../../../utils/history';
-import { saveUserSettings } from '../../../UserSettings/actions';
+import { saveUserName } from '../../../UserSettings/actions';
 
 function* workerLogin(action) {
   try {
@@ -14,7 +14,7 @@ function* workerLogin(action) {
     if (payload) {
       payload.isLogin = true;
       yield put(saveSessionData(payload));
-      yield put(saveUserSettings(settings));
+      yield put(saveUserName(settings));
       yield call(history.push, '/home');
     }
   } catch (e) {

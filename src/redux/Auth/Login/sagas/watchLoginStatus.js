@@ -4,6 +4,8 @@ import { resetSessionData } from '../actions';
 import checkToken from '../../../../services/checkToken';
 import history from '../../../../utils/history';
 import checkHistoryLocation from '../../../../utils/checkHistoryLocation';
+import getSettings from '../../../../utils/getSettings';
+import { saveUserSettings } from '../../../UserSettings/actions';
 
 function* workerStatus() {
   const getLoginState = (state) => state.login;
@@ -14,6 +16,9 @@ function* workerStatus() {
     if (!checkHistoryLocation(['/login', '/registration'])) {
       yield call(history.push, '/');
     }
+  } else {
+    const settingsFromApi = getSettings(data);
+    yield put(saveUserSettings(settingsFromApi));
   }
 }
 
