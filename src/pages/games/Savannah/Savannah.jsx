@@ -7,7 +7,9 @@ import styled, { keyframes } from 'styled-components';
 import { slideInDown } from 'react-animations';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import shuffleArray from '../../../utils/shuffleArray';
-import {SavannahComponent, WordToGuess, clickHandler} from '../../../components/Savannah/cardComponent'
+import {SavannahComponent, SavannahComponentTranslation, WordToGuess, mistakes} from '../../../components/Savannah/cardComponent'
+import ResultModal from '../../../containers/Modal/ResultModal';
+import changeAppMode from '../../../redux/AppMode/action';
 
 const Bounce = styled.div`animation: 3s ${keyframes`${slideInDown}`}`;
 
@@ -16,10 +18,19 @@ let gameWordsTranslations = ['1'];
 
 const Savannah = ({
   wordsCollection,
+  switchAppMode,
+  currentAppMode,
 }) => {
   const [gameStarted, setGameChange] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
   const [isGameFinished, changeGameMode] = useState(false);
+
+  const shuffledCollection = shuffleArray(wordsCollection);
+
+  if (currentAppMode !== 'Savannah') {
+    switchAppMode('Savannah');
+    return null;
+  }
 
   function switchToNextWord() {
     if (currentWordIndex <= 9) {
@@ -28,13 +39,13 @@ const Savannah = ({
     else {
       changeIndex(0);
     }
-    console.log(wordsCollection);
-      gameWords = wordsCollection[currentWordIndex].word;
-      gameWordsTranslations = wordsCollection[currentWordIndex].wordTranslate;
+      gameWords = shuffledCollection[currentWordIndex].word;
+      gameWordsTranslations = shuffledCollection[currentWordIndex].wordTranslate;
   }
 
     const startGame = () => {
     setGameChange(true);
+    console.log(wordsCollection);
     }
 
     const exitGame = () => {
@@ -50,12 +61,13 @@ const Savannah = ({
     <div id = 'first'>
     <Bounce id = 'animation' onAnimationEnd={switchToNextWord}>
     <div className="english_word">
-      <SavannahComponent wordsForRender = {wordsCollection}/>
+      <WordToGuess words = {shuffledCollection[currentWordIndex]}/>
       </div>
       </Bounce>
-      <div className="game_words">
-    <SavannahComponent wordsForRender = {wordsCollection} />
+      <div className="game_words" onClick={switchToNextWord}>
+    <SavannahComponentTranslation wordsForRender = {shuffleArray(shuffledCollection.slice(currentWordIndex,currentWordIndex + 4))} />
     <button onClick={switchToNextWord} />
+    {currentWordIndex > 8 || mistakes > 4 ? <ResultModal /> : null}
     </div>
     </div>
     </div>
@@ -97,4 +109,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Savannah);
+const mapDispatchToProps = {
+  switchAppMode: changeAppMode,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Savannah);

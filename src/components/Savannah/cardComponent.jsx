@@ -1,11 +1,29 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+import errorSound from '../../assets/audio/error.mp3';
+import correctSound from '../../assets/audio/correct.mp3';
 
 const wordsArr = ['man', 'woman', 'rookie', 'chance'];
 const translations = ['мужчина', 'женщина', 'новичок', 'шанс'];
+let result;
+let mistakes = 0;
+
+const playResultSound = (isOk) => {
+  const wordAudio = new Audio();
+  wordAudio.src = isOk ? correctSound : errorSound;
+  wordAudio.play();
+};
 
 const clickHandler = (event) => {
-    console.log(event.target.matches('[index]'));
+  if (event.target.dataset.indexTranslate === document.getElementById('title').dataset.indexTranslate) {
+  result = true;
+  playResultSound(result);
+  }
+  else {
+    result = false;
+    mistakes += 1;
+  }
+  playResultSound(result)
   };
 
 const WordToGuess = (props) => {
@@ -17,12 +35,12 @@ const WordToGuess = (props) => {
       isCorrect,
       selectedIndex,
       correctIndex,
-      translations
+      translation
     } = props;
     
   
-    return <div onClick={clickHandler}>
-      <p>
+    return <div>
+      <p id = 'title' index = {words.id} data-index-translate = {words.id}>
         {words.word}
       </p>
     </div>;
@@ -44,8 +62,31 @@ const WordToGuess = (props) => {
     console.log(wordsForRender);
 
     const wordsCards = wordsForRender.map((word, index) => {
-      return <p key={word} index={index}>
-       {word.wordTranslate} {word.word}
+      return <p key={word} index={index} data-index-translate = {word.id}>
+       {word.word}
+        </p>;
+    });
+  
+    return <div onClick={clickHandler}>{wordsCards}</div>;
+  };
+
+  const SavannahComponentTranslation = (props) => {
+    const {
+      wordsForRender,
+      correctWord,
+      UserAnswer,
+      isWordFinished,
+      isCorrect,
+      selectedIndex,
+      correctIndex,
+      translations
+    } = props;
+  
+    console.log(wordsForRender);
+
+    const wordsCards = wordsForRender.map((word, index) => {
+      return <p key={word.id} index={index} data-index-translate = {word.id}>
+       {word.wordTranslate}
         </p>;
     });
   
@@ -59,4 +100,4 @@ const WordToGuess = (props) => {
   })
 
 
-  export {SavannahComponent, WordToGuess, clickHandler, wordsArr, translations}
+  export {SavannahComponent, WordToGuess, clickHandler, wordsArr, translations, SavannahComponentTranslation, mistakes}
