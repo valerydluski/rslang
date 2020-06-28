@@ -66,3 +66,11 @@ export const MIN_WORDS_PER_DAY = 1;
 export const MAX_WORDS_PER_DAY = 600;
 export const MAX_WORDS_PER_PAGE = 25;
 export const MIN_WORDS_PER_PAGE = 5;
+
+export const CHECKBOXES = [
+  'textExample',
+  'textMeaning',
+  'transcription',
+  'translate',
+  'imageAssociation',
+];
