@@ -10,7 +10,7 @@ function* workerRegistration(action) {
   try {
     const getSettings = (state) => state.userSettings.settings;
     const settings = yield select(getSettings);
-    settings.name = name;
+    settings.name = name || 'user';
     yield call(signUp, userSettings);
     yield put(saveUserName(settings));
     yield put(authToServer(userSettings));
