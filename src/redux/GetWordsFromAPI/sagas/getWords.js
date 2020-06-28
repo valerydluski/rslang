@@ -1,4 +1,5 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import fetchWords from '../action';
 import {
   SPEAKIT_CHANGE_LEVEL,
@@ -26,7 +27,7 @@ function* workerGetWords() {
     yield put(fetchWords(payload));
     yield put(hideLoader());
   } catch (e) {
-    console.log(e.message);
+    toast.error('error');
     yield put(hideLoader());
   }
 }

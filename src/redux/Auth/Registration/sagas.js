@@ -1,4 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import REGISTER_TO_SERVER from './types';
 import { authToServer } from '../Login/actions';
 import saveUserSettings from '../../UserSettings/actions';
@@ -11,7 +12,7 @@ function* workerRegistration(action) {
     yield put(authToServer(userSettings));
     yield put(saveUserSettings(name));
   } catch (e) {
-    console.log(e.message);
+    toast.error('error');
   }
 }
 
