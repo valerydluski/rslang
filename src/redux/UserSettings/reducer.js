@@ -4,8 +4,8 @@ const initialState = {
   settings: {
     name: '',
     language: 'en',
-    WordsPerDay: 1,
-    CardsPerDay: 1,
+    WordsPerDay: 20,
+    CardsPerDay: 20,
     deleteButton: 'active',
     addDificultWordsButton: 'active',
     howToLearnWords: 'newWords',
