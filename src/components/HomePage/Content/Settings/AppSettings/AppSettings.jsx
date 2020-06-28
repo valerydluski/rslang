@@ -1,10 +1,11 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import PropTypes from 'prop-types';
 import Input from '../../../../UI/Input/Input';
 import WordsPerDayValidator from '../../../../../utils/validators/WordsPerDayValidator';
 import RadioButton from '../../../../UI/RadioButton/RadioButton';
 
-const AppSettings = () => {
+const AppSettings = ({ checkboxes }) => {
   return (
     <>
       <h3>Application settings</h3>
@@ -63,7 +64,7 @@ const AppSettings = () => {
         ]}
       />
       <h3>info in cards</h3>
-      <Field name="translate" id="translate" component={Input} type="checkbox" label="translate" />
+      {/* <Field name="translate" id="translate" component={Input} type="checkbox" label="translate" />
       <Field
         name="textMeaning"
         id="textMeaning"
@@ -91,9 +92,16 @@ const AppSettings = () => {
         component={Input}
         type="checkbox"
         label="imageAssociation"
-      />
+      /> */}
+      {checkboxes.map((el) => {
+        return <Field name={el} key={el} id={el} component={Input} type="checkbox" label={el} />;
+      })}
     </>
   );
+};
+
+AppSettings.propTypes = {
+  checkboxes: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default AppSettings;
