@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import ReduxSettingsForm from '../../../components/HomePage/Content/Settings/SettingsForm';
-import saveUserSettings from '../../../redux/UserSettings/actions';
+import { saveUserSettings } from '../../../redux/UserSettings/actions';
 import checkboxesValidator from '../../../utils/validators/checkboxesValidator';
 
 function SettingContent(props) {

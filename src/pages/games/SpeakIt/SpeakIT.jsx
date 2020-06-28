@@ -52,11 +52,11 @@ const SpeakIT = (props) => {
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
   const [isGameFinished, toggleGameMode] = useState(false);
   let IDontKnowWords = gameWords.slice();
-
   checkStatusSession();
   if (isWordsLoading) return <LoadingSpinner />;
   if (currentAppMode !== 'SpeakIT') {
     switchAppMode('SpeakIT');
+    return <LoadingSpinner />;
   }
 
   const newScoreHandler = () => {
@@ -189,7 +189,7 @@ const SpeakIT = (props) => {
       <Image src={srcForImage} />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
-      <CardsContainerSpeakIT />
+      <CardsContainerSpeakIT wordsCollection={wordsCollection} />
       <ButtonsContainerSpeakIT
         restartHandler={restartHandler}
         speakHandler={speakHandler}
