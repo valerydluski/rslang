@@ -6,12 +6,12 @@ import GoHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePa
 import ReduxLearnWordsForm from './LearnWordsForm';
 
 export default function LearnWords(props) {
-  const { onSubmit } = props;
+  const { onSubmit, word } = props;
   return (
     <LearnWordsContainer>
       <GoHomePageButton />
       <LearnWordCardContainer>
-        <ReduxLearnWordsForm onSubmit={onSubmit} />
+        <ReduxLearnWordsForm onSubmit={onSubmit} word={word} />
       </LearnWordCardContainer>
     </LearnWordsContainer>
   );
@@ -19,4 +19,9 @@ export default function LearnWords(props) {
 
 LearnWords.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  word: PropTypes.shape({}),
+};
+
+LearnWords.defaultProps = {
+  word: {},
 };

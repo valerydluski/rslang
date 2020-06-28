@@ -5,13 +5,24 @@ import Input from '../UI/Input/Input';
 import StyledRoundButton from '../UI/Button/Styled/StyledRoundButton';
 
 const LearnWordsForm = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, word } = props;
+  const { textExample, textExampleTranslate } = word;
+  const [firstPart, secondPart] = textExample;
   return (
     <form onSubmit={handleSubmit}>
-      <p>She is a nice</p>
-      <Field name="word" key="word" type="text" placeholder="" component={Input} />
+      <p>{firstPart}</p>
+      <Field
+        name="word"
+        key="word"
+        type="text"
+        placeholder=""
+        size="5"
+        component={Input}
+        autoFocus
+      />
+      <p>{secondPart}</p>
       <hr />
-      <p>Она хороший человек.</p>
+      <p>{textExampleTranslate}</p>
       <StyledRoundButton>Next</StyledRoundButton>
     </form>
   );
@@ -23,6 +34,10 @@ const ReduxLearnWordsForm = reduxForm({
 
 LearnWordsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  word: PropTypes.shape({
+    textExample: PropTypes.instanceOf(Array).isRequired,
+    textExampleTranslate: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ReduxLearnWordsForm;
