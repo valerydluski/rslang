@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReduxSettingsForm from '../../../components/HomePage/Content/Settings/SettingsForm';
-import saveUserSettings from '../../../redux/UserSettings/actions';
+import { saveUserSettings } from '../../../redux/UserSettings/actions';
 
 function SettingContent(props) {
   const { saveSettings } = props;

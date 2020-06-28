@@ -1,5 +1,5 @@
 import { takeLatest, select, call } from 'redux-saga/effects';
-import SAVE_USER_SETTINGS from '../types';
+import { SAVE_USER_SETTINGS } from '../types';
 import putSettingsToApi from '../../../services/putSettingsToApi';
 import createSettingsJSON from '../../../utils/createSettingsJSON';
 
