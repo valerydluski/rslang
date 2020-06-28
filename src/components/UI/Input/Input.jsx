@@ -10,6 +10,7 @@ const Input = (props) => {
     sizeInput,
     input,
     meta: { error, touched },
+    label,
   } = props;
 
   return (
@@ -24,6 +25,7 @@ const Input = (props) => {
         {...input}
       />
       {error && touched && <span>{error}</span>}
+      {label && <label htmlFor={label}>{label}</label>}
     </div>
   );
 };
@@ -37,6 +39,7 @@ Input.propTypes = {
   input: PropTypes.shape().isRequired,
   touched: PropTypes.bool,
   meta: PropTypes.shape(),
+  label: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -47,6 +50,7 @@ Input.defaultProps = {
   sizeInput: '',
   touched: false,
   meta: {},
+  label: '',
 };
 
 export default Input;
