@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import speechIcon from '../../../components/UI/Icon/speechIcoBlack.svg';
-import Icon from '../../../components/UI/Icon/Icon';
-import Button from '../../../components/UI/Button/Styled/StyledPuzzleRoundWhiteButton';
+import speechIcon from '../../UI/Icon/speechIcoBlack.svg';
+import Icon from '../../UI/Icon/Icon';
+import Button from '../../UI/Button/Styled/StyledPuzzleRoundWhiteButton';
 import Container from './Styled/Container';
 import Text from './Styled/Text';
 

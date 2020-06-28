@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Icon from '../../../../components/UI/Icon/Icon';
-import speechIcon from '../../../../components/UI/Icon/speechIco.svg';
-import translationIcon from '../../../../components/UI/Icon/translationIco.svg';
-import musicIcon from '../../../../components/UI/Icon/musicIco.svg';
-import pictureIcon from '../../../../components/UI/Icon/pictureIco.svg';
-import textIcon from '../../../../components/UI/Icon/textIco.svg';
-import Button from '../../../../components/UI/Button/Styled/StyledPuzzleRoundButton';
-import RedButton from '../../../../components/UI/Button/Styled/StyledPuzzleRoundRedButton';
+import Icon from '../../../UI/Icon/Icon';
+import speechIcon from '../../../UI/Icon/speechIco.svg';
+import translationIcon from '../../../UI/Icon/translationIco.svg';
+import musicIcon from '../../../UI/Icon/musicIco.svg';
+import pictureIcon from '../../../UI/Icon/pictureIco.svg';
+import textIcon from '../../../UI/Icon/textIco.svg';
+import Button from '../../../UI/Button/Styled/StyledPuzzleRoundButton';
+import RedButton from '../../../UI/Button/Styled/StyledPuzzleRoundRedButton';
 
 import Menu from './Styled/Menu';
 import {

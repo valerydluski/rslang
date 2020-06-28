@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { pickRow, updatePageStatus } from '../../../redux/EnglishPuzzle/actions';
-import StyledRectangleButton from '../../../components/UI/Button/Styled/StyledRectangleButton';
+import StyledRectangleButton from '../../UI/Button/Styled/StyledRectangleButton';
 import { changeIDontKnowWords } from '../../../redux/Games/action';
 import {
   changeEnglishPuzzleLevel,

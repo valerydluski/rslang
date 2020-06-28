@@ -10,8 +10,8 @@ import MenuItem from './Styled/MenuItem';
 import Title from './Styled/Title';
 import SelectContainer from './Styled/SelectContainer';
 import Overlay from './Styled/Overlay';
-import Select from '../../../../components/UI/Select/Select';
-import { DIRECTION_ROW } from '../../../../components/UI/Select/Styled/constants';
+import Select from '../../../UI/Select/Select';
+import { DIRECTION_ROW } from '../../../UI/Select/Styled/constants';
 import { ITEM_PAGE, ITEM_LEVEL } from './constants';
 
 const StatusMenu = (props) => {
