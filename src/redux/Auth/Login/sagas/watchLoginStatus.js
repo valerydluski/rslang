@@ -5,7 +5,7 @@ import checkToken from '../../../../services/checkToken';
 import history from '../../../../utils/history';
 import checkHistoryLocation from '../../../../utils/checkHistoryLocation';
 import getSettings from '../../../../utils/getSettings';
-import { saveUserSettings } from '../../../UserSettings/actions';
+import { saveUserName } from '../../../UserSettings/actions';
 
 function* workerStatus() {
   const getLoginState = (state) => state.login;
@@ -18,7 +18,7 @@ function* workerStatus() {
     }
   } else {
     const settingsFromApi = getSettings(data);
-    yield put(saveUserSettings(settingsFromApi));
+    yield put(saveUserName(settingsFromApi));
   }
 }
 
