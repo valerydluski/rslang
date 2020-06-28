@@ -7,8 +7,13 @@ import checkHistoryLocation from '../../../../utils/checkHistoryLocation';
 import getSettings from '../../../../utils/getSettings';
 import { saveUserName } from '../../../UserSettings/actions';
 import { getUserWords } from '../../../Dictionary/actions';
+import {
+  checkStatusShowLoader,
+  checkStatusHideLoader,
+} from '../../../Loader/CheckStatusLoader/action';
 
 function* workerStatus() {
+  yield put(checkStatusShowLoader());
   const getLoginState = (state) => state.login;
   const sessionData = yield select(getLoginState);
   const data = yield call(checkToken, sessionData);
@@ -18,10 +23,11 @@ function* workerStatus() {
       yield call(history.push, '/login');
     }
   } else {
+    yield put(getUserWords());
     const settingsFromApi = getSettings(data);
     yield put(saveUserName(settingsFromApi));
-    yield put(getUserWords());
   }
+  yield put(checkStatusHideLoader());
 }
 
 export default function* watchStatus() {
