@@ -8,10 +8,11 @@ const ModalStyled = styled.div`
   width: 60%;
   height: 800px;
   overflow: auto;
+
   flex-direction: column;
   border-radius: 20px;
   background-color: white;
-  z-index: 6;
+  z-index: 100;
   transition: all 0.5s;
 `;
 

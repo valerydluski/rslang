@@ -1,4 +1,5 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import { AUTH_TO_SERVER } from '../types';
 import { saveSessionData } from '../actions';
 import signIn from '../../../../services/signIn';
@@ -10,10 +11,10 @@ function* workerLogin(action) {
     if (payload) {
       payload.isLogin = true;
       yield put(saveSessionData(payload));
-      yield call(history.push, '/');
+      yield call(history.push, '/home');
     }
   } catch (e) {
-    console.log(e.message);
+    toast.error('error');
   }
 }
 
