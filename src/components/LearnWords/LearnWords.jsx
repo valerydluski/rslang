@@ -6,12 +6,17 @@ import GoHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePa
 import ReduxLearnWordsForm from './LearnWordsForm';
 
 export default function LearnWords(props) {
-  const { onSubmit, word } = props;
+  const { onSubmit, word, isCorrect } = props;
   return (
     <LearnWordsContainer>
       <GoHomePageButton />
       <LearnWordCardContainer>
-        <ReduxLearnWordsForm onSubmit={onSubmit} word={word} />
+        <ReduxLearnWordsForm
+          onSubmit={onSubmit}
+          word={word}
+          isCorrect={isCorrect}
+          autocomplete="off"
+        />
       </LearnWordCardContainer>
     </LearnWordsContainer>
   );

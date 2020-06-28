@@ -12,6 +12,7 @@ const Input = (props) => {
     autoFocus,
     meta: { error, touched },
     label,
+    autocomplete,
   } = props;
 
   return (
@@ -24,6 +25,7 @@ const Input = (props) => {
         size={size}
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={autoFocus}
+        autoComplete={autocomplete}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
       />
@@ -44,6 +46,7 @@ Input.propTypes = {
   meta: PropTypes.shape(),
   autoFocus: PropTypes.bool,
   label: PropTypes.string,
+  autocomplete: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -56,6 +59,7 @@ Input.defaultProps = {
   meta: {},
   autoFocus: false,
   label: '',
+  autocomplete: 'on',
 };
 
 export default Input;
