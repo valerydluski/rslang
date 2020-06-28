@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Content from './Styled/Content';
@@ -11,9 +11,13 @@ import Info from '../../../components/EnglishPuzzle/Info/Info';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import changeAppMode from '../../../redux/AppMode/action';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
+import { checkStatusSession } from '../../../redux/Auth/Login/actions';
+import ResultModal from '../../../containers/Modal/ResultModal';
 
 const EnglishPuzzle = (props) => {
   const { isWordsLoading, currentAppMode, switchAppMode } = props;
+  const [isModalOpen, toggleModal] = useState(false);
+  checkStatusSession();
 
   if (isWordsLoading) return <LoadingSpinner />;
 
@@ -24,14 +28,18 @@ const EnglishPuzzle = (props) => {
   return (
     <Content>
       <GoToHomePageButton />
-      <Container>
-        <StatusMenu />
-        <Main>
-          <Game />
-          <TipsMenu />
-        </Main>
-        <Info />
-      </Container>
+      {isModalOpen ? (
+        <ResultModal showProperties={['word', 'translation']} />
+      ) : (
+        <Container>
+          <StatusMenu />
+          <Main>
+            <Game />
+            <TipsMenu toggleModal={toggleModal} />
+          </Main>
+          <Info />
+        </Container>
+      )}
     </Content>
   );
 };

@@ -11,6 +11,8 @@ const Source = styled.div`
   box-sizing: border-box;
   background-color: ${(props) => (props.isDraggingOver ? '#7968dc' : 'none')};
   transition: 0.3s linear;
+  font-size: 17px;
+  font-weight: bold;
 `;
 
 export default Source;

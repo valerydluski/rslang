@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { pickRow, updatePageStatus } from '../../../redux/EnglishPuzzle/actions';
 import StyledRectangleButton from '../../../components/UI/Button/Styled/StyledRectangleButton';
+import { changeIDontKnowWords } from '../../../redux/Games/action';
 import {
   changeEnglishPuzzleLevel,
   changeEnglishPuzzlePage,
@@ -27,7 +28,11 @@ class Controls extends Component {
       page,
       level,
       maxPage,
+      words,
+      addWrongAnswersToStore,
+      wrongWords,
     } = this.props;
+    const { word } = words[row];
     if (isPageFill) {
       if (page === maxPage) {
         updateLevel(`${+level + 1}`);
@@ -38,6 +43,8 @@ class Controls extends Component {
       updateRow(row + 1);
     } else {
       fillRow();
+      if (wrongWords.includes(word)) return;
+      addWrongAnswersToStore([...wrongWords, word]);
     }
   };
 
@@ -58,13 +65,16 @@ Controls.propTypes = {
   level: PropTypes.string,
   page: PropTypes.string,
   row: PropTypes.number,
-  isRowCorrect: PropTypes.bool.isRequired,
-  isRowFill: PropTypes.bool.isRequired,
-  isPageFill: PropTypes.bool.isRequired,
-  updateRow: PropTypes.func.isRequired,
-  updatePage: PropTypes.func.isRequired,
-  updateLevel: PropTypes.func.isRequired,
-  fillRow: PropTypes.func.isRequired,
+  isRowCorrect: PropTypes.bool,
+  isRowFill: PropTypes.bool,
+  isPageFill: PropTypes.bool,
+  updateRow: PropTypes.func,
+  updatePage: PropTypes.func,
+  updateLevel: PropTypes.func,
+  fillRow: PropTypes.func,
+  words: PropTypes.arrayOf(PropTypes.object),
+  addWrongAnswersToStore: PropTypes.func,
+  wrongWords: PropTypes.arrayOf(PropTypes.string),
 };
 
 Controls.defaultProps = {
@@ -72,6 +82,16 @@ Controls.defaultProps = {
   page: '1',
   row: 0,
   maxPage: 60,
+  isRowCorrect: false,
+  isRowFill: false,
+  isPageFill: false,
+  updateRow: () => {},
+  updatePage: () => {},
+  updateLevel: () => {},
+  fillRow: () => {},
+  addWrongAnswersToStore: () => {},
+  words: [],
+  wrongWords: [],
 };
 
 function mapStateToProps(state) {
@@ -83,6 +103,8 @@ function mapStateToProps(state) {
     level: state.changeRound.EnglishPuzzleLevel,
     page: state.changeRound.EnglishPuzzlePage,
     maxPage: state.maxPage.maxPage.count,
+    words: state.getWordsFromAPI.wordsFromAPI,
+    wrongWords: state.gamesReducer.IDontKnowWords,
   };
 }
 
@@ -92,6 +114,7 @@ function mapDispatchToProps(dispatch) {
     updateLevel: (level) => dispatch(changeEnglishPuzzleLevel(level)),
     updatePage: (page) => dispatch(changeEnglishPuzzlePage(page)),
     fillRow: () => dispatch(pickRow()),
+    addWrongAnswersToStore: (wrongWords) => dispatch(changeIDontKnowWords(wrongWords)),
   };
 }
 

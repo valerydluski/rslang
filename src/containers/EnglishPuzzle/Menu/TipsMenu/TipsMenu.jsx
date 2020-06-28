@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Icon from '../../../../components/UI/Icon/Icon';
@@ -9,6 +9,7 @@ import pictureIcon from '../../../../components/UI/Icon/pictureIco.svg';
 import textIcon from '../../../../components/UI/Icon/textIco.svg';
 import Button from '../../../../components/UI/Button/Styled/StyledPuzzleRoundButton';
 import RedButton from '../../../../components/UI/Button/Styled/StyledPuzzleRoundRedButton';
+
 import Menu from './Styled/Menu';
 import {
   switchAutoSpeech,
@@ -28,6 +29,7 @@ const TipsMenu = (props) => {
     toggleTranslation,
     toggleSpeech,
     toggleBackground,
+    toggleModal,
   } = props;
   return (
     <Menu>
@@ -43,7 +45,16 @@ const TipsMenu = (props) => {
       <Button onClick={toggleBackground} isActive={background}>
         <Icon src={pictureIcon} />
       </Button>
-      <RedButton isActive={isPageFill}>
+      <RedButton
+        onClick={
+          isPageFill
+            ? () => {
+                toggleModal(true);
+              }
+            : null
+        }
+        isActive={isPageFill}
+      >
         <Icon src={textIcon} />
       </RedButton>
     </Menu>
@@ -60,6 +71,7 @@ TipsMenu.propTypes = {
   toggleTranslation: PropTypes.func.isRequired,
   toggleSpeech: PropTypes.func.isRequired,
   toggleBackground: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
