@@ -5,10 +5,11 @@ import ModalContentStyled from './Styled/ModalContentStyled';
 import ModalWordsBlock from '../../components/Modal/ModalWordsBlock';
 
 const ModalContent = (props) => {
-  const { wordsCollection, showProperties, wordHandler } = props;
+  const { wordsCollection, showProperties, wordHandler, correctWords } = props;
   let { IDontKnowWords } = props;
   IDontKnowWords = IDontKnowWords.map((el) => el.toLowerCase());
-  const arr = wordsCollection.map((el) => el.word.toLowerCase());
+  const words = correctWords || wordsCollection;
+  const arr = words.map((el) => el.word.toLowerCase());
   const iKnowWords = arr.filter((el) => !IDontKnowWords.includes(el));
 
   const fn = () => {
@@ -63,12 +64,14 @@ ModalContent.propTypes = {
   showProperties: PropTypes.instanceOf(Array),
   IDontKnowWords: PropTypes.instanceOf(Array).isRequired,
   wordHandler: PropTypes.func,
+  correctWords: PropTypes.instanceOf(Array),
 };
 
 ModalContent.defaultProps = {
   wordsCollection: [],
   showProperties: ['word'],
   wordHandler: () => {},
+  correctWords: null,
 };
 
 const mapStateToProps = (state) => {

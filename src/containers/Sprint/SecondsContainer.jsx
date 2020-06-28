@@ -13,6 +13,9 @@ const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinishe
     const tick = setInterval(() => {
       setSeconds((second) => second - 1);
     }, 1000);
+    if (seconds === 0) {
+      timeIsUpHandler();
+    }
     return () => {
       clearInterval(tick);
     };
@@ -31,10 +34,7 @@ const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinishe
     if (seconds === countdownSoundStart) countdownAudio = audio;
     audio.play();
   };
-
   if (seconds === 0) {
-    audio.pause();
-    timeIsUpHandler();
     return null;
   }
   if (seconds === 1) {

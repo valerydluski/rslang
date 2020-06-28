@@ -18,6 +18,7 @@ const ModalResult = (props) => {
     playAudio,
     restartGame,
     newGame,
+    correctWords,
   } = props;
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
@@ -42,7 +43,11 @@ const ModalResult = (props) => {
       <GoToHomePageButton />
       <ModalStyled>
         <Image src={srcForImage} className="small-img" />
-        <ModalContent showProperties={showProperties} wordHandler={wordHandler} />
+        <ModalContent
+          showProperties={showProperties}
+          wordHandler={wordHandler}
+          correctWords={correctWords}
+        />
         <ModalButtonsContainerStyled>
           <Button buttonHandler={restartHandler} text="restart" />
           <Button buttonHandler={newGameHandler} text="new game" />
@@ -61,6 +66,7 @@ ModalResult.propTypes = {
   playAudio: PropTypes.func,
   restartGame: PropTypes.func,
   newGame: PropTypes.func,
+  correctWords: PropTypes.instanceOf(Array),
 };
 
 ModalResult.defaultProps = {
@@ -68,6 +74,7 @@ ModalResult.defaultProps = {
   showProperties: ['word'],
   audioForPlay: '',
   isChangeImage: true,
+  correctWords: null,
   playAudio: () => {},
   restartGame: () => {},
   newGame: () => {},

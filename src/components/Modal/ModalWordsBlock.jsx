@@ -15,7 +15,9 @@ const ModalWordsBlock = (props) => {
           const arr = showProperties.map((prop) => {
             return word[0][`${prop}`];
           });
-          return <ModalWord text={arr.join(' ')} key={el} wordHandler={wordHandler} word={word} />;
+          return (
+            <ModalWord propertiesForShowing={arr} key={el} wordHandler={wordHandler} word={word} />
+          );
         })}
       </ModalWordsBlockStyled>
     </>
