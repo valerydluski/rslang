@@ -8,13 +8,13 @@ const WordStyled = styled.p`
   color: #000000;
   text-transform: uppercase;
   text-align: center;
-  margin: 100px 0 5px;
+  margin: 70px 0 0;
 `;
 
 const TranslationStyled = styled(WordStyled)`
   text-transform: lowercase;
   color: #c4c4c4;
-  margin: 0 0 80px;
+  margin: 0 0 70px;
 `;
 
 export { WordStyled, TranslationStyled };
