@@ -8,12 +8,18 @@ const FormStyled = styled.form`
   display: grid;
   grid-template-rows: 20% 20% 10% 50%;
   height: 100%;
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    transition: background-color 5000s ease-in-out 0s;
+  }
 
   input {
     height: 40px;
     width: 540px;
     border: 1.39565px solid #c4c4c4;
     outline: none;
+    background-color: #ffffff;
   }
 
   .button_sign-in {
