@@ -86,7 +86,6 @@ class Game extends Component {
           <PlayfieldRow
             key={row}
             ref={provided.innerRef}
-            // пока так)
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
@@ -125,7 +124,6 @@ class Game extends Component {
         {(provided, snapshot) => (
           <Source
             ref={provided.innerRef}
-            // пока так)
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
