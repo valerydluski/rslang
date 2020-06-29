@@ -9,6 +9,7 @@ import gamesReducer from './Games/gamesReducer';
 import changeAppModeReducer from './AppMode/AppModeReducer';
 import changeRoundReducer from './ChangeRounds/changeRoundReducer';
 import DefineMaxPagePerLevelReducer from './DefineMaxPagePerLevel/DefineMaxPagePerLevelReducer';
+import changeStatisticReducer from './Statistic/statisticReducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   changeAppMode: changeAppModeReducer,
   changeRound: changeRoundReducer,
   maxPage: DefineMaxPagePerLevelReducer,
+  changeStatistic: changeStatisticReducer,
 });
 
 export default rootReducer;
