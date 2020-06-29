@@ -15,6 +15,21 @@ const FormStyled = styled.form`
     border: 1.39565px solid #c4c4c4;
     outline: none;
   }
+
+  .button_sign-in {
+    border-radius: 50%;
+    width: 178px;
+    height: 178px;
+    border: none;
+    outline: none;
+    align-self: start;
+    justify-self: end;
+    background: #404497;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 34px;
+  }
 `;
 
 export default FormStyled;

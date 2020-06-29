@@ -40,8 +40,8 @@ const LoginForm = (props) => {
         <div>
           <Link to="/registration">Register</Link>
         </div>
-        <button type="submit" aria-label="Sign In">
-          Sign In
+        <button className="button_sign-in" type="submit" aria-label="Sign In">
+          OK
         </button>
       </FormStyled>
     </LoginFormWrapperStyled>
