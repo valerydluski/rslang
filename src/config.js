@@ -28,6 +28,7 @@ export const API = {
 export const DEFAULT_LANGUAGE = 'ru';
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
+export const LINK_FOR_AUDIO = LINK_FOR_IMAGE;
 
 export const GAME_LIST = [
   {

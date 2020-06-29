@@ -5,7 +5,7 @@ import ModalContentStyled from './Styled/ModalContentStyled';
 import ModalWordsBlock from '../../components/Modal/ModalWordsBlock';
 
 const ModalContent = (props) => {
-  const { wordsCollection, showProperties, wordHandler, correctWords } = props;
+  const { wordsCollection, showProperties, wordHandler, correctWords, audioForPlay } = props;
   let { IDontKnowWords } = props;
   IDontKnowWords = IDontKnowWords.map((el) => el.toLowerCase());
   const words = correctWords || wordsCollection;
@@ -22,6 +22,7 @@ const ModalContent = (props) => {
             words={iKnowWords}
             wordsCollection={wordsCollection}
             wordHandler={wordHandler}
+            audioForPlay={audioForPlay}
           />
         );
       case 0:
@@ -32,6 +33,7 @@ const ModalContent = (props) => {
             words={IDontKnowWords}
             wordsCollection={wordsCollection}
             wordHandler={wordHandler}
+            audioForPlay={audioForPlay}
           />
         );
       default:
@@ -43,6 +45,7 @@ const ModalContent = (props) => {
               words={IDontKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
+              audioForPlay={audioForPlay}
             />
             <ModalWordsBlock
               showProperties={showProperties}
@@ -50,13 +53,14 @@ const ModalContent = (props) => {
               words={iKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
+              audioForPlay={audioForPlay}
             />
           </>
         );
     }
   };
 
-  return <ModalContentStyled>{fn()}</ModalContentStyled>;
+  return <ModalContentStyled amount={showProperties.length}>{fn()}</ModalContentStyled>;
 };
 
 ModalContent.propTypes = {
@@ -65,6 +69,7 @@ ModalContent.propTypes = {
   IDontKnowWords: PropTypes.instanceOf(Array).isRequired,
   wordHandler: PropTypes.func,
   correctWords: PropTypes.instanceOf(Array),
+  audioForPlay: PropTypes.string,
 };
 
 ModalContent.defaultProps = {
@@ -72,6 +77,7 @@ ModalContent.defaultProps = {
   showProperties: ['word'],
   wordHandler: () => {},
   correctWords: null,
+  audioForPlay: null,
 };
 
 const mapStateToProps = (state) => {

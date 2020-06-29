@@ -7,9 +7,16 @@ const ModalWordTextStyled = styled.div`
   font-size: 25px;
   cursor: pointer;
   div {
-    margin-left: 20px;
-    width: calc(100% / ${(props) => props.amount});
+    margin: 5px 0 5px 20px;
+    width: calc(90% / ${(props) => props.amount});
     text-align: left;
+  }
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      transition: background-color 0.4s ease-in-out;
+    }
   }
 `;
 

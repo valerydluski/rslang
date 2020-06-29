@@ -23,7 +23,11 @@ const SprintGameContainer = (props) => {
   if (isGameFinished) {
     addWrongWordsToStore(wrongAnsweredWords);
     return (
-      <ResultModal correctWords={correctAnsweredWords} showProperties={['word', 'wordTranslate']} />
+      <ResultModal
+        correctWords={correctAnsweredWords}
+        showProperties={['word', 'wordTranslate']}
+        audioForPlay="audio"
+      />
     );
   }
   const currentWord = currentGameWords[currentWordIndex];

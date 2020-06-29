@@ -7,7 +7,7 @@ import Image from '../../components/UI/Image/Image';
 import ModalButtonsContainerStyled from './Styled/ModalButtonsContainerStyled';
 import Button from '../../components/UI/Button/Button';
 import GoToHomePageButton from '../Buttons/GoHomePageButton/GoHomePageButton';
-import { LINK_FOR_IMAGE } from '../../config';
+import { LINK_FOR_IMAGE, LINK_FOR_AUDIO } from '../../config';
 
 const ModalResult = (props) => {
   const {
@@ -15,7 +15,6 @@ const ModalResult = (props) => {
     showProperties,
     audioForPlay,
     isChangeImage,
-    playAudio,
     restartGame,
     newGame,
     correctWords,
@@ -27,6 +26,14 @@ const ModalResult = (props) => {
     restartGame();
   };
 
+  const wordAudio = new Audio();
+
+  const playAudio = (src) => {
+    wordAudio.src = `${LINK_FOR_AUDIO}${src}`;
+    wordAudio.load();
+    wordAudio.play();
+  };
+
   const newGameHandler = () => {
     newGame();
   };
@@ -35,7 +42,9 @@ const ModalResult = (props) => {
 
   const wordHandler = (obj) => {
     if (isChangeImage) setSrcForImage(`${LINK_FOR_IMAGE}${obj.image}`);
-    if (audioForPlay) playAudio(obj[audioForPlay]);
+    if (audioForPlay) {
+      playAudio(obj[audioForPlay]);
+    }
   };
 
   return (
@@ -47,6 +56,7 @@ const ModalResult = (props) => {
           showProperties={showProperties}
           wordHandler={wordHandler}
           correctWords={correctWords}
+          audioForPlay={audioForPlay}
         />
         <ModalButtonsContainerStyled>
           <Button buttonHandler={restartHandler} text="restart" />
@@ -63,7 +73,6 @@ ModalResult.propTypes = {
   showProperties: PropTypes.instanceOf(Array),
   audioForPlay: PropTypes.string,
   isChangeImage: PropTypes.bool,
-  playAudio: PropTypes.func,
   restartGame: PropTypes.func,
   newGame: PropTypes.func,
   correctWords: PropTypes.instanceOf(Array),
@@ -75,7 +84,6 @@ ModalResult.defaultProps = {
   audioForPlay: '',
   isChangeImage: true,
   correctWords: null,
-  playAudio: () => {},
   restartGame: () => {},
   newGame: () => {},
 };

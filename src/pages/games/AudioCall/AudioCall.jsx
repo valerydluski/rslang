@@ -32,7 +32,7 @@ const AudioCall = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (currentAppMode !== 'AudioCall') {
+  if (currentAppMode !== 'AudioCall' || wordsCollection.length === 0) {
     switchAppMode('AudioCall');
     return null;
   }
@@ -97,7 +97,9 @@ const AudioCall = ({
             isAutoSolved={answerResult.isAutoSolved}
           />
           <NextButton clickHandler={switchToNextWord} />
-          {isGameFinished ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
+          {isGameFinished ? (
+            <ResultModal showProperties={['word', 'wordTranslate']} audioForPlay="audio" />
+          ) : null}
         </>
       ) : (
         <>

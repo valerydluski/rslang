@@ -5,10 +5,12 @@ import {
   BigAudioPlayButtonStyled,
 } from '../../components/Audiocall/styled/StyledAudioButtons';
 
+const wordAudio = new Audio();
+
 const AudioPlayButton = ({ src, isBig }) => {
-  const wordAudio = new Audio();
   const link = 'https://raw.githubusercontent.com/kovanelly/rslang-data/master/';
   wordAudio.src = `${link}${src}`;
+  wordAudio.load();
 
   const playWordAudio = () => {
     wordAudio.play();

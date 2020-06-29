@@ -154,7 +154,6 @@ const SpeakIT = (props) => {
         <GoToHomePageButton />
         {isGameFinished ? (
           <ResultModal
-            playAudio={playAudio}
             audioForPlay="audio"
             showProperties={['word', 'transcription', 'wordTranslate']}
             restartGame={restartGame}
