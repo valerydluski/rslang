@@ -1,4 +1,4 @@
-import { takeEvery, call, select, put } from 'redux-saga/effects';
+import { call, select, put, takeLatest } from 'redux-saga/effects';
 import { GET_USER_WORDS } from '../types';
 import getAllUserWords from '../../../services/getAllUserWords';
 import { saveUserWords } from '../actions';
@@ -13,5 +13,5 @@ function* saveUserWordsSagaWorker() {
 }
 
 export default function* saveUserWordsSagaWatcher() {
-  yield takeEvery(GET_USER_WORDS, saveUserWordsSagaWorker);
+  yield takeLatest(GET_USER_WORDS, saveUserWordsSagaWorker);
 }

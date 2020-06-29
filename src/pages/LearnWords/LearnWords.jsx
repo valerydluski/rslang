@@ -1,6 +1,6 @@
 import React from 'react';
-import LearnWordCardContainer from '../../containers/LearnWords/LearnWordsContainer';
+import LearnWordsStart from '../../containers/LearnWords/LearnWordsStart';
 
 export default function LearnWords() {
-  return <LearnWordCardContainer />;
+  return <LearnWordsStart />;
 }

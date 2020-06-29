@@ -1,6 +1,6 @@
 import { takeLatest, select, put, call } from 'redux-saga/effects';
 import { CHECK_SESSION_STATUS } from '../types';
-import { resetSessionData } from '../actions';
+import { resetSessionData, isAlreadyCheckStatusSession } from '../actions';
 import checkToken from '../../../../services/checkToken';
 import history from '../../../../utils/history';
 import checkHistoryLocation from '../../../../utils/checkHistoryLocation';
@@ -27,6 +27,7 @@ function* workerStatus() {
     const settingsFromApi = getSettings(data);
     yield put(saveUserName(settingsFromApi));
   }
+  yield put(isAlreadyCheckStatusSession());
   yield put(checkStatusHideLoader());
 }
 

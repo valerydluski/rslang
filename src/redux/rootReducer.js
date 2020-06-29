@@ -13,6 +13,7 @@ import isCorrectReducer from './LearnWords/reducers/correctReducer';
 import newLearnCardShow from './LearnWords/reducers/newCardShowReducer';
 import saveUserWordsReducer from './Dictionary/reducers/saveUserWordsReducer';
 import checkStatusloaderReducer from './Loader/CheckStatusLoader/checkStatusloaderReducer';
+import isStatusCheckedReducer from './Auth/Login/isStatusCheckedReducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   newLearnCardShow,
   userWords: saveUserWordsReducer,
   checkStatusloaderReducer,
+  isStatusCheckedReducer,
 });
 
 export default rootReducer;

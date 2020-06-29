@@ -23,18 +23,15 @@ function LearnWordCardContainer(props) {
     correctCardHandler,
     isCorrect,
     showNewCardHandler,
-    checkStatusSessionHandler,
-    isCheckStatusLoading,
   } = props;
   const [currentWord, setCurrentWord] = useState();
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-
   const audio = new Audio();
 
-  if (isWordsLoading || isCheckStatusLoading) {
+  if (isWordsLoading) {
     return <LoadingSpinner />;
   }
-  if (appMode !== 'Savannah') {
+  if (appMode !== 'Savannah' || wordsCollection.length < 1) {
     changeAppMode('Savannah');
     return <LoadingSpinner />;
   }
@@ -73,16 +70,13 @@ LearnWordCardContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array).isRequired,
   appMode: PropTypes.string.isRequired,
   isWordsLoading: PropTypes.bool,
-  isCheckStatusLoading: PropTypes.bool,
   correctCardHandler: PropTypes.func.isRequired,
   showNewCardHandler: PropTypes.func.isRequired,
   isCorrect: PropTypes.bool,
-  checkStatusSessionHandler: PropTypes.func.isRequired,
 };
 
 LearnWordCardContainer.defaultProps = {
   isWordsLoading: false,
-  isCheckStatusLoading: false,
   isCorrect: false,
 };
 const mapStateToProps = (state) => {
