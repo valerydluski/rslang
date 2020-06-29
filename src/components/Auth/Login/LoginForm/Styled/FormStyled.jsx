@@ -35,6 +35,11 @@ const FormStyled = styled.form`
     font-style: normal;
     font-weight: bold;
     font-size: 34px;
+
+    &:hover {
+      cursor: pointer;
+      background: #fec246;
+    }
   }
 `;
 
