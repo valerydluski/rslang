@@ -19,6 +19,7 @@ const LoginPageTitleStyled = styled.div`
     font-size: 47.3752px;
     line-height: 56px;
     text-transform: uppercase;
+    margin-right: 20px;
   }
 `;
 
