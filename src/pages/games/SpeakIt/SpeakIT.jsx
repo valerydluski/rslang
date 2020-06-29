@@ -43,6 +43,7 @@ const SpeakIT = (props) => {
     changeLastRound,
     changePassedRound,
     passedRound,
+    wrongWords,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -149,14 +150,15 @@ const SpeakIT = (props) => {
       toggleGameMode(true);
       microphone.stopMicrophone();
       setListening(false);
-      const { lastRound, gameStatistic } = createGameEndData(
+      const { lastRound, roundsStatistic } = createGameEndData(
         Level,
         Page,
         wordsCollection,
-        passedRound
+        passedRound,
+        wrongWords
       );
       changeLastRound(lastRound);
-      changePassedRound(gameStatistic);
+      changePassedRound(roundsStatistic);
     }
   };
 
@@ -229,6 +231,7 @@ SpeakIT.propTypes = {
   changeLastRound: PropTypes.func.isRequired,
   changePassedRound: PropTypes.func.isRequired,
   passedRound: PropTypes.instanceOf(Array).isRequired,
+  wrongWords: PropTypes.instanceOf(Array).isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -255,6 +258,7 @@ const mapStateToProps = (state) => {
     currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage.count,
     passedRound: state.changeStatistic.SpeakITPassedRound,
+    wrongWords: state.gamesReducer.IDontKnowWords,
   };
 };
 
