@@ -2,7 +2,7 @@ import { SAVE_USER_SETTINGS, SAVE_USER_NAME } from './types';
 
 const initialState = {
   settings: {
-    name: '',
+    name: 'Buddy',
     language: 'en',
     WordsPerDay: 20,
     CardsPerDay: 20,
