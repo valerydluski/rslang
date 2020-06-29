@@ -1,9 +1,13 @@
+import { setLocale } from 'react-redux-i18n';
 import { SAVE_USER_SETTINGS, SAVE_USER_NAME } from './types';
 
 export function saveUserSettings(data) {
-  return {
-    type: SAVE_USER_SETTINGS,
-    payload: data,
+  return (dispatch) => {
+    console.log(data);
+    return {
+      type: SAVE_USER_SETTINGS,
+      payload: data,
+    };
   };
 }
 
