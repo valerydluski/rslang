@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import errorSound from '../../assets/audio/error.mp3';
+import shuffleArray from '../../utils/shuffleArray';
 import correctSound from '../../assets/audio/correct.mp3';
 
 const wordsArr = ['man', 'woman', 'rookie', 'chance'];
@@ -40,35 +41,13 @@ const WordToGuess = (props) => {
     
   
     return <div>
-      <p id = 'title' index = {words.id} data-index-translate = {words.id}>
+      <p id = 'title' data-index-translate = {words.id} data-index-match = {words.wordTranslate}>
         {words.word}
       </p>
     </div>;
   };
   
   
-  const SavannahComponent = (props) => {
-    const {
-      wordsForRender,
-      correctWord,
-      UserAnswer,
-      isWordFinished,
-      isCorrect,
-      selectedIndex,
-      correctIndex,
-      translations
-    } = props;
-  
-    console.log(wordsForRender);
-
-    const wordsCards = wordsForRender.map((word, index) => {
-      return <p key={word} index={index} data-index-translate = {word.id}>
-       {word.word}
-        </p>;
-    });
-  
-    return <div onClick={clickHandler}>{wordsCards}</div>;
-  };
 
   const SavannahComponentTranslation = (props) => {
     const {
@@ -81,11 +60,9 @@ const WordToGuess = (props) => {
       correctIndex,
       translations
     } = props;
-  
-    console.log(wordsForRender);
 
-    const wordsCards = wordsForRender.map((word, index) => {
-      return <p key={word.id} index={index} data-index-translate = {word.id}>
+    const wordsCards = shuffleArray(wordsForRender).map((word, index) => {
+      return <p className={'translation'} key={word.id} data-index={index} data-index-translate = {word.id}>
        {word.wordTranslate}
         </p>;
     });
@@ -93,11 +70,20 @@ const WordToGuess = (props) => {
     return <div onClick={clickHandler}>{wordsCards}</div>;
   };
   
-  document.addEventListener('keydown', (event) => {
+  const numberClickHandler = (event) => {
     if (event.key > 0 && event.key < 5) {
-    console.log(event.key);
-    }
-  })
+      console.log(document.getElementsByClassName('translation')[event.key - 1].textContent, document.getElementById('title').dataset.indexMatch)
+      if (document.getElementsByClassName('translation')[event.key - 1].textContent === document.getElementById('title').dataset.indexMatch) {
+        result = true;
+        playResultSound(result);
+        }
+        else {
+          result = false;
+          mistakes += 1;
+        }
+        playResultSound(result)
+      }
+  }
 
 
-  export {SavannahComponent, WordToGuess, clickHandler, wordsArr, translations, SavannahComponentTranslation, mistakes}
+  export {WordToGuess, clickHandler, wordsArr, translations, SavannahComponentTranslation, mistakes, result, numberClickHandler}
