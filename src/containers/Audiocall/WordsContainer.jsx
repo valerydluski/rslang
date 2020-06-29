@@ -34,9 +34,11 @@ const WordsContainer = (props) => {
     return <Word key={word.word} index={index} translation={word.wordTranslate} />;
   });
 
+  const wordAudio = new Audio();
+
   const playResultSound = (isOk) => {
-    const wordAudio = new Audio();
     wordAudio.src = isOk ? correctSound : errorSound;
+    wordAudio.load();
     wordAudio.play();
   };
 

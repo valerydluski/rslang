@@ -6,9 +6,10 @@ const ModalStyled = styled.div`
   align-items: center;
   justify-content: center;
   width: 60%;
-  height: 800px;
-  overflow: auto;
-
+  min-width: fit-content;
+  height: 90vh;
+  min-height: fit-content;
+  padding: 10px;
   flex-direction: column;
   border-radius: 20px;
   background-color: white;

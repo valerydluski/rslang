@@ -10,9 +10,11 @@ const SprintControlsContainer = ({ clickHandler, isAnswerCorrect, isWordFinished
   const buttonTrueText = 'true';
   const buttonFalseText = 'false';
 
+  const resultAudio = new Audio();
+
   const playResultSound = (isOk) => {
-    const resultAudio = new Audio();
     resultAudio.src = isOk ? correctSound : errorSound;
+    resultAudio.load();
     resultAudio.play();
   };
 

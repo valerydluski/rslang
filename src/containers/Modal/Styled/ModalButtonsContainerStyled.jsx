@@ -2,12 +2,11 @@ import styled from 'styled-components';
 
 const ModalButtonsContainerStyled = styled.div`
   display: flex;
+  width: 95%;
   flex-direction: row;
-  padding-top: 10px;
-  padding-bottom: 10px;
   align-items: center;
-  justify-content: center;
-  margin-top: 5px;
+  justify-content: space-between;
+  margin-top: 10px;
 `;
 
 export default ModalButtonsContainerStyled;
