@@ -53,6 +53,7 @@ const translations = {
       signIn: 'Sign In',
       signUp: 'Sign Up',
       register: 'Register',
+      choose: 'Choose',
     },
     Languages: {
       en: 'English',
@@ -67,6 +68,10 @@ const translations = {
       password:
         'Password must contain numbers, uppercase and lowercase letter, one of the following characters +-_@$!%*?&#.,;:[]{}',
       email: 'Invalid email address',
+    },
+    GameStatus: {
+      page: 'Page',
+      level: 'Level',
     },
   },
   ru: {
@@ -123,6 +128,7 @@ const translations = {
       signIn: 'Войти',
       signUp: 'Зарегестрироваться',
       register: 'Регистрация',
+      choose: 'Выбрать',
     },
     Languages: {
       en: 'Английский',
@@ -137,6 +143,10 @@ const translations = {
       password:
         'Пароль должен содержать числа, буквы верхнего и нижнего регистра, один из следующих символов +-_@$!%*?&#.,;:[]{}',
       email: 'Неправильный адрес электронной почты',
+    },
+    GameStatus: {
+      page: 'Страница',
+      level: 'Уровень',
     },
   },
 };
