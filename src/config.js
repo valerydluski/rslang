@@ -80,3 +80,12 @@ export const CHECKBOXES = [
   'translate',
   'imageAssociation',
 ];
+
+export const GAME_NAME = {
+  speakIT: 'SpeakIT',
+  englishPuzzle: 'EnglishPuzzle',
+  savannah: 'Savannah',
+  audioCall: 'AudioCall',
+  sprint: 'Sprint',
+  ownGame: 'OwnGame',
+};

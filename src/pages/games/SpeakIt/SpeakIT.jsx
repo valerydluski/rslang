@@ -15,14 +15,17 @@ import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
-import { LINK_FOR_IMAGE } from '../../../config';
+import { LINK_FOR_IMAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
+import createGameEndData from '../../../utils/createGameEndData';
+import { changeSpeakItLastRound } from '../../../redux/Statistic/action';
 
 const addScore = 100;
 
 const SpeakIT = (props) => {
   const {
+    gameName,
     Level,
     Page,
     wordsCollection,
@@ -40,6 +43,7 @@ const SpeakIT = (props) => {
     changePage,
     changeLevel,
     maxPage,
+    changeLastRound,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -54,8 +58,8 @@ const SpeakIT = (props) => {
   let IDontKnowWords = gameWords.slice();
   checkStatusSession();
   if (isWordsLoading) return <LoadingSpinner />;
-  if (currentAppMode !== 'SpeakIT') {
-    switchAppMode('SpeakIT');
+  if (currentAppMode !== gameName) {
+    switchAppMode(gameName);
     return <LoadingSpinner />;
   }
 
@@ -145,6 +149,8 @@ const SpeakIT = (props) => {
       toggleGameMode(true);
       microphone.stopMicrophone();
       setListening(false);
+      const { lastRound } = createGameEndData(Level, Page);
+      changeLastRound(lastRound);
     }
   };
 
@@ -216,6 +222,8 @@ SpeakIT.propTypes = {
   changeLevel: PropTypes.func.isRequired,
   changePage: PropTypes.func.isRequired,
   maxPage: PropTypes.number,
+  gameName: PropTypes.string,
+  changeLastRound: PropTypes.func.isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -232,6 +240,7 @@ SpeakIT.defaultProps = {
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
   maxPage: 60,
+  gameName: GAME_NAME.speakIT,
 };
 
 const mapStateToProps = (state) => {
@@ -252,6 +261,7 @@ const mapDispatchToProps = {
   switchAppMode: changeAppMode,
   changeLevel: changeSpeakItLevel,
   changePage: changeSpeakItPage,
+  changeLastRound: changeSpeakItLastRound,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);
