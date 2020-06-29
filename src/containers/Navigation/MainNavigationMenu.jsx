@@ -4,11 +4,11 @@ import StyledMainNavigationMenu from '../../components/Navigation/styled/StyledM
 
 export default function MainNavigationMenu() {
   const links = [
-    { name: 'Home', href: '/home' },
-    { name: 'Promo', href: '/promo' },
-    { name: 'Abous Us', href: '/about-us' },
-    { name: 'Dictionary', href: '/dictionary' },
-    { name: 'Statistics', href: '/statistics' },
+    { name: 'HomePage.home', href: '/home' },
+    { name: 'HomePage.promo', href: '/promo' },
+    { name: 'HomePage.about', href: '/about-us' },
+    { name: 'HomePage.dictionary', href: '/dictionary' },
+    { name: 'HomePage.statistics', href: '/statistics' },
   ];
 
   return (
