@@ -9,6 +9,7 @@ import Logo from '../../../UI/Logo/Logo';
 import LoginPageTitle from '../../Login/LoginPageTitle/LoginPageTitle';
 import FormNameStyled from '../../Login/LoginForm/Styled/FormNameStyled';
 import FormStyled from '../../Login/LoginForm/Styled/FormStyled';
+import PatternStyled from '../../Login/LoginForm/Styled/PatternStyled';
 
 const formName = 'Sign up';
 
@@ -41,6 +42,7 @@ const RegistrationForm = (props) => {
           OK
         </button>
       </FormStyled>
+      <PatternStyled />
     </LoginFormWrapperStyled>
   );
 };

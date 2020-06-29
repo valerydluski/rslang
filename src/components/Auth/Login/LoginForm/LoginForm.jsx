@@ -10,6 +10,7 @@ import FormStyled from './Styled/FormStyled';
 import Logo from '../../../UI/Logo/Logo';
 import LoginPageTitle from '../LoginPageTitle/LoginPageTitle';
 import FormNameStyled from './Styled/FormNameStyled';
+import PatternStyled from './Styled/PatternStyled';
 
 const formName = 'Sign in';
 
@@ -44,6 +45,7 @@ const LoginForm = (props) => {
           OK
         </button>
       </FormStyled>
+      <PatternStyled />
     </LoginFormWrapperStyled>
   );
 };
