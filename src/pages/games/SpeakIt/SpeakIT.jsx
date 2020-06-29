@@ -18,6 +18,7 @@ import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import { LINK_FOR_IMAGE } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
+import StatusMenu from '../../../components/SpeakIT/StatusMenu/StatusMenu';
 
 const addScore = 100;
 
@@ -161,6 +162,7 @@ const SpeakIT = (props) => {
           />
         ) : null}
         <Image src={srcForImage} />
+        <StatusMenu />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
         <CardsContainerSpeakIT cardHandler={cardHandler} wordsCollection={wordsCollection} />
