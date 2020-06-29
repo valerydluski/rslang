@@ -7,9 +7,22 @@ import SprintContainerStyled from '../../../containers/Sprint/Styled/SprintConta
 import SprintGameContainer from '../../../containers/Sprint/SprintGameContainer';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import Timer from '../../../components/Sprint/Timer';
+import StatusMenu from '../../../components/StatusMenu/StatusMenu';
+import { changeSprintLevel, changeSprintPage } from '../../../redux/ChangeRounds/action';
+import { GAME_MAX_PAGE } from '../../../config';
 
 const Sprint = (props) => {
-  const { wordsCollection, switchAppMode, isWordsLoading, currentAppMode } = props;
+  const {
+    wordsCollection,
+    switchAppMode,
+    isWordsLoading,
+    currentAppMode,
+    updateLevel,
+    updatePage,
+    page,
+    level,
+    maxPage,
+  } = props;
   const [isGameFinished, toggleGameMode] = useState(false);
 
   if (isWordsLoading) return <LoadingSpinner />;
@@ -33,6 +46,13 @@ const Sprint = (props) => {
   return (
     <SprintContainerStyled>
       <GoToHomePageButton />
+      <StatusMenu
+        page={page}
+        level={level}
+        maxPage={maxPage}
+        updateLevel={updateLevel}
+        updatePage={updatePage}
+      />
       <Timer
         initialTime={secondsForGuessing}
         timeIsUpHandler={timeIsUpHandler}
@@ -52,6 +72,11 @@ Sprint.propTypes = {
   switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
   currentAppMode: PropTypes.string,
+  updateLevel: PropTypes.func,
+  updatePage: PropTypes.func,
+  level: PropTypes.string,
+  page: PropTypes.string,
+  maxPage: PropTypes.number,
 };
 
 Sprint.defaultProps = {
@@ -59,6 +84,11 @@ Sprint.defaultProps = {
   switchAppMode: () => {},
   isWordsLoading: false,
   currentAppMode: '',
+  updatePage: () => {},
+  updateLevel: () => {},
+  level: '1',
+  page: '1',
+  maxPage: GAME_MAX_PAGE,
 };
 
 const mapStateToProps = (state) => {
@@ -66,11 +96,16 @@ const mapStateToProps = (state) => {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
+    level: state.changeRound.SprintLevel,
+    page: state.changeRound.SprintPage,
+    maxPage: state.maxPage.maxPage.count,
   };
 };
 
 const mapDispatchToProps = {
   switchAppMode: changeAppMode,
+  updateLevel: changeSprintLevel,
+  updatePage: changeSprintPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sprint);

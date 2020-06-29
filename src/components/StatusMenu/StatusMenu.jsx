@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {
-  changeEnglishPuzzleLevel,
-  changeEnglishPuzzlePage,
-} from '../../../../redux/ChangeRounds/action';
 import Menu from './Styled/Menu';
 import MenuItem from './Styled/MenuItem';
 import Title from './Styled/Title';
 import SelectContainer from './Styled/SelectContainer';
-import Overlay from './Styled/Overlay';
-import Select from '../../../UI/Select/Select';
-import { DIRECTION_ROW } from '../../../UI/Select/Styled/constants';
+import Overlay from '../UI/Overlay/Overlay';
+import Select from '../UI/Select/Select';
+import { DIRECTION_ROW } from '../UI/Select/Styled/constants';
 import { ITEM_PAGE, ITEM_LEVEL } from './constants';
-import { GAME_MAX_PAGE, GAME_MAX_LEVEL } from '../../../../config';
+import { GAME_MAX_PAGE, GAME_MAX_LEVEL } from '../../config';
 
 const StatusMenu = (props) => {
   const { level, page, maxPage, updateLevel, updatePage } = props;
@@ -23,10 +18,12 @@ const StatusMenu = (props) => {
 
   const switchLevel = () => {
     toggleLevel(!isLevelOpen);
+    togglePage(false);
   };
 
   const switchPage = () => {
     togglePage(!isPageOpen);
+    toggleLevel(false);
   };
 
   const onLevelOptionClick = (event) => {
@@ -92,19 +89,4 @@ StatusMenu.defaultProps = {
   maxPage: GAME_MAX_PAGE,
 };
 
-function mapStateToProps(state) {
-  return {
-    level: state.changeRound.EnglishPuzzleLevel,
-    page: state.changeRound.EnglishPuzzlePage,
-    maxPage: state.maxPage.maxPage.count,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    updateLevel: (level) => dispatch(changeEnglishPuzzleLevel(level)),
-    updatePage: (page) => dispatch(changeEnglishPuzzlePage(page)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StatusMenu);
+export default StatusMenu;
