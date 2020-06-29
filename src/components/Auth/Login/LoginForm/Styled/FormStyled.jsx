@@ -6,7 +6,7 @@ const FormStyled = styled.form`
   justify-self: start;
   margin-left: 150px;
   display: grid;
-  grid-template-rows: 20% 20% 10% 50%;
+  grid-template-rows: 15% 15% 15% 55%;
   height: 100%;
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
