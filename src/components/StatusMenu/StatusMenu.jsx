@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
-import Menu from '../../EnglishPuzzle/Menu/StatusMenu/Styled/Menu';
-import MenuItem from '../../EnglishPuzzle/Menu/StatusMenu/Styled/MenuItem';
-import Title from '../../EnglishPuzzle/Menu/StatusMenu/Styled/Title';
-import SelectContainer from '../../EnglishPuzzle/Menu/StatusMenu/Styled/SelectContainer';
-import Overlay from '../../UI/Overlay/Overlay';
-import Select from '../../UI/Select/Select';
-import { DIRECTION_ROW } from '../../UI/Select/Styled/constants';
-import { ITEM_PAGE, ITEM_LEVEL } from '../../EnglishPuzzle/Menu/StatusMenu/constants';
-import { GAME_MAX_PAGE, GAME_MAX_LEVEL } from '../../../config';
+import Menu from './Styled/Menu';
+import MenuItem from './Styled/MenuItem';
+import Title from './Styled/Title';
+import SelectContainer from './Styled/SelectContainer';
+import Overlay from '../UI/Overlay/Overlay';
+import Select from '../UI/Select/Select';
+import { DIRECTION_ROW } from '../UI/Select/Styled/constants';
+import { ITEM_PAGE, ITEM_LEVEL } from './constants';
+import { GAME_MAX_PAGE, GAME_MAX_LEVEL } from '../../config';
 
 const StatusMenu = (props) => {
   const { level, page, maxPage, updateLevel, updatePage } = props;
@@ -91,19 +89,4 @@ StatusMenu.defaultProps = {
   maxPage: GAME_MAX_PAGE,
 };
 
-function mapStateToProps(state) {
-  return {
-    level: state.changeRound.SpeakITLevel,
-    page: state.changeRound.SpeakITPage,
-    maxPage: state.maxPage.maxPage.count,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    updateLevel: (level) => dispatch(changeSpeakItLevel(level)),
-    updatePage: (page) => dispatch(changeSpeakItPage(page)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StatusMenu);
+export default StatusMenu;
