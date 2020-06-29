@@ -22,7 +22,13 @@ const SprintGameContainer = (props) => {
   if (!currentWordIndex) currentGameWords = shuffleArray(wordsCollection);
   if (isGameFinished) {
     addWrongWordsToStore(wrongAnsweredWords);
-    return <ResultModal showProperties={['word', 'wordTranslate']} />;
+    return (
+      <ResultModal
+        correctWords={correctAnsweredWords}
+        showProperties={['word', 'wordTranslate']}
+        audioForPlay="audio"
+      />
+    );
   }
   const currentWord = currentGameWords[currentWordIndex];
   const currentRightAnswer = Boolean(randomIntegerGenerator(0, 1));
