@@ -3,7 +3,7 @@ import { SAVE_USER_SETTINGS, SAVE_USER_NAME } from './types';
 
 export function saveUserSettings(data) {
   return (dispatch) => {
-    console.log(data);
+    dispatch(setLocale(data.language));
     return {
       type: SAVE_USER_SETTINGS,
       payload: data,

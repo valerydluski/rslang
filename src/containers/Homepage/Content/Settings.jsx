@@ -31,8 +31,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = {
-  saveSettings: saveUserSettings,
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveSettings: (data) => dispatch(saveUserSettings(data)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingContent);
