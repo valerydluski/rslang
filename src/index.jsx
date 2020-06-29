@@ -13,13 +13,14 @@ import App from './App';
 import rootReducer from './redux/rootReducer';
 import watchSaga from './redux/sagas';
 import history from './utils/history';
+import { DEFAULT_LANGUAGE } from './config';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware, thunk)));
 syncTranslationWithStore(store);
 store.dispatch(loadTranslations(translations));
-store.dispatch(setLocale('ru'));
+store.dispatch(setLocale(DEFAULT_LANGUAGE));
 
 sagaMiddleware.run(watchSaga);
 

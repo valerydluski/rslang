@@ -26,6 +26,10 @@ export const API = {
 };
 
 export const DEFAULT_LANGUAGE = 'ru';
+export const SUPPORTED_LANGUAGES = {
+  en: 'en',
+  ru: 'ru',
+}
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 export const LINK_FOR_ENGLISH_PUZZLE_IMAGE =
