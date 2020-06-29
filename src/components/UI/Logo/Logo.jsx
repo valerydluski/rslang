@@ -5,6 +5,13 @@ import styled from 'styled-components';
 const LogoContainer = styled.div`
   display: flex;
   cursor: pointer;
+
+  &.login-form_logo {
+    grid-area: logo;
+    place-self: start;
+    margin-top: 56px;
+    margin-left: 59px;
+  }
 `;
 
 const LogoImage = styled.div`
@@ -38,9 +45,9 @@ const LogoImageText = styled.p`
 `;
 
 function Logo(props) {
-  const { onClick } = props;
+  const { onClick, className } = props;
   return (
-    <LogoContainer onClick={onClick}>
+    <LogoContainer onClick={onClick} className={className}>
       <LogoImage>
         <LogoImageText>RS</LogoImageText>
       </LogoImage>
@@ -51,10 +58,12 @@ function Logo(props) {
 
 Logo.propTypes = {
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 Logo.defaultProps = {
   onClick: () => {},
+  className: '',
 };
 
 export default Logo;
