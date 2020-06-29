@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { Translate } from 'react-redux-i18n';
 import emailValidator from '../../../../utils/validators/emailValidator';
 import passwordValidator from '../../../../utils/validators/passwordValidator';
 import Input from '../../../UI/Input/Input';
@@ -27,10 +28,12 @@ const LoginForm = (props) => {
         validate={passwordValidator}
       />
       <div>
-        <Link to="/registration">Register</Link>
+        <Link to="/registration">
+          <Translate value="Buttons.register" />
+        </Link>
       </div>
       <button type="submit" aria-label="Sign In">
-        Sign In
+        <Translate value="Buttons.signIn" />
       </button>
     </form>
   );

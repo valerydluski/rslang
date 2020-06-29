@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
+import { I18n, Translate } from 'react-redux-i18n';
 import Input from '../../../../UI/Input/Input';
 import WordsPerDayValidator from '../../../../../utils/validators/WordsPerDayValidator';
 import RadioButton from '../../../../UI/RadioButton/RadioButton';
@@ -9,28 +10,26 @@ import nameValidator from '../../../../../utils/validators/nameValidator';
 const AppSettings = ({ checkboxes }) => {
   return (
     <>
-      <h3>Application settings</h3>
+      <h3>
+        <Translate value="Settings.appSettings" />
+      </h3>
       <Field
         name="name"
         key="name"
         type="text"
-        placeholder="user name"
+        placeholder={I18n.t('Settings.userName')}
         component={Input}
         validate={nameValidator}
       />
       <Field name="language" key="language" component="select">
-        <option value="en" key="en">
-          English
-        </option>
-        <option value="ru" key="ru">
-          Russian
-        </option>
+        <option value="en" key="en" label={I18n.t('Languages.en')} />
+        <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
       </Field>
       <Field
         name="WordsPerDay"
         key="WordsPerDay"
         type="number"
-        placeholder="Words per day"
+        placeholder={I18n.t('Settings.wordsPerDay')}
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
@@ -40,7 +39,7 @@ const AppSettings = ({ checkboxes }) => {
         key="CardsPerDay"
         type="number"
         component={Input}
-        placeholder="Cards per day"
+        placeholder={I18n.t('Settings.cardsPerDay')}
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
       />
@@ -71,7 +70,9 @@ const AppSettings = ({ checkboxes }) => {
           { value: 'repeat', text: 'repeat' },
         ]}
       />
-      <h3>info in cards</h3>
+      <h3>
+        <Translate value="Settings.infoInCards" />
+      </h3>
       {checkboxes.map((el) => {
         return <Field name={el} key={el} id={el} component={Input} type="checkbox" label={el} />;
       })}

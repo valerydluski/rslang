@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Translate } from 'react-redux-i18n';
 import emailValidator from '../../../../utils/validators/emailValidator';
 import passwordValidator from '../../../../utils/validators/passwordValidator';
 import Input from '../../../UI/Input/Input';
@@ -27,7 +28,7 @@ const RegistrationForm = (props) => {
         validate={passwordValidator}
       />
       <button type="submit" aria-label="Sign In">
-        Sign Up
+        <Translate value="Buttons.signUp" />
       </button>
     </form>
   );

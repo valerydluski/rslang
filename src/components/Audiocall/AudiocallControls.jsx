@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 import { NextButtonStyled, DontKnowButtonStyled } from './styled/StyledAudiocallControls';
 
 const DontKnowButton = ({ clickHandler }) => (
-  <DontKnowButtonStyled onClick={clickHandler}>I don&apos;t know</DontKnowButtonStyled>
+  <DontKnowButtonStyled onClick={clickHandler}>
+    <Translate value="Buttons.dontKnow" />
+  </DontKnowButtonStyled>
 );
 
 const NextButton = ({ clickHandler }) => <NextButtonStyled onClick={clickHandler} />;

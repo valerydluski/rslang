@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { I18n } from 'react-redux-i18n';
 import ModalContentStyled from './Styled/ModalContentStyled';
 import ModalWordsBlock from '../../components/Modal/ModalWordsBlock';
 
@@ -18,7 +19,7 @@ const ModalContent = (props) => {
         return (
           <ModalWordsBlock
             showProperties={showProperties}
-            header="I know"
+            header={I18n.t('ModalWindows.know')}
             words={iKnowWords}
             wordsCollection={wordsCollection}
             wordHandler={wordHandler}
@@ -29,7 +30,7 @@ const ModalContent = (props) => {
         return (
           <ModalWordsBlock
             showProperties={showProperties}
-            header="I don't know"
+            header={I18n.t('ModalWindows.doNotKnow')}
             words={IDontKnowWords}
             wordsCollection={wordsCollection}
             wordHandler={wordHandler}
@@ -41,7 +42,7 @@ const ModalContent = (props) => {
           <>
             <ModalWordsBlock
               showProperties={showProperties}
-              header="I don't know"
+              header={I18n.t('ModalWindows.know')}
               words={IDontKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
@@ -49,7 +50,7 @@ const ModalContent = (props) => {
             />
             <ModalWordsBlock
               showProperties={showProperties}
-              header="I know"
+              header={I18n.t('ModalWindows.doNotKnow')}
               words={iKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}

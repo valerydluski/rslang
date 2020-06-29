@@ -29,7 +29,7 @@ export const DEFAULT_LANGUAGE = 'ru';
 export const SUPPORTED_LANGUAGES = {
   en: 'en',
   ru: 'ru',
-}
+};
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 export const LINK_FOR_AUDIO = LINK_FOR_IMAGE;
@@ -38,32 +38,32 @@ export const LINK_FOR_ENGLISH_PUZZLE_IMAGE =
 
 export const GAME_LIST = [
   {
-    title: 'Savannah',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.savannah',
+    description: 'Games.savannahDescription',
     poster: savannahPoster,
     onClick: getRedirectFunction('/StartGame/Savannah/'),
   },
   {
-    title: 'SpeakIT',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.speakIT',
+    description: 'Games.speakITDescription',
     poster: speakItPoster,
     onClick: getRedirectFunction('/StartGame/SpeakIT/'),
   },
   {
-    title: 'Puzzle',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.puzzle',
+    description: 'Games.puzzleDescription',
     poster: puzzlePoster,
     onClick: getRedirectFunction('/StartGame/EnglishPuzzle/'),
   },
   {
-    title: 'AudioCall',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.audioCall',
+    description: 'Games.audioCallDescription',
     poster: audioCallPoster,
     onClick: getRedirectFunction('/StartGame/AudioCall/'),
   },
   {
-    title: 'Sprint',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.sprint',
+    description: 'Games.sprintDescription',
     poster: sprintPoster,
     onClick: getRedirectFunction('/StartGame/Sprint/'),
   },
