@@ -8,12 +8,18 @@ import Input from '../../../UI/Input/Input';
 import LoginFormWrapperStyled from './Styled/LoginFormWrapperStyled';
 import FormStyled from './Styled/FormStyled';
 import Logo from '../../../UI/Logo/Logo';
+import LoginPageTitle from '../LoginPageTitle/LoginPageTitle';
+import FormNameStyled from './Styled/FormNameStyled';
+
+const formName = 'Sign in';
 
 const LoginForm = (props) => {
   const { handleSubmit } = props;
   return (
     <LoginFormWrapperStyled>
       <Logo className="login-form_logo" />
+      <LoginPageTitle />
+      <FormNameStyled>{formName}</FormNameStyled>
       <FormStyled onSubmit={handleSubmit}>
         <Field
           name="email"

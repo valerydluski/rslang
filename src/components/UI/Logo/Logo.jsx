@@ -8,9 +8,9 @@ const LogoContainer = styled.div`
 
   &.login-form_logo {
     grid-area: logo;
-    place-self: start;
-    margin-top: 56px;
-    margin-left: 59px;
+    align-self: center;
+    justify-self: start;
+    margin-left: 60px;
   }
 `;
 
