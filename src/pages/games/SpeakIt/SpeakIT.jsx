@@ -19,7 +19,7 @@ import { LINK_FOR_IMAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 import createGameEndData from '../../../utils/createGameEndData';
-import { changeSpeakItLastRound } from '../../../redux/Statistic/action';
+import { changeSpeakItLastRound, changeSpeakITPassedRound } from '../../../redux/Statistic/action';
 
 const addScore = 100;
 
@@ -29,10 +29,7 @@ const SpeakIT = (props) => {
     Level,
     Page,
     wordsCollection,
-    imageSrc,
-    translate,
     listening,
-    transcript,
     microphone,
     speakITScore,
     changeScore,
@@ -44,16 +41,20 @@ const SpeakIT = (props) => {
     changeLevel,
     maxPage,
     changeLastRound,
+    changePassedRound,
+    passedRound,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
 
-  const [srcForImage, setSrcForImage] = useState(imageSrc);
-  const [textForTextField, setTranslate] = useState(translate);
+  const [srcForImage, setSrcForImage] = useState(
+    'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg'
+  );
+  const [textForTextField, setTranslate] = useState('');
   const [isListening, setListening] = useState(listening);
-  const [transcriptFromMicrophone, setTranscript] = useState(transcript);
+  const [transcriptFromMicrophone, setTranscript] = useState('');
   const [isGameFinished, toggleGameMode] = useState(false);
   let IDontKnowWords = gameWords.slice();
   checkStatusSession();
@@ -62,7 +63,6 @@ const SpeakIT = (props) => {
     switchAppMode(gameName);
     return <LoadingSpinner />;
   }
-
   const newScoreHandler = () => {
     changeScore(newScore);
   };
@@ -149,8 +149,14 @@ const SpeakIT = (props) => {
       toggleGameMode(true);
       microphone.stopMicrophone();
       setListening(false);
-      const { lastRound } = createGameEndData(Level, Page);
+      const { lastRound, gameStatistic } = createGameEndData(
+        Level,
+        Page,
+        wordsCollection,
+        passedRound
+      );
       changeLastRound(lastRound);
+      changePassedRound(gameStatistic);
     }
   };
 
@@ -208,10 +214,7 @@ SpeakIT.propTypes = {
   Level: PropTypes.string,
   Page: PropTypes.string,
   speakITScore: PropTypes.number,
-  imageSrc: PropTypes.string,
-  translate: PropTypes.string,
   listening: PropTypes.bool,
-  transcript: PropTypes.string,
   wordsCollection: PropTypes.instanceOf(Array),
   microphone: PropTypes.instanceOf(Microphone),
   changeScore: PropTypes.func,
@@ -224,16 +227,15 @@ SpeakIT.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   changeLastRound: PropTypes.func.isRequired,
+  changePassedRound: PropTypes.func.isRequired,
+  passedRound: PropTypes.instanceOf(Array).isRequired,
 };
 
 SpeakIT.defaultProps = {
   Level: '',
   Page: '',
   speakITScore: 0,
-  imageSrc: 'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg',
-  translate: '',
   listening: false,
-  transcript: '',
   wordsCollection: [],
   microphone: new Microphone(),
   changeScore: () => {},
@@ -252,6 +254,7 @@ const mapStateToProps = (state) => {
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage.count,
+    passedRound: state.changeStatistic.SpeakITPassedRound,
   };
 };
 
@@ -262,6 +265,7 @@ const mapDispatchToProps = {
   changeLevel: changeSpeakItLevel,
   changePage: changeSpeakItPage,
   changeLastRound: changeSpeakItLastRound,
+  changePassedRound: changeSpeakITPassedRound,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);
