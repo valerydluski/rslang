@@ -32,6 +32,7 @@ export const SUPPORTED_LANGUAGES = {
 }
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
+export const LINK_FOR_AUDIO = LINK_FOR_IMAGE;
 export const LINK_FOR_ENGLISH_PUZZLE_IMAGE =
   'https://raw.githubusercontent.com/valerydluski/Images/master/';
 
