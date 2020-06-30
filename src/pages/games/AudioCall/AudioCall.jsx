@@ -11,8 +11,10 @@ import ResultModal from '../../../containers/Modal/ResultModal';
 import shuffleArray from '../../../utils/shuffleArray';
 import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
+import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
-import { LINK_FOR_IMAGE } from '../../../config';
+import { changeAudioCallLevel, changeAudioCallPage } from '../../../redux/ChangeRounds/action';
+import { LINK_FOR_IMAGE, GAME_MAX_PAGE } from '../../../config';
 
 let currentGameWords;
 let answerResult = {};
@@ -23,6 +25,11 @@ const AudioCall = ({
   switchAppMode,
   isWordsLoading,
   currentAppMode,
+  updateLevel,
+  updatePage,
+  page,
+  level,
+  maxPage,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -103,6 +110,13 @@ const AudioCall = ({
         </>
       ) : (
         <>
+          <StatusMenu
+            page={page}
+            level={level}
+            maxPage={maxPage}
+            updateLevel={updateLevel}
+            updatePage={updatePage}
+          />
           <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
           <WordsContainer
             words={additionalWords}
@@ -123,6 +137,11 @@ AudioCall.propTypes = {
   switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
   currentAppMode: PropTypes.string,
+  updateLevel: PropTypes.func,
+  updatePage: PropTypes.func,
+  level: PropTypes.string,
+  page: PropTypes.string,
+  maxPage: PropTypes.number,
 };
 
 AudioCall.defaultProps = {
@@ -131,6 +150,11 @@ AudioCall.defaultProps = {
   switchAppMode: () => {},
   isWordsLoading: false,
   currentAppMode: '',
+  updatePage: () => {},
+  updateLevel: () => {},
+  level: '1',
+  page: '1',
+  maxPage: GAME_MAX_PAGE,
 };
 
 const mapStateToProps = (state) => {
@@ -138,12 +162,17 @@ const mapStateToProps = (state) => {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
+    level: state.changeRound.AudioCallLevel,
+    page: state.changeRound.AudioCallPage,
+    maxPage: state.maxPage.maxPage.count,
   };
 };
 
 const mapDispatchToProps = {
   addWordsWithMistakesToStore: changeIDontKnowWords,
   switchAppMode: changeAppMode,
+  updateLevel: changeAudioCallLevel,
+  updatePage: changeAudioCallPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AudioCall);
