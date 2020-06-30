@@ -7,10 +7,14 @@
 }
 
 .english_word {
+    position: absolute;
     text-align: center;
     color: blue;
     margin: 20px;
     font-size: 40px;
+    left: 50%;
+    top: 0;
+    animation: mymove 5s;
   }
 
   .exit-button {
@@ -21,3 +25,8 @@
   .block {
     transition: transform 0.6s cubic-bezier(0.12, 0, 0.39, 0);
   }
+
+  @keyframes mymove {
+    from {top: 0;}
+    to {top: 50%;}
+   }

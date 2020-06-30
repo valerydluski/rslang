@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../Savannah/style.css';
 import styled, { keyframes } from 'styled-components';
-import { slideInDown } from 'react-animations';
+import { CSSTransition } from 'react-transition-group'
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import shuffleArray from '../../../utils/shuffleArray';
 import {SavannahComponentTranslation, WordToGuess, mistakes, result, numberClickHandler} from '../../../components/Savannah/cardComponent'
@@ -12,7 +12,6 @@ import ResultModal from '../../../containers/Modal/ResultModal';
 import changeAppMode from '../../../redux/AppMode/action';
 import {changeIDontKnowWords} from '../../../redux/Games/action';
 
-const Bounce = styled.div`animation: 3s; ${keyframes`${slideInDown}`}`;
 let shuffledCollection;
 
 
@@ -26,6 +25,7 @@ const Savannah = ({
   const [currentWordIndex, changeIndex] = useState(0);
   const [isGameFinished, changeGameMode] = useState(false);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
+  const [inProp, setInProp] = useState(false);
 
 
 
@@ -61,16 +61,13 @@ const Savannah = ({
        structure = 
       <div className="savannah_container">
     <h1>Savannah</h1>
-    <button onClick={exitGame}>Exit</button>
+    <button onClick={exitGame} onKeyPress={switchToNextWord} >Exit</button>
     <div id = 'first'>
-    <Bounce id = 'animation' onAnimationEnd={switchToNextWord}>
-    <div className="english_word">
-      <WordToGuess words = {wordsCollection[currentWordIndex]}/>
+    <div onAnimationEnd={switchToNextWord}>
+      <WordToGuess className= 'english-word' words = {shuffledCollection[currentWordIndex]}/>
       </div>
-      </Bounce>
       <div className="game_words" onClick={switchToNextWord}>
-    <SavannahComponentTranslation wordsForRender = {wordsCollection.slice(currentWordIndex,currentWordIndex + 4)} />
-    <button onClick={switchToNextWord} />
+    <SavannahComponentTranslation wordsForRender = {shuffledCollection.slice(currentWordIndex,currentWordIndex + 4)} />
     {mistakes > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
     </div>
     </div>
@@ -79,7 +76,7 @@ const Savannah = ({
 
     else {
       structure = 
-      <div className="savannah_container">
+      <div className="savannah_container" onKeyDown={numberClickHandler}>
       {currentWordIndex > 9 || mistakes > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
       </div>
     }
@@ -93,7 +90,7 @@ const Savannah = ({
    }
 
 return (
-  <div onKeyPress={numberClickHandler} onKeyDown={switchToNextWord}>
+  <div onKeyPress={numberClickHandler}>
     <GoToHomePageButton />
     {structure}
   </div>

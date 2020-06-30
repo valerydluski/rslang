@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+import '../../pages/games/Savannah/style.css';
 import errorSound from '../../assets/audio/error.mp3';
 import shuffleArray from '../../utils/shuffleArray';
 import correctSound from '../../assets/audio/correct.mp3';
@@ -30,18 +31,11 @@ const clickHandler = (event) => {
 const WordToGuess = (props) => {
     const {
       words,
-      correctWord,
-      UserAnswer,
-      isWordFinished,
-      isCorrect,
-      selectedIndex,
-      correctIndex,
-      translation
     } = props;
     
   
     return <div>
-      <p id = 'title' data-index-translate = {words.id} data-index-match = {words.wordTranslate}>
+      <p id = 'title' data-index-translate = {words.id} data-index-match = {words.wordTranslate} data-index-test = {props.id}>
         {words.word}
       </p>
     </div>;
@@ -72,10 +66,8 @@ const WordToGuess = (props) => {
   
   const numberClickHandler = (event) => {
     if (event.key > 0 && event.key < 5) {
-      console.log(document.getElementsByClassName('translation')[event.key - 1].textContent, document.getElementById('title').dataset.indexMatch)
       if (document.getElementsByClassName('translation')[event.key - 1].textContent === document.getElementById('title').dataset.indexMatch) {
         result = true;
-        playResultSound(result);
         }
         else {
           result = false;
