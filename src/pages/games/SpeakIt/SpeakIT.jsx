@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import { Translate } from 'react-redux-i18n';
 import defaultImg from '../../../assets/img/blank.jpg';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
@@ -140,7 +141,7 @@ const SpeakIT = (props) => {
 
   const finishHandler = () => {
     if (!isListening) {
-      toast.info('you did not start the game');
+      toast.info(<Translate value="ModalWindows.didNotStartGame" />);
     } else {
       changeIDontKnowWordsInStore(wrongWordsState);
       toggleGameMode(true);

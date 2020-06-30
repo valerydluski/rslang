@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 
 const NavigationLink = (props) => {
   const { href, name, activeLinkClass } = props;
   return (
     <NavLink to={href} activeClassName={activeLinkClass}>
-      {name}
+      <Translate value={name} />
     </NavLink>
   );
 };

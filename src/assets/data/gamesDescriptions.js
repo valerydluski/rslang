@@ -1,63 +1,27 @@
 const gameDescriptions = {
   AudioCall: {
-    en: {
-      name: 'AudioCall',
-      description: 'AudioCall description.',
-    },
-    ru: {
-      name: '',
-      description: '',
-    },
+    name: 'Games.audioCall',
+    description: 'Games.audioCallDescription',
   },
   EnglishPuzzle: {
-    en: {
-      name: 'EnglishPuzzle',
-      description: 'EnglishPuzzle description.',
-    },
-    ru: {
-      name: '',
-      description: '',
-    },
+    name: 'Games.puzzle',
+    description: 'Games.puzzleDescription',
   },
   OwnGame: {
-    en: {
-      name: 'OwnGame',
-      description: 'OwnGame description.',
-    },
-    ru: {
-      name: '',
-      description: '',
-    },
+    name: 'Games.ownGame',
+    description: 'Games.ownGameDescription',
   },
   Savannah: {
-    en: {
-      name: 'Savannah',
-      description: 'Savannah description.',
-    },
-    ru: {
-      name: '',
-      description: '',
-    },
+    name: 'Games.savannah',
+    description: 'Savannah description.',
   },
   Sprint: {
-    en: {
-      name: 'Sprint',
-      description: 'Sprint description.',
-    },
-    ru: {
-      name: '',
-      description: '',
-    },
+    name: 'Games.sprint',
+    description: 'Games.sprintDescription',
   },
   SpeakIT: {
-    en: {
-      name: 'SpeakIT',
-      description: 'SpeakIT description.',
-    },
-    ru: {
-      name: '',
-      description: '',
-    },
+    name: 'Games.speakIT',
+    description: 'Games.speakITDescription',
   },
 };
 

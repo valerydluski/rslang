@@ -1,14 +1,16 @@
 import React from 'react';
+import { Translate } from 'react-redux-i18n';
 import LoginPageTittleStyled from './Styled/LoginPageTitleStyled';
-
-const smallTitle = 'Start your study today!';
-const bigTitle = 'learning languages ​​is easy!';
 
 const LoginPageTitle = () => {
   return (
     <LoginPageTittleStyled>
-      <p>{smallTitle}</p>
-      <h2>{bigTitle}</h2>
+      <p>
+        <Translate value="Auth.smallTitle" />
+      </p>
+      <h2>
+        <Translate value="Auth.bigTitle" />
+      </h2>
     </LoginPageTittleStyled>
   );
 };

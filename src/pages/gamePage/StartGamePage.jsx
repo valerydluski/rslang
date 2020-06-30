@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Translate } from 'react-redux-i18n';
 import gamesDescriptions from '../../assets/data/gamesDescriptions';
 import changeAppMode from '../../redux/AppMode/action';
 import StartGamePageStyled from './Styled/StartGamePageStyled';
@@ -15,18 +16,24 @@ import {
 
 const StartGamePage = ({ match }) => {
   const { gameId } = match.params;
-  const { name } = gamesDescriptions[gameId].en;
-  const { description } = gamesDescriptions[gameId].en;
+  const { name } = gamesDescriptions[gameId];
+  const { description } = gamesDescriptions[gameId];
 
   return (
     <StartGamePageStyled>
       <GoToHomePageButton />
       <StartGamePageContent>
         <ContainerNameAndDescription>
-          <GameNameStyled>GAME: {name}</GameNameStyled>
-          <GameDescriptionStyled>{description}</GameDescriptionStyled>
+          <GameNameStyled>
+            <Translate value="StartPage.game" />: <Translate value={name} />
+          </GameNameStyled>
+          <GameDescriptionStyled>
+            <Translate value={description} />
+          </GameDescriptionStyled>
         </ContainerNameAndDescription>
-        <Link to={`/Game/${gameId}`}>Start</Link>
+        <Link to={`/Game/${gameId}`}>
+          <Translate value="Buttons.start" />
+        </Link>
       </StartGamePageContent>
     </StartGamePageStyled>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { I18n } from 'react-redux-i18n';
 import OverlayStyled from './Styled/OverlayStyled';
 import ModalStyled from './Styled/ModalStyled';
 import ModalContent from './ModalContent';
@@ -59,9 +60,9 @@ const ModalResult = (props) => {
           audioForPlay={audioForPlay}
         />
         <ModalButtonsContainerStyled>
-          <Button buttonHandler={restartHandler} text="restart" />
-          <Button buttonHandler={newGameHandler} text="new game" />
-          <Button buttonHandler={statisticHandler} text="statistic" />
+          <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
+          <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
+          <Button buttonHandler={statisticHandler} text={I18n.t('Buttons.statistic')} />
         </ModalButtonsContainerStyled>
       </ModalStyled>
     </OverlayStyled>
