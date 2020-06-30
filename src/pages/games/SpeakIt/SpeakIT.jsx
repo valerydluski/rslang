@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import defaultImg from '../../../assets/img/blank.jpg';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
+import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import CardsContainerSpeakIT from '../../../containers/SpeakIT/CardsContainerSpeakIT';
 import ButtonsContainerSpeakIT from '../../../components/SpeakIT/ButtonsContainerSpeakIt';
 import RecognationTranscriptContainer from '../../../components/SpeakIT/RecognationTranscriptContainer';
@@ -16,7 +17,7 @@ import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
-import { LINK_FOR_IMAGE, GAME_NAME } from '../../../config';
+import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 import createGameEndData from '../../../utils/createGameEndData';
@@ -170,6 +171,13 @@ const SpeakIT = (props) => {
           />
         ) : null}
         <Image src={srcForImage} />
+        <StatusMenu
+          page={Page}
+          level={Level}
+          maxPage={maxPage}
+          updateLevel={changeLevel}
+          updatePage={changePage}
+        />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
         <CardsContainerSpeakIT
@@ -199,6 +207,13 @@ const SpeakIT = (props) => {
         />
       ) : null}
       <Image src={srcForImage} />
+      <StatusMenu
+        page={Page}
+        level={Level}
+        maxPage={maxPage}
+        updateLevel={changeLevel}
+        updatePage={changePage}
+      />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
       <CardsContainerSpeakIT wordsCollection={wordsCollection} wrongWords={wrongWordsState} />
@@ -241,8 +256,8 @@ SpeakIT.defaultProps = {
   changeScore: () => {},
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
-  maxPage: 60,
   gameName: GAME_NAME.speakIT,
+  maxPage: GAME_MAX_PAGE,
 };
 
 const mapStateToProps = (state) => {
