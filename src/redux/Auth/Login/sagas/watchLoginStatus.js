@@ -18,7 +18,8 @@ function* workerStatus() {
   yield put(checkStatusShowLoader());
   const getLoginState = (state) => state.login;
   const sessionData = yield select(getLoginState);
-  const data = yield call(checkToken, sessionData);
+  let data = '';
+  if (sessionData.token) data = yield call(checkToken, sessionData);
   if (!data) {
     yield put(resetSessionData());
     if (!checkHistoryLocation(['/login', '/registration'])) {
