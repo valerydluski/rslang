@@ -13,6 +13,7 @@ export const API = {
     SIGNIN: 'signin',
     WORDS: 'words',
     SETTINGS: 'settings',
+    STATISTICS: 'statistics',
   },
 
   QUERIES: {
