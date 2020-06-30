@@ -44,15 +44,6 @@ const AppSettings = ({ checkboxes }) => {
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
       />
-      {/* <RadioButton
-        name="deleteButton"
-        key="deleteButton"
-        headerText="delete button"
-        buttonsValue={[
-          { value: 'active', text: 'show' },
-          { value: 'inActive', text: 'not show' },
-        ]}
-      /> */}
       <Field
         name="deleteButton"
         id="deleteButton"
