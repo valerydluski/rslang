@@ -5,6 +5,7 @@ import { saveSessionData } from '../actions';
 import signIn from '../../../../services/signIn';
 import history from '../../../../utils/history';
 import { saveUserSettings } from '../../../UserSettings/actions';
+import { getUserWords } from '../../../Dictionary/actions';
 
 function* workerLogin(action) {
   try {
@@ -15,10 +16,11 @@ function* workerLogin(action) {
       payload.isLogin = true;
       yield put(saveSessionData(payload));
       yield put(saveUserSettings(settings));
+      yield put(getUserWords());
       yield call(history.push, '/home');
     }
   } catch (e) {
-    toast.error('error');
+    toast.error('login error');
   }
 }
 

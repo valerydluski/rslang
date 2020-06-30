@@ -7,10 +7,12 @@ const Input = (props) => {
     type,
     readOnlyInput,
     placeholder,
-    sizeInput,
+    size,
     input,
+    autoFocus,
     meta: { error, touched },
     label,
+    autocomplete,
   } = props;
 
   return (
@@ -20,7 +22,10 @@ const Input = (props) => {
         name={name}
         readOnly={readOnlyInput}
         placeholder={placeholder}
-        size={sizeInput}
+        size={size}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus={autoFocus}
+        autoComplete={autocomplete}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
       />
@@ -35,11 +40,13 @@ Input.propTypes = {
   name: PropTypes.string,
   readOnlyInput: PropTypes.bool,
   placeholder: PropTypes.string,
-  sizeInput: PropTypes.string,
+  size: PropTypes.string,
   input: PropTypes.shape().isRequired,
   touched: PropTypes.bool,
   meta: PropTypes.shape(),
+  autoFocus: PropTypes.bool,
   label: PropTypes.string,
+  autocomplete: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -47,10 +54,12 @@ Input.defaultProps = {
   name: '',
   readOnlyInput: false,
   placeholder: '',
-  sizeInput: '',
+  size: '20',
   touched: false,
   meta: {},
+  autoFocus: false,
   label: '',
+  autocomplete: 'on',
 };
 
 export default Input;

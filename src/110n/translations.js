@@ -23,6 +23,12 @@ const translations = {
       cardsPerDay: 'Cards per day',
       infoInCards: 'Info in cards',
     },
+    Auth: {
+      signIn: 'Sign In',
+      signUp: 'Sign Up',
+      smallTitle: 'Start your study today!',
+      bigTitle: 'learning languages ​​is easy!',
+    },
     Games: {
       puzzle: 'Puzzle',
       audioCall: 'Audioсall',
@@ -50,10 +56,9 @@ const translations = {
       finish: 'Finish',
       newGame: 'New Game',
       statistic: 'Statistic',
-      signIn: 'Sign In',
-      signUp: 'Sign Up',
       register: 'Register',
       choose: 'Choose',
+      OK: 'OK',
     },
     Languages: {
       en: 'English',
@@ -98,6 +103,12 @@ const translations = {
       cardsPerDay: 'Карточек в день',
       infoInCards: 'Информация в карточках',
     },
+    Auth: {
+      signIn: 'Войти',
+      signUp: 'Зарегестрироваться',
+      smallTitle: 'Начни учиться сейчас!',
+      bigTitle: 'учить языки это просто!',
+    },
     Games: {
       puzzle: 'Пазл',
       audioCall: 'Аудиовызов',
@@ -125,10 +136,9 @@ const translations = {
       finish: 'Завершить игру',
       newGame: 'Новая игра',
       statistic: 'Статистика',
-      signIn: 'Войти',
-      signUp: 'Зарегестрироваться',
       register: 'Регистрация',
       choose: 'Выбрать',
+      OK: 'OK',
     },
     Languages: {
       en: 'Английский',

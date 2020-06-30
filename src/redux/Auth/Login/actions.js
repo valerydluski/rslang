@@ -3,6 +3,7 @@ import {
   AUTH_TO_SERVER,
   CHECK_SESSION_STATUS,
   RESET_SESSION_DATA,
+  IS_ALREADY_CHECK_SESSION_STATUS,
 } from './types';
 
 export function saveSessionData(data) {
@@ -28,5 +29,11 @@ export function checkStatusSession() {
 export function resetSessionData() {
   return {
     type: RESET_SESSION_DATA,
+  };
+}
+
+export function isAlreadyCheckStatusSession() {
+  return {
+    type: IS_ALREADY_CHECK_SESSION_STATUS,
   };
 }
