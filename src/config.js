@@ -93,4 +93,5 @@ export const GAME_NAME = {
   audioCall: 'AudioCall',
   sprint: 'Sprint',
   ownGame: 'OwnGame',
+  learnWords: 'LearnWords',
 };
