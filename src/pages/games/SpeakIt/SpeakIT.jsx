@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes, { object } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import defaultImg from '../../../assets/img/blank.jpg';

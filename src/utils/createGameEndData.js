@@ -21,9 +21,8 @@ const createGameEndData = (level, page, collection, Statistic, wrongWords, gameN
   if (newRoundStatistics.length > 10) {
     newRoundStatistics.shift();
   }
-  newRoundStatistics.join(';');
   newStatistic[`${gameName}LastRound`] = lastRound;
-  newStatistic[`${gameName}PassedRound`] = newRoundStatistics;
+  newStatistic[`${gameName}PassedRound`] = newRoundStatistics.join(';');
   return newStatistic;
 };
 
