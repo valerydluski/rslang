@@ -44,23 +44,19 @@ const AppSettings = ({ checkboxes }) => {
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
       />
-      <RadioButton
+      <Field
         name="deleteButton"
-        key="deleteButton"
-        headerText="delete button"
-        buttonsValue={[
-          { value: 'active', text: 'show' },
-          { value: 'inActive', text: 'not show' },
-        ]}
+        id="deleteButton"
+        component={Input}
+        type="checkbox"
+        label="show delete words button"
       />
-      <RadioButton
+      <Field
         name="addDificultWordsButton"
-        key="addDificultWordsButton"
-        headerText="addDificultWords button"
-        buttonsValue={[
-          { value: 'active', text: 'show' },
-          { value: 'inActive', text: 'not show' },
-        ]}
+        id="addDificultWordsButton"
+        component={Input}
+        type="checkbox"
+        label="show add dificult words button"
       />
       <RadioButton
         name="howToLearnWords"
