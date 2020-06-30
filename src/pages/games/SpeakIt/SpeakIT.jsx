@@ -20,7 +20,7 @@ import { LINK_FOR_IMAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 import createGameEndData from '../../../utils/createGameEndData';
-import { changeSpeakItLastRound, changeSpeakITPassedRound } from '../../../redux/Statistic/action';
+// import { changeSpeakItLastRound, changeSpeakITPassedRound } from '../../../redux/Statistic/action';
 
 const addScore = 100;
 
@@ -41,9 +41,9 @@ const SpeakIT = (props) => {
     changePage,
     changeLevel,
     maxPage,
-    changeLastRound,
-    changePassedRound,
-    passedRound,
+    // changeLastRound,
+    // changePassedRound,
+    // passedRound,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -150,11 +150,11 @@ const SpeakIT = (props) => {
         Level,
         Page,
         wordsCollection,
-        passedRound,
+        // passedRound,
         wrongWordsState
       );
-      changeLastRound(lastRound);
-      changePassedRound(newStatistic);
+      // changeLastRound(lastRound);
+      // changePassedRound(newStatistic);
     }
   };
 
@@ -228,9 +228,9 @@ SpeakIT.propTypes = {
   changePage: PropTypes.func.isRequired,
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
-  changeLastRound: PropTypes.func.isRequired,
-  changePassedRound: PropTypes.func.isRequired,
-  passedRound: PropTypes.string.isRequired,
+  // changeLastRound: PropTypes.func.isRequired,
+  // changePassedRound: PropTypes.func.isRequired,
+  // passedRound: PropTypes.string.isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -256,7 +256,7 @@ const mapStateToProps = (state) => {
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage.count,
-    passedRound: state.changeStatistic.SpeakITPassedRound,
+    // passedRound: state.changeStatistic.SpeakITPassedRound,
   };
 };
 
@@ -266,8 +266,8 @@ const mapDispatchToProps = {
   switchAppMode: changeAppMode,
   changeLevel: changeSpeakItLevel,
   changePage: changeSpeakItPage,
-  changeLastRound: changeSpeakItLastRound,
-  changePassedRound: changeSpeakITPassedRound,
+  // changeLastRound: changeSpeakItLastRound,
+  // changePassedRound: changeSpeakITPassedRound,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);

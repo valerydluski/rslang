@@ -11,6 +11,8 @@ import {
   checkStatusShowLoader,
   checkStatusHideLoader,
 } from '../../../Loader/CheckStatusLoader/action';
+import { getStatistic } from '../../../Statistic/action';
+import getStatisticFromApi from '../../../../services/getStatisticFromApi';
 
 function* workerStatus() {
   yield put(checkStatusShowLoader());
@@ -24,7 +26,10 @@ function* workerStatus() {
     }
   } else {
     yield put(getUserWords());
+    const statistic = yield call(getStatisticFromApi, sessionData);
     const settingsFromApi = getSettings(data);
+    const statisticFromApi = getSettings(statistic);
+    yield put(getStatistic(statisticFromApi));
     yield put(saveUserName(settingsFromApi));
   }
   yield put(isAlreadyCheckStatusSession());

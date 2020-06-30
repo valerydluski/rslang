@@ -13,7 +13,7 @@ function* workerRegistration(action) {
     settings.name = name || 'user';
     yield call(signUp, userSettings);
     yield put(saveUserName(settings));
-    yield put(authToServer(userSettings));
+    yield call(authToServer(userSettings));
   } catch (e) {
     toast.error('error');
   }
