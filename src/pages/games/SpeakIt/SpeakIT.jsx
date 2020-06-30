@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import { Translate } from 'react-redux-i18n';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
+import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import CardsContainerSpeakIT from '../../../containers/SpeakIT/CardsContainerSpeakIT';
 import ButtonsContainerSpeakIT from '../../../components/SpeakIT/ButtonsContainerSpeakIt';
 import RecognationTranscriptContainer from '../../../components/SpeakIT/RecognationTranscriptContainer';
@@ -15,7 +17,7 @@ import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
-import { LINK_FOR_IMAGE } from '../../../config';
+import { LINK_FOR_IMAGE, GAME_MAX_PAGE } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 
@@ -52,11 +54,11 @@ const SpeakIT = (props) => {
   const [transcriptFromMicrophone, setTranscript] = useState(transcript);
   const [isGameFinished, toggleGameMode] = useState(false);
   let IDontKnowWords = gameWords.slice();
-
   checkStatusSession();
   if (isWordsLoading) return <LoadingSpinner />;
   if (currentAppMode !== 'SpeakIT') {
     switchAppMode('SpeakIT');
+    return <LoadingSpinner />;
   }
 
   const newScoreHandler = () => {
@@ -140,7 +142,7 @@ const SpeakIT = (props) => {
 
   const finishHandler = () => {
     if (!isListening) {
-      toast.info('you did not start the game');
+      toast.info(<Translate value="ModalWindows.didNotStartGame" />);
     } else {
       toggleGameMode(true);
       microphone.stopMicrophone();
@@ -154,7 +156,6 @@ const SpeakIT = (props) => {
         <GoToHomePageButton />
         {isGameFinished ? (
           <ResultModal
-            playAudio={playAudio}
             audioForPlay="audio"
             showProperties={['word', 'transcription', 'wordTranslate']}
             restartGame={restartGame}
@@ -162,6 +163,13 @@ const SpeakIT = (props) => {
           />
         ) : null}
         <Image src={srcForImage} />
+        <StatusMenu
+          page={Page}
+          level={Level}
+          maxPage={maxPage}
+          updateLevel={changeLevel}
+          updatePage={changePage}
+        />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
         <CardsContainerSpeakIT cardHandler={cardHandler} wordsCollection={wordsCollection} />
@@ -187,9 +195,16 @@ const SpeakIT = (props) => {
         />
       ) : null}
       <Image src={srcForImage} />
+      <StatusMenu
+        page={Page}
+        level={Level}
+        maxPage={maxPage}
+        updateLevel={changeLevel}
+        updatePage={changePage}
+      />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
-      <CardsContainerSpeakIT />
+      <CardsContainerSpeakIT wordsCollection={wordsCollection} />
       <ButtonsContainerSpeakIT
         restartHandler={restartHandler}
         speakHandler={speakHandler}
@@ -232,7 +247,7 @@ SpeakIT.defaultProps = {
   changeScore: () => {},
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
-  maxPage: 60,
+  maxPage: GAME_MAX_PAGE,
 };
 
 const mapStateToProps = (state) => {

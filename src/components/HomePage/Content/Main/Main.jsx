@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 import Title from './components/Title/Title';
 import TitleWithUnderline from './components/Title/styled/TitleWithUnderline';
 import GameCard from './components/GameCard/GameCard';
@@ -11,7 +12,9 @@ export default function Main(props) {
   return (
     <ContentContainer>
       <Title userName="User" />
-      <TitleWithUnderline>Let&#39;s play!</TitleWithUnderline>
+      <TitleWithUnderline>
+        <Translate value="HomePage.start" />
+      </TitleWithUnderline>
       <GamesContainer>
         {games.map((data) => {
           const { poster, title, description, onClick } = data;

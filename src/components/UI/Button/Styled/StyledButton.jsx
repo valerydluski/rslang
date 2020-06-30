@@ -1,22 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const pulseShrink = keyframes`
-  25% {
-    transform: scale(0.8);
-  }
-
-  50% {
-    transform: scale(1);
-  }
-
-  75% {
-    transform: scale(0.8);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-`;
+import styled from 'styled-components';
 
 const ButtonStyled = styled.button`
   position: relative;
@@ -28,13 +10,23 @@ const ButtonStyled = styled.button`
   font-style: normal;
   font-weight: bold;
   font-size: 22.5488px;
-  margin-left: 10px;
   outline-style: none;
   border: none;
   cursor: pointer;
 
-  &:hover {
-    animation: ${pulseShrink} 2s linear infinite;
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: #fec246;
+      transition: all 0.4s ease;
+    }
   }
 
   &.big-button {

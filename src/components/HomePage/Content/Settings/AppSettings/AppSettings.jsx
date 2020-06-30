@@ -1,27 +1,35 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import PropTypes from 'prop-types';
+import { I18n, Translate } from 'react-redux-i18n';
 import Input from '../../../../UI/Input/Input';
 import WordsPerDayValidator from '../../../../../utils/validators/WordsPerDayValidator';
 import RadioButton from '../../../../UI/RadioButton/RadioButton';
+import nameValidator from '../../../../../utils/validators/nameValidator';
 
-const AppSettings = () => {
+const AppSettings = ({ checkboxes }) => {
   return (
     <>
-      <h3>Application settings</h3>
-      <Field name="name" key="name" type="text" placeholder="user name" component={Input} />
+      <h3>
+        <Translate value="Settings.appSettings" />
+      </h3>
+      <Field
+        name="name"
+        key="name"
+        type="text"
+        placeholder={I18n.t('Settings.userName')}
+        component={Input}
+        validate={nameValidator}
+      />
       <Field name="language" key="language" component="select">
-        <option value="en" key="en">
-          English
-        </option>
-        <option value="ru" key="ru">
-          Russian
-        </option>
+        <option value="en" key="en" label={I18n.t('Languages.en')} />
+        <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
       </Field>
       <Field
         name="WordsPerDay"
         key="WordsPerDay"
         type="number"
-        placeholder="Words per day"
+        placeholder={I18n.t('Settings.wordsPerDay')}
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
@@ -31,27 +39,23 @@ const AppSettings = () => {
         key="CardsPerDay"
         type="number"
         component={Input}
-        placeholder="Cards per day"
+        placeholder={I18n.t('Settings.cardsPerDay')}
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
       />
-      <RadioButton
+      <Field
         name="deleteButton"
-        key="deleteButton"
-        headerText="delete button"
-        buttonsValue={[
-          { value: 'active', text: 'show' },
-          { value: 'inActive', text: 'not show' },
-        ]}
+        id="deleteButton"
+        component={Input}
+        type="checkbox"
+        label="show delete words button"
       />
-      <RadioButton
+      <Field
         name="addDificultWordsButton"
-        key="addDificultWordsButton"
-        headerText="addDificultWords button"
-        buttonsValue={[
-          { value: 'active', text: 'show' },
-          { value: 'inActive', text: 'not show' },
-        ]}
+        id="addDificultWordsButton"
+        component={Input}
+        type="checkbox"
+        label="show add dificult words button"
       />
       <RadioButton
         name="howToLearnWords"
@@ -62,9 +66,18 @@ const AppSettings = () => {
           { value: 'repeat', text: 'repeat' },
         ]}
       />
-      <h3>info in cards</h3>
+      <h3>
+        <Translate value="Settings.infoInCards" />
+      </h3>
+      {checkboxes.map((el) => {
+        return <Field name={el} key={el} id={el} component={Input} type="checkbox" label={el} />;
+      })}
     </>
   );
+};
+
+AppSettings.propTypes = {
+  checkboxes: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default AppSettings;

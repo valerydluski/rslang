@@ -1,16 +1,20 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 import AppSettings from './AppSettings/AppSettings';
 import Input from '../../../UI/Input/Input';
 import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageValidator';
+import { CHECKBOXES } from '../../../../config';
 
 const SettingsForm = (props) => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <AppSettings />
-      <h3>AudioCall</h3>
+      <AppSettings checkboxes={CHECKBOXES} />
+      <h3>
+        <Translate value="Games.audioCall" />
+      </h3>
       <Field
         name="AudioCallWordsPerPage"
         key="AudioCallWordsPerPage"
@@ -19,8 +23,11 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
+        label="words per page"
       />
-      <h3>Savannah</h3>
+      <h3>
+        <Translate value="Games.savannah" />
+      </h3>
       <Field
         name="SavannahWordsPerPage"
         key="SavannahWordsPerPage"
@@ -29,8 +36,11 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
+        label="words per page"
       />
-      <h3>SpeakIT</h3>
+      <h3>
+        <Translate value="Games.speakIT" />
+      </h3>
       <Field
         name="SpeakITWordsPerPage"
         key="SpeakITWordsPerPage"
@@ -39,8 +49,11 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
+        label="words per page"
       />
-      <h3>Sprint</h3>
+      <h3>
+        <Translate value="Games.sprint" />
+      </h3>
       <Field
         name="SprintWordsPerPage"
         key="SprintWordsPerPage"
@@ -49,9 +62,10 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
+        label="words per page"
       />
       <button type="submit" aria-label="Save">
-        Save
+        <Translate value="Buttons.save" />
       </button>
     </form>
   );
