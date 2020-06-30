@@ -3,7 +3,7 @@ import { ITEM_PAGE } from '../constants';
 
 const MenuItem = styled.div`
   height: 100%;
-  width: ${(props) => (props.type === ITEM_PAGE ? '280' : '160')}px;
+  width: ${(props) => (props.type === ITEM_PAGE ? '280' : '220')}px;
   display: flex;
 `;
 

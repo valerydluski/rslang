@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { I18n, Translate } from 'react-redux-i18n';
 import Menu from './Styled/Menu';
 import MenuItem from './Styled/MenuItem';
 import Title from './Styled/Title';
@@ -44,26 +45,30 @@ const StatusMenu = (props) => {
   return (
     <Menu>
       <MenuItem type={ITEM_LEVEL}>
-        <Title>level</Title>
+        <Title>
+          <Translate value="GameStatus.level" />
+        </Title>
         <SelectContainer>
           <Select
             isOpen={isLevelOpen}
             onToggle={switchLevel}
             optionsNumber={GAME_MAX_LEVEL}
-            openBtnName="Выбрать"
+            openBtnName={I18n.t('Buttons.choose')}
             onOptionClick={onLevelOptionClick}
             value={+level}
           />
         </SelectContainer>
       </MenuItem>
       <MenuItem type={ITEM_PAGE}>
-        <Title>page</Title>
+        <Title>
+          <Translate value="GameStatus.page" />
+        </Title>
         <SelectContainer>
           <Select
             isOpen={isPageOpen}
             optionsNumber={maxPage}
             onToggle={switchPage}
-            openBtnName="Выбрать"
+            openBtnName={I18n.t('Buttons.choose')}
             onOptionClick={onPageOptionClick}
             direction={DIRECTION_ROW}
             value={+page}

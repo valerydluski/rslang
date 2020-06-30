@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { Translate } from 'react-redux-i18n';
 import { pickRow, updatePageStatus } from '../../../redux/EnglishPuzzle/actions';
 import StyledRectangleButton from '../../UI/Button/Styled/StyledRectangleButton';
 import { changeIDontKnowWords } from '../../../redux/Games/action';
@@ -53,7 +54,11 @@ class Controls extends Component {
     return (
       <Container>
         <StyledRectangleButton onClick={this.onClick}>
-          {isRowCorrect && isRowFill ? 'Следующий' : 'Не знаю'}
+          {isRowCorrect && isRowFill ? (
+            <Translate value="Buttons.next" />
+          ) : (
+            <Translate value="Buttons.dontKnow" />
+          )}
         </StyledRectangleButton>
       </Container>
     );

@@ -1,5 +1,6 @@
 import { reducer as formReducer } from 'redux-form';
 import { combineReducers } from 'redux';
+import { i18nReducer } from 'react-redux-i18n';
 import englishPuzzleReducer from './EnglishPuzzle/englishPuzzleReducer';
 import loginReducer from './Auth/Login/reducer';
 import userSettingsReducer from './UserSettings/reducer';
@@ -17,6 +18,7 @@ import isStatusCheckedReducer from './Auth/Login/isStatusCheckedReducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
+  i18n: i18nReducer,
   englishPuzzle: englishPuzzleReducer,
   login: loginReducer,
   userSettings: userSettingsReducer,
