@@ -11,8 +11,11 @@ function SettingContent(props) {
   const { saveSettings, initialValues } = props;
   const onSubmit = (formData) => {
     if (!checkboxesValidator(formData)) {
-      toast.info(<Translate value="Settings.checkboxMessage" />);
-    } else saveSettings(formData);
+      toast.warning(<Translate value="Settings.checkboxMessage" />);
+    } else {
+      saveSettings(formData);
+      toast.info(<Translate value="Settings.settingsSave" />);
+    }
   };
   return (
     <>

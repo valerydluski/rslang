@@ -10,6 +10,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 10px;
     font-family: 'Montserrat', sans-serif;
   }
+
+  .toast-container {
+    font-size: 22px;
+  }
 `;
 
 export default GlobalStyle;
