@@ -20,7 +20,7 @@ function* workerLogin(action) {
       yield call(history.push, '/home');
     }
   } catch (e) {
-    toast.error('error');
+    toast.error('login error');
   }
 }
 
