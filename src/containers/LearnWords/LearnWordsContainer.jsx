@@ -42,7 +42,7 @@ function LearnWordCardContainer(props) {
 
   if (currentWord) {
     showNewCardHandler(currentWord);
-    audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audioExample}`);
+    audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audio}`);
     audio.load();
   }
 
@@ -54,9 +54,13 @@ function LearnWordCardContainer(props) {
         audio.play();
         setIsAudioPlaying(true);
         audio.onended = () => {
-          setCurrentWord(getWord(wordsCollection));
-          setIsAudioPlaying(false);
-          correctCardHandler(true);
+          audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audioExample}`);
+          audio.play();
+          audio.onended = () => {
+            setCurrentWord(getWord(wordsCollection));
+            setIsAudioPlaying(false);
+            correctCardHandler(true);
+          };
         };
       }
     }

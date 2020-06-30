@@ -9,7 +9,6 @@ import correctWatcher from './LearnWords/sagas/correctSaga';
 import addNewWordSagaWatcher from './LearnWords/sagas/addNewWordSaga';
 import watchPutSettings from './UserSettings/sagas/putSettings';
 import saveUserWordsSagaWatcher from './Dictionary/sagas/saveUserWordsSaga';
-import isStatusCheckedReducer from './Auth/Login/isStatusCheckedReducer';
 
 export default function* watchSaga() {
   yield all([
