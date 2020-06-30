@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { PUZZLE_PADDING, PUZZLE_HEIGHT, PLAYFIELD_WIDTH } from '../constants';
 
 const Source = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 20px;
   margin-top: 30px;
   width: ${PLAYFIELD_WIDTH}px;
   height: ${PUZZLE_HEIGHT}px;
