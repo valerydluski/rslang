@@ -35,6 +35,7 @@ const FormStyled = styled.form`
     font-style: normal;
     font-weight: bold;
     font-size: 34px;
+    transition: all 0.4s ease;
 
     &:hover {
       cursor: pointer;
