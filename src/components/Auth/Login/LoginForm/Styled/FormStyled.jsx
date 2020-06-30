@@ -1,17 +1,32 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../../config';
 
 const FormStyled = styled.form`
   grid-area: form;
   align-self: start;
   justify-self: start;
   margin-left: 150px;
-  display: grid;
-  grid-template-rows: 15% 15% 15% 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: flex-start;
   height: 100%;
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
+  }
+  & > div {
+    width: 100%;
+  }
+
+  @media ${DEVICE.laptop} {
+    margin-left: 60px;
+  }
+
+  @media ${DEVICE.mobileL} {
+    margin-left: 0;
+    width: 100%;
   }
 
   input {
@@ -20,6 +35,16 @@ const FormStyled = styled.form`
     border: 1.39565px solid #c4c4c4;
     outline: none;
     background-color: #ffffff;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+
+    @media ${DEVICE.laptopL} {
+      width: 380px;
+    }
+
+    @media ${DEVICE.mobileL} {
+      width: 100%;
+    }
   }
 
   .button_sign-in {
@@ -35,7 +60,15 @@ const FormStyled = styled.form`
     font-style: normal;
     font-weight: bold;
     font-size: 34px;
+    transform: translateX(50%);
     transition: all 0.4s ease;
+    align-self: flex-end;
+    margin-top: 40px;
+
+    @media ${DEVICE.laptop} {
+      transform: translateX(0);
+      justify-self: center;
+    }
 
     &:hover {
       cursor: pointer;
