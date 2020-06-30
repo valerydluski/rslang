@@ -38,34 +38,6 @@ const initialState = {
 
 const changeStatisticReducer = (state = initialState, action) => {
   switch (action.type) {
-    //   case SPEAKIT_LAST_ROUND:
-    //     return { ...state, statisctic: action.payload };
-    //   case ENGLISHPUZZLE_LAST_ROUND:
-    //     return { ...state, EnglishPuzzleLastRound: action.payload };
-    //   case SAVANNAH_ROUND:
-    //     return { ...state, SavannahLastRound: action.payload };
-    //   case AUDIOCALL_LAST_ROUND:
-    //     return { ...state, AudioCallLastRound: action.payload };
-    //   case SPRINT_LAST_ROUND:
-    //     return { ...state, SprintLastRound: action.payload };
-    //   case OWNGAME_LAST_ROUND:
-    //     return { ...state, OwnGameLastRound: action.payload };
-    //   case SPEAKIT_PASSED_ROUND:
-    //     return { ...state, SpeakITPassedRound: action.payload };
-    //   case ENGLISHPUZZLE_PASSED_ROUND:
-    //     return { ...state, EnglishPuzzlePassedRound: action.payload };
-    //   case SAVANNAH_PASSED_ROUND:
-    //     return { ...state, SavannahPassedRound: action.payload };
-    //   case AUDIOCALL_PASSED_ROUND:
-    //     return { ...state, AudioCallPassedRound: action.payload };
-    //   case SPRINT_PASSED_ROUND:
-    //     return { ...state, SprintPassedRound: action.payload };
-    //   case OWNGAME_PASSED_ROUND:
-    //     return { ...state, OwnGamePassedRound: action.payload };
-    //   case LEARN_LAST_WORDS:
-    //     return { ...state, LearnLastWords: action.payload };
-    //   case LEARN_LAST_LEVEL:
-    //     return { ...state, LearnLastLevel: action.payload };
     case SAVE_FULL_STATISTIC:
       return { ...state, statistic: action.payload };
     case GET_STATISTIC_FROM_API:

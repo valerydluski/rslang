@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import defaultImg from '../../../assets/img/blank.jpg';
@@ -20,7 +20,7 @@ import { LINK_FOR_IMAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 import createGameEndData from '../../../utils/createGameEndData';
-// import { changeSpeakItLastRound, changeSpeakITPassedRound } from '../../../redux/Statistic/action';
+import { saveFullStatistic } from '../../../redux/Statistic/action';
 
 const addScore = 100;
 
@@ -41,9 +41,8 @@ const SpeakIT = (props) => {
     changePage,
     changeLevel,
     maxPage,
-    // changeLastRound,
-    // changePassedRound,
-    // passedRound,
+    Statistic,
+    saveStatistic,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -146,15 +145,14 @@ const SpeakIT = (props) => {
       toggleGameMode(true);
       microphone.stopMicrophone();
       setListening(false);
-      const { lastRound, newStatistic } = createGameEndData(
+      const newStatistic = createGameEndData(
         Level,
         Page,
         wordsCollection,
-        // passedRound,
+        Statistic,
         wrongWordsState
       );
-      // changeLastRound(lastRound);
-      // changePassedRound(newStatistic);
+      saveStatistic(newStatistic);
     }
   };
 
@@ -228,9 +226,8 @@ SpeakIT.propTypes = {
   changePage: PropTypes.func.isRequired,
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
-  // changeLastRound: PropTypes.func.isRequired,
-  // changePassedRound: PropTypes.func.isRequired,
-  // passedRound: PropTypes.string.isRequired,
+  Statistic: PropTypes.instanceOf(object).isRequired,
+  saveStatistic: PropTypes.func.isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -256,7 +253,7 @@ const mapStateToProps = (state) => {
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage.count,
-    // passedRound: state.changeStatistic.SpeakITPassedRound,
+    Statistic: state.changeStatistic.statistic,
   };
 };
 
@@ -266,8 +263,7 @@ const mapDispatchToProps = {
   switchAppMode: changeAppMode,
   changeLevel: changeSpeakItLevel,
   changePage: changeSpeakItPage,
-  // changeLastRound: changeSpeakItLastRound,
-  // changePassedRound: changeSpeakITPassedRound,
+  saveStatistic: saveFullStatistic,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);
