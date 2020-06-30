@@ -4,32 +4,46 @@ import { Field, reduxForm } from 'redux-form';
 import emailValidator from '../../../../utils/validators/emailValidator';
 import passwordValidator from '../../../../utils/validators/passwordValidator';
 import Input from '../../../UI/Input/Input';
+import LoginFormWrapperStyled from '../../Login/LoginForm/Styled/LoginFormWrapperStyled';
+import Logo from '../../../UI/Logo/Logo';
+import LoginPageTitle from '../../Login/LoginPageTitle/LoginPageTitle';
+import FormNameStyled from '../../Login/LoginForm/Styled/FormNameStyled';
+import FormStyled from '../../Login/LoginForm/Styled/FormStyled';
+import PatternStyled from '../../Login/LoginForm/Styled/PatternStyled';
+
+const formName = 'Sign up';
 
 const RegistrationForm = (props) => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={handleSubmit}>
-      <Field name="name" key="name" type="text" placeholder="name" component={Input} />
-      <Field
-        name="email"
-        key="email"
-        type="text"
-        placeholder="email"
-        component={Input}
-        validate={emailValidator}
-      />
-      <Field
-        name="password"
-        key="password"
-        type="password"
-        placeholder="password"
-        component={Input}
-        validate={passwordValidator}
-      />
-      <button type="submit" aria-label="Sign In">
-        Sign Up
-      </button>
-    </form>
+    <LoginFormWrapperStyled>
+      <Logo className="login-form_logo" />
+      <LoginPageTitle />
+      <FormNameStyled>{formName}</FormNameStyled>
+      <FormStyled onSubmit={handleSubmit}>
+        <Field name="name" key="name" type="text" placeholder="name" component={Input} />
+        <Field
+          name="email"
+          key="email"
+          type="text"
+          placeholder="email"
+          component={Input}
+          validate={emailValidator}
+        />
+        <Field
+          name="password"
+          key="password"
+          type="password"
+          placeholder="password"
+          component={Input}
+          validate={passwordValidator}
+        />
+        <button className="button_sign-in" type="submit" aria-label="Sign In">
+          OK
+        </button>
+      </FormStyled>
+      <PatternStyled />
+    </LoginFormWrapperStyled>
   );
 };
 
