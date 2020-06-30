@@ -105,7 +105,7 @@ const translations = {
     },
     Auth: {
       signIn: 'Войти',
-      signUp: 'Зарегестрироваться',
+      signUp: 'Cоздать аккаунт',
       smallTitle: 'Начни учиться сейчас!',
       bigTitle: 'учить языки это просто!',
     },
