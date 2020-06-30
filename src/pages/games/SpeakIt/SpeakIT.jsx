@@ -150,7 +150,8 @@ const SpeakIT = (props) => {
         Page,
         wordsCollection,
         Statistic,
-        wrongWordsState
+        wrongWordsState,
+        gameName
       );
       saveStatistic(newStatistic);
     }
@@ -226,7 +227,7 @@ SpeakIT.propTypes = {
   changePage: PropTypes.func.isRequired,
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
-  Statistic: PropTypes.instanceOf(object).isRequired,
+  Statistic: PropTypes.instanceOf(Object).isRequired,
   saveStatistic: PropTypes.func.isRequired,
 };
 

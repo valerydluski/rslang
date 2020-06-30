@@ -2,12 +2,12 @@ import { SAVE_FULL_STATISTIC, GET_STATISTIC_FROM_API } from './types';
 
 const initialState = {
   statistic: {
-    SpeakITLastRound: '1_1',
-    EnglishPuzzleLastRound: '1_1',
-    SavannahLastRound: '1_1',
-    AudioCallLastRound: '1_1',
-    SprintLastRound: '1_1',
-    OwnGameLastRound: '1_1',
+    SpeakITLastRound: '0',
+    EnglishPuzzleLastRound: '0',
+    SavannahLastRound: '0',
+    AudioCallLastRound: '0',
+    SprintLastRound: '0',
+    OwnGameLastRound: '0',
     SpeakITPassedRound: '0',
     EnglishPuzzlePassedRound: '0',
     SavannahPassedRound: '0',

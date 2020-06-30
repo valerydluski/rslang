@@ -1,5 +1,6 @@
-const createGameEndData = (level, page, collection, roundsStatistic, wrongWords) => {
+const createGameEndData = (level, page, collection, Statistic, wrongWords, gameName) => {
   const lastRound = `${level}_${page}`;
+  const newStatistic = Statistic;
   const date = new Date();
   const formater = new Intl.DateTimeFormat('ru', {
     month: '2-digit',
@@ -12,17 +13,18 @@ const createGameEndData = (level, page, collection, roundsStatistic, wrongWords)
     if (!wrongWords.includes(el.word.toLowerCase())) wrongWordsIndex += `${index},`;
   });
   const gameStatistic = `${formater.format(date)}-${lastRound}-${wrongWordsIndex}`;
-  let newStatistic;
-  if (roundsStatistic === '0') newStatistic = [];
-  else newStatistic = roundsStatistic.split(';');
-  newStatistic.push(gameStatistic);
-  if (newStatistic.length > 10) {
-    newStatistic.shift();
+  const roundsStatistic = Statistic[`${gameName}PassedRound`];
+  let newRoundStatistics;
+  if (roundsStatistic === '0') newRoundStatistics = [];
+  else newRoundStatistics = roundsStatistic.split(';');
+  newRoundStatistics.push(gameStatistic);
+  if (newRoundStatistics.length > 10) {
+    newRoundStatistics.shift();
   }
-  return {
-    lastRound,
-    newStatistic: newStatistic.join(';'),
-  };
+  newRoundStatistics.join(';');
+  newStatistic[`${gameName}LastRound`] = lastRound;
+  newStatistic[`${gameName}PassedRound`] = newRoundStatistics;
+  return newStatistic;
 };
 
 export default createGameEndData;
