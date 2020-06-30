@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import defaultImg from '../../../assets/img/blank.jpg';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
 import CardsContainerSpeakIT from '../../../containers/SpeakIT/CardsContainerSpeakIT';
@@ -43,20 +44,17 @@ const SpeakIT = (props) => {
     changeLastRound,
     changePassedRound,
     passedRound,
-    wrongWords,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
-
-  const [srcForImage, setSrcForImage] = useState(
-    'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg'
-  );
+  const [srcForImage, setSrcForImage] = useState(defaultImg);
   const [textForTextField, setTranslate] = useState('');
   const [isListening, setListening] = useState(listening);
   const [transcriptFromMicrophone, setTranscript] = useState('');
   const [isGameFinished, toggleGameMode] = useState(false);
+  const [wrongWordsState, setWrongWords] = useState([]);
   let IDontKnowWords = gameWords.slice();
   checkStatusSession();
   if (isWordsLoading) return <LoadingSpinner />;
@@ -64,21 +62,18 @@ const SpeakIT = (props) => {
     switchAppMode(gameName);
     return <LoadingSpinner />;
   }
+  if (wrongWordsState.length === 0) setWrongWords(gameWords);
   const newScoreHandler = () => {
     changeScore(newScore);
   };
 
   const createGame = () => {
     IDontKnowWords = gameWords.slice();
-    changeIDontKnowWordsInStore(IDontKnowWords);
-    const spokenWords = document.querySelectorAll('.spoken-word');
-    spokenWords.forEach((element) => {
-      element.classList.remove('spoken-word');
-    });
+    setWrongWords(IDontKnowWords);
     setTranscript('');
     newScore = 0;
     newScoreHandler();
-    setSrcForImage('https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg');
+    setSrcForImage(defaultImg);
   };
 
   const speechResult = (transcriptResult) => {
@@ -88,8 +83,7 @@ const SpeakIT = (props) => {
       setSrcForImage(`${LINK_FOR_IMAGE}${word.image}`);
       if (IDontKnowWords.includes(transcriptResult)) {
         IDontKnowWords = IDontKnowWords.filter((item) => item !== transcriptResult);
-        changeIDontKnowWordsInStore(IDontKnowWords);
-        document.getElementById(transcriptResult).classList.add('spoken-word');
+        setWrongWords(IDontKnowWords);
         newScore += addScore;
         newScoreHandler();
         if (IDontKnowWords.length === 0) {
@@ -131,6 +125,7 @@ const SpeakIT = (props) => {
     const { newLevel, newPage } = newRound(Level, Page, maxPage);
     if (newLevel !== Level) changeLevel(newLevel);
     if (newPage !== Page) changePage(newPage);
+    setWrongWords([]);
   };
 
   const speakHandler = () => {
@@ -147,6 +142,7 @@ const SpeakIT = (props) => {
     if (!isListening) {
       toast.info('you did not start the game');
     } else {
+      changeIDontKnowWordsInStore(wrongWordsState);
       toggleGameMode(true);
       microphone.stopMicrophone();
       setListening(false);
@@ -155,7 +151,7 @@ const SpeakIT = (props) => {
         Page,
         wordsCollection,
         passedRound,
-        wrongWords
+        wrongWordsState
       );
       changeLastRound(lastRound);
       changePassedRound(roundsStatistic);
@@ -177,7 +173,11 @@ const SpeakIT = (props) => {
         <Image src={srcForImage} />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
-        <CardsContainerSpeakIT cardHandler={cardHandler} wordsCollection={wordsCollection} />
+        <CardsContainerSpeakIT
+          cardHandler={cardHandler}
+          wordsCollection={wordsCollection}
+          wrongWords={wrongWordsState}
+        />
         <ButtonsContainerSpeakIT
           restartHandler={restartHandler}
           speakHandler={speakHandler}
@@ -202,7 +202,7 @@ const SpeakIT = (props) => {
       <Image src={srcForImage} />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
-      <CardsContainerSpeakIT wordsCollection={wordsCollection} />
+      <CardsContainerSpeakIT wordsCollection={wordsCollection} wrongWords={wrongWordsState} />
       <ButtonsContainerSpeakIT
         restartHandler={restartHandler}
         speakHandler={speakHandler}
@@ -231,7 +231,6 @@ SpeakIT.propTypes = {
   changeLastRound: PropTypes.func.isRequired,
   changePassedRound: PropTypes.func.isRequired,
   passedRound: PropTypes.instanceOf(Array).isRequired,
-  wrongWords: PropTypes.instanceOf(Array).isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -258,7 +257,6 @@ const mapStateToProps = (state) => {
     currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage.count,
     passedRound: state.changeStatistic.SpeakITPassedRound,
-    wrongWords: state.gamesReducer.IDontKnowWords,
   };
 };
 
