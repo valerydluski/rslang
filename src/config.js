@@ -7,7 +7,7 @@ import getRedirectFunction from './utils/getRedirectFunction';
 
 export const API = {
   // URL: 'https://afternoon-falls-25894.herokuapp.com',
-  URL: 'http://pacific-castle-12388.herokuapp.com',
+  URL: 'https://pacific-castle-12388.herokuapp.com',
   ENDPOINTS: {
     USERS: 'users',
     SIGNIN: 'signin',
