@@ -146,7 +146,7 @@ const SpeakIT = (props) => {
       toggleGameMode(true);
       microphone.stopMicrophone();
       setListening(false);
-      const { lastRound, roundsStatistic } = createGameEndData(
+      const { lastRound, newStatistic } = createGameEndData(
         Level,
         Page,
         wordsCollection,
@@ -154,7 +154,7 @@ const SpeakIT = (props) => {
         wrongWordsState
       );
       changeLastRound(lastRound);
-      changePassedRound(roundsStatistic);
+      changePassedRound(newStatistic);
     }
   };
 
@@ -230,7 +230,7 @@ SpeakIT.propTypes = {
   gameName: PropTypes.string,
   changeLastRound: PropTypes.func.isRequired,
   changePassedRound: PropTypes.func.isRequired,
-  passedRound: PropTypes.instanceOf(Array).isRequired,
+  passedRound: PropTypes.string.isRequired,
 };
 
 SpeakIT.defaultProps = {

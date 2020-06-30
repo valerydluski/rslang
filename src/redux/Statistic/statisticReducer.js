@@ -22,12 +22,12 @@ const initialState = {
   AudioCallLastRound: '1_1',
   SprintLastRound: '1_1',
   OwnGameLastRound: '1_1',
-  SpeakITPassedRound: ['0'],
-  EnglishPuzzlePassedRound: ['0'],
-  SavannahPassedRound: ['0'],
-  AudioCallPassedRound: ['0'],
-  SprintPassedRound: ['0'],
-  OwnGamePassedRound: ['0'],
+  SpeakITPassedRound: '0',
+  EnglishPuzzlePassedRound: '0',
+  SavannahPassedRound: '0',
+  AudioCallPassedRound: '0',
+  SprintPassedRound: '0',
+  OwnGamePassedRound: '0',
   LearnLastWords: '0',
   LearnLastLevel: '0',
 };
@@ -47,7 +47,7 @@ const changeStatisticReducer = (state = initialState, action) => {
     case OWNGAME_LAST_ROUND:
       return { ...state, OwnGameLastRound: action.payload };
     case SPEAKIT_PASSED_ROUND:
-      return { ...state, SpeakITPassedRound: state.SpeakITPassedRound };
+      return { ...state, SpeakITPassedRound: action.payload };
     case ENGLISHPUZZLE_PASSED_ROUND:
       return { ...state, EnglishPuzzlePassedRound: action.payload };
     case SAVANNAH_PASSED_ROUND:

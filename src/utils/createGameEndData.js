@@ -12,13 +12,16 @@ const createGameEndData = (level, page, collection, roundsStatistic, wrongWords)
     if (!wrongWords.includes(el.word.toLowerCase())) wrongWordsIndex += `${index},`;
   });
   const gameStatistic = `${formater.format(date)}-${lastRound}-${wrongWordsIndex}`;
-  roundsStatistic.push(gameStatistic);
-  if (roundsStatistic[0] === '0' || roundsStatistic.length > 10) {
-    roundsStatistic.shift();
+  let newStatistic;
+  if (roundsStatistic === '0') newStatistic = [];
+  else newStatistic = roundsStatistic.split(';');
+  newStatistic.push(gameStatistic);
+  if (newStatistic.length > 10) {
+    newStatistic.shift();
   }
   return {
     lastRound,
-    roundsStatistic,
+    newStatistic: newStatistic.join(';'),
   };
 };
 
