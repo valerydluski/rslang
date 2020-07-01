@@ -179,7 +179,6 @@ const SpeakIT = (props) => {
             newGame={newGame}
           />
         ) : null}
-        <Image src={srcForImage} />
         <StatusMenu
           page={Page}
           level={Level}
@@ -187,6 +186,7 @@ const SpeakIT = (props) => {
           updateLevel={changeLevel}
           updatePage={changePage}
         />
+        <Image src={srcForImage} />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
         <CardsContainerSpeakIT
@@ -215,7 +215,6 @@ const SpeakIT = (props) => {
           newGame={newGame}
         />
       ) : null}
-      <Image src={srcForImage} />
       <StatusMenu
         page={Page}
         level={Level}
@@ -223,6 +222,7 @@ const SpeakIT = (props) => {
         updateLevel={changeLevel}
         updatePage={changePage}
       />
+      <Image src={srcForImage} />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
       <CardsContainerSpeakIT wordsCollection={wordsCollection} wrongWords={wrongWordsState} />
