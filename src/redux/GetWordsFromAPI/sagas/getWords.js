@@ -12,8 +12,8 @@ import {
   ENGLISHPUZZLE_CHANGE_PAGE,
   AUDIOCALL_CHANGE_LEVEL,
   AUDIOCALL_CHANGE_PAGE,
-  OWNGAME_CHANGE_LEVEL,
-  OWNGAME_CHANGE_PAGE,
+  MAKESENTENCE_CHANGE_LEVEL,
+  MAKESENTENCE_CHANGE_PAGE,
 } from '../../ChangeRounds/types';
 import CHANGE_APP_MODE from '../../AppMode/types';
 import { hideLoader, showLoader } from '../../Loader/action';
@@ -54,8 +54,8 @@ export default function* watchGetWords() {
       ENGLISHPUZZLE_CHANGE_PAGE,
       AUDIOCALL_CHANGE_LEVEL,
       AUDIOCALL_CHANGE_PAGE,
-      OWNGAME_CHANGE_LEVEL,
-      OWNGAME_CHANGE_PAGE,
+      MAKESENTENCE_CHANGE_LEVEL,
+      MAKESENTENCE_CHANGE_PAGE,
       CHANGE_APP_MODE,
     ],
     workerGetWords
