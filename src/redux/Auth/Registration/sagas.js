@@ -2,7 +2,7 @@ import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import REGISTER_TO_SERVER from './types';
 import { authToServer } from '../Login/actions';
-import { saveUserName } from '../../UserSettings/actions';
+import { saveUserName, saveUserSettings } from '../../UserSettings/actions';
 import signUp from '../../../services/signUp';
 
 function* workerRegistration(action) {
@@ -14,6 +14,7 @@ function* workerRegistration(action) {
     yield call(signUp, userSettings);
     yield put(saveUserName(settings));
     yield put(authToServer(userSettings));
+    yield put(saveUserSettings(settings));
   } catch (e) {
     toast.error('error registration');
   }

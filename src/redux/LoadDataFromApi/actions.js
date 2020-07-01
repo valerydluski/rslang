@@ -1,8 +1,9 @@
 import { SET_FLAG_LOAD_DATA, LOAD_DATA_FROM_API } from './types';
 
-export function isDataLoadFromApi() {
+export function isDataLoadFromApi(data) {
   return {
     type: SET_FLAG_LOAD_DATA,
+    payload: data,
   };
 }
 

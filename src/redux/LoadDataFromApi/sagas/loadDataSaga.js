@@ -5,7 +5,7 @@ import { getStatistic } from '../../Statistic/action';
 import getSettings from '../../../utils/getSettings';
 import getStatisticFromApi from '../../../services/getStatisticFromApi';
 import getSettingsFromApi from '../../../services/getSettingsFromApi';
-import { saveUserName } from '../../UserSettings/actions';
+import { saveUserSettings } from '../../UserSettings/actions';
 import { getUserWords } from '../../Dictionary/actions';
 
 function* workerLoadData() {
@@ -18,15 +18,15 @@ function* workerLoadData() {
     yield put(getStatistic(statisticFromApi));
   }
 
-  const settings = yield call(getSettingsFromApi);
+  const settings = yield call(getSettingsFromApi, sessionData);
   if (settings) {
     const settingsFromApi = getSettings(settings);
-    yield put(saveUserName(settingsFromApi));
+    yield put(saveUserSettings(settingsFromApi));
   }
 
   yield put(getUserWords());
 
-  yield put(isDataLoadFromApi());
+  yield put(isDataLoadFromApi(true));
 }
 
 export default function* watchLoadData() {
