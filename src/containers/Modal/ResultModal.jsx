@@ -12,6 +12,7 @@ import GoToHomePageButton from '../Buttons/GoHomePageButton/GoHomePageButton';
 import { LINK_FOR_IMAGE, LINK_FOR_AUDIO } from '../../config';
 import createStatisticForGames from '../../utils/createStatisticForGames';
 import StatisticsHeader from '../../components/Modal/Statistics/StatisticsHeader';
+import RoundStatistic from '../../components/Modal/Statistics/RoundStatistic';
 
 const ModalResult = (props) => {
   const {
@@ -58,13 +59,24 @@ const ModalResult = (props) => {
     setRoundsStatistic(createStatisticForGames(Statistic, currentAppMode));
   };
 
+  const correctCount = (str) => {
+    if (str === '') return 0;
+    return str.split(',').length;
+  };
+
   const isStatistics = () => {
     if (isShowStatistic) {
       return (
         <>
           <StatisticsHeader />
           {roundsStatistic.map((round) => (
-            <div key={round[0]}>{round[0]}</div>
+            <RoundStatistic
+              time={round[0]}
+              key={round[0]}
+              level={round[1].split('_')[0]}
+              page={round[1].split('_')[1]}
+              correct={correctCount(round[2])}
+            />
           ))}
         </>
       );
