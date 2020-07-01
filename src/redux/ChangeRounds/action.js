@@ -11,6 +11,8 @@ import {
   SPRINT_CHANGE_LEVEL,
   OWNGAME_CHANGE_LEVEL,
   OWNGAME_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_LEVEL,
 } from './types';
 
 export function changeSpeakItLevel(level) {
@@ -93,6 +95,20 @@ export function changeOwnGameLevel(level) {
 export function changeOwnGamePage(page) {
   return {
     type: OWNGAME_CHANGE_PAGE,
+    payload: page,
+  };
+}
+
+export function changeLearnWordsLevel(level) {
+  return {
+    type: LEARN_WORDS_CHANGE_LEVEL,
+    payload: level,
+  };
+}
+
+export function changeLearnWordsPage(page) {
+  return {
+    type: LEARN_WORDS_CHANGE_PAGE,
     payload: page,
   };
 }

@@ -11,12 +11,15 @@ import {
   checkStatusShowLoader,
   checkStatusHideLoader,
 } from '../../../Loader/CheckStatusLoader/action';
+import { getStatistic } from '../../../Statistic/action';
+import getStatisticFromApi from '../../../../services/getStatisticFromApi';
 
 function* workerStatus() {
   yield put(checkStatusShowLoader());
   const getLoginState = (state) => state.login;
   const sessionData = yield select(getLoginState);
-  const data = yield call(checkToken, sessionData);
+  let data = '';
+  if (sessionData.token) data = yield call(checkToken, sessionData);
   if (!data) {
     yield put(resetSessionData());
     if (!checkHistoryLocation(['/login', '/registration'])) {
@@ -24,7 +27,10 @@ function* workerStatus() {
     }
   } else {
     yield put(getUserWords());
+    const statistic = yield call(getStatisticFromApi, sessionData);
     const settingsFromApi = getSettings(data);
+    const statisticFromApi = getSettings(statistic);
+    yield put(getStatistic(statisticFromApi));
     yield put(saveUserName(settingsFromApi));
   }
   yield put(isAlreadyCheckStatusSession());
