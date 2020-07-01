@@ -17,6 +17,10 @@ const LoginFormWrapperStyled = styled.div`
   box-sizing: border-box;
   min-height: 900px;
 
+  @media ${DEVICE.laptopL} {
+    grid-template-columns: 60% 40%;
+  }
+
   @media ${DEVICE.tablet} {
     grid-template-columns: 65% 35%;
   }

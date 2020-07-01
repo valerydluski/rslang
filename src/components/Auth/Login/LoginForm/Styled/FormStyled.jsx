@@ -11,17 +11,22 @@ const FormStyled = styled.form`
   justify-content: stretch;
   align-items: flex-start;
   height: 100%;
+  width: calc(100% - 150px);
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
   }
   & > div {
-    width: 100%;
+    width: 70%;
   }
 
   @media ${DEVICE.laptop} {
     margin-left: 60px;
+    width: calc(100% - 120px);
+    & > div {
+      width: 100%;
+    }
   }
 
   @media ${DEVICE.mobileL} {
@@ -31,20 +36,12 @@ const FormStyled = styled.form`
 
   input {
     height: 40px;
-    width: 540px;
+    width: 100%;
     border: 1.39565px solid #c4c4c4;
     outline: none;
     background-color: #ffffff;
     box-sizing: border-box;
     margin-bottom: 15px;
-
-    @media ${DEVICE.laptopL} {
-      width: 380px;
-    }
-
-    @media ${DEVICE.mobileL} {
-      width: 100%;
-    }
   }
 
   .button_sign-in {
@@ -53,21 +50,20 @@ const FormStyled = styled.form`
     height: 178px;
     border: none;
     outline: none;
-    align-self: start;
-    justify-self: end;
+    justify-self: flex-end;
     background: #404497;
     color: #ffffff;
     font-style: normal;
     font-weight: bold;
     font-size: 34px;
-    transform: translateX(50%);
-    transition: all 0.4s ease;
-    align-self: flex-end;
+    transform: translateX(-50%);
+    margin-left: 70%;
     margin-top: 40px;
 
     @media ${DEVICE.laptop} {
       transform: translateX(0);
-      justify-self: center;
+      align-self: center;
+      margin-left: 0;
     }
 
     &:hover {
