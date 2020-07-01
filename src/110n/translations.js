@@ -78,6 +78,9 @@ const translations = {
       page: 'Page',
       level: 'Level',
     },
+    GamesStatistics: {
+      header: 'Game statistic',
+    },
   },
   ru: {
     HomePage: {
@@ -157,6 +160,9 @@ const translations = {
     GameStatus: {
       page: 'Страница',
       level: 'Уровень',
+    },
+    GamesStatistics: {
+      header: 'Статистика игры',
     },
   },
 };

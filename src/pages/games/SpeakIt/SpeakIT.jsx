@@ -23,7 +23,6 @@ import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 import createGameEndData from '../../../utils/createGameEndData';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
-import createStatisticForGames from '../../../utils/createStatisticForGames';
 
 const addScore = 100;
 
@@ -164,10 +163,6 @@ const SpeakIT = (props) => {
     }
   };
 
-  const showStatisticHandler = () => {
-    const roundsStatistic = createStatisticForGames(Statistic, gameName);
-  };
-
   if (!isListening) {
     return (
       <div className="speak-it_container">
@@ -178,7 +173,6 @@ const SpeakIT = (props) => {
             showProperties={['word', 'transcription', 'wordTranslate']}
             restartGame={restartGame}
             newGame={newGame}
-            showStatisticHandler={showStatisticHandler}
           />
         ) : null}
         <Image src={srcForImage} />
@@ -200,7 +194,6 @@ const SpeakIT = (props) => {
           restartHandler={restartHandler}
           speakHandler={speakHandler}
           finishHandler={finishHandler}
-          showStatisticHandler={showStatisticHandler}
         />
       </div>
     );
