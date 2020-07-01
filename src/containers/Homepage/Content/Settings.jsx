@@ -11,7 +11,6 @@ import {
 import checkboxesValidator from '../../../utils/validators/checkboxesValidator';
 
 function SettingContent(props) {
-  console.log('SettingContent -> props', props);
   const { saveToStore, saveToAPI, initialValues } = props;
   const onSubmit = (formData) => {
     if (!checkboxesValidator(formData)) {

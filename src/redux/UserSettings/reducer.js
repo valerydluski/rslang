@@ -24,7 +24,6 @@ const initialState = {
 function userSettingsReducer(state = initialState, action) {
   switch (action.type) {
     case SAVE_USER_SETTINGS_TO_STORE:
-      console.log('userSettingsReducer -> action', action);
       return {
         ...state,
         settings: action.payload,

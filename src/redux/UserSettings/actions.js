@@ -6,7 +6,6 @@ export function saveUserSettingsToAPI(data) {
     type: SAVE_USER_SETTINGS_TO_API,
     payload: data,
   };
-  // console.log('saveUserSettings -> data', data);
   // return (dispatch) => {
   //   dispatch(setLocale(data.language));
 
