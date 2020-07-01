@@ -39,12 +39,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     saveSettings: (data) => dispatch(saveUserSettingsToStore(data)),
-//   };
-// };
-
 const mapDispatchToProps = {
   saveToStore: saveUserSettingsToStore,
   saveToAPI: saveUserSettingsToAPI,
