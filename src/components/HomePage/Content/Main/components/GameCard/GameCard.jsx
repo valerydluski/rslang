@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 import GameCardContainer from './styled/GameCardContainer';
 import StyledRoundButton from '../../../../../UI/Button/Styled/StyledRoundButton';
 
@@ -9,9 +10,13 @@ export default function GameCard(props) {
   return (
     <GameCardContainer>
       <img src={poster} alt={title} />
-      <h3>{title}</h3>
+      <h3>
+        <Translate value={title} />
+      </h3>
       <div>
-        <p>{description}</p>
+        <p>
+          <Translate value={description} />
+        </p>
         <StyledRoundButton onClick={onClick}>GO!</StyledRoundButton>
       </div>
     </GameCardContainer>

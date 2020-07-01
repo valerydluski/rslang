@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 import Logo from '../../../containers/UI/Logo';
 import SideBarContainer from './styled/SideBarContainer';
 import MainNavigationMenu from '../../../containers/Navigation/MainNavigationMenu';
@@ -22,14 +23,14 @@ export default function LeftSideBar(props) {
           iconHover={iconSettingsHover}
           onClick={getRedirectFunction('/settings')}
         >
-          Settings
+          <Translate value="HomePage.settings" />
         </StyledButtonWithIcon>
         <StyledButtonWithIcon
           icon={iconLogout}
           iconHover={iconLogoutHover}
           onClick={resetSessionData}
         >
-          Log Out
+          <Translate value="HomePage.logout" />
         </StyledButtonWithIcon>
       </div>
     </SideBarContainer>

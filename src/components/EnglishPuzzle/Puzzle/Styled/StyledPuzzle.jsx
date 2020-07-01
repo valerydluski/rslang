@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { PUZZLE_HEIGHT, PUZZLE_PADDING } from '../../../../containers/EnglishPuzzle/Game/constants';
+import {
+  PUZZLE_HEIGHT,
+  PUZZLE_PADDING,
+  PLAYFIELD_HEIGHT,
+  PLAYFIELD_WIDTH,
+} from '../../../../containers/EnglishPuzzle/Game/constants';
 
 const StyledPuzzle = styled.span`
   display: flex;
@@ -21,7 +26,7 @@ const StyledPuzzle = styled.span`
     ${(props) => (props.isFirst ? 0 : PUZZLE_PADDING)}px 50%,
     0% 0%
   );
-  background-size: 560px 560px;
+  background-size: ${PLAYFIELD_WIDTH}px ${PLAYFIELD_HEIGHT}px;
   background-image: url('${(props) => props.url}');
   background-position: ${(props) => -props.bgXOffset}px ${(props) => -props.bgYOffset}px;
   color: #000000;

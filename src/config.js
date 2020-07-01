@@ -6,13 +6,13 @@ import sprintPoster from './assets/img/posters/sprint.svg';
 import getRedirectFunction from './utils/getRedirectFunction';
 
 export const API = {
-  // URL: 'https://afternoon-falls-25894.herokuapp.com',
-  URL: 'https://pacific-castle-12388.herokuapp.com',
+  URL: 'https://afternoon-falls-25894.herokuapp.com',
   ENDPOINTS: {
     USERS: 'users',
     SIGNIN: 'signin',
     WORDS: 'words',
     SETTINGS: 'settings',
+    STATISTICS: 'statistics',
   },
 
   QUERIES: {
@@ -27,6 +27,10 @@ export const API = {
 };
 
 export const DEFAULT_LANGUAGE = 'ru';
+export const SUPPORTED_LANGUAGES = {
+  en: 'en',
+  ru: 'ru',
+};
 
 export const LINK_FOR_IMAGE = 'https://raw.githubusercontent.com/valerydluski/rslang-data/master/';
 export const LINK_FOR_AUDIO = LINK_FOR_IMAGE;
@@ -35,32 +39,32 @@ export const LINK_FOR_ENGLISH_PUZZLE_IMAGE =
 
 export const GAME_LIST = [
   {
-    title: 'Savannah',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.savannah',
+    description: 'Games.savannahDescription',
     poster: savannahPoster,
     onClick: getRedirectFunction('/StartGame/Savannah/'),
   },
   {
-    title: 'SpeakIT',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.speakIT',
+    description: 'Games.speakITDescription',
     poster: speakItPoster,
     onClick: getRedirectFunction('/StartGame/SpeakIT/'),
   },
   {
-    title: 'Puzzle',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.puzzle',
+    description: 'Games.puzzleDescription',
     poster: puzzlePoster,
     onClick: getRedirectFunction('/StartGame/EnglishPuzzle/'),
   },
   {
-    title: 'AudioCall',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.audioCall',
+    description: 'Games.audioCallDescription',
     poster: audioCallPoster,
     onClick: getRedirectFunction('/StartGame/AudioCall/'),
   },
   {
-    title: 'Sprint',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    title: 'Games.sprint',
+    description: 'Games.sprintDescription',
     poster: sprintPoster,
     onClick: getRedirectFunction('/StartGame/Sprint/'),
   },
@@ -81,3 +85,34 @@ export const CHECKBOXES = [
   'translate',
   'imageAssociation',
 ];
+
+export const GAME_NAME = {
+  speakIT: 'SpeakIT',
+  englishPuzzle: 'EnglishPuzzle',
+  savannah: 'Savannah',
+  audioCall: 'AudioCall',
+  sprint: 'Sprint',
+  ownGame: 'OwnGame',
+  learnWords: 'LearnWords',
+};
+
+const size = {
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopL: '1440px',
+  desktop: '2560px',
+};
+
+export const DEVICE = {
+  mobileS: `(max-width: ${size.mobileS})`,
+  mobileM: `(max-width: ${size.mobileM})`,
+  mobileL: `(max-width: ${size.mobileL})`,
+  tablet: `(max-width: ${size.tablet})`,
+  laptop: `(max-width: ${size.laptop})`,
+  laptopL: `(max-width: ${size.laptopL})`,
+  desktop: `(max-width: ${size.desktop})`,
+  desktopL: `(max-width: ${size.desktop})`,
+};

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { I18n } from 'react-redux-i18n';
 import OverlayStyled from './Styled/OverlayStyled';
 import ModalStyled from './Styled/ModalStyled';
 import ModalContent from './ModalContent';
@@ -18,6 +19,7 @@ const ModalResult = (props) => {
     restartGame,
     newGame,
     correctWords,
+    showStatisticHandler,
   } = props;
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
@@ -38,8 +40,6 @@ const ModalResult = (props) => {
     newGame();
   };
 
-  const statisticHandler = () => {};
-
   const wordHandler = (obj) => {
     if (isChangeImage) setSrcForImage(`${LINK_FOR_IMAGE}${obj.image}`);
     if (audioForPlay) {
@@ -59,9 +59,9 @@ const ModalResult = (props) => {
           audioForPlay={audioForPlay}
         />
         <ModalButtonsContainerStyled>
-          <Button buttonHandler={restartHandler} text="restart" />
-          <Button buttonHandler={newGameHandler} text="new game" />
-          <Button buttonHandler={statisticHandler} text="statistic" />
+          <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
+          <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
+          <Button buttonHandler={showStatisticHandler} text={I18n.t('Buttons.statistic')} />
         </ModalButtonsContainerStyled>
       </ModalStyled>
     </OverlayStyled>
@@ -76,6 +76,7 @@ ModalResult.propTypes = {
   restartGame: PropTypes.func,
   newGame: PropTypes.func,
   correctWords: PropTypes.instanceOf(Array),
+  showStatisticHandler: PropTypes.func,
 };
 
 ModalResult.defaultProps = {
@@ -86,6 +87,7 @@ ModalResult.defaultProps = {
   correctWords: null,
   restartGame: () => {},
   newGame: () => {},
+  showStatisticHandler: () => {},
 };
 
 export default ModalResult;

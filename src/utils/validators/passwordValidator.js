@@ -1,6 +1,7 @@
+import { I18n } from 'react-redux-i18n';
+
 export default (password) => {
-  const errorMessage =
-    'Password must contain numbers, uppercase and lowercase letter, one of the following characters +-_@$!%*?&#.,;:[]{}';
+  const errorMessage = I18n.t('Validators.password');
   const SYMBOLS_REGEX = /[-+_@$!%*?&#.,;:[\]{}]/;
   if (password && password.length < 8) {
     return errorMessage;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Translate, I18n } from 'react-redux-i18n';
 import emailValidator from '../../../../utils/validators/emailValidator';
 import passwordValidator from '../../../../utils/validators/passwordValidator';
 import Input from '../../../UI/Input/Input';
@@ -11,15 +12,13 @@ import FormNameStyled from '../../Login/LoginForm/Styled/FormNameStyled';
 import FormStyled from '../../Login/LoginForm/Styled/FormStyled';
 import PatternStyled from '../../Login/LoginForm/Styled/PatternStyled';
 
-const formName = 'Sign up';
-
 const RegistrationForm = (props) => {
   const { handleSubmit } = props;
   return (
     <LoginFormWrapperStyled>
       <Logo className="login-form_logo" />
       <LoginPageTitle />
-      <FormNameStyled>{formName}</FormNameStyled>
+      <FormNameStyled>{I18n.t('Auth.signUp')}</FormNameStyled>
       <FormStyled onSubmit={handleSubmit}>
         <Field name="name" key="name" type="text" placeholder="name" component={Input} />
         <Field
@@ -39,7 +38,7 @@ const RegistrationForm = (props) => {
           validate={passwordValidator}
         />
         <button className="button_sign-in" type="submit" aria-label="Sign In">
-          OK
+          <Translate value="Buttons.OK" />
         </button>
       </FormStyled>
       <PatternStyled />
