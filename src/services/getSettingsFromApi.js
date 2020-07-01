@@ -1,14 +1,14 @@
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
-async function checkToken(user) {
+async function getSettingsFromApi(user) {
   try {
     const {
       URL,
-      ENDPOINTS: { USERS },
+      ENDPOINTS: { USERS, SETTINGS },
     } = API;
 
-    return await fetchData(`${URL}/${USERS}/${user.userId}/`, {
+    return await fetchData(`${URL}/${USERS}/${user.userId}/${SETTINGS}`, {
       method: 'GET',
       withCredentials: true,
       headers: {
@@ -21,4 +21,4 @@ async function checkToken(user) {
   }
 }
 
-export default checkToken;
+export default getSettingsFromApi;

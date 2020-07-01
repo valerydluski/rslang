@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Translate } from 'react-redux-i18n';
+import defaultImg from '../../../assets/img/blank.jpg';
 import Image from '../../../components/UI/Image/Image';
 import TextField from '../../../components/UI/TextField/TextField';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
@@ -17,21 +18,22 @@ import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
-import { LINK_FOR_IMAGE, GAME_MAX_PAGE } from '../../../config';
+import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
+import createGameEndData from '../../../utils/createGameEndData';
+import { saveFullStatistic } from '../../../redux/Statistic/action';
+import createStatisticForGames from '../../../utils/createStatisticForGames';
 
 const addScore = 100;
 
 const SpeakIT = (props) => {
   const {
+    gameName,
     Level,
     Page,
     wordsCollection,
-    imageSrc,
-    translate,
     listening,
-    transcript,
     microphone,
     speakITScore,
     changeScore,
@@ -42,40 +44,42 @@ const SpeakIT = (props) => {
     changePage,
     changeLevel,
     maxPage,
+    Statistic,
+    saveStatistic,
+    statusCheckLoader,
+    checkStatus,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
-
-  const [srcForImage, setSrcForImage] = useState(imageSrc);
-  const [textForTextField, setTranslate] = useState(translate);
+  const [srcForImage, setSrcForImage] = useState(defaultImg);
+  const [textForTextField, setTranslate] = useState('');
   const [isListening, setListening] = useState(listening);
-  const [transcriptFromMicrophone, setTranscript] = useState(transcript);
+  const [transcriptFromMicrophone, setTranscript] = useState('');
   const [isGameFinished, toggleGameMode] = useState(false);
+  const [wrongWordsState, setWrongWords] = useState([]);
   let IDontKnowWords = gameWords.slice();
-  checkStatusSession();
+
+  if (statusCheckLoader) return <LoadingSpinner />;
   if (isWordsLoading) return <LoadingSpinner />;
-  if (currentAppMode !== 'SpeakIT') {
-    switchAppMode('SpeakIT');
+  if (currentAppMode !== gameName) {
+    checkStatus();
+    switchAppMode(gameName);
     return <LoadingSpinner />;
   }
-
+  if (wrongWordsState.length === 0) setWrongWords(gameWords);
   const newScoreHandler = () => {
     changeScore(newScore);
   };
 
   const createGame = () => {
     IDontKnowWords = gameWords.slice();
-    changeIDontKnowWordsInStore(IDontKnowWords);
-    const spokenWords = document.querySelectorAll('.spoken-word');
-    spokenWords.forEach((element) => {
-      element.classList.remove('spoken-word');
-    });
+    setWrongWords(IDontKnowWords);
     setTranscript('');
     newScore = 0;
     newScoreHandler();
-    setSrcForImage('https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg');
+    setSrcForImage(defaultImg);
   };
 
   const speechResult = (transcriptResult) => {
@@ -85,8 +89,7 @@ const SpeakIT = (props) => {
       setSrcForImage(`${LINK_FOR_IMAGE}${word.image}`);
       if (IDontKnowWords.includes(transcriptResult)) {
         IDontKnowWords = IDontKnowWords.filter((item) => item !== transcriptResult);
-        changeIDontKnowWordsInStore(IDontKnowWords);
-        document.getElementById(transcriptResult).classList.add('spoken-word');
+        setWrongWords(IDontKnowWords);
         newScore += addScore;
         newScoreHandler();
         if (IDontKnowWords.length === 0) {
@@ -128,6 +131,7 @@ const SpeakIT = (props) => {
     const { newLevel, newPage } = newRound(Level, Page, maxPage);
     if (newLevel !== Level) changeLevel(newLevel);
     if (newPage !== Page) changePage(newPage);
+    setWrongWords([]);
   };
 
   const speakHandler = () => {
@@ -144,10 +148,24 @@ const SpeakIT = (props) => {
     if (!isListening) {
       toast.info(<Translate value="ModalWindows.didNotStartGame" />);
     } else {
+      changeIDontKnowWordsInStore(wrongWordsState);
       toggleGameMode(true);
       microphone.stopMicrophone();
       setListening(false);
+      const newStatistic = createGameEndData(
+        Level,
+        Page,
+        wordsCollection,
+        Statistic,
+        wrongWordsState,
+        gameName
+      );
+      saveStatistic(newStatistic);
     }
+  };
+
+  const showStatisticHandler = () => {
+    const roundsStatistic = createStatisticForGames(Statistic, gameName);
   };
 
   if (!isListening) {
@@ -160,6 +178,7 @@ const SpeakIT = (props) => {
             showProperties={['word', 'transcription', 'wordTranslate']}
             restartGame={restartGame}
             newGame={newGame}
+            showStatisticHandler={showStatisticHandler}
           />
         ) : null}
         <Image src={srcForImage} />
@@ -172,11 +191,16 @@ const SpeakIT = (props) => {
         />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
-        <CardsContainerSpeakIT cardHandler={cardHandler} wordsCollection={wordsCollection} />
+        <CardsContainerSpeakIT
+          cardHandler={cardHandler}
+          wordsCollection={wordsCollection}
+          wrongWords={wrongWordsState}
+        />
         <ButtonsContainerSpeakIT
           restartHandler={restartHandler}
           speakHandler={speakHandler}
           finishHandler={finishHandler}
+          showStatisticHandler={showStatisticHandler}
         />
       </div>
     );
@@ -204,7 +228,7 @@ const SpeakIT = (props) => {
       />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
-      <CardsContainerSpeakIT wordsCollection={wordsCollection} />
+      <CardsContainerSpeakIT wordsCollection={wordsCollection} wrongWords={wrongWordsState} />
       <ButtonsContainerSpeakIT
         restartHandler={restartHandler}
         speakHandler={speakHandler}
@@ -218,10 +242,7 @@ SpeakIT.propTypes = {
   Level: PropTypes.string,
   Page: PropTypes.string,
   speakITScore: PropTypes.number,
-  imageSrc: PropTypes.string,
-  translate: PropTypes.string,
   listening: PropTypes.bool,
-  transcript: PropTypes.string,
   wordsCollection: PropTypes.instanceOf(Array),
   microphone: PropTypes.instanceOf(Microphone),
   changeScore: PropTypes.func,
@@ -232,22 +253,26 @@ SpeakIT.propTypes = {
   changeLevel: PropTypes.func.isRequired,
   changePage: PropTypes.func.isRequired,
   maxPage: PropTypes.number,
+  gameName: PropTypes.string,
+  Statistic: PropTypes.instanceOf(Object).isRequired,
+  saveStatistic: PropTypes.func.isRequired,
+  statusCheckLoader: PropTypes.bool,
+  checkStatus: PropTypes.func.isRequired,
 };
 
 SpeakIT.defaultProps = {
   Level: '',
   Page: '',
   speakITScore: 0,
-  imageSrc: 'https://raw.githubusercontent.com/valerydluski/Images/master/blank.jpg',
-  translate: '',
   listening: false,
-  transcript: '',
   wordsCollection: [],
   microphone: new Microphone(),
   changeScore: () => {},
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
+  gameName: GAME_NAME.speakIT,
   maxPage: GAME_MAX_PAGE,
+  statusCheckLoader: false,
 };
 
 const mapStateToProps = (state) => {
@@ -259,6 +284,8 @@ const mapStateToProps = (state) => {
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage.count,
+    Statistic: state.changeStatistic.statistic,
+    statusCheckLoader: state.checkStatusloaderReducer.loading,
   };
 };
 
@@ -268,6 +295,8 @@ const mapDispatchToProps = {
   switchAppMode: changeAppMode,
   changeLevel: changeSpeakItLevel,
   changePage: changeSpeakItPage,
+  saveStatistic: saveFullStatistic,
+  checkStatus: checkStatusSession,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);

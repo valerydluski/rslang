@@ -9,7 +9,8 @@ import correctWatcher from './LearnWords/sagas/correctSaga';
 import addNewWordSagaWatcher from './LearnWords/sagas/addNewWordSaga';
 import watchPutSettings from './UserSettings/sagas/putSettings';
 import saveUserWordsSagaWatcher from './Dictionary/sagas/saveUserWordsSaga';
-import isStatusCheckedReducer from './Auth/Login/isStatusCheckedReducer';
+import statistic from './Statistic/sagas/statisticSaga';
+import watchLoadData from './LoadDataFromApi/sagas/loadDataSaga';
 
 export default function* watchSaga() {
   yield all([
@@ -23,5 +24,7 @@ export default function* watchSaga() {
     fork(addNewWordSagaWatcher),
     fork(watchPutSettings),
     fork(saveUserWordsSagaWatcher),
+    fork(statistic),
+    fork(watchLoadData),
   ]);
 }

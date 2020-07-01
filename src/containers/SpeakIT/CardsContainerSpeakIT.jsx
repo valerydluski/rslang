@@ -16,7 +16,11 @@ const CardsContainerSpeakITStyled = styled.div`
 `;
 
 const CardsContainerSpeakIT = (props) => {
-  const { wordsCollection, cardHandler } = props;
+  const { wordsCollection, cardHandler, wrongWords } = props;
+  const addClass = (word) => {
+    if (!wrongWords.includes(word.toLowerCase())) return 'spoken-word';
+    return '';
+  };
   return (
     <CardsContainerSpeakITStyled>
       {wordsCollection.map((word) => {
@@ -24,6 +28,7 @@ const CardsContainerSpeakIT = (props) => {
           <WordCardSpeakIT
             key={word.word.toLowerCase()}
             id={word.word.toLowerCase()}
+            className={addClass(word.word)}
             obj={word}
             wordCardHandler={cardHandler}
           />
@@ -36,11 +41,13 @@ const CardsContainerSpeakIT = (props) => {
 CardsContainerSpeakIT.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   cardHandler: PropTypes.func,
+  wrongWords: PropTypes.instanceOf(Array),
 };
 
 CardsContainerSpeakIT.defaultProps = {
   wordsCollection: [],
   cardHandler: () => {},
+  wrongWords: [],
 };
 
 export default CardsContainerSpeakIT;

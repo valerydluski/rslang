@@ -4,17 +4,20 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Translate } from 'react-redux-i18n';
 import ReduxSettingsForm from '../../../components/HomePage/Content/Settings/SettingsForm';
-import { saveUserSettings } from '../../../redux/UserSettings/actions';
+import {
+  saveUserSettingsToStore,
+  saveUserSettingsToAPI,
+} from '../../../redux/UserSettings/actions';
 import checkboxesValidator from '../../../utils/validators/checkboxesValidator';
 
 function SettingContent(props) {
-  const { saveSettings, initialValues } = props;
+  const { saveToStore, saveToAPI, initialValues } = props;
   const onSubmit = (formData) => {
     if (!checkboxesValidator(formData)) {
       toast.warning(<Translate value="Settings.checkboxMessage" />);
     } else {
-      saveSettings(formData);
-      toast.info(<Translate value="Settings.settingsSave" />);
+      saveToStore(formData);
+      saveToAPI();
     }
   };
   return (
@@ -25,8 +28,9 @@ function SettingContent(props) {
 }
 
 SettingContent.propTypes = {
-  saveSettings: PropTypes.func.isRequired,
+  saveToStore: PropTypes.func.isRequired,
   initialValues: PropTypes.instanceOf(Object).isRequired,
+  saveToAPI: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -35,10 +39,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    saveSettings: (data) => dispatch(saveUserSettings(data)),
-  };
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     saveSettings: (data) => dispatch(saveUserSettingsToStore(data)),
+//   };
+// };
+
+const mapDispatchToProps = {
+  saveToStore: saveUserSettingsToStore,
+  saveToAPI: saveUserSettingsToAPI,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingContent);

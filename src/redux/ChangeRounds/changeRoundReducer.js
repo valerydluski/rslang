@@ -9,8 +9,10 @@ import {
   AUDIOCALL_CHANGE_LEVEL,
   SPRINT_CHANGE_PAGE,
   SPRINT_CHANGE_LEVEL,
-  OWNGAME_CHANGE_PAGE,
-  OWNGAME_CHANGE_LEVEL,
+  MAKESENTENCE_CHANGE_PAGE,
+  MAKESENTENCE_CHANGE_LEVEL,
+  LEARN_WORDS_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_LEVEL,
 } from './types';
 
 const initialState = {
@@ -24,8 +26,10 @@ const initialState = {
   AudioCallPage: '1',
   SprintLevel: '1',
   SprintPage: '1',
-  OwnGameLevel: '1',
-  OwnGamePage: '1',
+  MakeSentenceLevel: '1',
+  MakeSentencePage: '1',
+  LearnWordsLevel: '1',
+  LearnWordsPage: '1',
 };
 
 const changeRoundReducer = (state = initialState, action) => {
@@ -50,10 +54,14 @@ const changeRoundReducer = (state = initialState, action) => {
       return { ...state, SprintPage: action.payload };
     case SPRINT_CHANGE_LEVEL:
       return { ...state, SprintLevel: action.payload, SprintPage: '1' };
-    case OWNGAME_CHANGE_PAGE:
-      return { ...state, OwnGamePage: action.payload };
-    case OWNGAME_CHANGE_LEVEL:
-      return { ...state, OwnGameLevel: action.payload, OwnGamePage: '1' };
+    case MAKESENTENCE_CHANGE_PAGE:
+      return { ...state, MakeSentencePage: action.payload };
+    case MAKESENTENCE_CHANGE_LEVEL:
+      return { ...state, MAKESENTENCELevel: action.payload };
+    case LEARN_WORDS_CHANGE_PAGE:
+      return { ...state, LearnWordsLevel: action.payload };
+    case LEARN_WORDS_CHANGE_LEVEL:
+      return { ...state, LearnWordsPage: action.payload };
     default:
       return state;
   }

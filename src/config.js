@@ -3,16 +3,17 @@ import speakItPoster from './assets/img/posters/speakit.svg';
 import puzzlePoster from './assets/img/posters/puzzle.svg';
 import audioCallPoster from './assets/img/posters/audio-call.svg';
 import sprintPoster from './assets/img/posters/sprint.svg';
+import makeSentencePoster from './assets/img/posters/make-sentence.svg';
 import getRedirectFunction from './utils/getRedirectFunction';
 
 export const API = {
-  // URL: 'https://afternoon-falls-25894.herokuapp.com',
-  URL: 'https://pacific-castle-12388.herokuapp.com',
+  URL: 'https://afternoon-falls-25894.herokuapp.com',
   ENDPOINTS: {
     USERS: 'users',
     SIGNIN: 'signin',
     WORDS: 'words',
     SETTINGS: 'settings',
+    STATISTICS: 'statistics',
   },
 
   QUERIES: {
@@ -68,6 +69,12 @@ export const GAME_LIST = [
     poster: sprintPoster,
     onClick: getRedirectFunction('/StartGame/Sprint/'),
   },
+  {
+    title: 'Games.makeSentence',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    poster: makeSentencePoster,
+    onClick: getRedirectFunction('/StartGame/MakeSentence/'),
+  },
 ];
 
 export const MIN_WORDS_PER_DAY = 1;
@@ -85,3 +92,34 @@ export const CHECKBOXES = [
   'translate',
   'imageAssociation',
 ];
+
+export const GAME_NAME = {
+  speakIT: 'SpeakIT',
+  englishPuzzle: 'EnglishPuzzle',
+  savannah: 'Savannah',
+  audioCall: 'AudioCall',
+  sprint: 'Sprint',
+  ownGame: 'OwnGame',
+  learnWords: 'LearnWords',
+};
+
+const size = {
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopL: '1440px',
+  desktop: '2560px',
+};
+
+export const DEVICE = {
+  mobileS: `(max-width: ${size.mobileS})`,
+  mobileM: `(max-width: ${size.mobileM})`,
+  mobileL: `(max-width: ${size.mobileL})`,
+  tablet: `(max-width: ${size.tablet})`,
+  laptop: `(max-width: ${size.laptop})`,
+  laptopL: `(max-width: ${size.laptopL})`,
+  desktop: `(max-width: ${size.desktop})`,
+  desktopL: `(max-width: ${size.desktop})`,
+};

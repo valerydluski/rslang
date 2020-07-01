@@ -64,6 +64,19 @@ const SettingsForm = (props) => {
         component={Input}
         label="words per page"
       />
+      <h3>
+        <Translate value="Games.makeSentence" />
+      </h3>
+      <Field
+        name="MakeSentenceWordsPerPage"
+        key="MakeSentenceWordsPerPage"
+        type="number"
+        placeholder="Make sentence - words per page"
+        validate={WordsPerPageValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
+        label="words per page"
+      />
       <button type="submit" aria-label="Save">
         <Translate value="Buttons.save" />
       </button>
