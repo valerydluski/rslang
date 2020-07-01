@@ -86,11 +86,11 @@ export const GAME_MAX_PAGE = 60;
 export const GAME_MAX_LEVEL = 6;
 
 export const CHECKBOXES = [
-  'textExample',
-  'textMeaning',
-  'transcription',
-  'translate',
-  'imageAssociation',
+  'isTranslate',
+  'isTextMeaning',
+  'isTextExample',
+  'isTranscription',
+  'isImageAssociation',
 ];
 
 export const GAME_NAME = {
