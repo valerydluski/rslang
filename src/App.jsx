@@ -25,6 +25,7 @@ function App() {
         <Redirect to="/home" />
       </Switch>
       <ToastContainer
+        className="toast-container"
         position="bottom-right"
         autoClose={4000}
         hideProgressBar={false}
