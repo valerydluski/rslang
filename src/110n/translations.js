@@ -22,6 +22,7 @@ const translations = {
       wordsPerDay: 'Words per day',
       cardsPerDay: 'Cards per day',
       infoInCards: 'Info in cards',
+      settingsSave: 'Settings saved successfully',
     },
     Auth: {
       signIn: 'Sign In',
@@ -110,6 +111,7 @@ const translations = {
       wordsPerDay: 'Слов в день',
       cardsPerDay: 'Карточек в день',
       infoInCards: 'Информация в карточках',
+      settingsSave: 'Настройки успешно сохранены',
     },
     Auth: {
       signIn: 'Войти',
