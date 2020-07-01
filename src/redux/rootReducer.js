@@ -16,6 +16,7 @@ import newLearnCardShow from './LearnWords/reducers/newCardShowReducer';
 import saveUserWordsReducer from './Dictionary/reducers/saveUserWordsReducer';
 import checkStatusloaderReducer from './Loader/CheckStatusLoader/checkStatusloaderReducer';
 import isStatusCheckedReducer from './Auth/Login/isStatusCheckedReducer';
+import loadDataFromApiReducer from './LoadDataFromApi/reducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   userWords: saveUserWordsReducer,
   checkStatusloaderReducer,
   isStatusCheckedReducer,
+  dataLoad: loadDataFromApiReducer,
 });
 
 export default rootReducer;
