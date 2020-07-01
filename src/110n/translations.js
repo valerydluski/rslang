@@ -80,6 +80,10 @@ const translations = {
     },
     GamesStatistics: {
       header: 'Game statistic',
+      level: 'Level:',
+      page: 'Page:',
+      correct: 'Correct answers:',
+      count: 'Total words:',
     },
   },
   ru: {
@@ -163,6 +167,10 @@ const translations = {
     },
     GamesStatistics: {
       header: 'Статистика игры',
+      level: 'Уровень:',
+      page: 'Страница:',
+      correct: 'Правильных ответов:',
+      count: 'Всего слов:',
     },
   },
 };

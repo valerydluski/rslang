@@ -47,6 +47,7 @@ const SpeakIT = (props) => {
     saveStatistic,
     statusCheckLoader,
     checkStatus,
+    wordsPerPage,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -61,7 +62,9 @@ const SpeakIT = (props) => {
   let IDontKnowWords = gameWords.slice();
 
   if (statusCheckLoader) return <LoadingSpinner />;
-  if (isWordsLoading) return <LoadingSpinner />;
+  if (isWordsLoading) {
+    return <LoadingSpinner />;
+  }
   if (currentAppMode !== gameName) {
     checkStatus();
     switchAppMode(gameName);
@@ -157,7 +160,8 @@ const SpeakIT = (props) => {
         wordsCollection,
         Statistic,
         wrongWordsState,
-        gameName
+        gameName,
+        wordsPerPage
       );
       saveStatistic(newStatistic);
     }
@@ -251,6 +255,7 @@ SpeakIT.propTypes = {
   saveStatistic: PropTypes.func.isRequired,
   statusCheckLoader: PropTypes.bool,
   checkStatus: PropTypes.func.isRequired,
+  wordsPerPage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -279,6 +284,7 @@ const mapStateToProps = (state) => {
     maxPage: state.maxPage.maxPage.count,
     Statistic: state.changeStatistic.statistic,
     statusCheckLoader: state.checkStatusloaderReducer.loading,
+    wordsPerPage: state.userSettings.settings.SpeakITWordsPerPage,
   };
 };
 

@@ -17,8 +17,10 @@ const CardsContainerSpeakITStyled = styled.div`
 
 const CardsContainerSpeakIT = (props) => {
   const { wordsCollection, cardHandler, wrongWords } = props;
+  const allWords = wordsCollection.map((el) => el.word);
   const addClass = (word) => {
-    if (!wrongWords.includes(word.toLowerCase())) return 'spoken-word';
+    if (!wrongWords.includes(word.toLowerCase()) && allWords.includes(wrongWords[0]))
+      return 'spoken-word';
     return '';
   };
   return (

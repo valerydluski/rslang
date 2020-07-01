@@ -1,4 +1,12 @@
-const createGameEndData = (level, page, collection, Statistic, wrongWords, gameName) => {
+const createGameEndData = (
+  level,
+  page,
+  collection,
+  Statistic,
+  wrongWords,
+  gameName,
+  wordsPerPage
+) => {
   const lastRound = `${level}_${page}`;
   const newStatistic = Statistic;
   const date = new Date();
@@ -14,7 +22,7 @@ const createGameEndData = (level, page, collection, Statistic, wrongWords, gameN
   });
   const gameStatistic = `${formater.format(date)}-${lastRound}-${wrongWordsIndex
     .replace(/^[,\s]+|[,\s]+$/g, '')
-    .replace(/,[,\s]*,/g, ',')}`;
+    .replace(/,[,\s]*,/g, ',')}-${wordsPerPage}`;
   const roundsStatistic = Statistic[`${gameName}PassedRound`];
   let newRoundStatistics;
   if (roundsStatistic === '0') newRoundStatistics = [];
