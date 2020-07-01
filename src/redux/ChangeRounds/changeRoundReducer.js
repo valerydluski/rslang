@@ -11,6 +11,8 @@ import {
   SPRINT_CHANGE_LEVEL,
   OWNGAME_CHANGE_PAGE,
   OWNGAME_CHANGE_LEVEL,
+  LEARN_WORDS_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_LEVEL,
 } from './types';
 
 const initialState = {
@@ -26,6 +28,8 @@ const initialState = {
   SprintPage: '1',
   OwnGameLevel: '1',
   OwnGamePage: '1',
+  LearnWordsLevel: '1',
+  LearnWordsPage: '1',
 };
 
 const changeRoundReducer = (state = initialState, action) => {
@@ -54,6 +58,10 @@ const changeRoundReducer = (state = initialState, action) => {
       return { ...state, OwnGamePage: action.payload };
     case OWNGAME_CHANGE_LEVEL:
       return { ...state, OwnGameLevel: action.payload, OwnGamePage: '1' };
+    case LEARN_WORDS_CHANGE_PAGE:
+      return { ...state, LearnWordsLevel: action.payload };
+    case LEARN_WORDS_CHANGE_LEVEL:
+      return { ...state, LearnWordsPage: action.payload };
     default:
       return state;
   }

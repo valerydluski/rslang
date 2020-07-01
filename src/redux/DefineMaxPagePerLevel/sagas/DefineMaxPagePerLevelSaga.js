@@ -18,7 +18,7 @@ function* workerDefineMaxPagePerLevel() {
     const payload = yield call(maxPage, state);
     yield put(fetchMaxPage(payload));
   } catch (e) {
-    toast.error('error');
+    toast.error('error define max page');
   }
 }
 
