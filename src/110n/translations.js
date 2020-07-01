@@ -59,6 +59,7 @@ const translations = {
       register: 'Register',
       choose: 'Choose',
       OK: 'OK',
+      back: 'Back',
     },
     Languages: {
       en: 'English',
@@ -146,6 +147,7 @@ const translations = {
       register: 'Регистрация',
       choose: 'Выбрать',
       OK: 'OK',
+      back: 'Назад',
     },
     Languages: {
       en: 'Английский',

@@ -67,6 +67,11 @@ const ModalResult = (props) => {
           {roundsStatistic.map((round) => (
             <RoundStatistic key={round} data={round} />
           ))}
+          <ModalButtonsContainerStyled>
+            <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
+            <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
+            <Button buttonHandler={showStatisticHandler} text={I18n.t('Buttons.back')} />
+          </ModalButtonsContainerStyled>
         </>
       );
     }

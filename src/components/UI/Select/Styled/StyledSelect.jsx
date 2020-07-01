@@ -24,7 +24,7 @@ const StyledSelect = styled.div`
   border: 1px solid #c4c4c4;
   background-color: #ffffff;
   transition: height 0.3s;
-  z-index: 100;
+  z-index: 90;
 
   &::after {
     content: '';
