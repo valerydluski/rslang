@@ -30,6 +30,7 @@ const ModalResult = (props) => {
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [isShowStatistic, toogleIsShowStatistic] = useState(false);
   const [roundsStatistic, setRoundsStatistic] = useState([]);
+  const [isOldResult, toogleIsOldResult] = useState(false);
 
   const restartHandler = () => {
     restartGame();
@@ -59,13 +60,17 @@ const ModalResult = (props) => {
     setRoundsStatistic(createStatisticForGames(Statistic, currentAppMode));
   };
 
-  const isStatistics = () => {
+  const roundHandler = (level, page, correctAnswers, count) => {
+    console.log(level, page, correctAnswers, count);
+  };
+
+  const showContent = () => {
     if (isShowStatistic) {
       return (
         <>
           <StatisticsHeader />
           {roundsStatistic.map((round) => (
-            <RoundStatistic key={round} data={round} />
+            <RoundStatistic key={round} data={round} roundHandler={roundHandler} />
           ))}
           <ModalButtonsContainerStyled>
             <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
@@ -96,7 +101,7 @@ const ModalResult = (props) => {
   return (
     <OverlayStyled id="overlay">
       <GoToHomePageButton />
-      <ModalStyled>{isStatistics()}</ModalStyled>
+      <ModalStyled>{showContent()}</ModalStyled>
     </OverlayStyled>
   );
 };

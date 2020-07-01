@@ -38,6 +38,7 @@ const createData = ({ changeRound, changeAppMode, userSettings }) => {
 
 async function wordsFetch(state) {
   try {
+    if (state.changeAppMode.appMode === 'MainPage') return [];
     const { linkLevel, linkPage, wordsPerSentence, wordsPerPage } = createData(state);
     const link = `${URL}/${WORDS}?${linkLevel}&${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
     return await fetchData(link);

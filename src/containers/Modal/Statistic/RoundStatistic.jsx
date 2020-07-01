@@ -4,23 +4,27 @@ import PropTypes from 'prop-types';
 import RoundStatisticStyled from '../../../components/Modal/Statistics/Styled/RoundStatisticStyled';
 
 const RoundStatistic = (props) => {
-  const { data } = props;
-  const roundHandler = () => {};
+  const { data, roundHandler } = props;
 
   const correctCount = (str) => {
     if (str === '') return 0;
     return str.split(',').length;
   };
 
+  const correctWords = data[2];
   const time = data[0];
   const level = data[1].split('_')[0];
   const page = data[1].split('_')[1];
-  const correct = correctCount(data[2]);
+  const correct = correctCount(correctWords);
   const count = data[3];
+
+  const handler = () => {
+    roundHandler(level, page, correctWords, count);
+  };
 
   return (
     <>
-      <RoundStatisticStyled onClick={roundHandler}>
+      <RoundStatisticStyled onClick={handler}>
         {time} <Translate value="GamesStatistics.level" /> {level}
         {'; '}
         <Translate value="GamesStatistics.page" /> {page}
@@ -35,5 +39,6 @@ const RoundStatistic = (props) => {
 
 RoundStatistic.propTypes = {
   data: PropTypes.instanceOf(Array).isRequired,
+  roundHandler: PropTypes.func.isRequired,
 };
 export default RoundStatistic;
