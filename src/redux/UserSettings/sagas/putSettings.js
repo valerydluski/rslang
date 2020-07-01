@@ -1,5 +1,5 @@
 import { takeLatest, select, call } from 'redux-saga/effects';
-import { SAVE_USER_SETTINGS } from '../types';
+import { SAVE_USER_SETTINGS_TO_API } from '../types';
 import putSettingsToApi from '../../../services/putSettingsToApi';
 import createSettingsJSON from '../../../utils/createSettingsJSON';
 
@@ -13,5 +13,5 @@ function* workerStatus() {
 }
 
 export default function* watchStatus() {
-  yield takeLatest(SAVE_USER_SETTINGS, workerStatus);
+  yield takeLatest(SAVE_USER_SETTINGS_TO_API, workerStatus);
 }
