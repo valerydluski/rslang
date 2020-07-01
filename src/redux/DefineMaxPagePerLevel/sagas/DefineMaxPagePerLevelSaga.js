@@ -6,10 +6,10 @@ import {
   SAVANNAH_CHANGE_LEVEL,
   ENGLISHPUZZLE_CHANGE_LEVEL,
   AUDIOCALL_CHANGE_LEVEL,
-  OWNGAME_CHANGE_LEVEL,
+  MAKESENTENCE_CHANGE_LEVEL,
 } from '../../ChangeRounds/types';
 import CHANGE_APP_MODE from '../../AppMode/types';
-import maxPage from '../../../services/devineMaxPagePerLevel';
+import maxPage from '../../../services/defineMaxPagePerLevel';
 import fetchMaxPage from '../action';
 
 function* workerDefineMaxPagePerLevel() {
@@ -30,7 +30,7 @@ export default function* watchMaxPage() {
       SAVANNAH_CHANGE_LEVEL,
       ENGLISHPUZZLE_CHANGE_LEVEL,
       AUDIOCALL_CHANGE_LEVEL,
-      OWNGAME_CHANGE_LEVEL,
+      MAKESENTENCE_CHANGE_LEVEL,
       CHANGE_APP_MODE,
     ],
     workerDefineMaxPagePerLevel

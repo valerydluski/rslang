@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const LogoContainer = styled.div`
   display: flex;
@@ -11,6 +12,10 @@ const LogoContainer = styled.div`
     align-self: center;
     justify-self: start;
     margin-left: 60px;
+
+    @media ${DEVICE.mobileL} {
+      margin-left: 0;
+    }
   }
 `;
 
