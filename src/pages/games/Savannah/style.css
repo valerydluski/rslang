@@ -1,9 +1,20 @@
-.game_words {
+.game_words_container {
   display: flex;
   justify-content: space-between;
-  color: brown;
-  margin: 10px;
-  font-size: 40px;
+  flex-direction: row;
+  margin-top: 20%;
+}
+
+.game_words {
+  font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 31px;
+    text-align: center;
+    color: black;
+    cursor: pointer;
+    padding: 12px 30px;
 }
 
 .english_word {

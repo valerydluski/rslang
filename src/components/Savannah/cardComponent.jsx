@@ -18,10 +18,12 @@ const playResultSound = (isOk) => {
 
 const clickHandler = (event) => {
   if (event.target.dataset.indexTranslate === document.getElementById('title').dataset.indexTranslate) {
+  event.target.style.backgroundColor = 'green';
   result = true;
   playResultSound(result);
   }
   else {
+    event.target.style.backgroundColor = 'red';
     result = false;
     mistakes += 1;
   }
@@ -35,7 +37,7 @@ const WordToGuess = (props) => {
     
   
     return <div>
-      <p id = 'title' data-index-translate = {words.id} data-index-match = {words.wordTranslate} data-index-test = {props.id}>
+      <p className="english_word" id = 'title' data-index-translate = {words.id} data-index-match = {words.wordTranslate} data-index-test = {props.id}>
         {words.word}
       </p>
     </div>;
@@ -56,12 +58,12 @@ const WordToGuess = (props) => {
     } = props;
 
     const wordsCards = shuffleArray(wordsForRender).map((word, index) => {
-      return <p className={'translation'} key={word.id} data-index={index} data-index-translate = {word.id}>
+      return <p className={'translation game_words'} key={word.id} data-index={index} data-index-translate = {word.id}>
        {word.wordTranslate}
         </p>;
     });
   
-    return <div onClick={clickHandler}>{wordsCards}</div>;
+    return <div className="game_words_container" onClick={clickHandler}>{wordsCards}</div>;
   };
   
   const numberClickHandler = (event) => {

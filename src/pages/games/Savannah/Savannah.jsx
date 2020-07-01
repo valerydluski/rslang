@@ -11,33 +11,45 @@ import {SavannahComponentTranslation, WordToGuess, mistakes, result, numberClick
 import ResultModal from '../../../containers/Modal/ResultModal';
 import changeAppMode from '../../../redux/AppMode/action';
 import {changeIDontKnowWords} from '../../../redux/Games/action';
+import { changeSavannahLevel, changeSavannahPage } from '../../../redux/ChangeRounds/action';
+import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 
 let shuffledCollection;
-
+let shuffledCollectionCopy;
 
 const Savannah = ({
   wordsCollection,
   switchAppMode,
   addWordsWithMistakesToStore,
   currentAppMode,
+  updateLevel,
+  updatePage,
+  page,
+  level,
+  maxPage,
 }) => {
   const [gameStarted, setGameChange] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
   const [isGameFinished, changeGameMode] = useState(false);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
-  const [inProp, setInProp] = useState(false);
-
-
 
   if (currentAppMode !== 'Savannah') {
     switchAppMode('Savannah');
     return null;
   }
 
+  function answerShuffle(index) {
+    shuffledCollectionCopy = shuffledCollection.slice();
+    shuffledCollectionCopy.splice(index, 1);
+    shuffledCollectionCopy = shuffleArray(shuffledCollectionCopy).slice(0, 3);
+    shuffledCollectionCopy.push(shuffledCollection[index]);
+    shuffledCollectionCopy = shuffleArray(shuffledCollectionCopy);
+  }
+
   function switchToNextWord() {
-    addWordsWithMistakesToStore(wrongAnsweredWords);
     if (result === false) {
-      addWordToWrong([...wrongAnsweredWords,wordsCollection[currentWordIndex].word]);
+      addWordToWrong([...wrongAnsweredWords,shuffledCollection[currentWordIndex + 1].word]);
+      addWordsWithMistakesToStore(wrongAnsweredWords);
     }
     if (currentWordIndex <= 10) {
       changeIndex(currentWordIndex + 1);
@@ -45,11 +57,13 @@ const Savannah = ({
     else {
       changeIndex(0);
     }
+    answerShuffle(currentWordIndex + 1);
   }
 
     const startGame = () => {
     setGameChange(true);
     shuffledCollection = shuffleArray(wordsCollection);
+    answerShuffle(currentWordIndex);
     }
 
     const exitGame = () => {
@@ -60,14 +74,13 @@ const Savannah = ({
     if(gameStarted && currentWordIndex < 10) {
        structure = 
       <div className="savannah_container">
-    <h1>Savannah</h1>
-    <button onClick={exitGame} onKeyPress={switchToNextWord} >Exit</button>
+    <button onClick={exitGame} onKeyPress={switchToNextWord} ></button>
     <div id = 'first'>
     <div onAnimationEnd={switchToNextWord}>
       <WordToGuess className= 'english-word' words = {shuffledCollection[currentWordIndex]}/>
       </div>
-      <div className="game_words" onClick={switchToNextWord}>
-    <SavannahComponentTranslation wordsForRender = {shuffledCollection.slice(currentWordIndex,currentWordIndex + 4)} />
+      <div onClick={switchToNextWord}>
+    <SavannahComponentTranslation wordsForRender = {shuffledCollectionCopy} />
     {mistakes > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
     </div>
     </div>
@@ -84,7 +97,6 @@ const Savannah = ({
     if(!gameStarted) {
       structure = 
      <div className="savannah_container">
-   <h1>Savannah</h1>
    <button onClick={startGame}>Click here to start</button>
    </div>
    }
@@ -92,6 +104,13 @@ const Savannah = ({
 return (
   <div onKeyPress={numberClickHandler}>
     <GoToHomePageButton />
+    <StatusMenu
+            page={page}
+            level={level}
+            maxPage={maxPage}
+            updateLevel={updateLevel}
+            updatePage={updatePage}
+          />
     {structure}
   </div>
 )
@@ -114,12 +133,17 @@ const mapStateToProps = (state) => {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
+    level: state.changeRound.AudioCallLevel,
+    page: state.changeRound.AudioCallPage,
+    maxPage: state.maxPage.maxPage.count,
   };
 };
 
 const mapDispatchToProps = {
   addWordsWithMistakesToStore: changeIDontKnowWords,
   switchAppMode: changeAppMode,
+  updateLevel: changeSavannahLevel,
+  updatePage: changeSavannahPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Savannah);
