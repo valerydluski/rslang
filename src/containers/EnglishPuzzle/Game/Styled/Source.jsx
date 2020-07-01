@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { PUZZLE_PADDING, PUZZLE_HEIGHT, PLAYFIELD_WIDTH } from '../constants';
+import {
+  PUZZLE_PADDING,
+  PUZZLE_HEIGHT,
+  PLAYFIELD_WIDTH,
+  PLAYFIELD_WIDTH_LAPTOP,
+  PUZZLE_HEIGHT_LAPTOP,
+} from '../constants';
+import { DEVICE } from '../../../../config';
 
 const Source = styled.div`
   order: 3;
@@ -16,6 +23,12 @@ const Source = styled.div`
   transition: 0.3s background linear;
   font-size: 17px;
   font-weight: bold;
+
+  @media ${DEVICE.laptop} {
+    width: ${(props) => (props.cols - 1) * 15 + PLAYFIELD_WIDTH_LAPTOP}px;
+    height: ${PUZZLE_HEIGHT_LAPTOP}px;
+    grid-gap: 15px;
+  }
 `;
 
 export default Source;

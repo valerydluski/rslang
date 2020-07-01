@@ -4,7 +4,12 @@ import {
   PUZZLE_PADDING,
   PLAYFIELD_HEIGHT,
   PLAYFIELD_WIDTH,
+  PLAYFIELD_WIDTH_LAPTOP,
+  PLAYFIELD_HEIGHT_LAPTOP,
+  PUZZLE_HEIGHT_LAPTOP,
+  PUZZLE_PADDING_LAPTOP,
 } from '../../../../containers/EnglishPuzzle/Game/constants';
+import { DEVICE } from '../../../../config';
 
 const StyledPuzzle = styled.span`
   display: flex;
@@ -45,6 +50,21 @@ const StyledPuzzle = styled.span`
     bottom: 0;
     width: 100%;
     height: 2px;
+  }
+
+  @media ${DEVICE.laptop} {
+    clip-path: polygon(
+      calc(100% - ${(props) => (props.isLast ? 0 : PUZZLE_PADDING_LAPTOP)}px) 0%,
+      100% 50%,
+      calc(100% - ${(props) => (props.isLast ? 0 : PUZZLE_PADDING_LAPTOP)}px) 100%,
+      0% 100%,
+      ${(props) => (props.isFirst ? 0 : PUZZLE_PADDING_LAPTOP)}px 50%,
+      0% 0%
+    );
+    height: ${PUZZLE_HEIGHT_LAPTOP}px;
+    background-size: ${PLAYFIELD_WIDTH_LAPTOP}px ${PLAYFIELD_HEIGHT_LAPTOP}px;
+    padding: 0 ${PUZZLE_PADDING_LAPTOP}px;
+    margin-left: -${PUZZLE_PADDING_LAPTOP}px;
   }
 `;
 
