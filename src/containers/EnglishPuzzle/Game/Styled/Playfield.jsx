@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { PLAYFIELD_WIDTH, PLAYFIELD_HEIGHT } from '../constants';
 
 const Playfield = styled.div`
+  margin-left: 62px;
   width: ${PLAYFIELD_WIDTH}px;
   height: ${PLAYFIELD_HEIGHT}px;
   background: #c4c4c4;

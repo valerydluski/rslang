@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Content from './Styled/Content';
 import Container from './Styled/Container';
 import Main from './Styled/Main';
+import MenuContainer from './Styled/MenuContainer';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import TipsMenu from '../../../components/EnglishPuzzle/Menu/TipsMenu/TipsMenu';
 import Game from '../../../containers/EnglishPuzzle/Game/Game';
@@ -46,13 +47,15 @@ const EnglishPuzzle = (props) => {
         <ResultModal showProperties={['word', 'translation']} />
       ) : (
         <Container>
-          <StatusMenu
-            page={page}
-            level={level}
-            maxPage={maxPage}
-            updateLevel={updateLevel}
-            updatePage={updatePage}
-          />
+          <MenuContainer>
+            <StatusMenu
+              page={page}
+              level={level}
+              maxPage={maxPage}
+              updateLevel={updateLevel}
+              updatePage={updatePage}
+            />
+          </MenuContainer>
           <Main>
             <Game />
             <TipsMenu toggleModal={toggleModal} />
