@@ -13,6 +13,7 @@ const initialState = {
     SavannahWordsPerPage: '10',
     AudioCallWordsPerPage: '10',
     SprintWordsPerPage: '10',
+    MakeSentenceWordsPerPage: '10',
     translate: true,
     textMeaning: true,
     textExample: true,
