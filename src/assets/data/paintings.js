@@ -5,7 +5,7 @@ const paintings1 = [
     imageSrc: 'level1/deerhunt.jpg',
     cutSrc: 'level1/cut/deerhunt.jpg',
     author: "Niccolò dell'",
-    year: '1550-52'
+    year: '1550-52',
   },
   {
     id: '1_02',
@@ -13,7 +13,7 @@ const paintings1 = [
     imageSrc: 'level1/deerlake.jpg',
     cutSrc: 'level1/cut/deerlake.jpg',
     author: 'Carl Frederik',
-    year: '1888'
+    year: '1888',
   },
   {
     id: '1_03',
@@ -21,7 +21,7 @@ const paintings1 = [
     imageSrc: 'level1/abbati2.jpg',
     cutSrc: 'level1/cut/abbati2.jpg',
     author: 'ABBATI, Giuseppe',
-    year: '1860'
+    year: '1860',
   },
   {
     id: '1_04',
@@ -29,7 +29,7 @@ const paintings1 = [
     imageSrc: 'level1/firework.jpg',
     cutSrc: 'level1/cut/firework.jpg',
     author: 'ACHENBACH, Oswald',
-    year: '1875'
+    year: '1875',
   },
   {
     id: '1_05',
@@ -37,7 +37,7 @@ const paintings1 = [
     imageSrc: 'level1/9th_wave.jpg',
     cutSrc: 'level1/cut/9th_wave.jpg',
     author: 'AIVAZOVSKY, Ivan Konstantinovich',
-    year: '1850'
+    year: '1850',
   },
   {
     id: '1_06',
@@ -45,7 +45,7 @@ const paintings1 = [
     imageSrc: 'level1/campo.jpg',
     cutSrc: 'level1/cut/campo.jpg',
     author: 'ALBOTTO, Francesco',
-    year: '1745'
+    year: '1745',
   },
   {
     id: '1_07',
@@ -53,7 +53,7 @@ const paintings1 = [
     imageSrc: 'level1/giuseppe.jpg',
     cutSrc: 'level1/cut/giuseppe.jpg',
     author: 'ALBOTTO, Francesco',
-    year: '1745'
+    year: '1745',
   },
   {
     id: '1_08',
@@ -61,7 +61,7 @@ const paintings1 = [
     imageSrc: 'level1/view_stp.jpg',
     cutSrc: 'level1/cut/view_stp.jpg',
     author: 'ALEKSEYEV, Fyodor Yakovlevich',
-    year: '1795'
+    year: '1795',
   },
   {
     id: '1_09',
@@ -69,7 +69,7 @@ const paintings1 = [
     imageSrc: 'level1/landmose.jpg',
     cutSrc: 'level1/cut/landmose.jpg',
     author: 'ALLEGRAIN, Etienne',
-    year: 'second half of XVII century'
+    year: 'second half of XVII century',
   },
   {
     id: '1_10',
@@ -77,7 +77,7 @@ const paintings1 = [
     imageSrc: 'level1/riverla2.jpg',
     cutSrc: 'level1/cut/riverla2.jpg',
     author: 'ALLEGRAIN, Etienne',
-    year: 'second half of XVII century'
+    year: 'second half of XVII century',
   },
   {
     id: '1_11',
@@ -85,7 +85,7 @@ const paintings1 = [
     imageSrc: 'level1/extensiv.jpg',
     cutSrc: 'level1/cut/extensiv.jpg',
     author: 'ALSLOOT, Denis van',
-    year: 'first half of XVII century'
+    year: 'first half of XVII century',
   },
   {
     id: '1_12',
@@ -93,7 +93,7 @@ const paintings1 = [
     imageSrc: 'level1/skating.jpg',
     cutSrc: 'level1/cut/skating.jpg',
     author: 'ALSLOOT, Denis van',
-    year: '1620'
+    year: '1620',
   },
   {
     id: '1_13',
@@ -101,7 +101,7 @@ const paintings1 = [
     imageSrc: 'level1/winter_l.jpg',
     cutSrc: 'level1/cut/winter_l.jpg',
     author: 'ALSLOOT, Denis van',
-    year: '1610'
+    year: '1610',
   },
   {
     id: '1_14',
@@ -109,7 +109,7 @@ const paintings1 = [
     imageSrc: 'level1/winterla.jpg',
     cutSrc: 'level1/cut/winterla.jpg',
     author: 'ALSLOOT, Denis van',
-    year: '1616'
+    year: '1616',
   },
   {
     id: '1_15',
@@ -117,7 +117,7 @@ const paintings1 = [
     imageSrc: 'level1/viewvien.jpg',
     cutSrc: 'level1/cut/viewvien.jpg',
     author: 'ALT, Rudolf von',
-    year: '1834'
+    year: '1834',
   },
   {
     id: '1_16',
@@ -125,7 +125,7 @@ const paintings1 = [
     imageSrc: 'level1/rateship.jpg',
     cutSrc: 'level1/cut/rateship.jpg',
     author: 'ANDERSON, William',
-    year: 'first half of XIX century'
+    year: 'first half of XIX century',
   },
   {
     id: '1_17',
@@ -133,7 +133,7 @@ const paintings1 = [
     imageSrc: 'level1/shipcalm.jpg',
     cutSrc: 'level1/cut/shipcalm.jpg',
     author: 'ANDERSON, William',
-    year: '1803'
+    year: '1803',
   },
   {
     id: '1_18',
@@ -141,7 +141,7 @@ const paintings1 = [
     imageSrc: 'level1/shipping.jpg',
     cutSrc: 'level1/cut/shipping.jpg',
     author: 'ANDERSON, William',
-    year: '1825'
+    year: '1825',
   },
   {
     id: '1_19',
@@ -149,7 +149,7 @@ const paintings1 = [
     imageSrc: 'level1/landsca3.jpg',
     cutSrc: 'level1/cut/landsca3.jpg',
     author: 'ANESI, Paolo',
-    year: 'XVIII century'
+    year: 'XVIII century',
   },
   {
     id: '1_20',
@@ -157,7 +157,7 @@ const paintings1 = [
     imageSrc: 'level1/rome.jpg',
     cutSrc: 'level1/cut/rome.jpg',
     author: 'ANESI, Paolo',
-    year: 'XVIII century'
+    year: 'XVIII century',
   },
   {
     id: '1_21',
@@ -165,7 +165,7 @@ const paintings1 = [
     imageSrc: 'level1/rome1.jpg',
     cutSrc: 'level1/cut/rome1.jpg',
     author: 'ANESI, Paolo',
-    year: 'XVIII century'
+    year: 'XVIII century',
   },
   {
     id: '1_22',
@@ -173,7 +173,7 @@ const paintings1 = [
     imageSrc: 'level1/scene.jpg',
     cutSrc: 'level1/cut/scene.jpg',
     author: 'ANESI, Paolo',
-    year: 'XVIII century'
+    year: 'XVIII century',
   },
   {
     id: '1_23',
@@ -181,7 +181,7 @@ const paintings1 = [
     imageSrc: 'level1/tivoli.jpg',
     cutSrc: 'level1/cut/tivoli.jpg',
     author: 'ANESI, Paolo',
-    year: 'XVIII century'
+    year: 'XVIII century',
   },
   {
     id: '1_24',
@@ -189,7 +189,7 @@ const paintings1 = [
     imageSrc: 'level1/railway.jpg',
     cutSrc: 'level1/cut/railway.jpg',
     author: 'ANGRAND, Charles',
-    year: '1886'
+    year: '1886',
   },
   {
     id: '1_25',
@@ -197,7 +197,7 @@ const paintings1 = [
     imageSrc: 'level1/landscap.jpg',
     cutSrc: 'level1/cut/landscap.jpg',
     author: 'APSHOVEN, Thomas van',
-    year: 'XVII century'
+    year: 'XVII century',
   },
   {
     id: '1_26',
@@ -205,7 +205,7 @@ const paintings1 = [
     imageSrc: 'level1/edgewood.jpg',
     cutSrc: 'level1/cut/edgewood.jpg',
     author: "ARTHOIS, Jacques d'",
-    year: 'XVII century'
+    year: 'XVII century',
   },
   {
     id: '1_27',
@@ -213,7 +213,7 @@ const paintings1 = [
     imageSrc: 'level1/extensiv_1.jpg',
     cutSrc: 'level1/cut/extensiv_1.jpg',
     author: "ARTHOIS, Jacques d'",
-    year: 'XVII century'
+    year: 'XVII century',
   },
   {
     id: '1_28',
@@ -221,7 +221,7 @@ const paintings1 = [
     imageSrc: 'level1/landscap_1.jpg',
     cutSrc: 'level1/cut/landscap_1.jpg',
     author: "ARTHOIS, Jacques d'",
-    year: 'XVII century'
+    year: 'XVII century',
   },
   {
     id: '1_29',
@@ -229,7 +229,7 @@ const paintings1 = [
     imageSrc: 'level1/woodedla.jpg',
     cutSrc: 'level1/cut/woodedla.jpg',
     author: "ARTHOIS, Jacques d'",
-    year: 'XVII century'
+    year: 'XVII century',
   },
   {
     id: '1_30',
@@ -237,7 +237,7 @@ const paintings1 = [
     imageSrc: 'level1/citywall.jpg',
     cutSrc: 'level1/cut/citywall.jpg',
     author: 'ASCH, Pieter Jansz.van',
-    year: '1650'
+    year: '1650',
   },
   {
     id: '1_31',
@@ -245,7 +245,7 @@ const paintings1 = [
     imageSrc: 'level1/river_la.jpg',
     cutSrc: 'level1/cut/river_la.jpg',
     author: 'ASCH, Pieter Jansz. van',
-    year: '1640'
+    year: '1640',
   },
   {
     id: '1_32',
@@ -253,7 +253,7 @@ const paintings1 = [
     imageSrc: 'level1/kilarney.jpg',
     cutSrc: 'level1/cut/kilarney.jpg',
     author: 'ASHFORD, William',
-    year: '1778'
+    year: '1778',
   },
   {
     id: '1_33',
@@ -261,7 +261,7 @@ const paintings1 = [
     imageSrc: 'level1/waterfal.jpg',
     cutSrc: 'level1/cut/waterfal.jpg',
     author: 'ASSCHE, Henri van',
-    year: '1806'
+    year: '1806',
   },
   {
     id: '1_34',
@@ -269,7 +269,7 @@ const paintings1 = [
     imageSrc: 'level1/winterla_1.jpg',
     cutSrc: 'level1/cut/winterla_1.jpg',
     author: 'ASSCHE, Henri van',
-    year: '1814'
+    year: '1814',
   },
   {
     id: '1_35',
@@ -277,7 +277,7 @@ const paintings1 = [
     imageSrc: 'level1/coastal.jpg',
     cutSrc: 'level1/cut/coastal.jpg',
     author: 'ASSELYN, Jan',
-    year: '1652'
+    year: '1652',
   },
   {
     id: '1_36',
@@ -285,7 +285,7 @@ const paintings1 = [
     imageSrc: 'level1/italiana.jpg',
     cutSrc: 'level1/cut/italiana.jpg',
     author: 'ASSELYN, Jan',
-    year: '1648'
+    year: '1648',
   },
   {
     id: '1_37',
@@ -293,7 +293,7 @@ const paintings1 = [
     imageSrc: 'level1/italianb.jpg',
     cutSrc: 'level1/cut/italianb.jpg',
     author: 'ASSELYN, Jan',
-    year: '1640-45'
+    year: '1640-45',
   },
   {
     id: '1_38',
@@ -301,7 +301,7 @@ const paintings1 = [
     imageSrc: 'level1/landscap_2.jpg',
     cutSrc: 'level1/cut/landscap_2.jpg',
     author: 'AVERCAMP, Barend',
-    year: '1655'
+    year: '1655',
   },
   {
     id: '1_39',
@@ -309,7 +309,7 @@ const paintings1 = [
     imageSrc: 'level1/ice_land.jpg',
     cutSrc: 'level1/cut/ice_land.jpg',
     author: 'AVERCAMP, Hendrick',
-    year: 'XVII century'
+    year: 'XVII century',
   },
   {
     id: '1_40',
@@ -317,7 +317,7 @@ const paintings1 = [
     imageSrc: 'level1/arabs.jpg',
     cutSrc: 'level1/cut/arabs.jpg',
     author: "AZEGLIO, Massimo Taparelli, Marquis d'",
-    year: '1840'
+    year: '1840',
   },
   {
     id: '1_41',
@@ -325,7 +325,7 @@ const paintings1 = [
     imageSrc: 'level1/distress.jpg',
     cutSrc: 'level1/cut/distress.jpg',
     author: 'BACKHUYSEN, Ludolf',
-    year: '1667'
+    year: '1667',
   },
   {
     id: '1_42',
@@ -333,7 +333,7 @@ const paintings1 = [
     imageSrc: 'level1/fishing.jpg',
     cutSrc: 'level1/cut/fishing.jpg',
     author: 'BACKHUYSEN, Ludolf',
-    year: '1680'
+    year: '1680',
   },
   {
     id: '1_43',
@@ -341,7 +341,7 @@ const paintings1 = [
     imageSrc: 'level1/shipping_1.jpg',
     cutSrc: 'level1/cut/shipping_1.jpg',
     author: 'BACKHUYSEN, Ludolf',
-    year: 'XVII century'
+    year: 'XVII century',
   },
   {
     id: '1_44',
@@ -349,7 +349,7 @@ const paintings1 = [
     imageSrc: 'level1/viewvlaa.jpg',
     cutSrc: 'level1/cut/viewvlaa.jpg',
     author: 'BACKHUYSEN, Ludolf',
-    year: '1680s'
+    year: '1680s',
   },
   {
     id: '1_45',
@@ -357,9 +357,9 @@ const paintings1 = [
     imageSrc: 'level1/vessels1.jpg',
     cutSrc: 'level1/cut/vessels1.jpg',
     author: 'BACKHUYSEN, Ludolf',
-    year: '1680'
-  }
-]
+    year: '1680',
+  },
+];
 
 const paintings2 = [
   {
@@ -368,7 +368,7 @@ const paintings2 = [
     imageSrc: 'level2/2_01.jpg',
     cutSrc: 'level2/cut/2_01.jpg',
     author: 'BARKER, Thomas',
-    year: '1793'
+    year: '1793',
   },
   {
     id: '2_02',
@@ -376,7 +376,7 @@ const paintings2 = [
     imageSrc: 'level2/2_02.jpg',
     cutSrc: 'level2/cut/2_02.jpg',
     author: 'BARRET, George',
-    year: '1728'
+    year: '1728',
   },
   {
     id: '2_03',
@@ -384,7 +384,7 @@ const paintings2 = [
     imageSrc: 'level2/2_03.jpg',
     cutSrc: 'level2/cut/2_03.jpg',
     author: 'BASSANO, Francesco',
-    year: '1577-78'
+    year: '1577-78',
   },
   {
     id: '2_04',
@@ -392,7 +392,7 @@ const paintings2 = [
     imageSrc: 'level2/2_04.jpg',
     cutSrc: 'level2/cut/2_04.jpg',
     author: 'BEERSTRATEN, Jan Abrahamsz.',
-    year: '1660-65'
+    year: '1660-65',
   },
   {
     id: '2_05',
@@ -400,7 +400,7 @@ const paintings2 = [
     imageSrc: 'level2/2_05.jpg',
     cutSrc: 'level2/cut/2_05.jpg',
     author: 'BEECKMAN, Andries',
-    year: '1656'
+    year: '1656',
   },
   {
     id: '2_06',
@@ -408,7 +408,7 @@ const paintings2 = [
     imageSrc: 'level2/2_06.jpg',
     cutSrc: 'level2/cut/2_06.jpg',
     author: 'BEEST, Sybrand van',
-    year: '1650'
+    year: '1650',
   },
   {
     id: '2_07',
@@ -416,7 +416,7 @@ const paintings2 = [
     imageSrc: 'level2/2_07.jpg',
     cutSrc: 'level2/cut/2_07.jpg',
     author: 'BEGEYN, Abraham Jansz.',
-    year: '1662'
+    year: '1662',
   },
   {
     id: '2_08',
@@ -424,7 +424,7 @@ const paintings2 = [
     imageSrc: 'level2/2_08.jpg',
     cutSrc: 'level2/cut/2_08.jpg',
     author: 'BÉLIARD, Edouard',
-    year: '1875'
+    year: '1875',
   },
   {
     id: '2_09',
@@ -432,7 +432,7 @@ const paintings2 = [
     imageSrc: 'level2/2_09.jpg',
     cutSrc: 'level2/cut/2_09.jpg',
     author: 'BELLOTTO, Bernardo',
-    year: '1738-40'
+    year: '1738-40',
   },
   {
     id: '2_10',
@@ -440,7 +440,7 @@ const paintings2 = [
     imageSrc: 'level2/2_10.jpg',
     cutSrc: 'level2/cut/2_10.jpg',
     author: 'BELLOTTO, Bernardo',
-    year: '1740'
+    year: '1740',
   },
   {
     id: '2_11',
@@ -448,7 +448,7 @@ const paintings2 = [
     imageSrc: 'level2/2_11.jpg',
     cutSrc: 'level2/cut/2_11.jpg',
     author: 'BELLOTTO, Bernardo',
-    year: '1744'
+    year: '1744',
   },
   {
     id: '2_12',
@@ -456,7 +456,7 @@ const paintings2 = [
     imageSrc: 'level2/2_12.jpg',
     cutSrc: 'level2/cut/2_12.jpg',
     author: 'BENOUVILLE, Jean-Achille',
-    year: '1848'
+    year: '1848',
   },
   {
     id: '2_13',
@@ -464,7 +464,7 @@ const paintings2 = [
     imageSrc: 'level2/2_13.jpg',
     cutSrc: 'level2/cut/2_13.jpg',
     author: 'BERCHEM, Nicolaes',
-    year: '1657-59'
+    year: '1657-59',
   },
   {
     id: '2_14',
@@ -472,7 +472,7 @@ const paintings2 = [
     imageSrc: 'level2/2_14.jpg',
     cutSrc: 'level2/cut/2_14.jpg',
     author: 'BERCHEM, Nicolaes',
-    year: '1665-70'
+    year: '1665-70',
   },
   {
     id: '2_15',
@@ -480,7 +480,7 @@ const paintings2 = [
     imageSrc: 'level2/2_15.jpg',
     cutSrc: 'level2/cut/2_15.jpg',
     author: 'CANELLA, Giuseppe',
-    year: '1830'
+    year: '1830',
   },
   {
     id: '2_16',
@@ -488,7 +488,7 @@ const paintings2 = [
     imageSrc: 'level2/2_16.jpg',
     cutSrc: 'level2/cut/2_16.jpg',
     author: 'CATEL, Franz Ludwig',
-    year: '1821-25'
+    year: '1821-25',
   },
   {
     id: '2_17',
@@ -496,7 +496,7 @@ const paintings2 = [
     imageSrc: 'level2/2_17.jpg',
     cutSrc: 'level2/cut/2_17.jpg',
     author: 'CHAMPAIGNE, Philippe de',
-    year: '1656'
+    year: '1656',
   },
   {
     id: '2_18',
@@ -504,7 +504,7 @@ const paintings2 = [
     imageSrc: 'level2/2_18.jpg',
     cutSrc: 'level2/cut/2_18.jpg',
     author: 'CHURCH, Frederic Edwin',
-    year: '1875'
+    year: '1875',
   },
   {
     id: '2_19',
@@ -512,7 +512,7 @@ const paintings2 = [
     imageSrc: 'level2/2_19.jpg',
     cutSrc: 'level2/cut/2_19.jpg',
     author: 'CLAUDE LORRAIN',
-    year: '1630'
+    year: '1630',
   },
   {
     id: '2_20',
@@ -520,7 +520,7 @@ const paintings2 = [
     imageSrc: 'level2/2_20.jpg',
     cutSrc: 'level2/cut/2_20.jpg',
     author: 'CLAUDE LORRAIN',
-    year: '1645-46'
+    year: '1645-46',
   },
   {
     id: '2_21',
@@ -528,7 +528,7 @@ const paintings2 = [
     imageSrc: 'level2/2_21.jpg',
     cutSrc: 'level2/cut/2_21.jpg',
     author: 'CONSTABLE, John',
-    year: '1821'
+    year: '1821',
   },
   {
     id: '2_22',
@@ -536,7 +536,7 @@ const paintings2 = [
     imageSrc: 'level2/2_22.jpg',
     cutSrc: 'level2/cut//2_22.jpg',
     author: 'COROT, Jean-Baptiste Camille',
-    year: '1868-70'
+    year: '1868-70',
   },
   {
     id: '2_23',
@@ -544,7 +544,7 @@ const paintings2 = [
     imageSrc: 'level2/2_23.jpg',
     cutSrc: 'level2/cut/2_23.jpg',
     author: 'COURBET, Gustave',
-    year: '1858'
+    year: '1858',
   },
   {
     id: '2_24',
@@ -552,7 +552,7 @@ const paintings2 = [
     imageSrc: 'level2/2_24.jpg',
     cutSrc: 'level2/cut/2_24.jpg',
     author: 'COURBET, Gustave',
-    year: '1869-70'
+    year: '1869-70',
   },
   {
     id: '2_25',
@@ -560,7 +560,7 @@ const paintings2 = [
     imageSrc: 'level2/2_25.jpg',
     cutSrc: 'level2/cut/2_25.jpg',
     author: 'CROPSEY, Jasper Francis',
-    year: '1870'
+    year: '1870',
   },
   {
     id: '2_26',
@@ -568,7 +568,7 @@ const paintings2 = [
     imageSrc: 'level2/2_26.jpg',
     cutSrc: 'level2/cut/2_26.jpg',
     author: 'CUYP, Aelbert',
-    year: '1650-52'
+    year: '1650-52',
   },
   {
     id: '2_27',
@@ -576,7 +576,7 @@ const paintings2 = [
     imageSrc: 'level2/2_27.jpg',
     cutSrc: 'level2/cut/2_27.jpg',
     author: 'CUYP, Aelbert',
-    year: '1652-54'
+    year: '1652-54',
   },
   {
     id: '2_28',
@@ -584,7 +584,7 @@ const paintings2 = [
     imageSrc: 'level2/2_28.jpg',
     cutSrc: 'level2/cut/2_28.jpg',
     author: 'DAHL, Johan Christian Clausen',
-    year: '1819'
+    year: '1819',
   },
   {
     id: '2_29',
@@ -592,7 +592,7 @@ const paintings2 = [
     imageSrc: 'level2/2_29.jpg',
     cutSrc: 'level2/cut/2_29.jpg',
     author: 'DAHL, Johan Christian Clausen',
-    year: '1823'
+    year: '1823',
   },
   {
     id: '2_30',
@@ -600,7 +600,7 @@ const paintings2 = [
     imageSrc: 'level2/2_30.jpg',
     cutSrc: 'level2/cut/2_30.jpg',
     author: 'DALEM, Cornelis van',
-    year: '1550-60'
+    year: '1550-60',
   },
   {
     id: '2_31',
@@ -608,7 +608,7 @@ const paintings2 = [
     imageSrc: 'level2/2_31.jpg',
     cutSrc: 'level2/cut/2_31.jpg',
     author: 'DAUBIGNY, Charles-François',
-    year: '1865'
+    year: '1865',
   },
   {
     id: '2_32',
@@ -616,7 +616,7 @@ const paintings2 = [
     imageSrc: 'level2/2_32.jpg',
     cutSrc: 'level2/cut/2_32.jpg',
     author: 'DELACROIX, Eugène',
-    year: '1852'
+    year: '1852',
   },
   {
     id: '2_33',
@@ -624,7 +624,7 @@ const paintings2 = [
     imageSrc: 'level2/2_33.jpg',
     cutSrc: 'level2/cut/2_33.jpg',
     author: 'DELEN, Dirck van',
-    year: '1633'
+    year: '1633',
   },
   {
     id: '2_34',
@@ -632,7 +632,7 @@ const paintings2 = [
     imageSrc: 'level2/2_34.jpg',
     cutSrc: 'level2/cut/2_34.jpg',
     author: 'DELPY, Hippolyte-Camille',
-    year: '1875'
+    year: '1875',
   },
   {
     id: '2_35',
@@ -640,7 +640,7 @@ const paintings2 = [
     imageSrc: 'level2/2_35.jpg',
     cutSrc: 'level2/cut/2_35.jpg',
     author: 'DEPPE, Ludwig',
-    year: '1820'
+    year: '1820',
   },
   {
     id: '2_36',
@@ -648,7 +648,7 @@ const paintings2 = [
     imageSrc: 'level2/2_36.jpg',
     cutSrc: 'level2/cut/2_36.jpg',
     author: 'DIAZ DE LA PEÑA, Narcisse Virgile',
-    year: '1867'
+    year: '1867',
   },
   {
     id: '2_37',
@@ -656,7 +656,7 @@ const paintings2 = [
     imageSrc: 'level2/2_37.jpg',
     cutSrc: 'level2/cut/2_37.jpg',
     author: 'DOMENICHINI, Apollonio',
-    year: '1744'
+    year: '1744',
   },
   {
     id: '2_38',
@@ -664,7 +664,7 @@ const paintings2 = [
     imageSrc: 'level2/2_38.jpg',
     cutSrc: 'level2/cut/2_38.jpg',
     author: 'DOMENICHINO',
-    year: '1603'
+    year: '1603',
   },
   {
     id: '2_39',
@@ -672,7 +672,7 @@ const paintings2 = [
     imageSrc: 'level2/2_39.jpg',
     cutSrc: 'level2/cut/2_39.jpg',
     author: 'DORÉ, Gustave',
-    year: '1878'
+    year: '1878',
   },
   {
     id: '2_40',
@@ -680,7 +680,7 @@ const paintings2 = [
     imageSrc: 'level2/2_40.jpg',
     cutSrc: 'level2/cut/2_40.jpg',
     author: 'DREYER, Dankvart',
-    year: '1842'
+    year: '1842',
   },
   {
     id: '2_41',
@@ -688,8 +688,8 @@ const paintings2 = [
     imageSrc: 'level2/2_41.jpg',
     cutSrc: 'level2/cut/2_41.jpg',
     author: 'DROOCHSLOOT, Joost Cornelisz.',
-    year: '1623'
-  }
+    year: '1623',
+  },
 ];
 
 const paintings3 = [
@@ -699,7 +699,7 @@ const paintings3 = [
     imageSrc: 'level3/3_01.jpg',
     cutSrc: 'level3/cut/3_01.jpg',
     author: 'BERCHEM, Nicolaes',
-    year: '1650'
+    year: '1650',
   },
   {
     id: '3_02',
@@ -707,7 +707,7 @@ const paintings3 = [
     imageSrc: 'level3/3_02.jpg',
     cutSrc: 'level3/cut/3_02.jpg',
     author: 'BERCHEM, Nicolaes',
-    year: '1657'
+    year: '1657',
   },
   {
     id: '3_03',
@@ -715,7 +715,7 @@ const paintings3 = [
     imageSrc: 'level3/3_03.jpg',
     cutSrc: 'level3/cut/3_03.jpg',
     author: 'BERUETE, Aureliano',
-    year: '1878'
+    year: '1878',
   },
   {
     id: '3_04',
@@ -723,7 +723,7 @@ const paintings3 = [
     imageSrc: 'level3/3_04.jpg',
     cutSrc: 'level3/cut/3_04.jpg',
     author: 'BIDAULD, Jean-Joseph-Xavier',
-    year: '1790'
+    year: '1790',
   },
   {
     id: '3_05',
@@ -731,7 +731,7 @@ const paintings3 = [
     imageSrc: 'level3/3_05.jpg',
     cutSrc: 'level3/cut/3_05.jpg',
     author: 'BLANCHET, Thomas',
-    year: '1650-1652'
+    year: '1650-1652',
   },
   {
     id: '3_06',
@@ -739,7 +739,7 @@ const paintings3 = [
     imageSrc: 'level3/3_06.jpg',
     cutSrc: 'level3/cut/3_06.jpg',
     author: 'BLECHEN, Karl',
-    year: '1833'
+    year: '1833',
   },
   {
     id: '3_07',
@@ -747,7 +747,7 @@ const paintings3 = [
     imageSrc: 'level3/3_07.jpg',
     cutSrc: 'level3/cut/3_07.jpg',
     author: 'BLEKER, Gerrit Claesz',
-    year: '1625-1629'
+    year: '1625-1629',
   },
   {
     id: '3_08',
@@ -755,7 +755,7 @@ const paintings3 = [
     imageSrc: 'level3/3_08.jpg',
     cutSrc: 'level3/cut/3_08.jpg',
     author: 'BLOEMAERT, Abraham',
-    year: '1610'
+    year: '1610',
   },
   {
     id: '3_09',
@@ -763,7 +763,7 @@ const paintings3 = [
     imageSrc: 'level3/3_09.jpg',
     cutSrc: 'level3/cut/3_09.jpg',
     author: 'GOYEN, Jan van',
-    year: '1633'
+    year: '1633',
   },
   {
     id: '3_10',
@@ -771,7 +771,7 @@ const paintings3 = [
     imageSrc: 'level3/3_10.jpg',
     cutSrc: 'level3/cut/3_10.jpg',
     author: 'EAKINS, Thomas',
-    year: '1871'
+    year: '1871',
   },
   {
     id: '3_11',
@@ -779,7 +779,7 @@ const paintings3 = [
     imageSrc: 'level3/3_11.jpg',
     cutSrc: 'level3/cut/3_11.jpg',
     author: 'ECKARDT, Christian Frederik Emil',
-    year: '1867'
+    year: '1867',
   },
   {
     id: '3_12',
@@ -787,7 +787,7 @@ const paintings3 = [
     imageSrc: 'level3/3_12.jpg',
     cutSrc: 'level3/cut/3_12.jpg',
     author: 'ECKERSBERG, Christoffer Wilhelm',
-    year: '1844-1845'
+    year: '1844-1845',
   },
   {
     id: '3_13',
@@ -795,7 +795,7 @@ const paintings3 = [
     imageSrc: 'level3/3_13.jpg',
     cutSrc: 'level3/cut/3_13.jpg',
     author: 'ECKERSBERG, Christoffer Wilhelm',
-    year: '1824'
+    year: '1824',
   },
   {
     id: '3_14',
@@ -803,7 +803,7 @@ const paintings3 = [
     imageSrc: 'level3/3_14.jpg',
     cutSrc: 'level3/cut/3_14.jpg',
     author: 'EKELS, Jan the Elder',
-    year: '1750-1780'
+    year: '1750-1780',
   },
   {
     id: '3_15',
@@ -811,7 +811,7 @@ const paintings3 = [
     imageSrc: 'level3/3_15.jpg',
     cutSrc: 'level3/cut/3_15.jpg',
     author: 'EKELS, Jan the Elder',
-    year: '1760-1780'
+    year: '1760-1780',
   },
   {
     id: '3_16',
@@ -819,7 +819,7 @@ const paintings3 = [
     imageSrc: 'level3/3_16.jpg',
     cutSrc: 'level3/cut/3_16.jpg',
     author: 'EYCK, Gaspard van',
-    year: '1650'
+    year: '1650',
   },
   {
     id: '3_17',
@@ -827,7 +827,7 @@ const paintings3 = [
     imageSrc: 'level3/3_17.jpg',
     cutSrc: 'level3/cut/3_17.jpg',
     author: 'BERCHEM, Nicolaes',
-    year: '1658'
+    year: '1658',
   },
   {
     id: '3_18',
@@ -835,7 +835,7 @@ const paintings3 = [
     imageSrc: 'level3/3_18.jpg',
     cutSrc: 'level3/cut/3_18.jpg',
     author: 'BERGHE, Christoffel van den',
-    year: '1615-1620'
+    year: '1615-1620',
   },
   {
     id: '3_19',
@@ -843,7 +843,7 @@ const paintings3 = [
     imageSrc: 'level3/3_19.jpg',
     cutSrc: 'level3/cut/3_19.jpg',
     author: 'BEYEREN, Abraham van',
-    year: '1640-1650'
+    year: '1640-1650',
   },
   {
     id: '3_20',
@@ -851,7 +851,7 @@ const paintings3 = [
     imageSrc: 'level3/3_20.jpg',
     cutSrc: 'level3/cut/3_20.jpg',
     author: 'BIDAULD, Jean-Joseph-Xavier',
-    year: '1793'
+    year: '1793',
   },
   {
     id: '3_21',
@@ -859,7 +859,7 @@ const paintings3 = [
     imageSrc: 'level3/3_21.jpg',
     cutSrc: 'level3/cut/3_21.jpg',
     author: 'BLEKER, Gerrit Claesz',
-    year: '1656'
+    year: '1656',
   },
   {
     id: '3_22',
@@ -867,7 +867,7 @@ const paintings3 = [
     imageSrc: 'level3/3_22.jpg',
     cutSrc: 'level3/cut/3_22.jpg',
     author: 'BLOEMAERT, Abraham',
-    year: '1624'
+    year: '1624',
   },
   {
     id: '3_23',
@@ -875,7 +875,7 @@ const paintings3 = [
     imageSrc: 'level3/3_23.jpg',
     cutSrc: 'level3/cut/3_23.jpg',
     author: 'BLOEMEN, Jan Frans van',
-    year: '1736'
+    year: '1736',
   },
   {
     id: '3_24',
@@ -883,7 +883,7 @@ const paintings3 = [
     imageSrc: 'level3/3_24.jpg',
     cutSrc: 'level3/cut/3_24.jpg',
     author: 'BLOEMEN, Jan Frans van',
-    year: '1777'
+    year: '1777',
   },
   {
     id: '3_25',
@@ -891,7 +891,7 @@ const paintings3 = [
     imageSrc: 'level3/3_25.jpg',
     cutSrc: 'level3/cut/3_25.jpg',
     author: 'GAINSBOROUGH, Thomas',
-    year: '1768-1770'
+    year: '1768-1770',
   },
   {
     id: '3_26',
@@ -899,7 +899,7 @@ const paintings3 = [
     imageSrc: 'level3/3_26.jpg',
     cutSrc: 'level3/cut/3_26.jpg',
     author: 'GAUGUIN, Paul',
-    year: '1875'
+    year: '1875',
   },
   {
     id: '3_27',
@@ -907,7 +907,7 @@ const paintings3 = [
     imageSrc: 'level3/3_27.jpg',
     cutSrc: 'level3/cut/3_27.jpg',
     author: 'GLOVER, John',
-    year: '1840'
+    year: '1840',
   },
   {
     id: '3_28',
@@ -915,7 +915,7 @@ const paintings3 = [
     imageSrc: 'level3/3_28.jpg',
     cutSrc: 'level3/cut/3_28.jpg',
     author: 'GOGH, Vincent van',
-    year: '1882'
+    year: '1882',
   },
   {
     id: '3_29',
@@ -923,7 +923,7 @@ const paintings3 = [
     imageSrc: 'level3/3_29.jpg',
     cutSrc: 'level3/cut/3_29.jpg',
     author: 'GOGH, Vincent van',
-    year: '1883'
+    year: '1883',
   },
   {
     id: '3_30',
@@ -931,7 +931,7 @@ const paintings3 = [
     imageSrc: 'level3/3_30.jpg',
     cutSrc: 'level3/cut/3_30.jpg',
     author: 'GOGH, Vincent van',
-    year: '1883'
+    year: '1883',
   },
   {
     id: '3_31',
@@ -939,7 +939,7 @@ const paintings3 = [
     imageSrc: 'level3/3_31.jpg',
     cutSrc: 'level3/cut/3_31.jpg',
     author: 'GOGH, Vincent van',
-    year: '1884'
+    year: '1884',
   },
   {
     id: '3_32',
@@ -947,7 +947,7 @@ const paintings3 = [
     imageSrc: 'level3/3_32.jpg',
     cutSrc: 'level3/cut/3_32.jpg',
     author: 'GOGH, Vincent van',
-    year: '1886'
+    year: '1886',
   },
   {
     id: '3_33',
@@ -955,7 +955,7 @@ const paintings3 = [
     imageSrc: 'level3/3_33.jpg',
     cutSrc: 'level3/cut/3_33.jpg',
     author: 'GOGH, Vincent van',
-    year: '1886'
+    year: '1886',
   },
   {
     id: '3_34',
@@ -963,7 +963,7 @@ const paintings3 = [
     imageSrc: 'level3/3_34.jpg',
     cutSrc: 'level3/cut/3_34.jpg',
     author: 'GOGH, Vincent van',
-    year: '1889'
+    year: '1889',
   },
   {
     id: '3_35',
@@ -971,7 +971,7 @@ const paintings3 = [
     imageSrc: 'level3/3_35.jpg',
     cutSrc: 'level3/cut/3_35.jpg',
     author: 'GOGH, Vincent van',
-    year: '1890'
+    year: '1890',
   },
   {
     id: '3_36',
@@ -979,7 +979,7 @@ const paintings3 = [
     imageSrc: 'level3/3_36.jpg',
     cutSrc: 'level3/cut/3_36.jpg',
     author: 'GOGH, Vincent van',
-    year: '1890'
+    year: '1890',
   },
   {
     id: '3_37',
@@ -987,7 +987,7 @@ const paintings3 = [
     imageSrc: 'level3/3_37.jpg',
     cutSrc: 'level3/cut/3_37.jpg',
     author: 'GOGH, Vincent van',
-    year: '1890'
+    year: '1890',
   },
   {
     id: '3_38',
@@ -995,7 +995,7 @@ const paintings3 = [
     imageSrc: 'level3/3_38.jpg',
     cutSrc: 'level3/cut/3_38.jpg',
     author: 'GOYA Y LUCIENTES, Francisco de',
-    year: '1788'
+    year: '1788',
   },
   {
     id: '3_39',
@@ -1003,7 +1003,7 @@ const paintings3 = [
     imageSrc: 'level3/3_39.jpg',
     cutSrc: 'level3/cut/3_39.jpg',
     author: 'GOYEN, Jan van',
-    year: '1631'
+    year: '1631',
   },
   {
     id: '3_40',
@@ -1011,9 +1011,9 @@ const paintings3 = [
     imageSrc: 'level3/3_40.jpg',
     cutSrc: 'level3/cut/3_40.jpg',
     author: 'GOYEN, Jan van',
-    year: '1630'
-  }
-]
+    year: '1630',
+  },
+];
 
 const paintings4 = [
   {
@@ -1022,7 +1022,7 @@ const paintings4 = [
     imageSrc: 'level4/4_01.jpg',
     cutSrc: 'level4/cut/4_01.jpg',
     author: 'FARGUE, Jacob Elias La',
-    year: '1761'
+    year: '1761',
   },
   {
     id: '4_02',
@@ -1030,7 +1030,7 @@ const paintings4 = [
     imageSrc: 'level4/4_02.jpg',
     cutSrc: 'level4/cut/4_02.jpg',
     author: 'FOHR, Carl Philipp',
-    year: '1818'
+    year: '1818',
   },
   {
     id: '4_03',
@@ -1038,7 +1038,7 @@ const paintings4 = [
     imageSrc: 'level4/4_03.jpg',
     cutSrc: 'level4/cut/4_03.jpg',
     author: 'FRAGONARD, Jean-Honore',
-    year: '1765'
+    year: '1765',
   },
   {
     id: '4_04',
@@ -1046,7 +1046,7 @@ const paintings4 = [
     imageSrc: 'level4/4_04.jpg',
     cutSrc: 'level4/cut/4_04.jpg',
     author: 'FREY, Johannes Jakob',
-    year: '1840s'
+    year: '1840s',
   },
   {
     id: '4_05',
@@ -1054,7 +1054,7 @@ const paintings4 = [
     imageSrc: 'level4/4_05.jpg',
     cutSrc: 'level4/cut/4_05.jpg',
     author: 'FRIEDRICH, Caspar David',
-    year: '1822'
+    year: '1822',
   },
   {
     id: '4_06',
@@ -1062,7 +1062,7 @@ const paintings4 = [
     imageSrc: 'level4/4_06.jpg',
     cutSrc: 'level4/cut/4_06.jpg',
     author: 'FRIEDRICH, Caspar David',
-    year: '1807'
+    year: '1807',
   },
   {
     id: '4_07',
@@ -1070,7 +1070,7 @@ const paintings4 = [
     imageSrc: 'level4/4_07.jpg',
     cutSrc: 'level4/cut/4_07.jpg',
     author: 'FRIES, Ernst',
-    year: '1830'
+    year: '1830',
   },
   {
     id: '4_08',
@@ -1078,7 +1078,7 @@ const paintings4 = [
     imageSrc: 'level4/4_08.jpg',
     cutSrc: 'level4/cut/4_08.jpg',
     author: 'GAINSBOROUGH, Thomas',
-    year: '1770'
+    year: '1770',
   },
   {
     id: '4_09',
@@ -1086,7 +1086,7 @@ const paintings4 = [
     imageSrc: 'level4/4_09.jpg',
     cutSrc: 'level4/cut/4_09.jpg',
     author: 'MANET, Edouard',
-    year: '1864'
+    year: '1864',
   },
   {
     id: '4_10',
@@ -1094,7 +1094,7 @@ const paintings4 = [
     imageSrc: 'level4/4_10.jpg',
     cutSrc: 'level4/cut/4_10.jpg',
     author: 'MANET, Edouard',
-    year: '1882'
+    year: '1882',
   },
   {
     id: '4_11',
@@ -1102,7 +1102,7 @@ const paintings4 = [
     imageSrc: 'level4/4_11.jpg',
     cutSrc: 'level4/cut/4_11.jpg',
     author: 'MARIESCHI, Michele',
-    year: '1740s'
+    year: '1740s',
   },
   {
     id: '4_12',
@@ -1110,7 +1110,7 @@ const paintings4 = [
     imageSrc: 'level4/4_12.jpg',
     cutSrc: 'level4/cut/4_12.jpg',
     author: 'MARIESCHI, Michele',
-    year: '1740'
+    year: '1740',
   },
   {
     id: '4_13',
@@ -1118,7 +1118,7 @@ const paintings4 = [
     imageSrc: 'level4/4_13.jpg',
     cutSrc: 'level4/cut/4_13.jpg',
     author: 'MARKÓ, András',
-    year: '1861'
+    year: '1861',
   },
   {
     id: '4_14',
@@ -1126,7 +1126,7 @@ const paintings4 = [
     imageSrc: 'level4/4_14.jpg',
     cutSrc: 'level4/cut/4_14.jpg',
     author: 'MARKÓ, Károly the Elder',
-    year: '1838'
+    year: '1838',
   },
   {
     id: '4_15',
@@ -1134,7 +1134,7 @@ const paintings4 = [
     imageSrc: 'level4/4_15.jpg',
     cutSrc: 'level4/cut/4_15.jpg',
     author: 'MARKÓ, Károly the Younger',
-    year: '1878'
+    year: '1878',
   },
   {
     id: '4_16',
@@ -1142,7 +1142,7 @@ const paintings4 = [
     imageSrc: 'level4/4_16.jpg',
     cutSrc: 'level4/cut/4_16.jpg',
     author: 'MAUFRA, Maxime',
-    year: '1892'
+    year: '1892',
   },
   {
     id: '4_17',
@@ -1150,7 +1150,7 @@ const paintings4 = [
     imageSrc: 'level4/4_17.jpg',
     cutSrc: 'level4/cut/4_17.jpg',
     author: 'MCCULLOCH, Horatio',
-    year: '1854'
+    year: '1854',
   },
   {
     id: '4_18',
@@ -1158,7 +1158,7 @@ const paintings4 = [
     imageSrc: 'level4/4_18.jpg',
     cutSrc: 'level4/cut/4_18.jpg',
     author: 'MEDNYÁNSZKY, László',
-    year: '1892'
+    year: '1892',
   },
   {
     id: '4_19',
@@ -1166,7 +1166,7 @@ const paintings4 = [
     imageSrc: 'level4/4_19.jpg',
     cutSrc: 'level4/cut/4_19.jpg',
     author: 'MICHALLON, Achille-Etna',
-    year: '1822'
+    year: '1822',
   },
   {
     id: '4_20',
@@ -1174,7 +1174,7 @@ const paintings4 = [
     imageSrc: 'level4/4_20.jpg',
     cutSrc: 'level4/cut/4_20.jpg',
     author: 'MINDERHOUT, Hendrik van',
-    year: '1665'
+    year: '1665',
   },
   {
     id: '4_21',
@@ -1182,7 +1182,7 @@ const paintings4 = [
     imageSrc: 'level4/4_21.jpg',
     cutSrc: 'level4/cut/4_21.jpg',
     author: 'MINDERHOUT, Hendrik van',
-    year: '1653'
+    year: '1653',
   },
   {
     id: '4_22',
@@ -1190,7 +1190,7 @@ const paintings4 = [
     imageSrc: 'level4/4_22.jpg',
     cutSrc: 'level4/cut/4_22.jpg',
     author: 'MIROU, Anton',
-    year: '1610s'
+    year: '1610s',
   },
   {
     id: '4_23',
@@ -1198,7 +1198,7 @@ const paintings4 = [
     imageSrc: 'level4/4_23.jpg',
     cutSrc: 'level4/cut/4_23.jpg',
     author: 'MONET, Claude',
-    year: '1866'
+    year: '1866',
   },
   {
     id: '4_24',
@@ -1206,7 +1206,7 @@ const paintings4 = [
     imageSrc: 'level4/4_24.jpg',
     cutSrc: 'level4/cut/4_24.jpg',
     author: 'MONET, Claude',
-    year: '1868'
+    year: '1868',
   },
   {
     id: '4_25',
@@ -1214,7 +1214,7 @@ const paintings4 = [
     imageSrc: 'level4/4_25.jpg',
     cutSrc: 'level4/cut/4_25.jpg',
     author: 'MONET, Claude',
-    year: '1873'
+    year: '1873',
   },
   {
     id: '4_26',
@@ -1222,7 +1222,7 @@ const paintings4 = [
     imageSrc: 'level4/4_26.jpg',
     cutSrc: 'level4/cut/4_26.jpg',
     author: 'MONET, Claude',
-    year: '1886'
+    year: '1886',
   },
   {
     id: '4_27',
@@ -1230,7 +1230,7 @@ const paintings4 = [
     imageSrc: 'level4/4_27.jpg',
     cutSrc: 'level4/cut/4_27.jpg',
     author: 'MONET, Claude',
-    year: '1886'
+    year: '1886',
   },
   {
     id: '4_28',
@@ -1238,7 +1238,7 @@ const paintings4 = [
     imageSrc: 'level4/4_28.jpg',
     cutSrc: 'level4/cut/4_28.jpg',
     author: 'MONET, Claude',
-    year: '1900'
+    year: '1900',
   },
   {
     id: '4_29',
@@ -1246,8 +1246,8 @@ const paintings4 = [
     imageSrc: 'level4/4_29.jpg',
     cutSrc: 'level4/cut/4_29.jpg',
     author: 'MONET, Claude',
-    year: '1914'
-  }
+    year: '1914',
+  },
 ];
 
 const paintings5 = [
@@ -1257,7 +1257,7 @@ const paintings5 = [
     imageSrc: 'level5/5_01.jpg',
     cutSrc: 'level5/cut/5_01.jpg',
     author: 'HALS, Dirck',
-    year: '1627'
+    year: '1627',
   },
   {
     id: '5_02',
@@ -1265,7 +1265,7 @@ const paintings5 = [
     imageSrc: 'level5/5_02.jpg',
     cutSrc: 'level5/cut/5_02.jpg',
     author: 'HALS, Frans',
-    year: 'c. 1648'
+    year: 'c. 1648',
   },
   {
     id: '5_03',
@@ -1273,7 +1273,7 @@ const paintings5 = [
     imageSrc: 'level5/5_03.jpg',
     cutSrc: 'level5/cut/5_03.jpg',
     author: 'HARPIGNIES, Henri-Joseph',
-    year: '1853'
+    year: '1853',
   },
   {
     id: '5_04',
@@ -1281,7 +1281,7 @@ const paintings5 = [
     imageSrc: 'level5/5_04.jpg',
     cutSrc: 'level5/cut/5_04.jpg',
     author: 'HARPIGNIES, Henri-Joseph',
-    year: '1859'
+    year: '1859',
   },
   {
     id: '5_05',
@@ -1289,7 +1289,7 @@ const paintings5 = [
     imageSrc: 'level5/5_05.jpg',
     cutSrc: 'level5/cut/5_05.jpg',
     author: 'HARPIGNIES, Henri-Joseph',
-    year: '1877'
+    year: '1877',
   },
   {
     id: '5_06',
@@ -1297,7 +1297,7 @@ const paintings5 = [
     imageSrc: 'level5/5_06.jpg',
     cutSrc: 'level5/cut/5_06.jpg',
     author: 'HARPIGNIES, Henri-Joseph',
-    year: '1860'
+    year: '1860',
   },
   {
     id: '5_07',
@@ -1305,7 +1305,7 @@ const paintings5 = [
     imageSrc: 'level5/5_07.jpg',
     cutSrc: 'level5/cut/5_07.jpg',
     author: 'HARPIGNIES, Henri-Joseph',
-    year: '1891'
+    year: '1891',
   },
   {
     id: '5_08',
@@ -1313,7 +1313,7 @@ const paintings5 = [
     imageSrc: 'level5/5_08.jpg',
     cutSrc: 'level5/cut/5_08.jpg',
     author: 'LÉPICIÉ, Nicolas-Bernard',
-    year: '1775'
+    year: '1775',
   },
   {
     id: '5_09',
@@ -1321,7 +1321,7 @@ const paintings5 = [
     imageSrc: 'level5/5_09.jpg',
     cutSrc: 'level5/cut/5_09.jpg',
     author: 'HEEM, Jan Davidsz. de',
-    year: '1653'
+    year: '1653',
   },
   {
     id: '5_10',
@@ -1329,7 +1329,7 @@ const paintings5 = [
     imageSrc: 'level5/5_10.jpg',
     cutSrc: 'level5/cut/5_10.jpg',
     author: 'HEIDELOFF, Josef',
-    year: '1781'
+    year: '1781',
   },
   {
     id: '5_11',
@@ -1337,7 +1337,7 @@ const paintings5 = [
     imageSrc: 'level5/5_11.jpg',
     cutSrc: 'level5/cut/5_11.jpg',
     author: 'HEINTZ, Joseph the Younger',
-    year: '1648'
+    year: '1648',
   },
   {
     id: '5_12',
@@ -1345,7 +1345,7 @@ const paintings5 = [
     imageSrc: 'level5/5_12.jpg',
     cutSrc: 'level5/cut/5_12.jpg',
     author: 'HERRING, Benjamin Jr.',
-    year: '1869'
+    year: '1869',
   },
   {
     id: '5_13',
@@ -1353,7 +1353,7 @@ const paintings5 = [
     imageSrc: 'level5/5_13.jpg',
     cutSrc: 'level5/cut/5_13.jpg',
     author: 'HESS, Peter von',
-    year: '1839'
+    year: '1839',
   },
   {
     id: '5_14',
@@ -1361,7 +1361,7 @@ const paintings5 = [
     imageSrc: 'level5/5_14.jpg',
     cutSrc: 'level5/cut/5_14.jpg',
     author: "HONDECOETER, Gillis Claesz. d'",
-    year: '1620-22'
+    year: '1620-22',
   },
   {
     id: '5_15',
@@ -1369,7 +1369,7 @@ const paintings5 = [
     imageSrc: 'level5/5_15.jpg',
     cutSrc: 'level5/cut/5_15.jpg',
     author: 'HOUASSE, Michel-Ange',
-    year: '1723'
+    year: '1723',
   },
   {
     id: '5_16',
@@ -1377,7 +1377,7 @@ const paintings5 = [
     imageSrc: 'level5/5_16.jpg',
     cutSrc: 'level5/cut/5_16.jpg',
     author: 'INGRES, Jean-Auguste-Dominique',
-    year: '1814'
+    year: '1814',
   },
   {
     id: '5_17',
@@ -1385,7 +1385,7 @@ const paintings5 = [
     imageSrc: 'level5/5_17.jpg',
     cutSrc: 'level5/cut/5_17.jpg',
     author: 'ISABEY, Eugène',
-    year: '1869'
+    year: '1869',
   },
   {
     id: '5_18',
@@ -1393,7 +1393,7 @@ const paintings5 = [
     imageSrc: 'level5/5_18.jpg',
     cutSrc: 'level5/cut/5_18.jpg',
     author: 'JOLI, Antonio',
-    year: '1753-54'
+    year: '1753-54',
   },
   {
     id: '5_19',
@@ -1401,7 +1401,7 @@ const paintings5 = [
     imageSrc: 'level5/5_19.jpg',
     cutSrc: 'level5/cut/5_19.jpg',
     author: 'LEUTZE, Emanuel Gottlieb',
-    year: '1851'
+    year: '1851',
   },
   {
     id: '5_20',
@@ -1409,7 +1409,7 @@ const paintings5 = [
     imageSrc: 'level5/5_20.jpg',
     cutSrc: 'level5/cut/5_20.jpg',
     author: 'JOLI, Antonio',
-    year: 'c. 1770'
+    year: 'c. 1770',
   },
   {
     id: '5_21',
@@ -1417,7 +1417,7 @@ const paintings5 = [
     imageSrc: 'level5/5_21.jpg',
     cutSrc: 'level5/cut/5_21.jpg',
     author: 'KEIRINCKX, Alexander',
-    year: 'c. 1620'
+    year: 'c. 1620',
   },
   {
     id: '5_22',
@@ -1425,7 +1425,7 @@ const paintings5 = [
     imageSrc: 'level5/5_22.jpg',
     cutSrc: 'level5/cut/5_22.jpg',
     author: 'KLODT, Mikhail Konstantinovich',
-    year: '1874'
+    year: '1874',
   },
   {
     id: '5_23',
@@ -1433,7 +1433,7 @@ const paintings5 = [
     imageSrc: 'level5/5_23.jpg',
     cutSrc: 'level5/cut/5_23.jpg',
     author: 'LA TOUR, Georges de',
-    year: '1625-30'
+    year: '1625-30',
   },
   {
     id: '5_24',
@@ -1441,7 +1441,7 @@ const paintings5 = [
     imageSrc: 'level5/5_24.jpg',
     cutSrc: 'level5/cut/5_24.jpg',
     author: 'LUNY, Thomas',
-    year: '1782'
+    year: '1782',
   },
   {
     id: '5_25',
@@ -1449,7 +1449,7 @@ const paintings5 = [
     imageSrc: 'level5/5_25.jpg',
     cutSrc: 'level5/cut/5_25.jpg',
     author: 'LANFRANCO, Giovanni',
-    year: '1614'
+    year: '1614',
   },
   {
     id: '5_26',
@@ -1457,7 +1457,7 @@ const paintings5 = [
     imageSrc: 'level5/5_26.jpg',
     cutSrc: 'level5/cut/5_26.jpg',
     author: 'LAURENS, Jean-Paul',
-    year: '1875'
+    year: '1875',
   },
   {
     id: '5_27',
@@ -1465,7 +1465,7 @@ const paintings5 = [
     imageSrc: 'level5/5_27.jpg',
     cutSrc: 'level5/cut/5_27.jpg',
     author: 'LAURI, Filippo',
-    year: '1675'
+    year: '1675',
   },
   {
     id: '5_28',
@@ -1473,7 +1473,7 @@ const paintings5 = [
     imageSrc: 'level5/5_28.jpg',
     cutSrc: 'level5/cut/5_28.jpg',
     author: 'LAURI, Filippo',
-    year: '1650s'
+    year: '1650s',
   },
   {
     id: '5_29',
@@ -1481,9 +1481,9 @@ const paintings5 = [
     imageSrc: 'level5/5_29.jpg',
     cutSrc: 'level5/cut/5_29.jpg',
     author: 'LEAR, Edward',
-    year: '1864'
-  }
-]
+    year: '1864',
+  },
+];
 
 const paintings6 = [
   {
@@ -1492,7 +1492,7 @@ const paintings6 = [
     imageSrc: 'level6/6_01.jpg',
     cutSrc: 'level6/cut/6_01.jpg',
     author: 'NEER, Aert van der',
-    year: 'c. 1645'
+    year: 'c. 1645',
   },
   {
     id: '6_02',
@@ -1500,7 +1500,7 @@ const paintings6 = [
     imageSrc: 'level6/6_02.jpg',
     cutSrc: 'level6/cut/6_02.jpg',
     author: 'OOST, Jacob van, the Elder',
-    year: '1634'
+    year: '1634',
   },
   {
     id: '6_03',
@@ -1508,7 +1508,7 @@ const paintings6 = [
     imageSrc: 'level6/6_03.jpg',
     cutSrc: 'level6/cut/6_03.jpg',
     author: 'OUDRY, Jean-Baptiste',
-    year: '1750'
+    year: '1750',
   },
   {
     id: '6_04',
@@ -1516,7 +1516,7 @@ const paintings6 = [
     imageSrc: 'level6/6_04.jpg',
     cutSrc: 'level6/cut/6_04.jpg',
     author: 'PALAMEDESZ., Anthonie',
-    year: '1632-34'
+    year: '1632-34',
   },
   {
     id: '6_05',
@@ -1524,7 +1524,7 @@ const paintings6 = [
     imageSrc: 'level6/6_05.jpg',
     cutSrc: 'level6/cut/6_05.jpg',
     author: 'PANNINI, Giovanni Paolo',
-    year: '1751'
+    year: '1751',
   },
   {
     id: '6_06',
@@ -1532,7 +1532,7 @@ const paintings6 = [
     imageSrc: 'level6/6_06.jpg',
     cutSrc: 'level6/cut/6_06.jpg',
     author: 'PAOLINI, Pietro',
-    year: '1628-32'
+    year: '1628-32',
   },
   {
     id: '6_07',
@@ -1540,7 +1540,7 @@ const paintings6 = [
     imageSrc: 'level6/6_07.jpg',
     cutSrc: 'level6/cut/6_07.jpg',
     author: 'PEETERS, Bonaventura',
-    year: '1652'
+    year: '1652',
   },
   {
     id: '6_08',
@@ -1548,7 +1548,7 @@ const paintings6 = [
     imageSrc: 'level6/6_08.jpg',
     cutSrc: 'level6/cut/6_08.jpg',
     author: 'PISSARRO, Camille',
-    year: '1874'
+    year: '1874',
   },
   {
     id: '6_09',
@@ -1556,7 +1556,7 @@ const paintings6 = [
     imageSrc: 'level6/6_09.jpg',
     cutSrc: 'level6/cut/6_09.jpg',
     author: 'PISSARRO, Camille',
-    year: '1871'
+    year: '1871',
   },
   {
     id: '6_10',
@@ -1564,7 +1564,7 @@ const paintings6 = [
     imageSrc: 'level6/6_10.jpg',
     cutSrc: 'level6/cut/6_10.jpg',
     author: 'POELENBURGH, Cornelis van',
-    year: '1628'
+    year: '1628',
   },
   {
     id: '6_11',
@@ -1572,7 +1572,7 @@ const paintings6 = [
     imageSrc: 'level6/6_11.jpg',
     cutSrc: 'level6/cut/6_11.jpg',
     author: 'POELENBURGH, Cornelis van',
-    year: '1622-25'
+    year: '1622-25',
   },
   {
     id: '6_12',
@@ -1580,7 +1580,7 @@ const paintings6 = [
     imageSrc: 'level6/6_12.jpg',
     cutSrc: 'level6/cut/6_12.jpg',
     author: 'POTTER, Paulus',
-    year: 'c. 1643'
+    year: 'c. 1643',
   },
   {
     id: '6_13',
@@ -1588,7 +1588,7 @@ const paintings6 = [
     imageSrc: 'level6/6_13.jpg',
     cutSrc: 'level6/cut/6_13.jpg',
     author: 'RASMUSSEN, Georg Anton',
-    year: '1883'
+    year: '1883',
   },
   {
     id: '6_14',
@@ -1596,7 +1596,7 @@ const paintings6 = [
     imageSrc: 'level6/6_14.jpg',
     cutSrc: 'level6/cut/6_14.jpg',
     author: 'RASMUSSEN, Georg Anton',
-    year: '1891'
+    year: '1891',
   },
   {
     id: '6_15',
@@ -1604,7 +1604,7 @@ const paintings6 = [
     imageSrc: 'level6/6_15.jpg',
     cutSrc: 'level6/cut/6_15.jpg',
     author: 'RENOIR, Pierre-Auguste',
-    year: '1867'
+    year: '1867',
   },
   {
     id: '6_16',
@@ -1612,7 +1612,7 @@ const paintings6 = [
     imageSrc: 'level6/6_16.jpg',
     cutSrc: 'level6/cut/6_16.jpg',
     author: 'RICCI, Marco',
-    year: '1710s'
+    year: '1710s',
   },
   {
     id: '6_17',
@@ -1620,7 +1620,7 @@ const paintings6 = [
     imageSrc: 'level6/6_17.jpg',
     cutSrc: 'level6/cut/6_17.jpg',
     author: 'RICCI, Marco',
-    year: 'c. 1725'
+    year: 'c. 1725',
   },
   {
     id: '6_18',
@@ -1628,7 +1628,7 @@ const paintings6 = [
     imageSrc: 'level6/6_18.jpg',
     cutSrc: 'level6/cut/6_18.jpg',
     author: 'RICHTER, Adrian Ludwig',
-    year: '1847'
+    year: '1847',
   },
   {
     id: '6_19',
@@ -1636,7 +1636,7 @@ const paintings6 = [
     imageSrc: 'level6/6_19.jpg',
     cutSrc: 'level6/cut/6_19.jpg',
     author: 'ROBERTS, David',
-    year: '1855'
+    year: '1855',
   },
   {
     id: '6_20',
@@ -1644,7 +1644,7 @@ const paintings6 = [
     imageSrc: 'level6/6_20.jpg',
     cutSrc: 'level6/cut/6_20.jpg',
     author: 'ROSA, Salvator',
-    year: '1640s'
+    year: '1640s',
   },
   {
     id: '6_21',
@@ -1652,7 +1652,7 @@ const paintings6 = [
     imageSrc: 'level6/6_21.jpg',
     cutSrc: 'level6/cut/6_21.jpg',
     author: 'ROSA, Salvator',
-    year: '1652-64'
+    year: '1652-64',
   },
   {
     id: '6_22',
@@ -1660,7 +1660,7 @@ const paintings6 = [
     imageSrc: 'level6/6_22.jpg',
     cutSrc: 'level6/cut/6_22.jpg',
     author: 'RUBENS, Peter Paul',
-    year: 'c. 1635'
+    year: 'c. 1635',
   },
   {
     id: '6_23',
@@ -1668,7 +1668,7 @@ const paintings6 = [
     imageSrc: 'level6/6_23.jpg',
     cutSrc: 'level6/cut/6_23.jpg',
     author: 'RUBENS, Peter Paul',
-    year: 'c. 1638'
+    year: 'c. 1638',
   },
   {
     id: '6_24',
@@ -1676,7 +1676,7 @@ const paintings6 = [
     imageSrc: 'level6/6_24.jpg',
     cutSrc: 'level6/cut/6_24.jpg',
     author: 'RUYSDAEL, Salomon van',
-    year: '1645-50'
+    year: '1645-50',
   },
   {
     id: '6_25',
@@ -1684,9 +1684,9 @@ const paintings6 = [
     imageSrc: 'level6/6_25.jpg',
     cutSrc: 'level6/cut/6_25.jpg',
     author: 'RYCKAERT, David the Younger',
-    year: '1638'
-  }
-]
+    year: '1638',
+  },
+];
 
 const paintings = [paintings1, paintings2, paintings3, paintings4, paintings5, paintings6];
 

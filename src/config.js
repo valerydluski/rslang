@@ -3,6 +3,7 @@ import speakItPoster from './assets/img/posters/speakit.svg';
 import puzzlePoster from './assets/img/posters/puzzle.svg';
 import audioCallPoster from './assets/img/posters/audio-call.svg';
 import sprintPoster from './assets/img/posters/sprint.svg';
+import makeSentencePoster from './assets/img/posters/make-sentence.svg';
 import getRedirectFunction from './utils/getRedirectFunction';
 
 export const API = {
@@ -67,6 +68,12 @@ export const GAME_LIST = [
     description: 'Games.sprintDescription',
     poster: sprintPoster,
     onClick: getRedirectFunction('/StartGame/Sprint/'),
+  },
+  {
+    title: 'Games.makeSentence',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    poster: makeSentencePoster,
+    onClick: getRedirectFunction('/StartGame/MakeSentence/'),
   },
 ];
 

@@ -6,7 +6,7 @@ import EnglishPuzzle from '../games/EnglishPuzzle/EnglishPuzzle';
 import Savannah from '../games/Savannah/Savannah';
 import AudioCall from '../games/AudioCall/AudioCall';
 import Sprint from '../games/Sprint/Sprint';
-import OwnGame from '../games/OwnGame/OwnGame';
+import MakeSentence from '../games/MakeSentence/MakeSentence';
 
 const GamePage = ({ match }) => {
   const { gameId } = match.params;
@@ -21,8 +21,8 @@ const GamePage = ({ match }) => {
       return <AudioCall />;
     case 'Sprint':
       return <Sprint />;
-    case 'OwnGame':
-      return <OwnGame />;
+    case 'MakeSentence':
+      return <MakeSentence />;
     default:
       return <Redirect to="/LoginPage" />;
   }
