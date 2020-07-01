@@ -23,6 +23,7 @@ import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 import createGameEndData from '../../../utils/createGameEndData';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
+import createStatisticForGames from '../../../utils/createStatisticForGames';
 
 const addScore = 100;
 
@@ -45,6 +46,8 @@ const SpeakIT = (props) => {
     maxPage,
     Statistic,
     saveStatistic,
+    statusCheckLoader,
+    checkStatus,
   } = props;
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
@@ -57,9 +60,11 @@ const SpeakIT = (props) => {
   const [isGameFinished, toggleGameMode] = useState(false);
   const [wrongWordsState, setWrongWords] = useState([]);
   let IDontKnowWords = gameWords.slice();
-  checkStatusSession();
+
+  if (statusCheckLoader) return <LoadingSpinner />;
   if (isWordsLoading) return <LoadingSpinner />;
   if (currentAppMode !== gameName) {
+    checkStatus();
     switchAppMode(gameName);
     return <LoadingSpinner />;
   }
@@ -159,6 +164,10 @@ const SpeakIT = (props) => {
     }
   };
 
+  const showStatisticHandler = () => {
+    const roundsStatistic = createStatisticForGames(Statistic, gameName);
+  };
+
   if (!isListening) {
     return (
       <div className="speak-it_container">
@@ -169,6 +178,7 @@ const SpeakIT = (props) => {
             showProperties={['word', 'transcription', 'wordTranslate']}
             restartGame={restartGame}
             newGame={newGame}
+            showStatisticHandler={showStatisticHandler}
           />
         ) : null}
         <Image src={srcForImage} />
@@ -190,6 +200,7 @@ const SpeakIT = (props) => {
           restartHandler={restartHandler}
           speakHandler={speakHandler}
           finishHandler={finishHandler}
+          showStatisticHandler={showStatisticHandler}
         />
       </div>
     );
@@ -245,6 +256,8 @@ SpeakIT.propTypes = {
   gameName: PropTypes.string,
   Statistic: PropTypes.instanceOf(Object).isRequired,
   saveStatistic: PropTypes.func.isRequired,
+  statusCheckLoader: PropTypes.bool,
+  checkStatus: PropTypes.func.isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -259,6 +272,7 @@ SpeakIT.defaultProps = {
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,
   maxPage: GAME_MAX_PAGE,
+  statusCheckLoader: false,
 };
 
 const mapStateToProps = (state) => {
@@ -271,6 +285,7 @@ const mapStateToProps = (state) => {
     currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage.count,
     Statistic: state.changeStatistic.statistic,
+    statusCheckLoader: state.checkStatusloaderReducer.loading,
   };
 };
 
@@ -281,6 +296,7 @@ const mapDispatchToProps = {
   changeLevel: changeSpeakItLevel,
   changePage: changeSpeakItPage,
   saveStatistic: saveFullStatistic,
+  checkStatus: checkStatusSession,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpeakIT);

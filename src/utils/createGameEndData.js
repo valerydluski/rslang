@@ -12,7 +12,9 @@ const createGameEndData = (level, page, collection, Statistic, wrongWords, gameN
   collection.forEach((el, index) => {
     if (!wrongWords.includes(el.word.toLowerCase())) wrongWordsIndex += `${index},`;
   });
-  const gameStatistic = `${formater.format(date)}-${lastRound}-${wrongWordsIndex}`;
+  const gameStatistic = `${formater.format(date)}-${lastRound}-${wrongWordsIndex
+    .replace(/^[,\s]+|[,\s]+$/g, '')
+    .replace(/,[,\s]*,/g, ',')}`;
   const roundsStatistic = Statistic[`${gameName}PassedRound`];
   let newRoundStatistics;
   if (roundsStatistic === '0') newRoundStatistics = [];
