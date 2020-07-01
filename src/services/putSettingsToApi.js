@@ -3,6 +3,7 @@ import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
 async function putSettingsToApi(settings, user) {
+  console.log('putSettingsToApi -> user', user);
   try {
     const {
       URL,

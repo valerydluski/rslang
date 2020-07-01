@@ -25,8 +25,8 @@ function* workerStatus() {
     }
   } else if (!isDataLoad) {
     yield put(loadDataFromApi());
+    yield put(isAlreadyCheckStatusSession());
   }
-  yield put(isAlreadyCheckStatusSession());
   yield put(checkStatusHideLoader());
 }
 
