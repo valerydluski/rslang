@@ -8,7 +8,7 @@ async function checkToken(user) {
       ENDPOINTS: { USERS, SETTINGS },
     } = API;
 
-    return await fetchData(`${URL}/${USERS}/${user.userId}/${SETTINGS}`, {
+    return await fetchData(`${URL}/${USERS}/${user.userId}/`, {
       method: 'GET',
       withCredentials: true,
       headers: {
