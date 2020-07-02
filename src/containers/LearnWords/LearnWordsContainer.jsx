@@ -23,16 +23,18 @@ function LearnWordCardContainer(props) {
     correctCardHandler,
     isCorrect,
     showNewCardHandler,
+    isDataLoading,
   } = props;
   const [currentWord, setCurrentWord] = useState();
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const audio = new Audio();
 
-  if (isWordsLoading) {
+  if (appMode !== 'Savannah') {
+    changeAppMode('Savannah');
     return <LoadingSpinner />;
   }
-  if (appMode !== 'Savannah' || wordsCollection.length < 1) {
-    changeAppMode('Savannah');
+
+  if (isWordsLoading || isDataLoading || wordsCollection.length < 1) {
     return <LoadingSpinner />;
   }
 
@@ -74,6 +76,7 @@ LearnWordCardContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array).isRequired,
   appMode: PropTypes.string.isRequired,
   isWordsLoading: PropTypes.bool,
+  isDataLoading: PropTypes.bool,
   correctCardHandler: PropTypes.func.isRequired,
   showNewCardHandler: PropTypes.func.isRequired,
   isCorrect: PropTypes.bool,
@@ -81,6 +84,7 @@ LearnWordCardContainer.propTypes = {
 
 LearnWordCardContainer.defaultProps = {
   isWordsLoading: false,
+  isDataLoading: false,
   isCorrect: false,
 };
 const mapStateToProps = (state) => {
@@ -88,6 +92,7 @@ const mapStateToProps = (state) => {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     appMode: state.changeAppMode.appMode,
     isWordsLoading: state.loader.loading,
+    isDataLoading: state.loadDataLoaderReducer.loading,
     isCorrect: state.correctLearnCard.isCorrect,
     isCheckStatusLoading: state.checkStatusloaderReducer.loading,
   };
