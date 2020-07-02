@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Switch, Redirect } from 'react-router-dom';
 import PrivateNavigationRoute from '../../../Navigation/PrivateNavigationRoute';
 import StyledDictionary from './Styled/StyledDictionary';
+import StyledTitle from './Styled/StyledTitle';
 import DictionaryNavigationMenu from '../../../../containers/Navigation/DictionaryNavigationMenu';
 import LearningList from './Lists/LearningList';
 import DifficultList from './Lists/DifficultList';
@@ -16,9 +17,9 @@ function Dictionary(props) {
 
   return (
     <StyledDictionary>
-      <h2>
+      <StyledTitle>
         <Translate value="HomePage.dictionary" />
-      </h2>
+      </StyledTitle>
       <DictionaryNavigationMenu />
       <Switch>
         <PrivateNavigationRoute path="/dictionary/learning-words" exact component={LearningList} />

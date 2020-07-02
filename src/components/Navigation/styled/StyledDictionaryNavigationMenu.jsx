@@ -2,10 +2,13 @@ import styled from 'styled-components';
 
 const StyledDictionaryNavigationMenu = styled.div`
   ul {
+    padding: 0;
+    margin: 0;
     display: flex;
     width: 100%;
+    height: 60px;
+    align-items: center;
     justify-content: center;
-    padding: 0;
   }
   li {
     list-style: none;
