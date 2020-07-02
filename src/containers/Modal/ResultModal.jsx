@@ -14,6 +14,7 @@ import createStatisticForGames from '../../utils/createStatisticForGames';
 import StatisticsHeader from '../../components/Modal/Statistics/StatisticsHeader';
 import RoundStatistic from './Statistic/RoundStatistic';
 import { fetchOldWords } from '../../redux/GetWordsFromAPI/action';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const ModalResult = (props) => {
   const {
@@ -27,12 +28,14 @@ const ModalResult = (props) => {
     Statistic,
     currentAppMode,
     getOldGameWords,
+    loading,
   } = props;
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [isShowStatistic, toogleIsShowStatistic] = useState(false);
   const [roundsStatistic, setRoundsStatistic] = useState([]);
   const [isOldResult, toogleIsOldResult] = useState(false);
+  if (loading) return <LoadingSpinner />;
 
   const restartHandler = () => {
     restartGame();
@@ -63,7 +66,6 @@ const ModalResult = (props) => {
   };
 
   const roundHandler = (level, page, correctAnswers, count) => {
-    console.log(level, page, correctAnswers, count);
     getOldGameWords({ level, page, correctAnswers, count });
   };
 
@@ -120,6 +122,7 @@ ModalResult.propTypes = {
   Statistic: PropTypes.instanceOf(Object).isRequired,
   currentAppMode: PropTypes.string.isRequired,
   getOldGameWords: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 ModalResult.defaultProps = {
@@ -136,6 +139,7 @@ const mapStateToProps = (state) => {
   return {
     Statistic: state.changeStatistic.statistic,
     currentAppMode: state.changeAppMode.appMode,
+    loadin: state.loader.loadingOldGame,
   };
 };
 
