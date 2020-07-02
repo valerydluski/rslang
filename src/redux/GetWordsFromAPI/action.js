@@ -1,4 +1,4 @@
-import { FETCH_WORDS, FETCH_OLD_WORDS } from './types';
+import { FETCH_WORDS, FETCH_OLD_WORDS, SAVE_OLD_WORDS } from './types';
 
 export function fetchWords(data) {
   return {
@@ -11,5 +11,12 @@ export function fetchOldWords(data) {
   return {
     type: FETCH_OLD_WORDS,
     payload: data,
+  };
+}
+
+export function saveOldWords(words) {
+  return {
+    type: SAVE_OLD_WORDS,
+    payload: words,
   };
 }

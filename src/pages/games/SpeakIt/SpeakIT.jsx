@@ -24,8 +24,6 @@ import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRoun
 import createGameEndData from '../../../utils/createGameEndData';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
 
-const addScore = 100;
-
 const SpeakIT = (props) => {
   const {
     gameName,
@@ -34,8 +32,6 @@ const SpeakIT = (props) => {
     wordsCollection,
     listening,
     microphone,
-    speakITScore,
-    changeScore,
     changeIDontKnowWordsInStore,
     switchAppMode,
     isWordsLoading,
@@ -49,8 +45,6 @@ const SpeakIT = (props) => {
     checkStatus,
     wordsPerPage,
   } = props;
-  console.log(props);
-  let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
@@ -67,17 +61,12 @@ const SpeakIT = (props) => {
     switchAppMode(gameName);
     return <LoadingSpinner />;
   }
-  // if (wrongWordsState.length === 0) setWrongWords(gameWords);
-  const newScoreHandler = () => {
-    changeScore(newScore);
-  };
+  if (wrongWordsState.length === 0) setWrongWords(gameWords);
 
   const createGame = () => {
     IDontKnowWords = gameWords.slice();
     setWrongWords(IDontKnowWords);
     setTranscript('');
-    newScore = 0;
-    newScoreHandler();
     setSrcForImage(defaultImg);
   };
 
@@ -89,8 +78,6 @@ const SpeakIT = (props) => {
       if (IDontKnowWords.includes(transcriptResult)) {
         IDontKnowWords = IDontKnowWords.filter((item) => item !== transcriptResult);
         setWrongWords(IDontKnowWords);
-        newScore += addScore;
-        newScoreHandler();
         if (IDontKnowWords.length === 0) {
           microphone.stopMicrophone();
           toggleGameMode(true);
@@ -235,11 +222,9 @@ const SpeakIT = (props) => {
 SpeakIT.propTypes = {
   Level: PropTypes.string,
   Page: PropTypes.string,
-  speakITScore: PropTypes.number,
   listening: PropTypes.bool,
   wordsCollection: PropTypes.instanceOf(Array),
   microphone: PropTypes.instanceOf(Microphone),
-  changeScore: PropTypes.func,
   changeIDontKnowWordsInStore: PropTypes.func,
   switchAppMode: PropTypes.func.isRequired,
   isWordsLoading: PropTypes.bool,

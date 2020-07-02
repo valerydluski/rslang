@@ -7,9 +7,9 @@ const initialState = {
 const loaderReducer = (state = initialState, action) => {
   switch (action.type) {
     case SHOW_LOADER_OLD_GAME:
-      return { ...state, loading: true };
+      return { ...state, loadingOldGame: true };
     case HIDE_LOADER_OLD_GAME:
-      return { ...state, loading: false };
+      return { ...state, loadingOldGame: false };
     default:
       return state;
   }

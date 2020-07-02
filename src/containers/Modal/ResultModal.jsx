@@ -30,12 +30,21 @@ const ModalResult = (props) => {
     getOldGameWords,
     loading,
   } = props;
-  console.log(loading);
+
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [isShowStatistic, toogleIsShowStatistic] = useState(false);
   const [roundsStatistic, setRoundsStatistic] = useState([]);
   const [isOldResult, toogleIsOldResult] = useState(false);
-  // if (loading) return <LoadingSpinner />;
+  if (loading) {
+    return (
+      <OverlayStyled id="overlay">
+        <GoToHomePageButton />
+        <ModalStyled>
+          <LoadingSpinner />
+        </ModalStyled>
+      </OverlayStyled>
+    );
+  }
 
   const restartHandler = () => {
     restartGame();

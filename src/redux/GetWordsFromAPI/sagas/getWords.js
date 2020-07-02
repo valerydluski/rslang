@@ -1,4 +1,4 @@
-import { takeLatest, put, call, select } from 'redux-saga/effects';
+import { takeLatest, put, call, select, delay } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { fetchWords } from '../action';
 import {
@@ -23,9 +23,10 @@ import { updateState, updateSource } from '../../EnglishPuzzle/actions';
 
 function* workerGetWords() {
   try {
+    yield put(showLoader());
+    yield delay(1000);
     const state = yield select();
     const { appMode } = state.changeAppMode;
-    yield put(showLoader());
     const payload = yield call(wordsFetch, state);
     yield put(fetchWords(payload));
     if (appMode === 'EnglishPuzzle') {

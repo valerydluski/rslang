@@ -1,12 +1,13 @@
-import { takeLatest, select, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { FETCH_OLD_WORDS } from '../types';
-import { hideLoaderOldGame, showLoaderOldGame } from '../../Loader/action';
+import { hideLoaderOldGame, showLoaderOldGame } from '../../Loader/LoadOldWords/action';
 import wordsFetch from '../../../services/getOldGamesWords';
+import { saveOldWords } from '../action';
 
 function* workerStatus(action) {
   yield put(showLoaderOldGame());
   const payload = yield call(wordsFetch, action.payload);
-  console.log(payload);
+  yield put(saveOldWords(payload));
   yield put(hideLoaderOldGame());
 }
 
