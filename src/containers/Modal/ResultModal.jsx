@@ -13,6 +13,7 @@ import { LINK_FOR_IMAGE, LINK_FOR_AUDIO } from '../../config';
 import createStatisticForGames from '../../utils/createStatisticForGames';
 import StatisticsHeader from '../../components/Modal/Statistics/StatisticsHeader';
 import RoundStatistic from './Statistic/RoundStatistic';
+import { fetchOldWords } from '../../redux/GetWordsFromAPI/action';
 
 const ModalResult = (props) => {
   const {
@@ -62,6 +63,7 @@ const ModalResult = (props) => {
 
   const roundHandler = (level, page, correctAnswers, count) => {
     console.log(level, page, correctAnswers, count);
+    fetchOldWords({ level, page, correctAnswers, count });
   };
 
   const showContent = () => {

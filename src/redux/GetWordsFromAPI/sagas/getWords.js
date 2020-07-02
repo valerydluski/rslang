@@ -1,6 +1,6 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
-import fetchWords from '../action';
+import { fetchWords } from '../action';
 import {
   SPEAKIT_CHANGE_LEVEL,
   SPEAKIT_CHANGE_PAGE,
