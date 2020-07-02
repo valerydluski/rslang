@@ -71,7 +71,7 @@ export const GAME_LIST = [
   },
   {
     title: 'Games.makeSentence',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    description: 'Games.makeSentenceDescription',
     poster: makeSentencePoster,
     onClick: getRedirectFunction('/StartGame/MakeSentence/'),
   },
@@ -99,7 +99,7 @@ export const GAME_NAME = {
   savannah: 'Savannah',
   audioCall: 'AudioCall',
   sprint: 'Sprint',
-  ownGame: 'OwnGame',
+  makeSentence: 'makeSentence',
   learnWords: 'LearnWords',
 };
 
