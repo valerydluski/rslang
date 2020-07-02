@@ -14,11 +14,11 @@ const initialState = {
     AudioCallWordsPerPage: '10',
     SprintWordsPerPage: '10',
     MakeSentenceWordsPerPage: '10',
-    translate: true,
-    textMeaning: true,
-    textExample: true,
-    transcription: true,
-    imageAssociation: true,
+    isTranslate: true,
+    isTextMeaning: true,
+    isTextExample: true,
+    isTranscription: true,
+    isImageAssociation: true,
   },
 };
 
