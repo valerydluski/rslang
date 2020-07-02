@@ -30,12 +30,12 @@ const ModalResult = (props) => {
     getOldGameWords,
     loading,
   } = props;
-
+  console.log(loading);
   const [srcForImage, setSrcForImage] = useState(imageSrc);
   const [isShowStatistic, toogleIsShowStatistic] = useState(false);
   const [roundsStatistic, setRoundsStatistic] = useState([]);
   const [isOldResult, toogleIsOldResult] = useState(false);
-  if (loading) return <LoadingSpinner />;
+  // if (loading) return <LoadingSpinner />;
 
   const restartHandler = () => {
     restartGame();
@@ -61,7 +61,7 @@ const ModalResult = (props) => {
   };
 
   const showStatisticHandler = () => {
-    toogleIsShowStatistic(!isShowStatistic);
+    toogleIsShowStatistic(true);
     setRoundsStatistic(createStatisticForGames(Statistic, currentAppMode));
   };
 
@@ -139,7 +139,7 @@ const mapStateToProps = (state) => {
   return {
     Statistic: state.changeStatistic.statistic,
     currentAppMode: state.changeAppMode.appMode,
-    loadin: state.loader.loadingOldGame,
+    loading: state.loadOldGameWords.loadingOldGame,
   };
 };
 

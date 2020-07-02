@@ -49,6 +49,7 @@ const SpeakIT = (props) => {
     checkStatus,
     wordsPerPage,
   } = props;
+  console.log(props);
   let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
@@ -60,17 +61,13 @@ const SpeakIT = (props) => {
   const [isGameFinished, toggleGameMode] = useState(false);
   const [wrongWordsState, setWrongWords] = useState([]);
   let IDontKnowWords = gameWords.slice();
-
-  if (statusCheckLoader) return <LoadingSpinner />;
-  if (isWordsLoading) {
-    return <LoadingSpinner />;
-  }
+  if (statusCheckLoader || isWordsLoading) return <LoadingSpinner />;
   if (currentAppMode !== gameName) {
     checkStatus();
     switchAppMode(gameName);
     return <LoadingSpinner />;
   }
-  if (wrongWordsState.length === 0) setWrongWords(gameWords);
+  // if (wrongWordsState.length === 0) setWrongWords(gameWords);
   const newScoreHandler = () => {
     changeScore(newScore);
   };
