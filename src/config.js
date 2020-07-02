@@ -14,6 +14,7 @@ export const API = {
     WORDS: 'words',
     SETTINGS: 'settings',
     STATISTICS: 'statistics',
+    DICTIONARY: 'aggregatedWords',
   },
 
   QUERIES: {
@@ -23,6 +24,7 @@ export const API = {
       WORDS_PER_SENTENCE: 'wordsPerExampleSentenceLTE',
       WORDS_PER_PAGE: 'wordsPerPage',
       COUNT: 'count',
+      FILTER: 'filter',
     },
   },
 };
