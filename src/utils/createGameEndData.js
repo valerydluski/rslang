@@ -23,7 +23,7 @@ const createGameEndData = (
   const gameStatistic = `${formater.format(date)}-${lastRound}-${wrongWordsIndex
     .replace(/^[,\s]+|[,\s]+$/g, '')
     .replace(/,[,\s]*,/g, ',')}-${wordsPerPage}`;
-  const roundsStatistic = Statistic[`${gameName}PassedRound`];
+  const roundsStatistic = newStatistic[`${gameName}PassedRound`];
   let newRoundStatistics;
   if (roundsStatistic === '0') newRoundStatistics = [];
   else newRoundStatistics = roundsStatistic.split(';');

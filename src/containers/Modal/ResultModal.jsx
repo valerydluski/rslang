@@ -76,6 +76,12 @@ const ModalResult = (props) => {
 
   const roundHandler = (level, page, correctAnswers, count) => {
     getOldGameWords({ level, page, correctAnswers, count });
+    toogleIsOldResult(true);
+  };
+
+  const backHandler = () => {
+    toogleIsShowStatistic(false);
+    toogleIsOldResult(false);
   };
 
   const showContent = () => {
@@ -89,7 +95,7 @@ const ModalResult = (props) => {
           <ModalButtonsContainerStyled>
             <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
             <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
-            <Button buttonHandler={showStatisticHandler} text={I18n.t('Buttons.back')} />
+            <Button buttonHandler={backHandler} text={I18n.t('Buttons.back')} />
           </ModalButtonsContainerStyled>
         </>
       );

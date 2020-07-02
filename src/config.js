@@ -123,3 +123,22 @@ export const DEVICE = {
   desktop: `(max-width: ${size.desktop})`,
   desktopL: `(max-width: ${size.desktop})`,
 };
+
+export const INITIAL_STATISTIC = {
+  statistic: {
+    SpeakITLastRound: '0',
+    EnglishPuzzleLastRound: '0',
+    SavannahLastRound: '0',
+    AudioCallLastRound: '0',
+    SprintLastRound: '0',
+    OwnGameLastRound: '0',
+    SpeakITPassedRound: '0',
+    EnglishPuzzlePassedRound: '0',
+    SavannahPassedRound: '0',
+    AudioCallPassedRound: '0',
+    SprintPassedRound: '0',
+    OwnGamePassedRound: '0',
+    LearnLastWords: '0',
+    LearnLastLevel: '0',
+  },
+};

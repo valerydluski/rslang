@@ -21,7 +21,6 @@ import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
-import createGameEndData from '../../../utils/createGameEndData';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
 
 const SpeakIT = (props) => {
@@ -39,11 +38,9 @@ const SpeakIT = (props) => {
     changePage,
     changeLevel,
     maxPage,
-    Statistic,
     saveStatistic,
     statusCheckLoader,
     checkStatus,
-    wordsPerPage,
   } = props;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
@@ -138,16 +135,7 @@ const SpeakIT = (props) => {
       toggleGameMode(true);
       microphone.stopMicrophone();
       setListening(false);
-      const newStatistic = createGameEndData(
-        Level,
-        Page,
-        wordsCollection,
-        Statistic,
-        wrongWordsState,
-        gameName,
-        wordsPerPage
-      );
-      saveStatistic(newStatistic);
+      saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
     }
   };
 
@@ -233,11 +221,9 @@ SpeakIT.propTypes = {
   changePage: PropTypes.func.isRequired,
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
-  Statistic: PropTypes.instanceOf(Object).isRequired,
   saveStatistic: PropTypes.func.isRequired,
   statusCheckLoader: PropTypes.bool,
   checkStatus: PropTypes.func.isRequired,
-  wordsPerPage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 SpeakIT.defaultProps = {
@@ -264,9 +250,7 @@ const mapStateToProps = (state) => {
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage.count,
-    Statistic: state.changeStatistic.statistic,
     statusCheckLoader: state.checkStatusloaderReducer.loading,
-    wordsPerPage: state.userSettings.settings.SpeakITWordsPerPage,
   };
 };
 
