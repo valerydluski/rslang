@@ -26,6 +26,7 @@ const ModalResult = (props) => {
     correctWords,
     Statistic,
     currentAppMode,
+    getOldGameWords,
   } = props;
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
@@ -63,7 +64,7 @@ const ModalResult = (props) => {
 
   const roundHandler = (level, page, correctAnswers, count) => {
     console.log(level, page, correctAnswers, count);
-    fetchOldWords({ level, page, correctAnswers, count });
+    getOldGameWords({ level, page, correctAnswers, count });
   };
 
   const showContent = () => {
@@ -118,6 +119,7 @@ ModalResult.propTypes = {
   correctWords: PropTypes.instanceOf(Array),
   Statistic: PropTypes.instanceOf(Object).isRequired,
   currentAppMode: PropTypes.string.isRequired,
+  getOldGameWords: PropTypes.func.isRequired,
 };
 
 ModalResult.defaultProps = {
@@ -137,4 +139,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ModalResult);
+const mapDispatchToProps = {
+  getOldGameWords: fetchOldWords,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalResult);

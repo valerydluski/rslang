@@ -1,12 +1,13 @@
 import { takeLatest, select, call, put } from 'redux-saga/effects';
 import { FETCH_OLD_WORDS } from '../types';
-import putSettingsToApi from '../../../services/putSettingsToApi';
+import { hideLoader, showLoader } from '../../Loader/action';
+import wordsFetch from '../../../services/getOldGamesWords';
 
 function* workerStatus(action) {
-  console.log(action, 'asdasdas');
-  const state = yield select();
-  console.log('function*workerStatus -> state', state);
-  // yield call(putSettingsToApi, sessionData, userData);
+  yield put(showLoader());
+  const payload = yield call(wordsFetch, action.payload);
+  console.log(payload);
+  yield put(hideLoader());
 }
 
 export default function* watchStatus() {
