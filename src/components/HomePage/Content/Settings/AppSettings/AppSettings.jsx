@@ -26,8 +26,8 @@ const AppSettings = ({ checkboxes }) => {
         <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
       </Field>
       <Field
-        name="WordsPerDay"
-        key="WordsPerDay"
+        name="wordsPerDay"
+        key="wordsPerDay"
         type="number"
         placeholder={I18n.t('Settings.wordsPerDay')}
         validate={WordsPerDayValidator}
@@ -35,8 +35,8 @@ const AppSettings = ({ checkboxes }) => {
         component={Input}
       />
       <Field
-        name="CardsPerDay"
-        key="CardsPerDay"
+        name="cardsPerDay"
+        key="cardsPerDay"
         type="number"
         component={Input}
         placeholder={I18n.t('Settings.cardsPerDay')}

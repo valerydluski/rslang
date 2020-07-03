@@ -24,7 +24,9 @@ function LearnWordCardContainer(props) {
     isCorrect,
     showNewCardHandler,
     isDataLoading,
+    settings,
   } = props;
+  const { howToLearnWords } = settings;
   const [currentWord, setCurrentWord] = useState();
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const audio = new Audio();
@@ -68,7 +70,9 @@ function LearnWordCardContainer(props) {
     }
   };
 
-  return <LearnWords onSubmit={onSubmit} word={currentWord} isCorrect={isCorrect} />;
+  return (
+    <LearnWords settings={settings} onSubmit={onSubmit} word={currentWord} isCorrect={isCorrect} />
+  );
 }
 
 LearnWordCardContainer.propTypes = {
@@ -80,12 +84,22 @@ LearnWordCardContainer.propTypes = {
   correctCardHandler: PropTypes.func.isRequired,
   showNewCardHandler: PropTypes.func.isRequired,
   isCorrect: PropTypes.bool,
+  settings: PropTypes.shape({
+    deleteButton: PropTypes.bool,
+    addDificultWordsButton: PropTypes.bool,
+    howToLearnWords: PropTypes.string,
+  }),
 };
 
 LearnWordCardContainer.defaultProps = {
   isWordsLoading: false,
   isDataLoading: false,
   isCorrect: false,
+  settings: PropTypes.shape({
+    deleteButton: true,
+    addDificultWordsButton: true,
+    howToLearnWords: 'allWords',
+  }),
 };
 const mapStateToProps = (state) => {
   return {
@@ -95,6 +109,7 @@ const mapStateToProps = (state) => {
     isDataLoading: state.loadDataLoaderReducer.loading,
     isCorrect: state.correctLearnCard.isCorrect,
     isCheckStatusLoading: state.checkStatusloaderReducer.loading,
+    settings: state.userSettings,
   };
 };
 

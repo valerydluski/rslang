@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import LearnWordsContainer from './styled/LearnWordsContainer';
 import LearnWordCardContainer from './styled/LearnWordCardContainer';
 import GoHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePageButton';
-import ReduxLearnWordsForm from './LearnWordsForm';
+import ReduxLearnWordsForm from '../../containers/LearnWords/LearnWordsForm';
 
 export default function LearnWords(props) {
-  const { onSubmit, word, isCorrect } = props;
+  const { onSubmit, word, isCorrect, settings } = props;
   return (
     <LearnWordsContainer>
       <GoHomePageButton />
@@ -16,6 +16,7 @@ export default function LearnWords(props) {
           word={word}
           isCorrect={isCorrect}
           autocomplete="off"
+          settings={settings}
         />
       </LearnWordCardContainer>
     </LearnWordsContainer>
@@ -25,6 +26,8 @@ export default function LearnWords(props) {
 LearnWords.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   word: PropTypes.shape({}),
+  isCorrect: PropTypes.bool.isRequired,
+  settings: PropTypes.shape().isRequired,
 };
 
 LearnWords.defaultProps = {

@@ -1,4 +1,4 @@
-import { takeEvery, call, put, select, delay, take, all, fork } from 'redux-saga/effects';
+import { takeEvery, call, put, select, delay } from 'redux-saga/effects';
 import { LOAD_DATA_FROM_API } from '../types';
 import { isDataLoadFromApi } from '../actions';
 import { getStatistic } from '../../Statistic/action';
@@ -8,7 +8,6 @@ import getSettingsFromApi from '../../../services/getSettingsFromApi';
 import { getUserWords } from '../../Dictionary/actions';
 import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
-import { SAVE_USER_SETTINGS_TO_STORE } from '../../UserSettings/types';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());

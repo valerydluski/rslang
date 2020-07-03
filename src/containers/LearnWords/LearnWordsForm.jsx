@@ -1,12 +1,23 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import Input from '../UI/Input/Input';
-import StyledRoundButton from '../UI/Button/Styled/StyledRoundButton';
+import Input from '../../components/UI/Input/Input';
+import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 
 const LearnWordsForm = (props) => {
-  const { handleSubmit, word, isCorrect, autocomplete, reset } = props;
+  const { handleSubmit, word, isCorrect, autocomplete, reset, settings } = props;
+  const {
+    isTranslate,
+    isTextMeaning,
+    isTextExample,
+    isTranscription,
+    isImageAssociation,
+    deleteButton,
+    addDificultWordsButton,
+  } = settings.settings;
+  console.log('LearnWordsForm -> settings', settings.settings);
   const { textExample, textExampleTranslate } = word;
+  console.log('LearnWordsForm -> word', word);
   const [firstPart, secondPart] = textExample;
 
   useEffect(() => {
@@ -29,8 +40,9 @@ const LearnWordsForm = (props) => {
         autocomplete={autocomplete}
       />
       <p>{secondPart}</p>
+      {isCorrect && isTranslate && <p></p>}
       <hr />
-      <p>{textExampleTranslate}</p>
+      {isTextExample && <p>{textExampleTranslate}</p>}
       <StyledRoundButton>Next</StyledRoundButton>
     </form>
   );
@@ -45,6 +57,15 @@ LearnWordsForm.propTypes = {
   word: PropTypes.shape({
     textExample: PropTypes.instanceOf(Array).isRequired,
     textExampleTranslate: PropTypes.string.isRequired,
+  }).isRequired,
+  settings: PropTypes.shape({
+    isTranslate: PropTypes.bool.isRequired,
+    isTextMeaning: PropTypes.bool.isRequired,
+    isTextExample: PropTypes.bool.isRequired,
+    isTranscription: PropTypes.bool.isRequired,
+    isImageAssociation: PropTypes.bool.isRequired,
+    deleteButton: PropTypes.bool.isRequired,
+    addDificultWordsButton: PropTypes.bool.isRequired,
   }).isRequired,
   isCorrect: PropTypes.bool.isRequired,
   autocomplete: PropTypes.string,
