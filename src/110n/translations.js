@@ -60,6 +60,7 @@ const translations = {
       register: 'Register',
       choose: 'Choose',
       OK: 'OK',
+      back: 'Back',
     },
     Languages: {
       en: 'English',
@@ -78,6 +79,13 @@ const translations = {
     GameStatus: {
       page: 'Page',
       level: 'Level',
+    },
+    GamesStatistics: {
+      header: 'Game statistic',
+      level: 'Level:',
+      page: 'Page:',
+      correct: 'Correct answers:',
+      count: 'Total words:',
     },
   },
   ru: {
@@ -141,6 +149,7 @@ const translations = {
       register: 'Регистрация',
       choose: 'Выбрать',
       OK: 'OK',
+      back: 'Назад',
     },
     Languages: {
       en: 'Английский',
@@ -159,6 +168,13 @@ const translations = {
     GameStatus: {
       page: 'Страница',
       level: 'Уровень',
+    },
+    GamesStatistics: {
+      header: 'Статистика игры',
+      level: 'Уровень:',
+      page: 'Страница:',
+      correct: 'Правильных ответов:',
+      count: 'Всего слов:',
     },
   },
 };

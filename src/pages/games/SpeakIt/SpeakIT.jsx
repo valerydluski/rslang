@@ -21,11 +21,9 @@ import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
-import createGameEndData from '../../../utils/createGameEndData';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
-import createStatisticForGames from '../../../utils/createStatisticForGames';
 
-const addScore = 100;
+const micro = new Microphone();
 
 const SpeakIT = (props) => {
   const {
@@ -34,9 +32,6 @@ const SpeakIT = (props) => {
     Page,
     wordsCollection,
     listening,
-    microphone,
-    speakITScore,
-    changeScore,
     changeIDontKnowWordsInStore,
     switchAppMode,
     isWordsLoading,
@@ -44,12 +39,10 @@ const SpeakIT = (props) => {
     changePage,
     changeLevel,
     maxPage,
-    Statistic,
     saveStatistic,
     statusCheckLoader,
     checkStatus,
   } = props;
-  let newScore = speakITScore;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
@@ -60,26 +53,31 @@ const SpeakIT = (props) => {
   const [isGameFinished, toggleGameMode] = useState(false);
   const [wrongWordsState, setWrongWords] = useState([]);
   let IDontKnowWords = gameWords.slice();
-
-  if (statusCheckLoader) return <LoadingSpinner />;
-  if (isWordsLoading) return <LoadingSpinner />;
+  if (statusCheckLoader || isWordsLoading) return <LoadingSpinner />;
   if (currentAppMode !== gameName) {
     checkStatus();
     switchAppMode(gameName);
     return <LoadingSpinner />;
   }
   if (wrongWordsState.length === 0) setWrongWords(gameWords);
-  const newScoreHandler = () => {
-    changeScore(newScore);
-  };
 
   const createGame = () => {
     IDontKnowWords = gameWords.slice();
     setWrongWords(IDontKnowWords);
     setTranscript('');
-    newScore = 0;
-    newScoreHandler();
     setSrcForImage(defaultImg);
+  };
+
+  const finishHandler = () => {
+    if (!isListening) {
+      toast.info(<Translate value="ModalWindows.didNotStartGame" />);
+    } else {
+      changeIDontKnowWordsInStore(wrongWordsState);
+      toggleGameMode(true);
+      micro.stopMicrophone();
+      setListening(false);
+      saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
+    }
   };
 
   const speechResult = (transcriptResult) => {
@@ -90,11 +88,10 @@ const SpeakIT = (props) => {
       if (IDontKnowWords.includes(transcriptResult)) {
         IDontKnowWords = IDontKnowWords.filter((item) => item !== transcriptResult);
         setWrongWords(IDontKnowWords);
-        newScore += addScore;
-        newScoreHandler();
         if (IDontKnowWords.length === 0) {
-          microphone.stopMicrophone();
+          micro.stopMicrophone();
           toggleGameMode(true);
+          saveStatistic({ Level, Page, wordsCollection, IDontKnowWords, gameName });
         }
       }
     }
@@ -118,7 +115,7 @@ const SpeakIT = (props) => {
   const restartHandler = () => {
     if (isListening) {
       createGame();
-      microphone.changeTranscript(speechResult);
+      micro.changeTranscript(speechResult);
     }
   };
 
@@ -131,42 +128,22 @@ const SpeakIT = (props) => {
     const { newLevel, newPage } = newRound(Level, Page, maxPage);
     if (newLevel !== Level) changeLevel(newLevel);
     if (newPage !== Page) changePage(newPage);
-    setWrongWords([]);
   };
 
   const speakHandler = () => {
     if (isListening) {
-      microphone.stopMicrophone();
-    } else {
-      microphone.startMicrophone(speechResult);
-    }
+      micro.stopMicrophone();
+    } else if (!micro.setTranscript) {
+      micro.startMicrophone(speechResult);
+    } else micro.startMicrophone();
     setListening(!isListening);
+  };
+
+  if (wrongWordsState.length > 0 && !gameWords.includes(wrongWordsState[0])) {
     createGame();
-  };
-
-  const finishHandler = () => {
-    if (!isListening) {
-      toast.info(<Translate value="ModalWindows.didNotStartGame" />);
-    } else {
-      changeIDontKnowWordsInStore(wrongWordsState);
-      toggleGameMode(true);
-      microphone.stopMicrophone();
-      setListening(false);
-      const newStatistic = createGameEndData(
-        Level,
-        Page,
-        wordsCollection,
-        Statistic,
-        wrongWordsState,
-        gameName
-      );
-      saveStatistic(newStatistic);
-    }
-  };
-
-  const showStatisticHandler = () => {
-    const roundsStatistic = createStatisticForGames(Statistic, gameName);
-  };
+    micro.changeTranscript(speechResult);
+    setListening(false);
+  }
 
   if (!isListening) {
     return (
@@ -178,10 +155,8 @@ const SpeakIT = (props) => {
             showProperties={['word', 'transcription', 'wordTranslate']}
             restartGame={restartGame}
             newGame={newGame}
-            showStatisticHandler={showStatisticHandler}
           />
         ) : null}
-        <Image src={srcForImage} />
         <StatusMenu
           page={Page}
           level={Level}
@@ -189,6 +164,7 @@ const SpeakIT = (props) => {
           updateLevel={changeLevel}
           updatePage={changePage}
         />
+        <Image src={srcForImage} />
         <TextField text={textForTextField} />
         <ScoreContainerSpeakIT />
         <CardsContainerSpeakIT
@@ -200,7 +176,6 @@ const SpeakIT = (props) => {
           restartHandler={restartHandler}
           speakHandler={speakHandler}
           finishHandler={finishHandler}
-          showStatisticHandler={showStatisticHandler}
         />
       </div>
     );
@@ -218,7 +193,6 @@ const SpeakIT = (props) => {
           newGame={newGame}
         />
       ) : null}
-      <Image src={srcForImage} />
       <StatusMenu
         page={Page}
         level={Level}
@@ -226,6 +200,7 @@ const SpeakIT = (props) => {
         updateLevel={changeLevel}
         updatePage={changePage}
       />
+      <Image src={srcForImage} />
       <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
       <ScoreContainerSpeakIT />
       <CardsContainerSpeakIT wordsCollection={wordsCollection} wrongWords={wrongWordsState} />
@@ -241,11 +216,8 @@ const SpeakIT = (props) => {
 SpeakIT.propTypes = {
   Level: PropTypes.string,
   Page: PropTypes.string,
-  speakITScore: PropTypes.number,
   listening: PropTypes.bool,
   wordsCollection: PropTypes.instanceOf(Array),
-  microphone: PropTypes.instanceOf(Microphone),
-  changeScore: PropTypes.func,
   changeIDontKnowWordsInStore: PropTypes.func,
   switchAppMode: PropTypes.func.isRequired,
   isWordsLoading: PropTypes.bool,
@@ -254,7 +226,6 @@ SpeakIT.propTypes = {
   changePage: PropTypes.func.isRequired,
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
-  Statistic: PropTypes.instanceOf(Object).isRequired,
   saveStatistic: PropTypes.func.isRequired,
   statusCheckLoader: PropTypes.bool,
   checkStatus: PropTypes.func.isRequired,
@@ -263,11 +234,8 @@ SpeakIT.propTypes = {
 SpeakIT.defaultProps = {
   Level: '',
   Page: '',
-  speakITScore: 0,
   listening: false,
   wordsCollection: [],
-  microphone: new Microphone(),
-  changeScore: () => {},
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,
@@ -283,8 +251,7 @@ const mapStateToProps = (state) => {
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
-    maxPage: state.maxPage.maxPage.count,
-    Statistic: state.changeStatistic.statistic,
+    maxPage: state.maxPage.maxPage,
     statusCheckLoader: state.checkStatusloaderReducer.loading,
   };
 };

@@ -1,4 +1,4 @@
-import { SAVE_FULL_STATISTIC, GET_STATISTIC_FROM_API } from './types';
+import { SAVE_FULL_STATISTIC, GET_STATISTIC_FROM_API, SAVE_FULL_STATISTIC_TO_STORE } from './types';
 
 export function saveFullStatistic(statistic) {
   return {
@@ -10,6 +10,13 @@ export function saveFullStatistic(statistic) {
 export function getStatistic(statistic) {
   return {
     type: GET_STATISTIC_FROM_API,
+    payload: statistic,
+  };
+}
+
+export function saveFullStatisticToStore(statistic) {
+  return {
+    type: SAVE_FULL_STATISTIC_TO_STORE,
     payload: statistic,
   };
 }

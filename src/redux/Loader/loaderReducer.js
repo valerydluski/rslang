@@ -2,6 +2,7 @@ import { SHOW_LOADER, HIDE_LOADER } from './types';
 
 const initialState = {
   loading: false,
+  loadingOldGame: false,
 };
 
 const loaderReducer = (state = initialState, action) => {
