@@ -128,18 +128,21 @@ const SpeakIT = (props) => {
     const { newLevel, newPage } = newRound(Level, Page, maxPage);
     if (newLevel !== Level) changeLevel(newLevel);
     if (newPage !== Page) changePage(newPage);
-    setWrongWords([]);
   };
 
   const speakHandler = () => {
     if (isListening) {
       micro.stopMicrophone();
-    } else {
+    } else if (!micro.setTranscript) {
       micro.startMicrophone(speechResult);
-    }
+    } else micro.startMicrophone();
     setListening(!isListening);
-    createGame();
   };
+
+  if (wrongWordsState.length > 0 && !gameWords.includes(wrongWordsState[0])) {
+    createGame();
+    micro.changeTranscript(speechResult);
+  }
 
   if (!isListening) {
     return (

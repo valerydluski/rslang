@@ -20,7 +20,7 @@ const WordCardSpeakITStyled = styled.div`
   cursor: pointer;
 
   &.spoken-word {
-    background-color: red;
+    box-shadow: 2px 5px 16px 0px #0b325e, -1px 6px 25px 14px rgba(101, 80, 222, 0.46);
   }
 `;
 
