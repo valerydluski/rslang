@@ -67,6 +67,18 @@ const SpeakIT = (props) => {
     setSrcForImage(defaultImg);
   };
 
+  const finishHandler = () => {
+    if (!isListening) {
+      toast.info(<Translate value="ModalWindows.didNotStartGame" />);
+    } else {
+      changeIDontKnowWordsInStore(wrongWordsState);
+      toggleGameMode(true);
+      microphone.stopMicrophone();
+      setListening(false);
+      saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
+    }
+  };
+
   const speechResult = (transcriptResult) => {
     setTranscript(transcriptResult);
     if (gameWords.includes(transcriptResult)) {
@@ -78,6 +90,7 @@ const SpeakIT = (props) => {
         if (IDontKnowWords.length === 0) {
           microphone.stopMicrophone();
           toggleGameMode(true);
+          saveStatistic({ Level, Page, wordsCollection, IDontKnowWords, gameName });
         }
       }
     }
@@ -125,18 +138,6 @@ const SpeakIT = (props) => {
     }
     setListening(!isListening);
     createGame();
-  };
-
-  const finishHandler = () => {
-    if (!isListening) {
-      toast.info(<Translate value="ModalWindows.didNotStartGame" />);
-    } else {
-      changeIDontKnowWordsInStore(wrongWordsState);
-      toggleGameMode(true);
-      microphone.stopMicrophone();
-      setListening(false);
-      saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
-    }
   };
 
   if (!isListening) {
@@ -247,7 +248,7 @@ const mapStateToProps = (state) => {
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
-    maxPage: state.maxPage.maxPage.count,
+    maxPage: state.maxPage.maxPage,
     statusCheckLoader: state.checkStatusloaderReducer.loading,
   };
 };

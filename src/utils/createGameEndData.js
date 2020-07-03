@@ -16,11 +16,17 @@ const createGameEndData = (
     hour: '2-digit',
     minute: '2-digit',
   });
-  let wrongWordsIndex = '';
-  collection.forEach((el, index) => {
-    if (!wrongWords.includes(el.word.toLowerCase())) wrongWordsIndex += `${index},`;
-  });
-  const gameStatistic = `${formater.format(date)}-${lastRound}-${wrongWordsIndex
+  let correctWordsIndex = '';
+  if (wrongWords) {
+    collection.forEach((el, index) => {
+      if (!wrongWords.includes(el.word.toLowerCase())) correctWordsIndex += `${index},`;
+    });
+  } else {
+    collection.forEach((el, index) => {
+      correctWordsIndex += `${index},`;
+    });
+  }
+  const gameStatistic = `${formater.format(date)}-${lastRound}-${correctWordsIndex
     .replace(/^[,\s]+|[,\s]+$/g, '')
     .replace(/,[,\s]*,/g, ',')}-${wordsPerPage}`;
   const roundsStatistic = newStatistic[`${gameName}PassedRound`];
