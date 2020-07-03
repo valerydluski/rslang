@@ -6,7 +6,7 @@ import SwiperContainer from './Styled/SwiperContainer';
 import Card from '../Card/Card';
 import 'swiper/css/swiper.css';
 
-function List({ wordsList }) {
+function List({ wordsList, type }) {
   const params = {
     direction: 'vertical',
     slidesPerView: 4,
@@ -25,7 +25,7 @@ function List({ wordsList }) {
       <Swiper {...params}>
         {wordsList.map((item) => (
           <div key={item.word}>
-            <Card {...item} />
+            <Card item={item} type={type} />
           </div>
         ))}
       </Swiper>
@@ -35,10 +35,12 @@ function List({ wordsList }) {
 
 List.propTypes = {
   wordsList: PropTypes.instanceOf(Array),
+  type: PropTypes.string,
 };
 
 List.defaultProps = {
   wordsList: [],
+  type: 'learning',
 };
 
 export default List;
