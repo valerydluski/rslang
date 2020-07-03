@@ -142,6 +142,7 @@ const SpeakIT = (props) => {
   if (wrongWordsState.length > 0 && !gameWords.includes(wrongWordsState[0])) {
     createGame();
     micro.changeTranscript(speechResult);
+    setListening(false);
   }
 
   if (!isListening) {
