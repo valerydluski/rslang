@@ -13,6 +13,7 @@ const CardsContainerSpeakITStyled = styled.div`
   border-bottom: 1px solid #c4c4c4;
   width: 80%;
   justify-items: center;
+  justify-content: stretch;
 `;
 
 const CardsContainerSpeakIT = (props) => {

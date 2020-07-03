@@ -10,6 +10,7 @@ const ButtonsContainerSpeakITStyled = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 15px;
+  margin-bottom: 30px;
 `;
 
 const ButtonsContainerSpeakIT = (props) => {

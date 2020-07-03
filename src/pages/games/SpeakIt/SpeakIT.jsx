@@ -22,6 +22,7 @@ import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
+import SpeakITContainerStyled from './Styled/StyledSpeakIT';
 
 const micro = new Microphone();
 
@@ -47,7 +48,7 @@ const SpeakIT = (props) => {
     return el.word.toLowerCase();
   });
   const [srcForImage, setSrcForImage] = useState(defaultImg);
-  const [textForTextField, setTranslate] = useState('');
+  const [textForTextField, setTranslate] = useState(' ');
   const [isListening, setListening] = useState(listening);
   const [transcriptFromMicrophone, setTranscript] = useState('');
   const [isGameFinished, toggleGameMode] = useState(false);
@@ -147,7 +148,7 @@ const SpeakIT = (props) => {
 
   if (!isListening) {
     return (
-      <div className="speak-it_container">
+      <SpeakITContainerStyled>
         <GoToHomePageButton />
         {isGameFinished ? (
           <ResultModal
@@ -163,9 +164,10 @@ const SpeakIT = (props) => {
           maxPage={maxPage}
           updateLevel={changeLevel}
           updatePage={changePage}
+          className="status-menu_speakIT"
         />
-        <Image src={srcForImage} />
-        <TextField text={textForTextField} />
+        <Image src={srcForImage} classNameContainer="image_speakIT" />
+        <TextField text={textForTextField} className="text-field_speakIT" />
         <ScoreContainerSpeakIT />
         <CardsContainerSpeakIT
           cardHandler={cardHandler}
@@ -177,12 +179,12 @@ const SpeakIT = (props) => {
           speakHandler={speakHandler}
           finishHandler={finishHandler}
         />
-      </div>
+      </SpeakITContainerStyled>
     );
   }
 
   return (
-    <div className="speak-it_container">
+    <SpeakITContainerStyled>
       <GoToHomePageButton />
       {isGameFinished ? (
         <ResultModal
@@ -199,9 +201,13 @@ const SpeakIT = (props) => {
         maxPage={maxPage}
         updateLevel={changeLevel}
         updatePage={changePage}
+        className="status-menu_speakIT"
       />
-      <Image src={srcForImage} />
-      <RecognationTranscriptContainer transcript={transcriptFromMicrophone} />
+      <Image src={srcForImage} classNameContainer="image_speakIT" />
+      <RecognationTranscriptContainer
+        transcript={transcriptFromMicrophone}
+        className="text-field_speakIT"
+      />
       <ScoreContainerSpeakIT />
       <CardsContainerSpeakIT wordsCollection={wordsCollection} wrongWords={wrongWordsState} />
       <ButtonsContainerSpeakIT
@@ -209,7 +215,7 @@ const SpeakIT = (props) => {
         speakHandler={speakHandler}
         finishHandler={finishHandler}
       />
-    </div>
+    </SpeakITContainerStyled>
   );
 };
 
