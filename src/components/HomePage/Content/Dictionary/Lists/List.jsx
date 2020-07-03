@@ -4,14 +4,14 @@ import Swiper from 'react-id-swiper';
 import PropTypes from 'prop-types';
 import SwiperContainer from './Styled/SwiperContainer';
 import EmptyListMessage from './Styled/EmptyListMessage';
-import Card from '../Card/Card';
+import Card from '../../../../../containers/Homepage/Dictionary/Card/Card';
 import 'swiper/css/swiper.css';
 
 function List({ wordsList, type }) {
   const params = {
     direction: 'vertical',
-    slidesPerView: 4,
-    slidesPerGroup: 4,
+    slidesPerView: 3,
+    slidesPerGroup: 3,
     spaceBetween: 10,
     mousewheel: true,
     shouldSwiperUpdate: true,

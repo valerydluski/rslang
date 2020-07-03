@@ -9,10 +9,12 @@ const Center = styled.div`
   & > p {
     margin: 0;
     font-size: 16px;
+    color: #929292;
     &:first-child {
       font-size: 25px;
       font-weight: bold;
       margin-bottom: 20px;
+      color: #000;
     }
   }
 `;
