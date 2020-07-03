@@ -1,4 +1,4 @@
-import { SAVE_FULL_STATISTIC, SAVE_FULL_STATISTIC_TO_STORE, GET_STATISTIC_FROM_API } from './types';
+import { SAVE_FULL_STATISTIC_TO_STORE, GET_STATISTIC_FROM_API } from './types';
 
 const initialState = {
   statistic: {

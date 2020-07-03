@@ -2,11 +2,12 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { FETCH_OLD_WORDS } from '../types';
 import { hideLoaderOldGame, showLoaderOldGame } from '../../Loader/LoadOldWords/action';
 import wordsFetch from '../../../services/getOldGamesWords';
-import { saveOldWords } from '../action';
+import { saveOldWords, saveCorrectIndexes } from '../action';
 
 function* workerStatus(action) {
   yield put(showLoaderOldGame());
   const payload = yield call(wordsFetch, action.payload);
+  yield put(saveCorrectIndexes(action.payload.correctAnswers.split(',')));
   yield put(saveOldWords(payload));
   yield put(hideLoaderOldGame());
 }

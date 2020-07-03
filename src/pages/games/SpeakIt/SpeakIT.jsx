@@ -229,11 +229,9 @@ SpeakIT.propTypes = {
 SpeakIT.defaultProps = {
   Level: '',
   Page: '',
-  speakITScore: 0,
   listening: false,
   wordsCollection: [],
   microphone: new Microphone(),
-  changeScore: () => {},
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,

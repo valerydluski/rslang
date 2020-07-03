@@ -85,6 +85,25 @@ const ModalResult = (props) => {
   };
 
   const showContent = () => {
+    if (isShowStatistic && isOldResult) {
+      return (
+        <>
+          <Image src={srcForImage} className="small-img" />
+          <ModalContent
+            showProperties={showProperties}
+            wordHandler={wordHandler}
+            correctWords={correctWords}
+            audioForPlay={audioForPlay}
+            isOldResult={isOldResult}
+          />
+          <ModalButtonsContainerStyled>
+            <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
+            <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
+            <Button buttonHandler={backHandler} text={I18n.t('Buttons.back')} />
+          </ModalButtonsContainerStyled>
+        </>
+      );
+    }
     if (isShowStatistic) {
       return (
         <>
@@ -108,6 +127,7 @@ const ModalResult = (props) => {
           wordHandler={wordHandler}
           correctWords={correctWords}
           audioForPlay={audioForPlay}
+          isOldResult={isOldResult}
         />
         <ModalButtonsContainerStyled>
           <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
