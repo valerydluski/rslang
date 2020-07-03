@@ -16,7 +16,7 @@ async function getAgreggatedUserWords(user, difficulty) {
       'userWord.difficulty': difficulty,
     };
 
-    const wordsPerPage = 100;
+    const wordsPerPage = 3600;
 
     return await fetchData(
       `${URL}/${USERS}/${
