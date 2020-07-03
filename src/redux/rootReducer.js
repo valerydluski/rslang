@@ -19,6 +19,7 @@ import checkStatusloaderReducer from './Loader/CheckStatusLoader/checkStatusload
 import isStatusCheckedReducer from './Auth/Login/isStatusCheckedReducer';
 import loadDataFromApiReducer from './LoadDataFromApi/reducer';
 import loadDataLoaderReducer from './Loader/LoadDataLoader/loadDataLoaderReducer';
+import loadOldGameWords from './Loader/LoadOldWords/loaderReducer';
 import dictionaryLoaderReducer from './Loader/DictionaryLoader/DictionaryLoaderReducer';
 
 const rootReducer = combineReducers({
@@ -43,5 +44,6 @@ const rootReducer = combineReducers({
   dictionaryLoaderReducer,
   dataLoad: loadDataFromApiReducer,
   loadDataLoaderReducer,
+  loadOldGameWords,
 });
 export default rootReducer;

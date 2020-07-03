@@ -9,6 +9,7 @@ export default class Microphone {
   createrecognition() {
     this.recognition = new SpeechRecognition();
     this.recognition.interimResults = false;
+    this.recognition.maxAlternatives = 10;
     this.changeLanguageMicrophone();
   }
 
@@ -32,7 +33,7 @@ export default class Microphone {
   startMicrophone(setTranscript) {
     this.recognition.addEventListener('end', this.recognition.start);
     this.recognition.start();
-    this.setTranscript = setTranscript;
+    if (setTranscript) this.setTranscript = setTranscript;
   }
 
   changeTranscript(setTranscript) {

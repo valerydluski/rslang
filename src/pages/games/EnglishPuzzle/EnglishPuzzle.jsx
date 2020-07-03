@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
     currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.EnglishPuzzleLevel,
     page: state.changeRound.EnglishPuzzlePage,
-    maxPage: state.maxPage.maxPage.count,
+    maxPage: state.maxPage.maxPage,
   };
 };
 

@@ -11,6 +11,7 @@ import watchPutSettings from './UserSettings/sagas/putSettings';
 import saveUserWordsSagaWatcher from './Dictionary/sagas/saveUserWordsSaga';
 import statistic from './Statistic/sagas/statisticSaga';
 import watchLoadData from './LoadDataFromApi/sagas/loadDataSaga';
+import oldWordsSaga from './GetWordsFromAPI/sagas/oldWordsSaga';
 import aggregatedWordsSagaWatcher from './Dictionary/sagas/aggregatedWordsSaga';
 
 export default function* watchSaga() {
@@ -27,6 +28,7 @@ export default function* watchSaga() {
     fork(saveUserWordsSagaWatcher),
     fork(statistic),
     fork(watchLoadData),
+    fork(oldWordsSaga),
     fork(aggregatedWordsSagaWatcher),
   ]);
 }

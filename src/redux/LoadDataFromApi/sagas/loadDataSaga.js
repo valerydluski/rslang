@@ -1,7 +1,7 @@
 import { takeEvery, call, put, select, delay } from 'redux-saga/effects';
 import { LOAD_DATA_FROM_API } from '../types';
 import { isDataLoadFromApi } from '../actions';
-import { getStatistic } from '../../Statistic/action';
+import { saveFullStatisticToStore } from '../../Statistic/action';
 import getSettings from '../../../utils/getSettings';
 import getStatisticFromApi from '../../../services/getStatisticFromApi';
 import getSettingsFromApi from '../../../services/getSettingsFromApi';
@@ -17,7 +17,7 @@ function* workerLoadData() {
   const statistic = yield call(getStatisticFromApi, sessionData);
   if (statistic) {
     const statisticFromApi = getSettings(statistic);
-    yield put(getStatistic(statisticFromApi));
+    yield put(saveFullStatisticToStore(statisticFromApi));
   }
 
   const settings = yield call(getSettingsFromApi, sessionData);

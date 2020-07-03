@@ -20,7 +20,7 @@ function* workerRegistration(action) {
     yield put(authToServer(userSettings));
     yield take(SAVE_SESSION_DATA);
     yield put(saveUserSettingsToAPI(settings));
-    yield put(saveFullStatistic(statistic));
+    yield put(saveFullStatistic(statistic.statistic || statistic));
   } catch (e) {
     toast.error('error registration');
   }

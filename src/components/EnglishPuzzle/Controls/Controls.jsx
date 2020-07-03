@@ -107,7 +107,7 @@ function mapStateToProps(state) {
     row: state.englishPuzzle.row,
     level: state.changeRound.EnglishPuzzleLevel,
     page: state.changeRound.EnglishPuzzlePage,
-    maxPage: state.maxPage.maxPage.count,
+    maxPage: state.maxPage.maxPage,
     words: state.getWordsFromAPI.wordsFromAPI,
     wrongWords: state.gamesReducer.IDontKnowWords,
   };
