@@ -9,6 +9,7 @@ export default class Microphone {
   createrecognition() {
     this.recognition = new SpeechRecognition();
     this.recognition.interimResults = false;
+    this.recognition.maxAlternatives = 10;
     this.changeLanguageMicrophone();
   }
 

@@ -14,6 +14,8 @@ import {
   AUDIOCALL_CHANGE_PAGE,
   MAKESENTENCE_CHANGE_LEVEL,
   MAKESENTENCE_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_LEVEL,
 } from '../../ChangeRounds/types';
 import CHANGE_APP_MODE from '../../AppMode/types';
 import { hideLoader, showLoader } from '../../Loader/action';
@@ -58,6 +60,8 @@ export default function* watchGetWords() {
       MAKESENTENCE_CHANGE_LEVEL,
       MAKESENTENCE_CHANGE_PAGE,
       CHANGE_APP_MODE,
+      LEARN_WORDS_CHANGE_PAGE,
+      LEARN_WORDS_CHANGE_LEVEL,
     ],
     workerGetWords
   );

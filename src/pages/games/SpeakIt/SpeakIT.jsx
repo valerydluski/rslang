@@ -23,6 +23,8 @@ import newRound from '../../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
 
+const micro = new Microphone();
+
 const SpeakIT = (props) => {
   const {
     gameName,
@@ -30,7 +32,6 @@ const SpeakIT = (props) => {
     Page,
     wordsCollection,
     listening,
-    microphone,
     changeIDontKnowWordsInStore,
     switchAppMode,
     isWordsLoading,
@@ -73,7 +74,7 @@ const SpeakIT = (props) => {
     } else {
       changeIDontKnowWordsInStore(wrongWordsState);
       toggleGameMode(true);
-      microphone.stopMicrophone();
+      micro.stopMicrophone();
       setListening(false);
       saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
     }
@@ -88,7 +89,7 @@ const SpeakIT = (props) => {
         IDontKnowWords = IDontKnowWords.filter((item) => item !== transcriptResult);
         setWrongWords(IDontKnowWords);
         if (IDontKnowWords.length === 0) {
-          microphone.stopMicrophone();
+          micro.stopMicrophone();
           toggleGameMode(true);
           saveStatistic({ Level, Page, wordsCollection, IDontKnowWords, gameName });
         }
@@ -114,7 +115,7 @@ const SpeakIT = (props) => {
   const restartHandler = () => {
     if (isListening) {
       createGame();
-      microphone.changeTranscript(speechResult);
+      micro.changeTranscript(speechResult);
     }
   };
 
@@ -132,9 +133,9 @@ const SpeakIT = (props) => {
 
   const speakHandler = () => {
     if (isListening) {
-      microphone.stopMicrophone();
+      micro.stopMicrophone();
     } else {
-      microphone.startMicrophone(speechResult);
+      micro.startMicrophone(speechResult);
     }
     setListening(!isListening);
     createGame();
@@ -213,7 +214,6 @@ SpeakIT.propTypes = {
   Page: PropTypes.string,
   listening: PropTypes.bool,
   wordsCollection: PropTypes.instanceOf(Array),
-  microphone: PropTypes.instanceOf(Microphone),
   changeIDontKnowWordsInStore: PropTypes.func,
   switchAppMode: PropTypes.func.isRequired,
   isWordsLoading: PropTypes.bool,
@@ -232,7 +232,6 @@ SpeakIT.defaultProps = {
   Page: '',
   listening: false,
   wordsCollection: [],
-  microphone: new Microphone(),
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,
