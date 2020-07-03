@@ -7,6 +7,7 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { LINK_FOR_IMAGE } from '../../config';
 import { correctCard, showNewCard } from '../../redux/LearnWords/actions';
 import { checkStatusSession } from '../../redux/Auth/Login/actions';
+import updateOneWord from '../../services/updateOneWord';
 
 function getWord(arr) {
   const w = arr.shift();
@@ -25,6 +26,7 @@ function LearnWordCardContainer(props) {
     showNewCardHandler,
     isDataLoading,
     settings,
+    user,
   } = props;
   const { howToLearnWords } = settings;
   const [currentWord, setCurrentWord] = useState();
@@ -49,6 +51,7 @@ function LearnWordCardContainer(props) {
 
   if (currentWord) {
     showNewCardHandler(currentWord);
+    console.log('LearnWordCardContainer -> currentWord', currentWord);
   }
 
   const nextWord = () => {
@@ -64,14 +67,31 @@ function LearnWordCardContainer(props) {
     const { buttonType } = formData;
     const answer = formData.word;
     const { word } = currentWord;
+    let config = {};
+
     switch (buttonType) {
       case 'sound':
         setIsSoundPlay(!isSoundPlay);
         break;
       case 'deleted':
+        config = {
+          difficulty: 'deleted',
+          optional: {
+            time: new Date(),
+          },
+        };
+        updateOneWord(currentWord.id, config, user);
+        console.log('onSubmit -> user', user);
         setCurrentWord(getWord(wordsCollection));
         break;
       case 'difficult':
+        config = {
+          difficulty: 'difficult',
+          optional: {
+            time: new Date(),
+          },
+        };
+        updateOneWord(currentWord.id, config, user);
         setCurrentWord(getWord(wordsCollection));
         break;
       case 'unknown':
@@ -124,6 +144,7 @@ LearnWordCardContainer.propTypes = {
     addDificultWordsButton: PropTypes.bool,
     howToLearnWords: PropTypes.string,
   }),
+  user: PropTypes.shape().isRequired,
 };
 
 LearnWordCardContainer.defaultProps = {
@@ -145,6 +166,7 @@ const mapStateToProps = (state) => {
     isCorrect: state.correctLearnCard.isCorrect,
     isCheckStatusLoading: state.checkStatusloaderReducer.loading,
     settings: state.userSettings,
+    user: state.login,
   };
 };
 
