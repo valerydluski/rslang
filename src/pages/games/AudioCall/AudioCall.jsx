@@ -164,7 +164,7 @@ const mapStateToProps = (state) => {
     currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.AudioCallLevel,
     page: state.changeRound.AudioCallPage,
-    maxPage: state.maxPage.maxPage.count,
+    maxPage: state.maxPage.maxPage,
   };
 };
 
