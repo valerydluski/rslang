@@ -13,7 +13,7 @@ const gameDescriptions = {
   },
   Savannah: {
     name: 'Games.savannah',
-    description: 'Savannah description.',
+    description: 'Games.savannahDescription',
   },
   Sprint: {
     name: 'Games.sprint',
