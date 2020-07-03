@@ -18,8 +18,9 @@ const createGameEndData = (
   });
   let correctWordsIndex = '';
   if (wrongWords) {
+    const wrongWordsLowerCase = wrongWords.map((el) => el.toLowerCase());
     collection.forEach((el, index) => {
-      if (!wrongWords.includes(el.word.toLowerCase())) correctWordsIndex += `${index},`;
+      if (!wrongWordsLowerCase.includes(el.word.toLowerCase())) correctWordsIndex += `${index},`;
     });
   } else {
     collection.forEach((el, index) => {
