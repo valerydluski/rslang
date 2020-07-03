@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AudioPlayButton from './AudioPlayButton';
-import InitialSentenceContainerStyled from '../Styled/InitialSentenceContainerStyled';
-import { InitialSentenceWordsStyled, MainWordStyled } from '../Styled/InitialSentenceWordsStyled';
-import SentencePartsContainerStyled from '../Styled/SentencePartsContainerStyled';
+import AudioPlayButton from '../../containers/MakeSentence/AudioPlayButton';
+import InitialSentenceContainerStyled from './Styled/InitialSentenceContainerStyled';
+import { InitialSentenceWordsStyled, MainWordStyled } from './Styled/InitialSentenceWordsStyled';
+import SentencePartsContainerStyled from './Styled/SentencePartsContainerStyled';
 
 const InitialSentenceContainer = ({ audioSrc, sentence }) => {
   const sentenceParts = sentence.split(' ');

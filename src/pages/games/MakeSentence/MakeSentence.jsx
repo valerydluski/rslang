@@ -9,19 +9,20 @@ import shuffleArray from '../../../utils/shuffleArray';
 import changeAppMode from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
+// import { DontKnowButton, NextButton } from '../../../components/Audiocall/AudiocallControls';
 import {
   changeMakeSentenceLevel,
   changeMakeSentencePage,
 } from '../../../redux/ChangeRounds/action';
-import InitialSentenceContainer from './components/InitialSentenceContainer';
+import InitialSentenceContainer from '../../../components/MakeSentence/InitialSentenceContainer';
 import { GAME_MAX_PAGE, LINK_FOR_AUDIO } from '../../../config';
-import GameFieldsContainer from './components/GameFieldsContainer';
+import GameFieldsContainer from '../../../containers/MakeSentence/GameFieldsContainer';
 
 let currentGameWords;
 
 const MakeSentence = ({
   wordsCollection,
-  addWordsWithMistakesToStore,
+  // addWordsWithMistakesToStore,
   switchAppMode,
   isWordsLoading,
   currentAppMode,
@@ -33,7 +34,7 @@ const MakeSentence = ({
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
-  const [wrongAnsweredWords, addWordToWrong] = useState([]);
+  // const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
 
   checkStatusSession();
@@ -50,11 +51,11 @@ const MakeSentence = ({
   }
 
   function finishGame() {
-    addWordsWithMistakesToStore(wrongAnsweredWords);
+    // addWordsWithMistakesToStore(wrongAnsweredWords);
     toggleGameMode(true);
   }
 
-  function switchToNextWord() {
+  if (isWordFinished) {
     if (currentWordIndex === wordsCollection.length - 1) finishGame();
     else {
       changeIndex(currentWordIndex + 1);
@@ -62,16 +63,25 @@ const MakeSentence = ({
     }
   }
 
-  function processUserAnswer(isCorrect, words, selectedIndex, correctIndex) {
-    if (!isCorrect) addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
-    // isAnswerCorrect = { isCorrect, words, selectedIndex, correctIndex };
-    toggleWordStatus(true);
-  }
+  // function switchToNextWord() {
+  //   if (currentWordIndex === wordsCollection.length - 1) finishGame();
+  //   else {
+  //     changeIndex(currentWordIndex + 1);
+  //     toggleWordStatus(false);
+  //   }
+  // }
+
+  // function processUserAnswer(isCorrect, words, selectedIndex, correctIndex) {
+  //   if (!isCorrect) addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
+  //   // isAnswerCorrect = { isCorrect, words, selectedIndex, correctIndex };
+  //   toggleWordStatus(true);
+  // }
+
+  // const checkResult = () => {};
 
   const audioSrc = `${LINK_FOR_AUDIO}${currentGameWords[currentWordIndex].audioExample}`;
   const sentence = currentGameWords[currentWordIndex].textExample;
   const sentenceTranslation = currentGameWords[currentWordIndex].textExampleTranslate;
-
   return (
     <div className="make-sentence_container">
       <GoToHomePageButton />
@@ -84,14 +94,18 @@ const MakeSentence = ({
       />
       {isGameFinished ? <ResultModal showProperties={['word', 'translation']} /> : null}
       <InitialSentenceContainer audioSrc={audioSrc} sentence={sentence} />
-      <GameFieldsContainer sentenceTranslation={sentenceTranslation} />
+      <GameFieldsContainer
+        sentenceTranslation={sentenceTranslation}
+        toggleWordStatus={toggleWordStatus}
+        isNewWord={123}
+      />
     </div>
   );
 };
 
 MakeSentence.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
-  addWordsWithMistakesToStore: PropTypes.func,
+  // addWordsWithMistakesToStore: PropTypes.func,
   switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
   currentAppMode: PropTypes.string,
@@ -104,7 +118,7 @@ MakeSentence.propTypes = {
 
 MakeSentence.defaultProps = {
   wordsCollection: [],
-  addWordsWithMistakesToStore: () => {},
+  // addWordsWithMistakesToStore: () => {},
   switchAppMode: () => {},
   isWordsLoading: false,
   currentAppMode: '',

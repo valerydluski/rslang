@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   ActiveAudioPlayButtonStyled,
   AudioPlayButtonStyled,
-} from '../Styled/AudioPlayButtonsStyled';
+} from './Styled/AudioPlayButtonsStyled';
 
 const audio = new Audio();
 
