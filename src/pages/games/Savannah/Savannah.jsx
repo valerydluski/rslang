@@ -7,15 +7,23 @@ import styled, { keyframes } from 'styled-components';
 import { CSSTransition } from 'react-transition-group'
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import shuffleArray from '../../../utils/shuffleArray';
-import {SavannahComponentTranslation, WordToGuess, mistakes, result, numberClickHandler} from '../../../components/Savannah/cardComponent'
+import {SavannahComponentTranslation, WordToGuess, mistakes, result, catchedEvent, playResultSound} from '../../../components/Savannah/cardComponent'
 import ResultModal from '../../../containers/Modal/ResultModal';
 import changeAppMode from '../../../redux/AppMode/action';
 import {changeIDontKnowWords} from '../../../redux/Games/action';
 import { changeSavannahLevel, changeSavannahPage } from '../../../redux/ChangeRounds/action';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 
+
 let shuffledCollection;
 let shuffledCollectionCopy;
+
+let keyPressResult = false;
+let keyEvent;
+let keyMistakes = 0;
+let isGameStarted = false;
+
+
 
 const Savannah = ({
   wordsCollection,
@@ -46,42 +54,72 @@ const Savannah = ({
     shuffledCollectionCopy = shuffleArray(shuffledCollectionCopy);
   }
 
-  function switchToNextWord() {
-    if (result === false) {
-      addWordToWrong([...wrongAnsweredWords,shuffledCollection[currentWordIndex + 1].word]);
-      addWordsWithMistakesToStore(wrongAnsweredWords);
-    }
+  const switchToNextWord = () => {
+    answerShuffle(currentWordIndex + 1);
     if (currentWordIndex <= 10) {
       changeIndex(currentWordIndex + 1);
     }
     else {
       changeIndex(0);
     }
-    answerShuffle(currentWordIndex + 1);
+    if (result === false) {
+      addWordToWrong([...wrongAnsweredWords,shuffledCollection[currentWordIndex + 1].word]);
+      addWordsWithMistakesToStore(wrongAnsweredWords);
+    }
+    if (catchedEvent) {
+    catchedEvent.style.backgroundColor = 'white';
+    }
+    if (document.getElementsByClassName('translation')[keyEvent]) {
+      document.getElementsByClassName('translation')[keyEvent].style.backgroundColor = 'white';
+      }
+  }
+
+  const intervalSwitch = () => {
+    setTimeout(switchToNextWord, 1000);
+  }
+
+  const buttonHandler = () => {
+    document.addEventListener('keydown', (event) => {
+    if (event.key > 0 && event.key < 5 && isGameStarted) {
+      keyEvent = event.key - 1;
+      if (document.getElementsByClassName('translation')[event.key - 1].textContent === document.getElementById('title').dataset.indexMatch) {
+        keyPressResult = true;
+        document.getElementsByClassName('translation')[event.key - 1].style.backgroundColor = 'green';
+        }
+        else {
+          keyPressResult = false;
+          document.getElementsByClassName('translation')[event.key - 1].style.backgroundColor = 'red';
+          keyMistakes += 1;
+        }
+        playResultSound(keyPressResult);
+        intervalSwitch(currentWordIndex);
+      }
+  })
   }
 
     const startGame = () => {
     setGameChange(true);
+    isGameStarted = true;
     shuffledCollection = shuffleArray(wordsCollection);
     answerShuffle(currentWordIndex);
     }
 
     const exitGame = () => {
       setGameChange(false);
-      }     
-
+      } 
+        
    let structure;
     if(gameStarted && currentWordIndex < 10) {
        structure = 
       <div className="savannah_container">
-    <button onClick={exitGame} onKeyPress={switchToNextWord} ></button>
+    <button onClick={exitGame}></button>
     <div id = 'first'>
-    <div onAnimationEnd={switchToNextWord}>
+    <div>
       <WordToGuess className= 'english-word' words = {shuffledCollection[currentWordIndex]}/>
       </div>
-      <div onClick={switchToNextWord}>
+      <div onClick={intervalSwitch}>
     <SavannahComponentTranslation wordsForRender = {shuffledCollectionCopy} />
-    {mistakes > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
+    {mistakes + keyMistakes > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
     </div>
     </div>
     </div>
@@ -89,8 +127,8 @@ const Savannah = ({
 
     else {
       structure = 
-      <div className="savannah_container" onKeyDown={numberClickHandler}>
-      {currentWordIndex > 9 || mistakes > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
+      <div className="savannah_container">
+      {currentWordIndex > 9 || mistakes + keyMistakes > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
       </div>
     }
 
@@ -102,7 +140,7 @@ const Savannah = ({
    }
 
 return (
-  <div onKeyPress={numberClickHandler}>
+  <div onClick={buttonHandler}>
     <GoToHomePageButton />
     <StatusMenu
             page={page}

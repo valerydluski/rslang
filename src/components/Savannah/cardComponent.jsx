@@ -7,6 +7,7 @@ import correctSound from '../../assets/audio/correct.mp3';
 
 const wordsArr = ['man', 'woman', 'rookie', 'chance'];
 const translations = ['мужчина', 'женщина', 'новичок', 'шанс'];
+let catchedEvent;
 let result;
 let mistakes = 0;
 
@@ -17,6 +18,7 @@ const playResultSound = (isOk) => {
 };
 
 const clickHandler = (event) => {
+  catchedEvent = event.target;
   if (event.target.dataset.indexTranslate === document.getElementById('title').dataset.indexTranslate) {
   event.target.style.backgroundColor = 'green';
   result = true;
@@ -34,8 +36,6 @@ const WordToGuess = (props) => {
     const {
       words,
     } = props;
-    
-  
     return <div>
       <p className="english_word" id = 'title' data-index-translate = {words.id} data-index-match = {words.wordTranslate} data-index-test = {props.id}>
         {words.word}
@@ -58,26 +58,15 @@ const WordToGuess = (props) => {
     } = props;
 
     const wordsCards = shuffleArray(wordsForRender).map((word, index) => {
-      return <p className={'translation game_words'} key={word.id} data-index={index} data-index-translate = {word.id}>
+      return <p onClick={clickHandler} className={'translation game_words'} key={word.id} data-index={index} data-index-translate = {word.id}>
        {word.wordTranslate}
         </p>;
     });
   
-    return <div className="game_words_container" onClick={clickHandler}>{wordsCards}</div>;
+    return <div className="game_words_container">{wordsCards}</div>;
   };
   
-  const numberClickHandler = (event) => {
-    if (event.key > 0 && event.key < 5) {
-      if (document.getElementsByClassName('translation')[event.key - 1].textContent === document.getElementById('title').dataset.indexMatch) {
-        result = true;
-        }
-        else {
-          result = false;
-          mistakes += 1;
-        }
-        playResultSound(result)
-      }
-  }
+  
 
 
-  export {WordToGuess, clickHandler, wordsArr, translations, SavannahComponentTranslation, mistakes, result, numberClickHandler}
+  export {WordToGuess, clickHandler, wordsArr, translations, SavannahComponentTranslation, mistakes, result, playResultSound, catchedEvent}
