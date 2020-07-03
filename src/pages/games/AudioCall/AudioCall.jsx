@@ -14,7 +14,8 @@ import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import { changeAudioCallLevel, changeAudioCallPage } from '../../../redux/ChangeRounds/action';
-import { LINK_FOR_IMAGE, GAME_MAX_PAGE } from '../../../config';
+import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../../config';
+import { saveFullStatistic } from '../../../redux/Statistic/action';
 
 let currentGameWords;
 let answerResult = {};
@@ -30,6 +31,8 @@ const AudioCall = ({
   page,
   level,
   maxPage,
+  gameName,
+  saveStatistic,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -39,8 +42,8 @@ const AudioCall = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (currentAppMode !== 'AudioCall' || wordsCollection.length === 0) {
-    switchAppMode('AudioCall');
+  if (currentAppMode !== gameName || wordsCollection.length === 0) {
+    switchAppMode(gameName);
     return null;
   }
 
@@ -51,6 +54,13 @@ const AudioCall = ({
   function finishGame() {
     addWordsWithMistakesToStore(wrongAnsweredWords);
     toggleGameMode(true);
+    saveStatistic({
+      Level: level,
+      Page: page,
+      wordsCollection,
+      wrongWordsState: wrongAnsweredWords,
+      gameName,
+    });
   }
 
   function switchToNextWord() {
@@ -142,6 +152,8 @@ AudioCall.propTypes = {
   level: PropTypes.string,
   page: PropTypes.string,
   maxPage: PropTypes.number,
+  gameName: PropTypes.string,
+  saveStatistic: PropTypes.func.isRequired,
 };
 
 AudioCall.defaultProps = {
@@ -155,6 +167,7 @@ AudioCall.defaultProps = {
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
+  gameName: GAME_NAME.audioCall,
 };
 
 const mapStateToProps = (state) => {
@@ -173,6 +186,7 @@ const mapDispatchToProps = {
   switchAppMode: changeAppMode,
   updateLevel: changeAudioCallLevel,
   updatePage: changeAudioCallPage,
+  saveStatistic: saveFullStatistic,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AudioCall);
