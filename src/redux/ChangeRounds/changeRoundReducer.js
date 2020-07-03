@@ -57,7 +57,7 @@ const changeRoundReducer = (state = initialState, action) => {
     case MAKESENTENCE_CHANGE_PAGE:
       return { ...state, MakeSentencePage: action.payload };
     case MAKESENTENCE_CHANGE_LEVEL:
-      return { ...state, MAKESENTENCELevel: action.payload };
+      return { ...state, MakeSentenceLevel: action.payload, MakeSentencePage: '1' };
     case LEARN_WORDS_CHANGE_PAGE:
       return { ...state, LearnWordsLevel: action.payload };
     case LEARN_WORDS_CHANGE_LEVEL:
