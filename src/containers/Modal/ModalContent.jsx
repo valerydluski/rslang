@@ -18,7 +18,7 @@ const ModalContent = (props) => {
   let IDontKnowWords;
   let wordsCollection;
   let words;
-  let iKnowWords;
+  let iKnowWords = [];
 
   if (!isOldResult) {
     IDontKnowWords = props.IDontKnowWords;
@@ -29,7 +29,9 @@ const ModalContent = (props) => {
     iKnowWords = arr.filter((el) => !IDontKnowWords.includes(el));
   } else {
     wordsCollection = oldWords;
-    iKnowWords = correctOldIndexes.map((el) => wordsCollection[`${el}`].word.toLowerCase());
+    if (correctOldIndexes[0]) {
+      iKnowWords = correctOldIndexes.map((el) => wordsCollection[`${el}`].word.toLowerCase());
+    }
     words = correctWords || wordsCollection;
     const arr = words.map((el) => el.word.toLowerCase());
     IDontKnowWords = arr.filter((el) => !iKnowWords.includes(el));
