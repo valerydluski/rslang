@@ -67,7 +67,7 @@ const ModalContent = (props) => {
             <ModalWordsBlock
               showProperties={showProperties}
               header={I18n.t('ModalWindows.know')}
-              words={IDontKnowWords}
+              words={iKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
               audioForPlay={audioForPlay}
@@ -75,7 +75,7 @@ const ModalContent = (props) => {
             <ModalWordsBlock
               showProperties={showProperties}
               header={I18n.t('ModalWindows.doNotKnow')}
-              words={iKnowWords}
+              words={IDontKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
               audioForPlay={audioForPlay}
