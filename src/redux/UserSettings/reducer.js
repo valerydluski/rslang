@@ -19,6 +19,9 @@ const initialState = {
     isTextExample: true,
     isTranscription: true,
     isImageAssociation: true,
+    isAudioTranslate: true,
+    isAudioTextMeaning: true,
+    isAudioTextExample: true,
   },
 };
 

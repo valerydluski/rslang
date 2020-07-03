@@ -64,6 +64,7 @@ const AppSettings = ({ checkboxes }) => {
         buttonsValue={[
           { value: 'newWords', text: 'only new' },
           { value: 'repeat', text: 'repeat' },
+          { value: 'allWords', text: 'all words' },
         ]}
       />
       <h3>
@@ -72,6 +73,28 @@ const AppSettings = ({ checkboxes }) => {
       {checkboxes.map((el) => {
         return <Field name={el} key={el} id={el} component={Input} type="checkbox" label={el} />;
       })}
+      <h3>Audio settings</h3>
+      <Field
+        name="isAudioTranslate"
+        id="isAudioTranslate"
+        component={Input}
+        type="checkbox"
+        label="play audio translate"
+      />
+      <Field
+        name="isAudioTextMeaning"
+        id="isAudioTextMeaning"
+        component={Input}
+        type="checkbox"
+        label="play audio text meaning"
+      />
+      <Field
+        name="isAudioTextExample"
+        id="isAudioTextExample"
+        component={Input}
+        type="checkbox"
+        label="play audio text example"
+      />
     </>
   );
 };
