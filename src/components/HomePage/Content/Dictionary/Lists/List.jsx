@@ -1,16 +1,19 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Swiper from 'react-id-swiper';
+import PropTypes from 'prop-types';
 import SwiperContainer from './Styled/SwiperContainer';
-import Slide from './Styled/Slide';
+import Card from '../Card/Card';
 import 'swiper/css/swiper.css';
 
-function LearningList() {
+function List({ wordsList }) {
   const params = {
     direction: 'vertical',
-    slidesPerView: 5,
-    slidesPerGroup: 5,
+    slidesPerView: 4,
+    slidesPerGroup: 4,
     spaceBetween: 10,
     mousewheel: true,
+    rebuildOnUpdate: true,
     scrollbar: {
       el: '.swiper-scrollbar',
       hide: false,
@@ -20,39 +23,22 @@ function LearningList() {
   return (
     <SwiperContainer>
       <Swiper {...params}>
-        <div style={{ backgroundColor: 'blue' }}>
-          <Slide>Slide #1</Slide>
-        </div>
-        <div style={{ backgroundColor: 'red' }}>
-          <Slide>Slide #2</Slide>
-        </div>
-        <div style={{ backgroundColor: 'blue' }}>
-          <Slide>Slide #3</Slide>
-        </div>
-        <div style={{ backgroundColor: 'red' }}>
-          <Slide>Slide #4</Slide>
-        </div>
-        <div style={{ backgroundColor: 'blue' }}>
-          <Slide>Slide #5</Slide>
-        </div>
-        <div style={{ backgroundColor: 'blue' }}>
-          <Slide>Slide #1</Slide>
-        </div>
-        <div style={{ backgroundColor: 'red' }}>
-          <Slide>Slide #2</Slide>
-        </div>
-        <div style={{ backgroundColor: 'blue' }}>
-          <Slide>Slide #3</Slide>
-        </div>
-        <div style={{ backgroundColor: 'red' }}>
-          <Slide>Slide #4</Slide>
-        </div>
-        <div style={{ backgroundColor: 'blue' }}>
-          <Slide>Slide #5</Slide>
-        </div>
+        {wordsList.map((item) => (
+          <div key={item.word}>
+            <Card {...item} />
+          </div>
+        ))}
       </Swiper>
     </SwiperContainer>
   );
 }
 
-export default LearningList;
+List.propTypes = {
+  wordsList: PropTypes.instanceOf(Array),
+};
+
+List.defaultProps = {
+  wordsList: [],
+};
+
+export default List;
