@@ -6,7 +6,7 @@ import GoHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePa
 import ReduxLearnWordsForm from '../../containers/LearnWords/LearnWordsForm';
 
 export default function LearnWords(props) {
-  const { onSubmit, word, isCorrect, settings } = props;
+  const { onSubmit, word, isCorrect, settings, isTranslationShow, isRightAnswerShow } = props;
   return (
     <LearnWordsContainer>
       <GoHomePageButton />
@@ -17,6 +17,8 @@ export default function LearnWords(props) {
           isCorrect={isCorrect}
           autocomplete="off"
           settings={settings}
+          isTranslationShow={isTranslationShow}
+          isRightAnswerShow={isRightAnswerShow}
         />
       </LearnWordCardContainer>
     </LearnWordsContainer>
@@ -26,7 +28,9 @@ export default function LearnWords(props) {
 LearnWords.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   word: PropTypes.shape({}),
+  isTranslationShow: PropTypes.bool.isRequired,
   isCorrect: PropTypes.bool.isRequired,
+  isRightAnswerShow: PropTypes.bool.isRequired,
   settings: PropTypes.shape().isRequired,
 };
 

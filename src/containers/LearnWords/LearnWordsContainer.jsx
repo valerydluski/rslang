@@ -29,11 +29,14 @@ function LearnWordCardContainer(props) {
   const { howToLearnWords } = settings;
   const [currentWord, setCurrentWord] = useState();
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [isTranslationShow, setIsTranslationShow] = useState(false);
+  const [isSoundPlay, setIsSoundPlay] = useState(true);
+  const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
   const audio = new Audio();
 
   if (appMode !== 'Savannah') {
     changeAppMode('Savannah');
-    return <LoadingSpinner />;
+    return null;
   }
 
   if (isWordsLoading || isDataLoading || wordsCollection.length < 1) {
@@ -46,32 +49,64 @@ function LearnWordCardContainer(props) {
 
   if (currentWord) {
     showNewCardHandler(currentWord);
-    audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audio}`);
-    audio.load();
   }
 
-  const onSubmit = async (formData) => {
+  const nextWord = () => {
+    setCurrentWord(getWord(wordsCollection));
+    setIsAudioPlaying(false);
+    correctCardHandler(true);
+    setIsTranslationShow(false);
+    setIsRightAnswerShow(false);
+  };
+
+  const onSubmit = (formData) => {
+    console.log('onSubmit -> formData', formData);
+    const { buttonType } = formData;
     const answer = formData.word;
     const { word } = currentWord;
-    if (answer === word) {
-      if (!isAudioPlaying) {
-        audio.play();
-        setIsAudioPlaying(true);
-        audio.onended = () => {
-          audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audioExample}`);
-          audio.play();
-          audio.onended = () => {
-            setCurrentWord(getWord(wordsCollection));
-            setIsAudioPlaying(false);
-            correctCardHandler(true);
-          };
-        };
-      }
+    switch (buttonType) {
+      case 'sound':
+        setIsSoundPlay(!isSoundPlay);
+        break;
+      case 'deleted':
+        setCurrentWord(getWord(wordsCollection));
+        break;
+      case 'difficult':
+        setCurrentWord(getWord(wordsCollection));
+        break;
+      case 'unknown':
+        setIsRightAnswerShow(true);
+        break;
+      default:
+        if (answer === word) {
+          audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audio}`);
+          audio.load();
+          setIsTranslationShow(true);
+          if (!isSoundPlay) {
+            nextWord();
+          }
+          if (!isAudioPlaying && isSoundPlay) {
+            audio.play();
+            setIsAudioPlaying(true);
+            audio.onended = () => {
+              audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audioExample}`);
+              audio.play();
+              audio.onended = nextWord;
+            };
+          }
+        }
     }
   };
 
   return (
-    <LearnWords settings={settings} onSubmit={onSubmit} word={currentWord} isCorrect={isCorrect} />
+    <LearnWords
+      isTranslationShow={isTranslationShow}
+      isRightAnswerShow={isRightAnswerShow}
+      settings={settings}
+      onSubmit={onSubmit}
+      word={currentWord}
+      isCorrect={isCorrect}
+    />
   );
 }
 

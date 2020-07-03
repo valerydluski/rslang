@@ -2,6 +2,7 @@ import { CORRECT_CARD } from '../types';
 
 const initialState = {
   isCorrect: false,
+  isTranslationShow: false,
 };
 
 function isCorrectReducer(state = initialState, action) {
