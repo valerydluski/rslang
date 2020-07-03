@@ -3,26 +3,26 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import List from './List';
 import SwiperContainer from './Styled/SwiperContainer';
+import Loader from '../Loader/Loader';
 
-function LearningList({ words }) {
-  return (
-    <SwiperContainer>
-      <List wordsList={words} />;
-    </SwiperContainer>
-  );
+function LearningList({ words, isLoading }) {
+  return <SwiperContainer>{isLoading ? <Loader /> : <List wordsList={words} />}</SwiperContainer>;
 }
 
 LearningList.propTypes = {
   words: PropTypes.instanceOf(Array),
+  isLoading: PropTypes.bool,
 };
 
 LearningList.defaultProps = {
   words: [],
+  isLoading: false,
 };
 
 const mapStateToProps = (state) => {
   return {
     words: state.dictionary.learningWords,
+    isLoading: state.dictionaryLoaderReducer.loading,
   };
 };
 

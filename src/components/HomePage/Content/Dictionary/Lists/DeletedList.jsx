@@ -3,26 +3,30 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import List from './List';
 import SwiperContainer from './Styled/SwiperContainer';
+import Loader from '../Loader/Loader';
 
-function DeletedList({ words }) {
+function DeletedList({ words, isLoading }) {
   return (
     <SwiperContainer>
-      <List wordsList={words} type="deleted" />;
+      {isLoading ? <Loader /> : <List wordsList={words} type="deleted" />}
     </SwiperContainer>
   );
 }
 
 DeletedList.propTypes = {
   words: PropTypes.instanceOf(Array),
+  isLoading: PropTypes.bool,
 };
 
 DeletedList.defaultProps = {
   words: [],
+  isLoading: false,
 };
 
 const mapStateToProps = (state) => {
   return {
     words: state.dictionary.deletedWords,
+    isLoading: state.dictionaryLoaderReducer.loading,
   };
 };
 

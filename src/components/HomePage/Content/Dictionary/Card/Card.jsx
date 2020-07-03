@@ -36,6 +36,7 @@ function Card(props) {
     switchDifficult(true);
     const wordOptions = { ...item.userWord };
     wordOptions.difficulty = 'difficult';
+    // eslint-disable-next-line no-underscore-dangle
     updateOneWord(item._id, wordOptions, user);
   };
 
@@ -43,6 +44,7 @@ function Card(props) {
     switchDeleted(true);
     const wordOptions = { ...item.userWord };
     wordOptions.difficulty = 'deleted';
+    // eslint-disable-next-line no-underscore-dangle
     updateOneWord(item._id, wordOptions, user);
   };
 
@@ -50,6 +52,7 @@ function Card(props) {
     switchRestored(true);
     const wordOptions = { ...item.userWord };
     wordOptions.difficulty = 'medium';
+    // eslint-disable-next-line no-underscore-dangle
     updateOneWord(item._id, wordOptions, user);
   };
 
