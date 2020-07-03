@@ -5,8 +5,6 @@ import errorSound from '../../assets/audio/error.mp3';
 import shuffleArray from '../../utils/shuffleArray';
 import correctSound from '../../assets/audio/correct.mp3';
 
-const wordsArr = ['man', 'woman', 'rookie', 'chance'];
-const translations = ['мужчина', 'женщина', 'новичок', 'шанс'];
 let catchedEvent;
 let result;
 let mistakes = 0;
@@ -69,4 +67,4 @@ const WordToGuess = (props) => {
   
 
 
-  export {WordToGuess, clickHandler, wordsArr, translations, SavannahComponentTranslation, mistakes, result, playResultSound, catchedEvent}
+  export {WordToGuess, clickHandler, SavannahComponentTranslation, mistakes, result, playResultSound, catchedEvent}

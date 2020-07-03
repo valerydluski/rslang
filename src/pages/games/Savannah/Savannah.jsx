@@ -92,7 +92,7 @@ const Savannah = ({
           keyMistakes += 1;
         }
         playResultSound(keyPressResult);
-        intervalSwitch(currentWordIndex);
+        intervalSwitch();
       }
   })
   }
