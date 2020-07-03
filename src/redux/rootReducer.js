@@ -14,11 +14,13 @@ import changeStatisticReducer from './Statistic/statisticReducer';
 import isCorrectReducer from './LearnWords/reducers/correctReducer';
 import newLearnCardShow from './LearnWords/reducers/newCardShowReducer';
 import saveUserWordsReducer from './Dictionary/reducers/saveUserWordsReducer';
+import aggregatedWordsReducer from './Dictionary/reducers/aggregatedWordsReducer';
 import checkStatusloaderReducer from './Loader/CheckStatusLoader/checkStatusloaderReducer';
 import isStatusCheckedReducer from './Auth/Login/isStatusCheckedReducer';
 import loadDataFromApiReducer from './LoadDataFromApi/reducer';
 import loadDataLoaderReducer from './Loader/LoadDataLoader/loadDataLoaderReducer';
 import loadOldGameWords from './Loader/LoadOldWords/loaderReducer';
+import dictionaryLoaderReducer from './Loader/DictionaryLoader/DictionaryLoaderReducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
@@ -35,9 +37,11 @@ const rootReducer = combineReducers({
   changeStatistic: changeStatisticReducer,
   correctLearnCard: isCorrectReducer,
   newLearnCardShow,
+  dictionary: aggregatedWordsReducer,
   userWords: saveUserWordsReducer,
   checkStatusloaderReducer,
   isStatusCheckedReducer,
+  dictionaryLoaderReducer,
   dataLoad: loadDataFromApiReducer,
   loadDataLoaderReducer,
   loadOldGameWords,
