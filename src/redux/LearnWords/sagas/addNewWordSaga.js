@@ -14,6 +14,8 @@ function* addNewWordSagaWorker(action) {
       difficulty: 'new',
       optional: {
         time: new Date(),
+        deleted: false,
+        difficult: false,
       },
     };
     yield call(saveOneWord, action.payload.id, config, sessionData);

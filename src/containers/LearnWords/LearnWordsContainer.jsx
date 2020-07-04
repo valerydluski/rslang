@@ -8,6 +8,8 @@ import { LINK_FOR_AUDIO } from '../../config';
 import { correctCard, showNewCard } from '../../redux/LearnWords/actions';
 import { checkStatusSession } from '../../redux/Auth/Login/actions';
 import updateOneWord from '../../services/updateOneWord';
+import { changeLearnWordsPage } from '../../redux/ChangeRounds/action';
+import getRandomValuesFromArray from '../../utils/getRandomValuesFromArray';
 
 function getWord(arr) {
   const w = arr.shift();
@@ -18,7 +20,6 @@ function getWord(arr) {
 function LearnWordCardContainer(props) {
   const {
     changeAppMode,
-    wordsCollection,
     appMode,
     isWordsLoading,
     correctCardHandler,
@@ -27,26 +28,57 @@ function LearnWordCardContainer(props) {
     isDataLoading,
     settings,
     user,
+    changeLearnWordsPageHandler,
+    userWords,
   } = props;
   const {
     howToLearnWords,
     isAudioTranslate,
     isAudioTextMeaning,
     isAudioTextExample,
+    cardsPerDay,
+    wordsPerDay,
   } = settings.settings;
+  console.log('LearnWordCardContainer -> settings.settings;', settings.settings);
   const [currentWord, setCurrentWord] = useState();
   const [isTranslationShow, setIsTranslationShow] = useState(false);
   const [isSoundPlay, setIsSoundPlay] = useState(true);
   const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
 
-  if (appMode !== 'Savannah') {
-    changeAppMode('Savannah');
-    return null;
+  if (appMode !== 'LearnWords') {
+    changeAppMode('LearnWords');
+    changeLearnWordsPageHandler({
+      level: 2,
+      page: 3,
+    });
   }
 
-  if (isWordsLoading || isDataLoading || wordsCollection.length < 1) {
+  let wordsCollection;
+
+  if (isWordsLoading || isDataLoading) {
     return <LoadingSpinner />;
   }
+
+  switch (howToLearnWords) {
+    case 'allWords':
+      if (cardsPerDay > wordsPerDay) {
+        wordsCollection = getRandomValuesFromArray(userWords, cardsPerDay);
+      }
+    case 'newWords':
+    case 'repeat':
+      if (userWords.length < cardsPerDay) {
+        wordsCollection = userWords;
+        break;
+      }
+      wordsCollection = getRandomValuesFromArray(userWords, cardsPerDay);
+      console.log('LearnWordCardContainer -> cardsPerDay', cardsPerDay);
+      console.log('LearnWordCardContainer -> userWords', userWords);
+      break;
+    default:
+      break;
+  }
+
+  console.log('LearnWordCardContainer -> wordsCollection', wordsCollection);
 
   if (!currentWord) {
     setCurrentWord(getWord(wordsCollection));
@@ -96,8 +128,9 @@ function LearnWordCardContainer(props) {
         break;
       case 'difficult':
         config = {
-          difficulty: 'bad',
+          difficulty: 'difficult',
           optional: {
+            difficult: true,
             time: new Date(),
           },
         };
@@ -142,7 +175,6 @@ function LearnWordCardContainer(props) {
 
 LearnWordCardContainer.propTypes = {
   changeAppMode: PropTypes.func.isRequired,
-  wordsCollection: PropTypes.instanceOf(Array).isRequired,
   appMode: PropTypes.string.isRequired,
   isWordsLoading: PropTypes.bool,
   isDataLoading: PropTypes.bool,
@@ -157,9 +189,13 @@ LearnWordCardContainer.propTypes = {
       isAudioTranslate: PropTypes.bool,
       isAudioTextMeaning: PropTypes.bool,
       isAudioTextExample: PropTypes.bool,
+      cardsPerDay: PropTypes.number.isRequired,
+      wordsPerDay: PropTypes.number.isRequired,
     }),
   }),
   user: PropTypes.shape().isRequired,
+  changeLearnWordsPageHandler: PropTypes.func.isRequired,
+  userWords: PropTypes.instanceOf(Array).isRequired,
 };
 
 LearnWordCardContainer.defaultProps = {
@@ -177,6 +213,7 @@ LearnWordCardContainer.defaultProps = {
     }),
   }),
 };
+
 const mapStateToProps = (state) => {
   return {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
@@ -185,6 +222,7 @@ const mapStateToProps = (state) => {
     isDataLoading: state.loadDataLoaderReducer.loading,
     isCorrect: state.correctLearnCard.isCorrect,
     isCheckStatusLoading: state.checkStatusloaderReducer.loading,
+    userWords: state.userWords.words,
     settings: state.userSettings,
     user: state.login,
   };
@@ -195,6 +233,7 @@ const mapDispatchToProps = {
   correctCardHandler: correctCard,
   showNewCardHandler: showNewCard,
   checkStatusSessionHandler: checkStatusSession,
+  changeLearnWordsPageHandler: changeLearnWordsPage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearnWordCardContainer);
