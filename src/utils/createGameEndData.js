@@ -1,4 +1,12 @@
-const createGameEndData = (level, page, collection, Statistic, wrongWords, gameName) => {
+const createGameEndData = (
+  level,
+  page,
+  collection,
+  Statistic,
+  wrongWords,
+  gameName,
+  wordsPerPage
+) => {
   const lastRound = `${level}_${page}`;
   const newStatistic = Statistic;
   const date = new Date();
@@ -8,14 +16,21 @@ const createGameEndData = (level, page, collection, Statistic, wrongWords, gameN
     hour: '2-digit',
     minute: '2-digit',
   });
-  let wrongWordsIndex = '';
-  collection.forEach((el, index) => {
-    if (!wrongWords.includes(el.word.toLowerCase())) wrongWordsIndex += `${index},`;
-  });
-  const gameStatistic = `${formater.format(date)}-${lastRound}-${wrongWordsIndex
+  let correctWordsIndex = '';
+  if (wrongWords) {
+    const wrongWordsLowerCase = wrongWords.map((el) => el.toLowerCase());
+    collection.forEach((el, index) => {
+      if (!wrongWordsLowerCase.includes(el.word.toLowerCase())) correctWordsIndex += `${index},`;
+    });
+  } else {
+    collection.forEach((el, index) => {
+      correctWordsIndex += `${index},`;
+    });
+  }
+  const gameStatistic = `${formater.format(date)}-${lastRound}-${correctWordsIndex
     .replace(/^[,\s]+|[,\s]+$/g, '')
-    .replace(/,[,\s]*,/g, ',')}`;
-  const roundsStatistic = Statistic[`${gameName}PassedRound`];
+    .replace(/,[,\s]*,/g, ',')}-${wordsPerPage}`;
+  const roundsStatistic = newStatistic[`${gameName}PassedRound`];
   let newRoundStatistics;
   if (roundsStatistic === '0') newRoundStatistics = [];
   else newRoundStatistics = roundsStatistic.split(';');

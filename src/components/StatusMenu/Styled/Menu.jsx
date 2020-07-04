@@ -5,6 +5,12 @@ const Menu = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 26px;
+
+  &.status-menu_speakIT {
+    margin-top: 55px;
+    justify-self: center;
+    width: 400px;
+  }
 `;
 
 export default Menu;

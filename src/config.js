@@ -14,6 +14,7 @@ export const API = {
     WORDS: 'words',
     SETTINGS: 'settings',
     STATISTICS: 'statistics',
+    DICTIONARY: 'aggregatedWords',
   },
 
   QUERIES: {
@@ -23,6 +24,7 @@ export const API = {
       WORDS_PER_SENTENCE: 'wordsPerExampleSentenceLTE',
       WORDS_PER_PAGE: 'wordsPerPage',
       COUNT: 'count',
+      FILTER: 'filter',
     },
   },
 };
@@ -71,7 +73,7 @@ export const GAME_LIST = [
   },
   {
     title: 'Games.makeSentence',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    description: 'Games.makeSentenceDescription',
     poster: makeSentencePoster,
     onClick: getRedirectFunction('/StartGame/MakeSentence/'),
   },
@@ -86,11 +88,11 @@ export const GAME_MAX_PAGE = 60;
 export const GAME_MAX_LEVEL = 6;
 
 export const CHECKBOXES = [
-  'textExample',
-  'textMeaning',
-  'transcription',
-  'translate',
-  'imageAssociation',
+  'isTranslate',
+  'isTextMeaning',
+  'isTextExample',
+  'isTranscription',
+  'isImageAssociation',
 ];
 
 export const GAME_NAME = {
@@ -122,4 +124,21 @@ export const DEVICE = {
   laptopL: `(max-width: ${size.laptopL})`,
   desktop: `(max-width: ${size.desktop})`,
   desktopL: `(max-width: ${size.desktop})`,
+};
+
+export const INITIAL_STATISTIC = {
+  SpeakITLastRound: '0',
+  EnglishPuzzleLastRound: '0',
+  SavannahLastRound: '0',
+  AudioCallLastRound: '0',
+  SprintLastRound: '0',
+  OwnGameLastRound: '0',
+  SpeakITPassedRound: '0',
+  EnglishPuzzlePassedRound: '0',
+  SavannahPassedRound: '0',
+  AudioCallPassedRound: '0',
+  SprintPassedRound: '0',
+  OwnGamePassedRound: '0',
+  LearnLastWords: '0',
+  LearnLastLevel: '0',
 };

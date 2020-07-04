@@ -8,7 +8,7 @@ import {
   AUDIOCALL_CHANGE_LEVEL,
   MAKESENTENCE_CHANGE_LEVEL,
 } from '../../ChangeRounds/types';
-import CHANGE_APP_MODE from '../../AppMode/types';
+import { CHANGE_APP_MODE } from '../../AppMode/types';
 import maxPage from '../../../services/defineMaxPagePerLevel';
 import fetchMaxPage from '../action';
 
@@ -16,7 +16,7 @@ function* workerDefineMaxPagePerLevel() {
   try {
     const state = yield select();
     const payload = yield call(maxPage, state);
-    yield put(fetchMaxPage(payload));
+    yield put(fetchMaxPage(payload.count));
   } catch (e) {
     toast.error('error define max page');
   }

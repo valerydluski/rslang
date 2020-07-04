@@ -14,7 +14,7 @@ const ModalWord = (props) => {
       <ModalWordTextStyled amount={propertiesForShowing.length}>
         {audioForPlay ? <ModalAudioIconStyled /> : null}
         {propertiesForShowing.map((textPart) => (
-          <div key={textPart}>{textPart}</div>
+          <div key={textPart}>{textPart.replace('<b>', '').replace('</b>', '')}</div>
         ))}
       </ModalWordTextStyled>
     </ModalWordStyled>

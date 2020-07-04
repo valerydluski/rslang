@@ -6,12 +6,36 @@ import ModalContentStyled from './Styled/ModalContentStyled';
 import ModalWordsBlock from '../../components/Modal/ModalWordsBlock';
 
 const ModalContent = (props) => {
-  const { wordsCollection, showProperties, wordHandler, correctWords, audioForPlay } = props;
-  let { IDontKnowWords } = props;
-  IDontKnowWords = IDontKnowWords.map((el) => el.toLowerCase());
-  const words = correctWords || wordsCollection;
-  const arr = words.map((el) => el.word.toLowerCase());
-  const iKnowWords = arr.filter((el) => !IDontKnowWords.includes(el));
+  const {
+    showProperties,
+    wordHandler,
+    correctWords,
+    audioForPlay,
+    isOldResult,
+    correctOldIndexes,
+    oldWords,
+  } = props;
+  let IDontKnowWords;
+  let wordsCollection;
+  let words;
+  let iKnowWords = [];
+
+  if (!isOldResult) {
+    IDontKnowWords = props.IDontKnowWords;
+    wordsCollection = props.wordsCollection;
+    IDontKnowWords = IDontKnowWords.map((el) => el.toLowerCase());
+    words = correctWords || wordsCollection;
+    const arr = words.map((el) => el.word.toLowerCase());
+    iKnowWords = arr.filter((el) => !IDontKnowWords.includes(el));
+  } else {
+    wordsCollection = oldWords;
+    if (correctOldIndexes[0]) {
+      iKnowWords = correctOldIndexes.map((el) => wordsCollection[`${el}`].word.toLowerCase());
+    }
+    words = correctWords || wordsCollection;
+    const arr = words.map((el) => el.word.toLowerCase());
+    IDontKnowWords = arr.filter((el) => !iKnowWords.includes(el));
+  }
 
   const fn = () => {
     switch (iKnowWords.length) {
@@ -43,7 +67,7 @@ const ModalContent = (props) => {
             <ModalWordsBlock
               showProperties={showProperties}
               header={I18n.t('ModalWindows.know')}
-              words={IDontKnowWords}
+              words={iKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
               audioForPlay={audioForPlay}
@@ -51,7 +75,7 @@ const ModalContent = (props) => {
             <ModalWordsBlock
               showProperties={showProperties}
               header={I18n.t('ModalWindows.doNotKnow')}
-              words={iKnowWords}
+              words={IDontKnowWords}
               wordsCollection={wordsCollection}
               wordHandler={wordHandler}
               audioForPlay={audioForPlay}
@@ -71,6 +95,9 @@ ModalContent.propTypes = {
   wordHandler: PropTypes.func,
   correctWords: PropTypes.instanceOf(Array),
   audioForPlay: PropTypes.string,
+  isOldResult: PropTypes.bool,
+  correctOldIndexes: PropTypes.instanceOf(Array),
+  oldWords: PropTypes.instanceOf(Array),
 };
 
 ModalContent.defaultProps = {
@@ -79,12 +106,17 @@ ModalContent.defaultProps = {
   wordHandler: () => {},
   correctWords: null,
   audioForPlay: null,
+  isOldResult: false,
+  correctOldIndexes: [],
+  oldWords: [],
 };
 
 const mapStateToProps = (state) => {
   return {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
+    oldWords: state.getWordsFromAPI.oldWords,
     IDontKnowWords: state.gamesReducer.IDontKnowWords,
+    correctOldIndexes: state.getWordsFromAPI.correctIndexes,
   };
 };
 

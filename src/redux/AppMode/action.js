@@ -1,10 +1,15 @@
-import CHANGE_APP_MODE from './types';
+import { CHANGE_APP_MODE, CHANGE_APP_MODE_LEARN } from './types';
 
-function changeAppMode(mode) {
+export function changeAppMode(mode) {
   return {
     type: CHANGE_APP_MODE,
     payload: mode,
   };
 }
 
-export default changeAppMode;
+export function changeAppModeLearn(mode) {
+  return {
+    type: CHANGE_APP_MODE_LEARN,
+    payload: mode,
+  };
+}
