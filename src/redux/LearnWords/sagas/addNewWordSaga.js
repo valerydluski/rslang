@@ -4,11 +4,19 @@ import saveOneWord from '../../../services/saveOneWord';
 import findObjInArray from '../../../utils/findObjInArray';
 
 function* addNewWordSagaWorker(action) {
-  const getUserWords = (state) => state.userWords;
+  const getUserWords = (state) => state.userWords.words;
   const userWords = yield select(getUserWords);
   const getLoginState = (state) => state.login;
   const sessionData = yield select(getLoginState);
-  const isKnownWord = yield call(findObjInArray, userWords, 'wordId', action.payload.id);
+  // eslint-disable-next-line no-underscore-dangle
+  const wordId = action.payload.id || action.payload._id;
+  const isKnownWord = yield call(
+    findObjInArray,
+    userWords[0].paginatedResults,
+    '_id',
+    // eslint-disable-next-line no-underscore-dangle
+    wordId
+  );
   if (!isKnownWord) {
     const config = {
       difficulty: 'new',
@@ -18,7 +26,7 @@ function* addNewWordSagaWorker(action) {
         difficult: false,
       },
     };
-    yield call(saveOneWord, action.payload.id, config, sessionData);
+    yield call(saveOneWord, wordId, config, sessionData);
   }
 }
 

@@ -27,7 +27,6 @@ LearnWordsStart.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    isCheckStatusLoading: state.checkStatusloaderReducer.loading,
     isStatusChecked: state.isStatusCheckedReducer.isAlreadyCheckStatusSession,
   };
 };

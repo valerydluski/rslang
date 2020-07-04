@@ -1,4 +1,4 @@
-import { takeEvery, call, put, select, delay } from 'redux-saga/effects';
+import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { LOAD_DATA_FROM_API } from '../types';
 import { isDataLoadFromApi } from '../actions';
 import { saveFullStatisticToStore } from '../../Statistic/action';
