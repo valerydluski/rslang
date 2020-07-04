@@ -13,12 +13,15 @@ const RecognationTranscriptContainerStyled = styled.div`
   margin: 10px 0;
   height: 54px;
   width: 100%;
+
+  .& text-field_speakIT {
+  }
 `;
 
 const RecognationTranscriptContainer = (props) => {
-  const { transcript } = props;
+  const { transcript, className } = props;
   return (
-    <RecognationTranscriptContainerStyled>
+    <RecognationTranscriptContainerStyled className={className}>
       <MicrophoneIcon />
       <TextField text={transcript} />
     </RecognationTranscriptContainerStyled>
@@ -27,10 +30,12 @@ const RecognationTranscriptContainer = (props) => {
 
 RecognationTranscriptContainer.propTypes = {
   transcript: PropTypes.string,
+  className: PropTypes.string,
 };
 
 RecognationTranscriptContainer.defaultProps = {
-  transcript: '',
+  transcript: ' ',
+  className: '',
 };
 
 export default RecognationTranscriptContainer;
