@@ -69,6 +69,18 @@
     margin-top: 10%;
   }
 
+  .green {
+    background-color: green;
+  }
+
+  .red {
+    background-color: red;
+  }
+
+  .white {
+    background-color: white;
+  }
+
   @keyframes mymove {
     from {top: 0;}
     to {top: 50%;}

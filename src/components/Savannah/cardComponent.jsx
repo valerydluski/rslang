@@ -22,10 +22,8 @@ const check = (key, func) => {
     document.getElementById('title').dataset.indexMatch
   ) {
     result = true;
-    document.getElementsByClassName('translation')[key - 1].style.backgroundColor = 'green';
   } else {
     result = false;
-    document.getElementsByClassName('translation')[key - 1].style.backgroundColor = 'red';
   }
   playResultSound(result);
 };
@@ -46,25 +44,28 @@ const clickHandler = (event) => {
   if (
     event.target.dataset.indexTranslate === document.getElementById('title').dataset.indexTranslate
   ) {
-    event.target.style.backgroundColor = 'green';
     result = true;
     playResultSound(result);
   } else {
-    event.target.style.backgroundColor = 'red';
     result = false;
   }
   playResultSound(result);
 };
 
 const SavannahComponentTranslation = (props) => {
-  const { wordsForRender } = props;
+  const { wordsForRender, color } = props;
 
-  const wordsCards = shuffleArray(wordsForRender).map((word, index) => {
+  const addClass = (word) => {
+    if (color === word) return 'green';
+    return 'white';
+  };
+
+  const wordsCards = wordsForRender.map((word, index) => {
     return (
       <div key={word.id}>
         <p
           onClick={clickHandler}
-          className="translation game_words"
+          className={`translation game_words ${addClass(word.wordTranslate)}`}
           data-index-order={index}
           data-index-translate={word.id}
         >

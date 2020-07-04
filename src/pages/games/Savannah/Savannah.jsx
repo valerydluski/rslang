@@ -12,7 +12,7 @@ import {
 } from '../../../components/Savannah/cardComponent';
 import WordToGuess from '../../../components/Savannah/titleCardComponent';
 import ResultModal from '../../../containers/Modal/ResultModal';
-import changeAppMode from '../../../redux/AppMode/action';
+import { changeAppMode } from '../../../redux/AppMode/action';
 import { changeIDontKnowWords } from '../../../redux/Games/action';
 import { changeSavannahLevel, changeSavannahPage } from '../../../redux/ChangeRounds/action';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
@@ -37,8 +37,10 @@ const Savannah = ({
   const [gameStarted, setGameChange] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
   const [isGameStarted, changeGameMode] = useState(false);
+  const [isCurrentGameStarted, setGameStart] = useState(false);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [mistakesMade, setMistakesMade] = useState(0);
+  const [translate, setTranslate] = useState('');
   const [livesLeft, setLivesLeft] = useState([0, 1, 2, 3, 4]);
 
   if (isWordsLoading) {
@@ -61,23 +63,26 @@ const Savannah = ({
   const switchToNextWord = () => {
     answerShuffle(currentWordIndex + 1);
     changeIndex(currentWordIndex + 1);
-    addWordToWrong([...wrongAnsweredWords, shuffledCollection[currentWordIndex].word]);
+    addWordsWithMistakesToStore(wrongAnsweredWords);
     if (currentWordIndex > 10) {
       changeIndex(0);
     }
     if (result === false) {
-      addWordsWithMistakesToStore(wrongAnsweredWords);
+      addWordToWrong([...wrongAnsweredWords, shuffledCollection[currentWordIndex].word]);
       setLivesLeft(livesLeft.splice(1));
       setMistakesMade(mistakesMade + 1);
     }
+    setTranslate('');
   };
 
   const intervalSwitch = () => {
+    setTranslate(shuffledCollection[currentWordIndex].wordTranslate);
     setTimeout(switchToNextWord, 1000);
   };
 
   const startGame = () => {
     changeIndex(0);
+    setTranslate('');
     setGameChange(true);
     changeGameMode(true);
     shuffledCollection = shuffleArray(wordsCollection);
@@ -97,7 +102,7 @@ const Savannah = ({
           <div onClick={intervalSwitch}>
             <SavannahComponentTranslation
               wordsForRender={shuffledCollectionCopy}
-              func={intervalSwitch}
+              color={translate}
             />
             {mistakesMade > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
           </div>
