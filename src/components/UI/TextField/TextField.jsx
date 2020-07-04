@@ -15,9 +15,8 @@ const TextContainer = styled.div`
   display: flex;
 
   &.text-field_speakIT {
-    margin-top: 10px;
-    justify-self: center;
-    min-height: 54px;
+    margin: 10px 0;
+    height: 54px;
   }
 `;
 

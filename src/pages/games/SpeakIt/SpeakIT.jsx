@@ -209,11 +209,16 @@ const SpeakIT = (props) => {
         className="text-field_speakIT"
       />
       <ScoreContainerSpeakIT />
-      <CardsContainerSpeakIT wordsCollection={wordsCollection} wrongWords={wrongWordsState} />
+      <CardsContainerSpeakIT
+        wordsCollection={wordsCollection}
+        wrongWords={wrongWordsState}
+        hiddenIcon={isListening}
+      />
       <ButtonsContainerSpeakIT
         restartHandler={restartHandler}
         speakHandler={speakHandler}
         finishHandler={finishHandler}
+        speakActive={isListening}
       />
     </SpeakITContainerStyled>
   );

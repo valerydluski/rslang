@@ -33,7 +33,7 @@ const WordAndTranscriptionContainer = styled.div`
 `;
 
 const WordCardSpeakIT = (props) => {
-  const { obj, wordCardHandler, id, className } = props;
+  const { obj, wordCardHandler, id, className, hiddenIcon } = props;
   const { word, transcription, image, audio, wordTranslate } = obj;
 
   const dataForHandler = {
@@ -54,7 +54,7 @@ const WordCardSpeakIT = (props) => {
       id={id}
       className={className}
     >
-      <AudioIcon />
+      <AudioIcon hiddenIcon={hiddenIcon} />
       <WordAndTranscriptionContainer>
         <Word key={word.toLowerCase()} word={word.toLowerCase()} />
         <Transcription key={`transcription${word}`} transcription={transcription} />
@@ -81,6 +81,7 @@ WordCardSpeakIT.propTypes = {
   wordCardHandler: PropTypes.func,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
+  hiddenIcon: PropTypes.bool,
 };
 
 WordCardSpeakIT.defaultProps = {
@@ -88,6 +89,7 @@ WordCardSpeakIT.defaultProps = {
   wordCardHandler: () => {},
   id: '',
   className: '',
+  hiddenIcon: false,
 };
 
 export default WordCardSpeakIT;
