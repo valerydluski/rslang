@@ -9,7 +9,7 @@ const Menu = styled.div`
   &.status-menu_speakIT {
     margin-top: 55px;
     justify-self: center;
-    width: 500px;
+    width: 400px;
   }
 `;
 

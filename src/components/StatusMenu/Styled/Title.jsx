@@ -4,7 +4,7 @@ const title = styled.span`
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
-  font-size: 23.25px;
+  font-size: 18px;
   line-height: 28px;
 `;
 
