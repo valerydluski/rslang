@@ -29,7 +29,6 @@ function* workerLoadData() {
   yield put(getUserWords());
 
   yield put(isDataLoadFromApi(true));
-  yield delay(500);
   yield put(loadDataLoaderHide());
 }
 

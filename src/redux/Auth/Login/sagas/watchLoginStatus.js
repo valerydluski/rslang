@@ -1,4 +1,4 @@
-import { takeLatest, select, put, call } from 'redux-saga/effects';
+import { takeLatest, select, put, call, delay } from 'redux-saga/effects';
 import { CHECK_SESSION_STATUS } from '../types';
 import { resetSessionData, isAlreadyCheckStatusSession } from '../actions';
 import checkToken from '../../../../services/checkToken';

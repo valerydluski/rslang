@@ -13,7 +13,7 @@ function* addNewWordSagaWorker(action) {
     const config = {
       difficulty: 'new',
       optional: {
-        time: new Date(),
+        time: new Date().valueOf(),
         deleted: false,
         difficult: false,
       },
