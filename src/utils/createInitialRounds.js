@@ -20,8 +20,8 @@ const createInitialRounds = (Statistic) => {
     if (el === GAME_NAME.learnWords) return;
     const lastRound = Statistic[`${el}LastRound`];
     if (lastRound === '0') return;
-    const level = lastRound.split('_')[0];
-    const page = lastRound.split('_')[1];
+    const level = lastRound.split('_')[2];
+    const page = lastRound.split('_')[3];
     initialRound[`${el}Level`] = level;
     initialRound[`${el}Page`] = page;
   });

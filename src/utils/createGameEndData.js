@@ -11,7 +11,7 @@ const createGameEndData = (
   maxPage
 ) => {
   const { newLevel, newPage } = newRound(level, page, maxPage);
-  const lastRound = `${newLevel}_${newPage}`;
+  const lastRound = `${level}_${page}_${newLevel}_${newPage}`;
   const newStatistic = Statistic;
   const date = new Date();
   const formater = new Intl.DateTimeFormat('ru', {
