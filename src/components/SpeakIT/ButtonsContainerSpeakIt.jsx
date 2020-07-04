@@ -10,14 +10,19 @@ const ButtonsContainerSpeakITStyled = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 15px;
+  margin-bottom: 30px;
 `;
 
 const ButtonsContainerSpeakIT = (props) => {
-  const { restartHandler, speakHandler, finishHandler } = props;
+  const { restartHandler, speakHandler, finishHandler, speakActive } = props;
   return (
     <ButtonsContainerSpeakITStyled>
       <Button text={I18n.t('Buttons.restart')} buttonHandler={restartHandler} />
-      <Button text={I18n.t('Buttons.speak')} className="big-button" buttonHandler={speakHandler} />
+      <Button
+        text={I18n.t('Buttons.speak')}
+        className={speakActive ? 'big-button active' : 'big-button'}
+        buttonHandler={speakHandler}
+      />
       <Button text={I18n.t('Buttons.finish')} buttonHandler={finishHandler} />
     </ButtonsContainerSpeakITStyled>
   );
@@ -27,12 +32,14 @@ ButtonsContainerSpeakIT.propTypes = {
   restartHandler: PropTypes.func,
   speakHandler: PropTypes.func,
   finishHandler: PropTypes.func,
+  speakActive: PropTypes.bool,
 };
 
 ButtonsContainerSpeakIT.defaultProps = {
   restartHandler: () => {},
   speakHandler: () => {},
   finishHandler: () => {},
+  speakActive: false,
 };
 
 export default ButtonsContainerSpeakIT;

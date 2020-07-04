@@ -9,7 +9,7 @@ import { DontKnowButton, NextButton } from '../../../components/Audiocall/Audioc
 import { changeIDontKnowWords } from '../../../redux/Games/action';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import shuffleArray from '../../../utils/shuffleArray';
-import changeAppMode from '../../../redux/AppMode/action';
+import { changeAppMode } from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';

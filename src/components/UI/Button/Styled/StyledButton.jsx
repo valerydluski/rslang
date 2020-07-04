@@ -32,6 +32,10 @@ const ButtonStyled = styled.button`
   &.big-button {
     width: 405px;
   }
+
+  &.active {
+    background-color: #f56748;
+  }
 `;
 
 export default ButtonStyled;

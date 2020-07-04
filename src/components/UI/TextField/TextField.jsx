@@ -13,15 +13,17 @@ const TextStyled = styled.p`
 
 const TextContainer = styled.div`
   display: flex;
-  justify-content: center;
-  height: 54px;
-  margin: 10px 0;
+
+  &.text-field_speakIT {
+    margin: 10px 0;
+    height: 54px;
+  }
 `;
 
 const TextField = (props) => {
-  const { text } = props;
+  const { text, className } = props;
   return (
-    <TextContainer>
+    <TextContainer className={className}>
       <TextStyled>{text}</TextStyled>
     </TextContainer>
   );
@@ -29,6 +31,11 @@ const TextField = (props) => {
 
 TextField.propTypes = {
   text: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};
+
+TextField.defaultProps = {
+  className: '',
 };
 
 export default TextField;

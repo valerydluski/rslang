@@ -26,14 +26,12 @@ const StyledDictionaryNavigationMenu = styled.div`
       transition: 0.3s linear;
 
       &:hover {
-        text-decoration: underline;
         color: #000;
       }
     }
 
     .active_link {
       color: #000;
-      text-decoration: underline;
     }
   }
 `;

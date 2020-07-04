@@ -15,7 +15,7 @@ import {
   MAKESENTENCE_CHANGE_LEVEL,
   MAKESENTENCE_CHANGE_PAGE,
 } from '../../ChangeRounds/types';
-import CHANGE_APP_MODE from '../../AppMode/types';
+import { CHANGE_APP_MODE } from '../../AppMode/types';
 import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';
