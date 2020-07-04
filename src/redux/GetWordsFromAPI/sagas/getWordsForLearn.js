@@ -1,21 +1,7 @@
 import { takeLatest, put, call, select, delay } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { fetchWords } from '../action';
-import {
-  SPEAKIT_CHANGE_LEVEL,
-  SPEAKIT_CHANGE_PAGE,
-  SPRINT_CHANGE_PAGE,
-  SPRINT_CHANGE_LEVEL,
-  SAVANNAH_CHANGE_PAGE,
-  SAVANNAH_CHANGE_LEVEL,
-  ENGLISHPUZZLE_CHANGE_LEVEL,
-  ENGLISHPUZZLE_CHANGE_PAGE,
-  AUDIOCALL_CHANGE_LEVEL,
-  AUDIOCALL_CHANGE_PAGE,
-  MAKESENTENCE_CHANGE_LEVEL,
-  MAKESENTENCE_CHANGE_PAGE,
-} from '../../ChangeRounds/types';
-import CHANGE_APP_MODE from '../../AppMode/types';
+import { LEARN_WORDS_CHANGE_PAGE, LEARN_WORDS_CHANGE_LEVEL } from '../../ChangeRounds/types';
 import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';
@@ -43,22 +29,5 @@ function* workerGetWords() {
 }
 
 export default function* watchGetWords() {
-  yield takeLatest(
-    [
-      SPEAKIT_CHANGE_LEVEL,
-      SPEAKIT_CHANGE_PAGE,
-      SPRINT_CHANGE_PAGE,
-      SPRINT_CHANGE_LEVEL,
-      SAVANNAH_CHANGE_PAGE,
-      SAVANNAH_CHANGE_LEVEL,
-      ENGLISHPUZZLE_CHANGE_LEVEL,
-      ENGLISHPUZZLE_CHANGE_PAGE,
-      AUDIOCALL_CHANGE_LEVEL,
-      AUDIOCALL_CHANGE_PAGE,
-      MAKESENTENCE_CHANGE_LEVEL,
-      MAKESENTENCE_CHANGE_PAGE,
-      CHANGE_APP_MODE,
-    ],
-    workerGetWords
-  );
+  yield takeLatest([LEARN_WORDS_CHANGE_PAGE, LEARN_WORDS_CHANGE_LEVEL], workerGetWords);
 }
