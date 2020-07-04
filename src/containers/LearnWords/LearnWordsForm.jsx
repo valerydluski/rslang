@@ -17,6 +17,7 @@ const LearnWordsForm = (props) => {
     onSubmit,
     isRightAnswerShow,
   } = props;
+  console.log('LearnWordsForm -> props', props);
 
   const {
     isTranslate,
@@ -43,28 +44,12 @@ const LearnWordsForm = (props) => {
     }
   });
 
-  const deleteHandleSubmit = () => {
-    onSubmit({
-      buttonType: 'deleted',
-    });
-  };
-
-  const difficultHandleSubmit = () => {
-    onSubmit({
-      buttonType: 'difficult',
-    });
-  };
-
-  const soundHandleSubmit = () => {
-    onSubmit({
-      buttonType: 'sound',
-    });
-  };
-
-  const unknowHandleSubmit = () => {
-    onSubmit({
-      buttonType: 'unknown',
-    });
+  const customHandleSubmit = (type) => {
+    return () => {
+      onSubmit({
+        buttonType: type,
+      });
+    };
   };
 
   const textMeaningFormatted = textMeaning.replace(/<i>|<\/i>/g, ``);
@@ -72,7 +57,7 @@ const LearnWordsForm = (props) => {
 
   return (
     <>
-      <StyledRoundButton onClick={soundHandleSubmit}>Sound</StyledRoundButton>
+      <StyledRoundButton onClick={customHandleSubmit('sound')}>Sound</StyledRoundButton>
       <form
         onSubmit={handleSubmit((values) =>
           onSubmit({
@@ -109,11 +94,13 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && <p>{wordTranslate}</p>}
         {isTranslationShow && isTranscription && <p>{transcription}</p>}
       </form>
-      {deleteButton && <StyledRoundButton onClick={deleteHandleSubmit}>Delete</StyledRoundButton>}
-      {addDificultWordsButton && (
-        <StyledRoundButton onClick={difficultHandleSubmit}>Difficult</StyledRoundButton>
+      {deleteButton && (
+        <StyledRoundButton onClick={customHandleSubmit('deleted')}>Delete</StyledRoundButton>
       )}
-      <StyledRoundButton onClick={unknowHandleSubmit}>Unknow</StyledRoundButton>
+      {addDificultWordsButton && (
+        <StyledRoundButton onClick={customHandleSubmit('difficult')}>Difficult</StyledRoundButton>
+      )}
+      <StyledRoundButton onClick={customHandleSubmit('unknown')}>Unknow</StyledRoundButton>
     </>
   );
 };

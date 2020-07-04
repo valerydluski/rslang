@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import LearnWords from '../../components/LearnWords/LearnWords';
 import changeAppModeAction from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import { LINK_FOR_IMAGE } from '../../config';
+import { LINK_FOR_AUDIO } from '../../config';
 import { correctCard, showNewCard } from '../../redux/LearnWords/actions';
 import { checkStatusSession } from '../../redux/Auth/Login/actions';
 import updateOneWord from '../../services/updateOneWord';
@@ -28,13 +28,16 @@ function LearnWordCardContainer(props) {
     settings,
     user,
   } = props;
-  const { howToLearnWords } = settings;
+  const {
+    howToLearnWords,
+    isAudioTranslate,
+    isAudioTextMeaning,
+    isAudioTextExample,
+  } = settings.settings;
   const [currentWord, setCurrentWord] = useState();
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isTranslationShow, setIsTranslationShow] = useState(false);
   const [isSoundPlay, setIsSoundPlay] = useState(true);
   const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
-  const audio = new Audio();
 
   if (appMode !== 'Savannah') {
     changeAppMode('Savannah');
@@ -49,21 +52,28 @@ function LearnWordCardContainer(props) {
     setCurrentWord(getWord(wordsCollection));
   }
 
+  let isAudiosPlay;
+  let audiosLinks;
+  let audios;
+
   if (currentWord) {
     showNewCardHandler(currentWord);
-    console.log('LearnWordCardContainer -> currentWord', currentWord);
+    const { audio, audioExample, audioMeaning } = currentWord;
+    isAudiosPlay = [isAudioTranslate, isAudioTextMeaning, isAudioTextExample];
+    audiosLinks = [audio, audioExample, audioMeaning];
+    audios = isAudiosPlay
+      .filter((bool) => bool === true)
+      .map((bool, i) => new Audio(`${LINK_FOR_AUDIO}${audiosLinks[i]}`));
   }
 
   const nextWord = () => {
     setCurrentWord(getWord(wordsCollection));
-    setIsAudioPlaying(false);
     correctCardHandler(true);
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
   };
 
-  const onSubmit = (formData) => {
-    console.log('onSubmit -> formData', formData);
+  const onSubmit = async (formData) => {
     const { buttonType } = formData;
     const answer = formData.word;
     const { word } = currentWord;
@@ -81,7 +91,6 @@ function LearnWordCardContainer(props) {
           },
         };
         updateOneWord(currentWord.id, config, user);
-        console.log('onSubmit -> user', user);
         setCurrentWord(getWord(wordsCollection));
         break;
       case 'difficult':
@@ -99,20 +108,20 @@ function LearnWordCardContainer(props) {
         break;
       default:
         if (answer === word) {
-          audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audio}`);
-          audio.load();
           setIsTranslationShow(true);
-          if (!isSoundPlay) {
+          if (!isSoundPlay || !audios[0]) {
             nextWord();
-          }
-          if (!isAudioPlaying && isSoundPlay) {
-            audio.play();
-            setIsAudioPlaying(true);
-            audio.onended = () => {
-              audio.setAttribute('src', `${LINK_FOR_IMAGE}${currentWord.audioExample}`);
-              audio.play();
-              audio.onended = nextWord;
-            };
+          } else {
+            audios[0].play();
+            for (let i = 0; i < audios.length; i += 1) {
+              if (audios[i + 1]) {
+                audios[i].onended = () => {
+                  audios[i + 1].play();
+                };
+              } else {
+                audios[i].onended = nextWord;
+              }
+            }
           }
         }
     }
@@ -140,9 +149,14 @@ LearnWordCardContainer.propTypes = {
   showNewCardHandler: PropTypes.func.isRequired,
   isCorrect: PropTypes.bool,
   settings: PropTypes.shape({
-    deleteButton: PropTypes.bool,
-    addDificultWordsButton: PropTypes.bool,
-    howToLearnWords: PropTypes.string,
+    settings: PropTypes.shape({
+      deleteButton: PropTypes.bool,
+      addDificultWordsButton: PropTypes.bool,
+      howToLearnWords: PropTypes.string,
+      isAudioTranslate: PropTypes.bool,
+      isAudioTextMeaning: PropTypes.bool,
+      isAudioTextExample: PropTypes.bool,
+    }),
   }),
   user: PropTypes.shape().isRequired,
 };
@@ -152,9 +166,14 @@ LearnWordCardContainer.defaultProps = {
   isDataLoading: false,
   isCorrect: false,
   settings: PropTypes.shape({
-    deleteButton: true,
-    addDificultWordsButton: true,
-    howToLearnWords: 'allWords',
+    settings: PropTypes.shape({
+      deleteButton: true,
+      addDificultWordsButton: true,
+      isAudioTranslate: true,
+      isAudioTextMeaning: true,
+      isAudioTextExample: true,
+      howToLearnWords: 'allWords',
+    }),
   }),
 };
 const mapStateToProps = (state) => {
