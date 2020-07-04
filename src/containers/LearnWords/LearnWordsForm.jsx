@@ -17,7 +17,6 @@ const LearnWordsForm = (props) => {
     onSubmit,
     isRightAnswerShow,
   } = props;
-  console.log('LearnWordsForm -> props', props);
 
   const {
     isTranslate,

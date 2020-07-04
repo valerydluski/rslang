@@ -85,8 +85,9 @@ function LearnWordCardContainer(props) {
         break;
       case 'deleted':
         config = {
-          difficulty: 'deleted',
+          difficulty: 'new',
           optional: {
+            deleted: true,
             time: new Date(),
           },
         };
@@ -95,7 +96,7 @@ function LearnWordCardContainer(props) {
         break;
       case 'difficult':
         config = {
-          difficulty: 'difficult',
+          difficulty: 'bad',
           optional: {
             time: new Date(),
           },

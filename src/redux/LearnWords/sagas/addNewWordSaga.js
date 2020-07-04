@@ -11,7 +11,7 @@ function* addNewWordSagaWorker(action) {
   const isKnownWord = yield call(findObjInArray, userWords, 'wordId', action.payload.id);
   if (!isKnownWord) {
     const config = {
-      difficulty: 'medium',
+      difficulty: 'new',
       optional: {
         time: new Date(),
       },
