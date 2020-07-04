@@ -6,6 +6,7 @@ import Input from '../../../../UI/Input/Input';
 import WordsPerDayValidator from '../../../../../utils/validators/WordsPerDayValidator';
 import RadioButton from '../../../../UI/RadioButton/RadioButton';
 import nameValidator from '../../../../../utils/validators/nameValidator';
+import { LabelStyled } from '../../../../UI/Input/Styled/InputStyled';
 
 const AppSettings = ({ checkboxes }) => {
   return (
@@ -20,7 +21,9 @@ const AppSettings = ({ checkboxes }) => {
         placeholder={I18n.t('Settings.userName')}
         component={Input}
         validate={nameValidator}
+        label={I18n.t('Settings.userName')}
       />
+      <LabelStyled htmlFor={I18n.t('Settings.language')}>{I18n.t('Settings.language')}</LabelStyled>
       <Field name="language" key="language" component="select">
         <option value="en" key="en" label={I18n.t('Languages.en')} />
         <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
@@ -33,6 +36,7 @@ const AppSettings = ({ checkboxes }) => {
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
+        label={I18n.t('Settings.wordsPerDay')}
       />
       <Field
         name="CardsPerDay"
@@ -42,20 +46,21 @@ const AppSettings = ({ checkboxes }) => {
         placeholder={I18n.t('Settings.cardsPerDay')}
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
+        label={I18n.t('Settings.cardsPerDay')}
       />
       <Field
         name="deleteButton"
         id="deleteButton"
         component={Input}
         type="checkbox"
-        label="show delete words button"
+        label={I18n.t('Settings.deleteButton')}
       />
       <Field
         name="addDificultWordsButton"
         id="addDificultWordsButton"
         component={Input}
         type="checkbox"
-        label="show add dificult words button"
+        label={I18n.t('Settings.difficultButton')}
       />
       <RadioButton
         name="howToLearnWords"

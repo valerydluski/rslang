@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InputContainer, InputStyled } from './Styled/InputStyled';
 
 const Input = (props) => {
   const {
@@ -16,8 +17,9 @@ const Input = (props) => {
   } = props;
 
   return (
-    <div>
-      <input
+    <InputContainer>
+      {label && <label htmlFor={label}>{label}</label>}
+      <InputStyled
         type={type}
         name={name}
         readOnly={readOnlyInput}
@@ -30,8 +32,7 @@ const Input = (props) => {
         {...input}
       />
       {error && touched && <span>{error}</span>}
-      {label && <label htmlFor={label}>{label}</label>}
-    </div>
+    </InputContainer>
   );
 };
 
