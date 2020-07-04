@@ -14,7 +14,7 @@ import ScoreContainerSpeakIT from '../../../containers/SpeakIT/ScoreContainerSpe
 import Microphone from '../../../utils/Microphone';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import { changeIDontKnowWords, changeScoreGame } from '../../../redux/Games/action';
-import changeAppMode from '../../../redux/AppMode/action';
+import { changeAppMode } from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
