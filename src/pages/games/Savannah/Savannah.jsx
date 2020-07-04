@@ -1,32 +1,26 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './style.css';
-import styled, { keyframes } from 'styled-components';
-import { CSSTransition } from 'react-transition-group';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import shuffleArray from '../../../utils/shuffleArray';
 import {
   SavannahComponentTranslation,
-  mistakes,
   result,
-  catchedEvent,
-  playResultSound,
+  GameRating,
+  KeyEventDetector,
 } from '../../../components/Savannah/cardComponent';
-import WordToGuess  from '../../../components/Savannah/titleCardComponent';
+import WordToGuess from '../../../components/Savannah/titleCardComponent';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import changeAppMode from '../../../redux/AppMode/action';
 import { changeIDontKnowWords } from '../../../redux/Games/action';
 import { changeSavannahLevel, changeSavannahPage } from '../../../redux/ChangeRounds/action';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
+import { GAME_MAX_PAGE } from '../../../config';
 
 let shuffledCollection;
 let shuffledCollectionCopy;
-
-let keyPressResult = false;
-let keyEvent;
-let keyMistakes = 0;
-let isGameStarted = false;
-let round = 1;
 
 const Savannah = ({
   wordsCollection,
@@ -37,13 +31,19 @@ const Savannah = ({
   updatePage,
   page,
   level,
+  isWordsLoading,
   maxPage,
 }) => {
   const [gameStarted, setGameChange] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
-  const [isGameFinished, changeGameMode] = useState(false);
+  const [isGameStarted, changeGameMode] = useState(false);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
-  const [color, changeColor] = useState('');
+  const [mistakesMade, setMistakesMade] = useState(0);
+  const [livesLeft, setLivesLeft] = useState([0, 1, 2, 3, 4]);
+
+  if (isWordsLoading) {
+    return <LoadingSpinner />;
+  }
 
   if (currentAppMode !== 'Savannah') {
     switchAppMode('Savannah');
@@ -51,7 +51,6 @@ const Savannah = ({
   }
 
   function answerShuffle(index) {
-    round = 1;
     shuffledCollectionCopy = shuffledCollection.slice();
     shuffledCollectionCopy.splice(index, 1);
     shuffledCollectionCopy = shuffleArray(shuffledCollectionCopy).slice(0, 3);
@@ -62,18 +61,14 @@ const Savannah = ({
   const switchToNextWord = () => {
     answerShuffle(currentWordIndex + 1);
     changeIndex(currentWordIndex + 1);
-    addWordToWrong([...wrongAnsweredWords,shuffledCollection[currentWordIndex + 1].word]);
+    addWordToWrong([...wrongAnsweredWords, shuffledCollection[currentWordIndex].word]);
     if (currentWordIndex > 10) {
       changeIndex(0);
     }
     if (result === false) {
       addWordsWithMistakesToStore(wrongAnsweredWords);
-    }
-    if (catchedEvent) {
-      catchedEvent.style.backgroundColor = 'white';
-    }
-    if (document.getElementsByClassName('translation')[keyEvent]) {
-      document.getElementsByClassName('translation')[keyEvent].style.backgroundColor = 'white';
+      setLivesLeft(livesLeft.splice(1));
+      setMistakesMade(mistakesMade + 1);
     }
   };
 
@@ -81,52 +76,30 @@ const Savannah = ({
     setTimeout(switchToNextWord, 1000);
   };
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key > 0 && event.key < 5 && isGameStarted && round === 1) {
-        keyEvent = event.key - 1;
-        if (
-          document.getElementsByClassName('translation')[event.key - 1].textContent ===
-          document.getElementById('title').dataset.indexMatch
-        ) {
-          keyPressResult = true;
-         document.getElementsByClassName('translation')[event.key - 1].style.backgroundColor =
-            'green';
-        } else {
-          keyPressResult = false;
-          document.getElementsByClassName('translation')[event.key - 1].style.backgroundColor =
-            'red';
-          keyMistakes += 1;
-        }
-        playResultSound(keyPressResult);
-        round += 1;
-      }
-    });
-
   const startGame = () => {
+    changeIndex(0);
     setGameChange(true);
-    isGameStarted = true;
+    changeGameMode(true);
     shuffledCollection = shuffleArray(wordsCollection);
     answerShuffle(currentWordIndex);
   };
 
-  const exitGame = () => {
-    setGameChange(false);
-  };
-
   let structure;
-  if (gameStarted && currentWordIndex < 10) {
+  if (isGameStarted && currentWordIndex < 10) {
     structure = (
       <div className="savannah_container">
-        <button onClick={exitGame} />
+        <KeyEventDetector func={intervalSwitch} />
         <div id="first">
           <div>
-            <WordToGuess className="english-word" words={shuffledCollection[currentWordIndex]} color={color}/>
+            <WordToGuess className="english-word" words={shuffledCollection[currentWordIndex]} />
+            <GameRating livesRemain={livesLeft} />
           </div>
           <div onClick={intervalSwitch}>
-            <SavannahComponentTranslation wordsForRender={shuffledCollectionCopy} color={color}/>
-            {mistakes + keyMistakes > 4 ? (
-              <ResultModal showProperties={['word', 'wordTranslate']} />
-            ) : null}
+            <SavannahComponentTranslation
+              wordsForRender={shuffledCollectionCopy}
+              func={intervalSwitch}
+            />
+            {mistakesMade > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
           </div>
         </div>
       </div>
@@ -134,7 +107,7 @@ const Savannah = ({
   } else {
     structure = (
       <div className="savannah_container">
-        {currentWordIndex > 9 || mistakes + keyMistakes > 4 ? (
+        {currentWordIndex > 9 || mistakesMade > 4 ? (
           <ResultModal showProperties={['word', 'wordTranslate']} />
         ) : null}
       </div>
@@ -144,13 +117,16 @@ const Savannah = ({
   if (!gameStarted) {
     structure = (
       <div className="savannah_container">
-        <button onClick={startGame}>Click here to start</button>
+        <button type="button" className="start_game_button" onClick={startGame}>
+          Start
+        </button>
+        <p className="game_words advice">Используйте клавиши 1,2,3,4 чтобы дать быстрый ответ!</p>
       </div>
     );
   }
 
   return (
-    <div onKeyDown={intervalSwitch}>
+    <div>
       <GoToHomePageButton />
       <StatusMenu
         page={page}
@@ -159,23 +135,43 @@ const Savannah = ({
         updateLevel={updateLevel}
         updatePage={updatePage}
       />
-      <div>
-      {structure}
-      </div>
+      <div>{structure}</div>
     </div>
   );
 };
 
+Savannah.propTypes = {
+  wordsCollection: PropTypes.instanceOf(Array),
+  addWordsWithMistakesToStore: PropTypes.func,
+  switchAppMode: PropTypes.func,
+  isWordsLoading: PropTypes.bool,
+  currentAppMode: PropTypes.string,
+  updateLevel: PropTypes.func,
+  updatePage: PropTypes.func,
+  level: PropTypes.string,
+  page: PropTypes.string,
+  maxPage: PropTypes.number,
+};
+
+Savannah.defaultProps = {
+  wordsCollection: [],
+  addWordsWithMistakesToStore: () => {},
+  switchAppMode: () => {},
+  isWordsLoading: false,
+  currentAppMode: '',
+  updatePage: () => {},
+  updateLevel: () => {},
+  level: '1',
+  page: '1',
+  maxPage: GAME_MAX_PAGE,
+};
+
+SavannahComponentTranslation.propTypes = {
+  wordsToRender: PropTypes.instanceOf(Array),
+};
+
 SavannahComponentTranslation.defaultProps = {
-  words: [],
-  translations: [],
-  correctWord: '',
-  processUserAnswer: () => {},
-  isWordFinished: false,
-  isCorrect: false,
-  selectedIndex: null,
-  correctIndex: null,
-  isAutoSolved: false,
+  wordsToRender: [],
 };
 
 const mapStateToProps = (state) => {
@@ -183,8 +179,8 @@ const mapStateToProps = (state) => {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
-    level: state.changeRound.AudioCallLevel,
-    page: state.changeRound.AudioCallPage,
+    level: state.changeRound.SavannahLevel,
+    page: state.changeRound.SavannahPage,
     maxPage: state.maxPage.maxPage.count,
   };
 };

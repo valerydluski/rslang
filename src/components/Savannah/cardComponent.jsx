@@ -1,13 +1,13 @@
 import React from 'react';
 import '../../pages/games/Savannah/style.css';
+import PropTypes from 'prop-types';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import errorSound from '../../assets/audio/error.mp3';
 import shuffleArray from '../../utils/shuffleArray';
 import correctSound from '../../assets/audio/correct.mp3';
+import heartSavannahBlack from '../../assets/img/heartSavannahBlack.svg';
 
-let catchedEvent;
 let result;
-let mistakes = 0;
-let color;
 
 const playResultSound = (isOk) => {
   const wordAudio = new Audio();
@@ -15,8 +15,34 @@ const playResultSound = (isOk) => {
   wordAudio.play();
 };
 
+const check = (key, func) => {
+  func();
+  if (
+    document.getElementsByClassName('translation')[key - 1].textContent ===
+    document.getElementById('title').dataset.indexMatch
+  ) {
+    result = true;
+    document.getElementsByClassName('translation')[key - 1].style.backgroundColor = 'green';
+  } else {
+    result = false;
+    document.getElementsByClassName('translation')[key - 1].style.backgroundColor = 'red';
+  }
+  playResultSound(result);
+};
+
+const KeyEventDetector = (props) => {
+  const { func } = props;
+  return (
+    <div>
+      <KeyboardEventHandler
+        handleKeys={['1', '2', '3', '4']}
+        onKeyEvent={(key) => check(key, func)}
+      />
+    </div>
+  );
+};
+
 const clickHandler = (event) => {
-  catchedEvent = event.target;
   if (
     event.target.dataset.indexTranslate === document.getElementById('title').dataset.indexTranslate
   ) {
@@ -26,50 +52,69 @@ const clickHandler = (event) => {
   } else {
     event.target.style.backgroundColor = 'red';
     result = false;
-    mistakes += 1;
   }
   playResultSound(result);
-  
 };
 
-
-
 const SavannahComponentTranslation = (props) => {
-  const {
-    wordsForRender,
-    correctWord,
-    UserAnswer,
-    isWordFinished,
-    isCorrect,
-    selectedIndex,
-    correctIndex,
-    translations,
-    color
-  } = props;
+  const { wordsForRender } = props;
 
   const wordsCards = shuffleArray(wordsForRender).map((word, index) => {
     return (
-      <p
-        onClick={clickHandler}
-        style = {{backgroundColor : color}}
-        className="translation game_words"
-        key={word.id}
-        data-index={index}
-        data-index-translate={word.id}
-      >
-        {word.wordTranslate}
-      </p>
+      <div key={word.id}>
+        <p
+          onClick={clickHandler}
+          className="translation game_words"
+          data-index-order={index}
+          data-index-translate={word.id}
+        >
+          {word.wordTranslate}
+        </p>
+      </div>
     );
   });
 
   return <div className="game_words_container">{wordsCards}</div>;
 };
 
+const GameRating = (props) => {
+  const { livesRemain } = props;
+
+  const HeartsImages = livesRemain.map((word, index) => {
+    return <img key={index} src={heartSavannahBlack} alt="lives remaining" />;
+  });
+  return <div>{HeartsImages}</div>;
+};
+
+SavannahComponentTranslation.propTypes = {
+  wordsForRender: PropTypes.instanceOf(Object),
+};
+
+SavannahComponentTranslation.defaultProps = {
+  wordsForRender: {},
+};
+
+GameRating.propTypes = {
+  livesRemain: PropTypes.instanceOf(Array),
+};
+
+GameRating.defaultProps = {
+  livesRemain: [],
+};
+
+KeyEventDetector.propTypes = {
+  func: PropTypes.func,
+};
+
+KeyEventDetector.defaultProps = {
+  func: () => {},
+};
+
 export {
   clickHandler,
   SavannahComponentTranslation,
-  mistakes,
   result,
   playResultSound,
-  catchedEvent,
+  GameRating,
+  KeyEventDetector,
 };
