@@ -13,6 +13,7 @@ import {
   MAKESENTENCE_CHANGE_PAGE,
   LEARN_WORDS_CHANGE_PAGE,
   LEARN_WORDS_CHANGE_LEVEL,
+  CHANGE_INITIAL_ROUND,
 } from './types';
 
 export function changeSpeakItLevel(level) {
@@ -110,5 +111,12 @@ export function changeLearnWordsPage(page) {
   return {
     type: LEARN_WORDS_CHANGE_PAGE,
     payload: page,
+  };
+}
+
+export function changeInitialRound(data) {
+  return {
+    type: CHANGE_INITIAL_ROUND,
+    payload: data,
   };
 }

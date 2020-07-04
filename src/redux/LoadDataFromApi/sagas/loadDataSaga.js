@@ -8,6 +8,8 @@ import getSettingsFromApi from '../../../services/getSettingsFromApi';
 import { getUserWords } from '../../Dictionary/actions';
 import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
+import createInitialRounds from '../../../utils/createInitialRounds';
+import { changeInitialRound } from '../../ChangeRounds/action';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());
@@ -17,6 +19,8 @@ function* workerLoadData() {
   const statistic = yield call(getStatisticFromApi, sessionData);
   if (statistic) {
     const statisticFromApi = getSettings(statistic);
+    const initialRound = createInitialRounds(statisticFromApi);
+    yield put(changeInitialRound(initialRound));
     yield put(saveFullStatisticToStore(statisticFromApi));
   }
 
