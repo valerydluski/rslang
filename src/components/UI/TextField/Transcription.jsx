@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const TranscriptionStyled = styled.div`
   font-family: Montserrat;
@@ -9,6 +10,10 @@ const TranscriptionStyled = styled.div`
   font-size: 17.5009px;
   line-height: 21px;
   color: #c4c4c4;
+
+  @media ${DEVICE.laptopL} {
+    font-size: 18px;
+  }
 `;
 
 const Transcription = (props) => {
