@@ -15,6 +15,7 @@ import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { changeAudioCallLevel, changeAudioCallPage } from '../../../redux/ChangeRounds/action';
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
+import newRound from '../../../utils/newRound';
 
 let currentGameWords;
 let answerResult = {};
@@ -37,7 +38,6 @@ const AudioCall = ({
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
-
   if (isWordsLoading) return <LoadingSpinner />;
 
   if (currentAppMode !== gameName || wordsCollection.length === 0) {
@@ -92,6 +92,13 @@ const AudioCall = ({
     toggleWordStatus(true);
   }
 
+  const newGame = () => {
+    toggleGameMode(false);
+    const { newLevel, newPage } = newRound(level, page, maxPage);
+    if (newLevel !== level) updateLevel(newLevel);
+    if (newPage !== page) updatePage(newPage);
+  };
+
   return (
     <div className="audio-call_container">
       <GoToHomePageButton />
@@ -120,7 +127,11 @@ const AudioCall = ({
           />
           <NextButton clickHandler={switchToNextWord} />
           {isGameFinished ? (
-            <ResultModal showProperties={['word', 'wordTranslate']} audioForPlay="audio" />
+            <ResultModal
+              showProperties={['word', 'wordTranslate']}
+              audioForPlay="audio"
+              newGame={newGame}
+            />
           ) : null}
         </>
       ) : (
