@@ -64,41 +64,50 @@ const AppSettings = ({ checkboxes }) => {
       />
       <RadioButton
         name="howToLearnWords"
-        headerText="how to learn words"
+        headerText={I18n.t('Settings.howToLearn')}
         key="howToLearnWords"
         buttonsValue={[
-          { value: 'newWords', text: 'only new' },
-          { value: 'repeat', text: 'repeat' },
-          { value: 'allWords', text: 'all words' },
+          { value: 'newWords', text: I18n.t('Settings.onlyNew') },
+          { value: 'repeat', text: I18n.t('Settings.repeat') },
+          { value: 'allWords', text: I18n.t('Settings.allWords') },
         ]}
       />
       <h3>
         <Translate value="Settings.infoInCards" />
       </h3>
       {checkboxes.map((el) => {
-        return <Field name={el} key={el} id={el} component={Input} type="checkbox" label={el} />;
+        return (
+          <Field
+            name={el}
+            key={el}
+            id={el}
+            component={Input}
+            type="checkbox"
+            label={I18n.t(`Settings.${el}`)}
+          />
+        );
       })}
-      <h3>Audio settings</h3>
+      <h3>{I18n.t('Settings.audio')}</h3>
       <Field
         name="isAudioTranslate"
         id="isAudioTranslate"
         component={Input}
         type="checkbox"
-        label="play audio translate"
+        label={I18n.t('Settings.isAudioTranslate')}
       />
       <Field
         name="isAudioTextMeaning"
         id="isAudioTextMeaning"
         component={Input}
         type="checkbox"
-        label="play audio text meaning"
+        label={I18n.t('Settings.isAudioTextMeaning')}
       />
       <Field
         name="isAudioTextExample"
         id="isAudioTextExample"
         component={Input}
         type="checkbox"
-        label="play audio text example"
+        label={I18n.t('Settings.isAudioTextExample')}
       />
     </>
   );
