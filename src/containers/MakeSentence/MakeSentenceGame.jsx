@@ -7,7 +7,6 @@ import shuffleArray from '../../utils/shuffleArray';
 import { changeAppMode } from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { checkStatusSession } from '../../redux/Auth/Login/actions';
-import { DontKnowButton, NextButton } from '../../components/MakeSentence/MakeSentenceControls';
 import { changeMakeSentenceLevel, changeMakeSentencePage } from '../../redux/ChangeRounds/action';
 import InitialSentenceContainer from '../../components/MakeSentence/InitialSentenceContainer';
 import { GAME_MAX_PAGE, GAME_NAME, LINK_FOR_AUDIO } from '../../config';
@@ -80,21 +79,20 @@ const MakeSentenceGame = ({
     );
   }
 
+  const switchToNextSentence = () => {
+    changeIndex(currentWordIndex + 1);
+    toggleWordStatus(false);
+  };
+
   if (isWordFinished) {
     if (currentWordIndex === wordsCollection.length - 1) toggleGameMode(true);
-    else {
-      changeIndex(currentWordIndex + 1);
-      toggleWordStatus(false);
-    }
+    else switchToNextSentence();
   }
 
-  // function switchToNextWord() {
-  //   if (currentWordIndex === wordsCollection.length - 1) finishGame();
-  //   else {
-  //     changeIndex(currentWordIndex + 1);
-  //     toggleWordStatus(false);
-  //   }
-  // }
+  function autoSolve() {
+    addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
+    toggleWordStatus(true);
+  }
 
   const audioSrc = `${LINK_FOR_AUDIO}${currentGameWords[currentWordIndex].audioExample}`;
   const sentence = currentGameWords[currentWordIndex].textExample;
@@ -108,6 +106,9 @@ const MakeSentenceGame = ({
         sentenceTranslationParts={shuffleArray(sentenceTranslation.split(' '))}
         toggleWordStatus={toggleWordStatus}
         sentenceTranslation={sentenceTranslation}
+        autoSolve={autoSolve}
+        switchToNextSentence={switchToNextSentence}
+        isWordFinished={isWordFinished}
       />
     </>
   );

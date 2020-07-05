@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AudioPlayButton from '../../containers/MakeSentence/AudioPlayButton';
+import AudioPlayControls from '../../containers/MakeSentence/AudioPlayControls';
 import InitialSentenceContainerStyled from './Styled/InitialSentenceContainerStyled';
 import { InitialSentenceWordsStyled, MainWordStyled } from './Styled/InitialSentenceWordsStyled';
 import SentencePartsContainerStyled from './Styled/SentencePartsContainerStyled';
@@ -16,7 +16,7 @@ const InitialSentenceContainer = ({ audioSrc, sentence }) => {
   });
   return (
     <InitialSentenceContainerStyled>
-      <AudioPlayButton audioSrc={audioSrc} />
+      <AudioPlayControls audioSrc={audioSrc} />
       <SentencePartsContainerStyled>{words}</SentencePartsContainerStyled>
     </InitialSentenceContainerStyled>
   );

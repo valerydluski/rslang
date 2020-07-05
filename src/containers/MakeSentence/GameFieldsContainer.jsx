@@ -4,8 +4,15 @@ import GameFieldsContainerStyled from './Styled/GameFieldsContainerStyled';
 import AnswerField from '../../components/MakeSentence/AnswerField';
 import OptionsField from '../../components/MakeSentence/OptionsField';
 import shuffleArray from '../../utils/shuffleArray';
+import { DontKnowButton, NextButton } from '../../components/MakeSentence/MakeSentenceControls';
 
-const GameFieldsContainer = ({ toggleWordStatus, sentenceTranslation }) => {
+const GameFieldsContainer = ({
+  toggleWordStatus,
+  sentenceTranslation,
+  isWordFinished,
+  autoSolve,
+  switchToNextSentence,
+}) => {
   const [optionParts, changeOptionParts] = useState(shuffleArray(sentenceTranslation.split(' ')));
   const [answerParts, changeAnswerParts] = useState([]);
 
@@ -45,6 +52,11 @@ const GameFieldsContainer = ({ toggleWordStatus, sentenceTranslation }) => {
     <GameFieldsContainerStyled onClick={clickFieldHandler}>
       <AnswerField answerParts={answerParts} />
       <OptionsField optionsParts={optionParts} />
+      {isWordFinished ? (
+        <NextButton clickHandler={switchToNextSentence} />
+      ) : (
+        <DontKnowButton clickHandler={autoSolve} />
+      )}
     </GameFieldsContainerStyled>
   );
 };
@@ -52,10 +64,16 @@ const GameFieldsContainer = ({ toggleWordStatus, sentenceTranslation }) => {
 GameFieldsContainer.propTypes = {
   sentenceTranslation: PropTypes.string.isRequired,
   toggleWordStatus: PropTypes.func,
+  isWordFinished: PropTypes.bool,
+  autoSolve: PropTypes.func,
+  switchToNextSentence: PropTypes.func,
 };
 
 GameFieldsContainer.defaultProps = {
+  isWordFinished: false,
+  autoSolve: () => {},
   toggleWordStatus: () => {},
+  switchToNextSentence: () => {},
 };
 
 export default GameFieldsContainer;
