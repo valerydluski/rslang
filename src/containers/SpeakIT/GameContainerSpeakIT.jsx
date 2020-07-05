@@ -14,13 +14,11 @@ import ScoreContainerSpeakIT from './ScoreContainerSpeakIT';
 import Microphone from '../../utils/Microphone';
 import ResultModal from '../Modal/ResultModal';
 import { changeIDontKnowWords, changeScoreGame } from '../../redux/Games/action';
-import { changeAppMode } from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../config';
 import newRound from '../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../redux/Statistic/action';
-import SpeakITContainerStyled from './Styled/StyledSpeakIT';
 
 const micro = new Microphone();
 
@@ -32,9 +30,7 @@ const GameContainerSpeakIT = (props) => {
     wordsCollection,
     listening,
     changeIDontKnowWordsInStore,
-    switchAppMode,
     isWordsLoading,
-    currentAppMode,
     changePage,
     changeLevel,
     maxPage,
@@ -52,10 +48,6 @@ const GameContainerSpeakIT = (props) => {
   const [correctWordsState, setCorrectWords] = useState([]);
   let IDontKnowWords = gameWords.slice();
   if (isWordsLoading) return <LoadingSpinner />;
-  if (currentAppMode !== gameName) {
-    switchAppMode(gameName);
-    return <LoadingSpinner />;
-  }
 
   function addCorrectWords(wrongWords) {
     setCorrectWords(gameWords.filter((el) => !wrongWords.includes(el)));
@@ -238,9 +230,7 @@ GameContainerSpeakIT.propTypes = {
   listening: PropTypes.bool,
   wordsCollection: PropTypes.instanceOf(Array),
   changeIDontKnowWordsInStore: PropTypes.func,
-  switchAppMode: PropTypes.func.isRequired,
   isWordsLoading: PropTypes.bool,
-  currentAppMode: PropTypes.string.isRequired,
   changeLevel: PropTypes.func.isRequired,
   changePage: PropTypes.func.isRequired,
   maxPage: PropTypes.number,
@@ -266,7 +256,6 @@ const mapStateToProps = (state) => {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
-    currentAppMode: state.changeAppMode.appMode,
     maxPage: state.maxPage.maxPage,
   };
 };
@@ -274,7 +263,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   changeScore: changeScoreGame,
   changeIDontKnowWordsInStore: changeIDontKnowWords,
-  switchAppMode: changeAppMode,
   changeLevel: changeSpeakItLevel,
   changePage: changeSpeakItPage,
   saveStatistic: saveFullStatistic,
