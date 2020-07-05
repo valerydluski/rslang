@@ -18,7 +18,7 @@ import newRound from '../../utils/newRound';
 let currentGameWords;
 let answerResult = {};
 
-const AudioCall = ({
+const AudioCallContainer = ({
   wordsCollection,
   addWordsWithMistakesToStore,
   switchAppMode,
@@ -148,7 +148,7 @@ const AudioCall = ({
   );
 };
 
-AudioCall.propTypes = {
+AudioCallContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   addWordsWithMistakesToStore: PropTypes.func,
   switchAppMode: PropTypes.func,
@@ -163,7 +163,7 @@ AudioCall.propTypes = {
   saveStatistic: PropTypes.func.isRequired,
 };
 
-AudioCall.defaultProps = {
+AudioCallContainer.defaultProps = {
   wordsCollection: [],
   addWordsWithMistakesToStore: () => {},
   switchAppMode: () => {},
@@ -195,4 +195,4 @@ const mapDispatchToProps = {
   saveStatistic: saveFullStatistic,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AudioCall);
+export default connect(mapStateToProps, mapDispatchToProps)(AudioCallContainer);
