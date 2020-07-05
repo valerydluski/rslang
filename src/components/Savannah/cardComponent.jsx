@@ -3,7 +3,6 @@ import '../../pages/games/Savannah/style.css';
 import PropTypes from 'prop-types';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import errorSound from '../../assets/audio/error.mp3';
-import shuffleArray from '../../utils/shuffleArray';
 import correctSound from '../../assets/audio/correct.mp3';
 import heartSavannahBlack from '../../assets/img/heartSavannahBlack.svg';
 
@@ -89,10 +88,12 @@ const GameRating = (props) => {
 
 SavannahComponentTranslation.propTypes = {
   wordsForRender: PropTypes.instanceOf(Object),
+  color: PropTypes.string,
 };
 
 SavannahComponentTranslation.defaultProps = {
   wordsForRender: {},
+  color: '',
 };
 
 GameRating.propTypes = {

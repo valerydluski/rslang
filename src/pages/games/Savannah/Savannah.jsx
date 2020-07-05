@@ -10,6 +10,7 @@ import {
   GameRating,
   KeyEventDetector,
 } from '../../../components/Savannah/cardComponent';
+import WordsForAnswer from '../../../components/Savannah/answerWordsComponent';
 import WordToGuess from '../../../components/Savannah/titleCardComponent';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import { changeAppMode } from '../../../redux/AppMode/action';
@@ -99,13 +100,12 @@ const Savannah = ({
             <WordToGuess className="english-word" words={shuffledCollection[currentWordIndex]} />
             <GameRating livesRemain={livesLeft} />
           </div>
-          <div onClick={intervalSwitch}>
-            <SavannahComponentTranslation
-              wordsForRender={shuffledCollectionCopy}
-              color={translate}
-            />
-            {mistakesMade > 4 ? <ResultModal showProperties={['word', 'wordTranslate']} /> : null}
-          </div>
+          <WordsForAnswer
+            words={shuffledCollectionCopy}
+            colorForWords={translate}
+            func={intervalSwitch}
+            mistakesInGame={mistakesMade}
+          />
         </div>
       </div>
     );
