@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Translate } from 'react-redux-i18n';
 import gamesDescriptions from '../../assets/data/gamesDescriptions';
-import changeAppMode from '../../redux/AppMode/action';
+import { changeAppMode } from '../../redux/AppMode/action';
 import StartGamePageStyled from './Styled/StartGamePageStyled';
 import GoToHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import {

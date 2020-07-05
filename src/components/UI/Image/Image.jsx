@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ImageContainer from './Styled/ImageContainer';
 
 const ImageStyled = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
   border-radius: 100%;
   margin: 0 auto;
 
@@ -14,15 +15,10 @@ const ImageStyled = styled.img`
   }
 `;
 
-const ImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const Image = (props) => {
-  const { src, className } = props;
+  const { src, className, classNameContainer } = props;
   return (
-    <ImageContainer>
+    <ImageContainer className={classNameContainer}>
       <ImageStyled src={src} alt="img" className={className} />
     </ImageContainer>
   );
@@ -31,10 +27,12 @@ const Image = (props) => {
 Image.propTypes = {
   src: PropTypes.string.isRequired,
   className: PropTypes.string,
+  classNameContainer: PropTypes.string,
 };
 
 Image.defaultProps = {
   className: '',
+  classNameContainer: '',
 };
 
 export default Image;

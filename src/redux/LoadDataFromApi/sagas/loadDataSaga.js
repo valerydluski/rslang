@@ -1,13 +1,15 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
 import { LOAD_DATA_FROM_API } from '../types';
 import { isDataLoadFromApi } from '../actions';
-import { getStatistic } from '../../Statistic/action';
+import { saveFullStatisticToStore } from '../../Statistic/action';
 import getSettings from '../../../utils/getSettings';
 import getStatisticFromApi from '../../../services/getStatisticFromApi';
 import getSettingsFromApi from '../../../services/getSettingsFromApi';
 import { getUserWords } from '../../Dictionary/actions';
 import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
+import createInitialRounds from '../../../utils/createInitialRounds';
+import { changeInitialRound } from '../../ChangeRounds/action';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());
@@ -17,7 +19,9 @@ function* workerLoadData() {
   const statistic = yield call(getStatisticFromApi, sessionData);
   if (statistic) {
     const statisticFromApi = getSettings(statistic);
-    yield put(getStatistic(statisticFromApi));
+    const initialRound = createInitialRounds(statisticFromApi);
+    yield put(changeInitialRound(initialRound));
+    yield put(saveFullStatisticToStore(statisticFromApi));
   }
 
   const settings = yield call(getSettingsFromApi, sessionData);

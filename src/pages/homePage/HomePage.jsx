@@ -8,10 +8,10 @@ import MainContainer from '../../containers/Homepage/Content/Main';
 import PrivateNavigationRoute from '../../components/Navigation/PrivateNavigationRoute';
 import Promo from '../../components/HomePage/Content/Promo/Promo';
 import AboutUs from '../../components/HomePage/Content/AboutUs/AboutUs';
-import Dictionary from '../../components/HomePage/Content/Dictionary/Dictionary';
 import Statistics from '../../components/HomePage/Content/Statistics/Statistics';
 import Settings from '../../components/HomePage/Content/Settings/Settings';
 import LeftSideBarContainer from '../../containers/Homepage/SideBars/LeftSideBarContainer';
+import DictionaryContainer from '../../containers/Homepage/Dictionary/DictionaryContainer';
 
 function HomePage(props) {
   const { checkStatusSession } = props;
@@ -28,7 +28,7 @@ function HomePage(props) {
       <Switch>
         <PrivateNavigationRoute path="/promo" exact component={Promo} />
         <PrivateNavigationRoute path="/about-us" exact component={AboutUs} />
-        <PrivateNavigationRoute path="/dictionary" exact component={Dictionary} />
+        <PrivateNavigationRoute path="/dictionary" component={DictionaryContainer} />
         <PrivateNavigationRoute path="/statistics" exact component={Statistics} />
         <PrivateNavigationRoute path="/settings" exact component={Settings} />
         <PrivateNavigationRoute path="/home" exact component={MainContainer} />

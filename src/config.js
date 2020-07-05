@@ -14,6 +14,7 @@ export const API = {
     WORDS: 'words',
     SETTINGS: 'settings',
     STATISTICS: 'statistics',
+    DICTIONARY: 'aggregatedWords',
   },
 
   QUERIES: {
@@ -23,6 +24,7 @@ export const API = {
       WORDS_PER_SENTENCE: 'wordsPerExampleSentenceLTE',
       WORDS_PER_PAGE: 'wordsPerPage',
       COUNT: 'count',
+      FILTER: 'filter',
     },
   },
 };
@@ -99,7 +101,7 @@ export const GAME_NAME = {
   savannah: 'Savannah',
   audioCall: 'AudioCall',
   sprint: 'Sprint',
-  makeSentence: 'makeSentence',
+  makeSentence: 'MakeSentence',
   learnWords: 'LearnWords',
 };
 
@@ -123,3 +125,30 @@ export const DEVICE = {
   desktop: `(max-width: ${size.desktop})`,
   desktopL: `(max-width: ${size.desktop})`,
 };
+
+export const INITIAL_STATISTIC = {
+  SpeakITLastRound: '0',
+  EnglishPuzzleLastRound: '0',
+  SavannahLastRound: '0',
+  AudioCallLastRound: '0',
+  SprintLastRound: '0',
+  MakeSentenceLastRound: '0',
+  SpeakITPassedRound: '0',
+  EnglishPuzzlePassedRound: '0',
+  SavannahPassedRound: '0',
+  AudioCallPassedRound: '0',
+  SprintPassedRound: '0',
+  MakeSentencePassedRound: '0',
+  LearnLastWords: '0',
+  LearnLastLevel: '0',
+};
+
+export const INIT_GAMES_ROUND = [
+  'SpeakITLastRound',
+  'EnglishPuzzleLastRound',
+  'SavannahLastRound',
+  'AudioCallLastRound',
+  'SprintLastRound',
+  'MakeSentenceLastRound',
+  'Learn',
+];

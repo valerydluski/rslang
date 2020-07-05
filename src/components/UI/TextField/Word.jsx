@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const WordStyled = styled.div`
   font-family: Montserrat;
@@ -8,19 +9,28 @@ const WordStyled = styled.div`
   font-weight: bold;
   font-size: 25.569px;
   line-height: 31px;
+
+  @media ${DEVICE.laptopL} {
+    font-size: 20px;
+  }
+  &.spoken-word {
+    color: #c4c4c4;
+  }
 `;
 
 const Word = (props) => {
-  const { word } = props;
-  return <WordStyled>{word}</WordStyled>;
+  const { word, className } = props;
+  return <WordStyled className={className}>{word}</WordStyled>;
 };
 
 Word.propTypes = {
   word: PropTypes.string,
+  className: PropTypes.string,
 };
 
 Word.defaultProps = {
   word: '',
+  className: '',
 };
 
 export default Word;

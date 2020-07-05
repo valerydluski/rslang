@@ -1,24 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import WordCardSpeakIT from '../../components/WordCards/WordCardSpeakIT';
-
-const CardsContainerSpeakITStyled = styled.div`
-  margin: 0 auto;
-  display: grid;
-  grid-template-areas:
-    'word word word word word'
-    'word word word word word';
-  border-top: 1px solid #c4c4c4;
-  border-bottom: 1px solid #c4c4c4;
-  width: 80%;
-  justify-items: center;
-`;
+import CardsContainerSpeakITStyled from './Styled/CardsContainerSpeakITStyled';
 
 const CardsContainerSpeakIT = (props) => {
-  const { wordsCollection, cardHandler, wrongWords } = props;
+  const { wordsCollection, cardHandler, correctWords, hiddenIcon } = props;
   const addClass = (word) => {
-    if (!wrongWords.includes(word.toLowerCase())) return 'spoken-word';
+    if (correctWords.includes(word.toLowerCase())) return 'spoken-word';
     return '';
   };
   return (
@@ -31,6 +19,7 @@ const CardsContainerSpeakIT = (props) => {
             className={addClass(word.word)}
             obj={word}
             wordCardHandler={cardHandler}
+            hiddenIcon={hiddenIcon}
           />
         );
       })}
@@ -41,13 +30,15 @@ const CardsContainerSpeakIT = (props) => {
 CardsContainerSpeakIT.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   cardHandler: PropTypes.func,
-  wrongWords: PropTypes.instanceOf(Array),
+  correctWords: PropTypes.instanceOf(Array),
+  hiddenIcon: PropTypes.bool,
 };
 
 CardsContainerSpeakIT.defaultProps = {
   wordsCollection: [],
   cardHandler: () => {},
-  wrongWords: [],
+  correctWords: [],
+  hiddenIcon: false,
 };
 
 export default CardsContainerSpeakIT;

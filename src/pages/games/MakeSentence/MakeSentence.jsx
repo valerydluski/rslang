@@ -54,7 +54,7 @@ const MakeSentence = ({
     // addWordsWithMistakesToStore(wrongAnsweredWords);
     toggleGameMode(true);
   }
-
+  console.log(currentWordIndex);
   if (isWordFinished) {
     if (currentWordIndex === wordsCollection.length - 1) finishGame();
     else {
@@ -95,9 +95,10 @@ const MakeSentence = ({
       {isGameFinished ? <ResultModal showProperties={['word', 'translation']} /> : null}
       <InitialSentenceContainer audioSrc={audioSrc} sentence={sentence} />
       <GameFieldsContainer
-        sentenceTranslation={sentenceTranslation}
+        key={currentGameWords[currentWordIndex].word}
+        sentenceTranslationParts={shuffleArray(sentenceTranslation.split(' '))}
         toggleWordStatus={toggleWordStatus}
-        isNewWord={123}
+        sentenceTranslation={sentenceTranslation}
       />
     </div>
   );

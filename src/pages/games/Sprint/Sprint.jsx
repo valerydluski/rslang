@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
-import changeAppMode from '../../../redux/AppMode/action';
+import { changeAppMode } from '../../../redux/AppMode/action';
 import SprintContainerStyled from '../../../containers/Sprint/Styled/SprintContainerStyled';
 import SprintGameContainer from '../../../containers/Sprint/SprintGameContainer';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
@@ -98,7 +98,7 @@ const mapStateToProps = (state) => {
     currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.SprintLevel,
     page: state.changeRound.SprintPage,
-    maxPage: state.maxPage.maxPage.count,
+    maxPage: state.maxPage.maxPage,
   };
 };
 

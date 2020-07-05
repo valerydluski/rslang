@@ -1,6 +1,6 @@
-import { takeLatest, put, call, select } from 'redux-saga/effects';
+import { takeLatest, put, call, select, delay } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
-import fetchWords from '../action';
+import { fetchWords } from '../action';
 import {
   SPEAKIT_CHANGE_LEVEL,
   SPEAKIT_CHANGE_PAGE,
@@ -14,8 +14,10 @@ import {
   AUDIOCALL_CHANGE_PAGE,
   MAKESENTENCE_CHANGE_LEVEL,
   MAKESENTENCE_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_LEVEL,
 } from '../../ChangeRounds/types';
-import CHANGE_APP_MODE from '../../AppMode/types';
+import { CHANGE_APP_MODE } from '../../AppMode/types';
 import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';
@@ -23,9 +25,10 @@ import { updateState, updateSource } from '../../EnglishPuzzle/actions';
 
 function* workerGetWords() {
   try {
+    yield put(showLoader());
+    yield delay(1000);
     const state = yield select();
     const { appMode } = state.changeAppMode;
-    yield put(showLoader());
     const payload = yield call(wordsFetch, state);
     yield put(fetchWords(payload));
     if (appMode === 'EnglishPuzzle') {
@@ -57,6 +60,8 @@ export default function* watchGetWords() {
       MAKESENTENCE_CHANGE_LEVEL,
       MAKESENTENCE_CHANGE_PAGE,
       CHANGE_APP_MODE,
+      LEARN_WORDS_CHANGE_PAGE,
+      LEARN_WORDS_CHANGE_LEVEL,
     ],
     workerGetWords
   );
