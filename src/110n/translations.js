@@ -10,6 +10,7 @@ const translations = {
       settings: 'Settings',
       logout: 'Log Out',
       start: "Let's play!",
+      wordsAmount: 'Total words',
     },
     StartPage: {
       game: 'GAME',
@@ -99,6 +100,7 @@ const translations = {
       settings: 'Настройки',
       logout: 'Выход',
       start: 'Начни играть!',
+      wordsAmount: 'Всего слов',
     },
     StartPage: {
       game: 'ИГРА',
