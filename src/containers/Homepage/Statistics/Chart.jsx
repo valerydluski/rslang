@@ -82,28 +82,27 @@ function Chart({ width, height, padding }) {
       .append('path')
       .datum(datum.chartPoints)
       .attr('d', learnedArea)
-      .attr('transform', 'translate(50, 50)')
+      .attr('transform', `translate(${padding}, ${padding})`)
       .attr('class', 'learned-area');
 
     canvas
       .append('path')
       .datum(datum.chartPoints)
       .attr('d', unlearnedArea)
-      .attr('transform', 'translate(50, 50)')
+      .attr('transform', `translate(${padding}, ${padding})`)
       .attr('class', 'unlearned-area');
 
-    canvas.append('g').attr('class', 'axis').attr('transform', 'translate(50, 450)').call(xAxis);
-
-    canvas.append('g').attr('class', 'axis').attr('transform', 'translate(50, 50)').call(yAxis);
-
-    const pointer = canvas
+    canvas
       .append('g')
-      .attr(
-        'transform',
-        `translate(${xScale(datum.chartPoints[value].x) + 50}, ${
-          yScale(datum.chartPoints[value].y) + 50
-        })`
-      );
+      .attr('class', 'axis')
+      .attr('transform', `translate(${padding}, ${height - padding})`)
+      .call(xAxis);
+
+    canvas
+      .append('g')
+      .attr('class', 'axis')
+      .attr('transform', `translate(${padding}, ${padding})`)
+      .call(yAxis);
 
     const info = canvas
       .append('g')
@@ -133,10 +132,19 @@ function Chart({ width, height, padding }) {
       .attr('r', 7)
       .attr('class', 'pointer-circle');
 
+    const pointer = canvas
+      .append('g')
+      .attr(
+        'transform',
+        `translate(${xScale(datum.chartPoints[value].x) + padding}, ${
+          yScale(datum.chartPoints[value].y) + padding
+        })`
+      );
+
     pointer
       .append('rect')
       .attr('width', 4)
-      .attr('height', height - 100 - yScale(datum.chartPoints[value].y))
+      .attr('height', height - 2 * padding - yScale(datum.chartPoints[value].y))
       .attr('class', 'pointer-line')
       .attr('transform', 'translate(-2, 0)');
     pointer.append('circle').attr('r', 7).attr('class', 'pointer-circle');
@@ -146,7 +154,7 @@ function Chart({ width, height, padding }) {
     d3.select('#canvas')
       .on('mousemove', function () {
         const [x] = d3.mouse(this);
-        const position = x - 50;
+        const position = x - padding;
         value = datum.chartPoints.findIndex((item, index, array) => {
           const cur = xScale(item.x);
           if (index === 0) {
