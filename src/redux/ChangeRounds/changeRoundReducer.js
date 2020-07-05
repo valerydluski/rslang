@@ -13,6 +13,7 @@ import {
   MAKESENTENCE_CHANGE_LEVEL,
   LEARN_WORDS_CHANGE_PAGE,
   LEARN_WORDS_CHANGE_LEVEL,
+  CHANGE_INITIAL_ROUND,
 } from './types';
 
 const initialState = {
@@ -62,6 +63,22 @@ const changeRoundReducer = (state = initialState, action) => {
       return { ...state, LearnWordsLevel: action.payload };
     case LEARN_WORDS_CHANGE_LEVEL:
       return { ...state, LearnWordsPage: action.payload };
+    case CHANGE_INITIAL_ROUND:
+      return {
+        ...state,
+        SpeakITLevel: action.payload.SpeakITLevel,
+        SpeakITPage: action.payload.SpeakITPage,
+        EnglishPuzzleLevel: action.payload.EnglishPuzzleLevel,
+        EnglishPuzzlePage: action.payload.EnglishPuzzlePage,
+        SavannahLevel: action.payload.SavannahLevel,
+        SavannahPage: action.payload.SavannahPage,
+        AudioCallLevel: action.payload.AudioCallLevel,
+        AudioCallPage: action.payload.AudioCallPage,
+        SprintLevel: action.payload.SprintLevel,
+        SprintPage: action.payload.SprintPage,
+        MakeSentenceLevel: action.payload.MakeSentenceLevel,
+        MakeSentencePage: action.payload.MakeSentencePage,
+      };
     default:
       return state;
   }
