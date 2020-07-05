@@ -6,7 +6,7 @@ const SpeakITContainerStyled = styled.div`
   flex-direction: column;
   min-height: 100vh;
   place-items: center;
-  background: #e5e5e5;
+  background: #fafafa;
   box-sizing: border-box;
 `;
 
