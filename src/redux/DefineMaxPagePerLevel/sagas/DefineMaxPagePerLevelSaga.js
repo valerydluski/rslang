@@ -8,7 +8,7 @@ import {
   AUDIOCALL_CHANGE_LEVEL,
   MAKESENTENCE_CHANGE_LEVEL,
 } from '../../ChangeRounds/types';
-import CHANGE_APP_MODE from '../../AppMode/types';
+import { CHANGE_APP_MODE } from '../../AppMode/types';
 import maxPage from '../../../services/defineMaxPagePerLevel';
 import fetchMaxPage from '../action';
 

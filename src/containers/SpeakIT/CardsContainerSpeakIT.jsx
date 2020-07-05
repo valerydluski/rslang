@@ -4,9 +4,9 @@ import WordCardSpeakIT from '../../components/WordCards/WordCardSpeakIT';
 import CardsContainerSpeakITStyled from './Styled/CardsContainerSpeakITStyled';
 
 const CardsContainerSpeakIT = (props) => {
-  const { wordsCollection, cardHandler, wrongWords, hiddenIcon } = props;
+  const { wordsCollection, cardHandler, correctWords, hiddenIcon } = props;
   const addClass = (word) => {
-    if (!wrongWords.includes(word.toLowerCase())) return 'spoken-word';
+    if (correctWords.includes(word.toLowerCase())) return 'spoken-word';
     return '';
   };
   return (
@@ -30,14 +30,14 @@ const CardsContainerSpeakIT = (props) => {
 CardsContainerSpeakIT.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   cardHandler: PropTypes.func,
-  wrongWords: PropTypes.instanceOf(Array),
+  correctWords: PropTypes.instanceOf(Array),
   hiddenIcon: PropTypes.bool,
 };
 
 CardsContainerSpeakIT.defaultProps = {
   wordsCollection: [],
   cardHandler: () => {},
-  wrongWords: [],
+  correctWords: [],
   hiddenIcon: false,
 };
 

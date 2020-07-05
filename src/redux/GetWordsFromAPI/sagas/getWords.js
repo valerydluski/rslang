@@ -17,7 +17,7 @@ import {
   LEARN_WORDS_CHANGE_PAGE,
   LEARN_WORDS_CHANGE_LEVEL,
 } from '../../ChangeRounds/types';
-import CHANGE_APP_MODE from '../../AppMode/types';
+import { CHANGE_APP_MODE } from '../../AppMode/types';
 import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';

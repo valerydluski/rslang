@@ -9,7 +9,7 @@ import TipsMenu from '../../../components/EnglishPuzzle/Menu/TipsMenu/TipsMenu';
 import Game from '../../../containers/EnglishPuzzle/Game/Game';
 import Info from '../../../components/EnglishPuzzle/Info/Info';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
-import changeAppMode from '../../../redux/AppMode/action';
+import { changeAppMode } from '../../../redux/AppMode/action';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import ResultModal from '../../../containers/Modal/ResultModal';

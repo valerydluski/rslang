@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import changeAppMode from '../../../redux/AppMode/action';
+import { changeAppMode } from '../../../redux/AppMode/action';
 import StyledGoHomeButton from '../../../components/UI/Button/Styled/StyledGoHomeButton';
 
 const GoHomePageButton = ({ switchAppMode }) => {

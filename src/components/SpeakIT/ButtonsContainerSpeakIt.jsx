@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { I18n } from 'react-redux-i18n';
 import Button from '../UI/Button/Button';
+import { DEVICE } from '../../config';
 
 const ButtonsContainerSpeakITStyled = styled.div`
   position: relative;
@@ -11,6 +12,10 @@ const ButtonsContainerSpeakITStyled = styled.div`
   justify-content: center;
   margin-top: 15px;
   margin-bottom: 30px;
+
+  @media ${DEVICE.tablet} {
+    flex-direction: column;
+  }
 `;
 
 const ButtonsContainerSpeakIT = (props) => {

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../config';
 
 const ButtonStyled = styled.button`
   position: relative;
@@ -14,8 +15,28 @@ const ButtonStyled = styled.button`
   border: none;
   cursor: pointer;
 
+  @media ${DEVICE.laptopL} {
+    font-size: 20px;
+    width: 250px;
+  }
+
+  @media ${DEVICE.laptopL} {
+    font-size: 18px;
+    width: 200px;
+  }
+
+  @media ${DEVICE.tablet} {
+    font-size: 20px;
+    width: 250px;
+    margin-top: 10px;
+  }
+
   &:not(:first-child) {
     margin-left: 10px;
+
+    @media ${DEVICE.tablet} {
+      margin-left: 0;
+    }
   }
 
   &:active {
@@ -31,6 +52,18 @@ const ButtonStyled = styled.button`
 
   &.big-button {
     width: 405px;
+
+    @media ${DEVICE.laptopL} {
+      width: 300px;
+    }
+
+    @media ${DEVICE.laptop} {
+      width: 250px;
+    }
+
+    @media ${DEVICE.tablet} {
+      width: 250px;
+    }
   }
 
   &.active {
