@@ -12,7 +12,6 @@ import shuffleArray from '../../../utils/shuffleArray';
 import { changeAppMode } from '../../../redux/AppMode/action';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
-import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import { changeAudioCallLevel, changeAudioCallPage } from '../../../redux/ChangeRounds/action';
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
@@ -38,7 +37,6 @@ const AudioCall = ({
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
-  checkStatusSession();
 
   if (isWordsLoading) return <LoadingSpinner />;
 
