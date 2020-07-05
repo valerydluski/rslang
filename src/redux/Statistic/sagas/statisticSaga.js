@@ -11,9 +11,11 @@ function* workerStatus({ payload }) {
   const getStatistic = (state) => state.changeStatistic.statistic;
   const getLoginState = (state) => state.login;
   const getWordsPerPage = (state) => state.userSettings.settings[`${gameName}WordsPerPage`];
+  const getMaxPage = (state) => state.maxPage.maxPage;
   const Statistic = yield select(getStatistic);
   const userData = yield select(getLoginState);
   const wordsPerPage = yield select(getWordsPerPage);
+  const maxPage = yield select(getMaxPage);
   let newStatistic;
   if (gameName) {
     newStatistic = yield createGameEndData(
@@ -23,7 +25,8 @@ function* workerStatus({ payload }) {
       Statistic,
       wrongWordsState,
       gameName,
-      wordsPerPage
+      wordsPerPage,
+      maxPage
     );
   } else {
     newStatistic = INITIAL_STATISTIC;

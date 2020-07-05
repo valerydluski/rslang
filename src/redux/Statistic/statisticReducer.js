@@ -14,7 +14,7 @@ const initialState = {
     AudioCallPassedRound: '0',
     SprintPassedRound: '0',
     MakeSentencePassedRound: '0',
-    LearnLastWords: '0',
+    LearnLastPage: '0',
     LearnLastLevel: '0',
   },
 };
