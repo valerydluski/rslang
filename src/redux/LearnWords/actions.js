@@ -8,6 +8,7 @@ import {
   NEXT_NEW_CARD,
   LOADING_NEW_CARD_SHOW,
   LOADING_NEW_CARD_HIDE,
+  GENERATE_LEARN_WORDS_COLLECTION,
 } from './types';
 
 export function showNewCard(card) {
@@ -69,5 +70,12 @@ export function loadNewWordHide() {
   return {
     type: LOADING_NEW_CARD_HIDE,
     payload: false,
+  };
+}
+
+export function generateLearnWordsCollection(data) {
+  return {
+    type: GENERATE_LEARN_WORDS_COLLECTION,
+    payload: data,
   };
 }

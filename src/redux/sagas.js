@@ -15,6 +15,7 @@ import oldWordsSaga from './GetWordsFromAPI/sagas/oldWordsSaga';
 import aggregatedWordsSagaWatcher from './Dictionary/sagas/aggregatedWordsSaga';
 import watchGetLearnWords from './GetWordsFromAPI/sagas/getWordsForLearn';
 import nextNewCardShowWatcher from './LearnWords/sagas/nextNewCardShow';
+import generateLearnWordsCollectionWatcher from './LearnWords/sagas/generateLearnWordsCollection';
 
 export default function* watchSaga() {
   yield all([
@@ -34,5 +35,6 @@ export default function* watchSaga() {
     fork(aggregatedWordsSagaWatcher),
     fork(watchGetLearnWords),
     fork(nextNewCardShowWatcher),
+    fork(generateLearnWordsCollectionWatcher),
   ]);
 }

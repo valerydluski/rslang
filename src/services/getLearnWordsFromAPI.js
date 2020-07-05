@@ -10,11 +10,12 @@ const {
 } = API;
 const fixNumberForLink = 1;
 const wordsPerSentenceGames = 100;
+const gameWordsPerPage = 50;
 
-const createData = (level, page) => {
-  const gameWordsPerPage = 1;
+const createData = (level, words) => {
+  const pageForLink = Math.ceil(words / gameWordsPerPage);
   const linkLevel = `${GROUP}=${level - fixNumberForLink}`;
-  const linkPage = `${PAGE}=${page - fixNumberForLink}`;
+  const linkPage = `${PAGE}=${pageForLink - fixNumberForLink}`;
   const wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentenceGames}`;
   const wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;
   return {
@@ -25,9 +26,9 @@ const createData = (level, page) => {
   };
 };
 
-async function wordsFetch({ level, page }) {
+async function wordsFetchForLearn({ level, words }) {
   try {
-    const { linkLevel, linkPage, wordsPerSentence, wordsPerPage } = createData(level, page);
+    const { linkLevel, linkPage, wordsPerSentence, wordsPerPage } = createData(level, words);
     const link = `${URL}/${WORDS}?${linkLevel}&${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
     return await fetchData(link);
   } catch (e) {
@@ -35,4 +36,4 @@ async function wordsFetch({ level, page }) {
   }
 }
 
-export default wordsFetch;
+export default wordsFetchForLearn;
