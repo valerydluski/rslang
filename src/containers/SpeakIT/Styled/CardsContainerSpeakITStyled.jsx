@@ -26,10 +26,22 @@ const CardsContainerSpeakITStyled = styled.div`
       'word word word';
   }
 
+  @media (max-width: 650px) {
+    grid-template-areas:
+      'word word'
+      'word word';
+  }
+
   @media ${DEVICE.mobileL} {
     grid-template-areas:
       'word word'
       'word word';
+  }
+
+  @media ${DEVICE.mobileM} {
+    grid-template-areas:
+      'word'
+      'word';
   }
 `;
 

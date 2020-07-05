@@ -156,7 +156,7 @@ const GameContainerSpeakIT = (props) => {
 
   if (!isListening) {
     return (
-      <SpeakITContainerStyled>
+      <>
         {isGameFinished ? (
           <ResultModal
             audioForPlay="audio"
@@ -187,12 +187,12 @@ const GameContainerSpeakIT = (props) => {
           speakHandler={speakHandler}
           finishHandler={finishHandler}
         />
-      </SpeakITContainerStyled>
+      </>
     );
   }
 
   return (
-    <SpeakITContainerStyled>
+    <>
       {isGameFinished ? (
         <ResultModal
           playAudio={playAudio}
@@ -228,7 +228,7 @@ const GameContainerSpeakIT = (props) => {
         finishHandler={finishHandler}
         speakActive={isListening}
       />
-    </SpeakITContainerStyled>
+    </>
   );
 };
 

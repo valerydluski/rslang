@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import AudioIcon from '../UI/Icon/AudioIcon';
 import Word from '../UI/TextField/Word';
 import Transcription from '../UI/TextField/Transcription';
+import { DEVICE } from '../../config';
 
 const WordCardSpeakITStyled = styled.div`
   position: relative;
@@ -19,6 +20,10 @@ const WordCardSpeakITStyled = styled.div`
   margin-top: 20px;
   cursor: pointer;
   justify-self: start;
+
+  @media ${DEVICE.mobileM} {
+    justify-self: center;
+  }
 `;
 
 const WordAndTranscriptionContainer = styled.div`

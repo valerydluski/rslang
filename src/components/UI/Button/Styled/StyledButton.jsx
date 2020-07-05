@@ -25,8 +25,18 @@ const ButtonStyled = styled.button`
     width: 200px;
   }
 
+  @media ${DEVICE.tablet} {
+    font-size: 20px;
+    width: 250px;
+    margin-top: 10px;
+  }
+
   &:not(:first-child) {
     margin-left: 10px;
+
+    @media ${DEVICE.tablet} {
+      margin-left: 0;
+    }
   }
 
   &:active {
@@ -48,6 +58,10 @@ const ButtonStyled = styled.button`
     }
 
     @media ${DEVICE.laptop} {
+      width: 250px;
+    }
+
+    @media ${DEVICE.tablet} {
       width: 250px;
     }
   }

@@ -5,6 +5,7 @@ import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import GameContainerSpeakIT from '../../../containers/SpeakIT/GameContainerSpeakIT';
+import SpeakITContainerStyled from '../../../containers/SpeakIT/Styled/StyledSpeakIT';
 
 const SpeakIT = (props) => {
   const { isLoading, isDataLoad, checkStatus } = props;
@@ -14,10 +15,13 @@ const SpeakIT = (props) => {
     return null;
   }
   return (
-    <>
-      <GoToHomePageButton />
+    <SpeakITContainerStyled>
+      <div>
+        <GoToHomePageButton />
+      </div>
+
       <GameContainerSpeakIT />
-    </>
+    </SpeakITContainerStyled>
   );
 };
 
