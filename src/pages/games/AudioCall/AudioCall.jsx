@@ -97,6 +97,13 @@ const AudioCall = ({
   return (
     <div className="audio-call_container">
       <GoToHomePageButton />
+      <StatusMenu
+        page={page}
+        level={level}
+        maxPage={maxPage}
+        updateLevel={updateLevel}
+        updatePage={updatePage}
+      />
       {isWordFinished ? (
         <>
           <FinishedWordInfo
@@ -120,13 +127,6 @@ const AudioCall = ({
         </>
       ) : (
         <>
-          <StatusMenu
-            page={page}
-            level={level}
-            maxPage={maxPage}
-            updateLevel={updateLevel}
-            updatePage={updatePage}
-          />
           <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
           <WordsContainer
             words={additionalWords}
