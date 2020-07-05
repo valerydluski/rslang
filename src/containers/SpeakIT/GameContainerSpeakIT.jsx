@@ -57,13 +57,16 @@ const GameContainerSpeakIT = (props) => {
     return <LoadingSpinner />;
   }
 
+  function addCorrectWords(wrongWords) {
+    setCorrectWords(gameWords.filter((el) => !wrongWords.includes(el)));
+  }
+
   const createGame = () => {
     IDontKnowWords = gameWords.slice();
     setWrongWords(IDontKnowWords);
-    setCorrectWords([]);
+    addCorrectWords(IDontKnowWords);
     setTranscript('');
     setSrcForImage(defaultImg);
-    console.log('createGame -> setSrcForImage');
   };
 
   const finishHandler = () => {
@@ -77,10 +80,6 @@ const GameContainerSpeakIT = (props) => {
       saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
     }
   };
-
-  function addCorrectWords(wrongWords) {
-    setCorrectWords(gameWords.filter((el) => !wrongWords.includes(el)));
-  }
 
   const speechResult = (transcriptResult) => {
     setTranscript(transcriptResult);
@@ -125,6 +124,7 @@ const GameContainerSpeakIT = (props) => {
   const restartGame = () => {
     toggleGameMode(false);
     createGame();
+    micro.changeTranscript(speechResult);
   };
 
   const newGame = () => {
@@ -149,6 +149,11 @@ const GameContainerSpeakIT = (props) => {
     setListening(false);
   }
 
+  const newRoundHandlerStatusMenu = () => {
+    micro.stopMicrophone();
+    toggleGameMode(false);
+  };
+
   if (!isListening) {
     return (
       <SpeakITContainerStyled>
@@ -166,6 +171,7 @@ const GameContainerSpeakIT = (props) => {
           maxPage={maxPage}
           updateLevel={changeLevel}
           updatePage={changePage}
+          restartGame={newRoundHandlerStatusMenu}
           className="status-menu_speakIT"
         />
         <Image src={srcForImage} classNameContainer="image_speakIT" />
@@ -203,6 +209,7 @@ const GameContainerSpeakIT = (props) => {
         updateLevel={changeLevel}
         updatePage={changePage}
         className="status-menu_speakIT"
+        restartGame={newRoundHandlerStatusMenu}
       />
       <Image src={srcForImage} classNameContainer="image_speakIT" />
       <RecognationTranscriptContainer
