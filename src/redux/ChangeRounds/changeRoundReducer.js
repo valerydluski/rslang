@@ -9,8 +9,11 @@ import {
   AUDIOCALL_CHANGE_LEVEL,
   SPRINT_CHANGE_PAGE,
   SPRINT_CHANGE_LEVEL,
-  OWNGAME_CHANGE_PAGE,
-  OWNGAME_CHANGE_LEVEL,
+  MAKESENTENCE_CHANGE_PAGE,
+  MAKESENTENCE_CHANGE_LEVEL,
+  LEARN_WORDS_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_LEVEL,
+  CHANGE_INITIAL_ROUND,
 } from './types';
 
 const initialState = {
@@ -24,8 +27,10 @@ const initialState = {
   AudioCallPage: '1',
   SprintLevel: '1',
   SprintPage: '1',
-  OwnGameLevel: '1',
-  OwnGamePage: '1',
+  MakeSentenceLevel: '1',
+  MakeSentencePage: '1',
+  LearnWordsLevel: '1',
+  LearnWordsPage: '1',
 };
 
 const changeRoundReducer = (state = initialState, action) => {
@@ -50,10 +55,30 @@ const changeRoundReducer = (state = initialState, action) => {
       return { ...state, SprintPage: action.payload };
     case SPRINT_CHANGE_LEVEL:
       return { ...state, SprintLevel: action.payload, SprintPage: '1' };
-    case OWNGAME_CHANGE_PAGE:
-      return { ...state, OwnGamePage: action.payload };
-    case OWNGAME_CHANGE_LEVEL:
-      return { ...state, OwnGameLevel: action.payload, OwnGamePage: '1' };
+    case MAKESENTENCE_CHANGE_PAGE:
+      return { ...state, MakeSentencePage: action.payload };
+    case MAKESENTENCE_CHANGE_LEVEL:
+      return { ...state, MakeSentenceLevel: action.payload, MakeSentencePage: '1' };
+    case LEARN_WORDS_CHANGE_PAGE:
+      return { ...state, LearnWordsLevel: action.payload };
+    case LEARN_WORDS_CHANGE_LEVEL:
+      return { ...state, LearnWordsPage: action.payload };
+    case CHANGE_INITIAL_ROUND:
+      return {
+        ...state,
+        SpeakITLevel: action.payload.SpeakITLevel,
+        SpeakITPage: action.payload.SpeakITPage,
+        EnglishPuzzleLevel: action.payload.EnglishPuzzleLevel,
+        EnglishPuzzlePage: action.payload.EnglishPuzzlePage,
+        SavannahLevel: action.payload.SavannahLevel,
+        SavannahPage: action.payload.SavannahPage,
+        AudioCallLevel: action.payload.AudioCallLevel,
+        AudioCallPage: action.payload.AudioCallPage,
+        SprintLevel: action.payload.SprintLevel,
+        SprintPage: action.payload.SprintPage,
+        MakeSentenceLevel: action.payload.MakeSentenceLevel,
+        MakeSentencePage: action.payload.MakeSentencePage,
+      };
     default:
       return state;
   }

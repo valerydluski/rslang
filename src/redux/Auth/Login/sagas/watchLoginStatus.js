@@ -4,30 +4,29 @@ import { resetSessionData, isAlreadyCheckStatusSession } from '../actions';
 import checkToken from '../../../../services/checkToken';
 import history from '../../../../utils/history';
 import checkHistoryLocation from '../../../../utils/checkHistoryLocation';
-import getSettings from '../../../../utils/getSettings';
-import { saveUserName } from '../../../UserSettings/actions';
-import { getUserWords } from '../../../Dictionary/actions';
 import {
   checkStatusShowLoader,
   checkStatusHideLoader,
 } from '../../../Loader/CheckStatusLoader/action';
+import { loadDataFromApi } from '../../../LoadDataFromApi/actions';
 
 function* workerStatus() {
   yield put(checkStatusShowLoader());
   const getLoginState = (state) => state.login;
+  const getLoadDataStatus = (state) => state.dataLoad.isDataLoadFromApi;
   const sessionData = yield select(getLoginState);
-  const data = yield call(checkToken, sessionData);
+  const isDataLoad = yield select(getLoadDataStatus);
+  let data = '';
+  if (sessionData.token) data = yield call(checkToken, sessionData);
   if (!data) {
     yield put(resetSessionData());
     if (!checkHistoryLocation(['/login', '/registration'])) {
       yield call(history.push, '/login');
     }
-  } else {
-    yield put(getUserWords());
-    const settingsFromApi = getSettings(data);
-    yield put(saveUserName(settingsFromApi));
+  } else if (!isDataLoad) {
+    yield put(loadDataFromApi());
+    yield put(isAlreadyCheckStatusSession());
   }
-  yield put(isAlreadyCheckStatusSession());
   yield put(checkStatusHideLoader());
 }
 

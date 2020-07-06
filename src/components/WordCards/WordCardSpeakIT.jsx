@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import AudioIcon from '../UI/Icon/AudioIcon';
 import Word from '../UI/TextField/Word';
 import Transcription from '../UI/TextField/Transcription';
+import { DEVICE } from '../../config';
 
 const WordCardSpeakITStyled = styled.div`
   position: relative;
@@ -14,13 +15,14 @@ const WordCardSpeakITStyled = styled.div`
   padding-left: 40px;
   font-size: 24px;
   line-height: 1.4;
-  min-width: 200px;
+  max-width: 200px;
   min-height: 70px;
   margin-top: 20px;
   cursor: pointer;
+  justify-self: start;
 
-  &.spoken-word {
-    background-color: red;
+  @media ${DEVICE.mobileM} {
+    justify-self: center;
   }
 `;
 
@@ -33,7 +35,7 @@ const WordAndTranscriptionContainer = styled.div`
 `;
 
 const WordCardSpeakIT = (props) => {
-  const { obj, wordCardHandler, id } = props;
+  const { obj, wordCardHandler, id, className, hiddenIcon } = props;
   const { word, transcription, image, audio, wordTranslate } = obj;
 
   const dataForHandler = {
@@ -53,9 +55,9 @@ const WordCardSpeakIT = (props) => {
       onClick={cardHandler}
       id={id}
     >
-      <AudioIcon />
+      <AudioIcon hiddenIcon={hiddenIcon} />
       <WordAndTranscriptionContainer>
-        <Word key={word.toLowerCase()} word={word.toLowerCase()} />
+        <Word className={className} key={word.toLowerCase()} word={word.toLowerCase()} />
         <Transcription key={`transcription${word}`} transcription={transcription} />
       </WordAndTranscriptionContainer>
     </WordCardSpeakITStyled>
@@ -79,12 +81,16 @@ WordCardSpeakIT.propTypes = {
   }),
   wordCardHandler: PropTypes.func,
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  className: PropTypes.string,
+  hiddenIcon: PropTypes.bool,
 };
 
 WordCardSpeakIT.defaultProps = {
   obj: {},
   wordCardHandler: () => {},
   id: '',
+  className: '',
+  hiddenIcon: false,
 };
 
 export default WordCardSpeakIT;

@@ -3,16 +3,18 @@ import speakItPoster from './assets/img/posters/speakit.svg';
 import puzzlePoster from './assets/img/posters/puzzle.svg';
 import audioCallPoster from './assets/img/posters/audio-call.svg';
 import sprintPoster from './assets/img/posters/sprint.svg';
+import makeSentencePoster from './assets/img/posters/make-sentence.svg';
 import getRedirectFunction from './utils/getRedirectFunction';
 
 export const API = {
-  // URL: 'https://afternoon-falls-25894.herokuapp.com',
-  URL: 'https://pacific-castle-12388.herokuapp.com',
+  URL: 'https://afternoon-falls-25894.herokuapp.com',
   ENDPOINTS: {
     USERS: 'users',
     SIGNIN: 'signin',
     WORDS: 'words',
     SETTINGS: 'settings',
+    STATISTICS: 'statistics',
+    DICTIONARY: 'aggregatedWords',
   },
 
   QUERIES: {
@@ -22,6 +24,7 @@ export const API = {
       WORDS_PER_SENTENCE: 'wordsPerExampleSentenceLTE',
       WORDS_PER_PAGE: 'wordsPerPage',
       COUNT: 'count',
+      FILTER: 'filter',
     },
   },
 };
@@ -68,6 +71,12 @@ export const GAME_LIST = [
     poster: sprintPoster,
     onClick: getRedirectFunction('/StartGame/Sprint/'),
   },
+  {
+    title: 'Games.makeSentence',
+    description: 'Games.makeSentenceDescription',
+    poster: makeSentencePoster,
+    onClick: getRedirectFunction('/StartGame/MakeSentence/'),
+  },
 ];
 
 export const MIN_WORDS_PER_DAY = 1;
@@ -79,11 +88,11 @@ export const GAME_MAX_PAGE = 60;
 export const GAME_MAX_LEVEL = 6;
 
 export const CHECKBOXES = [
-  'textExample',
-  'textMeaning',
-  'transcription',
-  'translate',
-  'imageAssociation',
+  'isTranslate',
+  'isTextMeaning',
+  'isTextExample',
+  'isTranscription',
+  'isImageAssociation',
 ];
 
 export const SCREEN_SIZE = {
@@ -94,6 +103,15 @@ export const SCREEN_SIZE = {
   laptop: 1024,
   laptopL: 1440,
   desktop: 2560,
+};
+export const GAME_NAME = {
+  speakIT: 'SpeakIT',
+  englishPuzzle: 'EnglishPuzzle',
+  savannah: 'Savannah',
+  audioCall: 'AudioCall',
+  sprint: 'Sprint',
+  makeSentence: 'MakeSentence',
+  learnWords: 'LearnWords',
 };
 
 export const DEVICE = {
@@ -106,3 +124,30 @@ export const DEVICE = {
   desktop: `(max-width: ${SCREEN_SIZE.desktop}px)`,
   desktopL: `(max-width: ${SCREEN_SIZE.desktop}px)`,
 };
+
+export const INITIAL_STATISTIC = {
+  SpeakITLastRound: '0',
+  EnglishPuzzleLastRound: '0',
+  SavannahLastRound: '0',
+  AudioCallLastRound: '0',
+  SprintLastRound: '0',
+  MakeSentenceLastRound: '0',
+  SpeakITPassedRound: '0',
+  EnglishPuzzlePassedRound: '0',
+  SavannahPassedRound: '0',
+  AudioCallPassedRound: '0',
+  SprintPassedRound: '0',
+  MakeSentencePassedRound: '0',
+  LearnLastWords: '0',
+  LearnLastLevel: '0',
+};
+
+export const INIT_GAMES_ROUND = [
+  'SpeakITLastRound',
+  'EnglishPuzzleLastRound',
+  'SavannahLastRound',
+  'AudioCallLastRound',
+  'SprintLastRound',
+  'MakeSentenceLastRound',
+  'Learn',
+];

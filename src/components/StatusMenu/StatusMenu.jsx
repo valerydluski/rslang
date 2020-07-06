@@ -12,7 +12,7 @@ import { ITEM_PAGE, ITEM_LEVEL } from './constants';
 import { GAME_MAX_PAGE, GAME_MAX_LEVEL } from '../../config';
 
 const StatusMenu = (props) => {
-  const { level, page, maxPage, updateLevel, updatePage } = props;
+  const { level, page, maxPage, updateLevel, updatePage, className, restartGame } = props;
 
   const [isLevelOpen, toggleLevel] = useState(false);
   const [isPageOpen, togglePage] = useState(false);
@@ -29,11 +29,13 @@ const StatusMenu = (props) => {
 
   const onLevelOptionClick = (event) => {
     const value = event.target.innerHTML;
+    restartGame();
     updateLevel(`${value}`);
   };
 
   const onPageOptionClick = (event) => {
     const value = event.target.innerHTML;
+    restartGame();
     updatePage(`${value}`);
   };
 
@@ -43,7 +45,7 @@ const StatusMenu = (props) => {
   };
 
   return (
-    <Menu>
+    <Menu className={className}>
       <MenuItem type={ITEM_LEVEL}>
         <Title>
           <Translate value="GameStatus.level" />
@@ -86,12 +88,16 @@ StatusMenu.propTypes = {
   maxPage: PropTypes.number,
   updatePage: PropTypes.func.isRequired,
   updateLevel: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  restartGame: PropTypes.func,
 };
 
 StatusMenu.defaultProps = {
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
+  className: '',
+  restartGame: () => {},
 };
 
 export default StatusMenu;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LearnWords from '../../components/LearnWords/LearnWords';
-import changeAppModeAction from '../../redux/AppMode/action';
+import { changeAppModeLearn } from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { LINK_FOR_IMAGE } from '../../config';
 import { correctCard, showNewCard } from '../../redux/LearnWords/actions';
@@ -90,7 +90,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  changeAppMode: changeAppModeAction,
+  changeAppMode: changeAppModeLearn,
   correctCardHandler: correctCard,
   showNewCardHandler: showNewCard,
   checkStatusSessionHandler: checkStatusSession,

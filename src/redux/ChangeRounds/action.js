@@ -9,8 +9,11 @@ import {
   AUDIOCALL_CHANGE_LEVEL,
   SPRINT_CHANGE_PAGE,
   SPRINT_CHANGE_LEVEL,
-  OWNGAME_CHANGE_LEVEL,
-  OWNGAME_CHANGE_PAGE,
+  MAKESENTENCE_CHANGE_LEVEL,
+  MAKESENTENCE_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_PAGE,
+  LEARN_WORDS_CHANGE_LEVEL,
+  CHANGE_INITIAL_ROUND,
 } from './types';
 
 export function changeSpeakItLevel(level) {
@@ -83,16 +86,37 @@ export function changeSprintPage(page) {
   };
 }
 
-export function changeOwnGameLevel(level) {
+export function changeMakeSentenceLevel(level) {
   return {
-    type: OWNGAME_CHANGE_LEVEL,
+    type: MAKESENTENCE_CHANGE_LEVEL,
     payload: level,
   };
 }
 
-export function changeOwnGamePage(page) {
+export function changeMakeSentencePage(page) {
   return {
-    type: OWNGAME_CHANGE_PAGE,
+    type: MAKESENTENCE_CHANGE_PAGE,
     payload: page,
+  };
+}
+
+export function changeLearnWordsLevel(level) {
+  return {
+    type: LEARN_WORDS_CHANGE_LEVEL,
+    payload: level,
+  };
+}
+
+export function changeLearnWordsPage(page) {
+  return {
+    type: LEARN_WORDS_CHANGE_PAGE,
+    payload: page,
+  };
+}
+
+export function changeInitialRound(data) {
+  return {
+    type: CHANGE_INITIAL_ROUND,
+    payload: data,
   };
 }

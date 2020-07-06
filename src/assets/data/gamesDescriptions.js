@@ -7,13 +7,13 @@ const gameDescriptions = {
     name: 'Games.puzzle',
     description: 'Games.puzzleDescription',
   },
-  OwnGame: {
-    name: 'Games.ownGame',
-    description: 'Games.ownGameDescription',
+  MakeSentence: {
+    name: 'Games.makeSentence',
+    description: 'Games.makeSentenceDescription',
   },
   Savannah: {
     name: 'Games.savannah',
-    description: 'Savannah description.',
+    description: 'Games.savannahDescription',
   },
   Sprint: {
     name: 'Games.sprint',

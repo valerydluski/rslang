@@ -8,7 +8,7 @@ const ScoreContainerSpeakITStyled = styled.div`
   align-items: center;
   margin: 10px 0;
   height: 54px;
-  width: 100%;
+  width: 80%;
 `;
 
 export default ScoreContainerSpeakITStyled;

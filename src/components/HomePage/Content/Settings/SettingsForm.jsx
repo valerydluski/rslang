@@ -1,7 +1,7 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import { Translate } from 'react-redux-i18n';
+import { Translate, I18n } from 'react-redux-i18n';
 import AppSettings from './AppSettings/AppSettings';
 import Input from '../../../UI/Input/Input';
 import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageValidator';
@@ -23,7 +23,7 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
       />
       <h3>
         <Translate value="Games.savannah" />
@@ -36,7 +36,7 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
       />
       <h3>
         <Translate value="Games.speakIT" />
@@ -49,7 +49,7 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
       />
       <h3>
         <Translate value="Games.sprint" />
@@ -62,7 +62,20 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
+      />
+      <h3>
+        <Translate value="Games.makeSentence" />
+      </h3>
+      <Field
+        name="MakeSentenceWordsPerPage"
+        key="MakeSentenceWordsPerPage"
+        type="number"
+        placeholder="Make sentence - words per page"
+        validate={WordsPerPageValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
+        label={I18n.t('Settings.wordsPerPage')}
       />
       <button type="submit" aria-label="Save">
         <Translate value="Buttons.save" />

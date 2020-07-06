@@ -1,7 +1,7 @@
 import MAX_PAGE from './types';
 
 const initialState = {
-  maxPage: '60',
+  maxPage: 60,
 };
 
 const DefineMaxPagePerLevelReducer = (state = initialState, action) => {

@@ -10,7 +10,7 @@ import TipsMenu from '../../../components/EnglishPuzzle/Menu/TipsMenu/TipsMenu';
 import Game from '../../../containers/EnglishPuzzle/Game/Game';
 import Info from '../../../components/EnglishPuzzle/Info/Info';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
-import changeAppMode from '../../../redux/AppMode/action';
+import { changeAppMode } from '../../../redux/AppMode/action';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import ResultModal from '../../../containers/Modal/ResultModal';
@@ -18,7 +18,7 @@ import {
   changeEnglishPuzzleLevel,
   changeEnglishPuzzlePage,
 } from '../../../redux/ChangeRounds/action';
-import { GAME_MAX_PAGE } from '../../../config';
+import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 
 const EnglishPuzzle = (props) => {
   const {
@@ -30,21 +30,22 @@ const EnglishPuzzle = (props) => {
     maxPage,
     updatePage,
     updateLevel,
+    gameName,
   } = props;
   const [isModalOpen, toggleModal] = useState(false);
   checkStatusSession();
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (currentAppMode !== 'EnglishPuzzle') {
-    switchAppMode('EnglishPuzzle');
+  if (currentAppMode !== gameName) {
+    switchAppMode(gameName);
   }
 
   return (
     <Content>
       <GoToHomePageButton />
       {isModalOpen ? (
-        <ResultModal showProperties={['word', 'translation']} />
+        <ResultModal showProperties={['textExample']} />
       ) : (
         <Container>
           <MenuContainer>
@@ -76,6 +77,7 @@ EnglishPuzzle.propTypes = {
   switchAppMode: PropTypes.func.isRequired,
   updatePage: PropTypes.func.isRequired,
   updateLevel: PropTypes.func.isRequired,
+  gameName: PropTypes.string,
 };
 
 EnglishPuzzle.defaultProps = {
@@ -83,6 +85,7 @@ EnglishPuzzle.defaultProps = {
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
+  gameName: GAME_NAME.englishPuzzle,
 };
 
 const mapStateToProps = (state) => {
@@ -91,7 +94,7 @@ const mapStateToProps = (state) => {
     currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.EnglishPuzzleLevel,
     page: state.changeRound.EnglishPuzzlePage,
-    maxPage: state.maxPage.maxPage.count,
+    maxPage: state.maxPage.maxPage,
   };
 };
 
