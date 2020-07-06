@@ -37,18 +37,34 @@ const EnglishPuzzle = (props) => {
   } = props;
   const [isModalOpen, toggleModal] = useState(false);
   const [isBreakpoint, changeBreakpoint] = useState(false);
+
+  const prevWidth = getScreenWidth();
+
   checkStatusSession();
 
   const onResize = () => {
-    if (getScreenWidth() <= SCREEN_SIZE.tablet) {
+    const width = getScreenWidth();
+    if (width <= SCREEN_SIZE.tablet) {
       changeBreakpoint(true);
     } else {
       changeBreakpoint(false);
     }
+    if (
+      width > SCREEN_SIZE.tablet &&
+      width <= SCREEN_SIZE.laptop &&
+      prevWidth > SCREEN_SIZE.laptop
+    ) {
+      window.removeEventListener('resize', onResize);
+      updatePage(page);
+    }
+    if (width > SCREEN_SIZE.laptop && prevWidth < SCREEN_SIZE.laptop) {
+      window.removeEventListener('resize', onResize);
+      updatePage(page);
+    }
   };
 
   useEffect(() => {
-    if (getScreenWidth() < SCREEN_SIZE.tablet) {
+    if (prevWidth < SCREEN_SIZE.tablet) {
       changeBreakpoint(true);
     }
     window.addEventListener('resize', onResize);
