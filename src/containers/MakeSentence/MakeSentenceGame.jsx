@@ -34,6 +34,7 @@ const MakeSentenceGame = ({
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
+  const [isAutoSolve, toggleAutoSolveMode] = useState(false);
 
   useEffect(() => {
     changeIndex(0);
@@ -80,17 +81,15 @@ const MakeSentenceGame = ({
   }
 
   const switchToNextSentence = () => {
-    changeIndex(currentWordIndex + 1);
+    if (isAutoSolve) toggleAutoSolveMode(false);
+    if (currentWordIndex === wordsCollection.length - 1) toggleGameMode(true);
+    else changeIndex(currentWordIndex + 1);
     toggleWordStatus(false);
   };
 
-  if (isWordFinished) {
-    if (currentWordIndex === wordsCollection.length - 1) toggleGameMode(true);
-    else switchToNextSentence();
-  }
-
   function autoSolve() {
     addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
+    toggleAutoSolveMode(true);
     toggleWordStatus(true);
   }
 
@@ -100,13 +99,18 @@ const MakeSentenceGame = ({
   return (
     <>
       {isGameFinished ? <ResultModal showProperties={['word', 'translation']} /> : null}
-      <InitialSentenceContainer audioSrc={audioSrc} sentence={sentence} />
+      <InitialSentenceContainer
+        audioSrc={audioSrc}
+        sentence={sentence}
+        mainWordTranslation={currentGameWords[currentWordIndex].wordTranslate}
+      />
       <GameFieldsContainer
         key={currentGameWords[currentWordIndex].word}
         sentenceTranslationParts={shuffleArray(sentenceTranslation.split(' '))}
         toggleWordStatus={toggleWordStatus}
         sentenceTranslation={sentenceTranslation}
         autoSolve={autoSolve}
+        isAutoSolve={isAutoSolve}
         switchToNextSentence={switchToNextSentence}
         isWordFinished={isWordFinished}
       />
@@ -147,9 +151,6 @@ const mapStateToProps = (state) => {
   return {
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
-    level: state.changeRound.MakeSentenceLevel,
-    page: state.changeRound.MakeSentencePage,
-    maxPage: state.maxPage.maxPage.count,
   };
 };
 

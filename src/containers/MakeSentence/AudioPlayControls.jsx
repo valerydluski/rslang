@@ -23,7 +23,12 @@ const AudioPlayControls = ({ audioSrc }) => {
           />
         </ActiveAudioPlayButtonStyled>
       ) : (
-        <AudioPlayButtonStyled onClick={() => toggleAudioMode(true)} />
+        <AudioPlayButtonStyled
+          onClick={() => {
+            toggleAudioMode(true);
+            if (isSlowAudioActive) toggleSlowAudioMode(false);
+          }}
+        />
       )}
       {isSlowAudioActive ? (
         <ActiveSlowAudioPlayButtonStyled onClick={() => toggleSlowAudioMode(false)}>
@@ -35,7 +40,12 @@ const AudioPlayControls = ({ audioSrc }) => {
           />
         </ActiveSlowAudioPlayButtonStyled>
       ) : (
-        <SlowAudioPlayButtonStyled onClick={() => toggleSlowAudioMode(true)} />
+        <SlowAudioPlayButtonStyled
+          onClick={() => {
+            toggleSlowAudioMode(true);
+            if (isAudioActive) toggleAudioMode(false);
+          }}
+        />
       )}
     </>
   );

@@ -11,6 +11,19 @@ const InitialSentenceWordsStyled = styled.div`
 
 const MainWordStyled = styled(InitialSentenceWordsStyled)`
   font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  text-decoration: underline;
+  div {
+    position: absolute;
+    height: fit-content;
+    width: fit-content;
+    line-height: 30px;
+    top: 55px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+  }
 `;
 
 export { InitialSentenceWordsStyled, MainWordStyled };

@@ -10,6 +10,7 @@ const GameFieldsContainer = ({
   toggleWordStatus,
   sentenceTranslation,
   isWordFinished,
+  isAutoSolve,
   autoSolve,
   switchToNextSentence,
 }) => {
@@ -43,10 +44,20 @@ const GameFieldsContainer = ({
   };
 
   const clickFieldHandler = (e) => {
-    if (e.target.hasAttribute('data-type')) {
+    if (e.target.hasAttribute('data-type') && !isWordFinished) {
       swapPart(e.target.dataset.type, e.target.dataset.index);
     }
   };
+
+  if (isAutoSolve) {
+    return (
+      <GameFieldsContainerStyled>
+        <AnswerField answerParts={sentenceTranslation.split(' ')} />
+        <OptionsField />
+        <NextButton clickHandler={switchToNextSentence} />
+      </GameFieldsContainerStyled>
+    );
+  }
 
   return (
     <GameFieldsContainerStyled onClick={clickFieldHandler}>
@@ -65,12 +76,14 @@ GameFieldsContainer.propTypes = {
   sentenceTranslation: PropTypes.string.isRequired,
   toggleWordStatus: PropTypes.func,
   isWordFinished: PropTypes.bool,
+  isAutoSolve: PropTypes.bool,
   autoSolve: PropTypes.func,
   switchToNextSentence: PropTypes.func,
 };
 
 GameFieldsContainer.defaultProps = {
   isWordFinished: false,
+  isAutoSolve: false,
   autoSolve: () => {},
   toggleWordStatus: () => {},
   switchToNextSentence: () => {},

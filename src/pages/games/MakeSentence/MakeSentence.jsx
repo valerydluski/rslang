@@ -30,7 +30,13 @@ const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, m
         updateLevel={updateLevel}
         updatePage={updatePage}
       />
-      <MakeSentenceGame key={`${level}-${page}`} wordsCollection={words} />
+      <MakeSentenceGame
+        key={`level-${level}/page-${page}`}
+        wordsCollection={words}
+        maxPage={maxPage}
+        page={page}
+        level={level}
+      />
     </div>
   );
 };
@@ -58,7 +64,7 @@ const mapStateToProps = (state) => {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     level: state.changeRound.MakeSentenceLevel,
     page: state.changeRound.MakeSentencePage,
-    maxPage: state.maxPage.maxPage.count,
+    maxPage: state.maxPage.maxPage,
   };
 };
 
