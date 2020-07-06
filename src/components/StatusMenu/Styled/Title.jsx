@@ -7,6 +7,10 @@ const title = styled.span`
   font-weight: normal;
   font-size: 18px;
   line-height: 28px;
+
+  @media ${DEVICE.laptop} {
+    font-size: 15px;
+  }
 `;
 
 export default title;

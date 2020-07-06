@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../../config';
 
 const Menu = styled.div`
   order: 2;
@@ -6,6 +7,10 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  @media ${DEVICE.laptop} {
+    margin-left: 10px;
+  }
 `;
 
 export default Menu;

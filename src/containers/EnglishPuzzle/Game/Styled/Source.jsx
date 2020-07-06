@@ -28,6 +28,7 @@ const Source = styled.div`
     width: ${(props) => (props.cols - 1) * 15 + PLAYFIELD_WIDTH_LAPTOP}px;
     height: ${PUZZLE_HEIGHT_LAPTOP}px;
     grid-gap: 15px;
+    margin-top: 15px;
   }
 `;
 

@@ -21,6 +21,7 @@ const Playfield = styled.div`
     width: ${PLAYFIELD_WIDTH_LAPTOP}px;
     height: ${PLAYFIELD_HEIGHT_LAPTOP}px;
     background-size: ${PLAYFIELD_WIDTH_LAPTOP}px ${PLAYFIELD_HEIGHT_LAPTOP}px;
+    margin-left: 35px;
   }
 `;
 

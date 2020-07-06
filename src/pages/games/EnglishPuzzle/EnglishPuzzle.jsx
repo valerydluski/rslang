@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Content from './Styled/Content';
@@ -18,7 +18,10 @@ import {
   changeEnglishPuzzleLevel,
   changeEnglishPuzzlePage,
 } from '../../../redux/ChangeRounds/action';
-import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
+import { GAME_MAX_PAGE, GAME_NAME, SCREEN_SIZE } from '../../../config';
+import screenRotateIcon from '../../../assets/img/rotate-screen.svg';
+import getScreenWidth from '../../../utils/getScreenWidth';
+import Image from '../../../components/UI/Image/Image';
 
 const EnglishPuzzle = (props) => {
   const {
@@ -33,12 +36,53 @@ const EnglishPuzzle = (props) => {
     gameName,
   } = props;
   const [isModalOpen, toggleModal] = useState(false);
+  const [isBreakpoint, changeBreakpoint] = useState(false);
+  const [prevWidth, changePrevWidth] = useState(getScreenWidth());
   checkStatusSession();
+
+  const onResize = () => {
+    const curWidth = getScreenWidth();
+    if (curWidth <= SCREEN_SIZE.tablet) {
+      changeBreakpoint(true);
+    } else {
+      changeBreakpoint(false);
+    }
+    if (
+      curWidth <= SCREEN_SIZE.laptop &&
+      curWidth > SCREEN_SIZE.tablet &&
+      prevWidth > SCREEN_SIZE.laptop
+    ) {
+      // updatePage(page);
+      console.log('больше 768 меньше 1024');
+      console.log(curWidth, prevWidth);
+    } else if (curWidth > SCREEN_SIZE.laptop && prevWidth <= SCREEN_SIZE.laptop) {
+      // updatePage(page);
+      console.log('больше 1024');
+      console.log(curWidth, prevWidth);
+    }
+    changePrevWidth(curWidth);
+  };
+
+  useEffect(() => {
+    if (prevWidth < SCREEN_SIZE.tablet) {
+      changeBreakpoint(true);
+    }
+    window.addEventListener('resize', onResize);
+  });
 
   if (isWordsLoading) return <LoadingSpinner />;
 
   if (currentAppMode !== gameName) {
     switchAppMode(gameName);
+  }
+
+  if (isBreakpoint) {
+    return (
+      <Content>
+        <GoToHomePageButton />
+        <Image src={screenRotateIcon} />
+      </Content>
+    );
   }
 
   return (
