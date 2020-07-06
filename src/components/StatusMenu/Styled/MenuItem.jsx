@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ITEM_PAGE } from '../constants';
+import { DEVICE } from '../../../config';
 
 const MenuItem = styled.div`
   height: 100%;
