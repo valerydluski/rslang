@@ -1,6 +1,7 @@
 import { select, takeLatest, put, call } from 'redux-saga/effects';
 import { GENERATE_LEARN_WORDS_COLLECTION } from '../types';
 import wordsFetch from '../../../services/getLearnWordsFromAPI';
+import getAllUserWords from '../../../services/getAllUserWords';
 
 const fn = (LearnLastLevel, LearnLastWords) => {
   let newLevel;
@@ -41,15 +42,15 @@ function* generateLearnWordsCollectionWorker() {
   const getSettings = (state) => state.userSettings.settings;
   const getStatistic = (state) => state.changeStatistic.statistic;
   const { cardsPerDay, howToLearnWords, wordsPerDay } = yield select(getSettings);
-  const { LearnLastPage, LearnLastLevel } = yield select(getStatistic);
+  const { LearnLastWords, LearnLastLevel } = yield select(getStatistic);
   let data;
   let filterData;
   switch (howToLearnWords) {
     case 'allWords':
-      data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastPage));
-      filterData = filterFn(data, LearnLastPage, wordsPerDay);
+      data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastWords));
+      filterData = filterFn(data, LearnLastWords, wordsPerDay);
       if (filterData.length < wordsPerDay) {
-        data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastPage));
+        data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastWords));
         filterData = filterFn2(data, filterData, wordsPerDay);
       }
       filterData = filterData.map((el) => {
@@ -59,17 +60,18 @@ function* generateLearnWordsCollectionWorker() {
       });
       if (filterData.length < cardsPerDay) {
         const oldWordsCount = cardsPerDay - filterData.length;
-        // берём слова из словаря и вытягиваем из них нужное количество oldWordsCount
-        // добавляем слова в filterData
-        // перемешиваем
+        const getLoginState = (state) => state.login;
+        const sessionData = yield select(getLoginState);
+        const payload = yield call(getAllUserWords, sessionData);
+        const userWords = payload[0].paginatedResults.slice(0, oldWordsCount);
+        filterData = filterData.concat(userWords);
       }
       break;
     case 'newWords':
-      console.log(fn(LearnLastLevel, LearnLastPage));
-      data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastPage));
-      filterData = filterFn(data, LearnLastPage, wordsPerDay);
+      data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastWords));
+      filterData = filterFn(data, LearnLastWords, wordsPerDay);
       if (filterData.length < wordsPerDay) {
-        data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastPage));
+        data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastWords));
         filterData = filterFn2(data, filterData, wordsPerDay);
       }
       filterData = filterData.map((el) => {
@@ -79,7 +81,12 @@ function* generateLearnWordsCollectionWorker() {
       });
       break;
     case 'repeat':
-      //берём слова из словаря и перемешиваем
+      if (cardsPerDay) {
+        const getLoginState = (state) => state.login;
+        const sessionData = yield select(getLoginState);
+        const payload = yield call(getAllUserWords, sessionData);
+        filterData = payload[0].paginatedResults.slice(0, cardsPerDay);
+      }
       break;
     default:
       break;

@@ -5,7 +5,7 @@ const initialState = {
     name: 'Buddy',
     language: 'en',
     wordsPerDay: 20,
-    cardsPerDay: 20,
+    cardsPerDay: 30,
     deleteButton: true,
     addDificultWordsButton: true,
     howToLearnWords: 'newWords',

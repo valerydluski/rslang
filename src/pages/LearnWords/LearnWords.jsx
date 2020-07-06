@@ -6,7 +6,8 @@ import { generateLearnWordsCollection } from '../../redux/LearnWords/actions';
 
 function LearnWords({ generateWordsCollection }) {
   generateWordsCollection();
-  return <LearnWordsStart />;
+  // return <LearnWordsStart />;
+  return null;
 }
 
 LearnWords.propTypes = {
