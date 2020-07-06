@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import configureChartData from '../../../utils/configureChartData';
 import './Styled/styles.css';
 
 function Chart({ width, height, padding }) {
   const datum = configureChartData();
-  let value = d3.max(datum.chartPoints, function (d) {
-    return d.x;
-  });
+  let value = d3.max(datum.chartPoints, (d) => d.x);
   const xScale = d3
     .scaleLinear()
     .domain([datum.xMin, datum.xMax])
@@ -37,33 +34,17 @@ function Chart({ width, height, padding }) {
 
   const learnedArea = d3
     .area()
-    .defined(function (d) {
-      return d.x <= value;
-    })
-    .x(function (d) {
-      return xScale(d.x);
-    })
-    .y0(function (d) {
-      return yScale.range()[0];
-    })
-    .y1(function (d) {
-      return yScale(d.y);
-    });
+    .defined((d) => d.x <= value)
+    .x((d) => xScale(d.x))
+    .y0(() => yScale.range()[0])
+    .y1((d) => yScale(d.y));
 
   const unlearnedArea = d3
     .area()
-    .defined(function (d) {
-      return d.x >= value;
-    })
-    .x(function (d) {
-      return xScale(d.x);
-    })
-    .y0(function (d) {
-      return yScale.range()[0];
-    })
-    .y1(function (d) {
-      return yScale(d.y);
-    });
+    .defined((d) => d.x >= value)
+    .x((d) => xScale(d.x))
+    .y0(() => yScale.range()[0])
+    .y1((d) => yScale(d.y));
 
   const draw = () => {
     d3.selectAll('path').remove();
@@ -152,7 +133,7 @@ function Chart({ width, height, padding }) {
 
   const initHandlers = () => {
     d3.select('#canvas')
-      .on('mousemove', function () {
+      .on('mousemove', function calcPointerPosition() {
         const [x] = d3.mouse(this);
         const position = x - padding;
         value = datum.chartPoints.findIndex((item, index, array) => {
@@ -174,10 +155,8 @@ function Chart({ width, height, padding }) {
         if (value === -1) return;
         draw();
       })
-      .on('mouseleave', function () {
-        value = d3.max(datum.chartPoints, function (d) {
-          return d.x;
-        });
+      .on('mouseleave', () => {
+        value = d3.max(datum.chartPoints, (d) => d.x);
         draw();
       });
   };

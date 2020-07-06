@@ -1,11 +1,10 @@
-// import * as d3 from 'd3';
 import scaleFunction from './scaleFunction';
 
 function configureChartData() {
   const reduxData = [];
   for (let i = 0; i < 25; i += 1) {
     const date = new Date(Date.now());
-    date.setDate(date.getDate() - i);
+    date.setDate(date.getDate() + i);
     const count = Math.ceil(Math.random() * 50);
     reduxData.push({
       date,
