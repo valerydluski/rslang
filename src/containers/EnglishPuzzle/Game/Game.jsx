@@ -155,7 +155,7 @@ Game.propTypes = {
   isRowCorrect: PropTypes.bool,
   isRowFill: PropTypes.bool,
   isPageFill: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
   source: PropTypes.arrayOf(PropTypes.string).isRequired,
   results: PropTypes.arrayOf(PropTypes.string).isRequired,
   background: PropTypes.bool.isRequired,
@@ -174,6 +174,7 @@ Game.propTypes = {
 
 Game.defaultProps = {
   row: 0,
+  data: [],
   isWordsLoading: false,
   isRowCorrect: false,
   isRowFill: false,

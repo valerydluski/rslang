@@ -35,6 +35,7 @@ function* workerGetWords() {
       const data = yield call(configureData, payload, EnglishPuzzleLevel, EnglishPuzzlePage);
       yield put(updateState(data));
       yield put(updateSource());
+      console.log(data);
     }
     yield put(hideLoader());
   } catch (e) {

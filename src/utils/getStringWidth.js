@@ -1,18 +1,9 @@
-const metric = document.createElement('span');
-metric.style.position = 'absolute';
-metric.style.top = '0px';
-metric.style.left = '-100px';
-metric.style.fontSize = '10px';
-metric.style.fontWeight = 'bold';
-metric.style.textTransform = 'uppercase';
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+ctx.font = 'bold 10px Montserrat';
 
 function getStringWidth(str) {
-  document.body.append(metric);
-  metric.innerHTML = str;
-  setTimeout(() => {
-    metric.remove();
-  }, 0);
-  return metric.offsetWidth;
+  return ctx.measureText(str).width;
 }
 
 export default getStringWidth;
