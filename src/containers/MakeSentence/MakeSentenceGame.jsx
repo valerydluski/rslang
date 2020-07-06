@@ -88,7 +88,7 @@ const MakeSentenceGame = ({
   };
 
   function autoSolve() {
-    addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
+    addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
     toggleAutoSolveMode(true);
     toggleWordStatus(true);
   }
