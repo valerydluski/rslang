@@ -2,38 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LearnWordCardContainer from './LearnWordsContainer';
-import { checkStatusSession, isAlreadyCheckStatusSession } from '../../redux/Auth/Login/actions';
+import { generateLearnWordsCollection } from '../../redux/LearnWords/actions';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 function LearnWordsStart(props) {
-  const { isStatusChecked, checkStatusSessionHandler } = props;
-
-  if (!isStatusChecked) {
-    checkStatusSessionHandler();
-    return <LoadingSpinner />;
+  const { generateLearnWordsCollectionHandler, isWordsLoading, isWordsCollectionLoaded } = props;
+  if (isWordsLoading) return <LoadingSpinner />;
+  if (!isWordsCollectionLoaded) {
+    generateLearnWordsCollectionHandler();
+    return null;
   }
 
   return <LearnWordCardContainer />;
 }
 
 LearnWordsStart.propTypes = {
-  isStatusChecked: PropTypes.bool,
-  checkStatusSessionHandler: PropTypes.func.isRequired,
-};
-
-LearnWordsStart.defaultProps = {
-  isStatusChecked: false,
+  generateLearnWordsCollectionHandler: PropTypes.func.isRequired,
+  isWordsLoading: PropTypes.bool.isRequired,
+  isWordsCollectionLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    isStatusChecked: state.isStatusCheckedReducer.isAlreadyCheckStatusSession,
+    isWordsLoading: state.newLearnCardShow.loadingWordsCollection,
+    isWordsCollectionLoaded: state.newLearnCardShow.isWordsCollectionLoaded,
   };
 };
 
 const mapDispatchToProps = {
-  checkStatusSessionHandler: checkStatusSession,
-  checkedSessionStatus: isAlreadyCheckStatusSession,
+  generateLearnWordsCollectionHandler: generateLearnWordsCollection,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearnWordsStart);

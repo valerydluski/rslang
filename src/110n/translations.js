@@ -39,6 +39,7 @@ const translations = {
       isAudioTranslate: 'Play translate audio',
       isAudioTextMeaning: 'Play text meaning audio',
       isAudioTextExample: 'Play text example audio',
+      saveSettings: 'settings have been saved',
     },
     Auth: {
       signIn: 'Sign In',
@@ -144,6 +145,7 @@ const translations = {
       isAudioTranslate: 'Воспроизведение аудио первода',
       isAudioTextMeaning: 'Воспроизведение аудио значение слова',
       isAudioTextExample: 'Воспроизведение аудио пример употребления слова',
+      saveSettings: 'настройки сохранены',
     },
     Auth: {
       signIn: 'Войти',

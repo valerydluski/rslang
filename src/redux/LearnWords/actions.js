@@ -9,6 +9,10 @@ import {
   LOADING_NEW_CARD_SHOW,
   LOADING_NEW_CARD_HIDE,
   GENERATE_LEARN_WORDS_COLLECTION,
+  SAVE_LEARN_WORDS_COLLECTION,
+  LOADER_WORDS_COLLECTION_SHOW,
+  LOADER_WORDS_COLLECTION_HIDE,
+  IS_WORD_COLLECTION_LOADED,
 } from './types';
 
 export function showNewCard(card) {
@@ -77,5 +81,31 @@ export function generateLearnWordsCollection(data) {
   return {
     type: GENERATE_LEARN_WORDS_COLLECTION,
     payload: data,
+  };
+}
+
+export function saveLearnWordsCollection(data) {
+  return {
+    type: SAVE_LEARN_WORDS_COLLECTION,
+    payload: data,
+  };
+}
+
+export function wordsCollectionLoaderShow() {
+  return {
+    type: LOADER_WORDS_COLLECTION_SHOW,
+  };
+}
+
+export function wordsCollectionLoaderHide() {
+  return {
+    type: LOADER_WORDS_COLLECTION_HIDE,
+  };
+}
+
+export function isWordsCollectionLoadedHandler(bool) {
+  return {
+    type: IS_WORD_COLLECTION_LOADED,
+    payload: bool,
   };
 }

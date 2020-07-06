@@ -11,10 +11,18 @@ const {
 const fixNumberForLink = 1;
 const wordsPerSentenceGames = 100;
 const gameWordsPerPage = 50;
+const wordsPerLevel = 600;
+const pagePerLevel = wordsPerLevel / gameWordsPerPage;
 
 const createData = (level, words) => {
-  const pageForLink = Math.ceil(words / gameWordsPerPage);
-  const linkLevel = `${GROUP}=${level - fixNumberForLink}`;
+  let newLevel = level;
+  let pageForLink = Math.ceil(words / gameWordsPerPage);
+  if (pageForLink > pagePerLevel) {
+    pageForLink = 1;
+    newLevel += 1;
+  }
+  if (level > 6) newLevel = 1;
+  const linkLevel = `${GROUP}=${newLevel - fixNumberForLink}`;
   const linkPage = `${PAGE}=${pageForLink - fixNumberForLink}`;
   const wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentenceGames}`;
   const wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;

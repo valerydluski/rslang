@@ -2,17 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LearnWords from '../../components/LearnWords/LearnWords';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { LINK_FOR_AUDIO } from '../../config';
-import {
-  correctCard,
-  showNewCard,
-  nextNewCard,
-  saveWordToState,
-} from '../../redux/LearnWords/actions';
-import { checkStatusSession } from '../../redux/Auth/Login/actions';
+import { correctCard, showNewCard, saveWordToState } from '../../redux/LearnWords/actions';
 import updateOneWord from '../../services/updateOneWord';
-import getRandomValuesFromArray from '../../utils/getRandomValuesFromArray';
 
 function getWord(arr) {
   const w = arr.shift();
@@ -21,69 +13,28 @@ function getWord(arr) {
 }
 
 function LearnWordCardContainer(props) {
-  let wordsCollection;
   const {
     correctCardHandler,
     isCorrect,
     showNewCardHandler,
-    isDataLoading,
     settings,
     user,
-    userWords,
-    isUserWordsLoading,
-    nextNewCardHandler,
-    nextCard,
     resetSaveWord,
+    wordsCollection,
   } = props;
-  const {
-    howToLearnWords,
-    isAudioTranslate,
-    isAudioTextMeaning,
-    isAudioTextExample,
-    cardsPerDay,
-    wordsPerDay,
-  } = settings.settings;
+  const { isAudioTranslate, isAudioTextMeaning, isAudioTextExample } = settings.settings;
   const [currentWord, setCurrentWord] = useState();
   const [isTranslationShow, setIsTranslationShow] = useState(false);
   const [isSoundPlay, setIsSoundPlay] = useState(true);
   const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
 
-  if (isDataLoading || isUserWordsLoading) {
-    return <LoadingSpinner />;
-  }
-  const words = userWords[0].paginatedResults;
-  switch (howToLearnWords) {
-    case 'allWords':
-      wordsCollection = getRandomValuesFromArray(words, cardsPerDay);
-      break;
-    case 'newWords':
-      if (!nextCard) {
-        nextNewCardHandler();
-      }
-      wordsCollection = [nextCard];
-      break;
-    case 'repeat':
-      if (words.length < cardsPerDay) {
-        wordsCollection = words;
-        break;
-      }
-      wordsCollection = getRandomValuesFromArray(words, cardsPerDay);
-      break;
-    default:
-      break;
-  }
-
-  if (!nextCard && howToLearnWords === 'newWords') {
-    return null;
-  }
+  let isAudiosPlay;
+  let audiosLinks;
+  let audios;
 
   if (!currentWord) {
     setCurrentWord(getWord(wordsCollection));
   }
-
-  let isAudiosPlay;
-  let audiosLinks;
-  let audios;
 
   if (currentWord && !isCorrect && !isRightAnswerShow) {
     showNewCardHandler(currentWord);
@@ -145,7 +96,7 @@ function LearnWordCardContainer(props) {
         setIsRightAnswerShow(true);
         break;
       default:
-        if (answer === word) {
+        if (answer.toLowerCase() === word.toLowerCase()) {
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
             nextWord();
@@ -164,7 +115,6 @@ function LearnWordCardContainer(props) {
         }
     }
   };
-
   return (
     <LearnWords
       isTranslationShow={isTranslationShow}
@@ -178,12 +128,10 @@ function LearnWordCardContainer(props) {
 }
 
 LearnWordCardContainer.propTypes = {
-  isUserWordsLoading: PropTypes.bool,
-  isDataLoading: PropTypes.bool,
   correctCardHandler: PropTypes.func.isRequired,
-  nextNewCardHandler: PropTypes.func.isRequired,
   showNewCardHandler: PropTypes.func.isRequired,
   resetSaveWord: PropTypes.func.isRequired,
+  wordsCollection: PropTypes.instanceOf(Array).isRequired,
   isCorrect: PropTypes.bool,
   settings: PropTypes.shape({
     settings: PropTypes.shape({
@@ -198,15 +146,10 @@ LearnWordCardContainer.propTypes = {
     }),
   }),
   user: PropTypes.shape().isRequired,
-  nextCard: PropTypes.shape(),
-  userWords: PropTypes.instanceOf(Array).isRequired,
 };
 
 LearnWordCardContainer.defaultProps = {
-  isDataLoading: false,
-  nextCard: null,
   isCorrect: false,
-  isUserWordsLoading: false,
   settings: PropTypes.shape({
     settings: PropTypes.shape({
       deleteButton: true,
@@ -221,22 +164,17 @@ LearnWordCardContainer.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    isDataLoading: state.loadDataLoaderReducer.loading,
     isCorrect: state.correctLearnCard.isCorrect,
-    isCheckStatusLoading: state.checkStatusloaderReducer.loading,
     userWords: state.userWords.words,
-    isUserWordsLoading: state.userWords.loading,
     settings: state.userSettings,
     user: state.login,
-    nextCard: state.newLearnCardShow.nextCard,
+    wordsCollection: state.newLearnCardShow.wordsCollection,
   };
 };
 
 const mapDispatchToProps = {
   correctCardHandler: correctCard,
   showNewCardHandler: showNewCard,
-  checkStatusSessionHandler: checkStatusSession,
-  nextNewCardHandler: nextNewCard,
   resetSaveWord: saveWordToState,
 };
 

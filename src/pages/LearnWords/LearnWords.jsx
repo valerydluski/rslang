@@ -2,20 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LearnWordsStart from '../../containers/LearnWords/LearnWordsStart';
-import { generateLearnWordsCollection } from '../../redux/LearnWords/actions';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import { checkStatusSession } from '../../redux/Auth/Login/actions';
 
-function LearnWords({ generateWordsCollection }) {
-  generateWordsCollection();
-  // return <LearnWordsStart />;
-  return null;
+function LearnWords({ isLoading, isDataLoad, checkStatus }) {
+  if (isLoading) return <LoadingSpinner />;
+  if (!isDataLoad) {
+    checkStatus();
+    return null;
+  }
+  return <LearnWordsStart />;
 }
 
 LearnWords.propTypes = {
-  generateWordsCollection: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isDataLoad: PropTypes.bool.isRequired,
+  checkStatus: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.loadDataLoaderReducer.loading,
+    isDataLoad: state.dataLoad.isDataLoadFromApi,
+  };
 };
 
 const mapDispatchToProps = {
-  generateWordsCollection: generateLearnWordsCollection,
+  checkStatus: checkStatusSession,
 };
 
-export default connect(null, mapDispatchToProps)(LearnWords);
+export default connect(mapStateToProps, mapDispatchToProps)(LearnWords);

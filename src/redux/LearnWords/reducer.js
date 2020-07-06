@@ -6,7 +6,11 @@ import {
   NEW_CARD_VALUE_SHOWS,
   LOADING_NEW_CARD_HIDE,
   LOADING_NEW_CARD_SHOW,
-} from '../types';
+  SAVE_LEARN_WORDS_COLLECTION,
+  LOADER_WORDS_COLLECTION_SHOW,
+  LOADER_WORDS_COLLECTION_HIDE,
+  IS_WORD_COLLECTION_LOADED,
+} from './types';
 
 const initialState = {
   card: null,
@@ -15,6 +19,9 @@ const initialState = {
   page: 1,
   newCardsShow: 0,
   loading: false,
+  wordsCollection: [],
+  loadingWordsCollection: false,
+  isWordsCollectionLoaded: false,
 };
 
 function newLearnCardShow(state = initialState, action) {
@@ -33,6 +40,14 @@ function newLearnCardShow(state = initialState, action) {
       return { ...state, loading: action.payload };
     case LOADING_NEW_CARD_SHOW:
       return { ...state, loading: action.payload };
+    case SAVE_LEARN_WORDS_COLLECTION:
+      return { ...state, wordsCollection: action.payload };
+    case LOADER_WORDS_COLLECTION_SHOW:
+      return { ...state, loadingWordsCollection: true };
+    case LOADER_WORDS_COLLECTION_HIDE:
+      return { ...state, loadingWordsCollection: false };
+    case IS_WORD_COLLECTION_LOADED:
+      return { ...state, isWordsCollectionLoaded: action.payload };
     default:
       return state;
   }

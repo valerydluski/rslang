@@ -1,4 +1,16 @@
-import { SAVE_FULL_STATISTIC, GET_STATISTIC_FROM_API, SAVE_FULL_STATISTIC_TO_STORE } from './types';
+import {
+  SAVE_FULL_STATISTIC,
+  GET_STATISTIC_FROM_API,
+  SAVE_FULL_STATISTIC_TO_STORE,
+  SET_LEARN_WORDS_STATISTIC,
+  SAVE_FULL_STATISTIC_TO_SERVER,
+} from './types';
+
+export function saveFullStatisticToApi() {
+  return {
+    type: SAVE_FULL_STATISTIC_TO_SERVER,
+  };
+}
 
 export function saveFullStatistic(statistic) {
   return {
@@ -18,5 +30,13 @@ export function saveFullStatisticToStore(statistic) {
   return {
     type: SAVE_FULL_STATISTIC_TO_STORE,
     payload: statistic,
+  };
+}
+
+export function setLearnWordsStatistic(obj) {
+  return {
+    type: SET_LEARN_WORDS_STATISTIC,
+    payload: obj,
+    from: 'LearnWords',
   };
 }

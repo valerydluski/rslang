@@ -1,7 +1,14 @@
 import { select, takeLatest, put, call } from 'redux-saga/effects';
 import { GENERATE_LEARN_WORDS_COLLECTION } from '../types';
+import getRandomValuesFromArray from '../../../utils/getRandomValuesFromArray';
 import wordsFetch from '../../../services/getLearnWordsFromAPI';
 import getAllUserWords from '../../../services/getAllUserWords';
+import {
+  saveLearnWordsCollection,
+  wordsCollectionLoaderShow,
+  wordsCollectionLoaderHide,
+  isWordsCollectionLoadedHandler,
+} from '../actions';
 
 const fn = (LearnLastLevel, LearnLastWords) => {
   let newLevel;
@@ -39,6 +46,7 @@ const filterFn2 = (data, filterData, wordsPerDay) => {
 };
 
 function* generateLearnWordsCollectionWorker() {
+  yield put(wordsCollectionLoaderShow());
   const getSettings = (state) => state.userSettings.settings;
   const getStatistic = (state) => state.changeStatistic.statistic;
   const { cardsPerDay, howToLearnWords, wordsPerDay } = yield select(getSettings);
@@ -63,7 +71,7 @@ function* generateLearnWordsCollectionWorker() {
         const getLoginState = (state) => state.login;
         const sessionData = yield select(getLoginState);
         const payload = yield call(getAllUserWords, sessionData);
-        const userWords = payload[0].paginatedResults.slice(0, oldWordsCount);
+        const userWords = getRandomValuesFromArray(payload[0].paginatedResults, oldWordsCount);
         filterData = filterData.concat(userWords);
       }
       break;
@@ -85,12 +93,15 @@ function* generateLearnWordsCollectionWorker() {
         const getLoginState = (state) => state.login;
         const sessionData = yield select(getLoginState);
         const payload = yield call(getAllUserWords, sessionData);
-        filterData = payload[0].paginatedResults.slice(0, cardsPerDay);
+        filterData = getRandomValuesFromArray(payload[0].paginatedResults, cardsPerDay);
       }
       break;
     default:
       break;
   }
+  yield put(saveLearnWordsCollection(filterData));
+  yield put(isWordsCollectionLoadedHandler(true));
+  yield put(wordsCollectionLoaderHide());
 }
 
 export default function* generateLearnWordsCollectionWatcher() {

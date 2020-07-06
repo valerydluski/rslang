@@ -87,6 +87,8 @@ export const MIN_WORDS_PER_PAGE = 5;
 export const GAME_MAX_PAGE = 60;
 export const GAME_MAX_LEVEL = 6;
 
+export const WORDS_PER_PAGE = 600;
+
 export const CHECKBOXES = [
   'isTranslate',
   'isTextMeaning',
@@ -141,6 +143,10 @@ export const INITIAL_STATISTIC = {
   MakeSentencePassedRound: '0',
   LearnLastWords: '0',
   LearnLastLevel: '0',
+  RepeatWordsToday: '0',
+  CountCardsShow: '0',
+  CountNewWordsToday: '0',
+  lastTrain: '0',
 };
 
 export const INIT_GAMES_ROUND = [

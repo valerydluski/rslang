@@ -19,6 +19,7 @@ function SettingContent(props) {
     } else {
       saveToStore(formData);
       saveToAPI();
+      toast.success(<Translate value="Settings.saveSettings" />);
     }
   };
   if (isLoadingData) return <LoadingSpinner />;
