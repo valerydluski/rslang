@@ -119,13 +119,8 @@ export function updateState({ data, audios, translations, pic }) {
 
 export function updatePageStatus(row) {
   return (dispatch) => {
-    if (row === ROWS_IN_PAGE) {
-      const isPageFill = true;
-      dispatch(changePageStatus(isPageFill));
-    } else {
-      dispatch(updateRow(row));
-      dispatch(updateSource());
-    }
+    dispatch(updateRow(row));
+    dispatch(updateSource());
   };
 }
 

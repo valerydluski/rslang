@@ -22,6 +22,7 @@ import { GAME_MAX_PAGE, GAME_NAME, SCREEN_SIZE } from '../../../config';
 import screenRotateIcon from '../../../assets/img/rotate-screen.svg';
 import getScreenWidth from '../../../utils/getScreenWidth';
 import Image from '../../../components/UI/Image/Image';
+import newRound from '../../../utils/newRound';
 
 const EnglishPuzzle = (props) => {
   const {
@@ -63,6 +64,18 @@ const EnglishPuzzle = (props) => {
     }
   };
 
+  const newGame = () => {
+    toggleModal(false);
+    const { newLevel, newPage } = newRound(level, page, maxPage);
+    if (newLevel !== level) updateLevel(newLevel);
+    if (newPage !== page) updatePage(newPage);
+  };
+
+  const restartGame = () => {
+    toggleModal(false);
+    updatePage(page);
+  };
+
   useEffect(() => {
     if (prevWidth < SCREEN_SIZE.tablet) {
       changeBreakpoint(true);
@@ -89,7 +102,12 @@ const EnglishPuzzle = (props) => {
     <Content>
       <GoToHomePageButton />
       {isModalOpen ? (
-        <ResultModal showProperties={['textExample']} />
+        <ResultModal
+          audioForPlay="audioExample"
+          showProperties={['word', 'textExample']}
+          restartGame={restartGame}
+          newGame={newGame}
+        />
       ) : (
         <Container>
           <MenuContainer>

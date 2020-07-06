@@ -10,6 +10,7 @@ const Content = styled.div`
   justify-content: center;
 
   @media ${DEVICE.laptop} {
+    height: 100vh;
     min-height: 414px;
   }
 `;
