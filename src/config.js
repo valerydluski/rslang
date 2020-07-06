@@ -101,7 +101,7 @@ export const GAME_NAME = {
   savannah: 'Savannah',
   audioCall: 'AudioCall',
   sprint: 'Sprint',
-  ownGame: 'OwnGame',
+  makeSentence: 'MakeSentence',
   learnWords: 'LearnWords',
 };
 
@@ -132,13 +132,23 @@ export const INITIAL_STATISTIC = {
   SavannahLastRound: '0',
   AudioCallLastRound: '0',
   SprintLastRound: '0',
-  OwnGameLastRound: '0',
+  MakeSentenceLastRound: '0',
   SpeakITPassedRound: '0',
   EnglishPuzzlePassedRound: '0',
   SavannahPassedRound: '0',
   AudioCallPassedRound: '0',
   SprintPassedRound: '0',
-  OwnGamePassedRound: '0',
+  MakeSentencePassedRound: '0',
   LearnLastWords: '0',
   LearnLastLevel: '0',
 };
+
+export const INIT_GAMES_ROUND = [
+  'SpeakITLastRound',
+  'EnglishPuzzleLastRound',
+  'SavannahLastRound',
+  'AudioCallLastRound',
+  'SprintLastRound',
+  'MakeSentenceLastRound',
+  'Learn',
+];

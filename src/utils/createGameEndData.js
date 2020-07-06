@@ -1,3 +1,5 @@
+import newRound from './newRound';
+
 const createGameEndData = (
   level,
   page,
@@ -5,9 +7,11 @@ const createGameEndData = (
   Statistic,
   wrongWords,
   gameName,
-  wordsPerPage
+  wordsPerPage,
+  maxPage
 ) => {
-  const lastRound = `${level}_${page}`;
+  const { newLevel, newPage } = newRound(level, page, maxPage);
+  const lastRound = `${level}_${page}_${newLevel}_${newPage}`;
   const newStatistic = Statistic;
   const date = new Date();
   const formater = new Intl.DateTimeFormat('ru', {

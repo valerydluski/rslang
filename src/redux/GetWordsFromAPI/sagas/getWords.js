@@ -24,7 +24,6 @@ import { updateState, updateSource } from '../../EnglishPuzzle/actions';
 function* workerGetWords() {
   try {
     yield put(showLoader());
-    yield delay(1000);
     const state = yield select();
     const { appMode } = state.changeAppMode;
     const payload = yield call(wordsFetch, state);
