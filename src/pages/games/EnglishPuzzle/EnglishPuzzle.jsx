@@ -37,34 +37,18 @@ const EnglishPuzzle = (props) => {
   } = props;
   const [isModalOpen, toggleModal] = useState(false);
   const [isBreakpoint, changeBreakpoint] = useState(false);
-  const [prevWidth, changePrevWidth] = useState(getScreenWidth());
   checkStatusSession();
 
   const onResize = () => {
-    const curWidth = getScreenWidth();
-    if (curWidth <= SCREEN_SIZE.tablet) {
+    if (getScreenWidth() <= SCREEN_SIZE.tablet) {
       changeBreakpoint(true);
     } else {
       changeBreakpoint(false);
     }
-    if (
-      curWidth <= SCREEN_SIZE.laptop &&
-      curWidth > SCREEN_SIZE.tablet &&
-      prevWidth > SCREEN_SIZE.laptop
-    ) {
-      // updatePage(page);
-      console.log('больше 768 меньше 1024');
-      console.log(curWidth, prevWidth);
-    } else if (curWidth > SCREEN_SIZE.laptop && prevWidth <= SCREEN_SIZE.laptop) {
-      // updatePage(page);
-      console.log('больше 1024');
-      console.log(curWidth, prevWidth);
-    }
-    changePrevWidth(curWidth);
   };
 
   useEffect(() => {
-    if (prevWidth < SCREEN_SIZE.tablet) {
+    if (getScreenWidth() < SCREEN_SIZE.tablet) {
       changeBreakpoint(true);
     }
     window.addEventListener('resize', onResize);
