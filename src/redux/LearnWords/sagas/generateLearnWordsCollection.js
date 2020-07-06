@@ -46,6 +46,23 @@ function* generateLearnWordsCollectionWorker() {
   let filterData;
   switch (howToLearnWords) {
     case 'allWords':
+      data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastWords));
+      filterData = filterFn(data, LearnLastWords, wordsPerDay);
+      if (filterData.length < wordsPerDay) {
+        data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastWords));
+        filterData = filterFn2(data, filterData, wordsPerDay);
+      }
+      filterData = filterData.map((el) => {
+        const newEl = el;
+        newEl.isNew = true;
+        return newEl;
+      });
+      if (filterData.length < cardsPerDay) {
+        const oldWordsCount = cardsPerDay - filterData.length;
+        // берём слова из словаря и вытягиваем из них нужное количество oldWordsCount
+        // добавляем слова в filterData
+        // перемешиваем
+      }
       break;
     case 'newWords':
       data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastWords));
@@ -61,6 +78,7 @@ function* generateLearnWordsCollectionWorker() {
       });
       break;
     case 'repeat':
+      //берём слова из словаря и перемешиваем
       break;
     default:
       break;
