@@ -65,6 +65,7 @@ const StyledPuzzle = styled.span`
     background-size: ${PLAYFIELD_WIDTH_LAPTOP}px ${PLAYFIELD_HEIGHT_LAPTOP}px;
     padding: 0 ${PUZZLE_PADDING_LAPTOP}px;
     margin-left: -${PUZZLE_PADDING_LAPTOP}px;
+    font-size: 7px;
   }
 `;
 

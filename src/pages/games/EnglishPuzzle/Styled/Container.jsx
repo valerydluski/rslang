@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../config';
 
 const Container = styled.div`
   max-width: 1024px;
@@ -8,6 +9,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${DEVICE.laptop} {
+    padding: 0 60px;
+  }
 `;
 
 export default Container;
