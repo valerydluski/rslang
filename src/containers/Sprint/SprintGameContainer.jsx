@@ -8,11 +8,21 @@ import randomIntegerGenerator from '../../utils/randomIntegerGenerator';
 import { changeIDontKnowWords } from '../../redux/Games/action';
 import shuffleArray from '../../utils/shuffleArray';
 import ResultModal from '../Modal/ResultModal';
+import { saveFullStatistic } from '../../redux/Statistic/action';
 
 let currentGameWords;
 
 const SprintGameContainer = (props) => {
-  const { wordsCollection, finishGameHandler, isGameFinished, addWrongWordsToStore } = props;
+  const {
+    wordsCollection,
+    finishGameHandler,
+    isGameFinished,
+    addWrongWordsToStore,
+    saveStatistic,
+    level,
+    page,
+    gameName,
+  } = props;
   const [currentWordIndex, changeWordIndex] = useState(0);
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
@@ -22,6 +32,13 @@ const SprintGameContainer = (props) => {
   if (!currentWordIndex) currentGameWords = shuffleArray(wordsCollection);
   if (isGameFinished) {
     addWrongWordsToStore(wrongAnsweredWords);
+    saveStatistic({
+      Level: level,
+      Page: page,
+      wordsCollection,
+      wrongWordsState: wrongAnsweredWords,
+      gameName,
+    });
     return (
       <ResultModal
         correctWords={correctAnsweredWords}
@@ -79,6 +96,10 @@ SprintGameContainer.propTypes = {
   isGameFinished: PropTypes.bool,
   finishGameHandler: PropTypes.func,
   addWrongWordsToStore: PropTypes.func,
+  saveStatistic: PropTypes.func.isRequired,
+  level: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
+  gameName: PropTypes.string.isRequired,
 };
 
 SprintGameContainer.defaultProps = {
@@ -90,6 +111,7 @@ SprintGameContainer.defaultProps = {
 
 const mapDispatchToProps = {
   addWrongWordsToStore: changeIDontKnowWords,
+  saveStatistic: saveFullStatistic,
 };
 
 export default connect(null, mapDispatchToProps)(SprintGameContainer);
