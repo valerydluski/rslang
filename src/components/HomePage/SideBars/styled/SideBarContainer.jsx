@@ -68,11 +68,10 @@ const SideBarContainer = styled.div`
     ul {
       color: #ffffff;
       background-color: #404497;
-      /* width: 100vw; */
-     /* width: 97vw; */
-     /* height: 100vh; */
-      position: absolute;
-    /*  right: -35vw; */
+      position: fixed;
+      width: 93vw;
+      right: 0%;
+      height: 100vh;
       } 
   }
    

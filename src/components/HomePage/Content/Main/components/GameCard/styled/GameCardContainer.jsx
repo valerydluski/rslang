@@ -6,6 +6,7 @@ const GameCardContainer = styled.div`
   h3 {
     font-weight: bold;
     font-size: 18px;
+    height: 35px;
     line-height: 22px;
     text-transform: uppercase;
     color: #000000;
@@ -69,17 +70,21 @@ const GameCardContainer = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 90%;
+    width: 97%;
     height: 55vh;
   }
 
   @media (max-width: 420px) {
     height: 45vh;
-    width: 80%;
+    width: 80vw;
   }
 
   @media (max-width: 390px) {
-    width: 75%;
+    width: 80vw;
+  }
+
+  @media (max-width: 340px) {
+    width: 77vw;
   }
 `;
 

@@ -28,16 +28,22 @@ const StyledRoundButton = styled.button`
 
   @media (max-width: 767px) {
     margin-top: 0px;
-    margin-left: 0;
     width: 74px;
     height: 74px;
     font-size: 23px;
+    margin-left: 8px;
   }
+
+  @media (max-width: 600px) {
+    margin-left: 0px;
+  }
+
 
   @media (max-width: 450px) {
     width: 50px;
     height: 50px;
     font-size: 14px;
+    margin-left: 8px;
   }
 `;
 

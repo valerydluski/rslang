@@ -37,7 +37,7 @@ const StyledButtonWithIcon = styled.button`
   }
 
   @media (max-width: 767px) {
-    display: none;
+   display: none;
   }
 `;
 

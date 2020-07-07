@@ -1,12 +1,26 @@
 import styled from 'styled-components';
 import React from 'react';
-import MainNavigationMenu from '../../../../../containers/Navigation/MainNavigationMenu'
+import { Translate } from 'react-redux-i18n';
+import MainNavigationMenu from '../../../../../containers/Navigation/MainNavigationMenu';
+import StyledButtonWithIcon from '../../../../UI/Button/Styled/StyledButtonWithIcon';
+import iconLogout from '../../../../UI/Icon/iconLogout.svg';
+import iconSettings from '../../../../UI/Icon/iconSettings.svg';
+import iconLogoutHover from '../../../../UI/Icon/iconLogoutHover.svg';
+import iconSettingsHover from '../../../../UI/Icon/iconSettingsHover.svg';
+import getRedirectFunction from '../../../../../utils/getRedirectFunction';
+import { resetSessionData } from '../../../../../redux/Auth/Login/actions';
+import Logo from '../../../../UI/Logo/Logo';
 
 const BurgerMenuContainer = styled.div`
   cursor: pointer;
   display: none;
-  margin-left: 45px;
   margin-top: 10px;
+
+  button {
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+  }
 
   .navbar-list {
     z-index: 10;
@@ -17,7 +31,20 @@ const BurgerMenuContainer = styled.div`
     transition: 1s all ease;
   }
 
-  input:checked ~.navbar-list {
+  div {
+    position: absolute;
+  }
+
+  input:checked ~ .navbar-list {
+    opacity: 1;
+    visibility: unset;
+  }
+
+  input:checked ~ .logo {
+    background: white;
+  }
+
+  input:checked ~ button {
     opacity: 1;
     visibility: unset;
   }
@@ -26,19 +53,19 @@ const BurgerMenuContainer = styled.div`
     opacity: 0;
     transition: 0.3s ease-in-out;
   }
-  
+
   input:checked ~ label .two {
     transform: rotate(-45deg);
     margin-bottom: 0;
     transition: 0.3s all ease;
   }
-  
+
   input:checked ~ label .three {
     transform: rotate(45deg);
     margin-bottom: 0;
     transition: 0.3s all ease;
   }
-  
+
   input:checked ~ label .four {
     opacity: 0;
     transition: 0.3s all ease;
@@ -47,15 +74,44 @@ const BurgerMenuContainer = styled.div`
   @media (max-width: 767px) {
     display: block;
     .navbar-list {
-    display: block;
+      display: block;
+    }
+    button {
+      position: fixed;
+      display: block;
+      margin-top: 85vh;
+      margin-left: 7vw;
+    }
+
+    button: first-of-type {
+      margin-top: 77vh;
+    }
+
+    button span {
+      margin-left: 7vw;
+    }
+
+    span {
+      font-size: 21px;
+      color: #ffffff;
+    }
+  }
+
+  @media (max-width: 700px) {
+    button {
+      margin-left: 4vw;
+    }
+  }
+
+  @media (max-width: 600px) {
+    button {
+      margin-left: -13vw;
     }
   }
 `;
 
 const BurgerMenuInput = styled.input`
   display: none;
-
-  
 `;
 
 const BurgerMenuLabel = styled.label`
@@ -82,15 +138,12 @@ const BurgerMenuFirstLine = styled.div`
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
-
   margin-top: 5px;
-
   @media (max-width: 767px) {
     display: block;
   }
-
-  @media (max-width: 450x) {
-    left: 80%;
+  @media (max-width: 450px) {
+    left: 83%;
   }
 `;
 
@@ -107,15 +160,14 @@ const BurgerMenuSecondLine = styled.div`
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
-
   margin-top: 15px;
 
   @media (max-width: 767px) {
     display: block;
   }
 
-  @media (max-width: 450x) {
-    left: 80%;
+  @media (max-width: 450px) {
+    left: 83%;
   }
 `;
 
@@ -132,15 +184,14 @@ const BurgerMenuThirdLine = styled.div`
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
-
   margin-top: 15px;
 
   @media (max-width: 767px) {
     display: block;
   }
 
-  @media (max-width: 450x) {
-    left: 80%;
+  @media (max-width: 450px) {
+    left: 83%;
   }
 `;
 
@@ -162,24 +213,39 @@ const BurgerMenuFourthLine = styled.div`
     display: block;
   }
 
-  @media (max-width: 450x) {
-    left: 80%;
+  @media (max-width: 450px) {
+    left: 83%;
   }
 `;
 
-const BurgerMenu = () => {
+const BurgerMenu = (props) => {
+  const { resetSessionData } = props;
   return (
     <BurgerMenuContainer>
-      <BurgerMenuInput id="check-nav" type="checkbox"/>
+      <BurgerMenuInput id="check-nav" type="checkbox" />
       <BurgerMenuLabel for="check-nav">
-        <BurgerMenuFirstLine className='one'/>
-        <BurgerMenuSecondLine className='two'/>
-        <BurgerMenuThirdLine className='three'/>
-        <BurgerMenuFourthLine className='four'/>
+        <BurgerMenuFirstLine className="one" />
+        <BurgerMenuSecondLine className="two" />
+        <BurgerMenuThirdLine className="three" />
+        <BurgerMenuFourthLine className="four" />
       </BurgerMenuLabel>
       <MainNavigationMenu />
+      <StyledButtonWithIcon
+        icon={iconSettings}
+        iconHover={iconSettingsHover}
+        onClick={getRedirectFunction('/settings')}
+      >
+        <Translate value="HomePage.settings" />
+      </StyledButtonWithIcon>
+      <StyledButtonWithIcon
+        icon={iconLogout}
+        iconHover={iconLogoutHover}
+        onClick={resetSessionData}
+      >
+        <Translate value="HomePage.logout" />
+      </StyledButtonWithIcon>
     </BurgerMenuContainer>
   );
-  }
+};
 
 export default BurgerMenu;

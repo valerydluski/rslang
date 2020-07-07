@@ -17,11 +17,11 @@ const ContentContainer = styled.main`
   }
 
   @media (max-width: 500px) {
-    width: 90%;
+    width: 95vw;
   }
 
   @media (max-width: 380px) {
-    width: 79%;
+    width: 94vw;
   }
 `;
 

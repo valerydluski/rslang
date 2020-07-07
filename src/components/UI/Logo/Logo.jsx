@@ -56,7 +56,7 @@ function Logo(props) {
   const { onClick, className } = props;
   return (
     <LogoContainer onClick={onClick} className={className}>
-      <LogoImage>
+      <LogoImage className={'logo'}>
         <LogoImageText>RS</LogoImageText>
       </LogoImage>
       <LogoTitle>Lang</LogoTitle>

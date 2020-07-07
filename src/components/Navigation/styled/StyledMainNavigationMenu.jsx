@@ -47,14 +47,22 @@ const StyledMainNavigationMenu = styled.div`
   }
 
 
-  @media (max-width: 980px) {
-    li a {
-      /* padding-left: 20px; */
-    }
-  }
-
   @media (max-width: 767px) {
     display: none;
+
+    li {
+      margin-bottom: 8vh;
+      margin-left: 65%;
+    }
+
+    li:first-of-type {
+    margin-top: 23vh;
+    }
+
+    span {
+      font-size: 22px;
+    }
+
     li a {
       color: #ffffff;
     }
@@ -70,6 +78,18 @@ const StyledMainNavigationMenu = styled.div`
 
   li .active_link::before {
     background-color: #fec246;
+  }
+
+  @media (max-width: 600px) {
+    li {
+    margin-left: 55%;
+    }
+  }
+
+  @media (max-width: 400px) {
+    li {
+    margin-left: 45%;
+    }
   }
 `;
 

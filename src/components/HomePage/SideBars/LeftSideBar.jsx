@@ -16,7 +16,7 @@ export default function LeftSideBar(props) {
   const { resetSessionData } = props;
   return (
     <SideBarContainer>
-      <Logo />
+      <Logo/>
       <BurgerMenu />
       <MainNavigationMenu />
       <div>
