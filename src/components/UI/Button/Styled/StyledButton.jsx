@@ -52,6 +52,7 @@ const ButtonStyled = styled.button`
 
   &.big-button {
     width: 405px;
+    background-color: #f56748;
 
     @media ${DEVICE.laptopL} {
       width: 300px;
@@ -67,7 +68,7 @@ const ButtonStyled = styled.button`
   }
 
   &.active {
-    background-color: #f56748;
+    background-color: #fec246;
   }
 `;
 

@@ -15,6 +15,7 @@ import {
   LEARN_WORDS_CHANGE_LEVEL,
   CHANGE_INITIAL_ROUND,
 } from './types';
+import RESET_STORE from '../resetStore/types';
 
 const initialState = {
   SpeakITLevel: '1',
@@ -79,6 +80,8 @@ const changeRoundReducer = (state = initialState, action) => {
         MakeSentenceLevel: action.payload.MakeSentenceLevel,
         MakeSentencePage: action.payload.MakeSentencePage,
       };
+    case RESET_STORE:
+      return { ...initialState };
     default:
       return state;
   }

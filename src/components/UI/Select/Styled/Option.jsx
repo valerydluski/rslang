@@ -23,6 +23,10 @@ const Option = styled.button`
   &:hover {
     text-decoration: underline;
   }
+
+  @media (max-width: 520px) {
+    font-size: 12px;
+  }
 `;
 
 export default Option;

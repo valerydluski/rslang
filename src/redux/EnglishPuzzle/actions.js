@@ -1,4 +1,4 @@
-import { TARGET_ID, SOURCE_ID, ROWS_IN_PAGE } from '../../containers/EnglishPuzzle/Game/constants';
+import { TARGET_ID, SOURCE_ID } from '../../containers/EnglishPuzzle/Game/constants';
 
 import {
   UPDATE_PUZZLES_POSITION,
@@ -119,13 +119,8 @@ export function updateState({ data, audios, translations, pic }) {
 
 export function updatePageStatus(row) {
   return (dispatch) => {
-    if (row === ROWS_IN_PAGE) {
-      const isPageFill = true;
-      dispatch(changePageStatus(isPageFill));
-    } else {
-      dispatch(updateRow(row));
-      dispatch(updateSource());
-    }
+    dispatch(updateRow(row));
+    dispatch(updateSource());
   };
 }
 
