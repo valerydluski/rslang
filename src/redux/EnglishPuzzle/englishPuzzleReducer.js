@@ -13,9 +13,10 @@ import {
   SWITCH_BACKGROUND,
   UPDATE_PIC,
 } from './types';
+import RESET_STORE from '../resetStore/types';
 
 const initialState = {
-  data: [],
+  data: [{}],
   translations: [],
   audios: [new Audio()],
   source: [],
@@ -120,6 +121,8 @@ const englishPuzzleReducer = (state = initialState, action) => {
         background: !state.background,
       };
     }
+    case RESET_STORE:
+      return { ...initialState };
     default:
       return state;
   }

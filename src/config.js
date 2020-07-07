@@ -95,6 +95,15 @@ export const CHECKBOXES = [
   'isImageAssociation',
 ];
 
+export const SCREEN_SIZE = {
+  mobileS: 320,
+  mobileM: 375,
+  mobileL: 425,
+  tablet: 768,
+  laptop: 1024,
+  laptopL: 1440,
+  desktop: 2560,
+};
 export const GAME_NAME = {
   speakIT: 'SpeakIT',
   englishPuzzle: 'EnglishPuzzle',
@@ -105,25 +114,15 @@ export const GAME_NAME = {
   learnWords: 'LearnWords',
 };
 
-const size = {
-  mobileS: '320px',
-  mobileM: '375px',
-  mobileL: '425px',
-  tablet: '768px',
-  laptop: '1024px',
-  laptopL: '1440px',
-  desktop: '2560px',
-};
-
 export const DEVICE = {
-  mobileS: `(max-width: ${size.mobileS})`,
-  mobileM: `(max-width: ${size.mobileM})`,
-  mobileL: `(max-width: ${size.mobileL})`,
-  tablet: `(max-width: ${size.tablet})`,
-  laptop: `(max-width: ${size.laptop})`,
-  laptopL: `(max-width: ${size.laptopL})`,
-  desktop: `(max-width: ${size.desktop})`,
-  desktopL: `(max-width: ${size.desktop})`,
+  mobileS: `(max-width: ${SCREEN_SIZE.mobileS}px)`,
+  mobileM: `(max-width: ${SCREEN_SIZE.mobileM}px)`,
+  mobileL: `(max-width: ${SCREEN_SIZE.mobileL}px)`,
+  tablet: `(max-width: ${SCREEN_SIZE.tablet}px)`,
+  laptop: `(max-width: ${SCREEN_SIZE.laptop}px)`,
+  laptopL: `(max-width: ${SCREEN_SIZE.laptopL}px)`,
+  desktop: `(max-width: ${SCREEN_SIZE.desktop}px)`,
+  desktopL: `(max-width: ${SCREEN_SIZE.desktop}px)`,
 };
 
 export const INITIAL_STATISTIC = {

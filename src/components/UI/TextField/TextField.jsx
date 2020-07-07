@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const TextStyled = styled.p`
   font-family: Montserrat;
@@ -9,6 +10,11 @@ const TextStyled = styled.p`
   font-size: 44px;
   line-height: 54px;
   margin: 0 auto;
+
+  @media ${DEVICE.tablet} {
+    font-size: 30px;
+    line-height: 40px;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -17,6 +23,10 @@ const TextContainer = styled.div`
   &.text-field_speakIT {
     margin: 10px 0;
     height: 54px;
+
+    @media ${DEVICE.tablet} {
+      height: 40px;
+    }
   }
 `;
 

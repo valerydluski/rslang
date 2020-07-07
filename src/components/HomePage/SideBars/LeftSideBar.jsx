@@ -13,7 +13,11 @@ import getRedirectFunction from '../../../utils/getRedirectFunction';
 import BurgerMenu from '../SideBars/components/styled/BurgerMenuContainer'
 
 export default function LeftSideBar(props) {
-  const { resetSessionData } = props;
+  const { resetSessionData, resetStore } = props;
+  const logoutHandler = () => {
+    resetSessionData();
+    resetStore();
+  };
   return (
     <SideBarContainer>
       <Logo/>
@@ -27,11 +31,7 @@ export default function LeftSideBar(props) {
         >
           <Translate value="HomePage.settings" />
         </StyledButtonWithIcon>
-        <StyledButtonWithIcon
-          icon={iconLogout}
-          iconHover={iconLogoutHover}
-          onClick={resetSessionData}
-        >
+        <StyledButtonWithIcon icon={iconLogout} iconHover={iconLogoutHover} onClick={logoutHandler}>
           <Translate value="HomePage.logout" />
         </StyledButtonWithIcon>
       </div>
@@ -41,4 +41,5 @@ export default function LeftSideBar(props) {
 
 LeftSideBar.propTypes = {
   resetSessionData: PropTypes.func.isRequired,
+  resetStore: PropTypes.func.isRequired,
 };

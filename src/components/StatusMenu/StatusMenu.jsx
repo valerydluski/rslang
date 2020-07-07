@@ -46,7 +46,7 @@ const StatusMenu = (props) => {
 
   return (
     <Menu className={className}>
-      <MenuItem type={ITEM_LEVEL}>
+      <MenuItem type={ITEM_LEVEL} className={className}>
         <Title>
           <Translate value="GameStatus.level" />
         </Title>
@@ -61,7 +61,7 @@ const StatusMenu = (props) => {
           />
         </SelectContainer>
       </MenuItem>
-      <MenuItem type={ITEM_PAGE}>
+      <MenuItem type={ITEM_PAGE} className={className}>
         <Title>
           <Translate value="GameStatus.page" />
         </Title>

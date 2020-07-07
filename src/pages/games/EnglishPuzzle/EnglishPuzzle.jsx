@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Content from './Styled/Content';
 import Container from './Styled/Container';
 import Main from './Styled/Main';
+import MenuContainer from './Styled/MenuContainer';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import TipsMenu from '../../../components/EnglishPuzzle/Menu/TipsMenu/TipsMenu';
 import Game from '../../../containers/EnglishPuzzle/Game/Game';
@@ -17,7 +18,11 @@ import {
   changeEnglishPuzzleLevel,
   changeEnglishPuzzlePage,
 } from '../../../redux/ChangeRounds/action';
-import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
+import { GAME_MAX_PAGE, GAME_NAME, SCREEN_SIZE } from '../../../config';
+import screenRotateIcon from '../../../assets/img/rotate-screen.svg';
+import getScreenWidth from '../../../utils/getScreenWidth';
+import Image from '../../../components/UI/Image/Image';
+import newRound from '../../../utils/newRound';
 
 const EnglishPuzzle = (props) => {
   const {
@@ -32,7 +37,63 @@ const EnglishPuzzle = (props) => {
     gameName,
   } = props;
   const [isModalOpen, toggleModal] = useState(false);
+  const [isBreakpoint, changeBreakpoint] = useState(false);
+
+  const breakpoint = 568;
+
+  const prevWidth = getScreenWidth();
+
   checkStatusSession();
+
+  const onResize = useCallback(() => {
+    const width = getScreenWidth();
+    if (width < breakpoint) {
+      changeBreakpoint(true);
+    } else {
+      changeBreakpoint(false);
+    }
+    if (
+      width > SCREEN_SIZE.tablet &&
+      width <= SCREEN_SIZE.laptop &&
+      prevWidth > SCREEN_SIZE.laptop
+    ) {
+      window.removeEventListener('resize', onResize);
+      updatePage(page);
+    }
+    if (width > SCREEN_SIZE.laptop && prevWidth < SCREEN_SIZE.laptop) {
+      window.removeEventListener('resize', onResize);
+      updatePage(page);
+    }
+  }, [changeBreakpoint, updatePage, prevWidth, page]);
+
+  const onOrientationChange = useCallback(() => {
+    const width = getScreenWidth();
+    if (width < breakpoint) {
+      changeBreakpoint(true);
+    } else {
+      changeBreakpoint(false);
+    }
+  }, [changeBreakpoint]);
+
+  const newGame = () => {
+    toggleModal(false);
+    const { newLevel, newPage } = newRound(level, page, maxPage);
+    if (newLevel !== level) updateLevel(newLevel);
+    if (newPage !== page) updatePage(newPage);
+  };
+
+  const restartGame = () => {
+    toggleModal(false);
+    updatePage(page);
+  };
+
+  useEffect(() => {
+    if (prevWidth < breakpoint) {
+      changeBreakpoint(true);
+    }
+    window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onOrientationChange);
+  }, [prevWidth, onResize, onOrientationChange]);
 
   if (isWordsLoading) return <LoadingSpinner />;
 
@@ -40,20 +101,36 @@ const EnglishPuzzle = (props) => {
     switchAppMode(gameName);
   }
 
+  if (isBreakpoint) {
+    return (
+      <Content>
+        <GoToHomePageButton />
+        <Image src={screenRotateIcon} />
+      </Content>
+    );
+  }
+
   return (
     <Content>
       <GoToHomePageButton />
       {isModalOpen ? (
-        <ResultModal showProperties={['textExample']} />
+        <ResultModal
+          audioForPlay="audioExample"
+          showProperties={['word', 'textExample']}
+          restartGame={restartGame}
+          newGame={newGame}
+        />
       ) : (
         <Container>
-          <StatusMenu
-            page={page}
-            level={level}
-            maxPage={maxPage}
-            updateLevel={updateLevel}
-            updatePage={updatePage}
-          />
+          <MenuContainer>
+            <StatusMenu
+              page={page}
+              level={level}
+              maxPage={maxPage}
+              updateLevel={updateLevel}
+              updatePage={updatePage}
+            />
+          </MenuContainer>
           <Main>
             <Game />
             <TipsMenu toggleModal={toggleModal} />
