@@ -110,11 +110,6 @@ const AudioCallContainer = ({
     <>
       {isWordFinished ? (
         <>
-          <FinishedWordInfo
-            word={currentGameWords[currentWordIndex].word}
-            audioSrc={currentGameWords[currentWordIndex].audio}
-            imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
-          />
           {isGameFinished ? (
             <ResultModal
               showProperties={['word', 'wordTranslate']}
@@ -130,6 +125,11 @@ const AudioCallContainer = ({
               updatePage={updatePage}
             />
           )}
+          <FinishedWordInfo
+            word={currentGameWords[currentWordIndex].word}
+            audioSrc={currentGameWords[currentWordIndex].audio}
+            imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
+          />
           <WordsContainer
             isWordFinished={isWordFinished}
             isCorrect={answerResult.isCorrect}
@@ -143,7 +143,6 @@ const AudioCallContainer = ({
         </>
       ) : (
         <>
-          <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
           <StatusMenu
             page={page}
             level={level}
@@ -151,6 +150,7 @@ const AudioCallContainer = ({
             updateLevel={updateLevel}
             updatePage={updatePage}
           />
+          <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
           <WordsContainer
             words={additionalWords}
             correctWord={currentGameWords[currentWordIndex].word}
