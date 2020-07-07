@@ -41,7 +41,7 @@ const translations = {
       isAudioTextMeaning: 'Play text meaning audio',
       isAudioTextExample: 'Play text example audio',
       isAutoSpeech: 'Auto speech',
-      isTranslation: 'Translation',
+      isTranslation: 'Translate',
       isBackground: 'Background',
     },
     Auth: {
