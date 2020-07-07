@@ -14,7 +14,7 @@ function* workerRegistration(action) {
     const getStatistic = (state) => state.changeStatistic.statistic;
     const settings = yield select(getSettings);
     const statistic = yield select(getStatistic);
-    settings.name = name;
+    settings.name = name || 'user';
     yield call(signUp, userSettings);
     yield put(saveUserSettingsToStore(settings));
     yield put(authToServer(userSettings));

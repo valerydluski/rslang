@@ -8,10 +8,10 @@ import GamesContainer from './styled/GamesContainer';
 import ContentContainer from '../ContentContainer';
 
 export default function Main(props) {
-  const { games } = props;
+  const { games, userName } = props;
   return (
     <ContentContainer>
-      <Title userName="User" />
+      <Title userName={userName} />
       <TitleWithUnderline>
         <Translate value="HomePage.start" />
       </TitleWithUnderline>
@@ -35,8 +35,10 @@ export default function Main(props) {
 
 Main.propTypes = {
   games: PropTypes.instanceOf(Array),
+  userName: PropTypes.string,
 };
 
 Main.defaultProps = {
   games: [],
+  userName: 'user',
 };

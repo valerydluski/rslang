@@ -13,6 +13,7 @@ import {
   LOADER_WORDS_COLLECTION_SHOW,
   LOADER_WORDS_COLLECTION_HIDE,
   IS_WORD_COLLECTION_LOADED,
+  ADD_TO_DISPLAYED_WORDS_LIST,
 } from './types';
 
 export function showNewCard(card) {
@@ -107,5 +108,12 @@ export function isWordsCollectionLoadedHandler(bool) {
   return {
     type: IS_WORD_COLLECTION_LOADED,
     payload: bool,
+  };
+}
+
+export function addToShowedWordsList(arr) {
+  return {
+    type: ADD_TO_DISPLAYED_WORDS_LIST,
+    payload: arr,
   };
 }
