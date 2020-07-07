@@ -59,9 +59,12 @@ const translations = {
       makeSentence: 'Make sentence',
       puzzleDescription: 'Make sentences from English words placed in random order.',
       audioCallDescription: 'AudioCall helps to improve the undestanding of English speech.',
-      savannahDescription: 'The game improves the understanding of English words, helps not to forget words that have already been learned.',
-      speakITDescription: 'Check the correctness of your pronunciation of English words in the exciting game!',
-      sprintDescription: 'This game will help you to translate English words into your native language.',
+      savannahDescription:
+        'The game improves the understanding of English words, helps not to forget words that have already been learned.',
+      speakITDescription:
+        'Check the correctness of your pronunciation of English words in the exciting game!',
+      sprintDescription:
+        'This game will help you to translate English words into your native language.',
       makeSentenceDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     },
     Buttons: {
@@ -81,6 +84,7 @@ const translations = {
       choose: 'Choose',
       OK: 'OK',
       back: 'Back',
+      login: 'LogIn',
     },
     Languages: {
       en: 'English',
@@ -166,11 +170,16 @@ const translations = {
       speakIT: 'Произнеси слово',
       sprint: 'Спринт',
       makeSentence: 'Собери предложение',
-      puzzleDescription: 'Собери предложение из английских слов, расположенных в случайном порядке.',
-      audioCallDescription: 'Игра `АудиоВызов` помогает улучшить восприятие английской речи на слух.',
-      savannahDescription: 'Данная игра улучшает навык понимания английских слов, помогает не забыть выученные слова.',
-      speakITDescription: 'Проверьте правильность вашего произношения английских слов в увлекательной игре!',
-      sprintDescription: 'С помощью данной игры вы научитесь быстро переводить слова на ваш родной язык.',
+      puzzleDescription:
+        'Собери предложение из английских слов, расположенных в случайном порядке.',
+      audioCallDescription:
+        'Игра `АудиоВызов` помогает улучшить восприятие английской речи на слух.',
+      savannahDescription:
+        'Данная игра улучшает навык понимания английских слов, помогает не забыть выученные слова.',
+      speakITDescription:
+        'Проверьте правильность вашего произношения английских слов в увлекательной игре!',
+      sprintDescription:
+        'С помощью данной игры вы научитесь быстро переводить слова на ваш родной язык.',
       makeSentenceDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     },
     Buttons: {
@@ -190,6 +199,7 @@ const translations = {
       choose: 'Выбрать',
       OK: 'OK',
       back: 'Назад',
+      login: 'Войти',
     },
     Languages: {
       en: 'Английский',
