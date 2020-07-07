@@ -8,8 +8,8 @@ const title = styled.span`
   font-size: 18px;
   line-height: 28px;
 
-  @media ${DEVICE.tablet} {
-    font-size: 14px;
+  @media ${DEVICE.laptop} {
+    font-size: 15px;
   }
 `;
 

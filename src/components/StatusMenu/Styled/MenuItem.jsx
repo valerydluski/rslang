@@ -6,6 +6,11 @@ const MenuItem = styled.div`
   height: 100%;
   width: ${(props) => (props.type === ITEM_PAGE ? '280' : '220')}px;
   display: flex;
+  align-items: center;
+
+  @media ${DEVICE.laptop} {
+    width: ${(props) => (props.type === ITEM_PAGE ? '280' : '180')}px;
+  }
 `;
 
 export default MenuItem;

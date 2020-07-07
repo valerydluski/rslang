@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../config';
 
 const StyledPuzzleRoundButton = styled.button`
   margin-top: 5px;
@@ -15,6 +16,16 @@ const StyledPuzzleRoundButton = styled.button`
   transition: 0.3s linear;
   &:first-child {
     margin-top: 0;
+  }
+
+  @media ${DEVICE.laptop} {
+    width: 25px;
+    height: 25px;
+
+    & > img {
+      width: 15px;
+      height: 15px;
+    }
   }
 `;
 
