@@ -77,6 +77,30 @@ const SettingsForm = (props) => {
         component={Input}
         label={I18n.t('Settings.wordsPerPage')}
       />
+      <h3>
+        <Translate value="Games.puzzle" />
+      </h3>
+      <Field
+        name="isAutoSpeech"
+        id="isAutoSpeech"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.isAutoSpeech')}
+      />
+      <Field
+        name="isTranslation"
+        id="isTranslation"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.isTranslation')}
+      />
+      <Field
+        name="isBackground"
+        id="isBackground"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.isBackground')}
+      />
       <button type="submit" aria-label="Save">
         <Translate value="Buttons.save" />
       </button>
