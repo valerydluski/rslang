@@ -39,13 +39,15 @@ const EnglishPuzzle = (props) => {
   const [isModalOpen, toggleModal] = useState(false);
   const [isBreakpoint, changeBreakpoint] = useState(false);
 
+  const breakpoint = 568;
+
   const prevWidth = getScreenWidth();
 
   checkStatusSession();
 
   const onResize = () => {
     const width = getScreenWidth();
-    if (width <= SCREEN_SIZE.tablet) {
+    if (width < breakpoint) {
       changeBreakpoint(true);
     } else {
       changeBreakpoint(false);
@@ -64,6 +66,15 @@ const EnglishPuzzle = (props) => {
     }
   };
 
+  const onOrientationChange = () => {
+    const width = getScreenWidth();
+    if (width < breakpoint) {
+      changeBreakpoint(true);
+    } else {
+      changeBreakpoint(false);
+    }
+  };
+
   const newGame = () => {
     toggleModal(false);
     const { newLevel, newPage } = newRound(level, page, maxPage);
@@ -77,10 +88,11 @@ const EnglishPuzzle = (props) => {
   };
 
   useEffect(() => {
-    if (prevWidth < SCREEN_SIZE.tablet) {
+    if (prevWidth < breakpoint) {
       changeBreakpoint(true);
     }
     window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onOrientationChange);
   });
 
   if (isWordsLoading) return <LoadingSpinner />;
