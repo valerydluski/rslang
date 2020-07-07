@@ -15,7 +15,7 @@ import {
 } from './types';
 
 const initialState = {
-  data: [],
+  data: [{}],
   translations: [],
   audios: [new Audio()],
   source: [],

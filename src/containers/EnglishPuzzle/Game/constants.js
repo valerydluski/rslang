@@ -6,3 +6,8 @@ export const ROWS_IN_PAGE = 10;
 
 export const TARGET_ID = 'TARGET_ID';
 export const SOURCE_ID = 'SOURCE_ID';
+
+export const PLAYFIELD_WIDTH_LAPTOP = 410;
+export const PLAYFIELD_HEIGHT_LAPTOP = 230;
+export const PUZZLE_HEIGHT_LAPTOP = PLAYFIELD_HEIGHT_LAPTOP / 10;
+export const PUZZLE_PADDING_LAPTOP = 10;

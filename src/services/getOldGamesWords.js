@@ -1,4 +1,4 @@
-import { API } from '../config';
+import { API, GAME_NAME } from '../config';
 import fetchData from '../utils/fetchData';
 
 const {
@@ -12,14 +12,18 @@ const fixNumberForLink = 1;
 const wordsPerSentenceGames = 100;
 const wordsPerSentencePuzzle = 10;
 
-const createData = ({ level, page, count }) => {
+const createData = ({ level, page, count }, gameName) => {
   const gameWordsPerPage = count;
   const gameLevel = level;
   const gamePage = page;
   const linkLevel = `${GROUP}=${gameLevel - fixNumberForLink}`;
   const linkPage = `${PAGE}=${gamePage - fixNumberForLink}`;
-  const wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentenceGames}`;
-  const wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;
+  let wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentenceGames}`;
+  let wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;
+  if (gameName === GAME_NAME.englishPuzzle) {
+    wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentencePuzzle}`;
+    wordsPerPage = `${WORDS_PER_PAGE}=${wordsPerSentencePuzzle}`;
+  }
   return {
     linkLevel,
     linkPage,
@@ -28,9 +32,9 @@ const createData = ({ level, page, count }) => {
   };
 };
 
-async function wordsFetch(payload) {
+async function wordsFetch(payload, gameName) {
   try {
-    const { linkLevel, linkPage, wordsPerSentence, wordsPerPage } = createData(payload);
+    const { linkLevel, linkPage, wordsPerSentence, wordsPerPage } = createData(payload, gameName);
     const link = `${URL}/${WORDS}?${linkLevel}&${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
     return await fetchData(link);
   } catch (e) {

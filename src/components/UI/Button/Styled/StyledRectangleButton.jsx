@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../config';
 
 const StyledRectangleButton = styled.button`
   width: 170px;
@@ -21,6 +22,12 @@ const StyledRectangleButton = styled.button`
   &:active,
   &:focus {
     outline: 0;
+  }
+
+  @media ${DEVICE.laptop} {
+    width: 90px;
+    height: 30px;
+    font-size: 10px;
   }
 `;
 
