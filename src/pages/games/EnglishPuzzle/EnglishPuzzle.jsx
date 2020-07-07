@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Content from './Styled/Content';
@@ -45,7 +45,7 @@ const EnglishPuzzle = (props) => {
 
   checkStatusSession();
 
-  const onResize = () => {
+  const onResize = useCallback(() => {
     const width = getScreenWidth();
     if (width < breakpoint) {
       changeBreakpoint(true);
@@ -64,16 +64,16 @@ const EnglishPuzzle = (props) => {
       window.removeEventListener('resize', onResize);
       updatePage(page);
     }
-  };
+  }, [changeBreakpoint, updatePage, prevWidth, page]);
 
-  const onOrientationChange = () => {
+  const onOrientationChange = useCallback(() => {
     const width = getScreenWidth();
     if (width < breakpoint) {
       changeBreakpoint(true);
     } else {
       changeBreakpoint(false);
     }
-  };
+  }, [changeBreakpoint]);
 
   const newGame = () => {
     toggleModal(false);
@@ -93,7 +93,7 @@ const EnglishPuzzle = (props) => {
     }
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', onOrientationChange);
-  });
+  }, [prevWidth, onResize, onOrientationChange]);
 
   if (isWordsLoading) return <LoadingSpinner />;
 

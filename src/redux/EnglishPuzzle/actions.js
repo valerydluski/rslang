@@ -1,4 +1,4 @@
-import { TARGET_ID, SOURCE_ID, ROWS_IN_PAGE } from '../../containers/EnglishPuzzle/Game/constants';
+import { TARGET_ID, SOURCE_ID } from '../../containers/EnglishPuzzle/Game/constants';
 
 import {
   UPDATE_PUZZLES_POSITION,
