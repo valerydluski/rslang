@@ -1,13 +1,38 @@
 import styled from 'styled-components';
 
 export const InputContainer = styled.div`
-  margin: 10px 0;
+  margin: 20px 0;
+
+  &.settings {
+    display: none;
+  }
 `;
 
 export const InputStyled = styled.input`
-  margin-left: 5px;
+  margin-right: 10px;
+  &.settings {
+    border: none;
+    border-bottom: 1px solid #c4c4c4;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 28px;
+    color: #929292;
+  }
 `;
 
 export const LabelStyled = styled.label`
-  margin-right: 5px;
+  margin-left: 10px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 28px;
+`;
+
+export const SpanStyled = styled.span`
+  &.span_none {
+    display: none;
+  }
 `;

@@ -6,15 +6,16 @@ import AppSettings from './AppSettings/AppSettings';
 import Input from '../../../UI/Input/Input';
 import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageValidator';
 import { CHECKBOXES } from '../../../../config';
+import { BlackHeader } from './Styled/Header';
 
 const SettingsForm = (props) => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
       <AppSettings checkboxes={CHECKBOXES} />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.audioCall" />
-      </h3>
+      </BlackHeader>
       <Field
         name="AudioCallWordsPerPage"
         key="AudioCallWordsPerPage"
@@ -24,10 +25,12 @@ const SettingsForm = (props) => {
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.savannah" />
-      </h3>
+      </BlackHeader>
       <Field
         name="SavannahWordsPerPage"
         key="SavannahWordsPerPage"
@@ -37,10 +40,12 @@ const SettingsForm = (props) => {
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.speakIT" />
-      </h3>
+      </BlackHeader>
       <Field
         name="SpeakITWordsPerPage"
         key="SpeakITWordsPerPage"
@@ -50,10 +55,12 @@ const SettingsForm = (props) => {
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.sprint" />
-      </h3>
+      </BlackHeader>
       <Field
         name="SprintWordsPerPage"
         key="SprintWordsPerPage"
@@ -63,10 +70,12 @@ const SettingsForm = (props) => {
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.makeSentence" />
-      </h3>
+      </BlackHeader>
       <Field
         name="MakeSentenceWordsPerPage"
         key="MakeSentenceWordsPerPage"
@@ -76,10 +85,12 @@ const SettingsForm = (props) => {
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.puzzle" />
-      </h3>
+      </BlackHeader>
       <Field
         name="isAutoSpeech"
         id="isAutoSpeech"
