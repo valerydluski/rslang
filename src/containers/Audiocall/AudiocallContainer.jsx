@@ -14,6 +14,7 @@ import { changeAudioCallLevel, changeAudioCallPage } from '../../redux/ChangeRou
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../config';
 import { saveFullStatistic } from '../../redux/Statistic/action';
 import newRound from '../../utils/newRound';
+import StatusMenu from '../../components/StatusMenu/StatusMenu';
 
 let currentGameWords;
 let answerResult = {};
@@ -114,6 +115,21 @@ const AudioCallContainer = ({
             audioSrc={currentGameWords[currentWordIndex].audio}
             imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
           />
+          {isGameFinished ? (
+            <ResultModal
+              showProperties={['word', 'wordTranslate']}
+              audioForPlay="audio"
+              newGame={newGame}
+            />
+          ) : (
+            <StatusMenu
+              page={page}
+              level={level}
+              maxPage={maxPage}
+              updateLevel={updateLevel}
+              updatePage={updatePage}
+            />
+          )}
           <WordsContainer
             isWordFinished={isWordFinished}
             isCorrect={answerResult.isCorrect}
@@ -124,17 +140,17 @@ const AudioCallContainer = ({
             isAutoSolved={answerResult.isAutoSolved}
           />
           <NextButton clickHandler={switchToNextWord} />
-          {isGameFinished ? (
-            <ResultModal
-              showProperties={['word', 'wordTranslate']}
-              audioForPlay="audio"
-              newGame={newGame}
-            />
-          ) : null}
         </>
       ) : (
         <>
           <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
+          <StatusMenu
+            page={page}
+            level={level}
+            maxPage={maxPage}
+            updateLevel={updateLevel}
+            updatePage={updatePage}
+          />
           <WordsContainer
             words={additionalWords}
             correctWord={currentGameWords[currentWordIndex].word}
