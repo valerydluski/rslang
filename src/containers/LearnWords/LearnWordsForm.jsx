@@ -74,7 +74,7 @@ const LearnWordsForm = (props) => {
           type="text"
           placeholder={isRightAnswerShow ? word.word : ''}
           size="5"
-          component={Input}
+          component={LearnWordsInput}
           autoFocus
           autocomplete={autocomplete}
         />
