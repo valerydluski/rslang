@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SprintGameContainerStyled from './Styled/SprintGameContainerStyled';
+import SprintScoreContainer from '../../components/Sprint/SprintScoreContainer';
 import { WordStyled, TranslationStyled } from './Styled/WordInfoStyled';
 import SprintControlsContainer from './SprintControlsContainer';
 import randomIntegerGenerator from '../../utils/randomIntegerGenerator';
@@ -29,8 +30,12 @@ const SprintGameContainer = (props) => {
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [correctAnsweredWords, addWordToCorrect] = useState([]);
   const [isAnswerCorrect, setAnswer] = useState(true);
+  const [correctAnswers, changeAnswersAmount] = useState(0);
+  const [scoreStep, changeScoreStep] = useState(10);
+  const [score, changeScore] = useState(0);
 
   if (!currentWordIndex) currentGameWords = shuffleArray(wordsCollection);
+
   if (isGameFinished) {
     addWrongWordsToStore(wrongAnsweredWords);
     saveStatistic({
@@ -65,10 +70,26 @@ const SprintGameContainer = (props) => {
     supposedAnswerWord = currentGameWords[currentWordIndex];
   }
 
+  const setResultScore = (isCorrect) => {
+    let answers;
+    if (isCorrect) {
+      answers = correctAnswers + 1;
+      changeAnswersAmount(correctAnswers + 1);
+      changeScore(score + scoreStep);
+    } else {
+      changeAnswersAmount(0);
+      changeScoreStep(10);
+    }
+    if (answers > 0 && answers % 4 === 0) {
+      changeScoreStep(scoreStep * 2);
+    }
+  };
+
   const processAnswer = (receivedAnswer) => {
     const isResultCorrect = receivedAnswer === currentRightAnswer;
     toggleWordStatus(true);
     setAnswer(isResultCorrect);
+    setResultScore(isResultCorrect);
     if (!isResultCorrect) {
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
     } else addWordToCorrect([...correctAnsweredWords, currentWord]);
@@ -78,6 +99,11 @@ const SprintGameContainer = (props) => {
   };
   return (
     <SprintGameContainerStyled>
+      <SprintScoreContainer
+        isAnswerCorrect={isAnswerCorrect}
+        score={score}
+        correctAnswers={correctAnswers}
+      />
       <WordStyled>{currentWord.word}</WordStyled>
       <TranslationStyled>{supposedAnswerWord.wordTranslate}</TranslationStyled>
       {isWordFinished ? (
