@@ -32,6 +32,7 @@ const fn2 = (LearnLastLevel, LearnLastWords) => {
 };
 
 const filterFn = (data, LearnLastWords, wordsPerDay) => {
+  if (wordsPerDay < 1) return [];
   let newWords;
   if (+LearnLastWords === 0) newWords = 1;
   else newWords = LearnLastWords;
@@ -41,6 +42,7 @@ const filterFn = (data, LearnLastWords, wordsPerDay) => {
 };
 
 const filterFn2 = (data, filterData, wordsPerDay) => {
+  if (wordsPerDay < 1) return [];
   const newElCount = wordsPerDay - filterData.length;
   const newData = data.slice(0, newElCount);
   return filterData.concat(newData);
@@ -87,7 +89,7 @@ function* generateLearnWordsCollectionWorker() {
         return newEl;
       });
       if (filterData.length < cardsPerDay) {
-        const oldWordsCount = cardsPerDay - filterData.length;
+        const oldWordsCount = cardsPerDay - filterData.length - CountCardsShow;
         const getLoginState = (state) => state.login;
         const sessionData = yield select(getLoginState);
         const payload = yield call(getAllUserWords, sessionData);
@@ -113,7 +115,10 @@ function* generateLearnWordsCollectionWorker() {
         const getLoginState = (state) => state.login;
         const sessionData = yield select(getLoginState);
         const payload = yield call(getAllUserWords, sessionData);
-        filterData = getRandomValuesFromArray(payload[0].paginatedResults, cardsPerDay);
+        filterData = getRandomValuesFromArray(
+          payload[0].paginatedResults,
+          cardsPerDay - CountCardsShow
+        );
       }
       break;
     default:

@@ -1,4 +1,7 @@
 export default function getRandomValuesFromArray(arr, n) {
+  if (n < 1) {
+    return [];
+  }
   const sourceArr = [...arr];
   let randomArr = [];
   for (let i = 0; i <= n; i += 1) {
