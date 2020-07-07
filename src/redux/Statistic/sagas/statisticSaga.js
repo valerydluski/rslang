@@ -37,7 +37,6 @@ function* workerStatus({ payload }) {
     newStatistic = INITIAL_STATISTIC;
   }
   const sessionData = yield createStatisticJSON(newStatistic);
-  console.log('function*workerStatus -> newStatistic', newStatistic);
   yield put(saveFullStatisticToStore(newStatistic));
   yield call(putStatisticToApi, sessionData, userData);
 }

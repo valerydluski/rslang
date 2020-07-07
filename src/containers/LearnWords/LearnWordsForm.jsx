@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import Input from '../../components/UI/Input/Input';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import { LINK_FOR_IMAGE } from '../../config';
 import LearnWordsInput from './LearnWordsInput';
@@ -17,6 +16,8 @@ const LearnWordsForm = (props) => {
     isTranslationShow,
     onSubmit,
     isRightAnswerShow,
+    attemptsNumber,
+    answer,
   } = props;
 
   const {
@@ -28,6 +29,7 @@ const LearnWordsForm = (props) => {
     deleteButton,
     addDificultWordsButton,
   } = settings.settings;
+
   const {
     textExample,
     textExampleTranslate,
@@ -66,7 +68,7 @@ const LearnWordsForm = (props) => {
           })
         )}
       >
-        {isImageAssociation && <img alt={word} src={`${LINK_FOR_IMAGE}${image}`} />}
+        {isImageAssociation && <img alt={word.word} src={`${LINK_FOR_IMAGE}${image}`} />}
         <p>{firstPart}</p>
         <Field
           name="word"
@@ -77,6 +79,9 @@ const LearnWordsForm = (props) => {
           component={LearnWordsInput}
           autoFocus
           autocomplete={autocomplete}
+          word={word.word}
+          attemptsNumber={attemptsNumber}
+          answer={answer}
         />
         <p>{secondPart}</p>
         {isTranslationShow && isTranslate && <p>{textExampleTranslate}</p>}
@@ -137,10 +142,13 @@ LearnWordsForm.propTypes = {
   reset: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   isRightAnswerShow: PropTypes.bool.isRequired,
+  attemptsNumber: PropTypes.number.isRequired,
+  answer: PropTypes.string,
 };
 
 LearnWordsForm.defaultProps = {
   autocomplete: 'off',
+  answer: '',
 };
 
 export default ReduxLearnWordsForm;
