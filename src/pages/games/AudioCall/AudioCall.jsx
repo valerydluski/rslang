@@ -17,7 +17,12 @@ const AudioCall = ({ wordsCollection }) => {
   return (
     <AudiocallStyled backgroundOpacity={backgroundOpacity}>
       <GoToHomePageButton />
-      <AudiocallContainer key={wordsCollection.join()} wordsCollection={words} />
+      <AudiocallContainer
+        key={wordsCollection.join()}
+        wordsCollection={words}
+        changeBackgroundOpacity={changeBackgroundOpacity}
+        backgroundOpacity={backgroundOpacity}
+      />
     </AudiocallStyled>
   );
 };
