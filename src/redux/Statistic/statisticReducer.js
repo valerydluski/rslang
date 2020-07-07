@@ -1,4 +1,5 @@
 import { SAVE_FULL_STATISTIC_TO_STORE, GET_STATISTIC_FROM_API } from './types';
+import RESET_STORE from '../resetStore/types';
 
 const initialState = {
   statistic: {
@@ -23,6 +24,8 @@ const changeStatisticReducer = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_FULL_STATISTIC_TO_STORE:
       return { ...state, statistic: action.payload };
+    case RESET_STORE:
+      return { ...initialState };
     case GET_STATISTIC_FROM_API:
       return { ...state, statistic: action.payload.statistic };
     default:
