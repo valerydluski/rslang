@@ -31,6 +31,8 @@ const AudioCallContainer = ({
   maxPage,
   gameName,
   saveStatistic,
+  backgroundOpacity,
+  changeBackgroundOpacity,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -85,6 +87,7 @@ const AudioCallContainer = ({
   }
 
   function autoSolve() {
+    changeBackgroundOpacity(backgroundOpacity + 100 / wordsCollection.length);
     addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
     toggleWordStatus(true);
     answerResult.isCorrect = true;
@@ -140,6 +143,9 @@ const AudioCallContainer = ({
             correctWord={currentGameWords[currentWordIndex].word}
             processUserAnswer={processUserAnswer}
             isWordFinished={isWordFinished}
+            backgroundOpacity={backgroundOpacity}
+            changeBackgroundOpacity={changeBackgroundOpacity}
+            wordsAmount={wordsCollection.length}
           />
           <DontKnowButton clickHandler={autoSolve} />
         </>
@@ -161,6 +167,8 @@ AudioCallContainer.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
+  changeBackgroundOpacity: PropTypes.func,
+  backgroundOpacity: PropTypes.number,
 };
 
 AudioCallContainer.defaultProps = {
@@ -175,6 +183,8 @@ AudioCallContainer.defaultProps = {
   page: '1',
   maxPage: GAME_MAX_PAGE,
   gameName: GAME_NAME.audioCall,
+  backgroundOpacity: 0,
+  changeBackgroundOpacity: () => {},
 };
 
 const mapStateToProps = (state) => {

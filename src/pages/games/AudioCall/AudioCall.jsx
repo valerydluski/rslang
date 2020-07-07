@@ -6,16 +6,19 @@ import { changeAudioCallLevel, changeAudioCallPage } from '../../../redux/Change
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { GAME_MAX_PAGE } from '../../../config';
+import AudiocallStyled from './Styled/AudiocallStyled';
 
 const AudioCall = ({ wordsCollection, updateLevel, updatePage, page, level, maxPage }) => {
   const [words, changeWords] = useState(wordsCollection);
+  const [backgroundOpacity, changeBackgroundOpacity] = useState(0);
 
   useEffect(() => {
     changeWords(wordsCollection);
+    changeBackgroundOpacity(0);
   }, [wordsCollection]);
 
   return (
-    <div className="audio-call_container">
+    <AudiocallStyled backgroundOpacity={backgroundOpacity}>
       <GoToHomePageButton />
       <StatusMenu
         page={page}
@@ -24,8 +27,13 @@ const AudioCall = ({ wordsCollection, updateLevel, updatePage, page, level, maxP
         updateLevel={updateLevel}
         updatePage={updatePage}
       />
-      <AudiocallContainer key={wordsCollection.join()} wordsCollection={words} />
-    </div>
+      <AudiocallContainer
+        key={wordsCollection.join()}
+        wordsCollection={words}
+        changeBackgroundOpacity={changeBackgroundOpacity}
+        backgroundOpacity={backgroundOpacity}
+      />
+    </AudiocallStyled>
   );
 };
 

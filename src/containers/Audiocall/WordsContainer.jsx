@@ -15,6 +15,9 @@ const WordsContainer = (props) => {
     selectedIndex,
     correctIndex,
     isAutoSolved,
+    backgroundOpacity,
+    changeBackgroundOpacity,
+    wordsAmount,
   } = props;
 
   const currentStepWords = words;
@@ -44,6 +47,7 @@ const WordsContainer = (props) => {
 
   const clickHandler = (e) => {
     if (e.target.matches('[data-index]')) {
+      changeBackgroundOpacity(backgroundOpacity + 100 / wordsAmount);
       const selectedWordIndex = +e.target.dataset.index;
       const result = currentStepWords[selectedWordIndex].word === correctWord;
       playResultSound(result);
@@ -64,6 +68,9 @@ WordsContainer.propTypes = {
   selectedIndex: PropTypes.number,
   correctIndex: PropTypes.number,
   isAutoSolved: PropTypes.bool,
+  changeBackgroundOpacity: PropTypes.func,
+  backgroundOpacity: PropTypes.number,
+  wordsAmount: PropTypes.number,
 };
 
 WordsContainer.defaultProps = {
@@ -75,6 +82,9 @@ WordsContainer.defaultProps = {
   selectedIndex: null,
   correctIndex: null,
   isAutoSolved: false,
+  backgroundOpacity: 0,
+  changeBackgroundOpacity: () => {},
+  wordsAmount: 0,
 };
 
 export default WordsContainer;
