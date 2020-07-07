@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Translate, I18n } from 'react-redux-i18n';
@@ -12,7 +11,6 @@ import LoginPageTitle from '../../Login/LoginPageTitle/LoginPageTitle';
 import FormNameStyled from '../../Login/LoginForm/Styled/FormNameStyled';
 import FormStyled from '../../Login/LoginForm/Styled/FormStyled';
 import PatternStyled from '../../Login/LoginForm/Styled/PatternStyled';
-import StyledFormNamesContainer from '../../Styled/StyledFormNamesContainer';
 
 const RegistrationForm = (props) => {
   const { handleSubmit } = props;
@@ -20,12 +18,7 @@ const RegistrationForm = (props) => {
     <LoginFormWrapperStyled>
       <Logo className="login-form_logo" />
       <LoginPageTitle />
-      <StyledFormNamesContainer>
-        <FormNameStyled>{I18n.t('Auth.signUp')}</FormNameStyled>
-        <Link to="/login">
-          <Translate value="Buttons.login" />
-        </Link>
-      </StyledFormNamesContainer>
+      <FormNameStyled>{I18n.t('Auth.signUp')}</FormNameStyled>
       <FormStyled onSubmit={handleSubmit}>
         <Field name="name" key="name" type="text" placeholder="name" component={Input} />
         <Field
