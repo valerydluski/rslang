@@ -1,14 +1,11 @@
 import { takeLatest, select, call, put } from 'redux-saga/effects';
 import { NEW_CARD_SHOW } from '../types';
 import saveOneWord from '../../../services/saveOneWord';
-import findObjInArray from '../../../utils/findObjInArray';
 import { WORDS_PER_PAGE } from '../../../config';
 import { setLearnWordsStatistic } from '../../Statistic/action';
 import { addToShowedWordsList } from '../actions';
 
 function* addNewWordSagaWorker(action) {
-  const getUserWords = (state) => state.userWords.words;
-  const userWords = yield select(getUserWords);
   const getLoginState = (state) => state.login;
   const getStatistic = (state) => state.changeStatistic.statistic;
   const { LearnLastWords, LearnLastLevel, CountCardsShow, CountNewWordsToday } = yield select(
@@ -22,13 +19,7 @@ function* addNewWordSagaWorker(action) {
   // eslint-disable-next-line no-underscore-dangle
   const wordId = action.payload.id || action.payload._id;
   const { isNew, word } = action.payload;
-  // const isKnownWord = yield call(
-  //   findObjInArray,
-  //   userWords[0].paginatedResults,
-  //   '_id',
-  //   // eslint-disable-next-line no-underscore-dangle
-  //   wordId
-  // );
+  console.log('function*addNewWordSagaWorker -> action.payload', action.payload);
   if (isNew) {
     const config = {
       difficulty: 'new',

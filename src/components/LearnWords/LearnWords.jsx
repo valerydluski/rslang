@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Line } from 'rc-progress';
 import LearnWordsContainer from './styled/LearnWordsContainer';
 import LearnWordCardContainer from './styled/LearnWordCardContainer';
 import GoHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePageButton';
@@ -21,6 +22,7 @@ export default function LearnWords(props) {
           isRightAnswerShow={isRightAnswerShow}
         />
       </LearnWordCardContainer>
+      <Line percent="30" strokeWidth="400" strokeColor="#404497" />
     </LearnWordsContainer>
   );
 }
