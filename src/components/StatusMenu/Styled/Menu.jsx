@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const Menu = styled.div`
   display: flex;
@@ -8,8 +9,12 @@ const Menu = styled.div`
 
   &.status-menu_speakIT {
     margin-top: 55px;
-    justify-self: center;
+    justify-content: flex-start;
     width: 400px;
+
+    @media ${DEVICE.tablet} {
+      width: 70%;
+    }
   }
 `;
 

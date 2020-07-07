@@ -42,6 +42,10 @@ const StyledSelect = styled.div`
     right: 5px;
     z-index: 90;
   }
+
+  @media (max-width: 520px) {
+    width: ${(props) => (props.direction === DIRECTION_ROW ? OPTION_SIZE * OPTIONS_IN_ROW : 50)}px;
+  }
 `;
 
 export default StyledSelect;

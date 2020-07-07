@@ -1,20 +1,21 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import { Translate } from 'react-redux-i18n';
+import { Translate, I18n } from 'react-redux-i18n';
 import AppSettings from './AppSettings/AppSettings';
 import Input from '../../../UI/Input/Input';
 import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageValidator';
 import { CHECKBOXES } from '../../../../config';
+import { BlackHeader } from './Styled/Header';
 
 const SettingsForm = (props) => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
       <AppSettings checkboxes={CHECKBOXES} />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.audioCall" />
-      </h3>
+      </BlackHeader>
       <Field
         name="AudioCallWordsPerPage"
         key="AudioCallWordsPerPage"
@@ -23,11 +24,13 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.savannah" />
-      </h3>
+      </BlackHeader>
       <Field
         name="SavannahWordsPerPage"
         key="SavannahWordsPerPage"
@@ -36,11 +39,13 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.speakIT" />
-      </h3>
+      </BlackHeader>
       <Field
         name="SpeakITWordsPerPage"
         key="SpeakITWordsPerPage"
@@ -49,11 +54,13 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.sprint" />
-      </h3>
+      </BlackHeader>
       <Field
         name="SprintWordsPerPage"
         key="SprintWordsPerPage"
@@ -62,11 +69,13 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Games.makeSentence" />
-      </h3>
+      </BlackHeader>
       <Field
         name="MakeSentenceWordsPerPage"
         key="MakeSentenceWordsPerPage"
@@ -75,7 +84,33 @@ const SettingsForm = (props) => {
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
-        label="words per page"
+        label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
+      />
+      <BlackHeader>
+        <Translate value="Games.puzzle" />
+      </BlackHeader>
+      <Field
+        name="isAutoSpeech"
+        id="isAutoSpeech"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.isAutoSpeech')}
+      />
+      <Field
+        name="isTranslation"
+        id="isTranslation"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.isTranslation')}
+      />
+      <Field
+        name="isBackground"
+        id="isBackground"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.isBackground')}
       />
       <button type="submit" aria-label="Save">
         <Translate value="Buttons.save" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InputContainer, InputStyled, SpanStyled, LabelStyled } from './Styled/InputStyled';
 
 const Input = (props) => {
   const {
@@ -13,11 +14,13 @@ const Input = (props) => {
     meta: { error, touched },
     label,
     autocomplete,
+    className,
+    classNameSpan,
   } = props;
 
   return (
-    <div>
-      <input
+    <InputContainer>
+      <InputStyled
         type={type}
         name={name}
         readOnly={readOnlyInput}
@@ -28,10 +31,11 @@ const Input = (props) => {
         autoComplete={autocomplete}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
+        className={className}
       />
-      {error && touched && <span>{error}</span>}
-      {label && <label htmlFor={label}>{label}</label>}
-    </div>
+      {error && touched && <SpanStyled className={classNameSpan}>{error}</SpanStyled>}
+      {label && <LabelStyled htmlFor={label}>{label}</LabelStyled>}
+    </InputContainer>
   );
 };
 
@@ -47,6 +51,8 @@ Input.propTypes = {
   autoFocus: PropTypes.bool,
   label: PropTypes.string,
   autocomplete: PropTypes.string,
+  className: PropTypes.string,
+  classNameSpan: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -60,6 +66,8 @@ Input.defaultProps = {
   autoFocus: false,
   label: '',
   autocomplete: 'on',
+  className: '',
+  classNameSpan: '',
 };
 
 export default Input;

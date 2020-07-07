@@ -10,7 +10,6 @@ import {
   onDragEnd,
 } from '../../../redux/EnglishPuzzle/actions';
 import Puzzle from '../../../components/EnglishPuzzle/Puzzle/Puzzle';
-import Container from './Styled/Container';
 import Playfield from './Styled/Playfield';
 import PlayfieldRow from './Styled/PlayfieldRow';
 import Source from './Styled/Source';
@@ -112,7 +111,7 @@ class Game extends Component {
   }
 
   renderSource() {
-    const { source, isPageFill, pic } = this.props;
+    const { source, isPageFill, pic, data, row } = this.props;
     const content = isPageFill ? (
       <Source isInCenter={isPageFill}>
         <span>
@@ -127,6 +126,7 @@ class Game extends Component {
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
+            cols={Object.keys(data[row]).length}
           >
             {source.map(this.renderActivePuzzle)}
             {provided.placeholder}
@@ -141,12 +141,10 @@ class Game extends Component {
     const { onDragPuzzle, isWordsLoading } = this.props;
     if (isWordsLoading) return null;
     return (
-      <Container>
-        <DragDropContext onDragEnd={onDragPuzzle}>
-          {this.renderPlayfield()}
-          {this.renderSource()}
-        </DragDropContext>
-      </Container>
+      <DragDropContext onDragEnd={onDragPuzzle}>
+        {this.renderPlayfield()}
+        {this.renderSource()}
+      </DragDropContext>
     );
   }
 }
@@ -157,7 +155,7 @@ Game.propTypes = {
   isRowCorrect: PropTypes.bool,
   isRowFill: PropTypes.bool,
   isPageFill: PropTypes.bool,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
   source: PropTypes.arrayOf(PropTypes.string).isRequired,
   results: PropTypes.arrayOf(PropTypes.string).isRequired,
   background: PropTypes.bool.isRequired,
@@ -176,6 +174,7 @@ Game.propTypes = {
 
 Game.defaultProps = {
   row: 0,
+  data: [],
   isWordsLoading: false,
   isRowCorrect: false,
   isRowFill: false,
