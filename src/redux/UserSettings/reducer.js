@@ -22,6 +22,9 @@ const initialState = {
     isAudioTranslate: true,
     isAudioTextMeaning: true,
     isAudioTextExample: true,
+    isAutoSpeech: true,
+    isTranslation: true,
+    isBackground: true,
   },
 };
 

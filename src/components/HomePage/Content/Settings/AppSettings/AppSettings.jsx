@@ -7,13 +7,14 @@ import WordsPerDayValidator from '../../../../../utils/validators/WordsPerDayVal
 import RadioButton from '../../../../UI/RadioButton/RadioButton';
 import nameValidator from '../../../../../utils/validators/nameValidator';
 import { LabelStyled } from '../../../../UI/Input/Styled/InputStyled';
+import { BlackHeader } from '../Styled/Header';
 
 const AppSettings = ({ checkboxes }) => {
   return (
     <>
-      <h3>
+      <BlackHeader>
         <Translate value="Settings.appSettings" />
-      </h3>
+      </BlackHeader>
       <Field
         name="name"
         key="name"
@@ -22,12 +23,14 @@ const AppSettings = ({ checkboxes }) => {
         component={Input}
         validate={nameValidator}
         label={I18n.t('Settings.userName')}
+        classNameSpan="span_none"
+        className="settings"
       />
-      <LabelStyled htmlFor={I18n.t('Settings.language')}>{I18n.t('Settings.language')}</LabelStyled>
       <Field name="language" key="language" component="select">
         <option value="en" key="en" label={I18n.t('Languages.en')} />
         <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
       </Field>
+      <LabelStyled htmlFor={I18n.t('Settings.language')}>{I18n.t('Settings.language')}</LabelStyled>
       <Field
         name="WordsPerDay"
         key="WordsPerDay"
@@ -37,6 +40,8 @@ const AppSettings = ({ checkboxes }) => {
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.wordsPerDay')}
+        classNameSpan="span_none"
+        className="settings"
       />
       <Field
         name="CardsPerDay"
@@ -47,6 +52,8 @@ const AppSettings = ({ checkboxes }) => {
         validate={WordsPerDayValidator}
         parse={(val) => parseInt(val, 10)}
         label={I18n.t('Settings.cardsPerDay')}
+        classNameSpan="span_none"
+        className="settings"
       />
       <Field
         name="deleteButton"
@@ -72,9 +79,9 @@ const AppSettings = ({ checkboxes }) => {
           { value: 'allWords', text: I18n.t('Settings.allWords') },
         ]}
       />
-      <h3>
+      <BlackHeader>
         <Translate value="Settings.infoInCards" />
-      </h3>
+      </BlackHeader>
       {checkboxes.map((el) => {
         return (
           <Field
@@ -87,7 +94,7 @@ const AppSettings = ({ checkboxes }) => {
           />
         );
       })}
-      <h3>{I18n.t('Settings.audio')}</h3>
+      <BlackHeader>{I18n.t('Settings.audio')}</BlackHeader>
       <Field
         name="isAudioTranslate"
         id="isAudioTranslate"
