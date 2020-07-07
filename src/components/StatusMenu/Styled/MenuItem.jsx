@@ -11,6 +11,10 @@ const MenuItem = styled.div`
   @media ${DEVICE.laptop} {
     width: ${(props) => (props.type === ITEM_PAGE ? '280' : '180')}px;
   }
+
+  @media ${DEVICE.tablet} {
+    width: ${(props) => (props.type === ITEM_PAGE ? '280' : '180')}px;
+  }
 `;
 
 export default MenuItem;

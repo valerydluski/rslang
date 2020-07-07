@@ -13,7 +13,6 @@ const Menu = styled.div`
     width: 400px;
 
     @media ${DEVICE.tablet} {
-      justify-content: space-around;
       width: 70%;
     }
   }
