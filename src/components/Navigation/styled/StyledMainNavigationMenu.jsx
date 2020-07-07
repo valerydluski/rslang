@@ -35,6 +35,31 @@ const StyledMainNavigationMenu = styled.div`
       }
     }
   }
+
+  @media (max-width: 980px) {
+    li a {
+      padding-left: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+    li a {
+      color: #ffffff;
+    }
+
+    li a:hover {
+      color: #fec246;
+    }
+  }
+  li .active_link {
+    color: #fec246;
+    position: relative;
+  }
+
+  li .active_link::before {
+    background-color: #fec246;
+  }
 `;
 
 export default StyledMainNavigationMenu;

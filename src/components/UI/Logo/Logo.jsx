@@ -47,6 +47,9 @@ const LogoImageText = styled.p`
   font-size: 27px;
   line-height: 38px;
   color: #fff;
+  @media (max-width: 950px) {
+    font-size: 23px;
+  }
 `;
 
 function Logo(props) {

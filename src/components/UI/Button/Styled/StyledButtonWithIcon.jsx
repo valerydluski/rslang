@@ -35,6 +35,10 @@ const StyledButtonWithIcon = styled.button`
       background-image: url(${(props) => props.iconHover});
     }
   }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 
 export default StyledButtonWithIcon;

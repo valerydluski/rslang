@@ -17,6 +17,28 @@ const StyledRoundButton = styled.button`
   &:hover {
     background: #fec246;
   }
+
+  @media (max-width: 950px) {;
+  margin-left: 4px;
+  }
+
+  @media (max-width: 850px) {
+    margin-top: -25px;
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 0px;
+    margin-left: 0;
+    width: 74px;
+    height: 74px;
+    font-size: 23px;
+  }
+
+  @media (max-width: 450px) {
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
+  }
 `;
 
 export default StyledRoundButton;

@@ -5,6 +5,10 @@ const HomePageContainer = styled.div`
   min-height: 100%;
   display: grid;
   grid-template-columns: 2fr 6fr 3fr;
+
+  @media (max-width: 767px) {
+    grid-template-columns: auto;
+  }
 `;
 
 export default HomePageContainer;

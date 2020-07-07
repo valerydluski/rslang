@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const userDescriptionContainer = styled.div`
-  width: 100%;
   flex-direction: column;
   text-align: center;
   padding-top: 40px;
@@ -23,6 +22,12 @@ const userDescriptionContainer = styled.div`
     margin: 0;
     margin-top: 6px;
     margin-bottom: 30px;
+  }
+
+  @media (max-width: 767px) {
+    width: auto;
+    margin-left: 40%;
+    padding-top: 0;
   }
 `;
 
