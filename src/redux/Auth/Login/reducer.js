@@ -1,4 +1,5 @@
 import { SAVE_SESSION_DATA, RESET_SESSION_DATA } from './types';
+import RESET_STORE from '../../resetStore/types';
 
 const initialState = {
   isLogin: JSON.parse(localStorage.getItem('isLogin')) || false,
@@ -23,6 +24,8 @@ function loginReducer(state = initialState, action) {
       localStorage.removeItem('token');
       localStorage.removeItem('isLogin');
       return initialState;
+    case RESET_STORE:
+      return { ...initialState };
     default:
       return state;
   }
