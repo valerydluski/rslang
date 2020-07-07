@@ -20,21 +20,15 @@ const LearnWordsInput = (props) => {
     meta: { error, touched },
     autocomplete,
     word,
+    answer,
     isShowResult,
     attemptsNumber,
-    onChangeHandler,
   } = props;
 
-  const [value, changeValue] = useState('');
   const [isCorrect, changeCorrect] = useState(false);
   const [isAnimationOn, changeAnimation] = useState(false);
 
   const width = getStringWidth(word);
-
-  const onInputChange = (event) => {
-    changeValue(event.target.value);
-    onChangeHandler(event);
-  };
 
   if (isShowResult) {
     changeCorrect(isCorrect);
@@ -56,10 +50,10 @@ const LearnWordsInput = (props) => {
         isAnimationOn={isAnimationOn}
         onAnimationEnd={() => changeAnimation(false)}
       >
-        {word.map((letter, index) => {
+        {word.split('').map((letter, index) => {
           const key = `${letter}${index}`;
           return (
-            <InputLetterContainer key={key} isIncorrect={letter !== value[index]}>
+            <InputLetterContainer key={key} isIncorrect={letter !== answer[index]}>
               {letter}
             </InputLetterContainer>
           );
@@ -76,7 +70,6 @@ const LearnWordsInput = (props) => {
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
         width={width}
-        onChange={onInputChange}
       />
       {error && touched && <span>{error}</span>}
     </InputContainer>
@@ -94,10 +87,9 @@ LearnWordsInput.propTypes = {
   autoFocus: PropTypes.bool,
   autocomplete: PropTypes.string,
   word: PropTypes.string,
-  isCorrect: PropTypes.bool,
+  answer: PropTypes.string,
   isShowResult: PropTypes.bool,
   attemptsNumber: PropTypes.number,
-  onChangeHandler: PropTypes.func,
 };
 
 LearnWordsInput.defaultProps = {
@@ -110,10 +102,9 @@ LearnWordsInput.defaultProps = {
   autoFocus: false,
   autocomplete: 'on',
   word: '',
-  isCorrect: false,
+  answer: '',
   isShowResult: false,
   attemptsNumber: 0,
-  onChangeHandler: () => {},
 };
 
 export default LearnWordsInput;
