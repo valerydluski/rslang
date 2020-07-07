@@ -13,12 +13,12 @@ function* workerStatus({ payload }) {
   const getLoginState = (state) => state.login;
   const getWordsPerPage = (state) => state.userSettings.settings[`${gameName}WordsPerPage`];
   const getMaxPage = (state) => state.maxPage.maxPage;
-  const getLearnWordsCollection = (state) => state.newLearnCardShow.wordsCollection;
   const Statistic = yield select(getStatistic);
   const userData = yield select(getLoginState);
   const wordsPerPage = yield select(getWordsPerPage);
+  const getDisplayedList = (state) => state.newLearnCardShow.displayedWordsList;
+  const displayedWordsList = yield select(getDisplayedList);
   const maxPage = yield select(getMaxPage);
-  const learnWordsCollection = yield select(getLearnWordsCollection);
   let newStatistic;
   if (gameName) {
     newStatistic = yield createGameEndData(
@@ -32,7 +32,7 @@ function* workerStatus({ payload }) {
       maxPage
     );
   } else if (learnData) {
-    newStatistic = yield createLearnWordsStatistic(Statistic, learnData, learnWordsCollection);
+    newStatistic = yield createLearnWordsStatistic(Statistic, learnData, displayedWordsList);
   } else {
     newStatistic = INITIAL_STATISTIC;
   }

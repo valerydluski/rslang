@@ -10,6 +10,7 @@ import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
 import createInitialRounds from '../../../utils/createInitialRounds';
 import { changeInitialRound } from '../../ChangeRounds/action';
+import { addToShowedWordsList } from '../../LearnWords/actions';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());
@@ -19,8 +20,10 @@ function* workerLoadData() {
   const statistic = yield call(getStatisticFromApi, sessionData);
   if (statistic) {
     const statisticFromApi = getSettings(statistic);
+    console.log('function*workerLoadData -> statisticFromApi', statisticFromApi);
     const initialRound = createInitialRounds(statisticFromApi);
     yield put(changeInitialRound(initialRound));
+    yield put(addToShowedWordsList(JSON.parse(statisticFromApi.RepeatWordsToday)));
     yield put(saveFullStatisticToStore(statisticFromApi));
   }
 

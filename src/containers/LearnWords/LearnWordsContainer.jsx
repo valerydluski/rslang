@@ -27,23 +27,26 @@ function LearnWordCardContainer(props) {
   const [isTranslationShow, setIsTranslationShow] = useState(false);
   const [isSoundPlay, setIsSoundPlay] = useState(true);
   const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
+  const [needNewWord, setNeedNewWord] = useState(true);
+  const [audios, setAudios] = useState([]);
 
   let isAudiosPlay;
   let audiosLinks;
-  let audios;
 
   if (!currentWord) {
     setCurrentWord(getWord(wordsCollection));
   }
 
-  if (currentWord && !isCorrect && !isRightAnswerShow) {
+  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord) {
     showNewCardHandler(currentWord);
     const { audio, audioExample, audioMeaning } = currentWord;
     isAudiosPlay = [isAudioTranslate, isAudioTextMeaning, isAudioTextExample];
     audiosLinks = [audio, audioExample, audioMeaning];
-    audios = isAudiosPlay
+    const audiosArr = isAudiosPlay
       .filter((bool) => bool === true)
       .map((bool, i) => new Audio(`${LINK_FOR_AUDIO}${audiosLinks[i]}`));
+    setAudios(audiosArr);
+    setNeedNewWord(false);
   }
 
   const nextWord = () => {
@@ -56,6 +59,7 @@ function LearnWordCardContainer(props) {
     }
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
+    setNeedNewWord(true);
   };
 
   const onSubmit = async (formData) => {

@@ -10,6 +10,7 @@ import {
   LOADER_WORDS_COLLECTION_SHOW,
   LOADER_WORDS_COLLECTION_HIDE,
   IS_WORD_COLLECTION_LOADED,
+  ADD_TO_DISPLAYED_WORDS_LIST,
 } from './types';
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   wordsCollection: [],
   loadingWordsCollection: false,
   isWordsCollectionLoaded: false,
+  displayedWordsList: [],
 };
 
 function newLearnCardShow(state = initialState, action) {
@@ -48,6 +50,8 @@ function newLearnCardShow(state = initialState, action) {
       return { ...state, loadingWordsCollection: false };
     case IS_WORD_COLLECTION_LOADED:
       return { ...state, isWordsCollectionLoaded: action.payload };
+    case ADD_TO_DISPLAYED_WORDS_LIST:
+      return { ...state, displayedWordsList: action.payload };
     default:
       return state;
   }

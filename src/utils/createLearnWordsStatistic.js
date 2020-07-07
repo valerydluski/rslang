@@ -6,9 +6,7 @@ const createLearnWordsStatistic = (statistic, learnData, repeatWordsToday) => {
   newStatistic.CountCardsShow = cardsShow;
   newStatistic.CountNewWordsToday = countNewWordsShow;
   newStatistic.lastTrain = lastDateTraining;
-  newStatistic.RepeatWordsToday = JSON.stringify(
-    repeatWordsToday.filter((word) => !word.isNew).map((word) => word.word)
-  );
+  newStatistic.RepeatWordsToday = JSON.stringify(repeatWordsToday);
   return newStatistic;
 };
 
