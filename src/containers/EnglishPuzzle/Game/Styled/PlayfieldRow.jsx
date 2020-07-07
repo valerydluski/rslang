@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { PUZZLE_PADDING, PUZZLE_HEIGHT } from '../constants';
+import {
+  PUZZLE_PADDING,
+  PUZZLE_HEIGHT,
+  PUZZLE_HEIGHT_LAPTOP,
+  PUZZLE_PADDING_LAPTOP,
+} from '../constants';
+import { DEVICE } from '../../../../config';
 
 const PlayfieldRow = styled.div`
   width: 100%;
@@ -12,6 +18,11 @@ const PlayfieldRow = styled.div`
   transition: 0.3s linear;
   position: relative;
   z-index: 10;
+
+  @media ${DEVICE.laptop} {
+    height: ${PUZZLE_HEIGHT_LAPTOP}px;
+    padding-left: ${PUZZLE_PADDING_LAPTOP}px;
+  }
 `;
 
 export default PlayfieldRow;

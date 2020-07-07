@@ -1,4 +1,4 @@
-import { takeLatest, put, call, select, delay } from 'redux-saga/effects';
+import { takeLatest, put, call, select } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { fetchWords } from '../action';
 import {

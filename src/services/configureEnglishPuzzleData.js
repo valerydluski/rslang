@@ -1,10 +1,14 @@
 import getStringWidth from '../utils/getStringWidth';
-import { LINK_FOR_IMAGE, LINK_FOR_ENGLISH_PUZZLE_IMAGE } from '../config';
+import { LINK_FOR_IMAGE, LINK_FOR_ENGLISH_PUZZLE_IMAGE, SCREEN_SIZE } from '../config';
 import {
-  PUZZLE_PADDING,
-  PUZZLE_HEIGHT,
   PLAYFIELD_WIDTH,
+  PUZZLE_HEIGHT,
+  PUZZLE_PADDING,
+  PLAYFIELD_WIDTH_LAPTOP,
+  PUZZLE_HEIGHT_LAPTOP,
+  PUZZLE_PADDING_LAPTOP,
 } from '../containers/EnglishPuzzle/Game/constants';
+
 import paintings from '../assets/data/paintings';
 import loadImage from './loadImage';
 import loadAudio from './loadAudio';
@@ -17,19 +21,34 @@ export function calculatePuzzleData(page, index) {
   rowKeys.forEach((key) => {
     newPage[key].width = getStringWidth(newPage[key].word);
   });
-
+  const screenWidth = window.innerWidth;
+  let playfieldWidth;
+  let puzzleHeight;
+  let puzzlePadding;
+  switch (true) {
+    case screenWidth <= SCREEN_SIZE.laptop:
+      playfieldWidth = PLAYFIELD_WIDTH_LAPTOP;
+      puzzleHeight = PUZZLE_HEIGHT_LAPTOP;
+      puzzlePadding = PUZZLE_PADDING_LAPTOP;
+      break;
+    default:
+      playfieldWidth = PLAYFIELD_WIDTH;
+      puzzleHeight = PUZZLE_HEIGHT;
+      puzzlePadding = PUZZLE_PADDING;
+      break;
+  }
   let bgXOffset = 0;
-  const bgYOffset = index * PUZZLE_HEIGHT;
+  const bgYOffset = index * puzzleHeight;
   const fullWidth = rowKeys.reduce((acc, key) => acc + newPage[key].width, 0);
-  const freeWidth = PLAYFIELD_WIDTH - fullWidth;
-  const extraWidth = (PUZZLE_PADDING * (rowKeys.length - 1) + freeWidth) / rowKeys.length;
+  const freeWidth = playfieldWidth - fullWidth;
+  const extraWidth = (puzzlePadding * (rowKeys.length - 1) + freeWidth) / rowKeys.length;
 
   rowKeys.forEach((key) => {
     const newWidth = newPage[key].width + extraWidth;
     newPage[key].width = newWidth;
     newPage[key].bgXOffset = bgXOffset;
     newPage[key].bgYOffset = bgYOffset;
-    bgXOffset += newWidth - PUZZLE_PADDING;
+    bgXOffset += newWidth - puzzlePadding;
   });
   return newPage;
 }
