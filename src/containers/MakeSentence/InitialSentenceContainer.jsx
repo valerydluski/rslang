@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import AudioPlayControls from '../../containers/MakeSentence/AudioPlayControls';
+import AudioPlayControls from './AudioPlayControls';
 import InitialSentenceContainerStyled from './Styled/InitialSentenceContainerStyled';
 import { InitialSentenceWordsStyled, MainWordStyled } from './Styled/InitialSentenceWordsStyled';
 import SentencePartsContainerStyled from './Styled/SentencePartsContainerStyled';
