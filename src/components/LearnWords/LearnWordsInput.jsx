@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputContainer, InputStyled } from './styled/LearnWordsInput';
+import {
+  InputContainer,
+  InputStyled,
+  InputWordsContainer,
+  InputLetterContainer,
+} from './styled/LearnWordsInput';
 import getStringWidth from '../../utils/getStringWidth';
 
 const LearnWordsInput = (props) => {
@@ -13,14 +18,21 @@ const LearnWordsInput = (props) => {
     autoFocus,
     meta: { error, touched },
     autocomplete,
-    str,
+    word,
+    entered,
     onChangeHandler,
   } = props;
 
-  const width = getStringWidth(str);
+  const width = getStringWidth(word);
 
   return (
     <InputContainer>
+      <InputWordsContainer>
+        {word.map((letter, index) => {
+          const key = `${letter}${index}`;
+          return <InputLetterContainer key={key}>{letter}</InputLetterContainer>;
+        })}
+      </InputWordsContainer>
       <InputStyled
         type={type}
         name={name}
@@ -49,7 +61,7 @@ LearnWordsInput.propTypes = {
   meta: PropTypes.shape(),
   autoFocus: PropTypes.bool,
   autocomplete: PropTypes.string,
-  str: PropTypes.string,
+  word: PropTypes.string,
   onChangeHandler: PropTypes.func,
 };
 
@@ -62,7 +74,7 @@ LearnWordsInput.defaultProps = {
   meta: {},
   autoFocus: false,
   autocomplete: 'on',
-  str: '',
+  word: '',
   onChangeHandler: () => {},
 };
 
