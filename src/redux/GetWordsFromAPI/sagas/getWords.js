@@ -22,11 +22,13 @@ import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';
 import { updateState, updateSource } from '../../EnglishPuzzle/actions';
+import { changeIDontKnowWords } from '../../Games/action';
 
 function* workerGetWords() {
   try {
     yield put(showLoader());
     const state = yield select();
+    yield put(changeIDontKnowWords([]));
     const { appMode } = state.changeAppMode;
     const payload = yield call(wordsFetch, state);
     yield put(fetchWords(payload));
