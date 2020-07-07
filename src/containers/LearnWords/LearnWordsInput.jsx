@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   InputContainer,
   InputStyled,
-  InputWordsContainer,
+  InputWordsAnimatedContainer,
+  InputWordsBgContainer,
   InputLetterContainer,
-} from './styled/LearnWordsInput';
+} from './Styled/LearnWordsInput';
 import getStringWidth from '../../utils/getStringWidth';
 
 const LearnWordsInput = (props) => {
@@ -19,20 +20,51 @@ const LearnWordsInput = (props) => {
     meta: { error, touched },
     autocomplete,
     word,
-    entered,
+    isShowResult,
+    attemptsNumber,
     onChangeHandler,
   } = props;
 
+  const [value, changeValue] = useState('');
+  const [isCorrect, changeCorrect] = useState(false);
+  const [isAnimationOn, changeAnimation] = useState(false);
+
   const width = getStringWidth(word);
+
+  const onInputChange = (event) => {
+    changeValue(event.target.value);
+    onChangeHandler(event);
+  };
+
+  if (isShowResult) {
+    changeCorrect(isCorrect);
+    if (!isCorrect) {
+      changeAnimation(true);
+    }
+  }
 
   return (
     <InputContainer>
-      <InputWordsContainer>
-        {word.map((letter, index) => {
+      <InputWordsBgContainer attemptsNumber={attemptsNumber} isCorrect={isCorrect} width={width}>
+        {word.split('').map((letter, index) => {
           const key = `${letter}${index}`;
           return <InputLetterContainer key={key}>{letter}</InputLetterContainer>;
         })}
-      </InputWordsContainer>
+      </InputWordsBgContainer>
+      <InputWordsAnimatedContainer
+        width={width}
+        isAnimationOn={isAnimationOn}
+        onAnimationEnd={() => changeAnimation(false)}
+      >
+        {word.map((letter, index) => {
+          const key = `${letter}${index}`;
+          return (
+            <InputLetterContainer key={key} isIncorrect={letter !== value[index]}>
+              {letter}
+            </InputLetterContainer>
+          );
+        })}
+      </InputWordsAnimatedContainer>
       <InputStyled
         type={type}
         name={name}
@@ -44,7 +76,7 @@ const LearnWordsInput = (props) => {
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
         width={width}
-        onChange={onChangeHandler}
+        onChange={onInputChange}
       />
       {error && touched && <span>{error}</span>}
     </InputContainer>
@@ -62,6 +94,9 @@ LearnWordsInput.propTypes = {
   autoFocus: PropTypes.bool,
   autocomplete: PropTypes.string,
   word: PropTypes.string,
+  isCorrect: PropTypes.bool,
+  isShowResult: PropTypes.bool,
+  attemptsNumber: PropTypes.number,
   onChangeHandler: PropTypes.func,
 };
 
@@ -75,6 +110,9 @@ LearnWordsInput.defaultProps = {
   autoFocus: false,
   autocomplete: 'on',
   word: '',
+  isCorrect: false,
+  isShowResult: false,
+  attemptsNumber: 0,
   onChangeHandler: () => {},
 };
 
