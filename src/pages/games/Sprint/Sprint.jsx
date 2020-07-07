@@ -10,6 +10,7 @@ import Timer from '../../../components/Sprint/Timer';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { changeSprintLevel, changeSprintPage } from '../../../redux/ChangeRounds/action';
 import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
+import newRound from '../../../utils/newRound';
 
 const Sprint = (props) => {
   const {
@@ -25,7 +26,6 @@ const Sprint = (props) => {
     gameName,
   } = props;
   const [isGameFinished, toggleGameMode] = useState(false);
-
   if (isWordsLoading) return <LoadingSpinner />;
 
   const secondsForOneWord = 2;
@@ -37,6 +37,13 @@ const Sprint = (props) => {
 
   const timeIsUpHandler = () => {
     finishGameHandler();
+  };
+
+  const newGame = () => {
+    toggleGameMode(false);
+    const { newLevel, newPage } = newRound(level, page, maxPage);
+    if (newLevel !== level) updateLevel(newLevel);
+    if (newPage !== page) updatePage(newPage);
   };
 
   if (currentAppMode !== gameName || wordsCollection.length === 0) {
@@ -66,6 +73,7 @@ const Sprint = (props) => {
         level={level}
         page={page}
         gameName={gameName}
+        newGame={newGame}
       />
     </SprintContainerStyled>
   );

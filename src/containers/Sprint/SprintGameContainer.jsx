@@ -22,6 +22,7 @@ const SprintGameContainer = (props) => {
     level,
     page,
     gameName,
+    newGame,
   } = props;
   const [currentWordIndex, changeWordIndex] = useState(0);
   const [isWordFinished, toggleWordStatus] = useState(false);
@@ -44,6 +45,7 @@ const SprintGameContainer = (props) => {
         correctWords={correctAnsweredWords}
         showProperties={['word', 'wordTranslate']}
         audioForPlay="audio"
+        newGame={newGame}
       />
     );
   }
@@ -100,6 +102,7 @@ SprintGameContainer.propTypes = {
   level: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
   gameName: PropTypes.string.isRequired,
+  newGame: PropTypes.func,
 };
 
 SprintGameContainer.defaultProps = {
@@ -107,6 +110,7 @@ SprintGameContainer.defaultProps = {
   isGameFinished: false,
   finishGameHandler: () => {},
   addWrongWordsToStore: () => {},
+  newGame: () => {},
 };
 
 const mapDispatchToProps = {
