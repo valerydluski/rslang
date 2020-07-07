@@ -36,9 +36,20 @@ const StyledMainNavigationMenu = styled.div`
     }
   }
 
+  @media (max-width: 1200px) {
+    li a {
+      padding-left: 0;
+    }
+
+    li .active_link::before {
+      left: -20px;
+    }
+  }
+
+
   @media (max-width: 980px) {
     li a {
-      padding-left: 20px;
+      /* padding-left: 20px; */
     }
   }
 

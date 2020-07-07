@@ -10,32 +10,34 @@ const SideBarContainer = styled.div`
   min-height: 100%;
   box-sizing: border-box;
 
-  img {
-    width: 100%;
-  }
-
   span {
     font-size: 16px;
+  }
+
+  @media (max-width: 1250px) {
+    img {
+      width: 137px;
+      height: 137px;
+    }
   }
 
   @media (max-width: 1150px) {
     padding: 20px;
     width: 15vw;
-    ul {
-    color: #ffffff;
-    background-color: #404497;
-    /* width: 100vw; */
-   /* width: 97vw; */
-   /* height: 100vh; */
-    position: absolute;
-  /*  right: -35vw; */
-    } 
     span {
       font-size: 13px;
     }
+
     img {
-      width: 90%;
-      height: 65%
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  @media (max-width: 1040px) {
+    img {
+      width: 100px;
+      height: 100px;
     }
   }
 
@@ -51,10 +53,6 @@ const SideBarContainer = styled.div`
     span {
       font-size: 11px;
     }
-    img {
-      width: 100%;
-      height: 60%;
-    }
   }
 
   @media (max-width: 767px) {
@@ -67,6 +65,15 @@ const SideBarContainer = styled.div`
       width: 130px;
       height: 130px;
     }
+    ul {
+      color: #ffffff;
+      background-color: #404497;
+      /* width: 100vw; */
+     /* width: 97vw; */
+     /* height: 100vh; */
+      position: absolute;
+    /*  right: -35vw; */
+      } 
   }
    
   @media (max-width: 500px) {
