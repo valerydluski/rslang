@@ -14,7 +14,6 @@ export default function LearnWords(props) {
     settings,
     isTranslationShow,
     isRightAnswerShow,
-    tryes,
     answer,
   } = props;
   return (
@@ -24,7 +23,6 @@ export default function LearnWords(props) {
         <ReduxLearnWordsForm
           onSubmit={onSubmit}
           word={word}
-          attemptsNumber={tryes}
           isCorrect={isCorrect}
           autocomplete="off"
           settings={settings}
@@ -45,7 +43,6 @@ LearnWords.propTypes = {
   isCorrect: PropTypes.bool.isRequired,
   isRightAnswerShow: PropTypes.bool.isRequired,
   settings: PropTypes.shape().isRequired,
-  tryes: PropTypes.number.isRequired,
   answer: PropTypes.string,
 };
 

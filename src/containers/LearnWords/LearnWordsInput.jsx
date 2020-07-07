@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   InputContainer,
   InputStyled,
-  InputWordsAnimatedContainer,
   InputWordsBgContainer,
   InputLetterContainer,
 } from './Styled/LearnWordsInput';
@@ -22,34 +21,22 @@ const LearnWordsInput = (props) => {
     word,
     answer,
     isShowResult,
-    attemptsNumber,
   } = props;
 
-  const [isCorrect, changeCorrect] = useState(false);
-  const [isAnimationOn, changeAnimation] = useState(false);
+  const [showResult, changeShowResult] = useState(false);
 
   const width = getStringWidth(word);
 
   if (isShowResult) {
-    changeCorrect(isCorrect);
-    if (!isCorrect) {
-      changeAnimation(true);
-    }
+    changeShowResult(true);
+    setTimeout(() => {
+      changeShowResult(false);
+    }, 2000);
   }
 
   return (
     <InputContainer>
-      <InputWordsBgContainer attemptsNumber={attemptsNumber} isCorrect={isCorrect} width={width}>
-        {word.split('').map((letter, index) => {
-          const key = `${letter}${index}`;
-          return <InputLetterContainer key={key}>{letter}</InputLetterContainer>;
-        })}
-      </InputWordsBgContainer>
-      <InputWordsAnimatedContainer
-        width={width}
-        isAnimationOn={isAnimationOn}
-        onAnimationEnd={() => changeAnimation(false)}
-      >
+      <InputWordsBgContainer showResult={showResult} width={width}>
         {word.split('').map((letter, index) => {
           const key = `${letter}${index}`;
           return (
@@ -58,7 +45,7 @@ const LearnWordsInput = (props) => {
             </InputLetterContainer>
           );
         })}
-      </InputWordsAnimatedContainer>
+      </InputWordsBgContainer>
       <InputStyled
         type={type}
         name={name}

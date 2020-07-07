@@ -16,7 +16,6 @@ const LearnWordsForm = (props) => {
     isTranslationShow,
     onSubmit,
     isRightAnswerShow,
-    attemptsNumber,
     answer,
   } = props;
 
@@ -80,7 +79,6 @@ const LearnWordsForm = (props) => {
           autoFocus
           autocomplete={autocomplete}
           word={word.word}
-          attemptsNumber={attemptsNumber}
           answer={answer}
         />
         <p>{secondPart}</p>
@@ -142,7 +140,6 @@ LearnWordsForm.propTypes = {
   reset: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   isRightAnswerShow: PropTypes.bool.isRequired,
-  attemptsNumber: PropTypes.number.isRequired,
   answer: PropTypes.string,
 };
 
