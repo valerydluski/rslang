@@ -2,31 +2,55 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SprintGameContainerStyled from './Styled/SprintGameContainerStyled';
+import SprintScoreContainer from '../../components/Sprint/SprintScoreContainer';
 import { WordStyled, TranslationStyled } from './Styled/WordInfoStyled';
 import SprintControlsContainer from './SprintControlsContainer';
 import randomIntegerGenerator from '../../utils/randomIntegerGenerator';
 import { changeIDontKnowWords } from '../../redux/Games/action';
 import shuffleArray from '../../utils/shuffleArray';
 import ResultModal from '../Modal/ResultModal';
+import { saveFullStatistic } from '../../redux/Statistic/action';
 
 let currentGameWords;
 
 const SprintGameContainer = (props) => {
-  const { wordsCollection, finishGameHandler, isGameFinished, addWrongWordsToStore } = props;
+  const {
+    wordsCollection,
+    finishGameHandler,
+    isGameFinished,
+    addWrongWordsToStore,
+    saveStatistic,
+    level,
+    page,
+    gameName,
+    newGame,
+  } = props;
   const [currentWordIndex, changeWordIndex] = useState(0);
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [correctAnsweredWords, addWordToCorrect] = useState([]);
   const [isAnswerCorrect, setAnswer] = useState(true);
+  const [correctAnswers, changeAnswersAmount] = useState(0);
+  const [scoreStep, changeScoreStep] = useState(10);
+  const [score, changeScore] = useState(0);
 
   if (!currentWordIndex) currentGameWords = shuffleArray(wordsCollection);
+
   if (isGameFinished) {
     addWrongWordsToStore(wrongAnsweredWords);
+    saveStatistic({
+      Level: level,
+      Page: page,
+      wordsCollection,
+      wrongWordsState: wrongAnsweredWords,
+      gameName,
+    });
     return (
       <ResultModal
         correctWords={correctAnsweredWords}
         showProperties={['word', 'wordTranslate']}
         audioForPlay="audio"
+        newGame={newGame}
       />
     );
   }
@@ -46,10 +70,26 @@ const SprintGameContainer = (props) => {
     supposedAnswerWord = currentGameWords[currentWordIndex];
   }
 
+  const setResultScore = (isCorrect) => {
+    let answers;
+    if (isCorrect) {
+      answers = correctAnswers + 1;
+      changeAnswersAmount(correctAnswers + 1);
+      changeScore(score + scoreStep);
+    } else {
+      changeAnswersAmount(0);
+      changeScoreStep(10);
+    }
+    if (answers > 0 && answers % 4 === 0) {
+      changeScoreStep(scoreStep * 2);
+    }
+  };
+
   const processAnswer = (receivedAnswer) => {
     const isResultCorrect = receivedAnswer === currentRightAnswer;
     toggleWordStatus(true);
     setAnswer(isResultCorrect);
+    setResultScore(isResultCorrect);
     if (!isResultCorrect) {
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
     } else addWordToCorrect([...correctAnsweredWords, currentWord]);
@@ -59,6 +99,11 @@ const SprintGameContainer = (props) => {
   };
   return (
     <SprintGameContainerStyled>
+      <SprintScoreContainer
+        isAnswerCorrect={isAnswerCorrect}
+        score={score}
+        correctAnswers={correctAnswers}
+      />
       <WordStyled>{currentWord.word}</WordStyled>
       <TranslationStyled>{supposedAnswerWord.wordTranslate}</TranslationStyled>
       {isWordFinished ? (
@@ -79,6 +124,11 @@ SprintGameContainer.propTypes = {
   isGameFinished: PropTypes.bool,
   finishGameHandler: PropTypes.func,
   addWrongWordsToStore: PropTypes.func,
+  saveStatistic: PropTypes.func.isRequired,
+  level: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
+  gameName: PropTypes.string.isRequired,
+  newGame: PropTypes.func,
 };
 
 SprintGameContainer.defaultProps = {
@@ -86,10 +136,12 @@ SprintGameContainer.defaultProps = {
   isGameFinished: false,
   finishGameHandler: () => {},
   addWrongWordsToStore: () => {},
+  newGame: () => {},
 };
 
 const mapDispatchToProps = {
   addWrongWordsToStore: changeIDontKnowWords,
+  saveStatistic: saveFullStatistic,
 };
 
 export default connect(null, mapDispatchToProps)(SprintGameContainer);
