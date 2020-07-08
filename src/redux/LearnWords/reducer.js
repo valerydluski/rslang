@@ -13,6 +13,7 @@ import {
   ADD_TO_DISPLAYED_WORDS_LIST,
   SHOW_RESULT,
 } from './types';
+import RESET_STORE from '../resetStore/types';
 
 const initialState = {
   card: null,
@@ -56,6 +57,8 @@ function newLearnCardShow(state = initialState, action) {
       return { ...state, displayedWordsList: action.payload };
     case SHOW_RESULT:
       return { ...state, showResult: action.payload };
+    case RESET_STORE:
+      return { ...initialState };
     default:
       return state;
   }
