@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import { LINK_FOR_IMAGE } from '../../config';
 import LearnWordsInput from './LearnWordsInput';
+import Input from '../../components/UI/Input/Input';
 
 const LearnWordsForm = (props) => {
   const {
@@ -17,6 +18,7 @@ const LearnWordsForm = (props) => {
     onSubmit,
     isRightAnswerShow,
     answer,
+    isResultShow,
   } = props;
 
   const {
@@ -80,6 +82,7 @@ const LearnWordsForm = (props) => {
           autocomplete={autocomplete}
           word={word.word}
           answer={answer}
+          isShowResult={isResultShow}
         />
         <p>{secondPart}</p>
         {isTranslationShow && isTranslate && <p>{textExampleTranslate}</p>}
@@ -141,11 +144,13 @@ LearnWordsForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isRightAnswerShow: PropTypes.bool.isRequired,
   answer: PropTypes.string,
+  isResultShow: PropTypes.bool,
 };
 
 LearnWordsForm.defaultProps = {
   autocomplete: 'off',
   answer: '',
+  isResultShow: false,
 };
 
 export default ReduxLearnWordsForm;

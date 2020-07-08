@@ -30,6 +30,7 @@ function LearnWordCardContainer(props) {
   const [needNewWord, setNeedNewWord] = useState(true);
   const [audios, setAudios] = useState([]);
   const [answerToForm, setAnswerToForm] = useState('');
+  const [isResultShow, setIsResultShow] = useState(false);
 
   let isAudiosPlay;
   let audiosLinks;
@@ -57,6 +58,7 @@ function LearnWordCardContainer(props) {
     } else {
       setCurrentWord(null);
     }
+    setIsResultShow(false);
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
     setNeedNewWord(true);
@@ -102,6 +104,7 @@ function LearnWordCardContainer(props) {
         break;
       default:
         if (!answer) break;
+        setIsResultShow(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
@@ -131,6 +134,7 @@ function LearnWordCardContainer(props) {
       word={currentWord}
       isCorrect={isCorrect}
       answer={answerToForm}
+      isResultShow={isResultShow}
     />
   );
 }

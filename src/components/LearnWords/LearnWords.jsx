@@ -7,6 +7,7 @@ import GoHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePa
 import ReduxLearnWordsForm from '../../containers/LearnWords/LearnWordsForm';
 
 export default function LearnWords(props) {
+  console.log('LearnWords -> props', props);
   const {
     onSubmit,
     word,
@@ -15,6 +16,7 @@ export default function LearnWords(props) {
     isTranslationShow,
     isRightAnswerShow,
     answer,
+    isResultShow,
   } = props;
   return (
     <LearnWordsContainer>
@@ -29,6 +31,7 @@ export default function LearnWords(props) {
           isTranslationShow={isTranslationShow}
           isRightAnswerShow={isRightAnswerShow}
           answer={answer}
+          isResultShow={isResultShow}
         />
       </LearnWordCardContainer>
       <Line percent="30" strokeWidth="400" strokeColor="#404497" />
@@ -44,9 +47,11 @@ LearnWords.propTypes = {
   isRightAnswerShow: PropTypes.bool.isRequired,
   settings: PropTypes.shape().isRequired,
   answer: PropTypes.string,
+  isResultShow: PropTypes.bool,
 };
 
 LearnWords.defaultProps = {
   word: {},
   answer: '',
+  isResultShow: false,
 };
