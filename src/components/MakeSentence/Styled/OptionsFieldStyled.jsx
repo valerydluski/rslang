@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 const OptionsFieldStyled = styled.div`
   display: flex;
-  width: 80%;
-  flex-wrap: wrap;
+  max-width: 1000px;
   margin: 30px auto;
 `;
 

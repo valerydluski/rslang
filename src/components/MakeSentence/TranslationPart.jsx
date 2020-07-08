@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Draggable } from 'react-beautiful-dnd';
 import TranslationPartStyled from './Styled/TranslationPartStyled';
 
-const TranslationPart = ({ part, type, index, id, isDragging }) => {
+const TranslationPart = ({ part, type, index, id, isDragging, width }) => {
   if (!isDragging) {
     return (
-      <TranslationPartStyled data-type={type} data-index={index}>
+      <TranslationPartStyled data-type={type} data-index={index} width={width}>
         {part}
       </TranslationPartStyled>
     );
@@ -22,6 +22,7 @@ const TranslationPart = ({ part, type, index, id, isDragging }) => {
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...provided.dragHandleProps}
           ref={provided.innerRef}
+          width={width}
         >
           {part}
         </TranslationPartStyled>
@@ -36,6 +37,7 @@ TranslationPart.propTypes = {
   id: PropTypes.string,
   index: PropTypes.number.isRequired,
   isDragging: PropTypes.bool,
+  width: PropTypes.number,
 };
 
 TranslationPart.defaultProps = {
@@ -43,6 +45,7 @@ TranslationPart.defaultProps = {
   type: '',
   id: '',
   isDragging: false,
+  width: 0,
 };
 
 export default TranslationPart;

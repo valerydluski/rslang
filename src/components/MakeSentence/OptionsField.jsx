@@ -4,9 +4,10 @@ import { Droppable } from 'react-beautiful-dnd';
 import OptionsFieldStyled from './Styled/OptionsFieldStyled';
 import TranslationPart from './TranslationPart';
 
-const OptionsField = ({ optionsParts, isDragging }) => {
+const OptionsField = ({ optionsParts, isDragging, wordsWidth }) => {
   const parts = optionsParts.map((part, i) => {
     const key = `${part}${i}`;
+    console.log(wordsWidth);
     return (
       <TranslationPart
         key={key}
@@ -15,6 +16,7 @@ const OptionsField = ({ optionsParts, isDragging }) => {
         index={i}
         type="option"
         isDragging={isDragging}
+        width={wordsWidth[part]}
       />
     );
   });
@@ -40,11 +42,13 @@ const OptionsField = ({ optionsParts, isDragging }) => {
 OptionsField.propTypes = {
   optionsParts: PropTypes.instanceOf(Array),
   isDragging: PropTypes.bool,
+  wordsWidth: PropTypes.shape(),
 };
 
 OptionsField.defaultProps = {
   optionsParts: [],
   isDragging: false,
+  wordsWidth: {},
 };
 
 export default OptionsField;

@@ -4,7 +4,7 @@ import { Droppable } from 'react-beautiful-dnd';
 import AnswerFieldStyled from './Styled/AnswerFieldStyled';
 import TranslationPart from './TranslationPart';
 
-const AnswerField = ({ answerParts, isDragging }) => {
+const AnswerField = ({ answerParts, isDragging, wordsWidth }) => {
   const parts = answerParts.map((part, i) => {
     const key = `${part}${i}`;
     return (
@@ -15,6 +15,7 @@ const AnswerField = ({ answerParts, isDragging }) => {
         index={i}
         type="answer"
         isDragging={isDragging}
+        width={wordsWidth[part]}
       />
     );
   });
@@ -40,11 +41,13 @@ const AnswerField = ({ answerParts, isDragging }) => {
 AnswerField.propTypes = {
   answerParts: PropTypes.instanceOf(Array),
   isDragging: PropTypes.bool,
+  wordsWidth: PropTypes.shape(),
 };
 
 AnswerField.defaultProps = {
   answerParts: [],
   isDragging: false,
+  wordsWidth: {},
 };
 
 export default AnswerField;

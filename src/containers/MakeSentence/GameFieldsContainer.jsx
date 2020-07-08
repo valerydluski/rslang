@@ -6,6 +6,7 @@ import AnswerField from '../../components/MakeSentence/AnswerField';
 import OptionsField from '../../components/MakeSentence/OptionsField';
 import shuffleArray from '../../utils/shuffleArray';
 import { DontKnowButton, NextButton } from '../../components/MakeSentence/MakeSentenceControls';
+import calcOwnWordsSentenceWidth from '../../utils/calcOwnWordsSentenceWidth';
 
 const GameFieldsContainer = ({
   toggleWordStatus,
@@ -17,6 +18,7 @@ const GameFieldsContainer = ({
 }) => {
   const [optionParts, changeOptionParts] = useState(shuffleArray(sentenceTranslation.split(' ')));
   const [answerParts, changeAnswerParts] = useState([]);
+  const [wordsWidth, changeWordsWidth] = useState({});
 
   const checkAnswer = () => {
     const result = answerParts.join(' ') === sentenceTranslation;
@@ -31,7 +33,10 @@ const GameFieldsContainer = ({
     }
   });
 
-  useEffect(() => {}, [sentenceTranslation]);
+  useEffect(() => {
+    const widths = calcOwnWordsSentenceWidth(sentenceTranslation);
+    changeWordsWidth(widths);
+  }, [sentenceTranslation]);
 
   const swapPart = (type, index) => {
     const isOption = type === 'option';
@@ -80,8 +85,12 @@ const GameFieldsContainer = ({
   if (isAutoSolve) {
     return (
       <GameFieldsContainerStyled>
-        <AnswerField isDragging={false} answerParts={sentenceTranslation.split(' ')} />
-        <OptionsField isDragging={false} />
+        <AnswerField
+          isDragging={false}
+          answerParts={sentenceTranslation.split(' ')}
+          wordsWidth={wordsWidth}
+        />
+        <OptionsField isDragging={false} wordsWidth={wordsWidth} />
         <NextButton clickHandler={switchToNextSentence} />
       </GameFieldsContainerStyled>
     );
@@ -90,8 +99,8 @@ const GameFieldsContainer = ({
   return (
     <GameFieldsContainerStyled onClick={clickFieldHandler}>
       <DragDropContext onDragEnd={dragHandler}>
-        <AnswerField isDragging answerParts={answerParts} />
-        <OptionsField isDragging optionsParts={optionParts} />
+        <AnswerField isDragging answerParts={answerParts} wordsWidth={wordsWidth} />
+        <OptionsField isDragging optionsParts={optionParts} wordsWidth={wordsWidth} />
       </DragDropContext>
       {isWordFinished ? (
         <NextButton clickHandler={switchToNextSentence} />
