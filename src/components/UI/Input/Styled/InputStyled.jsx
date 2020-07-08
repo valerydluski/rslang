@@ -33,11 +33,6 @@ export const LabelStyled = styled.label`
 
 export const SpanStyled = styled.span`
   &.span_none {
-    position: absolute;
-    bottom: 20px;
-    right: 40px;
-    width: 200px;
-    height: 50px;
-    background-color: red;
+    display: none;
   }
 `;

@@ -108,6 +108,9 @@ const translations = {
       correct: 'Correct answers:',
       count: 'Total words:',
     },
+    Errors: {
+      name: 'Name field cannot be empty',
+    },
   },
   ru: {
     HomePage: {
@@ -217,6 +220,9 @@ const translations = {
       page: 'Страница:',
       correct: 'Правильных ответов:',
       count: 'Всего слов:',
+    },
+    Errors: {
+      name: 'Поле имя не может быть пустым',
     },
   },
 };
