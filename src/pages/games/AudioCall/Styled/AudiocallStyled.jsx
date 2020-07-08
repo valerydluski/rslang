@@ -22,6 +22,10 @@ const AudiocallStyled = styled.div`
       rgba(255, 207, 207, 1) ${(props) => props.backgroundOpacity + 10}%
     );
   }
+
+  @media ${DEVICE.mobileL} {
+    padding: 20px;
+  }
 `;
 
 export default AudiocallStyled;
