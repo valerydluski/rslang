@@ -10,9 +10,10 @@ import {
 } from '../../../redux/UserSettings/actions';
 import checkboxesValidator from '../../../utils/validators/checkboxesValidator';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
+import { puzzleSettingsFromServer } from '../../../redux/EnglishPuzzle/actions';
 
 function SettingContent(props) {
-  const { saveToStore, saveToAPI, initialValues, isLoadingData } = props;
+  const { saveToStore, saveToAPI, initialValues, isLoadingData, puzzleSettingsSave } = props;
   const onSubmit = (formData) => {
     if (!checkboxesValidator(formData)) {
       toast.warning(<Translate value="Settings.checkboxMessage" />);
@@ -20,6 +21,11 @@ function SettingContent(props) {
       saveToStore(formData);
       saveToAPI();
       toast.success(<Translate value="Settings.saveSettings" />);
+      puzzleSettingsSave({
+        isAutoSpeech: formData.isAutoSpeech,
+        isTranslation: formData.isTranslation,
+        isBackground: formData.isBackground,
+      });
     }
   };
   if (isLoadingData) return <LoadingSpinner />;
@@ -35,6 +41,7 @@ SettingContent.propTypes = {
   initialValues: PropTypes.instanceOf(Object).isRequired,
   saveToAPI: PropTypes.func.isRequired,
   isLoadingData: PropTypes.bool.isRequired,
+  puzzleSettingsSave: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -47,6 +54,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   saveToStore: saveUserSettingsToStore,
   saveToAPI: saveUserSettingsToAPI,
+  puzzleSettingsSave: puzzleSettingsFromServer,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingContent);

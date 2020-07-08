@@ -1,4 +1,5 @@
 import { SAVE_USER_SETTINGS_TO_STORE } from './types';
+import RESET_STORE from '../resetStore/types';
 
 const initialState = {
   settings: {
@@ -22,6 +23,9 @@ const initialState = {
     isAudioTranslate: true,
     isAudioTextMeaning: true,
     isAudioTextExample: true,
+    isAutoSpeech: true,
+    isTranslation: true,
+    isBackground: true,
   },
 };
 
@@ -32,6 +36,8 @@ function userSettingsReducer(state = initialState, action) {
         ...state,
         settings: action.payload,
       };
+    case RESET_STORE:
+      return { ...initialState };
     default:
       return state;
   }

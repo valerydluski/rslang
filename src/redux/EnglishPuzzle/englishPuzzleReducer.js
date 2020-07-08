@@ -12,7 +12,9 @@ import {
   SWITCH_SPEECH,
   SWITCH_BACKGROUND,
   UPDATE_PIC,
+  PUZZLE_SETTINGS_FROM_API,
 } from './types';
+import RESET_STORE from '../resetStore/types';
 
 const initialState = {
   data: [{}],
@@ -104,6 +106,13 @@ const englishPuzzleReducer = (state = initialState, action) => {
         ...state,
         autoSpeech: !state.autoSpeech,
       };
+    case PUZZLE_SETTINGS_FROM_API:
+      return {
+        ...state,
+        autoSpeech: action.payload.isAutoSpeech,
+        translation: action.payload.isTranslation,
+        background: action.payload.isBackground,
+      };
     case SWITCH_TRANSLATION:
       return {
         ...state,
@@ -120,6 +129,8 @@ const englishPuzzleReducer = (state = initialState, action) => {
         background: !state.background,
       };
     }
+    case RESET_STORE:
+      return { ...initialState };
     default:
       return state;
   }

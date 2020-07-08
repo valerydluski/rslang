@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -39,6 +39,7 @@ const GameContainerSpeakIT = (props) => {
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
+
   const [srcForImage, setSrcForImage] = useState(defaultImg);
   const [textForTextField, setTranslate] = useState(' ');
   const [isListening, setListening] = useState(listening);
@@ -47,6 +48,17 @@ const GameContainerSpeakIT = (props) => {
   const [wrongWordsState, setWrongWords] = useState([]);
   const [correctWordsState, setCorrectWords] = useState([]);
   let IDontKnowWords = gameWords.slice();
+
+  useEffect(() => {
+    setSrcForImage(defaultImg);
+    setTranslate(' ');
+    setListening(false);
+    toggleGameMode(false);
+    setWrongWords([]);
+    micro.stopMicrophone();
+    micro.changeTranscript(speechResult);
+  }, [wordsCollection]);
+
   if (isWordsLoading) return <LoadingSpinner />;
 
   function addCorrectWords(wrongWords) {
@@ -124,12 +136,15 @@ const GameContainerSpeakIT = (props) => {
     const { newLevel, newPage } = newRound(Level, Page, maxPage);
     if (newLevel !== Level) changeLevel(newLevel);
     if (newPage !== Page) changePage(newPage);
+    createGame();
+    micro.changeTranscript(speechResult);
   };
 
   const speakHandler = () => {
     if (isListening) {
       micro.stopMicrophone();
     } else if (!micro.setTranscript) {
+      createGame();
       micro.startMicrophone(speechResult);
     } else micro.startMicrophone();
     setListening(!isListening);
@@ -141,11 +156,6 @@ const GameContainerSpeakIT = (props) => {
     setListening(false);
   }
 
-  const newRoundHandlerStatusMenu = () => {
-    micro.stopMicrophone();
-    toggleGameMode(false);
-  };
-
   if (!isListening) {
     return (
       <>
@@ -156,16 +166,17 @@ const GameContainerSpeakIT = (props) => {
             restartGame={restartGame}
             newGame={newGame}
           />
-        ) : null}
-        <StatusMenu
-          page={Page}
-          level={Level}
-          maxPage={maxPage}
-          updateLevel={changeLevel}
-          updatePage={changePage}
-          restartGame={newRoundHandlerStatusMenu}
-          className="status-menu_speakIT"
-        />
+        ) : (
+          <StatusMenu
+            page={Page}
+            level={Level}
+            maxPage={maxPage}
+            updateLevel={changeLevel}
+            updatePage={changePage}
+            className="status-menu_speakIT"
+          />
+        )}
+
         <Image src={srcForImage} classNameContainer="image_speakIT" />
         <TextField text={textForTextField} className="text-field_speakIT" />
         <ScoreContainerSpeakIT />
@@ -193,16 +204,17 @@ const GameContainerSpeakIT = (props) => {
           restartGame={restartGame}
           newGame={newGame}
         />
-      ) : null}
-      <StatusMenu
-        page={Page}
-        level={Level}
-        maxPage={maxPage}
-        updateLevel={changeLevel}
-        updatePage={changePage}
-        className="status-menu_speakIT"
-        restartGame={newRoundHandlerStatusMenu}
-      />
+      ) : (
+        <StatusMenu
+          page={Page}
+          level={Level}
+          maxPage={maxPage}
+          updateLevel={changeLevel}
+          updatePage={changePage}
+          className="status-menu_speakIT"
+        />
+      )}
+
       <Image src={srcForImage} classNameContainer="image_speakIT" />
       <RecognationTranscriptContainer
         transcript={transcriptFromMicrophone}
@@ -228,7 +240,6 @@ GameContainerSpeakIT.propTypes = {
   Level: PropTypes.string,
   Page: PropTypes.string,
   listening: PropTypes.bool,
-  wordsCollection: PropTypes.instanceOf(Array),
   changeIDontKnowWordsInStore: PropTypes.func,
   isWordsLoading: PropTypes.bool,
   changeLevel: PropTypes.func.isRequired,
@@ -242,7 +253,6 @@ GameContainerSpeakIT.defaultProps = {
   Level: '',
   Page: '',
   listening: false,
-  wordsCollection: [],
   changeIDontKnowWordsInStore: () => {},
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,
@@ -253,7 +263,6 @@ const mapStateToProps = (state) => {
   return {
     Level: state.changeRound.SpeakITLevel,
     Page: state.changeRound.SpeakITPage,
-    wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
     maxPage: state.maxPage.maxPage,

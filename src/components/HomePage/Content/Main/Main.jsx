@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-redux-i18n';
-import Title from './components/Title/Title';
+import Title from '../../../../containers/Homepage/Content/Title/Title';
 import TitleWithUnderline from './components/Title/styled/TitleWithUnderline';
 import GameCard from './components/GameCard/GameCard';
 import GamesContainer from './styled/GamesContainer';

@@ -1,6 +1,8 @@
+import { toast } from 'react-toastify';
+
 export default (value) => {
   if (!value) {
-    return 'Required';
+    return toast.warning('error');
   }
   return undefined;
 };

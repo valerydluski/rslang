@@ -14,6 +14,7 @@ import { changeAudioCallLevel, changeAudioCallPage } from '../../redux/ChangeRou
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../config';
 import { saveFullStatistic } from '../../redux/Statistic/action';
 import newRound from '../../utils/newRound';
+import StatusMenu from '../../components/StatusMenu/StatusMenu';
 
 let currentGameWords;
 let answerResult = {};
@@ -31,6 +32,8 @@ const AudioCallContainer = ({
   maxPage,
   gameName,
   saveStatistic,
+  backgroundOpacity,
+  changeBackgroundOpacity,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -85,6 +88,7 @@ const AudioCallContainer = ({
   }
 
   function autoSolve() {
+    changeBackgroundOpacity(backgroundOpacity + 100 / wordsCollection.length);
     addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
     toggleWordStatus(true);
     answerResult.isCorrect = true;
@@ -109,6 +113,21 @@ const AudioCallContainer = ({
     <>
       {isWordFinished ? (
         <>
+          {isGameFinished ? (
+            <ResultModal
+              showProperties={['word', 'wordTranslate']}
+              audioForPlay="audio"
+              newGame={newGame}
+            />
+          ) : (
+            <StatusMenu
+              page={page}
+              level={level}
+              maxPage={maxPage}
+              updateLevel={updateLevel}
+              updatePage={updatePage}
+            />
+          )}
           <FinishedWordInfo
             word={currentGameWords[currentWordIndex].word}
             audioSrc={currentGameWords[currentWordIndex].audio}
@@ -124,22 +143,25 @@ const AudioCallContainer = ({
             isAutoSolved={answerResult.isAutoSolved}
           />
           <NextButton clickHandler={switchToNextWord} />
-          {isGameFinished ? (
-            <ResultModal
-              showProperties={['word', 'wordTranslate']}
-              audioForPlay="audio"
-              newGame={newGame}
-            />
-          ) : null}
         </>
       ) : (
         <>
+          <StatusMenu
+            page={page}
+            level={level}
+            maxPage={maxPage}
+            updateLevel={updateLevel}
+            updatePage={updatePage}
+          />
           <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
           <WordsContainer
             words={additionalWords}
             correctWord={currentGameWords[currentWordIndex].word}
             processUserAnswer={processUserAnswer}
             isWordFinished={isWordFinished}
+            backgroundOpacity={backgroundOpacity}
+            changeBackgroundOpacity={changeBackgroundOpacity}
+            wordsAmount={wordsCollection.length}
           />
           <DontKnowButton clickHandler={autoSolve} />
         </>
@@ -161,6 +183,8 @@ AudioCallContainer.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
+  changeBackgroundOpacity: PropTypes.func,
+  backgroundOpacity: PropTypes.number,
 };
 
 AudioCallContainer.defaultProps = {
@@ -175,6 +199,8 @@ AudioCallContainer.defaultProps = {
   page: '1',
   maxPage: GAME_MAX_PAGE,
   gameName: GAME_NAME.audioCall,
+  backgroundOpacity: 0,
+  changeBackgroundOpacity: () => {},
 };
 
 const mapStateToProps = (state) => {

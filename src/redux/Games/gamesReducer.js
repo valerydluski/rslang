@@ -4,6 +4,7 @@ import {
   CHANGE_I_DONT_KNOW_WORDS,
   GAME_CHANGE_SCORE,
 } from './types';
+import RESET_STORE from '../resetStore/types';
 
 const initialState = {
   gameLevel: '1',
@@ -22,9 +23,10 @@ const gamesReducer = (state = initialState, action) => {
       return { ...state, IDontKnowWords: action.payload };
     case GAME_CHANGE_SCORE:
       return { ...state, gameScore: action.payload };
+    case RESET_STORE:
+      return { ...initialState };
     default:
       return state;
   }
 };
-
 export default gamesReducer;

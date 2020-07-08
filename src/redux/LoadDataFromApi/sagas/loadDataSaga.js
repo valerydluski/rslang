@@ -11,6 +11,7 @@ import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoa
 import createInitialRounds from '../../../utils/createInitialRounds';
 import { changeInitialRound } from '../../ChangeRounds/action';
 import { addToShowedWordsList } from '../../LearnWords/actions';
+import { puzzleSettingsFromServer } from '../../EnglishPuzzle/actions';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());
@@ -30,6 +31,13 @@ function* workerLoadData() {
   if (settings) {
     const settingsFromApi = getSettings(settings);
     yield put(saveUserSettingsToStore(settingsFromApi));
+    yield put(
+      puzzleSettingsFromServer({
+        isAutoSpeech: settingsFromApi.isAutoSpeech,
+        isTranslation: settingsFromApi.isTranslation,
+        isBackground: settingsFromApi.isBackground,
+      })
+    );
   }
 
   yield put(getUserWords());

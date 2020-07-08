@@ -10,6 +10,7 @@ const translations = {
       settings: 'Settings',
       logout: 'Log Out',
       start: "Let's play!",
+      wordsAmount: 'Total words',
     },
     StartPage: {
       game: 'GAME',
@@ -40,6 +41,9 @@ const translations = {
       isAudioTextMeaning: 'Play text meaning audio',
       isAudioTextExample: 'Play text example audio',
       saveSettings: 'settings have been saved',
+      isAutoSpeech: 'Auto speech',
+      isTranslation: 'Translate',
+      isBackground: 'Background',
     },
     Auth: {
       signIn: 'Sign In',
@@ -116,6 +120,7 @@ const translations = {
       settings: 'Настройки',
       logout: 'Выход',
       start: 'Начни играть!',
+      wordsAmount: 'Всего слов',
     },
     StartPage: {
       game: 'ИГРА',
@@ -146,6 +151,9 @@ const translations = {
       isAudioTextMeaning: 'Воспроизведение аудио значение слова',
       isAudioTextExample: 'Воспроизведение аудио пример употребления слова',
       saveSettings: 'настройки сохранены',
+      isAutoSpeech: 'Автовоспроизведение',
+      isTranslation: 'Перевод',
+      isBackground: 'Фоновая картинка',
     },
     Auth: {
       signIn: 'Войти',
