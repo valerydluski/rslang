@@ -4,7 +4,7 @@ import { DEVICE } from '../../../config';
 
 const MenuItem = styled.div`
   height: 100%;
-  width: ${(props) => (props.type === ITEM_PAGE ? '280' : '220')}px;
+  width: ${(props) => (props.type === ITEM_PAGE ? '280' : '200')}px;
   display: flex;
   align-items: center;
 
@@ -13,7 +13,10 @@ const MenuItem = styled.div`
   }
 
   @media ${DEVICE.tablet} {
-    width: ${(props) => (props.type === ITEM_PAGE ? '280' : '180')}px;
+    width: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 30px;
   }
 `;
 
