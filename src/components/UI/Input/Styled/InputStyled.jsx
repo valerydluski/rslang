@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const InputContainer = styled.div`
-  margin: 20px 0;
+  margin: 10px 0;
 
-  &.settings {
-    display: none;
+  &.radio-button_container {
+    margin: 5px 0;
   }
 `;
 
@@ -33,6 +33,11 @@ export const LabelStyled = styled.label`
 
 export const SpanStyled = styled.span`
   &.span_none {
-    display: none;
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
+    width: 200px;
+    height: 50px;
+    background-color: red;
   }
 `;
