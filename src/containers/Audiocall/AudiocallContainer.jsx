@@ -15,6 +15,7 @@ import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../config';
 import { saveFullStatistic } from '../../redux/Statistic/action';
 import newRound from '../../utils/newRound';
 import StatusMenu from '../../components/StatusMenu/StatusMenu';
+import GameContainerStyled from './styled/StyledGameContainer';
 
 let currentGameWords;
 let answerResult = {};
@@ -128,21 +129,23 @@ const AudioCallContainer = ({
               updatePage={updatePage}
             />
           )}
-          <FinishedWordInfo
-            word={currentGameWords[currentWordIndex].word}
-            audioSrc={currentGameWords[currentWordIndex].audio}
-            imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
-          />
-          <WordsContainer
-            isWordFinished={isWordFinished}
-            isCorrect={answerResult.isCorrect}
-            correctWord={currentGameWords[currentWordIndex].word}
-            words={answerResult.words}
-            selectedIndex={answerResult.selectedIndex}
-            correctIndex={answerResult.correctIndex}
-            isAutoSolved={answerResult.isAutoSolved}
-          />
-          <NextButton switchToNextWord={switchToNextWord} />
+          <GameContainerStyled>
+            <FinishedWordInfo
+              word={currentGameWords[currentWordIndex].word}
+              audioSrc={currentGameWords[currentWordIndex].audio}
+              imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
+            />
+            <WordsContainer
+              isWordFinished={isWordFinished}
+              isCorrect={answerResult.isCorrect}
+              correctWord={currentGameWords[currentWordIndex].word}
+              words={answerResult.words}
+              selectedIndex={answerResult.selectedIndex}
+              correctIndex={answerResult.correctIndex}
+              isAutoSolved={answerResult.isAutoSolved}
+            />
+            <NextButton switchToNextWord={switchToNextWord} />
+          </GameContainerStyled>
         </>
       ) : (
         <>
@@ -153,17 +156,22 @@ const AudioCallContainer = ({
             updateLevel={updateLevel}
             updatePage={updatePage}
           />
-          <AudioPlayButton src={currentGameWords[currentWordIndex].audio} isBig={!isWordFinished} />
-          <WordsContainer
-            words={additionalWords}
-            correctWord={currentGameWords[currentWordIndex].word}
-            processUserAnswer={processUserAnswer}
-            isWordFinished={isWordFinished}
-            backgroundOpacity={backgroundOpacity}
-            changeBackgroundOpacity={changeBackgroundOpacity}
-            wordsAmount={wordsCollection.length}
-          />
-          <DontKnowButton clickHandler={autoSolve} />
+          <GameContainerStyled>
+            <AudioPlayButton
+              src={currentGameWords[currentWordIndex].audio}
+              isBig={!isWordFinished}
+            />
+            <WordsContainer
+              words={additionalWords}
+              correctWord={currentGameWords[currentWordIndex].word}
+              processUserAnswer={processUserAnswer}
+              isWordFinished={isWordFinished}
+              backgroundOpacity={backgroundOpacity}
+              changeBackgroundOpacity={changeBackgroundOpacity}
+              wordsAmount={wordsCollection.length}
+            />
+            <DontKnowButton clickHandler={autoSolve} />
+          </GameContainerStyled>
         </>
       )}
     </>

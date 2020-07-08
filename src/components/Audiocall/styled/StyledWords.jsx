@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CorrectCheckmark from '../../UI/Icon/checkmark.svg';
+import { DEVICE } from '../../../config';
 
 const WordStyled = styled.div`
   font-family: Montserrat;
@@ -17,6 +18,16 @@ const WordStyled = styled.div`
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     transition: background-color 0.4s ease-in-out;
+  }
+  box-sizing: border-box;
+
+  @media ${DEVICE.laptopL} {
+    font-size: 20px;
+  }
+
+  @media ${DEVICE.tablet} {
+    font-size: 26px;
+    padding: 6px 0;
   }
 `;
 
