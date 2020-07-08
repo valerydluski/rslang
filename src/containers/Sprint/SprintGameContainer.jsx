@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import SprintGameContainerStyled from './Styled/SprintGameContainerStyled';
 import SprintScoreContainer from '../../components/Sprint/SprintScoreContainer';
 import { WordStyled, TranslationStyled } from './Styled/WordInfoStyled';
@@ -110,11 +111,17 @@ const SprintGameContainer = (props) => {
         <SprintControlsContainer
           isAnswerCorrect={isAnswerCorrect}
           isWordFinished={isWordFinished}
-          clickHandler={processAnswer}
+          processAnswer={processAnswer}
         />
       ) : (
-        <SprintControlsContainer clickHandler={processAnswer} />
+        <SprintControlsContainer processAnswer={processAnswer} />
       )}
+      <KeyboardEventHandler
+        handleKeys={['right', 'left']}
+        onKeyEvent={(key) => {
+          processAnswer(key === 'right');
+        }}
+      />
     </SprintGameContainerStyled>
   );
 };
