@@ -66,7 +66,7 @@ const translations = {
         'Check the correctness of your pronunciation of English words in the exciting game!',
       sprintDescription:
         'This game will help you to translate English words into your native language.',
-      makeSentenceDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      makeSentenceDescription: 'This game will help you enjoy reading, writing, speaking English with pleasure.',
     },
     Buttons: {
       save: 'Save',
@@ -202,7 +202,7 @@ const translations = {
         'Проверьте правильность вашего произношения английских слов в увлекательной игре!',
       sprintDescription:
         'С помощью данной игры вы научитесь быстро переводить слова на ваш родной язык.',
-      makeSentenceDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      makeSentenceDescription: 'Данная игра позволит вам научиться читать, писать, говорить легко и непринужденно.',
     },
     Buttons: {
       save: 'Сохранить',
