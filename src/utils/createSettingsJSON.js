@@ -1,6 +1,6 @@
 const createSettingsJSON = (settings) => {
   return {
-    wordsPerDay: settings.WordsPerDay,
+    wordsPerDay: settings.wordsPerDay,
     optional: settings,
   };
 };

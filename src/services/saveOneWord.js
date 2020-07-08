@@ -8,7 +8,6 @@ async function saveOneWord(wordId, wordOptions, user) {
       URL,
       ENDPOINTS: { USERS, WORDS },
     } = API;
-
     await fetchData(`${URL}/${USERS}/${user.userId}/${WORDS}/${wordId}`, {
       method: 'POST',
       withCredentials: true,

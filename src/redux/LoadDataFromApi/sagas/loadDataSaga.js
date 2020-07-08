@@ -11,6 +11,7 @@ import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
 import createInitialRounds from '../../../utils/createInitialRounds';
 import { changeInitialRound } from '../../ChangeRounds/action';
+import { addToShowedWordsList } from '../../LearnWords/actions';
 import { puzzleSettingsFromServer } from '../../EnglishPuzzle/actions';
 
 function* workerLoadData() {
@@ -23,6 +24,7 @@ function* workerLoadData() {
     const statisticFromApi = getSettings(statistic);
     const initialRound = createInitialRounds(statisticFromApi);
     yield put(changeInitialRound(initialRound));
+    yield put(addToShowedWordsList(JSON.parse(statisticFromApi.RepeatWordsToday)));
     yield put(saveFullStatisticToStore(statisticFromApi));
   }
 

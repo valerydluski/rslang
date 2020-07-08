@@ -5,6 +5,7 @@ import {
   UPDATE_LEARNING_WORDS,
   UPDATE_DIFFICULT_WORDS,
   UPDATE_DELETED_WORDS,
+  LOADING_USER_WORDS,
 } from './types';
 
 export function saveUserWords(words) {
@@ -44,5 +45,12 @@ export function updateDeletedWords(words) {
 export function getAggregatedWords() {
   return {
     type: GET_AGGREGATED_WORDS,
+  };
+}
+
+export function loadUserWords(bool) {
+  return {
+    type: LOADING_USER_WORDS,
+    payload: bool,
   };
 }

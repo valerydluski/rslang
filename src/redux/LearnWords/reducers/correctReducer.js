@@ -3,6 +3,7 @@ import RESET_STORE from '../../resetStore/types';
 
 const initialState = {
   isCorrect: false,
+  isTranslationShow: false,
 };
 
 function isCorrectReducer(state = initialState, action) {

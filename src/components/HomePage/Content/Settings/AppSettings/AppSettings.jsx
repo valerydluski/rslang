@@ -41,8 +41,8 @@ const AppSettings = ({ checkboxes }) => {
         <LabelStyled htmlFor="language">{I18n.t('Settings.language')}</LabelStyled>
       </SelectContainerStyled>
       <Field
-        name="WordsPerDay"
-        key="WordsPerDay"
+        name="wordsPerDay"
+        key="wordsPerDay"
         type="number"
         placeholder={I18n.t('Settings.wordsPerDay')}
         validate={WordsPerDayValidator}
@@ -53,8 +53,8 @@ const AppSettings = ({ checkboxes }) => {
         className="settings"
       />
       <Field
-        name="CardsPerDay"
-        key="CardsPerDay"
+        name="cardsPerDay"
+        key="cardsPerDay"
         type="number"
         component={Input}
         placeholder={I18n.t('Settings.cardsPerDay')}

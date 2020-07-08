@@ -20,6 +20,7 @@ function SettingContent(props) {
     } else {
       saveToStore(formData);
       saveToAPI();
+      toast.success(<Translate value="Settings.saveSettings" />);
       puzzleSettingsSave({
         isAutoSpeech: formData.isAutoSpeech,
         isTranslation: formData.isTranslation,
