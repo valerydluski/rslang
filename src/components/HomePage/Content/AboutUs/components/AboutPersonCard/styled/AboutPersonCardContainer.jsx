@@ -11,6 +11,7 @@ const AboutPersonCardContainer = styled.div`
     margin-top: -16vh;
     margin-left: 14.1vw;
      display: block;
+     border-bottom: 1px solid #c4c4c4;
     text-transform: uppercase;
   }
 
