@@ -45,6 +45,7 @@ const translations = {
       isTranslation: 'Translate',
       isBackground: 'Background',
       timeForWord: 'Time for a word',
+      errorCounter: 'Maximum number of errors',
     },
     Auth: {
       signIn: 'Sign In',
@@ -163,6 +164,7 @@ const translations = {
       isTranslation: 'Перевод',
       isBackground: 'Фоновая картинка',
       timeForWord: 'Времени на слово',
+      errorCounter: 'Максимальное число ошибок',
     },
     Auth: {
       signIn: 'Войти',

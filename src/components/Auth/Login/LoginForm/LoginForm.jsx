@@ -13,6 +13,7 @@ import LoginPageTitle from '../LoginPageTitle/LoginPageTitle';
 import FormNameStyled from './Styled/FormNameStyled';
 import PatternStyled from './Styled/PatternStyled';
 import StyledFormNamesContainer from '../../Styled/StyledFormNamesContainer';
+import SignInAnimation from '../../Animation/SignInAnimation';
 
 const LoginForm = (props) => {
   const { handleSubmit } = props;
@@ -47,7 +48,9 @@ const LoginForm = (props) => {
           <Translate value="Buttons.OK" />
         </button>
       </FormStyled>
-      <PatternStyled />
+      <PatternStyled>
+        <SignInAnimation />
+      </PatternStyled>
     </LoginFormWrapperStyled>
   );
 };
