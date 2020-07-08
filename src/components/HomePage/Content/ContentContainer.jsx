@@ -6,6 +6,10 @@ const ContentContainer = styled.main`
   box-sizing: border-box;
   padding: 75px 75px 0;
 
+  @media (max-width: 1100px) {
+    padding: 50px 50px 0;
+  }
+
   @media (max-width: 767px) {
     padding: 50px 50px 0;
     grid-row-start: 3;

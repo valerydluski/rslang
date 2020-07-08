@@ -18,16 +18,20 @@ const StyledRoundButton = styled.button`
     background: #fec246;
   }
 
-  @media (max-width: 950px) {;
-  margin-left: 4px;
-  }
+  @media (max-width: 1300px) {;
+    margin-left: 1.3vw;
+    }
+
+    @media (max-width: 910px) {
+      margin-left: 4.3vw;
+    }
 
   @media (max-width: 850px) {
     margin-top: -25px;
   }
 
   @media (max-width: 767px) {
-    margin-top: 0px;
+    margin-top: -100px;
     width: 74px;
     height: 74px;
     font-size: 23px;

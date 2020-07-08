@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const GameCardContainer = styled.div`
-  width: 15vw;
+  width: 13vw;
 
   h3 {
     font-weight: bold;
@@ -15,7 +15,7 @@ const GameCardContainer = styled.div`
   }
 
   p {
-    width: 15vw;
+    width: 13vw;
     font-size: 14px;
     line-height: 17px;
     color: #000000;
@@ -31,22 +31,29 @@ const GameCardContainer = styled.div`
   }
 
   @media (max-width: 1100px) {
+    width: 12vw;
     h3 {
     font-size: 13px;
     height: 35px;
     }
     p {
-      width: 13vw;
+      width: 12vw;
       font-size: 12px;
+      height: 150px;
     }
   }
 
   @media (max-width: 950px) {
-    width: 13vw;
+    width: 9vw;
+    p {
+      width: 9vw;
+      font-size: 12px;
+      height: 170px;
+    }
   }
 
   @media (max-width: 830px) {
-    width: 12vw;
+    width: 11vw;
   }
 
   @media (max-width: 767px) {
@@ -75,11 +82,6 @@ const GameCardContainer = styled.div`
   }
 
   @media (max-width: 420px) {
-    height: 45vh;
-    width: 80vw;
-  }
-
-  @media (max-width: 390px) {
     width: 80vw;
   }
 
