@@ -7,7 +7,6 @@ import GoHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePa
 import ReduxLearnWordsForm from '../../containers/LearnWords/LearnWordsForm';
 
 export default function LearnWords(props) {
-  console.log('LearnWords -> props', props);
   const {
     onSubmit,
     word,

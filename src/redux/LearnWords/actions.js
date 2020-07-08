@@ -14,6 +14,7 @@ import {
   LOADER_WORDS_COLLECTION_HIDE,
   IS_WORD_COLLECTION_LOADED,
   ADD_TO_DISPLAYED_WORDS_LIST,
+  SHOW_RESULT,
 } from './types';
 
 export function showNewCard(card) {
@@ -115,5 +116,12 @@ export function addToShowedWordsList(arr) {
   return {
     type: ADD_TO_DISPLAYED_WORDS_LIST,
     payload: arr,
+  };
+}
+
+export function showResult(bool) {
+  return {
+    type: SHOW_RESULT,
+    payload: bool,
   };
 }

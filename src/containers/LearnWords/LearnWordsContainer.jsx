@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LearnWords from '../../components/LearnWords/LearnWords';
 import { LINK_FOR_AUDIO } from '../../config';
-import { correctCard, showNewCard, saveWordToState } from '../../redux/LearnWords/actions';
+import {
+  correctCard,
+  showNewCard,
+  saveWordToState,
+  showResult,
+} from '../../redux/LearnWords/actions';
 import updateOneWord from '../../services/updateOneWord';
 
 function getWord(arr) {
@@ -21,6 +26,7 @@ function LearnWordCardContainer(props) {
     user,
     resetSaveWord,
     wordsCollection,
+    showResultHandler,
   } = props;
   const { isAudioTranslate, isAudioTextMeaning, isAudioTextExample } = settings.settings;
   const [currentWord, setCurrentWord] = useState();
@@ -30,7 +36,6 @@ function LearnWordCardContainer(props) {
   const [needNewWord, setNeedNewWord] = useState(true);
   const [audios, setAudios] = useState([]);
   const [answerToForm, setAnswerToForm] = useState('');
-  const [isResultShow, setIsResultShow] = useState(false);
 
   let isAudiosPlay;
   let audiosLinks;
@@ -58,7 +63,7 @@ function LearnWordCardContainer(props) {
     } else {
       setCurrentWord(null);
     }
-    setIsResultShow(false);
+    showResultHandler(false);
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
     setNeedNewWord(true);
@@ -104,7 +109,7 @@ function LearnWordCardContainer(props) {
         break;
       default:
         if (!answer) break;
-        setIsResultShow(true);
+        showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
@@ -134,7 +139,6 @@ function LearnWordCardContainer(props) {
       word={currentWord}
       isCorrect={isCorrect}
       answer={answerToForm}
-      isResultShow={isResultShow}
     />
   );
 }
@@ -158,6 +162,7 @@ LearnWordCardContainer.propTypes = {
     }),
   }),
   user: PropTypes.shape().isRequired,
+  showResultHandler: PropTypes.func.isRequired,
 };
 
 LearnWordCardContainer.defaultProps = {
@@ -188,6 +193,7 @@ const mapDispatchToProps = {
   correctCardHandler: correctCard,
   showNewCardHandler: showNewCard,
   resetSaveWord: saveWordToState,
+  showResultHandler: showResult,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LearnWordCardContainer);

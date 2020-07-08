@@ -4,7 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import { LINK_FOR_IMAGE } from '../../config';
 import LearnWordsInput from './LearnWordsInput';
-import Input from '../../components/UI/Input/Input';
 
 const LearnWordsForm = (props) => {
   const {

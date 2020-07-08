@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   InputContainer,
   InputStyled,
@@ -7,6 +8,7 @@ import {
   InputLetterContainer,
 } from './Styled/LearnWordsInput';
 import getStringWidth from '../../utils/getStringWidth';
+import { showResult } from '../../redux/LearnWords/actions';
 
 const LearnWordsInput = (props) => {
   const {
@@ -21,22 +23,32 @@ const LearnWordsInput = (props) => {
     word,
     answer,
     isShowResult,
+    showResultHander,
   } = props;
 
-  const [showResult, changeShowResult] = useState(false);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (isShowResult) {
+      setShow(true);
+      const timer = setTimeout(() => {
+        setShow(false);
+        showResultHander(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+    return undefined;
+  }, [isShowResult, showResultHander]);
+
+  const hideResult = () => {
+    setShow(false);
+  };
 
   const width = getStringWidth(word);
 
-  if (isShowResult) {
-    changeShowResult(true);
-    setTimeout(() => {
-      changeShowResult(false);
-    }, 2000);
-  }
-
   return (
     <InputContainer>
-      <InputWordsBgContainer showResult={showResult} width={width}>
+      <InputWordsBgContainer showResult={show} width={width} onClick={hideResult}>
         {word.split('').map((letter, index) => {
           const key = `${letter}${index}`;
           return (
@@ -75,8 +87,9 @@ LearnWordsInput.propTypes = {
   autocomplete: PropTypes.string,
   word: PropTypes.string,
   answer: PropTypes.string,
-  isShowResult: PropTypes.bool,
   attemptsNumber: PropTypes.number,
+  isShowResult: PropTypes.bool,
+  showResultHander: PropTypes.func.isRequired,
 };
 
 LearnWordsInput.defaultProps = {
@@ -94,4 +107,14 @@ LearnWordsInput.defaultProps = {
   attemptsNumber: 0,
 };
 
-export default LearnWordsInput;
+const mapStateToProps = (state) => {
+  return {
+    isShowResult: state.newLearnCardShow.showResult,
+  };
+};
+
+const mapDispatchToProps = {
+  showResultHander: showResult,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LearnWordsInput);

@@ -11,6 +11,7 @@ import {
   LOADER_WORDS_COLLECTION_HIDE,
   IS_WORD_COLLECTION_LOADED,
   ADD_TO_DISPLAYED_WORDS_LIST,
+  SHOW_RESULT,
 } from './types';
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
   loadingWordsCollection: false,
   isWordsCollectionLoaded: false,
   displayedWordsList: [],
+  showResult: false,
 };
 
 function newLearnCardShow(state = initialState, action) {
@@ -52,6 +54,8 @@ function newLearnCardShow(state = initialState, action) {
       return { ...state, isWordsCollectionLoaded: action.payload };
     case ADD_TO_DISPLAYED_WORDS_LIST:
       return { ...state, displayedWordsList: action.payload };
+    case SHOW_RESULT:
+      return { ...state, showResult: action.payload };
     default:
       return state;
   }

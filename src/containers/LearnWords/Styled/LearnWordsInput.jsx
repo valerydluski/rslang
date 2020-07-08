@@ -8,6 +8,7 @@ export const InputContainer = styled.div`
 export const InputWordsBgContainer = styled.span`
   width: ${(props) => props.width}px;
   opacity: ${(props) => (props.showResult ? '1' : '0')};
+  z-index: ${(props) => (props.showResult ? '1' : '-1')};
   position: absolute;
   top: 0;
   left: 0;
