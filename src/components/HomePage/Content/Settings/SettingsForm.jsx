@@ -62,7 +62,6 @@ const SettingsForm = (props) => {
       <BlackHeader>
         <Translate value="Games.sprint" />
       </BlackHeader>
-      {/* timeForWord */}
       <Field
         name="SprintWordsPerPage"
         key="SprintWordsPerPage"
