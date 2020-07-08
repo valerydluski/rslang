@@ -12,6 +12,7 @@ import {
   SWITCH_SPEECH,
   SWITCH_BACKGROUND,
   UPDATE_PIC,
+  PUZZLE_SETTINGS_FROM_API,
 } from './types';
 import RESET_STORE from '../resetStore/types';
 
@@ -104,6 +105,13 @@ const englishPuzzleReducer = (state = initialState, action) => {
       return {
         ...state,
         autoSpeech: !state.autoSpeech,
+      };
+    case PUZZLE_SETTINGS_FROM_API:
+      return {
+        ...state,
+        autoSpeech: action.payload.isAutoSpeech,
+        translation: action.payload.isTranslation,
+        background: action.payload.isBackground,
       };
     case SWITCH_TRANSLATION:
       return {
