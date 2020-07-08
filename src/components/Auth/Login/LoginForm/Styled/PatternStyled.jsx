@@ -8,11 +8,11 @@ const PatternStyled = styled.div`
   width: 100%;
   background-repeat: no-repeat;
   height: 100%;
-  background-size: contain;
-  background-position: right;
-  background-image: url(${background});
-  color: #fafafa;
-  justify-self: end;
+  // background-size: contain;
+  // background-position: right;
+  // background-image: url(${background});
+  // color: #fafafa;
+  // justify-self: end;
 
   @media ${DEVICE.laptopL} {
     background-size: cover;
