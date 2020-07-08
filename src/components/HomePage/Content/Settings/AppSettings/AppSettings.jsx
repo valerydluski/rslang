@@ -9,6 +9,7 @@ import nameValidator from '../../../../../utils/validators/nameValidator';
 import { LabelStyled } from '../../../../UI/Input/Styled/InputStyled';
 import { BlackHeader } from '../Styled/Header';
 import { SelectContainerStyled } from '../Styled/SettingsContainerStyled';
+import { stackOffsetNone } from 'd3';
 
 const AppSettings = ({ checkboxes }) => {
   return (
@@ -28,7 +29,12 @@ const AppSettings = ({ checkboxes }) => {
         className="settings"
       />
       <SelectContainerStyled>
-        <Field name="language" key="language" component="select">
+        <Field
+          name="language"
+          key="language"
+          component="select"
+          style={{ width: 283, border: 'none', outline: 'none' }}
+        >
           <option value="en" key="en" label={I18n.t('Languages.en')} />
           <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
         </Field>

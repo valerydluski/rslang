@@ -109,6 +109,12 @@ const translations = {
       correct: 'Correct answers:',
       count: 'Total words:',
     },
+    Errors: {
+      empty: 'Fields cannot be empty',
+      number: 'Must be a number',
+      least: 'Must be at least ',
+      more: 'Must be no more ',
+    },
   },
   ru: {
     HomePage: {
@@ -219,6 +225,12 @@ const translations = {
       page: 'Страница:',
       correct: 'Правильных ответов:',
       count: 'Всего слов:',
+    },
+    Errors: {
+      empty: 'Поля настроек не могут быть пустыми',
+      number: 'Должно быть число',
+      least: 'Не может быть меньше ',
+      more: 'Не может быть больше ',
     },
   },
 };
