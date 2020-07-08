@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 const SettingsContainerStyled = styled.div`
-  margin: 70px auto;
-  width: 80%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: start;

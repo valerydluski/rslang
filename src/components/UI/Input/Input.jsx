@@ -16,10 +16,10 @@ const Input = (props) => {
     autocomplete,
     className,
     classNameSpan,
+    classNameContainer,
   } = props;
-
   return (
-    <InputContainer>
+    <InputContainer className={classNameContainer}>
       <InputStyled
         type={type}
         name={name}
@@ -53,6 +53,7 @@ Input.propTypes = {
   autocomplete: PropTypes.string,
   className: PropTypes.string,
   classNameSpan: PropTypes.string,
+  classNameContainer: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -68,6 +69,7 @@ Input.defaultProps = {
   autocomplete: 'on',
   className: '',
   classNameSpan: '',
+  classNameContainer: '',
 };
 
 export default Input;

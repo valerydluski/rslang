@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const InputContainer = styled.div`
   margin: 20px 0;
 
-  &.settings {
-    display: none;
+  &.radio-button_container {
+    margin: 5px 0;
   }
 `;
 
