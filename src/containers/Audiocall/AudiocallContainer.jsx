@@ -142,7 +142,7 @@ const AudioCallContainer = ({
             correctIndex={answerResult.correctIndex}
             isAutoSolved={answerResult.isAutoSolved}
           />
-          <NextButton clickHandler={switchToNextWord} />
+          <NextButton switchToNextWord={switchToNextWord} />
         </>
       ) : (
         <>

@@ -1,4 +1,5 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
+import { setLocale } from 'react-redux-i18n';
 import { LOAD_DATA_FROM_API } from '../types';
 import { isDataLoadFromApi } from '../actions';
 import { saveFullStatisticToStore } from '../../Statistic/action';
@@ -10,6 +11,7 @@ import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
 import createInitialRounds from '../../../utils/createInitialRounds';
 import { changeInitialRound } from '../../ChangeRounds/action';
+import { addToShowedWordsList } from '../../LearnWords/actions';
 import { puzzleSettingsFromServer } from '../../EnglishPuzzle/actions';
 
 function* workerLoadData() {
@@ -22,6 +24,7 @@ function* workerLoadData() {
     const statisticFromApi = getSettings(statistic);
     const initialRound = createInitialRounds(statisticFromApi);
     yield put(changeInitialRound(initialRound));
+    yield put(addToShowedWordsList(JSON.parse(statisticFromApi.RepeatWordsToday)));
     yield put(saveFullStatisticToStore(statisticFromApi));
   }
 
@@ -36,6 +39,7 @@ function* workerLoadData() {
         isBackground: settingsFromApi.isBackground,
       })
     );
+    yield put(setLocale(settingsFromApi.language));
   }
 
   yield put(getUserWords());

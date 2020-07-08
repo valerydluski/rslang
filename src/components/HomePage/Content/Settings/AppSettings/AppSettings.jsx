@@ -9,6 +9,7 @@ import nameValidator from '../../../../../utils/validators/nameValidator';
 import { LabelStyled } from '../../../../UI/Input/Styled/InputStyled';
 import { BlackHeader } from '../Styled/Header';
 import { SelectContainerStyled } from '../Styled/SettingsContainerStyled';
+import { stackOffsetNone } from 'd3';
 
 const AppSettings = ({ checkboxes }) => {
   return (
@@ -28,15 +29,20 @@ const AppSettings = ({ checkboxes }) => {
         className="settings"
       />
       <SelectContainerStyled>
-        <Field name="language" key="language" component="select">
+        <Field
+          name="language"
+          key="language"
+          component="select"
+          style={{ width: 283, border: 'none', outline: 'none' }}
+        >
           <option value="en" key="en" label={I18n.t('Languages.en')} />
           <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
         </Field>
         <LabelStyled htmlFor="language">{I18n.t('Settings.language')}</LabelStyled>
       </SelectContainerStyled>
       <Field
-        name="WordsPerDay"
-        key="WordsPerDay"
+        name="wordsPerDay"
+        key="wordsPerDay"
         type="number"
         placeholder={I18n.t('Settings.wordsPerDay')}
         validate={WordsPerDayValidator}
@@ -47,8 +53,8 @@ const AppSettings = ({ checkboxes }) => {
         className="settings"
       />
       <Field
-        name="CardsPerDay"
-        key="CardsPerDay"
+        name="cardsPerDay"
+        key="cardsPerDay"
         type="number"
         component={Input}
         placeholder={I18n.t('Settings.cardsPerDay')}

@@ -40,6 +40,7 @@ const translations = {
       isAudioTranslate: 'Play translate audio',
       isAudioTextMeaning: 'Play text meaning audio',
       isAudioTextExample: 'Play text example audio',
+      saveSettings: 'settings have been saved',
       isAutoSpeech: 'Auto speech',
       isTranslation: 'Translate',
       isBackground: 'Background',
@@ -85,6 +86,7 @@ const translations = {
       choose: 'Choose',
       OK: 'OK',
       back: 'Back',
+      login: 'Log In',
     },
     Languages: {
       en: 'English',
@@ -132,6 +134,12 @@ const translations = {
       artsemiDescription:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
     },
+    Errors: {
+      empty: 'Fields cannot be empty',
+      number: 'Must be a number',
+      least: 'Must be at least ',
+      more: 'Must be no more ',
+    },
   },
   ru: {
     HomePage: {
@@ -174,6 +182,7 @@ const translations = {
       isAudioTranslate: 'Воспроизведение аудио первода',
       isAudioTextMeaning: 'Воспроизведение аудио значение слова',
       isAudioTextExample: 'Воспроизведение аудио пример употребления слова',
+      saveSettings: 'настройки сохранены',
       isAutoSpeech: 'Автовоспроизведение',
       isTranslation: 'Перевод',
       isBackground: 'Фоновая картинка',
@@ -221,6 +230,7 @@ const translations = {
       choose: 'Выбрать',
       OK: 'OK',
       back: 'Назад',
+      login: 'Войти',
     },
     Languages: {
       en: 'Английский',
@@ -266,6 +276,12 @@ const translations = {
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
       artsemiDescription:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+    },
+    Errors: {
+      empty: 'Поля настроек не могут быть пустыми',
+      number: 'Должно быть число',
+      least: 'Не может быть меньше ',
+      more: 'Не может быть больше ',
     },
   },
 };

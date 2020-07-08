@@ -4,6 +4,8 @@ const GlobalStyle = createGlobalStyle`
   body, html, #root, .App{
     height: 100%;
     min-height: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
   }
 
   html {
