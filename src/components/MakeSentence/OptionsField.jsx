@@ -7,7 +7,6 @@ import TranslationPart from './TranslationPart';
 const OptionsField = ({ optionsParts, isDragging, wordsWidth }) => {
   const parts = optionsParts.map((part, i) => {
     const key = `${part}${i}`;
-    console.log(wordsWidth);
     return (
       <TranslationPart
         key={key}
