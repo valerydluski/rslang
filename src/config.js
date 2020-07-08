@@ -5,6 +5,7 @@ import audioCallPoster from './assets/img/posters/audio-call.svg';
 import sprintPoster from './assets/img/posters/sprint.svg';
 import makeSentencePoster from './assets/img/posters/make-sentence.svg';
 import getRedirectFunction from './utils/getRedirectFunction';
+import Elena from './assets/img/photo.png';
 
 export const API = {
   URL: 'https://afternoon-falls-25894.herokuapp.com',
@@ -76,6 +77,39 @@ export const GAME_LIST = [
     description: 'Games.makeSentenceDescription',
     poster: makeSentencePoster,
     onClick: getRedirectFunction('/StartGame/MakeSentence/'),
+  },
+];
+
+export const TEAM_LIST = [
+  {
+    title: 'TeamMembers.valera',
+    description: 'TeamMembers.valeraDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.marta',
+    description: 'TeamMembers.martaDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.nelly',
+    description: 'TeamMembers.nellyDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.kostya',
+    description: 'TeamMembers.kostyaDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.taras',
+    description: 'TeamMembers.tarasDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.artsemi',
+    description: 'TeamMembers.artsemiDescription',
+    poster: Elena,
   },
 ];
 

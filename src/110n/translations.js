@@ -59,9 +59,12 @@ const translations = {
       makeSentence: 'Make sentence',
       puzzleDescription: 'Make sentences from English words placed in random order.',
       audioCallDescription: 'AudioCall helps to improve the undestanding of English speech.',
-      savannahDescription: 'The game improves the understanding of English words, helps not to forget words that have already been learned.',
-      speakITDescription: 'Check the correctness of your pronunciation of English words in the exciting game!',
-      sprintDescription: 'This game will help you to translate English words into your native language.',
+      savannahDescription:
+        'The game improves the understanding of English words, helps not to forget words that have already been learned.',
+      speakITDescription:
+        'Check the correctness of your pronunciation of English words in the exciting game!',
+      sprintDescription:
+        'This game will help you to translate English words into your native language.',
       makeSentenceDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     },
     Buttons: {
@@ -106,6 +109,27 @@ const translations = {
       page: 'Page:',
       correct: 'Correct answers:',
       count: 'Total words:',
+    },
+
+    TeamMembers: {
+      valera: 'Valera',
+      nelly: 'Nelly',
+      kostya: 'Kostya',
+      taras: 'Taras',
+      marta: 'Marta',
+      artsemi: 'Artsemi',
+      valeraDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      nellyDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      kostyaDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      tarasDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      martaDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      artsemiDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
     },
   },
   ru: {
@@ -166,11 +190,16 @@ const translations = {
       speakIT: 'Произнеси слово',
       sprint: 'Спринт',
       makeSentence: 'Собери предложение',
-      puzzleDescription: 'Собери предложение из английских слов, расположенных в случайном порядке.',
-      audioCallDescription: 'Игра `АудиоВызов` помогает улучшить восприятие английской речи на слух.',
-      savannahDescription: 'Данная игра улучшает навык понимания английских слов, помогает не забыть выученные слова.',
-      speakITDescription: 'Проверьте правильность вашего произношения английских слов в увлекательной игре!',
-      sprintDescription: 'С помощью данной игры вы научитесь быстро переводить слова на ваш родной язык.',
+      puzzleDescription:
+        'Собери предложение из английских слов, расположенных в случайном порядке.',
+      audioCallDescription:
+        'Игра `АудиоВызов` помогает улучшить восприятие английской речи на слух.',
+      savannahDescription:
+        'Данная игра улучшает навык понимания английских слов, помогает не забыть выученные слова.',
+      speakITDescription:
+        'Проверьте правильность вашего произношения английских слов в увлекательной игре!',
+      sprintDescription:
+        'С помощью данной игры вы научитесь быстро переводить слова на ваш родной язык.',
       makeSentenceDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     },
     Buttons: {
@@ -215,6 +244,26 @@ const translations = {
       page: 'Страница:',
       correct: 'Правильных ответов:',
       count: 'Всего слов:',
+    },
+    TeamMembers: {
+      valera: 'Валера',
+      nelly: 'Нелли',
+      kostya: 'Костя',
+      taras: 'Тарас',
+      marta: 'Марта',
+      artsemi: 'Артемий',
+      valeraDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      nellyDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      kostyaDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      tarasDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      martaDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      artsemiDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
     },
   },
 };
