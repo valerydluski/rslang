@@ -1,4 +1,5 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
+import { setLocale } from 'react-redux-i18n';
 import { LOAD_DATA_FROM_API } from '../types';
 import { isDataLoadFromApi } from '../actions';
 import { saveFullStatisticToStore } from '../../Statistic/action';
@@ -10,6 +11,7 @@ import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
 import createInitialRounds from '../../../utils/createInitialRounds';
 import { changeInitialRound } from '../../ChangeRounds/action';
+import { puzzleSettingsFromServer } from '../../EnglishPuzzle/actions';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());
@@ -28,6 +30,14 @@ function* workerLoadData() {
   if (settings) {
     const settingsFromApi = getSettings(settings);
     yield put(saveUserSettingsToStore(settingsFromApi));
+    yield put(
+      puzzleSettingsFromServer({
+        isAutoSpeech: settingsFromApi.isAutoSpeech,
+        isTranslation: settingsFromApi.isTranslation,
+        isBackground: settingsFromApi.isBackground,
+      })
+    );
+    yield put(setLocale(settingsFromApi.language));
   }
 
   yield put(getUserWords());

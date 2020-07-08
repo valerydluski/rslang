@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 const SettingsContainerStyled = styled.div`
-  margin: 70px auto;
-  width: 80%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -12,4 +11,16 @@ const SettingsContainerStyled = styled.div`
   user-select: none;
 `;
 
+export const SettingsFormStyled = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+`;
+
+export const SelectContainerStyled = styled.div`
+  display: flex;
+  width: 100%;
+`;
 export default SettingsContainerStyled;

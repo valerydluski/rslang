@@ -41,8 +41,9 @@ const translations = {
       isAudioTextMeaning: 'Play text meaning audio',
       isAudioTextExample: 'Play text example audio',
       isAutoSpeech: 'Auto speech',
-      isTranslation: 'Translation',
+      isTranslation: 'Translate',
       isBackground: 'Background',
+      timeForWord: 'Time for a word',
     },
     Auth: {
       signIn: 'Sign In',
@@ -81,6 +82,7 @@ const translations = {
       choose: 'Choose',
       OK: 'OK',
       back: 'Back',
+      login: 'Log In',
     },
     Languages: {
       en: 'English',
@@ -106,6 +108,12 @@ const translations = {
       page: 'Page:',
       correct: 'Correct answers:',
       count: 'Total words:',
+    },
+    Errors: {
+      empty: 'Fields cannot be empty',
+      number: 'Must be a number',
+      least: 'Must be at least ',
+      more: 'Must be no more ',
     },
   },
   ru: {
@@ -152,6 +160,7 @@ const translations = {
       isAutoSpeech: 'Автовоспроизведение',
       isTranslation: 'Перевод',
       isBackground: 'Фоновая картинка',
+      timeForWord: 'Времени на слово',
     },
     Auth: {
       signIn: 'Войти',
@@ -190,6 +199,7 @@ const translations = {
       choose: 'Выбрать',
       OK: 'OK',
       back: 'Назад',
+      login: 'Войти',
     },
     Languages: {
       en: 'Английский',
@@ -215,6 +225,12 @@ const translations = {
       page: 'Страница:',
       correct: 'Правильных ответов:',
       count: 'Всего слов:',
+    },
+    Errors: {
+      empty: 'Поля настроек не могут быть пустыми',
+      number: 'Должно быть число',
+      least: 'Не может быть меньше ',
+      more: 'Не может быть больше ',
     },
   },
 };

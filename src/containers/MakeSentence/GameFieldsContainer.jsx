@@ -91,7 +91,7 @@ const GameFieldsContainer = ({
           wordsWidth={wordsWidth}
         />
         <OptionsField isDragging={false} wordsWidth={wordsWidth} />
-        <NextButton clickHandler={switchToNextSentence} />
+        <NextButton switchToNextSentence={switchToNextSentence} />
       </GameFieldsContainerStyled>
     );
   }
@@ -103,7 +103,7 @@ const GameFieldsContainer = ({
         <OptionsField isDragging optionsParts={optionParts} wordsWidth={wordsWidth} />
       </DragDropContext>
       {isWordFinished ? (
-        <NextButton clickHandler={switchToNextSentence} />
+        <NextButton switchToNextSentence={switchToNextSentence} />
       ) : (
         <DontKnowButton clickHandler={autoSolve} />
       )}

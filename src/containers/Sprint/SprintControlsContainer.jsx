@@ -7,9 +7,9 @@ import errorSound from '../../assets/audio/error.mp3';
 import correctSound from '../../assets/audio/correct.mp3';
 import SprintResultMarker from '../../components/Sprint/SprintResultMarker';
 
-const SprintControlsContainer = ({ clickHandler, isAnswerCorrect, isWordFinished }) => {
-  const resultAudio = new Audio();
+const resultAudio = new Audio();
 
+const SprintControlsContainer = ({ processAnswer, isAnswerCorrect, isWordFinished }) => {
   const playResultSound = (isOk) => {
     resultAudio.src = isOk ? correctSound : errorSound;
     resultAudio.load();
@@ -21,10 +21,10 @@ const SprintControlsContainer = ({ clickHandler, isAnswerCorrect, isWordFinished
   return (
     <ControlContainerStyled>
       {isWordFinished ? <SprintResultMarker isAnswerCorrect={isAnswerCorrect} /> : null}
-      <FalseButtonStyled onClick={() => clickHandler(false)}>
+      <FalseButtonStyled onClick={() => processAnswer(false)}>
         <Translate value="Buttons.false" />
       </FalseButtonStyled>
-      <TrueButtonStyled onClick={() => clickHandler(true)}>
+      <TrueButtonStyled onClick={() => processAnswer(true)}>
         <Translate value="Buttons.true" />
       </TrueButtonStyled>
     </ControlContainerStyled>
@@ -33,13 +33,13 @@ const SprintControlsContainer = ({ clickHandler, isAnswerCorrect, isWordFinished
 
 SprintControlsContainer.propTypes = {
   isAnswerCorrect: PropTypes.bool,
-  clickHandler: PropTypes.func,
+  processAnswer: PropTypes.func,
   isWordFinished: PropTypes.bool,
 };
 
 SprintControlsContainer.defaultProps = {
   isAnswerCorrect: false,
-  clickHandler: () => {},
+  processAnswer: () => {},
   isWordFinished: false,
 };
 

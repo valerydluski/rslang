@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import Word from '../../components/Audiocall/styled/StyledWords';
 import errorSound from '../../assets/audio/error.mp3';
 import correctSound from '../../assets/audio/correct.mp3';
@@ -15,6 +16,9 @@ const WordsContainer = (props) => {
     selectedIndex,
     correctIndex,
     isAutoSolved,
+    backgroundOpacity,
+    changeBackgroundOpacity,
+    wordsAmount,
   } = props;
 
   const currentStepWords = words;
@@ -42,9 +46,10 @@ const WordsContainer = (props) => {
     wordAudio.play();
   };
 
-  const clickHandler = (e) => {
-    if (e.target.matches('[data-index]')) {
-      const selectedWordIndex = +e.target.dataset.index;
+  const clickHandler = (e, key) => {
+    if (key || e.target.matches('[data-index]')) {
+      changeBackgroundOpacity(backgroundOpacity + 100 / wordsAmount);
+      const selectedWordIndex = key ? key - 1 : +e.target.dataset.index;
       const result = currentStepWords[selectedWordIndex].word === correctWord;
       playResultSound(result);
       const correctWordIndex = currentStepWords.findIndex((a) => a.word === correctWord);
@@ -52,7 +57,15 @@ const WordsContainer = (props) => {
     }
   };
 
-  return <WordsContainerStyled onClick={clickHandler}>{wordsCards}</WordsContainerStyled>;
+  return (
+    <>
+      <WordsContainerStyled onClick={clickHandler}>{wordsCards}</WordsContainerStyled>
+      <KeyboardEventHandler
+        handleKeys={['1', '2', '3', '4', '5']}
+        onKeyEvent={(key) => clickHandler(null, +key)}
+      />
+    </>
+  );
 };
 
 WordsContainer.propTypes = {
@@ -64,6 +77,9 @@ WordsContainer.propTypes = {
   selectedIndex: PropTypes.number,
   correctIndex: PropTypes.number,
   isAutoSolved: PropTypes.bool,
+  changeBackgroundOpacity: PropTypes.func,
+  backgroundOpacity: PropTypes.number,
+  wordsAmount: PropTypes.number,
 };
 
 WordsContainer.defaultProps = {
@@ -75,6 +91,9 @@ WordsContainer.defaultProps = {
   selectedIndex: null,
   correctIndex: null,
   isAutoSolved: false,
+  backgroundOpacity: 0,
+  changeBackgroundOpacity: () => {},
+  wordsAmount: 0,
 };
 
 export default WordsContainer;

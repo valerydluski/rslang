@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import { InputContainer, InputStyled, SpanStyled, LabelStyled } from './Styled/InputStyled';
 
 const Input = (props) => {
@@ -33,7 +34,9 @@ const Input = (props) => {
         {...input}
         className={className}
       />
-      {error && touched && <SpanStyled className={classNameSpan}>{error}</SpanStyled>}
+      {error && touched && toast.warning(error) && (
+        <SpanStyled className={classNameSpan}>{error}</SpanStyled>
+      )}
       {label && <LabelStyled htmlFor={label}>{label}</LabelStyled>}
     </InputContainer>
   );
