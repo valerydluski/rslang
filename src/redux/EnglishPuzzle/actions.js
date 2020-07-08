@@ -14,6 +14,7 @@ import {
   SWITCH_TRANSLATION,
   SWITCH_SPEECH,
   SWITCH_BACKGROUND,
+  PUZZLE_SETTINGS_FROM_API,
 } from './types';
 
 export function updatePuzzlesPosition(results, source) {
@@ -77,6 +78,13 @@ export function changePageStatus(isPageFill) {
 export function switchAutoSpeech() {
   return {
     type: SWITCH_AUTOSPEECH,
+  };
+}
+
+export function puzzleSettingsFromServer(obj) {
+  return {
+    type: PUZZLE_SETTINGS_FROM_API,
+    payload: obj,
   };
 }
 

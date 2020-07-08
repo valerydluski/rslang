@@ -41,8 +41,9 @@ const translations = {
       isAudioTextMeaning: 'Play text meaning audio',
       isAudioTextExample: 'Play text example audio',
       isAutoSpeech: 'Auto speech',
-      isTranslation: 'Translation',
+      isTranslation: 'Translate',
       isBackground: 'Background',
+      timeForWord: 'Time for a word',
     },
     Auth: {
       signIn: 'Sign In',
@@ -152,6 +153,7 @@ const translations = {
       isAutoSpeech: 'Автовоспроизведение',
       isTranslation: 'Перевод',
       isBackground: 'Фоновая картинка',
+      timeForWord: 'Времени на слово',
     },
     Auth: {
       signIn: 'Войти',

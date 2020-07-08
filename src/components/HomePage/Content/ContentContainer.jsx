@@ -5,6 +5,8 @@ const ContentContainer = styled.main`
   width: 100%;
   box-sizing: border-box;
   padding: 75px 75px 0;
+  overflow: auto;
+  max-height: 100vh;
 
   @media (max-width: 767px) {
     padding: 50px 50px 0;
