@@ -7,6 +7,7 @@ import Input from '../../../UI/Input/Input';
 import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageValidator';
 import { CHECKBOXES } from '../../../../config';
 import { BlackHeader } from './Styled/Header';
+import timeForWordValidator from '../../../../utils/validators/timeForWordValidator';
 
 const SettingsForm = (props) => {
   const { handleSubmit } = props;
@@ -61,15 +62,28 @@ const SettingsForm = (props) => {
       <BlackHeader>
         <Translate value="Games.sprint" />
       </BlackHeader>
+      {/* timeForWord */}
       <Field
         name="SprintWordsPerPage"
         key="SprintWordsPerPage"
         type="number"
-        placeholder="Sprint - words per page"
+        placeholder={I18n.t('Settings.wordsPerPage')}
         validate={WordsPerPageValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.wordsPerPage')}
+        classNameSpan="span_none"
+        className="settings"
+      />
+      <Field
+        name="timeForWord"
+        key="timeForWord"
+        type="number"
+        placeholder={I18n.t('Settings.timeForWord')}
+        validate={timeForWordValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
+        label={I18n.t('Settings.timeForWord')}
         classNameSpan="span_none"
         className="settings"
       />
