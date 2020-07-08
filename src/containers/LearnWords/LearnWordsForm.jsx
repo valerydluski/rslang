@@ -4,6 +4,8 @@ import { Field, reduxForm } from 'redux-form';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import { LINK_FOR_IMAGE } from '../../config';
 import LearnWordsInput from './LearnWordsInput';
+import Image from '../../components/UI/Image/Image';
+import Transcription from '../../components/UI/TextField/Transcription';
 
 const LearnWordsForm = (props) => {
   const {
@@ -29,7 +31,6 @@ const LearnWordsForm = (props) => {
     deleteButton,
     addDificultWordsButton,
   } = settings.settings;
-
   const {
     textExample,
     textExampleTranslate,
@@ -68,7 +69,7 @@ const LearnWordsForm = (props) => {
           })
         )}
       >
-        {isImageAssociation && <img alt={word.word} src={`${LINK_FOR_IMAGE}${image}`} />}
+        {isImageAssociation && <Image alt={word.word} src={`${LINK_FOR_IMAGE}${image}`} />}
         <p>{firstPart}</p>
         <Field
           name="word"
@@ -97,7 +98,7 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && isTextExample && <p>{textExample.join(` ${word.word} `)}</p>}
         <StyledRoundButton>Next</StyledRoundButton>
         {isTranslationShow && <p>{wordTranslate}</p>}
-        {isTranslationShow && isTranscription && <p>{transcription}</p>}
+        {isTranslationShow && isTranscription && <Transcription>{transcription}</Transcription>}
       </form>
       {deleteButton && (
         <StyledRoundButton onClick={customHandleSubmit('deleted')}>Delete</StyledRoundButton>

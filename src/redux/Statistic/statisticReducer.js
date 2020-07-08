@@ -17,7 +17,7 @@ const initialState = {
     MakeSentencePassedRound: '0',
     LearnLastWords: '0',
     LearnLastLevel: '0',
-    RepeatWordsToday: [],
+    RepeatWordsToday: '[]',
     CountCardsShow: '0',
     CountNewWordsToday: '0',
     lastTrain: '0',
