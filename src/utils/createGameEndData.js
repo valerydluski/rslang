@@ -1,4 +1,5 @@
 import newRound from './newRound';
+import { GAME_NAME } from '../config';
 
 const createGameEndData = (
   level,
@@ -10,6 +11,7 @@ const createGameEndData = (
   wordsPerPage,
   maxPage
 ) => {
+  let newWordsPerPage = wordsPerPage;
   const { newLevel, newPage } = newRound(level, page, maxPage);
   const lastRound = `${level}_${page}_${newLevel}_${newPage}`;
   const newStatistic = Statistic;
@@ -31,9 +33,10 @@ const createGameEndData = (
       correctWordsIndex += `${index},`;
     });
   }
+  if (gameName === GAME_NAME.englishPuzzle) newWordsPerPage = 10;
   const gameStatistic = `${formater.format(date)}-${lastRound}-${correctWordsIndex
     .replace(/^[,\s]+|[,\s]+$/g, '')
-    .replace(/,[,\s]*,/g, ',')}-${wordsPerPage}`;
+    .replace(/,[,\s]*,/g, ',')}-${newWordsPerPage}`;
   const roundsStatistic = newStatistic[`${gameName}PassedRound`];
   let newRoundStatistics;
   if (roundsStatistic === '0') newRoundStatistics = [];

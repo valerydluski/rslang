@@ -9,7 +9,8 @@ import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import Timer from '../../../components/Sprint/Timer';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { changeSprintLevel, changeSprintPage } from '../../../redux/ChangeRounds/action';
-import { GAME_MAX_PAGE } from '../../../config';
+import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
+import newRound from '../../../utils/newRound';
 
 const Sprint = (props) => {
   const {
@@ -22,9 +23,9 @@ const Sprint = (props) => {
     page,
     level,
     maxPage,
+    gameName,
   } = props;
   const [isGameFinished, toggleGameMode] = useState(false);
-
   if (isWordsLoading) return <LoadingSpinner />;
 
   const secondsForOneWord = 2;
@@ -38,8 +39,15 @@ const Sprint = (props) => {
     finishGameHandler();
   };
 
-  if (currentAppMode !== 'Sprint' || wordsCollection.length === 0) {
-    switchAppMode('Sprint');
+  const newGame = () => {
+    toggleGameMode(false);
+    const { newLevel, newPage } = newRound(level, page, maxPage);
+    if (newLevel !== level) updateLevel(newLevel);
+    if (newPage !== page) updatePage(newPage);
+  };
+
+  if (currentAppMode !== gameName || wordsCollection.length === 0) {
+    switchAppMode(gameName);
     return null;
   }
 
@@ -62,6 +70,10 @@ const Sprint = (props) => {
         isGameFinished={isGameFinished}
         wordsCollection={wordsCollection}
         finishGameHandler={finishGameHandler}
+        level={level}
+        page={page}
+        gameName={gameName}
+        newGame={newGame}
       />
     </SprintContainerStyled>
   );
@@ -77,6 +89,7 @@ Sprint.propTypes = {
   level: PropTypes.string,
   page: PropTypes.string,
   maxPage: PropTypes.number,
+  gameName: PropTypes.string,
 };
 
 Sprint.defaultProps = {
@@ -89,6 +102,7 @@ Sprint.defaultProps = {
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
+  gameName: '',
 };
 
 const mapStateToProps = (state) => {
@@ -99,6 +113,7 @@ const mapStateToProps = (state) => {
     level: state.changeRound.SprintLevel,
     page: state.changeRound.SprintPage,
     maxPage: state.maxPage.maxPage,
+    gameName: GAME_NAME.sprint,
   };
 };
 

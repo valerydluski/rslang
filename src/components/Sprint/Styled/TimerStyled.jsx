@@ -8,8 +8,8 @@ const TimerStyled = styled.div`
   }
 
   .timer {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     margin: 0 auto;
     position: relative;
     background: white;
@@ -20,7 +20,7 @@ const TimerStyled = styled.div`
     height: 100%;
     transform-origin: 100% 50%;
     position: absolute;
-    border: 5px solid #6550de;
+    border: 2px solid #5a3dff;
   }
 
   .spinner {
