@@ -23,12 +23,12 @@ const Sprint = (props) => {
     page,
     level,
     maxPage,
+    secondsForOneWord,
     gameName,
   } = props;
   const [isGameFinished, toggleGameMode] = useState(false);
   if (isWordsLoading) return <LoadingSpinner />;
 
-  const secondsForOneWord = 2;
   const secondsForGuessing = wordsCollection.length * secondsForOneWord;
 
   const finishGameHandler = () => {
@@ -89,6 +89,7 @@ Sprint.propTypes = {
   level: PropTypes.string,
   page: PropTypes.string,
   maxPage: PropTypes.number,
+  secondsForOneWord: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   gameName: PropTypes.string,
 };
 
@@ -113,6 +114,7 @@ const mapStateToProps = (state) => {
     level: state.changeRound.SprintLevel,
     page: state.changeRound.SprintPage,
     maxPage: state.maxPage.maxPage,
+    secondsForOneWord: state.userSettings.settings.timeForWord,
     gameName: GAME_NAME.sprint,
   };
 };

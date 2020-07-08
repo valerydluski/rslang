@@ -16,13 +16,28 @@ const LoginFormWrapperStyled = styled.div`
   background: #fafafa;
   box-sizing: border-box;
   min-height: 900px;
+  max-height: 1080px;
+
+  @media (max-width: 1800px) {
+    grid-template-columns: 40% 60%;
+  }
 
   @media ${DEVICE.laptopL} {
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 50% 50%;
   }
 
   @media ${DEVICE.tablet} {
-    grid-template-columns: 65% 35%;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 25% 10% auto 20%;
+    grid-template-areas:
+      'logo logo'
+      'title title'
+      'header header'
+      'form form'
+      'background background';
+    width: 100%;
+    padding: 20px;
+    min-height: 650px;
   }
 
   @media ${DEVICE.mobileL} {
@@ -31,7 +46,8 @@ const LoginFormWrapperStyled = styled.div`
       'logo logo'
       'title title'
       'header header'
-      'form form';
+      'form form'
+      'background background';
     width: 100%;
     padding: 20px;
     min-height: 650px;

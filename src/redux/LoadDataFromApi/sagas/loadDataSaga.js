@@ -1,4 +1,5 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
+import { setLocale } from 'react-redux-i18n';
 import { LOAD_DATA_FROM_API } from '../types';
 import { isDataLoadFromApi } from '../actions';
 import { saveFullStatisticToStore } from '../../Statistic/action';
@@ -38,6 +39,7 @@ function* workerLoadData() {
         isBackground: settingsFromApi.isBackground,
       })
     );
+    yield put(setLocale(settingsFromApi.language));
   }
 
   yield put(getUserWords());

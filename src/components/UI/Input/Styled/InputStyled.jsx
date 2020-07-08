@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const InputContainer = styled.div`
-  margin: 20px 0;
+  margin: 10px 0;
 
-  &.settings {
-    display: none;
+  &.radio-button_container {
+    margin: 5px 0;
   }
 `;
 
@@ -19,6 +19,7 @@ export const InputStyled = styled.input`
     font-size: 23px;
     line-height: 28px;
     color: #929292;
+    outline: none;
   }
 `;
 

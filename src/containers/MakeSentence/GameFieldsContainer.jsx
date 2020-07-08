@@ -54,7 +54,7 @@ const GameFieldsContainer = ({
       <GameFieldsContainerStyled>
         <AnswerField answerParts={sentenceTranslation.split(' ')} />
         <OptionsField />
-        <NextButton clickHandler={switchToNextSentence} />
+        <NextButton switchToNextSentence={switchToNextSentence} />
       </GameFieldsContainerStyled>
     );
   }
@@ -64,7 +64,7 @@ const GameFieldsContainer = ({
       <AnswerField answerParts={answerParts} />
       <OptionsField optionsParts={optionParts} />
       {isWordFinished ? (
-        <NextButton clickHandler={switchToNextSentence} />
+        <NextButton switchToNextSentence={switchToNextSentence} />
       ) : (
         <DontKnowButton clickHandler={autoSolve} />
       )}

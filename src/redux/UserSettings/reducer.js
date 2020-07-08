@@ -26,6 +26,7 @@ const initialState = {
     isAutoSpeech: true,
     isTranslation: true,
     isBackground: true,
+    timeForWord: '2',
   },
 };
 
