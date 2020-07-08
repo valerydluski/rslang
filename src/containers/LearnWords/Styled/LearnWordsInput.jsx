@@ -1,14 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const scale = keyframes`
-  from {
-    transform: scale(1.2);
-  }
-
-  to {
-    transform: scale(1);
-  }
-`;
+import styled from 'styled-components';
 
 export const InputContainer = styled.div`
   margin: 10px 0;
@@ -16,27 +6,15 @@ export const InputContainer = styled.div`
 `;
 
 export const InputWordsBgContainer = styled.span`
-  display: ${(props) => (props.attemptsNumber === 0 ? 'none' : 'inline')};
-  color: ${(props) => (props.isCorrect && props.attemptsNumber === 1 ? 'green' : 'blue')};
-  width: ${(props) => props.width};
-  text-decoration: underline;
+  width: ${(props) => props.width}px;
+  opacity: ${(props) => (props.showResult ? '1' : '0')};
   position: absolute;
   top: 0;
   left: 0;
-  box-sizing: border-box;
   padding: 5px 10px;
   background-color: transparent;
-`;
-
-export const InputWordsAnimatedContainer = styled.span`
-  width: ${(props) => props.width}px;
-  display: ${(props) => (props.inAnimationOn ? 'inline' : 'none')};
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  padding: 5px 10px;
-  animation: ${scale} 0.3s linear;
+  border: 2px solid transparent;
+  transition: 0.3s linear;
 `;
 
 export const InputLetterContainer = styled.span`
@@ -45,7 +23,6 @@ export const InputLetterContainer = styled.span`
 
 export const InputStyled = styled.input`
   width: ${(props) => props.width}px;
-  box-sizing: border-box;
   padding: 5px 10px;
   color: #000;
 `;

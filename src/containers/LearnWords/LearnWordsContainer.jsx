@@ -29,7 +29,6 @@ function LearnWordCardContainer(props) {
   const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
   const [needNewWord, setNeedNewWord] = useState(true);
   const [audios, setAudios] = useState([]);
-  const [tryes, setTryes] = useState(0);
   const [answerToForm, setAnswerToForm] = useState('');
 
   let isAudiosPlay;
@@ -69,7 +68,7 @@ function LearnWordCardContainer(props) {
     const answer = formData.word;
     const { word } = currentWord;
     let config = {};
-    setTryes(tryes + 1);
+
     switch (buttonType) {
       case 'sound':
         setIsSoundPlay(!isSoundPlay);
@@ -102,6 +101,7 @@ function LearnWordCardContainer(props) {
         setIsRightAnswerShow(true);
         break;
       default:
+        if (!answer) break;
         if (answer.toLowerCase() === word.toLowerCase()) {
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
@@ -119,7 +119,6 @@ function LearnWordCardContainer(props) {
             }
           }
         }
-        setTryes(0);
         correctCardHandler(true);
     }
   };
@@ -131,7 +130,6 @@ function LearnWordCardContainer(props) {
       onSubmit={onSubmit}
       word={currentWord}
       isCorrect={isCorrect}
-      tryes={tryes}
       answer={answerToForm}
     />
   );
