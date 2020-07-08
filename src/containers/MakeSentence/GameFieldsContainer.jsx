@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { DragDropContext } from 'react-beautiful-dnd';
 import GameFieldsContainerStyled from './Styled/GameFieldsContainerStyled';
 import AnswerField from '../../components/MakeSentence/AnswerField';
 import OptionsField from '../../components/MakeSentence/OptionsField';
@@ -43,6 +44,33 @@ const GameFieldsContainer = ({
     changeAnswerParts(answers);
   };
 
+  const dragHandler = (result) => {
+    const { destination, source } = result;
+    const options = [...optionParts];
+    const answers = [...answerParts];
+    if (!destination) {
+      return;
+    }
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return;
+    }
+    if (destination.droppableId === 'target' && source.droppableId === 'source') {
+      const item = options.splice(source.index, 1);
+      answers.splice(destination.index, 0, ...item);
+    } else if (destination.droppableId === 'target' && source.droppableId === 'target') {
+      const item = answers.splice(source.index, 1);
+      answers.splice(destination.index, 0, ...item);
+    } else if (destination.droppableId === 'source' && source.droppableId === 'source') {
+      const item = options.splice(source.index, 1);
+      options.splice(destination.index, 0, ...item);
+    } else if (destination.droppableId === 'source' && source.droppableId === 'target') {
+      const item = answers.splice(source.index, 1);
+      options.splice(destination.index, 0, ...item);
+    }
+    changeOptionParts(options);
+    changeAnswerParts(answers);
+  };
+
   const clickFieldHandler = (e) => {
     if (e.target.hasAttribute('data-type') && !isWordFinished) {
       swapPart(e.target.dataset.type, e.target.dataset.index);
@@ -52,8 +80,8 @@ const GameFieldsContainer = ({
   if (isAutoSolve) {
     return (
       <GameFieldsContainerStyled>
-        <AnswerField answerParts={sentenceTranslation.split(' ')} />
-        <OptionsField />
+        <AnswerField isDragging={false} answerParts={sentenceTranslation.split(' ')} />
+        <OptionsField isDragging={false} />
         <NextButton clickHandler={switchToNextSentence} />
       </GameFieldsContainerStyled>
     );
@@ -61,8 +89,10 @@ const GameFieldsContainer = ({
 
   return (
     <GameFieldsContainerStyled onClick={clickFieldHandler}>
-      <AnswerField answerParts={answerParts} />
-      <OptionsField optionsParts={optionParts} />
+      <DragDropContext onDragEnd={dragHandler}>
+        <AnswerField isDragging answerParts={answerParts} />
+        <OptionsField isDragging optionsParts={optionParts} />
+      </DragDropContext>
       {isWordFinished ? (
         <NextButton clickHandler={switchToNextSentence} />
       ) : (
