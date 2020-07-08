@@ -19,6 +19,7 @@ export const InputStyled = styled.input`
     font-size: 23px;
     line-height: 28px;
     color: #929292;
+    outline: none;
   }
 `;
 

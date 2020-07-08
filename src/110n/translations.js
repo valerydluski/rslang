@@ -109,7 +109,10 @@ const translations = {
       count: 'Total words:',
     },
     Errors: {
-      name: 'Name field cannot be empty',
+      empty: 'Fields cannot be empty',
+      number: 'Must be a number',
+      least: 'Must be at least ',
+      more: 'Must be no more ',
     },
   },
   ru: {
@@ -222,7 +225,10 @@ const translations = {
       count: 'Всего слов:',
     },
     Errors: {
-      name: 'Поле имя не может быть пустым',
+      empty: 'Поля настроек не могут быть пустыми',
+      number: 'Должно быть число',
+      least: 'Не может быть меньше ',
+      more: 'Не может быть больше ',
     },
   },
 };
