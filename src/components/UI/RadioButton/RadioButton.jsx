@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import Input from '../Input/Input';
-import RadioButtonStyled from './Styled/RadioButtonStyled';
+import RadioButtonStyled, { HeaderTextStyled } from './Styled/RadioButtonStyled';
 
 const RadioButton = (props) => {
   const { name, headerText, buttonsValue } = props;
   return (
     <RadioButtonStyled>
-      <p>{headerText}</p>
+      <HeaderTextStyled>{headerText}</HeaderTextStyled>
       {buttonsValue.map((el) => {
         return (
           <Field
@@ -18,6 +18,7 @@ const RadioButton = (props) => {
             type="radio"
             value={el.value}
             label={el.text}
+            classNameContainer="radio-button_container"
           />
         );
       })}

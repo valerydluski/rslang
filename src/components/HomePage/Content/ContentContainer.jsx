@@ -23,6 +23,8 @@ const ContentContainer = styled.main`
   @media (max-width: 380px) {
     width: 94vw;
   }
+  overflow: auto;
+  max-height: 100vh;
 `;
 
 export default ContentContainer;

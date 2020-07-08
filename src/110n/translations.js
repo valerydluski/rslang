@@ -43,6 +43,7 @@ const translations = {
       isAutoSpeech: 'Auto speech',
       isTranslation: 'Translate',
       isBackground: 'Background',
+      timeForWord: 'Time for a word',
     },
     Auth: {
       signIn: 'Sign In',
@@ -176,6 +177,7 @@ const translations = {
       isAutoSpeech: 'Автовоспроизведение',
       isTranslation: 'Перевод',
       isBackground: 'Фоновая картинка',
+      timeForWord: 'Времени на слово',
     },
     Auth: {
       signIn: 'Войти',
