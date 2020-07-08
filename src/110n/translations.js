@@ -81,6 +81,7 @@ const translations = {
       choose: 'Choose',
       OK: 'OK',
       back: 'Back',
+      login: 'Log In',
     },
     Languages: {
       en: 'English',
@@ -190,6 +191,7 @@ const translations = {
       choose: 'Выбрать',
       OK: 'OK',
       back: 'Назад',
+      login: 'Войти',
     },
     Languages: {
       en: 'Английский',
