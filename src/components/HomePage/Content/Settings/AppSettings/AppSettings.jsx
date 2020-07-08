@@ -8,6 +8,7 @@ import RadioButton from '../../../../UI/RadioButton/RadioButton';
 import nameValidator from '../../../../../utils/validators/nameValidator';
 import { LabelStyled } from '../../../../UI/Input/Styled/InputStyled';
 import { BlackHeader } from '../Styled/Header';
+import { SelectContainerStyled } from '../Styled/SettingsContainerStyled';
 
 const AppSettings = ({ checkboxes }) => {
   return (
@@ -26,11 +27,13 @@ const AppSettings = ({ checkboxes }) => {
         classNameSpan="span_none"
         className="settings"
       />
-      <Field name="language" key="language" component="select">
-        <option value="en" key="en" label={I18n.t('Languages.en')} />
-        <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
-      </Field>
-      <LabelStyled htmlFor={I18n.t('Settings.language')}>{I18n.t('Settings.language')}</LabelStyled>
+      <SelectContainerStyled>
+        <Field name="language" key="language" component="select">
+          <option value="en" key="en" label={I18n.t('Languages.en')} />
+          <option value="ru" key="ru" label={I18n.t('Languages.ru')} />
+        </Field>
+        <LabelStyled htmlFor="language">{I18n.t('Settings.language')}</LabelStyled>
+      </SelectContainerStyled>
       <Field
         name="WordsPerDay"
         key="WordsPerDay"

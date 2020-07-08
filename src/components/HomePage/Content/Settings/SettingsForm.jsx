@@ -8,11 +8,12 @@ import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageVali
 import { CHECKBOXES } from '../../../../config';
 import { BlackHeader } from './Styled/Header';
 import timeForWordValidator from '../../../../utils/validators/timeForWordValidator';
+import { SettingsFormStyled } from './Styled/SettingsContainerStyled';
 
 const SettingsForm = (props) => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={handleSubmit}>
+    <SettingsFormStyled onSubmit={handleSubmit}>
       <AppSettings checkboxes={CHECKBOXES} />
       <BlackHeader>
         <Translate value="Games.audioCall" />
@@ -128,7 +129,7 @@ const SettingsForm = (props) => {
       <button type="submit" aria-label="Save">
         <Translate value="Buttons.save" />
       </button>
-    </form>
+    </SettingsFormStyled>
   );
 };
 

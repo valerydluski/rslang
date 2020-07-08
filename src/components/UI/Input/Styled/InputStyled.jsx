@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const InputContainer = styled.div`
-  margin: 20px 0;
+  margin: 10px 0;
 
   &.radio-button_container {
     margin: 5px 0;

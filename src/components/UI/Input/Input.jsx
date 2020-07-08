@@ -34,7 +34,7 @@ const Input = (props) => {
         className={className}
       />
       {error && touched && <SpanStyled className={classNameSpan}>{error}</SpanStyled>}
-      {label && <LabelStyled htmlFor={label}>{label}</LabelStyled>}
+      {label && <LabelStyled htmlFor={name}>{label}</LabelStyled>}
     </InputContainer>
   );
 };
