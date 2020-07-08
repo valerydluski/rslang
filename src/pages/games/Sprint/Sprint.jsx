@@ -11,6 +11,7 @@ import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { changeSprintLevel, changeSprintPage } from '../../../redux/ChangeRounds/action';
 import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
+import GameContainerStyled from './Styled/StyledGameContainer';
 
 const Sprint = (props) => {
   const {
@@ -61,20 +62,22 @@ const Sprint = (props) => {
         updateLevel={updateLevel}
         updatePage={updatePage}
       />
-      <Timer
-        initialTime={secondsForGuessing}
-        timeIsUpHandler={timeIsUpHandler}
-        isGameFinished={isGameFinished}
-      />
-      <SprintGameContainer
-        isGameFinished={isGameFinished}
-        wordsCollection={wordsCollection}
-        finishGameHandler={finishGameHandler}
-        level={level}
-        page={page}
-        gameName={gameName}
-        newGame={newGame}
-      />
+      <GameContainerStyled>
+        <Timer
+          initialTime={secondsForGuessing}
+          timeIsUpHandler={timeIsUpHandler}
+          isGameFinished={isGameFinished}
+        />
+        <SprintGameContainer
+          isGameFinished={isGameFinished}
+          wordsCollection={wordsCollection}
+          finishGameHandler={finishGameHandler}
+          level={level}
+          page={page}
+          gameName={gameName}
+          newGame={newGame}
+        />
+      </GameContainerStyled>
     </SprintContainerStyled>
   );
 };
