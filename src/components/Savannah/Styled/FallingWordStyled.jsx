@@ -25,7 +25,7 @@ const FallingWordStyled = styled.div`
       top: 0;
     }
     100% {
-      top: calc(90vh - 200px);
+      top: calc(100vh - 350px);
     }
   }
 `;

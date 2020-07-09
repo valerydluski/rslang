@@ -35,7 +35,7 @@ const SavannahWordsContainer = ({
       ${word.wordTranslate}`}</WordCorrectStyled>
         );
       }
-      if (word.word === selectedWord && word.word !== currentWord) {
+      if (word.word === selectedWord) {
         return (
           <WordWrongStyled key={word.wordTranslate}>{`${i + 1}.
         ${word.wordTranslate}`}</WordWrongStyled>

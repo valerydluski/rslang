@@ -44,6 +44,7 @@ const SavannaGameContainer = ({
   const [isGameFinished, toggleGameMode] = useState(false);
   const [wrongAmount, changeWrongAmount] = useState(0);
   const [correctAnsweredWords, addWordToCorrect] = useState([]);
+  const [selectedWord, changeSelectedWord] = useState(null);
 
   useEffect(() => {
     changeIndex(0);
@@ -59,8 +60,8 @@ const SavannaGameContainer = ({
     return null;
   }
 
-  function finishGame(wrongWord) {
-    addWordsWithMistakesToStore([...wrongAnsweredWords, wrongWord]);
+  function finishGame() {
+    addWordsWithMistakesToStore(wrongAnsweredWords);
     toggleGameMode(true);
     saveStatistic({
       Level: level,
@@ -101,7 +102,6 @@ const SavannaGameContainer = ({
   }
 
   const currentWord = currentGameWords[currentWordIndex];
-  let selectedWord;
 
   function switchToNextWord() {
     if (currentWordIndex === wordsCollection.length - 1) finishGame();
@@ -125,8 +125,9 @@ const SavannaGameContainer = ({
   };
 
   const processAnswer = (selectedWordIndex) => {
-    selectedWord = currentStepWords[selectedWordIndex];
-    const isCorrect = selectedWordIndex === false ? false : selectedWord.word === currentWord.word;
+    changeSelectedWord(currentStepWords[selectedWordIndex]);
+    const word = currentStepWords[selectedWordIndex];
+    const isCorrect = selectedWordIndex === false ? false : word.word === currentWord.word;
     if (!isCorrect) {
       changeWrongAmount(wrongAmount + 1);
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
@@ -136,12 +137,12 @@ const SavannaGameContainer = ({
     playResultAudio(isCorrect);
     toggleWordStatus(true);
     if (initialErrorsAmont - wrongAmount === 1 && !isCorrect) {
-      if (!selectedWord) finishGame(currentWord.word);
-      else finishGame(selectedWord.word);
+      finishGame();
     }
   };
 
   const onFallingEnd = () => {
+    changeSelectedWord(null);
     processAnswer(false);
   };
 

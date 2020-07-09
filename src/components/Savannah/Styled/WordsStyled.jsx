@@ -26,17 +26,15 @@ const WordFinishedStyled = styled(WordStyled)`
 `;
 
 const WordCorrectStyled = styled(WordStyled)`
-  background-color: rgba(254, 194, 70, 0.8);
+  background-color: rgb(101, 80, 222);
   &:hover {
-    background-color: rgba(254, 194, 70, 0.8);
+    background-color: rgb(101, 80, 222);
   }
 `;
-
 const WordWrongStyled = styled(WordFinishedStyled)`
-  text-decoration: line-through;
-  background-color: rgba(245, 103, 72, 0.8);
+  background-color: rgb(245, 103, 72);
   &:hover {
-    background-color: rgba(245, 103, 72, 0.8);
+    background-color: rgb(245, 103, 72);
   }
 `;
 
