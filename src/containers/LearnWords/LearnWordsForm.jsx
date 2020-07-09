@@ -33,6 +33,7 @@ const LearnWordsForm = (props) => {
     isResultShow,
     wordsCount,
     currentWordIndex,
+    audiosDuration,
   } = props;
 
   const {
@@ -108,6 +109,7 @@ const LearnWordsForm = (props) => {
             word={word.word}
             answer={answer}
             isShowResult={isResultShow}
+            audiosDuration={audiosDuration}
           />
           {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
         </TextExampleStyled>
@@ -190,6 +192,7 @@ LearnWordsForm.propTypes = {
   isResultShow: PropTypes.bool,
   wordsCount: PropTypes.number,
   currentWordIndex: PropTypes.number,
+  audiosDuration: PropTypes.number.isRequired,
 };
 
 LearnWordsForm.defaultProps = {

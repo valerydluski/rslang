@@ -18,6 +18,7 @@ export default function LearnWords(props) {
     isResultShow,
     wordsCount,
     currentWordIndex,
+    audiosDuration,
   } = props;
   return (
     <LearnWordsContainer>
@@ -35,6 +36,7 @@ export default function LearnWords(props) {
           isResultShow={isResultShow}
           wordsCount={wordsCount}
           currentWordIndex={currentWordIndex}
+          audiosDuration={audiosDuration}
         />
       </LearnWordCardContainer>
       <Line percent="30" strokeWidth="400" strokeColor="#404497" />
@@ -53,6 +55,7 @@ LearnWords.propTypes = {
   isResultShow: PropTypes.bool,
   wordsCount: PropTypes.number,
   currentWordIndex: PropTypes.number,
+  audiosDuration: PropTypes.number,
 };
 
 LearnWords.defaultProps = {
@@ -61,4 +64,5 @@ LearnWords.defaultProps = {
   isResultShow: false,
   wordsCount: 0,
   currentWordIndex: 0,
+  audiosDuration: -1,
 };

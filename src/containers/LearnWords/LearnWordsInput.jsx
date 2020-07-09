@@ -24,21 +24,23 @@ const LearnWordsInput = (props) => {
     answer,
     isShowResult,
     showResultHander,
+    audiosDuration,
   } = props;
 
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (isShowResult) {
+      const duration = audiosDuration < 0 ? 2000 : audiosDuration * 1000 - 500;
       setShow(true);
       const timer = setTimeout(() => {
         setShow(false);
         showResultHander(false);
-      }, 2000);
+      }, duration);
       return () => clearTimeout(timer);
     }
     return undefined;
-  }, [isShowResult, showResultHander]);
+  }, [isShowResult, showResultHander, audiosDuration]);
 
   const hideResult = () => {
     setShow(false);
@@ -90,6 +92,7 @@ LearnWordsInput.propTypes = {
   attemptsNumber: PropTypes.number,
   isShowResult: PropTypes.bool,
   showResultHander: PropTypes.func.isRequired,
+  audiosDuration: PropTypes.number.isRequired,
 };
 
 LearnWordsInput.defaultProps = {

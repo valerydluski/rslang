@@ -34,18 +34,19 @@ function LearnWordCardContainer(props) {
   const [isTranslationShow, setIsTranslationShow] = useState(false);
   const [isSoundPlay, setIsSoundPlay] = useState(true);
   const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
-  const [needNewWord, setNeedNewWord] = useState(true);
+  const needNewWord = useRef(true);
   const [audios, setAudios] = useState([]);
   const [answerToForm, setAnswerToForm] = useState('');
-  const [isGameStart, setIsGameStart] = useState(false);
+  const isGameStart = useRef(false);
   const firstAnswer = useRef(true);
   const wordsCount = useRef(wordsCollection.length);
   const rightAnswer = useRef(0);
   const newWordCount = useRef(0);
   const currentWordIndex = useRef(0);
+  const audiosDuration = useRef(-1);
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
 
-  if (wordsCollection.length < 1 && !isGameStart) {
+  if (wordsCollection.length < 1 && !isGameStart.current) {
     return <FinalScreen noWords />;
   }
 
@@ -56,9 +57,9 @@ function LearnWordCardContainer(props) {
     setCurrentWord(getWord(wordsCollection, currentWordIndex.current));
   }
 
-  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord) {
+  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord.current) {
     if (currentWord.isNew) newWordCount.current += 1;
-    setIsGameStart(true);
+    isGameStart.current = true;
     showNewCardHandler(currentWord);
     const { audio, audioExample, audioMeaning } = currentWord;
     isAudiosPlay = [isAudioTranslate, isAudioTextMeaning, isAudioTextExample];
@@ -67,22 +68,23 @@ function LearnWordCardContainer(props) {
       .filter((bool) => bool === true)
       .map((bool, i) => new Audio(`${LINK_FOR_AUDIO}${audiosLinks[i]}`));
     setAudios(audiosArr);
-    setNeedNewWord(false);
+    needNewWord.current = false;
   }
 
   const nextWord = () => {
     resetSaveWord(null);
     currentWordIndex.current += 1;
     firstAnswer.current = true;
+    showResultHandler(false);
+    setIsTranslationShow(false);
+    setIsRightAnswerShow(false);
+    audiosDuration.current = -1;
+    needNewWord.current = true;
     if (currentWordIndex.current < wordsCount.current) {
       setCurrentWord(getWord(wordsCollection, currentWordIndex.current));
     } else {
       setCurrentWord(null);
     }
-    showResultHandler(false);
-    setIsTranslationShow(false);
-    setIsRightAnswerShow(false);
-    setNeedNewWord(true);
     return undefined;
   };
 
@@ -122,13 +124,14 @@ function LearnWordCardContainer(props) {
         setCurrentWord(getWord(wordsCollection));
         break;
       case 'unknown':
-        setIsRightAnswerShow(true);
+        showResultHandler(true);
         break;
       default:
         if (!answer) break;
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
           if (firstAnswer.current) rightAnswer.current += 1;
+          audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
             nextWord();
@@ -165,8 +168,9 @@ function LearnWordCardContainer(props) {
       word={currentWord}
       isCorrect={isCorrect}
       answer={answerToForm}
-      wordsCount={wordsCount.current}
-      currentWordIndex={currentWordIndex.current}
+      wordsCount={wordsCount.current + 1}
+      currentWordIndex={currentWordIndex.current + 1}
+      audiosDuration={audiosDuration.current}
     />
   );
 }
