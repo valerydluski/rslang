@@ -12,8 +12,8 @@ export default (value) => {
     return `${I18n.t('Errors.least')}${1}`;
   }
 
-  if (value && value > 6) {
-    return `${I18n.t('Errors.more')}${6}`;
+  if (value && value > 5) {
+    return `${I18n.t('Errors.more')}${5}`;
   }
 
   return undefined;

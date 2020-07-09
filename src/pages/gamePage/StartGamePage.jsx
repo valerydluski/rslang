@@ -13,6 +13,7 @@ import {
   ContainerNameAndDescription,
   StartGamePageContent,
 } from './Styled/StartGamePageContentStyled';
+import GamesAnimation from '../../components/GamesPage/Animation/GamesAnimation';
 
 const StartGamePage = ({ match }) => {
   const { gameId } = match.params;
@@ -35,6 +36,7 @@ const StartGamePage = ({ match }) => {
           <Translate value="Buttons.start" />
         </Link>
       </StartGamePageContent>
+      <GamesAnimation />
     </StartGamePageStyled>
   );
 };
