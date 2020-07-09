@@ -9,7 +9,7 @@ import { CHECKBOXES } from '../../../../config';
 import { BlackHeader } from './Styled/Header';
 import timeForWordValidator from '../../../../utils/validators/timeForWordValidator';
 import { SettingsFormStyled } from './Styled/SettingsContainerStyled';
-import Button from '../../../UI/Button/Button';
+import StyledSettingsRoundButton from '../../../UI/Button/Styled/StyledSettingsRoundButton';
 
 const SettingsForm = (props) => {
   const { handleSubmit } = props;
@@ -151,7 +151,9 @@ const SettingsForm = (props) => {
         type="checkbox"
         label={I18n.t('Settings.isBackground')}
       />
-      <Button type="submit" aria-label="Save" text={I18n.t('Buttons.save')} className="settings" />
+      <StyledSettingsRoundButton type="submit" aria-label="Save">
+        <Translate value="Buttons.save" />
+      </StyledSettingsRoundButton>
     </SettingsFormStyled>
   );
 };
