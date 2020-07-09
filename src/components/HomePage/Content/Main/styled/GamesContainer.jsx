@@ -1,20 +1,18 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../../config';
 
 const GamesContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 25px;
-  width: 106%;
+  width: 100%;
 
-  @media (max-width: 1200px) {
+  @media ${DEVICE.laptopL} {
     grid-template-columns: 1fr 1fr;
-    width: 100%;
-    gap: 15px;
   }
 
-  @media (max-width: 767px) {
-    grid-template-columns: auto;
-    gap: 40px;
+  @media ${DEVICE.tablet} {
+    grid-template-columns: 1fr;
   }
 `;
 
