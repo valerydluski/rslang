@@ -21,6 +21,7 @@ import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';
 import { updateState, updateSource } from '../../EnglishPuzzle/actions';
 import { changeIDontKnowWords } from '../../Games/action';
+import getRandomValuesFromArray from '../../../utils/getRandomValuesFromArray';
 
 function* workerGetWords() {
   try {
@@ -28,7 +29,15 @@ function* workerGetWords() {
     const state = yield select();
     yield put(changeIDontKnowWords([]));
     const { appMode } = state.changeAppMode;
-    const payload = yield call(wordsFetch, state);
+    const { gameMode } = state.gamesReducer;
+    const userWords = state.userWords.words;
+    const wordsPerPage = state.userSettings.settings[`${appMode}WordsPerPage`] || 10;
+    let payload;
+    if (!gameMode && userWords[0] && userWords[0].pagenatedResults.length >= +wordsPerPage) {
+      payload = yield put(getRandomValuesFromArray(userWords[0].pagenatedResults, +wordsPerPage));
+    } else {
+      payload = yield call(wordsFetch, state);
+    }
     yield put(fetchWords(payload));
     if (appMode === 'EnglishPuzzle') {
       const { EnglishPuzzleLevel, EnglishPuzzlePage } = state.changeRound;
@@ -38,6 +47,8 @@ function* workerGetWords() {
     }
     yield put(hideLoader());
   } catch (e) {
+    console.log('function*workerGetWords -> e', e);
+
     toast.error('error get words');
     yield put(hideLoader());
   }

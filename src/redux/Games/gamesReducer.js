@@ -3,6 +3,7 @@ import {
   GAME_CHANGE_PAGE,
   CHANGE_I_DONT_KNOW_WORDS,
   GAME_CHANGE_SCORE,
+  GHANGE_GAME_MODE,
 } from './types';
 import RESET_STORE from '../resetStore/types';
 
@@ -11,6 +12,7 @@ const initialState = {
   gamePage: '1',
   IDontKnowWords: [],
   gameScore: 0,
+  gameMode: false,
 };
 
 const gamesReducer = (state = initialState, action) => {
@@ -25,6 +27,8 @@ const gamesReducer = (state = initialState, action) => {
       return { ...state, gameScore: action.payload };
     case RESET_STORE:
       return { ...initialState };
+    case GHANGE_GAME_MODE:
+      return { ...state, gameMode: action.payload };
     default:
       return state;
   }

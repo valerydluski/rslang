@@ -19,6 +19,7 @@ import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../config';
 import newRound from '../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../redux/Statistic/action';
+import getRandomValuesFromArray from '../../utils/getRandomValuesFromArray';
 
 const micro = new Microphone();
 
@@ -35,12 +36,10 @@ const GameContainerSpeakIT = (props) => {
     changeLevel,
     maxPage,
     saveStatistic,
-    userWords,
   } = props;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
-  console.log('GameContainerSpeakIT -> userWords', userWords);
   let IDontKnowWords = gameWords.slice();
   const [srcForImage, setSrcForImage] = useState(defaultImg);
   const [textForTextField, setTranslate] = useState(' ');
@@ -85,8 +84,6 @@ const GameContainerSpeakIT = (props) => {
       toggleGameMode(true);
       micro.stopMicrophone();
       setListening(false);
-      console.log('finishHandler -> wrongWordsState', wrongWordsState);
-
       saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
     }
   };
@@ -253,8 +250,6 @@ GameContainerSpeakIT.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
-  userWords: PropTypes.instanceOf(Array),
-  wordsCollection: PropTypes.instanceOf(Array).isRequired,
 };
 
 GameContainerSpeakIT.defaultProps = {
@@ -265,7 +260,6 @@ GameContainerSpeakIT.defaultProps = {
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,
   maxPage: GAME_MAX_PAGE,
-  userWords: [],
 };
 
 const mapStateToProps = (state) => {
@@ -275,7 +269,8 @@ const mapStateToProps = (state) => {
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
     maxPage: state.maxPage.maxPage,
-    userWords: state.userWords.words[0].paginatedResults,
+    userWords: state.userWords.words,
+    maxWordsPerPage: state.userSettings.settings.SpeakITWordsPerPage,
   };
 };
 
