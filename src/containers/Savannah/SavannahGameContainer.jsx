@@ -21,6 +21,7 @@ import SavannahWordsContainer from '../../components/Savannah/SavannahWordsConta
 let currentGameWords;
 let currentStepWords = [];
 const wordAudio = new Audio();
+let timer;
 
 const SavannaGameContainer = ({
   wordsCollection,
@@ -51,6 +52,9 @@ const SavannaGameContainer = ({
     addWordToWrong([]);
     toggleWordStatus(false);
     toggleGameMode(false);
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
@@ -72,7 +76,7 @@ const SavannaGameContainer = ({
     });
   }
 
-  if (!currentWordIndex && !isWordFinished) {
+  if (!currentWordIndex && !isWordFinished && !currentGameWords) {
     currentGameWords = shuffleArray(wordsCollection);
   }
 
@@ -105,17 +109,15 @@ const SavannaGameContainer = ({
   const currentWord = currentGameWords[currentWordIndex];
 
   function switchToNextWord() {
-    if (initialErrorsAmont - wrongAmount === 0) {
+    if (initialErrorsAmont - wrongAmount === 0 || currentWordIndex === wordsCollection.length - 1) {
       finishGame();
-    }
-    if (currentWordIndex === wordsCollection.length - 1) finishGame();
-    else {
+    } else {
       changeIndex(currentWordIndex + 1);
     }
   }
 
   if (isWordFinished) {
-    setTimeout(() => {
+    timer = setTimeout(() => {
       toggleWordStatus(false);
       switchToNextWord();
     }, 1000);
