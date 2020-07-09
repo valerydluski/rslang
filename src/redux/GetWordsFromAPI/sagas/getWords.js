@@ -33,8 +33,18 @@ function* workerGetWords() {
     const userWords = state.userWords.words;
     const wordsPerPage = state.userSettings.settings[`${appMode}WordsPerPage`] || 10;
     let payload;
-    if (!gameMode && userWords[0] && userWords[0].pagenatedResults.length >= +wordsPerPage) {
-      payload = yield put(getRandomValuesFromArray(userWords[0].pagenatedResults, +wordsPerPage));
+    if (!gameMode && userWords[0] && userWords[0].paginatedResults.length >= +wordsPerPage) {
+      const arr = userWords[0].paginatedResults;
+      if (appMode === 'EnglishPuzzle') {
+        const arrForPuzzle = arr.filter((el) => el.wordsPerExampleSentence <= 10);
+        if (arrForPuzzle.length >= 10) {
+          payload = getRandomValuesFromArray(arrForPuzzle, 9);
+        } else {
+          payload = yield call(wordsFetch, state);
+        }
+      } else {
+        payload = getRandomValuesFromArray(arr, +wordsPerPage - 1);
+      }
     } else {
       payload = yield call(wordsFetch, state);
     }
@@ -47,8 +57,6 @@ function* workerGetWords() {
     }
     yield put(hideLoader());
   } catch (e) {
-    console.log('function*workerGetWords -> e', e);
-
     toast.error('error get words');
     yield put(hideLoader());
   }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { I18n, Translate } from 'react-redux-i18n';
 import Menu from './Styled/Menu';
@@ -10,9 +11,19 @@ import Select from '../UI/Select/Select';
 import { DIRECTION_ROW } from '../UI/Select/Styled/constants';
 import { ITEM_PAGE, ITEM_LEVEL } from './constants';
 import { GAME_MAX_PAGE, GAME_MAX_LEVEL } from '../../config';
+import { changeGameMode } from '../../redux/Games/action';
 
 const StatusMenu = (props) => {
-  const { level, page, maxPage, updateLevel, updatePage, className, restartGame } = props;
+  const {
+    level,
+    page,
+    maxPage,
+    updateLevel,
+    updatePage,
+    className,
+    restartGame,
+    changeMode,
+  } = props;
 
   const [isLevelOpen, toggleLevel] = useState(false);
   const [isPageOpen, togglePage] = useState(false);
@@ -29,12 +40,14 @@ const StatusMenu = (props) => {
 
   const onLevelOptionClick = (event) => {
     const value = event.target.innerHTML;
+    changeMode(true);
     restartGame();
     updateLevel(`${value}`);
   };
 
   const onPageOptionClick = (event) => {
     const value = event.target.innerHTML;
+    changeMode(true);
     restartGame();
     updatePage(`${value}`);
   };
@@ -90,6 +103,7 @@ StatusMenu.propTypes = {
   updateLevel: PropTypes.func.isRequired,
   className: PropTypes.string,
   restartGame: PropTypes.func,
+  changeMode: PropTypes.func.isRequired,
 };
 
 StatusMenu.defaultProps = {
@@ -100,4 +114,7 @@ StatusMenu.defaultProps = {
   restartGame: () => {},
 };
 
-export default StatusMenu;
+const mapDispatchToProps = {
+  changeMode: changeGameMode,
+};
+export default connect(null, mapDispatchToProps)(StatusMenu);
