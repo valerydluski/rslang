@@ -41,24 +41,27 @@ const GameContainerSpeakIT = (props) => {
     return el.word.toLowerCase();
   });
   console.log('GameContainerSpeakIT -> userWords', userWords);
+  let IDontKnowWords = gameWords.slice();
   const [srcForImage, setSrcForImage] = useState(defaultImg);
   const [textForTextField, setTranslate] = useState(' ');
   const [isListening, setListening] = useState(listening);
   const [transcriptFromMicrophone, setTranscript] = useState('');
   const [isGameFinished, toggleGameMode] = useState(false);
-  const [wrongWordsState, setWrongWords] = useState([]);
+  const [wrongWordsState, setWrongWords] = useState(IDontKnowWords);
   const [correctWordsState, setCorrectWords] = useState([]);
-  let IDontKnowWords = gameWords.slice();
 
-  useEffect(() => {
-    setSrcForImage(defaultImg);
-    setTranslate(' ');
-    setListening(false);
-    toggleGameMode(false);
-    setWrongWords([]);
-    micro.stopMicrophone();
-    micro.changeTranscript(speechResult);
-  }, [wordsCollection]);
+  useEffect(
+    (speechResult) => {
+      setSrcForImage(defaultImg);
+      setTranslate(' ');
+      setListening(false);
+      toggleGameMode(false);
+      setWrongWords([]);
+      micro.stopMicrophone();
+      micro.changeTranscript(speechResult);
+    },
+    [wordsCollection]
+  );
 
   if (isWordsLoading) return <LoadingSpinner />;
 
@@ -82,6 +85,8 @@ const GameContainerSpeakIT = (props) => {
       toggleGameMode(true);
       micro.stopMicrophone();
       setListening(false);
+      console.log('finishHandler -> wrongWordsState', wrongWordsState);
+
       saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
     }
   };
@@ -249,6 +254,7 @@ GameContainerSpeakIT.propTypes = {
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
   userWords: PropTypes.instanceOf(Array),
+  wordsCollection: PropTypes.instanceOf(Array).isRequired,
 };
 
 GameContainerSpeakIT.defaultProps = {
