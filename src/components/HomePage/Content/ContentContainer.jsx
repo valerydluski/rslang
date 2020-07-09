@@ -8,7 +8,7 @@ const ContentContainer = styled.main`
   padding: 75px 75px 0;
 
   @media ${DEVICE.laptop} {
-    padding: 50px 50px 0;
+    padding: 40px 40px 0;
   }
 
   @media ${DEVICE.tablet} {

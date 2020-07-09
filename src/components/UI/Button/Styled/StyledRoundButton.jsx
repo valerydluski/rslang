@@ -15,6 +15,7 @@ const StyledRoundButton = styled.button`
   border-radius: 50%;
   cursor: pointer;
   transition: 0.3s linear;
+  flex-grow: 1;
 
   &:hover {
     background: #fec246;

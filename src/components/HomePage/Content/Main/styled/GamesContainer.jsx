@@ -8,7 +8,7 @@ const GamesContainer = styled.div`
   width: 100%;
 
   @media ${DEVICE.laptopL} {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   @media ${DEVICE.tablet} {

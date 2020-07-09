@@ -14,7 +14,8 @@ const GameCardContainer = styled.div`
   }
 
   p {
-    width: 100%;
+    height: 100px;
+    flex-grow: 1;
     font-size: 14px;
     line-height: 17px;
     color: #000000;
@@ -31,18 +32,20 @@ const GameCardContainer = styled.div`
 
   @media ${DEVICE.laptopL} {
     p {
-      width: auto;
+      width: 100%;
+      height: 120px;
     }
   }
 
   @media ${DEVICE.laptop} {
     width: 100%;
+    height: auto;
   }
 
   @media ${DEVICE.tablet} {
     width: 100%;
     p {
-      width: 100%;
+      height: auto;
       font-size: 20px;
       line-height: 30px;
     }
