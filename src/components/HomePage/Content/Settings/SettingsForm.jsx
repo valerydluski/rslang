@@ -58,8 +58,8 @@ const SettingsForm = (props) => {
         className="settings"
       />
       <Field
-        name="savannahTMaxErrorCounter"
-        key="savannahTMaxErrorCounter"
+        name="savannahMaxErrorCounter"
+        key="savannahMaxErrorCounter"
         type="number"
         placeholder={I18n.t('Settings.errorCounter')}
         validate={timeForWordValidator}
