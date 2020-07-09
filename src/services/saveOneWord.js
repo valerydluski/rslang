@@ -3,7 +3,6 @@ import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
 async function saveOneWord(wordId, wordOptions, user) {
-  console.log('saveOneWord -> wordId', wordId);
   try {
     const {
       URL,

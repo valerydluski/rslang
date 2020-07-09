@@ -23,10 +23,8 @@ function* addNewWordSagaWorker(action) {
   // eslint-disable-next-line no-underscore-dangle
   const wordId = action.payload.id || action.payload._id;
   const { isNew, word } = action.payload;
-  // console.log('function*addNewWordSagaWorker -> action.payload', action.payload);
   const isKnown = findObjInArray(userWords, '_id', wordId);
   if (isNew || !isKnown) {
-    console.log(1);
     const config = {
       difficulty: 'new',
       optional: {
