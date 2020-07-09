@@ -73,13 +73,12 @@ function LearnWordCardContainer(props) {
   const nextWord = () => {
     resetSaveWord(null);
     currentWordIndex.current += 1;
-
+    firstAnswer.current = true;
     if (currentWordIndex.current < wordsCount.current) {
       setCurrentWord(getWord(wordsCollection, currentWordIndex.current));
     } else {
       setCurrentWord(null);
     }
-    firstAnswer.current = true;
     showResultHandler(false);
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
@@ -145,8 +144,9 @@ function LearnWordCardContainer(props) {
               }
             }
           }
+        } else {
+          firstAnswer.current = false;
         }
-        firstAnswer.current = false;
         correctCardHandler(true);
     }
   };

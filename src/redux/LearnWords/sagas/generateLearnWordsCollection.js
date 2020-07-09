@@ -128,7 +128,6 @@ function* generateLearnWordsCollectionWorker() {
       break;
   }
   yield put(saveLearnWordsCollection(filterData));
-  console.log('function*generateLearnWordsCollectionWorker -> filterData', filterData);
   yield put(isWordsCollectionLoadedHandler(true));
   yield put(wordsCollectionLoaderHide());
 }
