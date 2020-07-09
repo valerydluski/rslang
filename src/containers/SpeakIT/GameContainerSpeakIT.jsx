@@ -35,11 +35,12 @@ const GameContainerSpeakIT = (props) => {
     changeLevel,
     maxPage,
     saveStatistic,
+    userWords,
   } = props;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
-
+  console.log('GameContainerSpeakIT -> userWords', userWords);
   const [srcForImage, setSrcForImage] = useState(defaultImg);
   const [textForTextField, setTranslate] = useState(' ');
   const [isListening, setListening] = useState(listening);
@@ -247,6 +248,7 @@ GameContainerSpeakIT.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
+  userWords: PropTypes.instanceOf(Array),
 };
 
 GameContainerSpeakIT.defaultProps = {
@@ -257,6 +259,7 @@ GameContainerSpeakIT.defaultProps = {
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,
   maxPage: GAME_MAX_PAGE,
+  userWords: [],
 };
 
 const mapStateToProps = (state) => {
@@ -266,6 +269,7 @@ const mapStateToProps = (state) => {
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
     maxPage: state.maxPage.maxPage,
+    userWords: state.userWords.words[0].paginatedResults,
   };
 };
 
