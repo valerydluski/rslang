@@ -1,29 +1,57 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useCallback } from 'react';
 import Lottie from 'react-lottie';
 import animationData from '../../../assets/animation/signin/data.json';
+import animationDataMobile from '../../../assets/animation/signin-mobile/data.json';
+import AnimationContainerStyled from './Styled/AnimationContainerStyled';
+import getScreenWidth from '../../../utils/getScreenWidth';
 
-function SignInAnimation({ defaultOptions }) {
-  return (
-    <div>
-      <Lottie options={defaultOptions} />
-    </div>
-  );
-}
+function SignInAnimation() {
+  const [isBreakpoint, changeBreakpoint] = useState(false);
 
-SignInAnimation.propTypes = {
-  defaultOptions: PropTypes.instanceOf(Object),
-};
+  const breakpoint = 768;
 
-SignInAnimation.defaultProps = {
-  defaultOptions: {
+  const prevWidth = getScreenWidth();
+
+  const onResize = useCallback(() => {
+    const width = getScreenWidth();
+    if (width <= breakpoint) {
+      changeBreakpoint(true);
+    } else {
+      changeBreakpoint(false);
+    }
+  }, [changeBreakpoint]);
+
+  const onOrientationChange = useCallback(() => {
+    const width = getScreenWidth();
+    if (width < breakpoint) {
+      changeBreakpoint(true);
+    } else {
+      changeBreakpoint(false);
+    }
+  }, [changeBreakpoint]);
+
+  useEffect(() => {
+    if (prevWidth < breakpoint) {
+      changeBreakpoint(true);
+    }
+    window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onOrientationChange);
+  }, [prevWidth, onResize, onOrientationChange]);
+
+  const options = {
     loop: true,
     autoplay: true,
-    animationData,
+    animationData: isBreakpoint ? animationDataMobile : animationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
+      preserveAspectRatio: isBreakpoint ? 'xMinYMin slice' : 'xMinYMid slice',
     },
-  },
-};
+  };
+
+  return (
+    <AnimationContainerStyled>
+      <Lottie options={options} />
+    </AnimationContainerStyled>
+  );
+}
 
 export default SignInAnimation;
