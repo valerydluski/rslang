@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { DEVICE } from '../../../../config';
+import audioIco from '../../Icon/audioIco.svg';
 
 const StyledRoundButton = styled.button`
   margin-left: 20px;
@@ -37,6 +38,16 @@ const StyledRoundButton = styled.button`
     font-size: 13px;
     line-height: 16px;
     }
+  &.learn_sound-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background: url(${audioIco});
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 `;
 
 export default StyledRoundButton;

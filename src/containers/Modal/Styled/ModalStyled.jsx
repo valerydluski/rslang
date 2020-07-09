@@ -13,7 +13,7 @@ const ModalStyled = styled.div`
   flex-direction: column;
   border-radius: 20px;
   background-color: white;
-  z-index: 100;
+  z-index: 111;
   transition: all 0.5s;
 `;
 

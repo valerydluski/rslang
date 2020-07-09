@@ -61,9 +61,16 @@ const FormStyled = styled.form`
     margin-top: 40px;
 
     @media ${DEVICE.laptop} {
-      transform: translateX(0);
-      align-self: center;
+      transform: translateX(-50%);
+      align-self: flex-end;
       margin-left: 0;
+    }
+
+    @media ${DEVICE.tablet} {
+      margin-bottom: 40px;
+      width: 86px;
+      height: 86px;
+      font-size: 16px;
     }
 
     &:hover {

@@ -34,9 +34,12 @@ const Input = (props) => {
         {...input}
         className={className}
       />
-      {error && touched && toast.warning(error) && (
-        <SpanStyled className={classNameSpan}>{error}</SpanStyled>
-      )}
+      {classNameSpan
+        ? error &&
+          touched &&
+          toast.warning(error) && <SpanStyled className={classNameSpan}>{error}</SpanStyled>
+        : error && touched && <SpanStyled className={classNameSpan}>{error}</SpanStyled>}
+
       {label && <LabelStyled htmlFor={label}>{label}</LabelStyled>}
     </InputContainer>
   );

@@ -6,13 +6,14 @@ import { saveFullStatisticToStore } from '../../Statistic/action';
 import getSettings from '../../../utils/getSettings';
 import getStatisticFromApi from '../../../services/getStatisticFromApi';
 import getSettingsFromApi from '../../../services/getSettingsFromApi';
-import { getUserWords } from '../../Dictionary/actions';
 import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
 import createInitialRounds from '../../../utils/createInitialRounds';
 import { changeInitialRound } from '../../ChangeRounds/action';
 import { addToShowedWordsList } from '../../LearnWords/actions';
 import { puzzleSettingsFromServer } from '../../EnglishPuzzle/actions';
+import getAllUserWords from '../../../services/getAllUserWords';
+import { saveUserWords } from '../../Dictionary/actions';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());
@@ -42,7 +43,10 @@ function* workerLoadData() {
     yield put(setLocale(settingsFromApi.language));
   }
 
-  yield put(getUserWords());
+  const payload = yield call(getAllUserWords, sessionData);
+  if (payload) {
+    yield put(saveUserWords(payload));
+  }
 
   yield put(isDataLoadFromApi(true));
   yield put(loadDataLoaderHide());

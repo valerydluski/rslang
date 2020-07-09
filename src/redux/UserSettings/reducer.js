@@ -20,13 +20,15 @@ const initialState = {
     isTextExample: true,
     isTranscription: true,
     isImageAssociation: true,
-    isAudioTranslate: true,
-    isAudioTextMeaning: true,
-    isAudioTextExample: true,
+    isAudioTranslate: false,
+    isAudioTextMeaning: false,
+    isAudioTextExample: false,
     isAutoSpeech: true,
     isTranslation: true,
     isBackground: true,
     timeForWord: '2',
+    savannahTimeForWord: '2',
+    savannahMaxErrorCounter: '2',
   },
 };
 
