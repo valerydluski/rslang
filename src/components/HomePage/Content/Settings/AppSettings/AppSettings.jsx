@@ -9,7 +9,6 @@ import nameValidator from '../../../../../utils/validators/nameValidator';
 import { LabelStyled } from '../../../../UI/Input/Styled/InputStyled';
 import { BlackHeader } from '../Styled/Header';
 import { SelectContainerStyled } from '../Styled/SettingsContainerStyled';
-import { stackOffsetNone } from 'd3';
 
 const AppSettings = ({ checkboxes }) => {
   return (
