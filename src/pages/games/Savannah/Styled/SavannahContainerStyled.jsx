@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import background from '../../../../assets/img/savannah-background.png';
 
 const SavannahContainerStyled = styled.div`
   width: 100%;
@@ -6,7 +7,7 @@ const SavannahContainerStyled = styled.div`
   min-height: 100vh;
   box-sizing: border-box;
   padding: 30px;
- }
+  background-image: url(${background});
 `;
 
 export default SavannahContainerStyled;
