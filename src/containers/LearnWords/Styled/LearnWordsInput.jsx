@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const InputContainer = styled.div`
-  margin: 10px 0;
+  margin-top: 10px;
   position: relative;
 `;
 
