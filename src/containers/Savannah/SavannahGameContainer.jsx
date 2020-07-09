@@ -41,9 +41,9 @@ const SavannaGameContainer = ({
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
+  const [correctAnsweredWords, addWordToCorrect] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
   const [wrongAmount, changeWrongAmount] = useState(0);
-  const [correctAnsweredWords, addWordToCorrect] = useState([]);
   const [selectedWord, changeSelectedWord] = useState(null);
 
   useEffect(() => {
@@ -83,16 +83,6 @@ const SavannaGameContainer = ({
     if (newPage !== page) updatePage(newPage);
   };
 
-  if (isGameFinished)
-    return (
-      <ResultModal
-        showProperties={['word', 'wordTranslate']}
-        correctWords={correctAnsweredWords}
-        audioForPlay="audio"
-        newGame={newGame}
-      />
-    );
-
   if (!isWordFinished) {
     currentStepWords = currentGameWords.slice();
     currentStepWords.splice(currentWordIndex, 1);
@@ -101,9 +91,23 @@ const SavannaGameContainer = ({
     currentStepWords = shuffleArray(currentStepWords);
   }
 
+  if (isGameFinished) {
+    return (
+      <ResultModal
+        showProperties={['word', 'wordTranslate']}
+        correctWords={correctAnsweredWords}
+        audioForPlay="audio"
+        newGame={newGame}
+      />
+    );
+  }
+
   const currentWord = currentGameWords[currentWordIndex];
 
   function switchToNextWord() {
+    if (initialErrorsAmont - wrongAmount === 0) {
+      finishGame();
+    }
     if (currentWordIndex === wordsCollection.length - 1) finishGame();
     else {
       changeIndex(currentWordIndex + 1);
@@ -136,9 +140,6 @@ const SavannaGameContainer = ({
     }
     playResultAudio(isCorrect);
     toggleWordStatus(true);
-    if (initialErrorsAmont - wrongAmount === 1 && !isCorrect) {
-      finishGame();
-    }
   };
 
   const onFallingEnd = () => {
