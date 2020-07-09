@@ -9,7 +9,7 @@ const StyledPattern = styled.div`
   height: 100%;
 
   @media ${DEVICE.laptopL} {
-    width: 200px;
+    width: 188px;
   }
 
   @media ${DEVICE.laptop} {

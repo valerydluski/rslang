@@ -13,7 +13,7 @@ const MenuItem = styled.div`
   }
 
   @media ${DEVICE.tablet} {
-    width: auto;
+    width: 80px;
     flex-direction: column;
     align-items: flex-start;
     margin-right: 30px;
