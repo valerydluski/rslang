@@ -6,6 +6,9 @@ import { LINK_FOR_IMAGE } from '../../config';
 import LearnWordsInput from './LearnWordsInput';
 import Image from '../../components/UI/Image/Image';
 import Transcription from '../../components/UI/TextField/Transcription';
+import LearnFormStyled from './Styled/LearnFormStyled';
+import LearnCardsContainer, { TranslateStyled } from './Styled/LearnCardsContainer';
+import LearnButtonsContainer from './Styled/LearnButtonsContainer';
 
 const LearnWordsForm = (props) => {
   const {
@@ -59,16 +62,21 @@ const LearnWordsForm = (props) => {
   const wordRegExp = new RegExp(`${word.word}`, 'i');
 
   return (
-    <>
-      <StyledRoundButton onClick={customHandleSubmit('sound')}>Sound</StyledRoundButton>
-      <form
-        onSubmit={handleSubmit((values) =>
-          onSubmit({
-            ...values,
-            buttonType: 'form',
-          })
-        )}
-      >
+    <LearnFormStyled
+      onSubmit={handleSubmit((values) =>
+        onSubmit({
+          ...values,
+          buttonType: 'form',
+        })
+      )}
+    >
+      <LearnCardsContainer>
+        <StyledRoundButton
+          onClick={customHandleSubmit('sound')}
+          type="button"
+          className="learn_sound-button"
+        />
+        {isTranslationShow && <TranslateStyled>{wordTranslate}</TranslateStyled>}
         {isImageAssociation && <Image alt={word.word} src={`${LINK_FOR_IMAGE}${image}`} />}
         <p>{firstPart}</p>
         <Field
@@ -96,18 +104,25 @@ const LearnWordsForm = (props) => {
           <p>{textExample.join('*'.repeat(word.word.length))}</p>
         )}
         {isTranslationShow && isTextExample && <p>{textExample.join(` ${word.word} `)}</p>}
-        <StyledRoundButton>Next</StyledRoundButton>
-        {isTranslationShow && <p>{wordTranslate}</p>}
         {isTranslationShow && isTranscription && <Transcription>{transcription}</Transcription>}
-      </form>
-      {deleteButton && (
-        <StyledRoundButton onClick={customHandleSubmit('deleted')}>Delete</StyledRoundButton>
-      )}
-      {addDificultWordsButton && (
-        <StyledRoundButton onClick={customHandleSubmit('difficult')}>Difficult</StyledRoundButton>
-      )}
-      <StyledRoundButton onClick={customHandleSubmit('unknown')}>Unknow</StyledRoundButton>
-    </>
+      </LearnCardsContainer>
+      <LearnButtonsContainer>
+        <StyledRoundButton>Next</StyledRoundButton>
+        {deleteButton && (
+          <StyledRoundButton onClick={customHandleSubmit('deleted')} type="button">
+            Delete
+          </StyledRoundButton>
+        )}
+        {addDificultWordsButton && (
+          <StyledRoundButton onClick={customHandleSubmit('difficult')} type="button">
+            Difficult
+          </StyledRoundButton>
+        )}
+        <StyledRoundButton onClick={customHandleSubmit('unknown')} type="button">
+          Unknow
+        </StyledRoundButton>
+      </LearnButtonsContainer>
+    </LearnFormStyled>
   );
 };
 
