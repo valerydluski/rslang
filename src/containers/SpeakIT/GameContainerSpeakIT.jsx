@@ -260,6 +260,7 @@ GameContainerSpeakIT.propTypes = {
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
   gameMode: PropTypes.bool.isRequired,
+  wordsCollection: PropTypes.instanceOf(Array),
 };
 
 GameContainerSpeakIT.defaultProps = {
@@ -270,6 +271,7 @@ GameContainerSpeakIT.defaultProps = {
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,
   maxPage: GAME_MAX_PAGE,
+  wordsCollection: [],
 };
 
 const mapStateToProps = (state) => {
