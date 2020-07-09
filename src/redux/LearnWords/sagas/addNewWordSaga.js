@@ -4,6 +4,8 @@ import saveOneWord from '../../../services/saveOneWord';
 import { WORDS_PER_PAGE } from '../../../config';
 import { setLearnWordsStatistic } from '../../Statistic/action';
 import { addToShowedWordsList } from '../actions';
+import findObjInArray from '../../../utils/findObjInArray';
+import { saveUserWords } from '../../Dictionary/actions';
 
 function* addNewWordSagaWorker(action) {
   const getLoginState = (state) => state.login;
@@ -12,6 +14,8 @@ function* addNewWordSagaWorker(action) {
     getStatistic
   );
   const getDisplayedList = (state) => state.newLearnCardShow.displayedWordsList;
+  const getUserWords = (state) => state.userWords.words[0].paginatedResults;
+  const userWords = yield select(getUserWords);
   const displayedWordsList = yield select(getDisplayedList);
   let nextLevel;
   let nextWord;
@@ -19,7 +23,10 @@ function* addNewWordSagaWorker(action) {
   // eslint-disable-next-line no-underscore-dangle
   const wordId = action.payload.id || action.payload._id;
   const { isNew, word } = action.payload;
-  if (isNew) {
+  // console.log('function*addNewWordSagaWorker -> action.payload', action.payload);
+  const isKnown = findObjInArray(userWords, '_id', wordId);
+  if (isNew || !isKnown) {
+    console.log(1);
     const config = {
       difficulty: 'new',
       optional: {
@@ -31,6 +38,7 @@ function* addNewWordSagaWorker(action) {
     yield call(saveOneWord, wordId, config, sessionData);
     nextWord = +LearnLastWords + 1 > +WORDS_PER_PAGE ? 1 : +LearnLastWords + 1;
     nextLevel = +LearnLastWords + 1 > +WORDS_PER_PAGE ? +LearnLastLevel + 1 : +LearnLastLevel;
+    yield saveUserWords([...userWords, action.payload]);
   }
   const cardsShow = +CountCardsShow + 1;
   const countNewWordsShow = +CountNewWordsToday + 1;
