@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import audioIco from '../../Icon/audioIco.svg';
 
 const StyledRoundButton = styled.button`
   width: 42px;
@@ -16,6 +17,17 @@ const StyledRoundButton = styled.button`
 
   &:hover {
     background: #fec246;
+  }
+
+  &.learn_sound-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background: url(${audioIco});
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 `;
 
