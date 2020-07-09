@@ -12,6 +12,7 @@ import {
   IS_WORD_COLLECTION_LOADED,
   ADD_TO_DISPLAYED_WORDS_LIST,
   SHOW_RESULT,
+  RESET_STORE_REPEAT_WORDS,
 } from './types';
 import RESET_STORE from '../resetStore/types';
 
@@ -58,6 +59,8 @@ function repeatWords(state = initialState, action) {
     case SHOW_RESULT:
       return { ...state, showResult: action.payload };
     case RESET_STORE:
+      return { ...initialState };
+    case RESET_STORE_REPEAT_WORDS:
       return { ...initialState };
     default:
       return state;

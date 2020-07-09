@@ -3,27 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RepeatWords from '../../components/RepeatWords/RepeatWords';
 import { LINK_FOR_AUDIO } from '../../config';
-import {
-  correctCard,
-  showNewCard,
-  saveWordToState,
-  showResult,
-} from '../../redux/RepeatWords/actions';
+import { correctCard, saveWordToState, showResult } from '../../redux/RepeatWords/actions';
 import updateOneWord from '../../services/updateOneWord';
 import FinalScreen from '../../components/RepeatWords/FinalScreen';
 
 function getWord(arr, i) {
   const w = arr[i];
+  if (w.textExample instanceof Array) return w;
   w.textExample = w.textExample.split(/<b>\w+<\/b>/);
   return w;
 }
 
 function RepeatWordCardContainer(props) {
-  console.log('RepeatWordCardContainer -> props', props);
   const {
     correctCardHandler,
     isCorrect,
-    showNewCardHandler,
     settings,
     user,
     resetSaveWord,
@@ -39,10 +33,7 @@ function RepeatWordCardContainer(props) {
   const [audios, setAudios] = useState([]);
   const [answerToForm, setAnswerToForm] = useState('');
   const isGameStart = useRef(false);
-  const firstAnswer = useRef(true);
   const wordsCount = useRef(wordsCollection.length);
-  const rightAnswer = useRef(0);
-  const newWordCount = useRef(0);
   const currentWordIndex = useRef(0);
   const audiosDuration = useRef(-1);
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
@@ -59,9 +50,7 @@ function RepeatWordCardContainer(props) {
   }
 
   if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord.current) {
-    if (currentWord.isNew) newWordCount.current += 1;
     isGameStart.current = true;
-    showNewCardHandler(currentWord);
     const { audio, audioExample, audioMeaning } = currentWord;
     isAudiosPlay = [isAudioTranslate, isAudioTextMeaning, isAudioTextExample];
     audiosLinks = [audio, audioExample, audioMeaning];
@@ -75,7 +64,6 @@ function RepeatWordCardContainer(props) {
   const nextWord = () => {
     resetSaveWord(null);
     currentWordIndex.current += 1;
-    firstAnswer.current = true;
     showResultHandler(false);
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
@@ -131,7 +119,6 @@ function RepeatWordCardContainer(props) {
         if (!answer) break;
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
-          if (firstAnswer.current) rightAnswer.current += 1;
           audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
@@ -148,18 +135,12 @@ function RepeatWordCardContainer(props) {
               }
             }
           }
-        } else {
-          firstAnswer.current = false;
         }
         correctCardHandler(true);
     }
   };
   return isFinalScreen ? (
-    <FinalScreen
-      wordsCount={wordsCount.current}
-      newWordCount={newWordCount.current}
-      rightAnswer={rightAnswer.current}
-    />
+    <FinalScreen wordsCount={wordsCount.current} />
   ) : (
     <RepeatWords
       isTranslationShow={isTranslationShow}
@@ -178,7 +159,6 @@ function RepeatWordCardContainer(props) {
 
 RepeatWordCardContainer.propTypes = {
   correctCardHandler: PropTypes.func.isRequired,
-  showNewCardHandler: PropTypes.func.isRequired,
   resetSaveWord: PropTypes.func.isRequired,
   wordsCollection: PropTypes.instanceOf(Array).isRequired,
   isCorrect: PropTypes.bool,
@@ -215,7 +195,7 @@ RepeatWordCardContainer.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isCorrect: state.isCorrectRepeatReducer.isCorrect,
-    wordsCollection: state.userWords.words,
+    wordsCollection: state.userWords.words[0].paginatedResults,
     settings: state.userSettings,
     user: state.login,
   };
@@ -223,7 +203,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   correctCardHandler: correctCard,
-  showNewCardHandler: showNewCard,
   resetSaveWord: saveWordToState,
   showResultHandler: showResult,
 };

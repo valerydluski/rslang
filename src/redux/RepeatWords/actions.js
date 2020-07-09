@@ -15,6 +15,7 @@ import {
   IS_WORD_COLLECTION_LOADED,
   ADD_TO_DISPLAYED_WORDS_LIST,
   SHOW_RESULT,
+  RESET_STORE_REPEAT_WORDS,
 } from './types';
 
 export function showNewCard(card) {
@@ -123,5 +124,11 @@ export function showResult(bool) {
   return {
     type: SHOW_RESULT,
     payload: bool,
+  };
+}
+
+export function resetStoreRepeatWords() {
+  return {
+    type: RESET_STORE_REPEAT_WORDS,
   };
 }
