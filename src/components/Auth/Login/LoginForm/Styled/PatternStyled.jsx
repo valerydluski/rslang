@@ -5,8 +5,8 @@ import { DEVICE } from '../../../../../config';
 const PatternStyled = styled.div`
   grid-area: background;
   width: 100%;
-  background-repeat: no-repeat;
   height: 100%;
+  background-repeat: no-repeat;
 
   @media ${DEVICE.laptopL} {
     background-size: cover;

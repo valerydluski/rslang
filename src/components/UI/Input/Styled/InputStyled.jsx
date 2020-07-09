@@ -21,6 +21,23 @@ export const InputStyled = styled.input`
     color: #929292;
     outline: none;
   }
+  &.auth {
+    border: 1px solid #c4c4c4;
+    box-sizing: border-box;
+    color: #c4c4c4;
+    font-size: 23px;
+    line-height: 27px;
+    outline: none;
+    &::placeholder {
+      color: #c4c4c4;
+    }
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    -webkit-autofill:focus,
+    -internal-autofill-selected {
+      -webkit-text-fill-color: #c4c4c4;
+    }
+  }
 `;
 
 export const LabelStyled = styled.label`

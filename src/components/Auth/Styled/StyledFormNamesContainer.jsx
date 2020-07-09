@@ -19,7 +19,8 @@ const StyledFormNamesContainer = styled.div`
     }
   }
   @media ${DEVICE.laptop} {
-    margin-left: 120px;
+    margin-left: 60px;
+    width: calc(100% - 60px);
   }
 
   @media ${DEVICE.tablet} {
