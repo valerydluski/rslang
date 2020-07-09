@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { DEVICE } from '../../../../../../../config'
 
 const GameCardContainer = styled.div`
-
   h3 {
     font-weight: bold;
     font-size: 18px;
@@ -32,12 +31,12 @@ const GameCardContainer = styled.div`
 
   @media ${DEVICE.laptopL} {
     p {
-      width: 94px;
+      width: auto;
     }
   }
 
   @media ${DEVICE.laptop} {
-    width: 150px;
+    width: 100%;
   }
 
   @media ${DEVICE.tablet} {
