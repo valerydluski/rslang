@@ -92,7 +92,7 @@ const LearnWordsForm = (props) => {
           />
         )}
         <TextExampleStyled>
-          {isTextExample && <p>{firstPart}</p>}
+          {isTextExample && <p style={{ display: 'inline' }}>{firstPart}</p>}
           <Field
             name="word"
             key="word"
@@ -106,7 +106,7 @@ const LearnWordsForm = (props) => {
             answer={answer}
             isShowResult={isResultShow}
           />
-          {isTextExample && <p>{secondPart}</p>}
+          {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
         </TextExampleStyled>
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>

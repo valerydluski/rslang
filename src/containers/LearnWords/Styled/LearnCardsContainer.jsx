@@ -33,9 +33,9 @@ export const TextExampleStyled = styled.div`
   font-style: normal;
   font-weight: bold;
   font-size: 30px;
-  line-height: 30px;
+  line-height: 35px;
   color: #929292;
-  display: flex;
+  display: inline;
   border-bottom: 1px solid #c4c4c4;
   margin-left: 10px;
 `;

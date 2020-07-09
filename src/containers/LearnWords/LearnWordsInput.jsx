@@ -47,7 +47,7 @@ const LearnWordsInput = (props) => {
   const width = getStringWidth(word, 30);
 
   return (
-    <InputContainer>
+    <InputContainer style={{ display: 'inline' }}>
       <InputWordsBgContainer showResult={show} width={width} onClick={hideResult}>
         {word.split('').map((letter, index) => {
           const key = `${letter}${index}`;
