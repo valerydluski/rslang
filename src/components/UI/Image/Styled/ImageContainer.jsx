@@ -14,6 +14,11 @@ const ImageContainer = styled.div`
     grid-area: image;
     justify-self: center;
     align-self: center;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #c4c4c4;
+    display: flex;
+    align-items: center;
   }
 `;
 

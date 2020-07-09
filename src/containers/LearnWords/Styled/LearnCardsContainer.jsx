@@ -24,6 +24,7 @@ export const TranslateStyled = styled.p`
   line-height: 35px;
   color: #929292;
   grid-area: translate;
+  place-self: center;
 `;
 
 export const TextExampleStyled = styled.div`
@@ -31,9 +32,45 @@ export const TextExampleStyled = styled.div`
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 44px;
-  line-height: 54px;
+  font-size: 30px;
+  line-height: 30px;
   color: #929292;
+  display: flex;
+  border-bottom: 1px solid #c4c4c4;
+  margin-left: 10px;
+`;
+
+export const TextExampleTranslateStyled = styled.div`
+  grid-area: textExampleTranslate;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25.1118px;
+  line-height: 31px;
+  color: #c4c4c4;
+  margin-left: 10px;
+`;
+
+export const TextMeaningStyled = styled.div`
+  grid-area: textMeaning;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25.1118px;
+  line-height: 31px;
+  color: #c4c4c4;
+  margin-left: 10px;
+`;
+
+export const TextMeaningTranslateStyled = styled.div`
+  grid-area: textMeaningTranslate;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25.1118px;
+  line-height: 31px;
+  color: #c4c4c4;
+  margin-left: 10px;
 `;
 
 export default LearnCardsContainer;

@@ -10,6 +10,9 @@ import LearnFormStyled from './Styled/LearnFormStyled';
 import LearnCardsContainer, {
   TranslateStyled,
   TextExampleStyled,
+  TextExampleTranslateStyled,
+  TextMeaningStyled,
+  TextMeaningTranslateStyled,
 } from './Styled/LearnCardsContainer';
 import LearnButtonsContainer from './Styled/LearnButtonsContainer';
 
@@ -44,6 +47,7 @@ const LearnWordsForm = (props) => {
     image,
     wordTranslate,
     transcription,
+    textMeaningTranslate,
   } = word;
   const [firstPart, secondPart] = textExample;
 
@@ -78,7 +82,7 @@ const LearnWordsForm = (props) => {
           type="button"
           className="learn_sound-button"
         />
-        {isTranslationShow && <TranslateStyled>{wordTranslate}</TranslateStyled>}
+        {isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
         {isImageAssociation && (
           <Image
             alt={word.word}
@@ -103,18 +107,20 @@ const LearnWordsForm = (props) => {
           />
           <p>{secondPart}</p>
         </TextExampleStyled>
-        {isTranslationShow && isTranslate && <p>{textExampleTranslate}</p>}
-        <hr />
+        {isTranslationShow && isTranslate && (
+          <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
+        )}
+        {isTranscription && <Transcription>{transcription}</Transcription>}
         {isTextMeaning && isTranslationShow ? (
-          <p>{textMeaningFormatted}</p>
+          <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
-          <p>{textMeaningFormatted.replace(wordRegExp, '*'.repeat(word.word.length))}</p>
+          <TextMeaningStyled>
+            {textMeaningFormatted.replace(wordRegExp, '*'.repeat(word.word.length))}
+          </TextMeaningStyled>
         )}
-        {!isTranslationShow && isTextExample && (
-          <p>{textExample.join('*'.repeat(word.word.length))}</p>
+        {isTranslationShow && isTextMeaning && (
+          <TextMeaningTranslateStyled>{textMeaningTranslate}</TextMeaningTranslateStyled>
         )}
-        {isTranslationShow && isTextExample && <p>{textExample.join(` ${word.word} `)}</p>}
-        {isTranslationShow && isTranscription && <Transcription>{transcription}</Transcription>}
       </LearnCardsContainer>
       <LearnButtonsContainer>
         <StyledRoundButton>Next</StyledRoundButton>
@@ -150,6 +156,7 @@ LearnWordsForm.propTypes = {
     wordTranslate: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     transcription: PropTypes.string.isRequired,
+    textMeaningTranslate: PropTypes.string.isRequired,
   }).isRequired,
   settings: PropTypes.shape({
     settings: PropTypes.shape({

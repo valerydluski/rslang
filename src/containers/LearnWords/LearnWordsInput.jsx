@@ -44,7 +44,7 @@ const LearnWordsInput = (props) => {
     setShow(false);
   };
 
-  const width = getStringWidth(word);
+  const width = getStringWidth(word, 30);
 
   return (
     <InputContainer>
