@@ -67,6 +67,10 @@ const ButtonStyled = styled.button`
     }
   }
 
+  &.settings {
+    margin: 20px 0;
+  }
+
   &.active {
     background-color: #fec246;
   }
