@@ -14,6 +14,7 @@ import FinalScreen from '../../components/LearnWords/FinalScreen';
 
 function getWord(arr, i) {
   const w = arr[i];
+  if (w.textExample instanceof Array) return w;
   w.textExample = w.textExample.split(/<b>\w+<\/b>/);
   return w;
 }
