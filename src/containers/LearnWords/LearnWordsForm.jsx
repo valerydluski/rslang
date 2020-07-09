@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
+import StyledButton from '../../components/UI/Button/Styled/StyledButton';
 import { LINK_FOR_IMAGE } from '../../config';
 import LearnWordsInput from './LearnWordsInput';
 import Image from '../../components/UI/Image/Image';
@@ -123,20 +124,20 @@ const LearnWordsForm = (props) => {
         )}
       </LearnCardsContainer>
       <LearnButtonsContainer>
-        <StyledRoundButton>Next</StyledRoundButton>
+        <StyledButton>Next</StyledButton>
         {deleteButton && (
-          <StyledRoundButton onClick={customHandleSubmit('deleted')} type="button">
+          <StyledButton onClick={customHandleSubmit('deleted')} type="button">
             Delete
-          </StyledRoundButton>
+          </StyledButton>
         )}
         {addDificultWordsButton && (
-          <StyledRoundButton onClick={customHandleSubmit('difficult')} type="button">
+          <StyledButton onClick={customHandleSubmit('difficult')} type="button">
             Difficult
-          </StyledRoundButton>
+          </StyledButton>
         )}
-        <StyledRoundButton onClick={customHandleSubmit('unknown')} type="button">
+        <StyledButton onClick={customHandleSubmit('unknown')} type="button">
           Unknow
-        </StyledRoundButton>
+        </StyledButton>
       </LearnButtonsContainer>
     </LearnFormStyled>
   );
