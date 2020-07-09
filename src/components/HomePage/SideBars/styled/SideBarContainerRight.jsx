@@ -16,7 +16,6 @@ const SideBarContainerRight = styled.div`
   }
 
   @media ${DEVICE.laptopL} {
-    width: 190px;
     padding: 20px;
 
     div {

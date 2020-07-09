@@ -218,10 +218,10 @@ const BurgerMenuFourthLine = styled.div`
 
 const BurgerMenu = (props) => {
   const { resetSessionData } = props;
+
   const [checkboxType, changeCheckbox] = useState(false);
 
-  const clickHandler = (event) => {
-    console.log(event.target);
+  const clickHandler = () => {
     if (checkboxType === false) {
     changeCheckbox(true)
     }
@@ -235,7 +235,7 @@ const BurgerMenu = (props) => {
     
   return (
     <BurgerMenuContainer onChange={clickHandler} onClick={pageClose}>
-      <BurgerMenuInput id="check-nav" type="checkbox" defaultChecked={checkboxType} />
+      <BurgerMenuInput id="check-nav" type="checkbox" onChange={pageClose} checked={checkboxType} />
       <BurgerMenuLabel htmlFor="check-nav" onClick={pageClose}>
         <BurgerMenuFirstLine className="one" />
         <BurgerMenuSecondLine className="two" />
