@@ -17,6 +17,7 @@ const WordsContainerStyled = styled.div`
 
   @media ${DEVICE.laptop} {
     max-width: 768px;
+    padding: 20px 0;
   }
 
   @media ${DEVICE.tablet} {

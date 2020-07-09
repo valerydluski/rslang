@@ -27,7 +27,10 @@ const WordStyled = styled.div`
 
   @media ${DEVICE.tablet} {
     font-size: 26px;
-    padding: 6px 0;
+    padding: 6px 30px;
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
   }
 `;
 
