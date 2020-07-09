@@ -9,9 +9,13 @@ const ContentContainer = styled.main`
 
   @media ${DEVICE.laptop} {
     padding: 40px 40px 0;
+    grid-column-start: 2;
+    grid-column-end: 3;
   }
 
   @media ${DEVICE.tablet} {
+    grid-column-start: auto;
+    grid-column-end: auto;
     grid-row-start: 3;
     grid-row-end: 4;
   }

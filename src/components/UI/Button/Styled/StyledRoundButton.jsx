@@ -16,6 +16,7 @@ const StyledRoundButton = styled.button`
   cursor: pointer;
   transition: 0.3s linear;
   flex-grow: 1;
+  align-self: flex-start;
 
   &:hover {
     background: #fec246;
@@ -27,6 +28,7 @@ const StyledRoundButton = styled.button`
   font-weight: bold;
   font-size: 20px;
   line-height: 26px;
+  flex-shrink: 0;
   }
 
   @media ${DEVICE.mobileL} {

@@ -1,13 +1,13 @@
 import React from 'react';
-import SideBarContainer from './styled/SideBarContainer';
+import SideBarContainerRight from './styled/SideBarContainerRight';
 import UserDescription from './components/UserDescription';
 import LearnNavigationMenu from '../../../containers/Navigation/LearnNavigationMenu';
 
 export default function RightSideBar() {
   return (
-    <SideBarContainer>
+    <SideBarContainerRight>
       <UserDescription />
       <LearnNavigationMenu />
-    </SideBarContainer>
+    </SideBarContainerRight>
   );
 }
