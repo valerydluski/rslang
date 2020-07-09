@@ -2,7 +2,7 @@ import { SAVE_USER_WORDS, LOADING_USER_WORDS } from '../types';
 import RESET_STORE from '../../resetStore/types';
 
 const initialState = {
-  words: [],
+  words: [{ paginatedResults: [] }],
   loading: false,
 };
 

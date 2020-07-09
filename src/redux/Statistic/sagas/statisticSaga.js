@@ -6,6 +6,8 @@ import createStatisticJSON from '../../../utils/createStatisticJSON';
 import createGameEndData from '../../../utils/createGameEndData';
 import { saveFullStatisticToStore } from '../action';
 import createLearnWordsStatistic from '../../../utils/createLearnWordsStatistic';
+import updateOneWord from '../../../services/updateOneWord';
+import saveOneWord from '../../../services/saveOneWord';
 
 function* workerStatus({ payload }) {
   const { gameName, Level, Page, wordsCollection, wrongWordsState, learnData } = payload;
@@ -13,12 +15,38 @@ function* workerStatus({ payload }) {
   const getLoginState = (state) => state.login;
   const getWordsPerPage = (state) => state.userSettings.settings[`${gameName}WordsPerPage`];
   const getMaxPage = (state) => state.maxPage.maxPage;
-  const Statistic = yield select(getStatistic);
-  const userData = yield select(getLoginState);
-  const wordsPerPage = yield select(getWordsPerPage);
+  const getUserWords = (state) => state.userWords.words[0].paginatedResults;
   const getDisplayedList = (state) => state.newLearnCardShow.displayedWordsList;
+  const userWords = yield select(getUserWords);
+  const userData = yield select(getLoginState);
+  const Statistic = yield select(getStatistic);
+  const wordsPerPage = yield select(getWordsPerPage);
   const displayedWordsList = yield select(getDisplayedList);
   const maxPage = yield select(getMaxPage);
+  if (wordsCollection) {
+    wordsCollection.forEach((element) => {
+      // eslint-disable-next-line no-underscore-dangle
+      const word = userWords.find((item) => item.id || item._id === element.id);
+      if (word && wrongWordsState.includes(element.word)) {
+        const config = word.userWord;
+        config.optional.time = new Date().valueOf();
+        config.optional.nextRepeat = new Date().valueOf();
+        updateOneWord(element.id, config, userData);
+      } else {
+        const config = {
+          difficulty: 'new',
+          optional: {
+            time: new Date().valueOf(),
+            deleted: false,
+            difficult: false,
+            nextRepeat: new Date().valueOf(),
+            repeats: 1,
+          },
+        };
+        saveOneWord(element.id, config, userData);
+      }
+    });
+  }
   let newStatistic;
   if (gameName) {
     newStatistic = yield createGameEndData(
