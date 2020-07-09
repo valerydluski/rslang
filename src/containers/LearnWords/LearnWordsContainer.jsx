@@ -165,6 +165,8 @@ function LearnWordCardContainer(props) {
       word={currentWord}
       isCorrect={isCorrect}
       answer={answerToForm}
+      wordsCount={wordsCount.current}
+      currentWordIndex={currentWordIndex.current}
     />
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Line } from 'rc-progress';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import { LINK_FOR_IMAGE } from '../../config';
 import LearnWordsInput from './LearnWordsInput';
@@ -20,6 +21,8 @@ const LearnWordsForm = (props) => {
     isRightAnswerShow,
     answer,
     isResultShow,
+    wordsCount,
+    currentWordIndex,
   } = props;
 
   const {
@@ -107,6 +110,13 @@ const LearnWordsForm = (props) => {
         <StyledRoundButton onClick={customHandleSubmit('difficult')}>Difficult</StyledRoundButton>
       )}
       <StyledRoundButton onClick={customHandleSubmit('unknown')}>Unknow</StyledRoundButton>
+      <p>{currentWordIndex}</p>
+      <Line
+        percent={Math.round((currentWordIndex / wordsCount) * 100)}
+        strokeWidth="1"
+        strokeColor="#404497"
+      />
+      <p>{wordsCount}</p>
     </>
   );
 };
@@ -145,12 +155,16 @@ LearnWordsForm.propTypes = {
   isRightAnswerShow: PropTypes.bool.isRequired,
   answer: PropTypes.string,
   isResultShow: PropTypes.bool,
+  wordsCount: PropTypes.number,
+  currentWordIndex: PropTypes.number,
 };
 
 LearnWordsForm.defaultProps = {
   autocomplete: 'off',
   answer: '',
   isResultShow: false,
+  wordsCount: 0,
+  currentWordIndex: 0,
 };
 
 export default ReduxLearnWordsForm;
