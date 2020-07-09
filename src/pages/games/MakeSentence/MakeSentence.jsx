@@ -10,6 +10,8 @@ import {
 } from '../../../redux/ChangeRounds/action';
 import { GAME_MAX_PAGE } from '../../../config';
 import MakeSentenceGame from '../../../containers/MakeSentence/MakeSentenceGame';
+import StyledContainer from './Styled/StyledContainer';
+import StyledGameContainer from './Styled/StyledGameContainer';
 
 const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, maxPage }) => {
   const [words, changeWords] = useState(wordsCollection);
@@ -21,7 +23,7 @@ const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, m
   checkStatusSession();
 
   return (
-    <div className="make-sentence_container">
+    <StyledContainer>
       <GoToHomePageButton />
       <StatusMenu
         page={page}
@@ -30,14 +32,16 @@ const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, m
         updateLevel={updateLevel}
         updatePage={updatePage}
       />
-      <MakeSentenceGame
-        key={`level-${level}/page-${page}`}
-        wordsCollection={words}
-        maxPage={maxPage}
-        page={page}
-        level={level}
-      />
-    </div>
+      <StyledGameContainer>
+        <MakeSentenceGame
+          key={`level-${level}/page-${page}`}
+          wordsCollection={words}
+          maxPage={maxPage}
+          page={page}
+          level={level}
+        />
+      </StyledGameContainer>
+    </StyledContainer>
   );
 };
 
