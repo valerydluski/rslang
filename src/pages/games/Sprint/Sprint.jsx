@@ -114,7 +114,7 @@ const mapStateToProps = (state) => {
     level: state.changeRound.SprintLevel,
     page: state.changeRound.SprintPage,
     maxPage: state.maxPage.maxPage,
-    secondsForOneWord: state.userSettings.settings.timeForWord,
+    secondsForOneWord: state.userSettings.settings.sprintTimeForWord,
     gameName: GAME_NAME.sprint,
   };
 };
