@@ -45,6 +45,30 @@ const SettingsForm = (props) => {
         classNameSpan="span_none"
         className="settings"
       />
+      <Field
+        name="savannahTimeForWord"
+        key="savannahTimeForWord"
+        type="number"
+        placeholder={I18n.t('Settings.timeForWord')}
+        validate={timeForWordValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
+        label={I18n.t('Settings.timeForWord')}
+        classNameSpan="span_none"
+        className="settings"
+      />
+      <Field
+        name="savannahMaxErrorCounter"
+        key="savannahMaxErrorCounter"
+        type="number"
+        placeholder={I18n.t('Settings.errorCounter')}
+        validate={timeForWordValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
+        label={I18n.t('Settings.errorCounter')}
+        classNameSpan="span_none"
+        className="settings"
+      />
       <BlackHeader>
         <Translate value="Games.speakIT" />
       </BlackHeader>

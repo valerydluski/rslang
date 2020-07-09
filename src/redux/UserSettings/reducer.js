@@ -27,6 +27,8 @@ const initialState = {
     isTranslation: true,
     isBackground: true,
     timeForWord: '2',
+    savannahTimeForWord: '2',
+    savannahMaxErrorCounter: '2',
   },
 };
 
