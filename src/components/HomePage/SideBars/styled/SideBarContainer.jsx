@@ -50,7 +50,7 @@ const SideBarContainer = styled.div`
       color: #ffffff;
       background-color: #404497;
       position: fixed;
-      width: 93vw;
+      width: 100%;
       right: 0%;
       height: 100vh;
       } 

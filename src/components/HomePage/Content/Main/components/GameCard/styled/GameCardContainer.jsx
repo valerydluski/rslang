@@ -33,7 +33,7 @@ const GameCardContainer = styled.div`
   @media ${DEVICE.laptopL} {
     p {
       width: 100%;
-      height: 120px;
+      height: 75px;
     }
   }
 

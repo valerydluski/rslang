@@ -51,12 +51,12 @@ const StyledMainNavigationMenu = styled.div`
     display: none;
 
     li {
-      margin-bottom: 8vh;
+      margin-bottom: 50px;
       margin-left: 65%;
     }
 
     li:first-of-type {
-    margin-top: 23vh;
+    margin-top: 200px;
     }
 
     span {

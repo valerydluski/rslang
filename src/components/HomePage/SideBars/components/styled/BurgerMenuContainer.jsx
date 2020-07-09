@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
 import { Translate } from 'react-redux-i18n';
 import MainNavigationMenu from '../../../../../containers/Navigation/MainNavigationMenu';
 import StyledButtonWithIcon from '../../../../UI/Button/Styled/StyledButtonWithIcon';
@@ -52,23 +52,27 @@ const BurgerMenuContainer = styled.div`
   input:checked ~ label .one {
     opacity: 0;
     transition: 0.3s ease-in-out;
+    position: fixed;
   }
 
   input:checked ~ label .two {
     transform: rotate(-45deg);
     margin-bottom: 0;
     transition: 0.3s all ease;
+    position: fixed;
   }
 
   input:checked ~ label .three {
     transform: rotate(45deg);
     margin-bottom: 0;
     transition: 0.3s all ease;
+    position: fixed;
   }
 
   input:checked ~ label .four {
     opacity: 0;
     transition: 0.3s all ease;
+    position: fixed;
   }
 
   @media (max-width: 767px) {
@@ -79,16 +83,16 @@ const BurgerMenuContainer = styled.div`
     button {
       position: fixed;
       display: block;
-      margin-top: 85vh;
-      margin-left: 7vw;
+      margin-top: 650px;
+      margin-left: 17px;
     }
 
     button: first-of-type {
-      margin-top: 77vh;
+      margin-top: 600px;
     }
 
     button span {
-      margin-left: 7vw;
+      margin-left: 17px;
     }
 
     span {
@@ -97,15 +101,9 @@ const BurgerMenuContainer = styled.div`
     }
   }
 
-  @media (max-width: 700px) {
-    button {
-      margin-left: 4vw;
-    }
-  }
-
   @media (max-width: 600px) {
     button {
-      margin-left: -13vw;
+      margin-left: -75px;
     }
   }
 `;
@@ -220,10 +218,25 @@ const BurgerMenuFourthLine = styled.div`
 
 const BurgerMenu = (props) => {
   const { resetSessionData } = props;
+  const [checkboxType, changeCheckbox] = useState(false);
+
+  const clickHandler = (event) => {
+    console.log(event.target);
+    if (checkboxType === false) {
+    changeCheckbox(true)
+    }
+  }
+
+  const pageClose = () => {
+    if (checkboxType === true) {
+      changeCheckbox(false)
+      }
+  }
+    
   return (
-    <BurgerMenuContainer>
-      <BurgerMenuInput id="check-nav" type="checkbox" />
-      <BurgerMenuLabel for="check-nav">
+    <BurgerMenuContainer onChange={clickHandler} onClick={pageClose}>
+      <BurgerMenuInput id="check-nav" type="checkbox" defaultChecked={checkboxType} />
+      <BurgerMenuLabel htmlFor="check-nav" onClick={pageClose}>
         <BurgerMenuFirstLine className="one" />
         <BurgerMenuSecondLine className="two" />
         <BurgerMenuThirdLine className="three" />

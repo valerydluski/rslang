@@ -7,6 +7,10 @@ const ContentContainer = styled.main`
   box-sizing: border-box;
   padding: 75px 75px 0;
 
+  @media ${DEVICE.laptopL} {
+    padding: 30px;
+  }
+
   @media ${DEVICE.laptop} {
     padding: 40px 40px 0;
     grid-column-start: 2;
