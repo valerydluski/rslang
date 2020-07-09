@@ -5,7 +5,6 @@ const Menu = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  height: 26px;
 
   &.status-menu_speakIT {
     margin-top: 55px;
@@ -15,6 +14,10 @@ const Menu = styled.div`
     @media ${DEVICE.tablet} {
       width: 70%;
     }
+  }
+
+  @media ${DEVICE.tablet} {
+    height: 56px;
   }
 `;
 

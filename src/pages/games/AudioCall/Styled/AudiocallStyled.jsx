@@ -6,7 +6,13 @@ const AudiocallStyled = styled.div`
     rgba(193, 172, 232, 1) ${(props) => props.backgroundOpacity}%,
     rgba(255, 207, 207, 1) ${(props) => props.backgroundOpacity + 10}%
   );
-  padding-bottom: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 40px;
+  box-sizing: border-box;
+  min-height: 896px;
 `;
 
 export default AudiocallStyled;
