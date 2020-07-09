@@ -7,7 +7,10 @@ import LearnWordsInput from './LearnWordsInput';
 import Image from '../../components/UI/Image/Image';
 import Transcription from '../../components/UI/TextField/Transcription';
 import LearnFormStyled from './Styled/LearnFormStyled';
-import LearnCardsContainer, { TranslateStyled } from './Styled/LearnCardsContainer';
+import LearnCardsContainer, {
+  TranslateStyled,
+  TextExampleStyled,
+} from './Styled/LearnCardsContainer';
 import LearnButtonsContainer from './Styled/LearnButtonsContainer';
 
 const LearnWordsForm = (props) => {
@@ -60,7 +63,6 @@ const LearnWordsForm = (props) => {
 
   const textMeaningFormatted = textMeaning.replace(/<i>|<\/i>/g, ``);
   const wordRegExp = new RegExp(`${word.word}`, 'i');
-
   return (
     <LearnFormStyled
       onSubmit={handleSubmit((values) =>
@@ -77,22 +79,30 @@ const LearnWordsForm = (props) => {
           className="learn_sound-button"
         />
         {isTranslationShow && <TranslateStyled>{wordTranslate}</TranslateStyled>}
-        {isImageAssociation && <Image alt={word.word} src={`${LINK_FOR_IMAGE}${image}`} />}
-        <p>{firstPart}</p>
-        <Field
-          name="word"
-          key="word"
-          type="text"
-          placeholder={isRightAnswerShow ? word.word : ''}
-          size="5"
-          component={LearnWordsInput}
-          autoFocus
-          autocomplete={autocomplete}
-          word={word.word}
-          answer={answer}
-          isShowResult={isResultShow}
-        />
-        <p>{secondPart}</p>
+        {isImageAssociation && (
+          <Image
+            alt={word.word}
+            src={`${LINK_FOR_IMAGE}${image}`}
+            classNameContainer="image_learn"
+          />
+        )}
+        <TextExampleStyled>
+          <p>{firstPart}</p>
+          <Field
+            name="word"
+            key="word"
+            type="text"
+            placeholder={isRightAnswerShow ? word.word : ''}
+            size="5"
+            component={LearnWordsInput}
+            autoFocus
+            autocomplete={autocomplete}
+            word={word.word}
+            answer={answer}
+            isShowResult={isResultShow}
+          />
+          <p>{secondPart}</p>
+        </TextExampleStyled>
         {isTranslationShow && isTranslate && <p>{textExampleTranslate}</p>}
         <hr />
         {isTextMeaning && isTranslationShow ? (

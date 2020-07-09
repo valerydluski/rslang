@@ -9,6 +9,12 @@ const ImageContainer = styled.div`
     justify-self: center;
     height: 100%;
   }
+
+  &.image_learn {
+    grid-area: image;
+    justify-self: center;
+    align-self: center;
+  }
 `;
 
 export default ImageContainer;

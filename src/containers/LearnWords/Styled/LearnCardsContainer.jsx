@@ -26,4 +26,14 @@ export const TranslateStyled = styled.p`
   grid-area: translate;
 `;
 
+export const TextExampleStyled = styled.div`
+  grid-area: textExample;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 44px;
+  line-height: 54px;
+  color: #929292;
+`;
+
 export default LearnCardsContainer;
