@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import CorrectIcon from '../../UI/Icon/checkmark.svg';
 import WrongIcon from '../../UI/Icon/icon-false.svg';
+import { DEVICE } from '../../../config';
 
 const MarkerStyled = styled.div`
   width: 50px;
@@ -10,6 +11,12 @@ const MarkerStyled = styled.div`
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media ${DEVICE.tablet} {
+    width: 36px;
+    height: 36px;
+  }
+
   &:before {
     content: '';
     position: absolute;
@@ -20,6 +27,11 @@ const MarkerStyled = styled.div`
     height: 2px;
     background: #c4c4c4;
     z-index: -1;
+
+    @media ${DEVICE.tablet} {
+      width: 40px;
+      left: -37px;
+    }
   }
   &:after {
     content: '';
@@ -31,6 +43,11 @@ const MarkerStyled = styled.div`
     height: 2px;
     background: #c4c4c4;
     z-index: -1;
+
+    @media ${DEVICE.tablet} {
+      width: 40px;
+      left: 34px;
+    }
   }
 `;
 
