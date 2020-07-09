@@ -93,7 +93,10 @@ function* generateLearnWordsCollectionWorker() {
         const getLoginState = (state) => state.login;
         const sessionData = yield select(getLoginState);
         const payload = yield call(getAllUserWords, sessionData);
-        const userWords = getRandomValuesFromArray(payload[0].paginatedResults, oldWordsCount);
+        const arrRepeat = payload[0].paginatedResults.filter(
+          (el) => !RepeatWordsToday.includes(el.word)
+        );
+        const userWords = getRandomValuesFromArray(arrRepeat, oldWordsCount);
         filterData = filterData.concat(userWords);
       }
       break;
@@ -115,10 +118,10 @@ function* generateLearnWordsCollectionWorker() {
         const getLoginState = (state) => state.login;
         const sessionData = yield select(getLoginState);
         const payload = yield call(getAllUserWords, sessionData);
-        filterData = getRandomValuesFromArray(
-          payload[0].paginatedResults,
-          cardsPerDay - CountCardsShow
+        const arrRepeat = payload[0].paginatedResults.filter(
+          (el) => !RepeatWordsToday.includes(el.word)
         );
+        filterData = getRandomValuesFromArray(arrRepeat, cardsPerDay - CountCardsShow);
       }
       break;
     default:

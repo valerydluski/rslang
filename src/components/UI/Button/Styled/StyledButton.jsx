@@ -70,6 +70,14 @@ const ButtonStyled = styled.button`
   &.active {
     background-color: #fec246;
   }
+
+  &.button-next {
+    background-color: #f56748;
+
+    &:hover {
+      background: #fec246;
+    }
+  }
 `;
 
 export default ButtonStyled;

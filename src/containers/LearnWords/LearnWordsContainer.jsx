@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LearnWords from '../../components/LearnWords/LearnWords';
@@ -10,9 +10,10 @@ import {
   showResult,
 } from '../../redux/LearnWords/actions';
 import updateOneWord from '../../services/updateOneWord';
+import FinalScreen from '../../components/LearnWords/FinalScreen';
 
-function getWord(arr) {
-  const w = arr.shift();
+function getWord(arr, i) {
+  const w = arr[i];
   w.textExample = w.textExample.split(/<b>\w+<\/b>/);
   return w;
 }
@@ -33,18 +34,32 @@ function LearnWordCardContainer(props) {
   const [isTranslationShow, setIsTranslationShow] = useState(false);
   const [isSoundPlay, setIsSoundPlay] = useState(true);
   const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
-  const [needNewWord, setNeedNewWord] = useState(true);
+  const needNewWord = useRef(true);
   const [audios, setAudios] = useState([]);
   const [answerToForm, setAnswerToForm] = useState('');
+  const isGameStart = useRef(false);
+  const firstAnswer = useRef(true);
+  const wordsCount = useRef(wordsCollection.length);
+  const rightAnswer = useRef(0);
+  const newWordCount = useRef(0);
+  const currentWordIndex = useRef(0);
+  const audiosDuration = useRef(-1);
+  const isFinalScreen = currentWordIndex.current === wordsCount.current;
+
+  if (wordsCollection.length < 1 && !isGameStart.current) {
+    return <FinalScreen noWords />;
+  }
 
   let isAudiosPlay;
   let audiosLinks;
 
-  if (!currentWord) {
-    setCurrentWord(getWord(wordsCollection));
+  if (!currentWord && !isFinalScreen) {
+    setCurrentWord(getWord(wordsCollection, currentWordIndex.current));
   }
 
-  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord) {
+  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord.current) {
+    if (currentWord.isNew) newWordCount.current += 1;
+    isGameStart.current = true;
     showNewCardHandler(currentWord);
     const { audio, audioExample, audioMeaning } = currentWord;
     isAudiosPlay = [isAudioTranslate, isAudioTextMeaning, isAudioTextExample];
@@ -53,20 +68,24 @@ function LearnWordCardContainer(props) {
       .filter((bool) => bool === true)
       .map((bool, i) => new Audio(`${LINK_FOR_AUDIO}${audiosLinks[i]}`));
     setAudios(audiosArr);
-    setNeedNewWord(false);
+    needNewWord.current = false;
   }
 
   const nextWord = () => {
     resetSaveWord(null);
-    if (wordsCollection.length > 1) {
-      setCurrentWord(getWord(wordsCollection));
-    } else {
-      setCurrentWord(null);
-    }
+    currentWordIndex.current += 1;
+    firstAnswer.current = true;
     showResultHandler(false);
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
-    setNeedNewWord(true);
+    audiosDuration.current = -1;
+    needNewWord.current = true;
+    if (currentWordIndex.current < wordsCount.current) {
+      setCurrentWord(getWord(wordsCollection, currentWordIndex.current));
+    } else {
+      setCurrentWord(null);
+    }
+    return undefined;
   };
 
   const onSubmit = async (formData) => {
@@ -105,12 +124,14 @@ function LearnWordCardContainer(props) {
         setCurrentWord(getWord(wordsCollection));
         break;
       case 'unknown':
-        setIsRightAnswerShow(true);
+        showResultHandler(true);
         break;
       default:
         if (!answer) break;
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
+          if (firstAnswer.current) rightAnswer.current += 1;
+          audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
             nextWord();
@@ -126,11 +147,19 @@ function LearnWordCardContainer(props) {
               }
             }
           }
+        } else {
+          firstAnswer.current = false;
         }
         correctCardHandler(true);
     }
   };
-  return (
+  return isFinalScreen ? (
+    <FinalScreen
+      wordsCount={wordsCount.current}
+      newWordCount={newWordCount.current}
+      rightAnswer={rightAnswer.current}
+    />
+  ) : (
     <LearnWords
       isTranslationShow={isTranslationShow}
       isRightAnswerShow={isRightAnswerShow}
@@ -139,6 +168,9 @@ function LearnWordCardContainer(props) {
       word={currentWord}
       isCorrect={isCorrect}
       answer={answerToForm}
+      wordsCount={wordsCount.current + 1}
+      currentWordIndex={currentWordIndex.current + 1}
+      audiosDuration={audiosDuration.current}
     />
   );
 }

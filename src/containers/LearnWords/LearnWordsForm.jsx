@@ -1,9 +1,22 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
+import { Line } from 'rc-progress';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
+import StyledButton from '../../components/UI/Button/Styled/StyledButton';
 import { LINK_FOR_IMAGE } from '../../config';
 import LearnWordsInput from './LearnWordsInput';
+import Image from '../../components/UI/Image/Image';
+import Transcription from '../../components/UI/TextField/Transcription';
+import LearnFormStyled from './Styled/LearnFormStyled';
+import LearnCardsContainer, {
+  TranslateStyled,
+  TextExampleStyled,
+  TextExampleTranslateStyled,
+  TextMeaningStyled,
+  TextMeaningTranslateStyled,
+} from './Styled/LearnCardsContainer';
+import LearnButtonsContainer from './Styled/LearnButtonsContainer';
 
 const LearnWordsForm = (props) => {
   const {
@@ -18,6 +31,9 @@ const LearnWordsForm = (props) => {
     isRightAnswerShow,
     answer,
     isResultShow,
+    wordsCount,
+    currentWordIndex,
+    audiosDuration,
   } = props;
 
   const {
@@ -29,7 +45,6 @@ const LearnWordsForm = (props) => {
     deleteButton,
     addDificultWordsButton,
   } = settings.settings;
-
   const {
     textExample,
     textExampleTranslate,
@@ -37,6 +52,7 @@ const LearnWordsForm = (props) => {
     image,
     wordTranslate,
     transcription,
+    textMeaningTranslate,
   } = word;
   const [firstPart, secondPart] = textExample;
 
@@ -56,57 +72,86 @@ const LearnWordsForm = (props) => {
 
   const textMeaningFormatted = textMeaning.replace(/<i>|<\/i>/g, ``);
   const wordRegExp = new RegExp(`${word.word}`, 'i');
-
   return (
-    <>
-      <StyledRoundButton onClick={customHandleSubmit('sound')}>Sound</StyledRoundButton>
-      <form
-        onSubmit={handleSubmit((values) =>
-          onSubmit({
-            ...values,
-            buttonType: 'form',
-          })
-        )}
-      >
-        {isImageAssociation && <img alt={word.word} src={`${LINK_FOR_IMAGE}${image}`} />}
-        <p>{firstPart}</p>
-        <Field
-          name="word"
-          key="word"
-          type="text"
-          placeholder={isRightAnswerShow ? word.word : ''}
-          size="5"
-          component={LearnWordsInput}
-          autoFocus
-          autocomplete={autocomplete}
-          word={word.word}
-          answer={answer}
-          isShowResult={isResultShow}
+    <LearnFormStyled
+      onSubmit={handleSubmit((values) =>
+        onSubmit({
+          ...values,
+          buttonType: 'form',
+        })
+      )}
+    >
+      <LearnCardsContainer>
+        <StyledRoundButton
+          onClick={customHandleSubmit('sound')}
+          type="button"
+          className="learn_sound-button"
         />
-        <p>{secondPart}</p>
-        {isTranslationShow && isTranslate && <p>{textExampleTranslate}</p>}
-        <hr />
+        {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
+        {isImageAssociation && (
+          <Image
+            alt={word.word}
+            src={`${LINK_FOR_IMAGE}${image}`}
+            classNameContainer="image_learn"
+          />
+        )}
+        <TextExampleStyled>
+          {isTextExample && <p style={{ display: 'inline' }}>{firstPart}</p>}
+          <Field
+            name="word"
+            key="word"
+            type="text"
+            placeholder={isRightAnswerShow ? word.word : ''}
+            size="5"
+            component={LearnWordsInput}
+            autoFocus
+            autocomplete={autocomplete}
+            word={word.word}
+            answer={answer}
+            isShowResult={isResultShow}
+            audiosDuration={audiosDuration}
+          />
+          {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
+        </TextExampleStyled>
+        {isTranslationShow && isTranslate && (
+          <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
+        )}
+        {isTranscription && <Transcription>{transcription}</Transcription>}
         {isTextMeaning && isTranslationShow ? (
-          <p>{textMeaningFormatted}</p>
+          <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
-          <p>{textMeaningFormatted.replace(wordRegExp, '*'.repeat(word.word.length))}</p>
+          <TextMeaningStyled>
+            {textMeaningFormatted.replace(wordRegExp, '*'.repeat(word.word.length))}
+          </TextMeaningStyled>
         )}
-        {!isTranslationShow && isTextExample && (
-          <p>{textExample.join('*'.repeat(word.word.length))}</p>
+        {isTranslationShow && isTextMeaning && (
+          <TextMeaningTranslateStyled>{textMeaningTranslate}</TextMeaningTranslateStyled>
         )}
-        {isTranslationShow && isTextExample && <p>{textExample.join(` ${word.word} `)}</p>}
-        <StyledRoundButton>Next</StyledRoundButton>
-        {isTranslationShow && <p>{wordTranslate}</p>}
-        {isTranslationShow && isTranscription && <p>{transcription}</p>}
-      </form>
-      {deleteButton && (
-        <StyledRoundButton onClick={customHandleSubmit('deleted')}>Delete</StyledRoundButton>
-      )}
-      {addDificultWordsButton && (
-        <StyledRoundButton onClick={customHandleSubmit('difficult')}>Difficult</StyledRoundButton>
-      )}
-      <StyledRoundButton onClick={customHandleSubmit('unknown')}>Unknow</StyledRoundButton>
-    </>
+      </LearnCardsContainer>
+      <LearnButtonsContainer>
+        <StyledButton className="button-next">Next</StyledButton>
+        {deleteButton && (
+          <StyledButton onClick={customHandleSubmit('deleted')} type="button">
+            Delete
+          </StyledButton>
+        )}
+        {addDificultWordsButton && (
+          <StyledButton onClick={customHandleSubmit('difficult')} type="button">
+            Difficult
+          </StyledButton>
+        )}
+        <StyledButton onClick={customHandleSubmit('unknown')} type="button">
+          Unknow
+        </StyledButton>
+        <p>{currentWordIndex}</p>
+        <Line
+          percent={Math.round((currentWordIndex / wordsCount) * 100)}
+          strokeWidth="1"
+          strokeColor="#404497"
+        />
+        <p>{wordsCount}</p>
+      </LearnButtonsContainer>
+    </LearnFormStyled>
   );
 };
 
@@ -124,6 +169,7 @@ LearnWordsForm.propTypes = {
     wordTranslate: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     transcription: PropTypes.string.isRequired,
+    textMeaningTranslate: PropTypes.string.isRequired,
   }).isRequired,
   settings: PropTypes.shape({
     settings: PropTypes.shape({
@@ -144,12 +190,17 @@ LearnWordsForm.propTypes = {
   isRightAnswerShow: PropTypes.bool.isRequired,
   answer: PropTypes.string,
   isResultShow: PropTypes.bool,
+  wordsCount: PropTypes.number,
+  currentWordIndex: PropTypes.number,
+  audiosDuration: PropTypes.number.isRequired,
 };
 
 LearnWordsForm.defaultProps = {
   autocomplete: 'off',
   answer: '',
   isResultShow: false,
+  wordsCount: 0,
+  currentWordIndex: 0,
 };
 
 export default ReduxLearnWordsForm;
