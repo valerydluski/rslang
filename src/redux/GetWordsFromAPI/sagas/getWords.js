@@ -20,7 +20,7 @@ import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';
 import { updateState, updateSource } from '../../EnglishPuzzle/actions';
-import { changeIDontKnowWords } from '../../Games/action';
+import { changeIDontKnowWords, changeGameMode } from '../../Games/action';
 import getRandomValuesFromArray from '../../../utils/getRandomValuesFromArray';
 
 function* workerGetWords() {
@@ -41,12 +41,14 @@ function* workerGetWords() {
           payload = getRandomValuesFromArray(arrForPuzzle, 9);
         } else {
           payload = yield call(wordsFetch, state);
+          yield put(changeGameMode(true));
         }
       } else {
         payload = getRandomValuesFromArray(arr, +wordsPerPage - 1);
       }
     } else {
       payload = yield call(wordsFetch, state);
+      yield put(changeGameMode(true));
     }
     yield put(fetchWords(payload));
     if (appMode === 'EnglishPuzzle') {
