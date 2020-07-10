@@ -124,6 +124,7 @@ const translations = {
       completed: 'Series completed',
       theLongestSeries: 'The longest series of correct answers',
       noWords: 'No more words for today',
+      progress: 'Progress',
     },
   },
   ru: {
@@ -251,6 +252,7 @@ const translations = {
       completed: 'Cерия завершена',
       theLongestSeries: 'Самая длинная серия правильных ответов',
       noWords: 'На сегодня слов больше нет',
+      progress: 'Прогресс',
     },
   },
 };
