@@ -17,7 +17,6 @@ const SideBarContainerRight = styled.div`
 
   @media ${DEVICE.laptopL} {
     padding: 20px;
-    width: 355px;
 
     div {
       border-bottom: none;
@@ -42,10 +41,6 @@ const SideBarContainerRight = styled.div`
       display: none;
     }
     min-height: auto;
-  }
-
-  @media (max-width: 1200px) {
-    width: 280px;
   }
 
   @media ${DEVICE.laptop} {
