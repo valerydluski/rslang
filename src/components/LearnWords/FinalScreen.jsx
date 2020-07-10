@@ -1,11 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from '../UI/TextField/TextField';
+import { Translate } from 'react-redux-i18n';
+import FinalScreenContainer from './styled/FinalScreenContainer';
+import ResultAnimation from './Animation/ResultAnimation';
+import ResultItem from './styled/ResultItem';
 
 export default function FinalScreen(props) {
-  const { noWords, wordsCount, newWordCount, rightAnswer } = props;
-  const str = `words count = ${wordsCount}, new words = ${newWordCount}, right answer = ${rightAnswer}`;
-  return noWords ? <TextField text="Нету больше слов" /> : <TextField text={str} />;
+  const { noWords, wordsCount, newWordCount, rightAnswer, longestSeries } = props;
+  const percent = Math.round((rightAnswer / wordsCount) * 100);
+  const correctWordsClass = percent > 50 ? 'correct' : 'incorrect';
+  const values = [
+    {
+      dimension: 'LearnWords.cardsShowed',
+      value: wordsCount,
+    },
+    {
+      dimension: 'LearnWords.correctWords',
+      value: `${percent} %`,
+    },
+    {
+      dimension: 'LearnWords.newWords',
+      value: newWordCount,
+    },
+    {
+      dimension: 'LearnWords.theLongestSeries',
+      value: longestSeries,
+    },
+  ];
+  return (
+    <FinalScreenContainer>
+      <ResultAnimation />
+      <h2>
+        <Translate value={noWords ? 'LearnWords.noWords' : 'LearnWords.completed'} />
+      </h2>
+      {!noWords
+        ? values.map((item) => (
+            <ResultItem key={item.dimension}>
+              <Translate
+                className={
+                  item.dimension === 'LearnWords.correctWords' ? correctWordsClass : 'dimension'
+                }
+                value={item.dimension}
+              />
+              <span className="value">{item.value}</span>
+            </ResultItem>
+          ))
+        : null}
+    </FinalScreenContainer>
+  );
 }
 
 FinalScreen.propTypes = {
@@ -13,6 +55,7 @@ FinalScreen.propTypes = {
   wordsCount: PropTypes.number,
   newWordCount: PropTypes.number,
   rightAnswer: PropTypes.number,
+  longestSeries: PropTypes.number,
 };
 
 FinalScreen.defaultProps = {
@@ -20,4 +63,5 @@ FinalScreen.defaultProps = {
   wordsCount: 0,
   newWordCount: 0,
   rightAnswer: 0,
+  longestSeries: 0,
 };
