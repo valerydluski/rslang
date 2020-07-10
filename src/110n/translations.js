@@ -117,6 +117,11 @@ const translations = {
       least: 'Must be at least ',
       more: 'Must be no more ',
     },
+    LearnWords: {
+      newWords: 'new words',
+      cardsShowed: 'cards showed',
+      progress: 'Progress',
+    },
   },
   ru: {
     HomePage: {
@@ -235,6 +240,11 @@ const translations = {
       number: 'Должно быть число',
       least: 'Не может быть меньше ',
       more: 'Не может быть больше ',
+    },
+    LearnWords: {
+      newWords: 'новых слов',
+      cardsShowed: 'показанных карточек',
+      progress: 'Прогресс',
     },
   },
 };
