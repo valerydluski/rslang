@@ -8,6 +8,7 @@ import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageVali
 import { CHECKBOXES } from '../../../../config';
 import { BlackHeader } from './Styled/Header';
 import timeForWordValidator from '../../../../utils/validators/timeForWordValidator';
+import timeForSavannahWordValidator from '../../../../utils/validators/timeForSavannahWordValidator';
 import { SettingsFormStyled } from './Styled/SettingsContainerStyled';
 import StyledSettingsRoundButton from '../../../UI/Button/Styled/StyledSettingsRoundButton';
 
@@ -51,7 +52,7 @@ const SettingsForm = (props) => {
         key="savannahTimeForWord"
         type="number"
         placeholder={I18n.t('Settings.timeForWord')}
-        validate={timeForWordValidator}
+        validate={timeForSavannahWordValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.timeForWord')}
