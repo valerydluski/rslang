@@ -51,14 +51,17 @@ const LearnWordsInput = (props) => {
   return (
     <InputContainer style={{ display: 'inline' }}>
       <InputWordsBgContainer showResult={show} width={width} onClick={hideResult}>
-        {word.split('').map((letter, index) => {
-          const key = `${letter}${index}`;
-          return (
-            <InputLetterContainer key={key} isIncorrect={letter !== answer[index]}>
-              {letter}
-            </InputLetterContainer>
-          );
-        })}
+        {word
+          .toLowerCase()
+          .split('')
+          .map((letter, index) => {
+            const key = `${letter}${index}`;
+            return (
+              <InputLetterContainer key={key} isIncorrect={letter !== answer[index]}>
+                {letter}
+              </InputLetterContainer>
+            );
+          })}
       </InputWordsBgContainer>
       <InputStyled
         type={type}

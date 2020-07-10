@@ -46,6 +46,7 @@ function RepeatWordCardContainer(props) {
   const audiosDuration = useRef(-1);
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
   const [isShowButtons, setIsShowButtons] = useState(false);
+  const isErrorAnswer = useRef(false);
 
   if (wordsCollection.length < 1 && !isGameStart.current) {
     return <FinalScreen noWords />;
@@ -70,7 +71,16 @@ function RepeatWordCardContainer(props) {
     needNewWord.current = false;
   }
 
+  const addWordToWordsCollection = (word) => {
+    saveRepeatWordsHandler([...wordsCollection, word]);
+    isErrorAnswer.current = false;
+    wordsCount.current += 1;
+  };
+
   const nextWord = () => {
+    if (isErrorAnswer.current) {
+      addWordToWordsCollection(currentWord);
+    }
     setIsShowButtons(false);
     resetSaveWord(null);
     currentWordIndex.current += 1;
@@ -128,8 +138,7 @@ function RepeatWordCardContainer(props) {
         customUpdateOneWord('hard', HARD);
         break;
       case 'repeat':
-        saveRepeatWordsHandler([...wordsCollection, currentWord]);
-        wordsCount.current += 1;
+        addWordToWordsCollection(currentWord);
         customUpdateOneWord(currentWord.userWord.difficulty, 0);
         break;
       default:
@@ -154,6 +163,8 @@ function RepeatWordCardContainer(props) {
               }
             }
           }
+        } else {
+          isErrorAnswer.current = true;
         }
         correctCardHandler(true);
     }
