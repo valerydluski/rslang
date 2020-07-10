@@ -69,15 +69,14 @@ const StyledMainNavigationMenu = styled.div`
     li a:hover {
       color: #fec246;
     }
-  }
   li .active_link {
-    color: #fec246;
     position: relative;
   }
 
   li .active_link::before {
     background-color: #fec246;
   }
+}
 
   @media (max-width: 600px) {
     li {
