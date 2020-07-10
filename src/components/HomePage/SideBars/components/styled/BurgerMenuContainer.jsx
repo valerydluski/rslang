@@ -60,6 +60,7 @@ const BurgerMenuContainer = styled.div`
     margin-bottom: 0;
     transition: 0.3s all ease;
     position: fixed;
+    background-color: #FFFFFF;
   }
 
   input:checked ~ label .three {
@@ -67,6 +68,7 @@ const BurgerMenuContainer = styled.div`
     margin-bottom: 0;
     transition: 0.3s all ease;
     position: fixed;
+    background-color: #FFFFFF;
   }
 
   input:checked ~ label .four {
@@ -132,7 +134,7 @@ const BurgerMenuFirstLine = styled.div`
   width: 30px;
   height: 4px;
   left: 90%;
-  background-color: grey;
+  background-color: #6550de;
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
@@ -140,8 +142,47 @@ const BurgerMenuFirstLine = styled.div`
   @media (max-width: 767px) {
     display: block;
   }
-  @media (max-width: 450px) {
+
+  @media (max-width: 620px) {
+    left: 89%;
+  }
+
+  @media (max-width: 530px) {
+    left: 87%;
+  }
+
+  @media (max-width: 460px) {
+    left: 84%;
+  }
+
+  @media (max-width: 320px) {
     left: 83%;
+  }
+`;
+
+const BurgerMenuFirstLineSmall = styled.div`
+  display: none;
+  cursor: pointer;
+  z-index: 20;
+  position: absolute;
+  width: 5px;
+  height: 4px;
+  left: 94.5%;
+  background-color: #fec246;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s all ease;
+  margin-top: 5px;
+  @media (max-width: 767px) {
+    display: block;
+  }
+
+  @media (max-width: 720px) {
+    left: 95%;
+  }
+
+  @media (max-width: 530px) {
+    left: 94%;
   }
 `;
 
@@ -150,11 +191,11 @@ const BurgerMenuSecondLine = styled.div`
   cursor: pointer;
 
   z-index: 20;
-  left: 90%;
+  left: 91.3%;
   position: absolute;
   width: 30px;
   height: 4px;
-  background-color: grey;
+  background-color: #f56748;
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
@@ -164,7 +205,59 @@ const BurgerMenuSecondLine = styled.div`
     display: block;
   }
 
+  @media (max-width: 650px) {
+    left: 91%;
+  }
+
+  @media (max-width: 550px) {
+    left: 90.5%;
+  }
+
+  @media (max-width: 530px) {
+    left: 88.8%;
+  }
+
   @media (max-width: 450px) {
+    left: 87.4%;
+  }
+
+  @media (max-width: 360px) {
+    left: 86.4%;
+  }
+`;
+
+const BurgerMenuSecondLineSmall = styled.div`
+  display: none;
+  cursor: pointer;
+
+  z-index: 20;
+  left: 90%;
+  position: absolute;
+  width: 5px;
+  height: 4px;
+  background-color: #6550de;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s all ease;
+  margin-top: 15px;
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+
+  @media (max-width: 620px) {
+    left: 89%;
+  }
+
+  @media (max-width: 530px) {
+    left: 87%;
+  }
+
+  @media (max-width: 460px) {
+    left: 84%;
+  }
+
+  @media (max-width: 320px) {
     left: 83%;
   }
 `;
@@ -174,11 +267,11 @@ const BurgerMenuThirdLine = styled.div`
   cursor: pointer;
 
   z-index: 20;
-  left: 90%;
+  left: 91.3%;
   position: absolute;
   width: 30px;
   height: 4px;
-  background-color: grey;
+  background-color: #f56748;
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
@@ -188,8 +281,24 @@ const BurgerMenuThirdLine = styled.div`
     display: block;
   }
 
+  @media (max-width: 650px) {
+    left: 91%;
+  }
+
+  @media (max-width: 550px) {
+    left: 90.5%;
+  }
+
+  @media (max-width: 530px) {
+    left: 88.8%;
+  }
+
   @media (max-width: 450px) {
-    left: 83%;
+    left: 87.4%;
+  }
+
+  @media (max-width: 360px) {
+    left: 86.4%;
   }
 `;
 
@@ -201,7 +310,7 @@ const BurgerMenuFourthLine = styled.div`
   position: absolute;
   width: 30px;
   height: 4px;
-  background-color: grey;
+  background-color: #fec246;
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
@@ -211,8 +320,46 @@ const BurgerMenuFourthLine = styled.div`
     display: block;
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: 620px) {
+    left: 89%;
+  }
+
+  @media (max-width: 530px) {
+    left: 87%;
+  }
+
+  @media (max-width: 460px) {
+    left: 84%;
+  }
+
+  @media (max-width: 320px) {
     left: 83%;
+  }
+`;
+
+const BurgerMenuFourthLineSmall = styled.div`
+  display: none;
+  cursor: pointer;
+  z-index: 20;
+  position: absolute;
+  width: 5px;
+  height: 4px;
+  left: 94.5%;
+  background-color: #f56748;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s all ease;
+  margin-top: 25px;
+  @media (max-width: 767px) {
+    display: block;
+  }
+
+  @media (max-width: 720px) {
+    left: 95%;
+  }
+
+  @media (max-width: 530px) {
+    left: 94%;
   }
 `;
 
@@ -236,9 +383,12 @@ const BurgerMenu = (props) => {
       <BurgerMenuInput id="check-nav" type="checkbox" onChange={pageClose} checked={checkboxType} />
       <BurgerMenuLabel htmlFor="check-nav" onClick={pageClose}>
         <BurgerMenuFirstLine className="one" />
+        <BurgerMenuFirstLineSmall className="one"/>
+        <BurgerMenuSecondLineSmall className="one"/>
         <BurgerMenuSecondLine className="two" />
         <BurgerMenuThirdLine className="three" />
         <BurgerMenuFourthLine className="four" />
+        <BurgerMenuFourthLineSmall className="four"/>
       </BurgerMenuLabel>
       <MainNavigationMenu />
       <StyledButtonWithIcon

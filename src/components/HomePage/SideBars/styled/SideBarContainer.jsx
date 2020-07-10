@@ -52,6 +52,8 @@ const SideBarContainer = styled.div`
       position: fixed;
       width: 100%;
       right: 0%;
+      top: 0%;
+      margin: 0;
       height: 100vh;
       } 
   }
