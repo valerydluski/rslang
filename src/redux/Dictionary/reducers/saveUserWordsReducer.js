@@ -1,4 +1,4 @@
-import { SAVE_USER_WORDS, LOADING_USER_WORDS } from '../types';
+import { SAVE_USER_WORDS, LOADING_USER_WORDS, SAVE_ONE_USER_WORD } from '../types';
 import RESET_STORE from '../../resetStore/types';
 
 const initialState = {
@@ -14,6 +14,8 @@ function saveUserWordsReducer(state = initialState, action) {
       return { ...state, loading: action.payload };
     case RESET_STORE:
       return { ...initialState };
+    case SAVE_ONE_USER_WORD:
+      return { ...state, words: action.payload };
     default:
       return state;
   }

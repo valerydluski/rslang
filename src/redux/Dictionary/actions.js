@@ -6,6 +6,7 @@ import {
   UPDATE_DIFFICULT_WORDS,
   UPDATE_DELETED_WORDS,
   LOADING_USER_WORDS,
+  SAVE_ONE_USER_WORD,
 } from './types';
 
 export function saveUserWords(words) {
@@ -52,5 +53,12 @@ export function loadUserWords(bool) {
   return {
     type: LOADING_USER_WORDS,
     payload: bool,
+  };
+}
+
+export function saveOneUserWords(words) {
+  return {
+    type: SAVE_ONE_USER_WORD,
+    payload: words,
   };
 }

@@ -8,6 +8,7 @@ import { saveFullStatisticToStore } from '../action';
 import createLearnWordsStatistic from '../../../utils/createLearnWordsStatistic';
 import updateOneWord from '../../../services/updateOneWord';
 import saveOneWord from '../../../services/saveOneWord';
+import { saveOneUserWords } from '../../Dictionary/actions';
 
 function* workerStatus({ payload }) {
   const { gameName, Level, Page, wordsCollection, wrongWordsState, learnData } = payload;
@@ -15,9 +16,10 @@ function* workerStatus({ payload }) {
   const getLoginState = (state) => state.login;
   const getWordsPerPage = (state) => state.userSettings.settings[`${gameName}WordsPerPage`];
   const getMaxPage = (state) => state.maxPage.maxPage;
-  const getUserWords = (state) => state.userWords.words[0].paginatedResults;
+  const getUserWords = (state) => state.userWords.words;
   const getDisplayedList = (state) => state.newLearnCardShow.displayedWordsList;
-  const userWords = yield select(getUserWords);
+  const words = yield select(getUserWords);
+  const userWords = words[0].paginatedResults;
   const userData = yield select(getLoginState);
   const Statistic = yield select(getStatistic);
   const wordsPerPage = yield select(getWordsPerPage);
@@ -43,7 +45,9 @@ function* workerStatus({ payload }) {
             repeats: 1,
           },
         };
+        words[0].paginatedResults = words[0].paginatedResults.concat(element);
         saveOneWord(element.id, config, userData);
+        saveOneUserWords(words);
       }
     });
   }
