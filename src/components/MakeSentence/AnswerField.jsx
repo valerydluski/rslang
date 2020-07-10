@@ -24,11 +24,12 @@ const AnswerField = ({ answerParts, isDragging, wordsWidth }) => {
   }
   return (
     <Droppable droppableId="target" direction="horizontal">
-      {(provided) => (
+      {(provided, snapshot) => (
         <AnswerFieldStyled
           ref={provided.innerRef}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...provided.droppableProps}
+          isDraggingOver={snapshot.isDraggingOver}
         >
           {parts}
           {provided.placeholder}

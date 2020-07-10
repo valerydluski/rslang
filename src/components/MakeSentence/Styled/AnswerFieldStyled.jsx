@@ -8,9 +8,9 @@ const AnswerFieldStyled = styled.div`
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  border-radius: 5px;
-  border: 1px solid grey;
-  background: linear-gradient(180deg, #fff 40%, #f0f0f0);
+  border: 1px solid #c4c4c4;
+  background: ${(props) => (props.isDraggingOver ? '#FEC246' : '#fff')};
+  transition: 0.3s linear;
 
   @media ${DEVICE.laptopL} {
     width: 924px;
@@ -19,14 +19,13 @@ const AnswerFieldStyled = styled.div`
   @media ${DEVICE.laptop} {
     width: 668px;
     height: 40px;
-    margin: 20px 0;
+    margin: 30px 0;
   }
 
   @media ${DEVICE.tablet} {
     padding: 2px 0;
     width: 528px;
-    height: 30px;
-    margin: 10px 0;
+    margin: 20px 0;
   }
 `;
 

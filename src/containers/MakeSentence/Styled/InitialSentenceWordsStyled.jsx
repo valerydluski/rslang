@@ -8,6 +8,7 @@ const InitialSentenceWordsStyled = styled.div`
   font-weight: 500;
   font-size: 30px;
   margin-left: 10px;
+  color: #929292;
 
   @media ${DEVICE.laptop} {
     font-size: 20px;
@@ -27,7 +28,7 @@ const MainWordStyled = styled(InitialSentenceWordsStyled)`
   font-weight: 800;
   cursor: pointer;
   position: relative;
-  text-decoration: underline;
+  color: #000;
   div {
     position: absolute;
     height: fit-content;
@@ -39,11 +40,11 @@ const MainWordStyled = styled(InitialSentenceWordsStyled)`
     text-decoration: none;
 
     @media ${DEVICE.laptop} {
-      top: 36px;
+      top: 30px;
     }
 
     @media ${DEVICE.tablet} {
-      top: 25px;
+      top: 15px;
     }
   }
 `;
