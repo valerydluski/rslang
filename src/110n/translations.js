@@ -117,6 +117,14 @@ const translations = {
       least: 'Must be at least ',
       more: 'Must be no more ',
     },
+    LearnWords: {
+      newWords: 'New words',
+      cardsShowed: 'Cards showed',
+      correctWords: 'Correct words',
+      completed: 'Series completed',
+      theLongestSeries: 'The longest series of correct answers',
+      noWords: 'No more words for today',
+    },
   },
   ru: {
     HomePage: {
@@ -235,6 +243,14 @@ const translations = {
       number: 'Должно быть число',
       least: 'Не может быть меньше ',
       more: 'Не может быть больше ',
+    },
+    LearnWords: {
+      newWords: 'Новые слова',
+      cardsShowed: 'Карточек завершено',
+      correctWords: 'Правильные слова',
+      completed: 'Cерия завершена',
+      theLongestSeries: 'Самая длинная серия правильных ответов',
+      noWords: 'На сегодня слов больше нет',
     },
   },
 };
