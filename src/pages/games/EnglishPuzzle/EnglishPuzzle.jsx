@@ -48,11 +48,7 @@ const EnglishPuzzle = (props) => {
 
   const onResize = useCallback(() => {
     const width = getScreenWidth();
-    if (width < breakpoint) {
-      changeBreakpoint(true);
-    } else {
-      changeBreakpoint(false);
-    }
+    changeBreakpoint(width < breakpoint);
     if (
       width > SCREEN_SIZE.tablet &&
       width <= SCREEN_SIZE.laptop &&
@@ -68,12 +64,7 @@ const EnglishPuzzle = (props) => {
   }, [changeBreakpoint, updatePage, prevWidth, page]);
 
   const onOrientationChange = useCallback(() => {
-    const width = getScreenWidth();
-    if (width < breakpoint) {
-      changeBreakpoint(true);
-    } else {
-      changeBreakpoint(false);
-    }
+    changeBreakpoint(getScreenWidth() < breakpoint);
   }, [changeBreakpoint]);
 
   const newGame = () => {

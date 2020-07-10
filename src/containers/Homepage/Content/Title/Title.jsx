@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Translate } from 'react-redux-i18n';
-import helloImg from '../../../../assets/img/helloImg.svg';
 import UserTitleContainer from '../../../../components/HomePage/Content/Main/components/Title/styled/UserTitleContainer';
+import BannerAnimation from '../../../../components/HomePage/Content/Animation/BannerAnimation';
 
 function Title(props) {
   const { userName } = props;
   return (
-    <UserTitleContainer bg={helloImg}>
+    <UserTitleContainer>
       <h2>
         <Translate value="HomePage.greeting" />, {userName}
       </h2>
+      <BannerAnimation />
     </UserTitleContainer>
   );
 }

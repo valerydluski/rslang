@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
@@ -10,6 +10,11 @@ import {
 } from '../../../redux/ChangeRounds/action';
 import { GAME_MAX_PAGE } from '../../../config';
 import MakeSentenceGame from '../../../containers/MakeSentence/MakeSentenceGame';
+import StyledContainer from './Styled/StyledContainer';
+import StyledGameContainer from './Styled/StyledGameContainer';
+import getScreenWidth from '../../../utils/getScreenWidth';
+import Image from '../../../components/UI/Image/Image';
+import screenRotateIcon from '../../../assets/img/rotate-screen.svg';
 
 const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, maxPage }) => {
   const [words, changeWords] = useState(wordsCollection);
@@ -20,24 +25,54 @@ const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, m
 
   checkStatusSession();
 
+  const [isBreakpoint, changeBreakpoint] = useState(false);
+
+  const breakpoint = 568;
+
+  checkStatusSession();
+
+  const onResize = useCallback(() => {
+    changeBreakpoint(getScreenWidth() < breakpoint);
+  }, [changeBreakpoint]);
+
+  const onOrientationChange = useCallback(() => {
+    changeBreakpoint(getScreenWidth() < breakpoint);
+  }, [changeBreakpoint]);
+
+  useEffect(() => {
+    if (getScreenWidth() < breakpoint) {
+      changeBreakpoint(true);
+    }
+    window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onOrientationChange);
+  }, [onResize, onOrientationChange]);
+
   return (
-    <div className="make-sentence_container">
+    <StyledContainer>
       <GoToHomePageButton />
-      <StatusMenu
-        page={page}
-        level={level}
-        maxPage={maxPage}
-        updateLevel={updateLevel}
-        updatePage={updatePage}
-      />
-      <MakeSentenceGame
-        key={`level-${level}/page-${page}`}
-        wordsCollection={words}
-        maxPage={maxPage}
-        page={page}
-        level={level}
-      />
-    </div>
+      {isBreakpoint ? (
+        <Image src={screenRotateIcon} />
+      ) : (
+        <>
+          <StatusMenu
+            page={page}
+            level={level}
+            maxPage={maxPage}
+            updateLevel={updateLevel}
+            updatePage={updatePage}
+          />
+          <StyledGameContainer>
+            <MakeSentenceGame
+              key={`level-${level}/page-${page}`}
+              wordsCollection={words}
+              maxPage={maxPage}
+              page={page}
+              level={level}
+            />
+          </StyledGameContainer>
+        </>
+      )}
+    </StyledContainer>
   );
 };
 
