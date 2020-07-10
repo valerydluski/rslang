@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { DEVICE } from '../../../../../../../config'
+import { DEVICE } from '../../../../../../../config';
 
 const AboutPersonCardContainer = styled.div`
-display: flex;
-flex-direction: column;
-margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
 
   h3 {
     align-self: center;
@@ -15,8 +15,8 @@ margin-bottom: 30px;
     line-height: 22px;
     text-transform: uppercase;
     color: #000000;
-     display: block;
-     border-bottom: 1px solid #c4c4c4;
+    display: block;
+    border-bottom: 1px solid #c4c4c4;
     text-transform: uppercase;
   }
 
@@ -42,8 +42,8 @@ margin-bottom: 30px;
 
   @media ${DEVICE.laptopL} {
     img {
-        width: 100px;
-      }
+      width: 100px;
+    }
   }
 
   @media ${DEVICE.tablet} {
@@ -53,14 +53,14 @@ margin-bottom: 30px;
       height: 35px;
       width: 100%;
       text-align: center;
-      }
+    }
 
     span {
-        display: inline-block;
-        width: 100%;
-        font-size: 19px;
-        line-height: 27px;
-      }
+      display: inline-block;
+      width: 100%;
+      font-size: 19px;
+      line-height: 27px;
+    }
   }
 `;
 

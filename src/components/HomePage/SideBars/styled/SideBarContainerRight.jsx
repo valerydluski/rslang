@@ -20,7 +20,7 @@ const SideBarContainerRight = styled.div`
     width: 355px;
 
     div {
-    border-bottom: none;
+      border-bottom: none;
     }
 
     img {
@@ -39,7 +39,7 @@ const SideBarContainerRight = styled.div`
     width: auto;
     background-color: #ffffff;
     nav {
-        display: none;
+      display: none;
     }
     min-height: auto;
   }
@@ -72,7 +72,7 @@ const SideBarContainerRight = styled.div`
       width: 93vw;
       right: 0%;
       height: 100vh;
-      } 
+    }
   }
 `;
 

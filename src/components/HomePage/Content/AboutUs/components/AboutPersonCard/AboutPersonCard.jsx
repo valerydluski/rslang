@@ -12,11 +12,9 @@ export default function AboutPersonCard(props) {
       <h3>
         <Translate value={title} />
       </h3>
-      <div>
-        <p>
-          <Translate value={description} />
-        </p>
-      </div>
+      <p>
+        <Translate value={description} />
+      </p>
     </AboutPersonCardContainer>
   );
 }
@@ -25,4 +23,10 @@ AboutPersonCardContainer.propTypes = {
   poster: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+};
+
+AboutPersonCardContainer.defaultProps = {
+  poster: '',
+  title: '',
+  description: '',
 };

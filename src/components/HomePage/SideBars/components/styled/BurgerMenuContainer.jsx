@@ -222,17 +222,15 @@ const BurgerMenu = (props) => {
   const [checkboxType, changeCheckbox] = useState(false);
 
   const clickHandler = () => {
-    if (checkboxType === false) {
-    changeCheckbox(true)
-    }
-  }
+    changeCheckbox(!checkboxType);
+  };
 
   const pageClose = () => {
-    if (checkboxType === true) {
-      changeCheckbox(false)
-      }
-  }
-    
+    if (checkboxType) {
+      changeCheckbox(false);
+    }
+  };
+
   return (
     <BurgerMenuContainer onChange={clickHandler} onClick={pageClose}>
       <BurgerMenuInput id="check-nav" type="checkbox" onChange={pageClose} checked={checkboxType} />
