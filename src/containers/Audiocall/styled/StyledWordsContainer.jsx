@@ -7,7 +7,6 @@ const WordsContainerStyled = styled.div`
   padding: 20px 30px;
   justify-content: space-between;
   max-width: 1440px;
-  border-top: 1px solid #c4c4c4;
   user-select: none;
   box-sizing: border-box;
 
