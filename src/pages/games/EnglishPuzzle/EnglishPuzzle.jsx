@@ -35,6 +35,7 @@ const EnglishPuzzle = (props) => {
     updatePage,
     updateLevel,
     gameName,
+    gameMode,
   } = props;
   const [isModalOpen, toggleModal] = useState(false);
   const [isBreakpoint, changeBreakpoint] = useState(false);
@@ -77,9 +78,18 @@ const EnglishPuzzle = (props) => {
 
   const newGame = () => {
     toggleModal(false);
-    const { newLevel, newPage } = newRound(level, page, maxPage);
-    if (newLevel !== level) updateLevel(newLevel);
-    if (newPage !== page) updatePage(newPage);
+    let newLevel;
+    let newPage;
+    let obj;
+    if (gameMode) {
+      obj = newRound(level, page, maxPage);
+      newLevel = obj.newLevel;
+      newPage = obj.newPage;
+      if (newLevel !== level) updateLevel(newLevel);
+      if (newPage !== page) updatePage(newPage);
+    } else {
+      updateLevel(level);
+    }
   };
 
   const restartGame = () => {
@@ -152,6 +162,7 @@ EnglishPuzzle.propTypes = {
   updatePage: PropTypes.func.isRequired,
   updateLevel: PropTypes.func.isRequired,
   gameName: PropTypes.string,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 EnglishPuzzle.defaultProps = {
@@ -169,6 +180,7 @@ const mapStateToProps = (state) => {
     level: state.changeRound.EnglishPuzzleLevel,
     page: state.changeRound.EnglishPuzzlePage,
     maxPage: state.maxPage.maxPage,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 
