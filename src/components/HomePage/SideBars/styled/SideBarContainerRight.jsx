@@ -5,7 +5,7 @@ const SideBarContainerRight = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 280px;
+  width: 100%;
   background-color: #f3f3f3;
   padding: 30px;
   min-height: 100%;
@@ -17,6 +17,7 @@ const SideBarContainerRight = styled.div`
 
   @media ${DEVICE.laptopL} {
     padding: 20px;
+    width: 355px;
 
     div {
     border-bottom: none;
@@ -43,7 +44,16 @@ const SideBarContainerRight = styled.div`
     min-height: auto;
   }
 
+  @media (max-width: 1200px) {
+    width: 280px;
+  }
+
+  @media ${DEVICE.laptop} {
+    width: auto;
+  }
+
   @media ${DEVICE.tablet} {
+    width: auto;
     grid-column-start: auto;
     grid-row-start: auto;
     flex-direction: row;
