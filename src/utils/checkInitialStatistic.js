@@ -3,7 +3,6 @@ import { INITIAL_STATISTIC } from '../config';
 const checkInitialStatistic = (stat) => {
   const statisticFromApi = stat.statistic || stat;
   const newStatistic = {};
-  console.log(INITIAL_STATISTIC);
   Object.keys(INITIAL_STATISTIC).forEach((key) => {
     if (statisticFromApi[`${key}`]) {
       newStatistic[`${key}`] = statisticFromApi[`${key}`];
