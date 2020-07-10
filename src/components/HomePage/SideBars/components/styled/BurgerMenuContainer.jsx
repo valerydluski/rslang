@@ -9,7 +9,6 @@ import iconLogoutHover from '../../../../UI/Icon/iconLogoutHover.svg';
 import iconSettingsHover from '../../../../UI/Icon/iconSettingsHover.svg';
 import getRedirectFunction from '../../../../../utils/getRedirectFunction';
 import { resetSessionData } from '../../../../../redux/Auth/Login/actions';
-import Logo from '../../../../UI/Logo/Logo';
 
 const BurgerMenuContainer = styled.div`
   cursor: pointer;
@@ -367,26 +366,34 @@ const BurgerMenu = (props) => {
   const { resetSessionData } = props;
 
   const [checkboxType, changeCheckbox] = useState(false);
+  const [isMenuClicked, changeMenuClick] = useState(false);
 
   const clickHandler = () => {
+    if (isMenuClicked) {
     changeCheckbox(!checkboxType);
+    }
   };
 
   const pageClose = () => {
     if (checkboxType) {
       changeCheckbox(false);
+      changeMenuClick(false);
     }
   };
 
+  const isCLicked = () => {
+    changeMenuClick(true);
+  }
+
   return (
-    <BurgerMenuContainer onChange={clickHandler} onClick={pageClose}>
-      <BurgerMenuInput id="check-nav" type="checkbox" onChange={pageClose} checked={checkboxType} />
-      <BurgerMenuLabel htmlFor="check-nav" onClick={pageClose}>
+    <BurgerMenuContainer onClick={pageClose} >
+      <BurgerMenuInput id="check-nav" type="checkbox" onChange={clickHandler} checked={checkboxType} />
+      <BurgerMenuLabel htmlFor="check-nav">
         <BurgerMenuFirstLine className="one" />
         <BurgerMenuFirstLineSmall className="one"/>
         <BurgerMenuSecondLineSmall className="one"/>
-        <BurgerMenuSecondLine className="two" />
-        <BurgerMenuThirdLine className="three" />
+        <BurgerMenuSecondLine className="two" onClick={isCLicked}/>
+        <BurgerMenuThirdLine className="three" onClick={isCLicked}/>
         <BurgerMenuFourthLine className="four" />
         <BurgerMenuFourthLineSmall className="four"/>
       </BurgerMenuLabel>
