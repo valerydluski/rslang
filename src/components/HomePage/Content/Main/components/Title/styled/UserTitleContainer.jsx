@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const UserTitleContainer = styled.div`
   width: 100%;
   height: 205px;
-  background-image: url(${(props) => props.bg});
   position: relative;
   background-size: cover;
 
@@ -16,6 +15,7 @@ const UserTitleContainer = styled.div`
     font-weight: bold;
     font-size: 29px;
     line-height: 56px;
+    z-index: 1;
   }
 `;
 

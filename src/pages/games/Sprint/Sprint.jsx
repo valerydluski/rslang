@@ -12,6 +12,8 @@ import { changeSprintLevel, changeSprintPage } from '../../../redux/ChangeRounds
 import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import newRound from '../../../utils/newRound';
 import GameContainerStyled from './Styled/StyledGameContainer';
+import SprintAnimation from '../../../components/Sprint/Animation/SprintAnimation';
+import StyledPattern from '../../../components/Sprint/Styled/StyledPattern';
 
 const Sprint = (props) => {
   const {
@@ -78,6 +80,9 @@ const Sprint = (props) => {
           newGame={newGame}
         />
       </GameContainerStyled>
+      <StyledPattern>
+        <SprintAnimation />
+      </StyledPattern>
     </SprintContainerStyled>
   );
 };

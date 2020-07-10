@@ -84,7 +84,6 @@ const GameContainerSpeakIT = (props) => {
       toggleGameMode(true);
       micro.stopMicrophone();
       setListening(false);
-      console.log('finishHandler -> wrongWordsState', wrongWordsState);
 
       saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
     }
