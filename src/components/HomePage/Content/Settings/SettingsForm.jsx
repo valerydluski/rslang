@@ -101,8 +101,8 @@ const SettingsForm = (props) => {
         className="settings"
       />
       <Field
-        name="timeForWord"
-        key="timeForWord"
+        name="sprintTimeForWord"
+        key="sprintTimeForWord"
         type="number"
         placeholder={I18n.t('Settings.timeForWord')}
         validate={timeForWordValidator}
