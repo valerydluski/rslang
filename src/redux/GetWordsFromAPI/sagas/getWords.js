@@ -35,7 +35,7 @@ function* workerGetWords() {
     let payload;
     if (!gameMode && userWords[0] && userWords[0].paginatedResults.length >= +wordsPerPage) {
       const arr = userWords[0].paginatedResults;
-      if (appMode === 'EnglishPuzzle') {
+      if (appMode === 'EnglishPuzzle' || appMode === 'MakeSentence') {
         const arrForPuzzle = arr.filter((el) => el.wordsPerExampleSentence <= 10);
         if (arrForPuzzle.length >= 10) {
           payload = getRandomValuesFromArray(arrForPuzzle, 9);
