@@ -28,6 +28,7 @@ const Sprint = (props) => {
     maxPage,
     secondsForOneWord,
     gameName,
+    gameMode,
   } = props;
   const [isGameFinished, toggleGameMode] = useState(false);
   if (isWordsLoading) return <LoadingSpinner />;
@@ -44,9 +45,18 @@ const Sprint = (props) => {
 
   const newGame = () => {
     toggleGameMode(false);
-    const { newLevel, newPage } = newRound(level, page, maxPage);
-    if (newLevel !== level) updateLevel(newLevel);
-    if (newPage !== page) updatePage(newPage);
+    let newLevel;
+    let newPage;
+    let obj;
+    if (gameMode) {
+      obj = newRound(level, page, maxPage);
+      newLevel = obj.newLevel;
+      newPage = obj.newPage;
+      if (newLevel !== level) updateLevel(newLevel);
+      if (newPage !== page) updatePage(newPage);
+    } else {
+      updateLevel(level);
+    }
   };
 
   if (currentAppMode !== gameName || wordsCollection.length === 0) {
@@ -99,6 +109,7 @@ Sprint.propTypes = {
   maxPage: PropTypes.number,
   secondsForOneWord: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   gameName: PropTypes.string,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 Sprint.defaultProps = {
@@ -124,6 +135,7 @@ const mapStateToProps = (state) => {
     maxPage: state.maxPage.maxPage,
     secondsForOneWord: state.userSettings.settings.sprintTimeForWord,
     gameName: GAME_NAME.sprint,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 

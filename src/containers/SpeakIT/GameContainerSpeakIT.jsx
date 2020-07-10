@@ -35,12 +35,12 @@ const GameContainerSpeakIT = (props) => {
     changeLevel,
     maxPage,
     saveStatistic,
+    gameMode,
   } = props;
   const gameWords = wordsCollection.map((el) => {
     return el.word.toLowerCase();
   });
   let IDontKnowWords = gameWords.slice();
-
   const [srcForImage, setSrcForImage] = useState(defaultImg);
   const [textForTextField, setTranslate] = useState(' ');
   const [isListening, setListening] = useState(listening);
@@ -84,8 +84,7 @@ const GameContainerSpeakIT = (props) => {
       toggleGameMode(true);
       micro.stopMicrophone();
       setListening(false);
-
-      saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
+      if (gameMode) saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
     }
   };
 
@@ -101,7 +100,7 @@ const GameContainerSpeakIT = (props) => {
         if (IDontKnowWords.length === 0) {
           micro.stopMicrophone();
           toggleGameMode(true);
-          saveStatistic({ Level, Page, wordsCollection, IDontKnowWords, gameName });
+          if (gameMode) saveStatistic({ Level, Page, wordsCollection, IDontKnowWords, gameName });
         }
       }
     }
@@ -137,9 +136,18 @@ const GameContainerSpeakIT = (props) => {
 
   const newGame = () => {
     toggleGameMode(false);
-    const { newLevel, newPage } = newRound(Level, Page, maxPage);
-    if (newLevel !== Level) changeLevel(newLevel);
-    if (newPage !== Page) changePage(newPage);
+    let obj;
+    let newLevel;
+    let newPage;
+    if (gameMode) {
+      obj = newRound(Level, Page, maxPage);
+      newLevel = obj.newLevel;
+      newPage = obj.newPage;
+      if (newLevel !== Level) changeLevel(newLevel);
+      if (newPage !== Page) changePage(newPage);
+    } else {
+      changeLevel(Level);
+    }
     createGame();
     micro.changeTranscript(speechResult);
   };
@@ -251,7 +259,8 @@ GameContainerSpeakIT.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
-  wordsCollection: PropTypes.instanceOf(Array).isRequired,
+  gameMode: PropTypes.bool.isRequired,
+  wordsCollection: PropTypes.instanceOf(Array),
 };
 
 GameContainerSpeakIT.defaultProps = {
@@ -262,6 +271,7 @@ GameContainerSpeakIT.defaultProps = {
   isWordsLoading: false,
   gameName: GAME_NAME.speakIT,
   maxPage: GAME_MAX_PAGE,
+  wordsCollection: [],
 };
 
 const mapStateToProps = (state) => {
@@ -271,6 +281,9 @@ const mapStateToProps = (state) => {
     gameScore: state.gamesReducer.gameScore,
     isWordsLoading: state.loader.loading,
     maxPage: state.maxPage.maxPage,
+    userWords: state.userWords.words,
+    maxWordsPerPage: state.userSettings.settings.SpeakITWordsPerPage,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 

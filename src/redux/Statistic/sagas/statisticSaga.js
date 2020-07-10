@@ -6,6 +6,7 @@ import createStatisticJSON from '../../../utils/createStatisticJSON';
 import createGameEndData from '../../../utils/createGameEndData';
 import { saveFullStatisticToStore } from '../action';
 import createLearnWordsStatistic from '../../../utils/createLearnWordsStatistic';
+import { saveWordsFromGames } from '../../Dictionary/actions';
 
 function* workerStatus({ payload }) {
   const { gameName, Level, Page, wordsCollection, wrongWordsState, learnData } = payload;
@@ -13,12 +14,15 @@ function* workerStatus({ payload }) {
   const getLoginState = (state) => state.login;
   const getWordsPerPage = (state) => state.userSettings.settings[`${gameName}WordsPerPage`];
   const getMaxPage = (state) => state.maxPage.maxPage;
-  const Statistic = yield select(getStatistic);
-  const userData = yield select(getLoginState);
-  const wordsPerPage = yield select(getWordsPerPage);
   const getDisplayedList = (state) => state.newLearnCardShow.displayedWordsList;
+  const userData = yield select(getLoginState);
+  const Statistic = yield select(getStatistic);
+  const wordsPerPage = yield select(getWordsPerPage);
   const displayedWordsList = yield select(getDisplayedList);
   const maxPage = yield select(getMaxPage);
+  if (wordsCollection) {
+    yield put(saveWordsFromGames({ wordsCollection, wrongWordsState }));
+  }
   let newStatistic;
   if (gameName) {
     newStatistic = yield createGameEndData(
