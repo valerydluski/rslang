@@ -12,7 +12,6 @@ const SpeakIT = (props) => {
   const { switchAppMode, isWordsLoading, currentAppMode, gameName, wordsCollection } = props;
 
   const [words, changeWords] = useState(wordsCollection);
-
   useEffect(() => {
     changeWords(wordsCollection);
   }, [wordsCollection]);

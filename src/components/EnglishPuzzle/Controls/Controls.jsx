@@ -39,6 +39,7 @@ class Controls extends Component {
       saveStatistic,
       gameName,
       setPageFill,
+      gameMode,
     } = this.props;
     const { word } = words[row];
     if (isPageFill) {
@@ -49,13 +50,15 @@ class Controls extends Component {
       const newRow = row + 1;
       if (newRow === ROWS_IN_PAGE) {
         setPageFill(true);
-        saveStatistic({
-          Level: level,
-          Page: page,
-          wordsCollection: words,
-          wrongWordsState: wrongWords,
-          gameName,
-        });
+        if (gameMode) {
+          saveStatistic({
+            Level: level,
+            Page: page,
+            wordsCollection: words,
+            wrongWordsState: wrongWords,
+            gameName,
+          });
+        }
       } else {
         updateRow(newRow);
       }
@@ -100,6 +103,7 @@ Controls.propTypes = {
   addWrongAnswersToStore: PropTypes.func,
   wrongWords: PropTypes.arrayOf(PropTypes.string),
   gameName: PropTypes.string,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 Controls.defaultProps = {
@@ -133,6 +137,7 @@ function mapStateToProps(state) {
     maxPage: state.maxPage.maxPage,
     words: state.getWordsFromAPI.wordsFromAPI,
     wrongWords: state.gamesReducer.IDontKnowWords,
+    gameMode: state.gamesReducer.gameMode,
   };
 }
 

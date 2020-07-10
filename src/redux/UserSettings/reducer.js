@@ -26,9 +26,9 @@ const initialState = {
     isAutoSpeech: true,
     isTranslation: true,
     isBackground: true,
-    timeForWord: '2',
-    savannahTimeForWord: '2',
-    savannahMaxErrorCounter: '2',
+    sprintTimeForWord: '2',
+    savannahTimeForWord: '5',
+    savannahMaxErrorCounter: '5',
   },
 };
 
