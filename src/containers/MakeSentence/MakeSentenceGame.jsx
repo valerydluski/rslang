@@ -29,6 +29,7 @@ const MakeSentenceGame = ({
   maxPage,
   gameName,
   saveStatistic,
+  gameMode,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -64,13 +65,15 @@ const MakeSentenceGame = ({
 
   if (isGameFinished) {
     addWordsWithMistakesToStore(wrongAnsweredWords);
-    saveStatistic({
-      Level: level,
-      Page: page,
-      wordsCollection,
-      wrongWordsState: wrongAnsweredWords,
-      gameName,
-    });
+    if (gameMode) {
+      saveStatistic({
+        Level: level,
+        Page: page,
+        wordsCollection,
+        wrongWordsState: wrongAnsweredWords,
+        gameName,
+      });
+    }
     return (
       <ResultModal
         showProperties={['word', 'wordTranslate']}
@@ -131,6 +134,7 @@ MakeSentenceGame.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 MakeSentenceGame.defaultProps = {
@@ -151,6 +155,7 @@ const mapStateToProps = (state) => {
   return {
     isWordsLoading: state.loader.loading,
     currentAppMode: state.changeAppMode.appMode,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 

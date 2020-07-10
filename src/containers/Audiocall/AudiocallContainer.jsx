@@ -35,6 +35,7 @@ const AudioCallContainer = ({
   saveStatistic,
   backgroundOpacity,
   changeBackgroundOpacity,
+  gameMode,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -62,13 +63,15 @@ const AudioCallContainer = ({
   function finishGame() {
     addWordsWithMistakesToStore(wrongAnsweredWords);
     toggleGameMode(true);
-    saveStatistic({
-      Level: level,
-      Page: page,
-      wordsCollection,
-      wrongWordsState: wrongAnsweredWords,
-      gameName,
-    });
+    if (gameMode) {
+      saveStatistic({
+        Level: level,
+        Page: page,
+        wordsCollection,
+        wrongWordsState: wrongAnsweredWords,
+        gameName,
+      });
+    }
   }
 
   function switchToNextWord() {
@@ -193,6 +196,7 @@ AudioCallContainer.propTypes = {
   saveStatistic: PropTypes.func.isRequired,
   changeBackgroundOpacity: PropTypes.func,
   backgroundOpacity: PropTypes.number,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 AudioCallContainer.defaultProps = {
@@ -218,6 +222,7 @@ const mapStateToProps = (state) => {
     level: state.changeRound.AudioCallLevel,
     page: state.changeRound.AudioCallPage,
     maxPage: state.maxPage.maxPage,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 
