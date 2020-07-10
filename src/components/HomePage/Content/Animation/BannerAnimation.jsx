@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../../../assets/animation/signin/data.json';
-import animationDataMobile from '../../../assets/animation/signin-mobile/data.json';
+import animationData from '../../../../assets/animation/banner/data.json';
+import animationDataMobile from '../../../../assets/animation/banner-mobile/data.json';
 import AnimationContainerStyled from './Styled/AnimationContainerStyled';
-import getScreenWidth from '../../../utils/getScreenWidth';
+import getScreenWidth from '../../../../utils/getScreenWidth';
 
 function SignInAnimation() {
   const [isBreakpoint, changeBreakpoint] = useState(false);

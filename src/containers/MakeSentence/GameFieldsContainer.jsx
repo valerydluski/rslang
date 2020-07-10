@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
 import GameFieldsContainerStyled from './Styled/GameFieldsContainerStyled';
@@ -20,12 +20,27 @@ const GameFieldsContainer = ({
   const [answerParts, changeAnswerParts] = useState([]);
   const [wordsWidth, changeWordsWidth] = useState({});
 
+  const onResize = useCallback(() => {
+    const widths = calcOwnWordsSentenceWidth(sentenceTranslation);
+    changeWordsWidth(widths);
+  }, [changeWordsWidth, sentenceTranslation]);
+
+  const onOrientationChange = useCallback(() => {
+    const widths = calcOwnWordsSentenceWidth(sentenceTranslation);
+    changeWordsWidth(widths);
+  }, [changeWordsWidth, sentenceTranslation]);
+
   const checkAnswer = () => {
     const result = answerParts.join(' ') === sentenceTranslation;
     if (result) {
       toggleWordStatus(true);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onOrientationChange);
+  });
 
   useEffect(() => {
     if (optionParts.length === 0) {
