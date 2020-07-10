@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { I18n, Translate } from 'react-redux-i18n';
+import { Translate } from 'react-redux-i18n';
 import Menu from './Styled/Menu';
 import MenuItem from './Styled/MenuItem';
 import Title from './Styled/Title';
@@ -68,7 +68,7 @@ const StatusMenu = (props) => {
             isOpen={isLevelOpen}
             onToggle={switchLevel}
             optionsNumber={GAME_MAX_LEVEL}
-            openBtnName={I18n.t('Buttons.choose')}
+            openBtnName={+level}
             onOptionClick={onLevelOptionClick}
             value={+level}
           />
@@ -83,7 +83,7 @@ const StatusMenu = (props) => {
             isOpen={isPageOpen}
             optionsNumber={maxPage}
             onToggle={switchPage}
-            openBtnName={I18n.t('Buttons.choose')}
+            openBtnName={page}
             onOptionClick={onPageOptionClick}
             direction={DIRECTION_ROW}
             value={+page}

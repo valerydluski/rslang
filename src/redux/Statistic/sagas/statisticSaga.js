@@ -31,7 +31,6 @@ function* workerStatus({ payload }) {
       const word = userWords.find((item) => item.id || item._id === element.id);
       if (word && wrongWordsState.includes(element.word)) {
         const config = word.userWord;
-        config.optional.time = new Date().valueOf();
         config.optional.nextRepeat = new Date().valueOf();
         updateOneWord(element.id, config, userData);
       } else {
