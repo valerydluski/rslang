@@ -25,8 +25,8 @@ function* workerLoadData() {
   const statistic = yield call(getStatisticFromApi, sessionData);
   if (statistic) {
     const statisticFromApi = getSettings(statistic);
-    const initialRound = createInitialRounds(statisticFromApi);
-    const initialStatistic = (checkInitialStatistic, statisticFromApi);
+    const initialStatistic = checkInitialStatistic(statisticFromApi);
+    const initialRound = createInitialRounds(initialStatistic);
     yield put(changeInitialRound(initialRound));
     yield put(addToShowedWordsList(JSON.parse(initialStatistic.RepeatWordsToday)));
     yield put(saveFullStatisticToStore(initialStatistic));
