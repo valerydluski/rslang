@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import background from '../../../../assets/img/savannah-background.png';
+import background from '../../../../assets/img/background.png';
 
 const SavannahContainerStyled = styled.div`
   width: 100%;
