@@ -16,7 +16,10 @@ import LearnCardsContainer, {
   TextMeaningStyled,
   TextMeaningTranslateStyled,
 } from './Styled/LearnCardsContainer';
-import LearnButtonsContainer from './Styled/LearnButtonsContainer';
+import LearnButtonsContainer, {
+  ProgressBarCount,
+  ProgressBarContainer,
+} from './Styled/LearnButtonsContainer';
 
 const LearnWordsForm = (props) => {
   const {
@@ -143,13 +146,15 @@ const LearnWordsForm = (props) => {
         <StyledButton onClick={customHandleSubmit('unknown')} type="button">
           Unknow
         </StyledButton>
-        <p>{currentWordIndex}</p>
+        {/* <ProgressBarContainer> */}
+        <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
         <Line
           percent={Math.round((currentWordIndex / wordsCount) * 100)}
-          strokeWidth="1"
+          strokeWidth="4"
           strokeColor="#404497"
         />
-        <p>{wordsCount}</p>
+        <ProgressBarCount>{wordsCount}</ProgressBarCount>
+        {/* </ProgressBarContainer> */}
       </LearnButtonsContainer>
     </LearnFormStyled>
   );

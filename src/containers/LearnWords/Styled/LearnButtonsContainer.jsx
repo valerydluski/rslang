@@ -7,4 +7,14 @@ const LearnButtonsContainer = styled.div`
   place-items: center;
 `;
 
+export const ProgressBarContainer = styled.div``;
+export const ProgressBarCount = styled.p`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 35px;
+  color: #929292;
+`;
+
 export default LearnButtonsContainer;
