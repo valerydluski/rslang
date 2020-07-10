@@ -85,12 +85,12 @@ const BurgerMenuContainer = styled.div`
     button {
       position: fixed;
       display: block;
-      margin-top: 650px;
+      margin-top: 88vh;
       margin-left: 17px;
     }
 
     button: first-of-type {
-      margin-top: 600px;
+      margin-top: 80vh;
     }
 
     button span {

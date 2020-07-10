@@ -46,7 +46,6 @@ const StyledMainNavigationMenu = styled.div`
     }
   }
 
-
   @media (max-width: 767px) {
     display: none;
 
@@ -56,7 +55,7 @@ const StyledMainNavigationMenu = styled.div`
     }
 
     li:first-of-type {
-    margin-top: 200px;
+      margin-top: 20vh;
     }
 
     span {
@@ -82,13 +81,13 @@ const StyledMainNavigationMenu = styled.div`
 
   @media (max-width: 600px) {
     li {
-    margin-left: 55%;
+      margin-left: 55%;
     }
   }
 
   @media (max-width: 400px) {
     li {
-    margin-left: 45%;
+      margin-left: 45%;
     }
   }
 `;
