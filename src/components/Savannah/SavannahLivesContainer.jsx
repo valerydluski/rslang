@@ -15,8 +15,8 @@ const SavannahLivesContainer = ({ wrongAmount, wholeLives }) => {
 };
 
 SavannahLivesContainer.propTypes = {
-  wrongAmount: PropTypes.number,
-  wholeLives: PropTypes.number,
+  wrongAmount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  wholeLives: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 SavannahLivesContainer.defaultProps = {

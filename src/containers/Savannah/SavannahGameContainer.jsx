@@ -18,10 +18,12 @@ import SavannahLivesContainer from '../../components/Savannah/SavannahLivesConta
 import FallingWordStyled from '../../components/Savannah/Styled/FallingWordStyled';
 import SavannahWordsContainer from '../../components/Savannah/SavannahWordsContainer';
 
-let currentGameWords;
-let currentStepWords = [];
 const wordAudio = new Audio();
+let currentGameWords = [];
+let currentStepWords = [];
+let selectedWord;
 let timer;
+let currentMainWord;
 
 const SavannaGameContainer = ({
   wordsCollection,
@@ -37,7 +39,7 @@ const SavannaGameContainer = ({
   updateLevel,
   updatePage,
   secondsForOneWord,
-  initialErrorsAmont,
+  initialErrorsAmount,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -45,13 +47,14 @@ const SavannaGameContainer = ({
   const [correctAnsweredWords, addWordToCorrect] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
   const [wrongAmount, changeWrongAmount] = useState(0);
-  const [selectedWord, changeSelectedWord] = useState(null);
 
   useEffect(() => {
     changeIndex(0);
     addWordToWrong([]);
     toggleWordStatus(false);
     toggleGameMode(false);
+    currentGameWords = [];
+    currentMainWord = '';
     return () => {
       if (timer) clearTimeout(timer);
     };
@@ -76,7 +79,7 @@ const SavannaGameContainer = ({
     });
   }
 
-  if (!currentWordIndex && !isWordFinished && !currentGameWords) {
+  if (!currentWordIndex && !isWordFinished && !currentGameWords.length) {
     currentGameWords = shuffleArray(wordsCollection);
   }
 
@@ -87,12 +90,17 @@ const SavannaGameContainer = ({
     if (newPage !== page) updatePage(newPage);
   };
 
+  const currentWord = currentGameWords[currentWordIndex];
+
   if (!isWordFinished) {
-    currentStepWords = currentGameWords.slice();
-    currentStepWords.splice(currentWordIndex, 1);
-    currentStepWords = shuffleArray(currentStepWords).slice(0, 3);
-    currentStepWords.push(currentGameWords[currentWordIndex]);
-    currentStepWords = shuffleArray(currentStepWords);
+    if (currentMainWord !== currentWord.word) {
+      currentMainWord = currentWord.word;
+      currentStepWords = currentGameWords.slice();
+      currentStepWords.splice(currentWordIndex, 1);
+      currentStepWords = shuffleArray(currentStepWords).slice(0, 3);
+      currentStepWords.push(currentGameWords[currentWordIndex]);
+      currentStepWords = shuffleArray(currentStepWords);
+    }
   }
 
   if (isGameFinished) {
@@ -106,10 +114,11 @@ const SavannaGameContainer = ({
     );
   }
 
-  const currentWord = currentGameWords[currentWordIndex];
-
   function switchToNextWord() {
-    if (initialErrorsAmont - wrongAmount === 0 || currentWordIndex === wordsCollection.length - 1) {
+    if (
+      initialErrorsAmount - wrongAmount === 0 ||
+      currentWordIndex === wordsCollection.length - 1
+    ) {
       finishGame();
     } else {
       changeIndex(currentWordIndex + 1);
@@ -131,9 +140,9 @@ const SavannaGameContainer = ({
   };
 
   const processAnswer = (selectedWordIndex) => {
-    changeSelectedWord(currentStepWords[selectedWordIndex]);
+    selectedWord = selectedWordIndex === null ? null : currentStepWords[selectedWordIndex].word;
     const word = currentStepWords[selectedWordIndex];
-    const isCorrect = selectedWordIndex === false ? false : word.word === currentWord.word;
+    const isCorrect = selectedWordIndex === null ? false : word.word === currentWord.word;
     if (!isCorrect) {
       changeWrongAmount(wrongAmount + 1);
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
@@ -145,13 +154,12 @@ const SavannaGameContainer = ({
   };
 
   const onFallingEnd = () => {
-    changeSelectedWord(null);
-    processAnswer(false);
+    processAnswer(null);
   };
 
   return (
     <SavannahGameContainerStyled>
-      <SavannahLivesContainer wrongAmount={wrongAmount} wholeLives={initialErrorsAmont} />
+      <SavannahLivesContainer wrongAmount={wrongAmount} wholeLives={initialErrorsAmount} />
       <FallingWordStyled
         animationDuration={secondsForOneWord}
         onAnimationEnd={() => onFallingEnd()}
@@ -172,7 +180,7 @@ const SavannaGameContainer = ({
         currentStepWords={currentStepWords}
         isWordFinished={isWordFinished}
         processAnswer={processAnswer}
-        selectedWord={selectedWord ? selectedWord.word : null}
+        selectedWord={selectedWord}
         currentWord={currentWord.word}
       />
     </SavannahGameContainerStyled>
@@ -193,7 +201,7 @@ SavannaGameContainer.propTypes = {
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func,
   secondsForOneWord: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  initialErrorsAmont: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  initialErrorsAmount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 SavannaGameContainer.defaultProps = {
@@ -220,7 +228,7 @@ const mapStateToProps = (state) => {
     maxPage: state.maxPage.maxPage,
     gameName: GAME_NAME.savannah,
     secondsForOneWord: state.userSettings.settings.savannahTimeForWord,
-    initialErrorsAmont: state.userSettings.settings.savannahMaxErrorCounter,
+    initialErrorsAmount: state.userSettings.settings.savannahMaxErrorCounter,
   };
 };
 

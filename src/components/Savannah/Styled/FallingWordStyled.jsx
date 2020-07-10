@@ -22,10 +22,10 @@ const FallingWordStyled = styled.div`
 }
   @keyframes falling {
     0% {
-      top: 0;
+      top: -20px;
     }
     100% {
-      top: calc(100vh - 350px);
+      top: calc(100vh - 180px);
     }
   }
 `;
