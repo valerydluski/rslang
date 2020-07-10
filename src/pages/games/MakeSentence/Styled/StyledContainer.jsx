@@ -7,6 +7,7 @@ const StyledContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 40px;
 
   @media ${DEVICE.tablet} {

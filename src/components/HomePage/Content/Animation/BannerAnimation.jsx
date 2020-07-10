@@ -10,33 +10,21 @@ function SignInAnimation() {
 
   const breakpoint = 768;
 
-  const prevWidth = getScreenWidth();
-
   const onResize = useCallback(() => {
-    const width = getScreenWidth();
-    if (width <= breakpoint) {
-      changeBreakpoint(true);
-    } else {
-      changeBreakpoint(false);
-    }
+    changeBreakpoint(getScreenWidth() < breakpoint);
   }, [changeBreakpoint]);
 
   const onOrientationChange = useCallback(() => {
-    const width = getScreenWidth();
-    if (width < breakpoint) {
-      changeBreakpoint(true);
-    } else {
-      changeBreakpoint(false);
-    }
+    changeBreakpoint(getScreenWidth() < breakpoint);
   }, [changeBreakpoint]);
 
   useEffect(() => {
-    if (prevWidth < breakpoint) {
+    if (getScreenWidth() < breakpoint) {
       changeBreakpoint(true);
     }
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', onOrientationChange);
-  }, [prevWidth, onResize, onOrientationChange]);
+  }, [onResize, onOrientationChange]);
 
   const options = {
     loop: true,
