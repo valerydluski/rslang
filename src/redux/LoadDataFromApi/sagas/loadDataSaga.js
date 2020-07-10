@@ -14,6 +14,8 @@ import { addToShowedWordsList } from '../../LearnWords/actions';
 import { puzzleSettingsFromServer } from '../../EnglishPuzzle/actions';
 import getAllUserWords from '../../../services/getAllUserWords';
 import { saveUserWords } from '../../Dictionary/actions';
+import checkInitialStatistic from '../../../utils/checkInitialStatistic';
+import checkInitialSettings from '../../../utils/checkInitialSettings';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());
@@ -24,23 +26,25 @@ function* workerLoadData() {
   if (statistic) {
     const statisticFromApi = getSettings(statistic);
     const initialRound = createInitialRounds(statisticFromApi);
+    const initialStatistic = (checkInitialStatistic, statisticFromApi);
     yield put(changeInitialRound(initialRound));
-    yield put(addToShowedWordsList(JSON.parse(statisticFromApi.RepeatWordsToday)));
-    yield put(saveFullStatisticToStore(statisticFromApi));
+    yield put(addToShowedWordsList(JSON.parse(initialStatistic.RepeatWordsToday)));
+    yield put(saveFullStatisticToStore(initialStatistic));
   }
 
   const settings = yield call(getSettingsFromApi, sessionData);
   if (settings) {
     const settingsFromApi = getSettings(settings);
-    yield put(saveUserSettingsToStore(settingsFromApi));
+    const initialSettings = checkInitialSettings(settingsFromApi);
+    yield put(saveUserSettingsToStore(initialSettings));
     yield put(
       puzzleSettingsFromServer({
-        isAutoSpeech: settingsFromApi.isAutoSpeech,
-        isTranslation: settingsFromApi.isTranslation,
-        isBackground: settingsFromApi.isBackground,
+        isAutoSpeech: initialSettings.isAutoSpeech,
+        isTranslation: initialSettings.isTranslation,
+        isBackground: initialSettings.isBackground,
       })
     );
-    yield put(setLocale(settingsFromApi.language));
+    yield put(setLocale(initialSettings.language));
   }
 
   const payload = yield call(getAllUserWords, sessionData);
