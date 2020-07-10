@@ -5,7 +5,7 @@ export default function DayInfo({ title, count, total }) {
   return (
     <div>
       <h3>{title}</h3>
-      <p>{`${count}/${total}`}</p>
+      <p>{`${+count}/${total}`}</p>
     </div>
   );
 }
