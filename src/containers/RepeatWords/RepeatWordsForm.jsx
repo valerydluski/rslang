@@ -34,6 +34,7 @@ const LearnWordsForm = (props) => {
     wordsCount,
     currentWordIndex,
     audiosDuration,
+    showButtons,
   } = props;
 
   const {
@@ -42,8 +43,6 @@ const LearnWordsForm = (props) => {
     isTextExample,
     isTranscription,
     isImageAssociation,
-    deleteButton,
-    addDificultWordsButton,
   } = settings.settings;
   const {
     textExample,
@@ -60,7 +59,7 @@ const LearnWordsForm = (props) => {
     if (isCorrect) {
       reset('wordLearn');
     }
-  });
+  }, [isCorrect, reset]);
 
   const customHandleSubmit = (type) => {
     return () => {
@@ -129,20 +128,30 @@ const LearnWordsForm = (props) => {
         )}
       </RepeatCardsContainer>
       <RepeatButtonsContainer>
-        <StyledButton className="button-next">Next</StyledButton>
-        {deleteButton && (
-          <StyledButton onClick={customHandleSubmit('deleted')} type="button">
-            Delete
-          </StyledButton>
+        {!showButtons && <StyledButton className="button-next">Check</StyledButton>}
+        {showButtons && (
+          <>
+            <StyledButton onClick={customHandleSubmit('easy')} type="button">
+              Easy
+            </StyledButton>
+            <StyledButton onClick={customHandleSubmit('simply')} type="button">
+              Simply
+            </StyledButton>
+            <StyledButton onClick={customHandleSubmit('medium')} type="button">
+              Medium
+            </StyledButton>
+            <StyledButton onClick={customHandleSubmit('difficult')} type="button">
+              Difficult
+            </StyledButton>
+            <StyledButton onClick={customHandleSubmit('hard')} type="button">
+              Hard
+            </StyledButton>
+            <StyledButton className="button-next" onClick={customHandleSubmit('repeat')}>
+              repeat
+            </StyledButton>
+          </>
         )}
-        {addDificultWordsButton && (
-          <StyledButton onClick={customHandleSubmit('difficult')} type="button">
-            Difficult
-          </StyledButton>
-        )}
-        <StyledButton onClick={customHandleSubmit('unknown')} type="button">
-          Unknow
-        </StyledButton>
+
         <p>{currentWordIndex}</p>
         <Line
           percent={Math.round((currentWordIndex / wordsCount) * 100)}
@@ -178,8 +187,6 @@ LearnWordsForm.propTypes = {
       isTextExample: PropTypes.bool.isRequired,
       isTranscription: PropTypes.bool.isRequired,
       isImageAssociation: PropTypes.bool.isRequired,
-      deleteButton: PropTypes.bool.isRequired,
-      addDificultWordsButton: PropTypes.bool.isRequired,
     }).isRequired,
   }).isRequired,
   isCorrect: PropTypes.bool.isRequired,
@@ -190,6 +197,7 @@ LearnWordsForm.propTypes = {
   isRightAnswerShow: PropTypes.bool.isRequired,
   answer: PropTypes.string,
   isResultShow: PropTypes.bool,
+  showButtons: PropTypes.bool.isRequired,
   wordsCount: PropTypes.number,
   currentWordIndex: PropTypes.number,
   audiosDuration: PropTypes.number.isRequired,

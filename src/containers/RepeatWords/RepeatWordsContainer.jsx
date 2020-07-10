@@ -2,8 +2,13 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RepeatWords from '../../components/RepeatWords/RepeatWords';
-import { LINK_FOR_AUDIO } from '../../config';
-import { correctCard, saveWordToState, showResult } from '../../redux/RepeatWords/actions';
+import { LINK_FOR_AUDIO, REPEAT_TIMES } from '../../config';
+import {
+  correctCard,
+  saveWordToState,
+  showResult,
+  saveRepeatWords,
+} from '../../redux/RepeatWords/actions';
 import updateOneWord from '../../services/updateOneWord';
 import FinalScreen from '../../components/RepeatWords/FinalScreen';
 
@@ -14,6 +19,8 @@ function getWord(arr, i) {
   return w;
 }
 
+const { EASY, SIMPLY, MEDIUM, DIFFICULT, HARD } = REPEAT_TIMES;
+
 function RepeatWordCardContainer(props) {
   const {
     correctCardHandler,
@@ -23,6 +30,7 @@ function RepeatWordCardContainer(props) {
     resetSaveWord,
     wordsCollection,
     showResultHandler,
+    saveRepeatWordsHandler,
   } = props;
   const { isAudioTranslate, isAudioTextMeaning, isAudioTextExample } = settings.settings;
   const [currentWord, setCurrentWord] = useState();
@@ -37,6 +45,7 @@ function RepeatWordCardContainer(props) {
   const currentWordIndex = useRef(0);
   const audiosDuration = useRef(-1);
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
+  const [isShowButtons, setIsShowButtons] = useState(false);
 
   if (wordsCollection.length < 1 && !isGameStart.current) {
     return <FinalScreen noWords />;
@@ -49,7 +58,7 @@ function RepeatWordCardContainer(props) {
     setCurrentWord(getWord(wordsCollection, currentWordIndex.current));
   }
 
-  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord.current) {
+  if (currentWord && !isRightAnswerShow && needNewWord.current) {
     isGameStart.current = true;
     const { audio, audioExample, audioMeaning } = currentWord;
     isAudiosPlay = [isAudioTranslate, isAudioTextMeaning, isAudioTextExample];
@@ -62,6 +71,7 @@ function RepeatWordCardContainer(props) {
   }
 
   const nextWord = () => {
+    setIsShowButtons(false);
     resetSaveWord(null);
     currentWordIndex.current += 1;
     showResultHandler(false);
@@ -74,7 +84,22 @@ function RepeatWordCardContainer(props) {
     } else {
       setCurrentWord(null);
     }
-    return undefined;
+  };
+
+  const customUpdateOneWord = (dufficulty, addTime) => {
+    const config = {
+      difficulty: dufficulty,
+      optional: {
+        deleted: false,
+        difficult: false,
+        time: new Date(),
+        nextRepeat: new Date().valueOf() + addTime,
+        repeats: currentWord.userWord.optional.repeats + 1,
+      },
+    };
+    // eslint-disable-next-line no-underscore-dangle
+    updateOneWord(currentWord._id, config, user);
+    nextWord();
   };
 
   const onSubmit = async (formData) => {
@@ -82,38 +107,30 @@ function RepeatWordCardContainer(props) {
     setAnswerToForm(formData.word);
     const answer = formData.word;
     const { word } = currentWord;
-    let config = {};
 
     switch (buttonType) {
       case 'sound':
         setIsSoundPlay(!isSoundPlay);
         break;
-      case 'deleted':
-        config = {
-          difficulty: 'new',
-          optional: {
-            deleted: true,
-            difficult: false,
-            time: new Date(),
-          },
-        };
-        updateOneWord(currentWord.id, config, user);
-        setCurrentWord(getWord(wordsCollection));
+      case 'easy':
+        customUpdateOneWord('easy', EASY);
+        break;
+      case 'simply':
+        customUpdateOneWord('simply', SIMPLY);
+        break;
+      case 'medium':
+        customUpdateOneWord('medium', MEDIUM);
         break;
       case 'difficult':
-        config = {
-          difficulty: 'difficult',
-          optional: {
-            difficult: true,
-            delete: false,
-            time: new Date(),
-          },
-        };
-        updateOneWord(currentWord.id, config, user);
-        setCurrentWord(getWord(wordsCollection));
+        customUpdateOneWord('difficult', DIFFICULT);
         break;
-      case 'unknown':
-        showResultHandler(true);
+      case 'hard':
+        customUpdateOneWord('hard', HARD);
+        break;
+      case 'repeat':
+        saveRepeatWordsHandler([...wordsCollection, currentWord]);
+        wordsCount.current += 1;
+        customUpdateOneWord(currentWord.userWord.difficulty, 0);
         break;
       default:
         if (!answer) break;
@@ -131,7 +148,9 @@ function RepeatWordCardContainer(props) {
                   audios[i + 1].play();
                 };
               } else {
-                audios[i].onended = nextWord;
+                audios[i].onended = () => {
+                  setIsShowButtons(true);
+                };
               }
             }
           }
@@ -149,6 +168,7 @@ function RepeatWordCardContainer(props) {
       onSubmit={onSubmit}
       word={currentWord}
       isCorrect={isCorrect}
+      showButtons={isShowButtons}
       answer={answerToForm}
       wordsCount={wordsCount.current + 1}
       currentWordIndex={currentWordIndex.current + 1}
@@ -160,6 +180,7 @@ function RepeatWordCardContainer(props) {
 RepeatWordCardContainer.propTypes = {
   correctCardHandler: PropTypes.func.isRequired,
   resetSaveWord: PropTypes.func.isRequired,
+  saveRepeatWordsHandler: PropTypes.func.isRequired,
   wordsCollection: PropTypes.instanceOf(Array).isRequired,
   isCorrect: PropTypes.bool,
   settings: PropTypes.shape({
@@ -195,7 +216,7 @@ RepeatWordCardContainer.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isCorrect: state.isCorrectRepeatReducer.isCorrect,
-    wordsCollection: state.userWords.words[0].paginatedResults,
+    wordsCollection: state.repeatWords.wordsCollection,
     settings: state.userSettings,
     user: state.login,
   };
@@ -205,6 +226,7 @@ const mapDispatchToProps = {
   correctCardHandler: correctCard,
   resetSaveWord: saveWordToState,
   showResultHandler: showResult,
+  saveRepeatWordsHandler: saveRepeatWords,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepeatWordCardContainer);

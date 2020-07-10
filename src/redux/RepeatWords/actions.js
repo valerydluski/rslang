@@ -7,6 +7,12 @@ import {
   ADD_TO_DISPLAYED_WORDS_LIST,
   SHOW_RESULT,
   RESET_STORE_REPEAT_WORDS,
+  GET_REPEAT_WORDS,
+  GET_REPEAT_WORDS_LOADER_SHOW,
+  GET_REPEAT_WORDS_LOADER_HIDE,
+  SAVE_REPEAT_WORDS,
+  IS_WORD_COLLECTION_LOADED,
+  IS_REPEAT_WORDS_LOADED,
 } from './types';
 
 export function showNewCard(card) {
@@ -60,5 +66,44 @@ export function showResult(bool) {
 export function resetStoreRepeatWords() {
   return {
     type: RESET_STORE_REPEAT_WORDS,
+  };
+}
+
+export function getRepeatWords() {
+  return {
+    type: GET_REPEAT_WORDS,
+  };
+}
+
+export function saveRepeatWords(arr) {
+  return {
+    type: SAVE_REPEAT_WORDS,
+    payload: arr,
+  };
+}
+
+export function isWordsCollectionLoadedHandler(bool) {
+  return {
+    type: IS_WORD_COLLECTION_LOADED,
+    payload: bool,
+  };
+}
+
+export function isRepeatWordsLoadedHandler(bool) {
+  return {
+    type: IS_REPEAT_WORDS_LOADED,
+    payload: bool,
+  };
+}
+
+export function getRepeatWordsLoaderShow() {
+  return {
+    type: GET_REPEAT_WORDS_LOADER_SHOW,
+  };
+}
+
+export function getRepeatWordsLoaderHide() {
+  return {
+    type: GET_REPEAT_WORDS_LOADER_HIDE,
   };
 }

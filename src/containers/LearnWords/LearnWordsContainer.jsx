@@ -104,21 +104,25 @@ function LearnWordCardContainer(props) {
         config = {
           difficulty: 'new',
           optional: {
+            time: new Date(),
             deleted: true,
             difficult: false,
-            time: new Date(),
+            nextRepeat: new Date().valueOf(),
+            repeats: 1,
           },
         };
         updateOneWord(currentWord.id, config, user);
         setCurrentWord(getWord(wordsCollection));
         break;
-      case 'difficult':
+      case 'hard':
         config = {
-          difficulty: 'difficult',
+          difficulty: 'hard',
           optional: {
+            time: new Date(),
             difficult: true,
             delete: false,
-            time: new Date(),
+            nextRepeat: new Date().valueOf(),
+            repeats: 1,
           },
         };
         updateOneWord(currentWord.id, config, user);

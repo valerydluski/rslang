@@ -19,6 +19,7 @@ export default function RepeatWords(props) {
     wordsCount,
     currentWordIndex,
     audiosDuration,
+    showButtons,
   } = props;
   return (
     <RepeatWordsContainer>
@@ -28,6 +29,7 @@ export default function RepeatWords(props) {
           onSubmit={onSubmit}
           word={word}
           isCorrect={isCorrect}
+          showButtons={showButtons}
           autocomplete="off"
           settings={settings}
           isTranslationShow={isTranslationShow}
@@ -49,6 +51,7 @@ RepeatWords.propTypes = {
   word: PropTypes.shape({}),
   isTranslationShow: PropTypes.bool.isRequired,
   isCorrect: PropTypes.bool.isRequired,
+  showButtons: PropTypes.bool.isRequired,
   isRightAnswerShow: PropTypes.bool.isRequired,
   settings: PropTypes.shape().isRequired,
   answer: PropTypes.string,

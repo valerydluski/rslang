@@ -136,8 +136,8 @@ const LearnWordsForm = (props) => {
           </StyledButton>
         )}
         {addDificultWordsButton && (
-          <StyledButton onClick={customHandleSubmit('difficult')} type="button">
-            Difficult
+          <StyledButton onClick={customHandleSubmit('hard')} type="button">
+            Hard
           </StyledButton>
         )}
         <StyledButton onClick={customHandleSubmit('unknown')} type="button">
