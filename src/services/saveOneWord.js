@@ -1,9 +1,18 @@
 import { toast } from 'react-toastify';
-import { API } from '../config';
+import { API, DICTIONARY_API } from '../config';
 import fetchData from '../utils/fetchData';
 
-async function saveOneWord(wordId, wordOptions, user) {
+async function saveOneWord(wordId, wordOptions, user, word) {
+  const {
+    LINK,
+    ENDPOINTS: { PUBLIC, VERSION, WORD, SEARCH },
+  } = DICTIONARY_API;
+  const data = await fetchData(`${LINK}/${PUBLIC}/${VERSION}/${WORD}/${SEARCH}?${SEARCH}=${word}`);
   const newOptions = { ...wordOptions };
+  if (data && data[0] && data[0].meanings) {
+    const { partOfSpeechCode } = data[0].meanings[0];
+    newOptions.partOfSpeechCode = partOfSpeechCode;
+  }
   newOptions.addDate = new Date().valueOf();
   try {
     const {

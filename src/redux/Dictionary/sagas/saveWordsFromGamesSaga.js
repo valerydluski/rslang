@@ -46,7 +46,7 @@ function* saveUserWordsFromGamesSagaWorker({ payload }) {
           words[0].paginatedResults = words[0].paginatedResults.concat(elForStore);
           saveOneUserWords(words);
           // eslint-disable-next-line no-underscore-dangle
-          saveOneWord(element.id || element._id, config, userData);
+          saveOneWord(element.id || element._id, config, userData, element.word);
         }
         return element;
       })

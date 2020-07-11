@@ -202,3 +202,13 @@ export const INITIAL_SETTINGS = {
   isDictionaryDeletedButton: true,
   isDictionaryDifficultButton: true,
 };
+
+export const DICTIONARY_API = {
+  LINK: 'https://dictionary.skyeng.ru/api',
+  ENDPOINTS: {
+    PUBLIC: 'public',
+    VERSION: 'v1',
+    WORD: 'words',
+    SEARCH: 'search',
+  },
+};

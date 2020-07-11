@@ -38,7 +38,7 @@ function* addNewWordSagaWorker(action) {
         repeats: 1,
       },
     };
-    yield call(saveOneWord, wordId, config, sessionData);
+    yield call(saveOneWord, wordId, config, sessionData, action.payload.word);
     nextWord = +LearnLastWords + 1 > +WORDS_PER_PAGE ? 1 : +LearnLastWords + 1;
     nextLevel = +LearnLastWords + 1 > +WORDS_PER_PAGE ? +LearnLastLevel + 1 : +LearnLastLevel;
     yield saveUserWords([...userWords, action.payload]);
