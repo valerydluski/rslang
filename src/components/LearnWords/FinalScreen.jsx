@@ -4,6 +4,7 @@ import { Translate } from 'react-redux-i18n';
 import FinalScreenContainer from './styled/FinalScreenContainer';
 import ResultAnimation from './Animation/ResultAnimation';
 import ResultItem from './styled/ResultItem';
+import GoToHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 
 export default function FinalScreen(props) {
   const { noWords, wordsCount, newWordCount, rightAnswer, longestSeries } = props;
@@ -29,6 +30,7 @@ export default function FinalScreen(props) {
   ];
   return (
     <FinalScreenContainer>
+      <GoToHomePageButton />
       <ResultAnimation />
       <h2>
         <Translate value={noWords ? 'LearnWords.noWords' : 'LearnWords.completed'} />
