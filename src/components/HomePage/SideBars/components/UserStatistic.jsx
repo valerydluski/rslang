@@ -10,7 +10,6 @@ import TotalProgress from './TotalProgress';
 import { TOTAL_WORDS } from '../../../../config';
 
 function UserStatistic({ wordsInDay, cardsInDay, totalWordsInDay, totalCardsInDay, totalWords }) {
-  console.log(totalWords);
   return (
     <UserStatisticContainer>
       <DayInfoContainer>
@@ -22,14 +21,14 @@ function UserStatistic({ wordsInDay, cardsInDay, totalWordsInDay, totalCardsInDa
         />
       </DayInfoContainer>
       <ProgressBarContainer>
-        <TotalProgress
+        {/* <TotalProgress
           count={
             totalWords.length === 0 || totalWords[0].totalCount.length === 0
               ? 0
               : totalWords[0].totalCount[0].count
           }
           total={TOTAL_WORDS}
-        />
+        /> */}
       </ProgressBarContainer>
     </UserStatisticContainer>
   );
