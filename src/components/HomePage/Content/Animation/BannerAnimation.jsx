@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Lottie from 'react-lottie';
+import Lottie from 'lottie-react-web';
 import animationData from '../../../../assets/animation/banner/data.json';
 import animationDataMobile from '../../../../assets/animation/banner-mobile/data.json';
 import AnimationContainerStyled from './Styled/AnimationContainerStyled';
