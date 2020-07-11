@@ -1,18 +1,17 @@
 import React from 'react';
 import { Translate } from 'react-redux-i18n';
 import PropTypes from 'prop-types';
-import Title from '../Main/components/Title/styled/UserTitleContainer';
+import Title from '../../../../containers/Homepage/Content/Title/Title';
 import TitleWithUnderline from '../Main/components/Title/styled/TitleWithUnderline';
 import TeamContainer from './components/AboutPersonCard/styled/TeamContainer';
 import AboutPersonCard from './components/AboutPersonCard/AboutPersonCard';
 import ContentContainer from '../ContentContainer';
-import helloImg from '../../../../assets/img/helloImg.svg';
 
 export default function AboutUs(props) {
   const { userName, team } = props;
   return (
     <ContentContainer>
-      <Title userName={userName} bg={helloImg} />
+      <Title userName={userName} />
       <TitleWithUnderline>
         <Translate value="HomePage.about" />
       </TitleWithUnderline>
