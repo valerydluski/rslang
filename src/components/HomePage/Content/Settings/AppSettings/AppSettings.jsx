@@ -64,6 +64,18 @@ const AppSettings = ({ checkboxes }) => {
         className="settings"
       />
       <Field
+        name="cardsPerDayRepeat"
+        key="cardsPerDayRepeat"
+        type="number"
+        component={Input}
+        placeholder={I18n.t('Settings.cardsPerDayRepeat')}
+        validate={WordsPerDayValidator}
+        parse={(val) => parseInt(val, 10)}
+        label={I18n.t('Settings.cardsPerDayRepeat')}
+        classNameSpan="span_none"
+        className="settings"
+      />
+      <Field
         name="deleteButton"
         id="deleteButton"
         component={Input}
