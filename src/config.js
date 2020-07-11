@@ -198,4 +198,5 @@ export const INITIAL_SETTINGS = {
   sprintTimeForWord: '2',
   savannahTimeForWord: '2',
   savannahMaxErrorCounter: '5',
+  cardsPerDayRepeat: 20,
 };
