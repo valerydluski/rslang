@@ -89,6 +89,16 @@ const StyledMainNavigationMenu = styled.div`
       margin-left: 45%;
     }
   }
+
+  @media (max-height: 600px) {
+    li {
+      margin-bottom: 4vh;
+    }
+
+    li:first-of-type {
+      margin-top: 10vh;
+    }
+  }
 `;
 
 export default StyledMainNavigationMenu;

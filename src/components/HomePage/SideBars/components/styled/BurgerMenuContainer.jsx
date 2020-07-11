@@ -107,6 +107,16 @@ const BurgerMenuContainer = styled.div`
       margin-left: -75px;
     }
   }
+
+  @media (max-height: 600px) {
+    button {
+      margin-top: 77vh;
+    }
+
+    button: first-of-type {
+      margin-top: 70vh;
+    }
+  }
 `;
 
 const BurgerMenuInput = styled.input`
