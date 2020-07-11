@@ -7,21 +7,21 @@ import AudiocallStyled from './Styled/AudiocallStyled';
 
 const AudioCall = ({ wordsCollection }) => {
   const [words, changeWords] = useState(wordsCollection);
-  const [backgroundOpacity, changeBackgroundOpacity] = useState(0);
+  const [gameProgressLine, changegameProgressLine] = useState(0);
 
   useEffect(() => {
     changeWords(wordsCollection);
-    changeBackgroundOpacity(0);
+    changegameProgressLine(0);
   }, [wordsCollection]);
 
   return (
-    <AudiocallStyled backgroundOpacity={backgroundOpacity}>
+    <AudiocallStyled gameProgressLine={gameProgressLine}>
       <GoToHomePageButton />
       <AudiocallContainer
         key={wordsCollection.join()}
         wordsCollection={words}
-        changeBackgroundOpacity={changeBackgroundOpacity}
-        backgroundOpacity={backgroundOpacity}
+        changegameProgressLine={changegameProgressLine}
+        gameProgressLine={gameProgressLine}
       />
     </AudiocallStyled>
   );

@@ -29,6 +29,9 @@ const initialState = {
     sprintTimeForWord: '2',
     savannahTimeForWord: '5',
     savannahMaxErrorCounter: '5',
+    cardsPerDayRepeat: 20,
+    isDictionaryDeletedButton: true,
+    isDictionaryDifficultButton: true,
   },
 };
 

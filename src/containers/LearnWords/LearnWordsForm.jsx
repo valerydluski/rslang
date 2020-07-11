@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Line } from 'rc-progress';
+import { connect } from 'react-redux';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import StyledButton from '../../components/UI/Button/Styled/StyledButton';
 import { LINK_FOR_IMAGE } from '../../config';
@@ -20,6 +21,8 @@ import LearnButtonsContainer, {
   ProgressBarCount,
   ProgressBarContainer,
 } from './Styled/LearnButtonsContainer';
+import LearnButtonsContainer from './Styled/LearnButtonsContainer';
+import { showResult } from '../../redux/LearnWords/actions';
 
 const LearnWordsForm = (props) => {
   const {
@@ -37,6 +40,8 @@ const LearnWordsForm = (props) => {
     wordsCount,
     currentWordIndex,
     audiosDuration,
+    isShowResult,
+    showResultHander,
   } = props;
 
   const {
@@ -63,7 +68,7 @@ const LearnWordsForm = (props) => {
     if (isCorrect) {
       reset('wordLearn');
     }
-  });
+  }, [isCorrect, reset]);
 
   const customHandleSubmit = (type) => {
     return () => {
@@ -113,6 +118,11 @@ const LearnWordsForm = (props) => {
             answer={answer}
             isShowResult={isResultShow}
             audiosDuration={audiosDuration}
+            onChange={() => {
+              if (isShowResult) {
+                showResultHander(false);
+              }
+            }}
           />
           {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
         </TextExampleStyled>
@@ -132,15 +142,17 @@ const LearnWordsForm = (props) => {
         )}
       </LearnCardsContainer>
       <LearnButtonsContainer>
-        <StyledButton className="button-next">Next</StyledButton>
+        <StyledButton className="button-next" onClick={customHandleSubmit('form')}>
+          Next
+        </StyledButton>
         {deleteButton && (
           <StyledButton onClick={customHandleSubmit('deleted')} type="button">
             Delete
           </StyledButton>
         )}
         {addDificultWordsButton && (
-          <StyledButton onClick={customHandleSubmit('difficult')} type="button">
-            Difficult
+          <StyledButton onClick={customHandleSubmit('hard')} type="button">
+            Hard
           </StyledButton>
         )}
         <StyledButton onClick={customHandleSubmit('unknown')} type="button">
@@ -189,10 +201,12 @@ LearnWordsForm.propTypes = {
     }).isRequired,
   }).isRequired,
   isCorrect: PropTypes.bool.isRequired,
+  isShowResult: PropTypes.bool.isRequired,
   isTranslationShow: PropTypes.bool.isRequired,
   autocomplete: PropTypes.string,
   reset: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  showResultHander: PropTypes.func.isRequired,
   isRightAnswerShow: PropTypes.bool.isRequired,
   answer: PropTypes.string,
   isResultShow: PropTypes.bool,
@@ -209,4 +223,14 @@ LearnWordsForm.defaultProps = {
   currentWordIndex: 0,
 };
 
-export default ReduxLearnWordsForm;
+const mapStateToProps = (state) => {
+  return {
+    isShowResult: state.newLearnCardShow.showResult,
+  };
+};
+
+const mapDispatchToProps = {
+  showResultHander: showResult,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReduxLearnWordsForm);

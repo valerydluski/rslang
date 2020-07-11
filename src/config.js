@@ -159,6 +159,18 @@ export const INIT_GAMES_ROUND = [
   'Learn',
 ];
 
+const MILLISEC_IN_SEC = 1000;
+const SEC_IN_MIN = 60;
+const MIN_IN_HOUR = 60;
+
+export const REPEAT_TIMES = {
+  HARD: 10 * SEC_IN_MIN * MILLISEC_IN_SEC,
+  DIFFICULT: 40 * SEC_IN_MIN * MILLISEC_IN_SEC,
+  MEDIUM: 4 * MIN_IN_HOUR * SEC_IN_MIN * MILLISEC_IN_SEC,
+  SIMPLY: 36 * MIN_IN_HOUR * SEC_IN_MIN * MILLISEC_IN_SEC,
+  EASY: 468 * MIN_IN_HOUR * SEC_IN_MIN * MILLISEC_IN_SEC,
+};
+
 export const INITIAL_SETTINGS = {
   name: 'Buddy',
   language: 'en',
@@ -186,4 +198,7 @@ export const INITIAL_SETTINGS = {
   sprintTimeForWord: '2',
   savannahTimeForWord: '2',
   savannahMaxErrorCounter: '5',
+  cardsPerDayRepeat: 20,
+  isDictionaryDeletedButton: true,
+  isDictionaryDifficultButton: true,
 };

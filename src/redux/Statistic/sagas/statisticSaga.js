@@ -41,8 +41,8 @@ function* workerStatus({ payload }) {
     newStatistic = INITIAL_STATISTIC;
   }
   const sessionData = yield createStatisticJSON(newStatistic);
-  yield put(saveFullStatisticToStore(newStatistic));
   yield call(putStatisticToApi, sessionData, userData);
+  yield put(saveFullStatisticToStore(newStatistic));
 }
 
 export default function* watchStatus() {

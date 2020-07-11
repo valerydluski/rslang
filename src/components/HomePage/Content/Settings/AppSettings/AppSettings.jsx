@@ -64,6 +64,18 @@ const AppSettings = ({ checkboxes }) => {
         className="settings"
       />
       <Field
+        name="cardsPerDayRepeat"
+        key="cardsPerDayRepeat"
+        type="number"
+        component={Input}
+        placeholder={I18n.t('Settings.cardsPerDayRepeat')}
+        validate={WordsPerDayValidator}
+        parse={(val) => parseInt(val, 10)}
+        label={I18n.t('Settings.cardsPerDayRepeat')}
+        classNameSpan="span_none"
+        className="settings"
+      />
+      <Field
         name="deleteButton"
         id="deleteButton"
         component={Input}
@@ -123,6 +135,23 @@ const AppSettings = ({ checkboxes }) => {
         component={Input}
         type="checkbox"
         label={I18n.t('Settings.isAudioTextExample')}
+      />
+      <BlackHeader>
+        <Translate value="HomePage.dictionary" />
+      </BlackHeader>
+      <Field
+        name="isDictionaryDeletedButton"
+        id="isDictionaryDeletedButton"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.deleteButton')}
+      />
+      <Field
+        name="isDictionaryDifficultButton"
+        id="isDictionaryDifficultButton"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.difficultButton')}
       />
     </>
   );

@@ -31,17 +31,18 @@ const fn2 = (LearnLastLevel, LearnLastWords) => {
   return { level: newLevel, words: newWords };
 };
 
-const filterFn = (data, LearnLastWords, wordsPerDay) => {
+const filterFn = (data, LearnLastWords, wordsPerDay, payload) => {
   if (wordsPerDay < 1) return [];
   let newWords;
   if (+LearnLastWords === 0) newWords = 1;
   else newWords = LearnLastWords;
   const remainder = newWords % 50;
-  const filterData = data.slice(remainder - 1, remainder - 1 + +wordsPerDay);
+  const dataWithoutOldWords = data.filter((el) => !payload.includes(el.id));
+  const filterData = dataWithoutOldWords.slice(remainder - 1, remainder - 1 + +wordsPerDay);
   return filterData;
 };
 
-const filterFn2 = (data, filterData, wordsPerDay) => {
+const filterFn2 = (data, filterData, wordsPerDay, payload) => {
   if (wordsPerDay < 1) return [];
   const newElCount = wordsPerDay - filterData.length;
   const newData = data.slice(0, newElCount);
@@ -52,6 +53,11 @@ function* generateLearnWordsCollectionWorker() {
   yield put(wordsCollectionLoaderShow());
   const getSettings = (state) => state.userSettings.settings;
   const getStatistic = (state) => state.changeStatistic.statistic;
+  const getLoginState = (state) => state.login;
+  const sessionData = yield select(getLoginState);
+  const payload = yield call(getAllUserWords, sessionData);
+  // eslint-disable-next-line no-underscore-dangle
+  const userWordsID = payload[0].paginatedResults.map((el) => el.id || el._id);
   const { cardsPerDay, howToLearnWords, wordsPerDay } = yield select(getSettings);
   let { CountCardsShow, CountNewWordsToday, RepeatWordsToday } = yield select(getStatistic);
   const { LearnLastWords, LearnLastLevel, lastTrain } = yield select(getStatistic);
@@ -78,10 +84,10 @@ function* generateLearnWordsCollectionWorker() {
   switch (howToLearnWords) {
     case 'allWords':
       data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastWords));
-      filterData = filterFn(data, LearnLastWords, wordsPerDay - CountNewWordsToday);
+      filterData = filterFn(data, LearnLastWords, wordsPerDay - CountNewWordsToday, userWordsID);
       if (filterData.length < wordsPerDay - CountNewWordsToday) {
         data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastWords));
-        filterData = filterFn2(data, filterData, wordsPerDay - CountNewWordsToday);
+        filterData = filterFn2(data, filterData, wordsPerDay - CountNewWordsToday, userWordsID);
       }
       filterData = filterData.map((el) => {
         const newEl = el;
@@ -90,9 +96,6 @@ function* generateLearnWordsCollectionWorker() {
       });
       if (filterData.length < cardsPerDay) {
         const oldWordsCount = cardsPerDay - filterData.length - CountCardsShow;
-        const getLoginState = (state) => state.login;
-        const sessionData = yield select(getLoginState);
-        const payload = yield call(getAllUserWords, sessionData);
         const arrRepeat = payload[0].paginatedResults.filter(
           (el) => !RepeatWordsToday.includes(el.word)
         );
@@ -102,10 +105,10 @@ function* generateLearnWordsCollectionWorker() {
       break;
     case 'newWords':
       data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastWords));
-      filterData = filterFn(data, LearnLastWords, wordsPerDay - CountNewWordsToday);
+      filterData = filterFn(data, LearnLastWords, wordsPerDay - CountNewWordsToday, userWordsID);
       if (filterData.length < wordsPerDay - CountNewWordsToday) {
         data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastWords));
-        filterData = filterFn2(data, filterData, wordsPerDay - CountNewWordsToday);
+        filterData = filterFn2(data, filterData, wordsPerDay - CountNewWordsToday, userWordsID);
       }
       filterData = filterData.map((el) => {
         const newEl = el;
@@ -115,9 +118,6 @@ function* generateLearnWordsCollectionWorker() {
       break;
     case 'repeat':
       if (cardsPerDay) {
-        const getLoginState = (state) => state.login;
-        const sessionData = yield select(getLoginState);
-        const payload = yield call(getAllUserWords, sessionData);
         const arrRepeat = payload[0].paginatedResults.filter(
           (el) => !RepeatWordsToday.includes(el.word)
         );

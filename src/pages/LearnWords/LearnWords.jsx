@@ -11,6 +11,7 @@ function LearnWords({ isLoading, isDataLoad, checkStatus }) {
     checkStatus();
     return null;
   }
+
   return <LearnWordsStart />;
 }
 
