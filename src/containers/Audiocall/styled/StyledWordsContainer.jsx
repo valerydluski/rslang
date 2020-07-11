@@ -5,17 +5,19 @@ const WordsContainerStyled = styled.div`
   display: flex;
   margin: 0 auto 50px;
   padding: 20px 30px;
-  justify-content: space-between;
+  justify-content: center;
   max-width: 1440px;
   user-select: none;
   box-sizing: border-box;
 
   @media ${DEVICE.laptopL} {
     max-width: 1024px;
+    flex-wrap: wrap;
   }
 
   @media ${DEVICE.laptop} {
     max-width: 768px;
+    flex-wrap: wrap;
     padding: 20px 0;
   }
 

@@ -24,13 +24,14 @@ const WordStyled = styled.div`
 
   @media ${DEVICE.laptopL} {
     font-size: 20px;
+    white-space: normal;
   }
 
   @media ${DEVICE.tablet} {
     font-size: 26px;
     padding: 6px 30px;
     &:not(:last-child) {
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
   }
 `;
