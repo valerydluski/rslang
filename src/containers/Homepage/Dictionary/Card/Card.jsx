@@ -31,8 +31,14 @@ function Card(props) {
     updateLearning,
     updateDifficult,
     updateDeleted,
+    isTranslate,
+    isTextMeaning,
+    isTextExample,
+    isTranscription,
+    isImageAssociation,
   } = props;
   const sound = new Audio();
+  console.log(item);
 
   const play = () => {
     sound.src = `${LINK_FOR_AUDIO}${item.audio}`;
@@ -133,12 +139,17 @@ function Card(props) {
 
   return (
     <StyledCard>
-      <Left>
+      <Left isImageAssociation={isImageAssociation}>
         <Image src={`${LINK_FOR_IMAGE}${item.image}`} className="small-img" />
       </Left>
       <Center>
-        <p>{item.word}</p>
-        <p>{item.textExample.replace(/<\w+>|<\/\w+>/g, '')}</p>
+        <p>
+          {item.word}
+          {isTranslate ? <span> - {item.wordTranslate}</span> : null}
+        </p>
+        {isTranscription ? <p>{item.transcription}</p> : null}
+        {isTextMeaning ? <p>{item.textMeaning.replace(/<\w+>|<\/\w+>/g, '')}</p> : null}
+        {isTextExample ? <p>{item.textExample.replace(/<\w+>|<\/\w+>/g, '')}</p> : null}
       </Center>
       {controls()}
     </StyledCard>
@@ -155,6 +166,11 @@ Card.propTypes = {
   updateLearning: PropTypes.func,
   updateDifficult: PropTypes.func,
   updateDeleted: PropTypes.func,
+  isTranslate: PropTypes.bool,
+  isTextMeaning: PropTypes.bool,
+  isTextExample: PropTypes.bool,
+  isTranscription: PropTypes.bool,
+  isImageAssociation: PropTypes.bool,
 };
 
 Card.defaultProps = {
@@ -167,6 +183,11 @@ Card.defaultProps = {
   updateLearning: () => {},
   updateDifficult: () => {},
   updateDeleted: () => {},
+  isTranslate: false,
+  isTextMeaning: false,
+  isTextExample: false,
+  isTranscription: false,
+  isImageAssociation: false,
 };
 
 const mapStateToProps = (state) => {
@@ -175,6 +196,11 @@ const mapStateToProps = (state) => {
     learningWords: state.dictionary.learningWords,
     difficultWords: state.dictionary.difficultWords,
     deletedWords: state.dictionary.deletedWords,
+    isTranslate: state.userSettings.settings.isTranslate,
+    isTextMeaning: state.userSettings.settings.isTextMeaning,
+    isTextExample: state.userSettings.settings.isTextExample,
+    isTranscription: state.userSettings.settings.isTranscription,
+    isImageAssociation: state.userSettings.settings.isImageAssociation,
   };
 };
 
