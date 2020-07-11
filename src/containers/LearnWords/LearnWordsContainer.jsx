@@ -140,7 +140,7 @@ function LearnWordCardContainer(props) {
         config = {
           difficulty: 'hard',
           optional: {
-            time: new Date().valueof(),
+            time: new Date().valueOf(),
             deleted: false,
             difficult: true,
             nextRepeat: new Date().valueOf(),
