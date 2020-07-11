@@ -30,6 +30,8 @@ const initialState = {
     savannahTimeForWord: '5',
     savannahMaxErrorCounter: '5',
     cardsPerDayRepeat: 20,
+    isDictionaryDeletedButton: true,
+    isDictionaryDifficultButton: true,
   },
 };
 
