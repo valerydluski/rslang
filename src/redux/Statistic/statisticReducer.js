@@ -21,6 +21,8 @@ const initialState = {
     CountCardsShow: '0',
     CountNewWordsToday: '0',
     lastTrain: '0',
+    lastUpdateDate: '0',
+    countRepeatToday: 0,
   },
 };
 

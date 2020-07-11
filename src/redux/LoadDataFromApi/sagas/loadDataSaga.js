@@ -22,6 +22,9 @@ function* workerLoadData() {
 
   const statistic = yield call(getStatisticFromApi, sessionData);
   if (statistic) {
+    console.log('function*workerLoadData -> statistic', statistic);
+    const now = new Date();
+    // const { lastUpdateDate } = statistic;
     const statisticFromApi = getSettings(statistic);
     const initialRound = createInitialRounds(statisticFromApi);
     yield put(changeInitialRound(initialRound));
