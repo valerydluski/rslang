@@ -2,9 +2,24 @@ import { UPDATE_CHART_DATA } from './types';
 
 const initialState = {
   chartData: {
-    daysData: {},
-    points: {},
-    chartPoints: {},
+    days: [
+      {
+        date: new Date(),
+        count: 0,
+      },
+    ],
+    points: [
+      {
+        date: new Date(),
+        count: 0,
+      },
+    ],
+    chartPoints: [
+      {
+        x: 0,
+        y: 0,
+      },
+    ],
     xMin: 0,
     xMax: 1,
     yMin: 0,

@@ -20,6 +20,7 @@ import correctRepeatWatcher from './RepeatWords/sagas/correctSaga';
 import getRepeatWordsWatcher from './RepeatWords/sagas/getRepeatWordsSaga';
 import saveUserWordsFromGamesSagaWatcher from './Dictionary/sagas/saveWordsFromGamesSaga';
 import showRepeatCardWatcher from './RepeatWords/sagas/newCardShow';
+import chartSaga from './Chart/sagas/chartSaga';
 
 export default function* watchSaga() {
   yield all([
@@ -44,5 +45,6 @@ export default function* watchSaga() {
     fork(getRepeatWordsWatcher),
     fork(saveUserWordsFromGamesSagaWatcher),
     fork(showRepeatCardWatcher),
+    fork(chartSaga),
   ]);
 }

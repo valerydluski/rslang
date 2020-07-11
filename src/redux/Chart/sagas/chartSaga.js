@@ -12,7 +12,9 @@ function* chartSagaWorker() {
   const allWords = yield call(getAggregatedUserWords, sessionData, 'all');
   if (allWords) {
     const [{ paginatedResults }] = allWords;
-    const chartData = configureChartData(paginatedResults);
+    const chartData = configureChartData(
+      paginatedResults.map((item) => item.userWord.optional.addDate)
+    );
     yield put(updateChartData(chartData));
   }
   yield put(hideDictionaryLoader());
