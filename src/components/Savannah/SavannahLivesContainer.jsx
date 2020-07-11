@@ -4,8 +4,9 @@ import { SavannahLiveEmptyStyled, SavannahLiveFilledStyled } from './Styled/Sava
 import SavannahLivesContainerStyled from './Styled/SavannahLivesContainerStyled';
 
 const SavannahLivesContainer = ({ wrongAmount, wholeLives }) => {
-  const livesArr = new Array(wholeLives).fill(0).map((a, i) => {
-    return wholeLives - i > wrongAmount ? 1 : 0;
+  const livesAmount = +wholeLives;
+  const livesArr = new Array(livesAmount).fill(0).map((a, i) => {
+    return livesAmount - i > wrongAmount ? 1 : 0;
   });
   const lives = livesArr.map((live, i) => {
     const key = `live-${i}`;
