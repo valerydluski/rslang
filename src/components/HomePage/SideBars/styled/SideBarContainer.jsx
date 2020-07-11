@@ -16,7 +16,7 @@ const SideBarContainer = styled.div`
   }
 
   @media ${DEVICE.laptopL} {
-    width: 190px;
+    width: 100%;
     padding: 20px;
     img {
       width: 100px;
