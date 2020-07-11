@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Lottie from 'react-lottie';
+import Lottie from 'lottie-react-web';
 import animationData from '../../../assets/animation/sprint/data.json';
 import AnimationContainerStyled from './Styled/AnimationContainerStyled';
 
