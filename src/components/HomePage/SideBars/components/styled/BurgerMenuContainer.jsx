@@ -76,7 +76,7 @@ const BurgerMenuContainer = styled.div`
     position: fixed;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: block;
     .navbar-list {
       display: block;
@@ -148,7 +148,7 @@ const BurgerMenuFirstLine = styled.div`
   cursor: pointer;
   transition: 1s all ease;
   margin-top: 5px;
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: block;
   }
 
@@ -182,7 +182,7 @@ const BurgerMenuFirstLineSmall = styled.div`
   cursor: pointer;
   transition: 1s all ease;
   margin-top: 5px;
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: block;
   }
 
@@ -210,7 +210,7 @@ const BurgerMenuSecondLine = styled.div`
   transition: 1s all ease;
   margin-top: 15px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: block;
   }
 
@@ -250,7 +250,7 @@ const BurgerMenuSecondLineSmall = styled.div`
   transition: 1s all ease;
   margin-top: 15px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: block;
   }
 
@@ -286,7 +286,7 @@ const BurgerMenuThirdLine = styled.div`
   transition: 1s all ease;
   margin-top: 15px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: block;
   }
 
@@ -325,7 +325,7 @@ const BurgerMenuFourthLine = styled.div`
   transition: 1s all ease;
   margin-top: 25px;
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: block;
   }
 
@@ -359,7 +359,7 @@ const BurgerMenuFourthLineSmall = styled.div`
   cursor: pointer;
   transition: 1s all ease;
   margin-top: 25px;
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     display: block;
   }
 
