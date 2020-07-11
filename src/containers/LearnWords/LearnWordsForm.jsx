@@ -146,15 +146,16 @@ const LearnWordsForm = (props) => {
         <StyledButton onClick={customHandleSubmit('unknown')} type="button">
           Unknow
         </StyledButton>
-        {/* <ProgressBarContainer> */}
+
         <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
-        <Line
-          percent={Math.round((currentWordIndex / wordsCount) * 100)}
-          strokeWidth="4"
-          strokeColor="#404497"
-        />
+        <ProgressBarContainer>
+          <Line
+            percent={Math.round((currentWordIndex / wordsCount) * 100)}
+            strokeWidth="4"
+            strokeColor="#404497"
+          />
+        </ProgressBarContainer>
         <ProgressBarCount>{wordsCount}</ProgressBarCount>
-        {/* </ProgressBarContainer> */}
       </LearnButtonsContainer>
     </LearnFormStyled>
   );
