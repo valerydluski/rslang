@@ -48,7 +48,7 @@ Select.propTypes = {
     top: PropTypes.number,
     left: PropTypes.number,
   }),
-  openBtnName: PropTypes.string.isRequired,
+  openBtnName: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   onToggle: PropTypes.func.isRequired,
   onOptionClick: PropTypes.func.isRequired,
 };

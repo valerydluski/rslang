@@ -21,7 +21,7 @@ const createData = ({ changeRound, changeAppMode, userSettings }) => {
   const linkPage = `${PAGE}=${gamePage - fixNumberForLink}`;
   let wordsPerSentence;
   let wordsPerPage;
-  if (appMode === 'EnglishPuzzle') {
+  if (appMode === 'EnglishPuzzle' || appMode === 'MakeSentence') {
     wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentencePuzzle}`;
     wordsPerPage = `${WORDS_PER_PAGE}=${wordsPerSentencePuzzle}`;
   } else {

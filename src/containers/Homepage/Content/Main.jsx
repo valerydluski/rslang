@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import Main from '../../../components/HomePage/Content/Main/Main';
 import { GAME_LIST } from '../../../config';
 import { resetStoreLearnWords } from '../../../redux/LearnWords/actions';
+import { resetStoreRepeatWords } from '../../../redux/RepeatWords/actions';
 
-function MainContainer({ name, resetStoreLearnWordsHandler }) {
+function MainContainer({ name, resetStoreLearnWordsHandler, resetStoreRepeatWordsHandler }) {
   useEffect(() => {
     resetStoreLearnWordsHandler();
+    resetStoreRepeatWordsHandler();
   });
   return <Main games={GAME_LIST} userName={name} />;
 }
@@ -15,6 +17,7 @@ function MainContainer({ name, resetStoreLearnWordsHandler }) {
 MainContainer.propTypes = {
   name: PropTypes.string.isRequired,
   resetStoreLearnWordsHandler: PropTypes.func.isRequired,
+  resetStoreRepeatWordsHandler: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -25,6 +28,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   resetStoreLearnWordsHandler: resetStoreLearnWords,
+  resetStoreRepeatWordsHandler: resetStoreRepeatWords,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

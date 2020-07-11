@@ -3,6 +3,8 @@ import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
 async function saveOneWord(wordId, wordOptions, user) {
+  const newOptions = { ...wordOptions };
+  newOptions.addDate = new Date().valueOf();
   try {
     const {
       URL,
@@ -16,7 +18,7 @@ async function saveOneWord(wordId, wordOptions, user) {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(wordOptions),
+      body: JSON.stringify(newOptions),
     });
   } catch (e) {
     toast.error(e.message);

@@ -16,6 +16,7 @@ import { saveFullStatistic } from '../../redux/Statistic/action';
 import newRound from '../../utils/newRound';
 import StatusMenu from '../../components/StatusMenu/StatusMenu';
 import GameContainerStyled from './styled/StyledGameContainer';
+import StyledGameProgress from './styled/StyledGameProgress';
 
 let currentGameWords;
 let answerResult = {};
@@ -33,8 +34,9 @@ const AudioCallContainer = ({
   maxPage,
   gameName,
   saveStatistic,
-  backgroundOpacity,
-  changeBackgroundOpacity,
+  gameProgressLine,
+  changegameProgressLine,
+  gameMode,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -62,13 +64,15 @@ const AudioCallContainer = ({
   function finishGame() {
     addWordsWithMistakesToStore(wrongAnsweredWords);
     toggleGameMode(true);
-    saveStatistic({
-      Level: level,
-      Page: page,
-      wordsCollection,
-      wrongWordsState: wrongAnsweredWords,
-      gameName,
-    });
+    if (gameMode) {
+      saveStatistic({
+        Level: level,
+        Page: page,
+        wordsCollection,
+        wrongWordsState: wrongAnsweredWords,
+        gameName,
+      });
+    }
   }
 
   function switchToNextWord() {
@@ -89,7 +93,7 @@ const AudioCallContainer = ({
   }
 
   function autoSolve() {
-    changeBackgroundOpacity(backgroundOpacity + 100 / wordsCollection.length);
+    changegameProgressLine(gameProgressLine + 100 / wordsCollection.length);
     addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
     toggleWordStatus(true);
     answerResult.isCorrect = true;
@@ -105,9 +109,18 @@ const AudioCallContainer = ({
 
   const newGame = () => {
     toggleGameMode(false);
-    const { newLevel, newPage } = newRound(level, page, maxPage);
-    if (newLevel !== level) updateLevel(newLevel);
-    if (newPage !== page) updatePage(newPage);
+    let newLevel;
+    let newPage;
+    let obj;
+    if (gameMode) {
+      obj = newRound(level, page, maxPage);
+      newLevel = obj.newLevel;
+      newPage = obj.newPage;
+      if (newLevel !== level) updateLevel(newLevel);
+      if (newPage !== page) updatePage(newPage);
+    } else {
+      updateLevel(level);
+    }
   };
 
   return (
@@ -135,6 +148,7 @@ const AudioCallContainer = ({
               audioSrc={currentGameWords[currentWordIndex].audio}
               imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
             />
+            <StyledGameProgress gameProgressLine={gameProgressLine} />
             <WordsContainer
               isWordFinished={isWordFinished}
               isCorrect={answerResult.isCorrect}
@@ -161,13 +175,14 @@ const AudioCallContainer = ({
               src={currentGameWords[currentWordIndex].audio}
               isBig={!isWordFinished}
             />
+            <StyledGameProgress gameProgressLine={gameProgressLine} />
             <WordsContainer
               words={additionalWords}
               correctWord={currentGameWords[currentWordIndex].word}
               processUserAnswer={processUserAnswer}
               isWordFinished={isWordFinished}
-              backgroundOpacity={backgroundOpacity}
-              changeBackgroundOpacity={changeBackgroundOpacity}
+              gameProgressLine={gameProgressLine}
+              changegameProgressLine={changegameProgressLine}
               wordsAmount={wordsCollection.length}
             />
             <DontKnowButton clickHandler={autoSolve} />
@@ -191,8 +206,9 @@ AudioCallContainer.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
-  changeBackgroundOpacity: PropTypes.func,
-  backgroundOpacity: PropTypes.number,
+  changegameProgressLine: PropTypes.func,
+  gameProgressLine: PropTypes.number,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 AudioCallContainer.defaultProps = {
@@ -207,8 +223,8 @@ AudioCallContainer.defaultProps = {
   page: '1',
   maxPage: GAME_MAX_PAGE,
   gameName: GAME_NAME.audioCall,
-  backgroundOpacity: 0,
-  changeBackgroundOpacity: () => {},
+  gameProgressLine: 0,
+  changegameProgressLine: () => {},
 };
 
 const mapStateToProps = (state) => {
@@ -218,6 +234,7 @@ const mapStateToProps = (state) => {
     level: state.changeRound.AudioCallLevel,
     page: state.changeRound.AudioCallPage,
     maxPage: state.maxPage.maxPage,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 

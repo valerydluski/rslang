@@ -46,6 +46,7 @@ const translations = {
       isBackground: 'Background',
       timeForWord: 'Time for a word',
       errorCounter: 'Maximum number of errors',
+      cardsPerDayRepeat: 'Сards per day interval repetition',
     },
     Auth: {
       signIn: 'Sign In',
@@ -117,6 +118,24 @@ const translations = {
       least: 'Must be at least ',
       more: 'Must be no more ',
     },
+    LearnWords: {
+      newWords: 'New words',
+      cardsShowed: 'Cards showed',
+      correctWords: 'Correct words',
+      completed: 'Series completed',
+      theLongestSeries: 'The longest series of correct answers',
+      noWords: 'No more words for today',
+      progress: 'Progress',
+    },
+    Dictionary: {
+      repeats: 'Repeats',
+      prevRepeat: 'Previous repeat',
+      nextRepeat: 'Next repeat',
+      emptyList: "There aren't words in this dictionary",
+      learningWords: 'Learning words',
+      difficultWords: 'Difficult words',
+      deletedWords: 'Deleted words',
+    },
   },
   ru: {
     HomePage: {
@@ -165,6 +184,7 @@ const translations = {
       isBackground: 'Фоновая картинка',
       timeForWord: 'Времени на слово',
       errorCounter: 'Максимальное число ошибок',
+      cardsPerDayRepeat: 'Карточек на день интервальное повторение',
     },
     Auth: {
       signIn: 'Войти',
@@ -235,6 +255,24 @@ const translations = {
       number: 'Должно быть число',
       least: 'Не может быть меньше ',
       more: 'Не может быть больше ',
+    },
+    LearnWords: {
+      newWords: 'Новые слова',
+      cardsShowed: 'Карточек завершено',
+      correctWords: 'Правильные слова',
+      completed: 'Cерия завершена',
+      theLongestSeries: 'Самая длинная серия правильных ответов',
+      noWords: 'На сегодня слов больше нет',
+      progress: 'Прогресс',
+    },
+    Dictionary: {
+      repeats: 'Количество повторений',
+      prevRepeat: 'Предыдущее повторение',
+      nextRepeat: 'Следующее повторение',
+      emptyList: 'В этом словаре нету слов',
+      learningWords: 'Выученные слова',
+      difficultWords: 'Сложные слова',
+      deletedWords: 'Удаленные слова',
     },
   },
 };

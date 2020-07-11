@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const TranslationPartStyled = styled.div`
   display: flex;
@@ -10,13 +11,28 @@ const TranslationPartStyled = styled.div`
   font-weight: 500;
   font-size: 20px;
   width: ${(props) => props.width}px;
-  margin: 0 10px;
+  margin: 0 5px;
   padding: 5px 10px;
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid grey;
+  background: #6550de;
   cursor: pointer;
   user-select: none;
+  color: #fff;
+
+  @media ${DEVICE.laptopL} {
+    font-size: 15px;
+  }
+
+  @media ${DEVICE.laptop} {
+    height: 40px;
+    font-size: 12px;
+    margin: 0 3px;
+  }
+
+  @media ${DEVICE.tablet} {
+    font-size: 10px;
+    height: 30px;
+    margin: 0 2px;
+  }
 `;
 
 export default TranslationPartStyled;

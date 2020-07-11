@@ -83,6 +83,7 @@ export const MIN_WORDS_PER_DAY = 1;
 export const MAX_WORDS_PER_DAY = 600;
 export const MAX_WORDS_PER_PAGE = 25;
 export const MIN_WORDS_PER_PAGE = 5;
+export const TOTAL_WORDS = 3600;
 
 export const GAME_MAX_PAGE = 60;
 export const GAME_MAX_LEVEL = 6;
@@ -157,3 +158,47 @@ export const INIT_GAMES_ROUND = [
   'MakeSentenceLastRound',
   'Learn',
 ];
+
+const MILLISEC_IN_SEC = 1000;
+const SEC_IN_MIN = 60;
+const MIN_IN_HOUR = 60;
+
+export const REPEAT_TIMES = {
+  HARD: 10 * SEC_IN_MIN * MILLISEC_IN_SEC,
+  DIFFICULT: 40 * SEC_IN_MIN * MILLISEC_IN_SEC,
+  MEDIUM: 4 * MIN_IN_HOUR * SEC_IN_MIN * MILLISEC_IN_SEC,
+  SIMPLY: 36 * MIN_IN_HOUR * SEC_IN_MIN * MILLISEC_IN_SEC,
+  EASY: 468 * MIN_IN_HOUR * SEC_IN_MIN * MILLISEC_IN_SEC,
+};
+
+export const INITIAL_SETTINGS = {
+  name: 'Buddy',
+  language: 'en',
+  wordsPerDay: 20,
+  cardsPerDay: 30,
+  deleteButton: true,
+  addDificultWordsButton: true,
+  howToLearnWords: 'newWords',
+  SpeakITWordsPerPage: '10',
+  SavannahWordsPerPage: '10',
+  AudioCallWordsPerPage: '10',
+  SprintWordsPerPage: '10',
+  MakeSentenceWordsPerPage: '10',
+  isTranslate: true,
+  isTextMeaning: true,
+  isTextExample: true,
+  isTranscription: true,
+  isImageAssociation: true,
+  isAudioTranslate: false,
+  isAudioTextMeaning: false,
+  isAudioTextExample: false,
+  isAutoSpeech: true,
+  isTranslation: true,
+  isBackground: true,
+  sprintTimeForWord: '2',
+  savannahTimeForWord: '2',
+  savannahMaxErrorCounter: '5',
+  cardsPerDayRepeat: 20,
+  isDictionaryDeletedButton: true,
+  isDictionaryDifficultButton: true,
+};

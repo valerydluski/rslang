@@ -30,16 +30,18 @@ const LearnWordsInput = (props) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    let timer;
     if (isShowResult) {
       const duration = audiosDuration < 0 ? 2000 : audiosDuration * 1000 - 500;
       setShow(true);
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         setShow(false);
         showResultHander(false);
       }, duration);
-      return () => clearTimeout(timer);
+    } else {
+      setShow(false);
     }
-    return undefined;
+    return () => clearTimeout(timer);
   }, [isShowResult, showResultHander, audiosDuration]);
 
   const hideResult = () => {
@@ -51,14 +53,17 @@ const LearnWordsInput = (props) => {
   return (
     <InputContainer style={{ display: 'inline' }}>
       <InputWordsBgContainer showResult={show} width={width} onClick={hideResult}>
-        {word.split('').map((letter, index) => {
-          const key = `${letter}${index}`;
-          return (
-            <InputLetterContainer key={key} isIncorrect={letter !== answer[index]}>
-              {letter}
-            </InputLetterContainer>
-          );
-        })}
+        {word
+          .toLowerCase()
+          .split('')
+          .map((letter, index) => {
+            const key = `${letter}${index}`;
+            return (
+              <InputLetterContainer key={key} isIncorrect={letter !== answer[index]}>
+                {letter}
+              </InputLetterContainer>
+            );
+          })}
       </InputWordsBgContainer>
       <InputStyled
         type={type}
