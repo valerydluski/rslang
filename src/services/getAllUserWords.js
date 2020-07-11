@@ -15,7 +15,7 @@ async function getAllUserWords(user) {
     } = API;
 
     const filter = {
-      'userWord.optional.deleted': false,
+      'userWord.optional.delete': false,
     };
 
     return await fetchData(

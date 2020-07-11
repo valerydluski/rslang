@@ -16,6 +16,7 @@ import {
   ADD_TO_DISPLAYED_WORDS_LIST,
   SHOW_RESULT,
   RESET_STORE_LEARN_WORDS,
+  ADD_WORD_TO_SERVER,
 } from './types';
 
 export function showNewCard(card) {
@@ -130,5 +131,12 @@ export function showResult(bool) {
 export function resetStoreLearnWords() {
   return {
     type: RESET_STORE_LEARN_WORDS,
+  };
+}
+
+export function loadingWordToServer(bool) {
+  return {
+    type: ADD_WORD_TO_SERVER,
+    payload: bool,
   };
 }

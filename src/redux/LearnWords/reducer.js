@@ -13,6 +13,7 @@ import {
   ADD_TO_DISPLAYED_WORDS_LIST,
   SHOW_RESULT,
   RESET_STORE_LEARN_WORDS,
+  ADD_WORD_TO_SERVER,
 } from './types';
 import RESET_STORE from '../resetStore/types';
 
@@ -28,6 +29,7 @@ const initialState = {
   isWordsCollectionLoaded: false,
   displayedWordsList: [],
   showResult: false,
+  loadingWord: false,
 };
 
 function newLearnCardShow(state = initialState, action) {
@@ -58,6 +60,8 @@ function newLearnCardShow(state = initialState, action) {
       return { ...state, displayedWordsList: action.payload };
     case SHOW_RESULT:
       return { ...state, showResult: action.payload };
+    case ADD_WORD_TO_SERVER:
+      return { ...state, loadingWord: action.payload };
     case RESET_STORE:
       return { ...initialState };
     case RESET_STORE_LEARN_WORDS:
