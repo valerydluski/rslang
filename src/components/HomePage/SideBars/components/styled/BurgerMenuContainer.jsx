@@ -114,7 +114,7 @@ const BurgerMenuContainer = styled.div`
     }
 
     button: first-of-type {
-      margin-top: 70vh;
+      margin-top: 68vh;
     }
   }
 `;
