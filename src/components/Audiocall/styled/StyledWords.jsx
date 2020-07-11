@@ -14,6 +14,7 @@ const WordStyled = styled.div`
   color: black;
   cursor: pointer;
   padding: 12px 30px;
+  white-space: nowrap;
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 2px;
@@ -35,11 +36,11 @@ const WordStyled = styled.div`
 `;
 
 const FinishedWordStyled = styled(WordStyled)`
-  color: #c4c4c4;
+  color: #7d7d7d;
 `;
 
 const WrongWordStyled = styled(FinishedWordStyled)`
-  text-decoration: line-through;
+  color: #f56748;
 `;
 
 const CorrectWordStyled = styled(WordStyled)`
@@ -55,13 +56,13 @@ const CorrectWordStyled = styled(WordStyled)`
 const Word = ({ translation, wordStyleType, index }) => {
   switch (wordStyleType) {
     case 'finished':
-      return <FinishedWordStyled>{translation}</FinishedWordStyled>;
+      return <FinishedWordStyled>{`${index + 1}. ${translation}`}</FinishedWordStyled>;
     case 'wrong':
-      return <WrongWordStyled>{translation}</WrongWordStyled>;
+      return <WrongWordStyled>{`${index + 1}. ${translation}`}</WrongWordStyled>;
     case 'correct':
-      return <CorrectWordStyled>{translation}</CorrectWordStyled>;
+      return <CorrectWordStyled>{`${index + 1}. ${translation}`}</CorrectWordStyled>;
     default:
-      return <WordStyled data-index={index}>{translation}</WordStyled>;
+      return <WordStyled data-index={index}>{`${index + 1}. ${translation}`}</WordStyled>;
   }
 };
 
