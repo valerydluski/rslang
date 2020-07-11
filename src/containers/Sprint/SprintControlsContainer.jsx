@@ -26,7 +26,9 @@ const SprintControlsContainer = ({ processAnswer, isAnswerCorrect, isWordFinishe
 
   return (
     <ControlContainerStyled>
-      {isWordFinished ? <SprintResultMarker isAnswerCorrect={isAnswerCorrect} /> : null}
+      {isWordFinished ? (
+        <SprintResultMarker key={new Date()} isAnswerCorrect={isAnswerCorrect} />
+      ) : null}
       <FalseButtonStyled onClick={() => processAnswer(false)}>
         <Translate value="Buttons.false" />
       </FalseButtonStyled>
