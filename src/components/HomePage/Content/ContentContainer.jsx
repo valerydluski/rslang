@@ -25,8 +25,8 @@ const ContentContainer = styled.main`
     grid-row-start: 3;
     grid-row-end: 4;
   }
-  
-low: auto;
+
+  overflow: auto;
   max-height: 100vh;
 `;
 

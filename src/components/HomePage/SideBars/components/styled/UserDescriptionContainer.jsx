@@ -24,7 +24,7 @@ const userDescriptionContainer = styled.div`
     margin-bottom: 30px;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     width: auto;
     margin-left: 0;
     padding-top: 0;

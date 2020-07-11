@@ -11,7 +11,7 @@ const HomePageContainer = styled.div`
     grid-template-columns: 1fr 6fr 0fr;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 768px) {
     grid-template-columns: auto;
   }
 `;
