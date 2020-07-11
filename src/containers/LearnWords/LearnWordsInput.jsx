@@ -29,10 +29,18 @@ const LearnWordsInput = (props) => {
 
   const [show, setShow] = useState(false);
 
+  const FONT_SIZE = 30;
+  const DEFAUL_TIME_SHOW = 2000;
+  const MILLISEC_IN_SEC = 1000;
+  const CORRECTION_FACTOR = 500;
+
   useEffect(() => {
     let timer;
     if (isShowResult) {
-      const duration = audiosDuration < 0 ? 2000 : audiosDuration * 1000 - 500;
+      const duration =
+        audiosDuration < 0
+          ? DEFAUL_TIME_SHOW
+          : audiosDuration * MILLISEC_IN_SEC - CORRECTION_FACTOR;
       setShow(true);
       timer = setTimeout(() => {
         setShow(false);
@@ -48,7 +56,7 @@ const LearnWordsInput = (props) => {
     setShow(false);
   };
 
-  const width = getStringWidth(word, 30);
+  const width = getStringWidth(word, FONT_SIZE);
 
   return (
     <InputContainer style={{ display: 'inline' }}>

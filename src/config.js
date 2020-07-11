@@ -147,6 +147,8 @@ export const INITIAL_STATISTIC = {
   CountCardsShow: '0',
   CountNewWordsToday: '0',
   lastTrain: '0',
+  lastUpdateDate: '0',
+  countRepeatToday: 0,
 };
 
 export const INIT_GAMES_ROUND = [
