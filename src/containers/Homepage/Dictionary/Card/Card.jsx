@@ -69,7 +69,6 @@ function Card(props) {
     const wordOptions = { ...item.userWord };
     wordOptions.optional.difficult = isDifficult;
     wordOptions.optional.deleted = isDeleted;
-    console.log(wordOptions);
     // eslint-disable-next-line no-underscore-dangle
     updateOneWord(item._id, wordOptions, user);
   };
