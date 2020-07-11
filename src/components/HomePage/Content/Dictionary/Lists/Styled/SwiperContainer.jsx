@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const SwiperContainer = styled.div`
   overflow: hidden;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 345px);
   display: flex;
   justify-content: center;
   align-items: center;
