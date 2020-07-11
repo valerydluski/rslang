@@ -93,7 +93,7 @@ const BurgerMenuContainer = styled.div`
     }
 
     button span {
-      margin-left: 17px;
+      margin-left: 28px;
     }
 
     span {
@@ -104,7 +104,7 @@ const BurgerMenuContainer = styled.div`
 
   @media (max-width: 600px) {
     button {
-      margin-left: -75px;
+      margin-left: -83px;
     }
   }
 
