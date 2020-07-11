@@ -21,7 +21,6 @@ import LearnButtonsContainer, {
   ProgressBarCount,
   ProgressBarContainer,
 } from './Styled/LearnButtonsContainer';
-import LearnButtonsContainer from './Styled/LearnButtonsContainer';
 import { showResult } from '../../redux/LearnWords/actions';
 
 const LearnWordsForm = (props) => {
