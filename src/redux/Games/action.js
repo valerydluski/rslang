@@ -4,6 +4,7 @@ import {
   CHANGE_WORDS_COLLECTION,
   CHANGE_I_DONT_KNOW_WORDS,
   GAME_CHANGE_SCORE,
+  GHANGE_GAME_MODE,
 } from './types';
 
 export function changeGameLevel(level) {
@@ -38,5 +39,12 @@ export function changeScoreGame(score) {
   return {
     type: GAME_CHANGE_SCORE,
     payload: score,
+  };
+}
+
+export function changeGameMode(bool) {
+  return {
+    type: GHANGE_GAME_MODE,
+    payload: bool,
   };
 }

@@ -18,6 +18,7 @@ import nextNewCardShowWatcher from './LearnWords/sagas/nextNewCardShow';
 import generateLearnWordsCollectionWatcher from './LearnWords/sagas/generateLearnWordsCollection';
 import correctRepeatWatcher from './RepeatWords/sagas/correctSaga';
 import getRepeatWordsWatcher from './RepeatWords/sagas/getRepeatWordsSaga';
+import saveUserWordsFromGamesSagaWatcher from './Dictionary/sagas/saveWordsFromGamesSaga';
 
 export default function* watchSaga() {
   yield all([
@@ -40,5 +41,6 @@ export default function* watchSaga() {
     fork(generateLearnWordsCollectionWatcher),
     fork(correctRepeatWatcher),
     fork(getRepeatWordsWatcher),
+    fork(saveUserWordsFromGamesSagaWatcher),
   ]);
 }

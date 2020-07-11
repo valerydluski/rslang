@@ -35,6 +35,7 @@ const AudioCallContainer = ({
   saveStatistic,
   backgroundOpacity,
   changeBackgroundOpacity,
+  gameMode,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -62,13 +63,15 @@ const AudioCallContainer = ({
   function finishGame() {
     addWordsWithMistakesToStore(wrongAnsweredWords);
     toggleGameMode(true);
-    saveStatistic({
-      Level: level,
-      Page: page,
-      wordsCollection,
-      wrongWordsState: wrongAnsweredWords,
-      gameName,
-    });
+    if (gameMode) {
+      saveStatistic({
+        Level: level,
+        Page: page,
+        wordsCollection,
+        wrongWordsState: wrongAnsweredWords,
+        gameName,
+      });
+    }
   }
 
   function switchToNextWord() {
@@ -105,9 +108,18 @@ const AudioCallContainer = ({
 
   const newGame = () => {
     toggleGameMode(false);
-    const { newLevel, newPage } = newRound(level, page, maxPage);
-    if (newLevel !== level) updateLevel(newLevel);
-    if (newPage !== page) updatePage(newPage);
+    let newLevel;
+    let newPage;
+    let obj;
+    if (gameMode) {
+      obj = newRound(level, page, maxPage);
+      newLevel = obj.newLevel;
+      newPage = obj.newPage;
+      if (newLevel !== level) updateLevel(newLevel);
+      if (newPage !== page) updatePage(newPage);
+    } else {
+      updateLevel(level);
+    }
   };
 
   return (
@@ -193,6 +205,7 @@ AudioCallContainer.propTypes = {
   saveStatistic: PropTypes.func.isRequired,
   changeBackgroundOpacity: PropTypes.func,
   backgroundOpacity: PropTypes.number,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 AudioCallContainer.defaultProps = {
@@ -218,6 +231,7 @@ const mapStateToProps = (state) => {
     level: state.changeRound.AudioCallLevel,
     page: state.changeRound.AudioCallPage,
     maxPage: state.maxPage.maxPage,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 
