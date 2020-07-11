@@ -13,6 +13,8 @@ import {
   SAVE_REPEAT_WORDS,
   IS_WORD_COLLECTION_LOADED,
   IS_REPEAT_WORDS_LOADED,
+  IS_MORE_CARDS_TODAY,
+  SHOW_CARD,
 } from './types';
 
 export function showNewCard(card) {
@@ -105,5 +107,18 @@ export function getRepeatWordsLoaderShow() {
 export function getRepeatWordsLoaderHide() {
   return {
     type: GET_REPEAT_WORDS_LOADER_HIDE,
+  };
+}
+
+export function setIsMoreCardsShowToday(bool) {
+  return {
+    type: IS_MORE_CARDS_TODAY,
+    payload: bool,
+  };
+}
+
+export function showCard() {
+  return {
+    type: SHOW_CARD,
   };
 }

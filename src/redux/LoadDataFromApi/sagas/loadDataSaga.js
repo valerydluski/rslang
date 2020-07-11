@@ -24,11 +24,17 @@ function* workerLoadData() {
 
   const statistic = yield call(getStatisticFromApi, sessionData);
   if (statistic) {
-    console.log('function*workerLoadData -> statistic', statistic);
-    const now = new Date();
-    // const { lastUpdateDate } = statistic;
     const statisticFromApi = getSettings(statistic);
     const initialStatistic = checkInitialStatistic(statisticFromApi);
+    const now = new Date();
+    const { lastUpdateDate } = initialStatistic;
+    const last = new Date(lastUpdateDate);
+    if (last.getDate() !== now.getDate() && lastUpdateDate !== '0') {
+      initialStatistic.countRepeatToday = 0;
+      initialStatistic.CountCardsShow = 0;
+      initialStatistic.CountNewWordsToday = 0;
+      initialStatistic.RepeatWordsToday = '[]';
+    }
     const initialRound = createInitialRounds(initialStatistic);
     yield put(changeInitialRound(initialRound));
     yield put(addToShowedWordsList(JSON.parse(initialStatistic.RepeatWordsToday)));

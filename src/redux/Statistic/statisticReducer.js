@@ -1,5 +1,6 @@
 import { SAVE_FULL_STATISTIC_TO_STORE, GET_STATISTIC_FROM_API } from './types';
 import RESET_STORE from '../resetStore/types';
+import { IS_MORE_CARDS_TODAY } from '../RepeatWords/types';
 
 const initialState = {
   statistic: {
@@ -23,6 +24,7 @@ const initialState = {
     lastTrain: '0',
     lastUpdateDate: '0',
     countRepeatToday: 0,
+    isMoreCardsToday: false,
   },
 };
 
@@ -34,6 +36,8 @@ const changeStatisticReducer = (state = initialState, action) => {
       return { ...initialState };
     case GET_STATISTIC_FROM_API:
       return { ...state, statistic: action.payload.statistic };
+    case IS_MORE_CARDS_TODAY:
+      return { ...state, isMoreCardsToday: action.payload };
     default:
       return state;
   }

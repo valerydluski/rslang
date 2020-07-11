@@ -1,6 +1,8 @@
 const createStatisticJSON = (statistic) => {
+  const newStatistic = { ...statistic };
+  newStatistic.lastUpdateDate = new Date().valueOf();
   return {
-    optional: statistic,
+    optional: newStatistic,
   };
 };
 
