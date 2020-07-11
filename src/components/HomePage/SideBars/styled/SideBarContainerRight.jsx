@@ -48,10 +48,11 @@ const SideBarContainerRight = styled.div`
   }
 
   @media ${DEVICE.tablet} {
+    display: flex;
     width: auto;
     grid-column-start: auto;
     grid-row-start: auto;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #ffffff;
     width: 100%;
     height: fit-content;

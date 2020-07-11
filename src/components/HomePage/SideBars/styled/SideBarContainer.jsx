@@ -57,6 +57,8 @@ const SideBarContainer = styled.div`
       height: 100vh;
       } 
   }
+
+  
 `;
 
 export default SideBarContainer;
