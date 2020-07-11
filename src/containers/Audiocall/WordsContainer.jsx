@@ -32,7 +32,9 @@ const WordsContainer = (props) => {
       if ((!isCorrect && index === correctIndex) || (isAutoSolved && word.word === correctWord)) {
         type = '';
       }
-      return <Word key={word.word} wordStyleType={type} translation={word.wordTranslate} />;
+      return (
+        <Word key={word.word} index={index} wordStyleType={type} translation={word.wordTranslate} />
+      );
     }
 
     return <Word key={word.word} index={index} translation={word.wordTranslate} />;

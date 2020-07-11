@@ -13,7 +13,10 @@ const AudioPlayButton = ({ src, isBig }) => {
   wordAudio.load();
 
   const playWordAudio = () => {
-    wordAudio.play();
+    const playPromise = wordAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {}).catch(() => {});
+    }
   };
 
   useEffect(() => {
