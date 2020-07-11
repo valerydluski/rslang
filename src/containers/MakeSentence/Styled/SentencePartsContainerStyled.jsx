@@ -7,6 +7,7 @@ const SentencePartsContainerStyled = styled.div`
   flex-wrap: wrap;
   width: 70%;
   align-items: center;
+  justify-content: center;
   div:first-child {
     margin-left: 0;
   }

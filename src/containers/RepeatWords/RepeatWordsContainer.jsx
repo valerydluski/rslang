@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LearnWords from '../../components/LearnWords/LearnWords';
-import { LINK_FOR_AUDIO } from '../../config';
+import RepeatWords from '../../components/RepeatWords/RepeatWords';
+import { LINK_FOR_AUDIO, REPEAT_TIMES } from '../../config';
 import {
   correctCard,
-  showNewCard,
   saveWordToState,
   showResult,
-} from '../../redux/LearnWords/actions';
+  saveRepeatWords,
+} from '../../redux/RepeatWords/actions';
 import updateOneWord from '../../services/updateOneWord';
-import FinalScreen from '../../components/LearnWords/FinalScreen';
+import FinalScreen from '../../components/RepeatWords/FinalScreen';
 
 function getWord(arr, i) {
   const w = arr[i];
@@ -19,16 +19,18 @@ function getWord(arr, i) {
   return w;
 }
 
-function LearnWordCardContainer(props) {
+const { EASY, SIMPLY, MEDIUM, DIFFICULT, HARD } = REPEAT_TIMES;
+
+function RepeatWordCardContainer(props) {
   const {
     correctCardHandler,
     isCorrect,
-    showNewCardHandler,
     settings,
     user,
     resetSaveWord,
     wordsCollection,
     showResultHandler,
+    saveRepeatWordsHandler,
   } = props;
   const { isAudioTranslate, isAudioTextMeaning, isAudioTextExample } = settings.settings;
   const [currentWord, setCurrentWord] = useState();
@@ -39,13 +41,12 @@ function LearnWordCardContainer(props) {
   const [audios, setAudios] = useState([]);
   const [answerToForm, setAnswerToForm] = useState('');
   const isGameStart = useRef(false);
-  const firstAnswer = useRef(true);
   const wordsCount = useRef(wordsCollection.length);
-  const rightAnswer = useRef(0);
-  const newWordCount = useRef(0);
   const currentWordIndex = useRef(0);
   const audiosDuration = useRef(-1);
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
+  const [isShowButtons, setIsShowButtons] = useState(false);
+  const isErrorAnswer = useRef(false);
 
   if (wordsCollection.length < 1 && !isGameStart.current) {
     return <FinalScreen noWords />;
@@ -58,10 +59,8 @@ function LearnWordCardContainer(props) {
     setCurrentWord(getWord(wordsCollection, currentWordIndex.current));
   }
 
-  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord.current) {
-    if (currentWord.isNew) newWordCount.current += 1;
+  if (currentWord && !isRightAnswerShow && needNewWord.current) {
     isGameStart.current = true;
-    showNewCardHandler(currentWord);
     const { audio, audioExample, audioMeaning } = currentWord;
     isAudiosPlay = [isAudioTranslate, isAudioTextMeaning, isAudioTextExample];
     audiosLinks = [audio, audioExample, audioMeaning];
@@ -72,10 +71,19 @@ function LearnWordCardContainer(props) {
     needNewWord.current = false;
   }
 
+  const addWordToWordsCollection = (word) => {
+    saveRepeatWordsHandler([...wordsCollection, word]);
+    isErrorAnswer.current = false;
+    wordsCount.current += 1;
+  };
+
   const nextWord = () => {
+    if (isErrorAnswer.current) {
+      addWordToWordsCollection(currentWord);
+    }
+    setIsShowButtons(false);
     resetSaveWord(null);
     currentWordIndex.current += 1;
-    firstAnswer.current = true;
     showResultHandler(false);
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
@@ -86,7 +94,22 @@ function LearnWordCardContainer(props) {
     } else {
       setCurrentWord(null);
     }
-    return undefined;
+  };
+
+  const customUpdateOneWord = (dufficulty, addTime) => {
+    const config = {
+      difficulty: dufficulty,
+      optional: {
+        deleted: false,
+        difficult: false,
+        time: new Date(),
+        nextRepeat: new Date().valueOf() + addTime,
+        repeats: currentWord.userWord.optional.repeats + 1,
+      },
+    };
+    // eslint-disable-next-line no-underscore-dangle
+    updateOneWord(currentWord._id, config, user);
+    nextWord();
   };
 
   const onSubmit = async (formData) => {
@@ -94,48 +117,34 @@ function LearnWordCardContainer(props) {
     setAnswerToForm(formData.word);
     const answer = formData.word;
     const { word } = currentWord;
-    let config = {};
 
     switch (buttonType) {
       case 'sound':
         setIsSoundPlay(!isSoundPlay);
         break;
-      case 'deleted':
-        config = {
-          difficulty: 'new',
-          optional: {
-            time: new Date(),
-            deleted: true,
-            difficult: false,
-            nextRepeat: new Date().valueOf(),
-            repeats: 1,
-          },
-        };
-        updateOneWord(currentWord.id, config, user);
-        setCurrentWord(getWord(wordsCollection));
+      case 'easy':
+        customUpdateOneWord('easy', EASY);
+        break;
+      case 'simply':
+        customUpdateOneWord('simply', SIMPLY);
+        break;
+      case 'medium':
+        customUpdateOneWord('medium', MEDIUM);
+        break;
+      case 'difficult':
+        customUpdateOneWord('difficult', DIFFICULT);
         break;
       case 'hard':
-        config = {
-          difficulty: 'hard',
-          optional: {
-            time: new Date(),
-            difficult: true,
-            delete: false,
-            nextRepeat: new Date().valueOf(),
-            repeats: 1,
-          },
-        };
-        updateOneWord(currentWord.id, config, user);
-        setCurrentWord(getWord(wordsCollection));
+        customUpdateOneWord('hard', HARD);
         break;
-      case 'unknown':
-        showResultHandler(true);
+      case 'repeat':
+        addWordToWordsCollection(currentWord);
+        customUpdateOneWord(currentWord.userWord.difficulty, 0);
         break;
       default:
         if (!answer) break;
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
-          if (firstAnswer.current) rightAnswer.current += 1;
           audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
@@ -148,30 +157,29 @@ function LearnWordCardContainer(props) {
                   audios[i + 1].play();
                 };
               } else {
-                audios[i].onended = nextWord;
+                audios[i].onended = () => {
+                  setIsShowButtons(true);
+                };
               }
             }
           }
         } else {
-          firstAnswer.current = false;
+          isErrorAnswer.current = true;
         }
         correctCardHandler(true);
     }
   };
   return isFinalScreen ? (
-    <FinalScreen
-      wordsCount={wordsCount.current}
-      newWordCount={newWordCount.current}
-      rightAnswer={rightAnswer.current}
-    />
+    <FinalScreen wordsCount={wordsCount.current} />
   ) : (
-    <LearnWords
+    <RepeatWords
       isTranslationShow={isTranslationShow}
       isRightAnswerShow={isRightAnswerShow}
       settings={settings}
       onSubmit={onSubmit}
       word={currentWord}
       isCorrect={isCorrect}
+      showButtons={isShowButtons}
       answer={answerToForm}
       wordsCount={wordsCount.current + 1}
       currentWordIndex={currentWordIndex.current + 1}
@@ -180,10 +188,10 @@ function LearnWordCardContainer(props) {
   );
 }
 
-LearnWordCardContainer.propTypes = {
+RepeatWordCardContainer.propTypes = {
   correctCardHandler: PropTypes.func.isRequired,
-  showNewCardHandler: PropTypes.func.isRequired,
   resetSaveWord: PropTypes.func.isRequired,
+  saveRepeatWordsHandler: PropTypes.func.isRequired,
   wordsCollection: PropTypes.instanceOf(Array).isRequired,
   isCorrect: PropTypes.bool,
   settings: PropTypes.shape({
@@ -202,7 +210,7 @@ LearnWordCardContainer.propTypes = {
   showResultHandler: PropTypes.func.isRequired,
 };
 
-LearnWordCardContainer.defaultProps = {
+RepeatWordCardContainer.defaultProps = {
   isCorrect: false,
   settings: PropTypes.shape({
     settings: PropTypes.shape({
@@ -218,19 +226,18 @@ LearnWordCardContainer.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    isCorrect: state.correctLearnCard.isCorrect,
-    userWords: state.userWords.words,
+    isCorrect: state.isCorrectRepeatReducer.isCorrect,
+    wordsCollection: state.repeatWords.wordsCollection,
     settings: state.userSettings,
     user: state.login,
-    wordsCollection: state.newLearnCardShow.wordsCollection,
   };
 };
 
 const mapDispatchToProps = {
   correctCardHandler: correctCard,
-  showNewCardHandler: showNewCard,
   resetSaveWord: saveWordToState,
   showResultHandler: showResult,
+  saveRepeatWordsHandler: saveRepeatWords,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearnWordCardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(RepeatWordCardContainer);

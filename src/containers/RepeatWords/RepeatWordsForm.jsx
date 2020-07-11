@@ -5,18 +5,18 @@ import { Line } from 'rc-progress';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import StyledButton from '../../components/UI/Button/Styled/StyledButton';
 import { LINK_FOR_IMAGE } from '../../config';
-import LearnWordsInput from './LearnWordsInput';
+import RepeatWordsInput from './RepeatWordsInput';
 import Image from '../../components/UI/Image/Image';
 import Transcription from '../../components/UI/TextField/Transcription';
-import LearnFormStyled from './Styled/LearnFormStyled';
-import LearnCardsContainer, {
+import RepeatFormStyled from './Styled/RepeatFormStyled';
+import RepeatCardsContainer, {
   TranslateStyled,
   TextExampleStyled,
   TextExampleTranslateStyled,
   TextMeaningStyled,
   TextMeaningTranslateStyled,
-} from './Styled/LearnCardsContainer';
-import LearnButtonsContainer from './Styled/LearnButtonsContainer';
+} from './Styled/RepeatCardsContainer';
+import RepeatButtonsContainer from './Styled/RepeatButtonsContainer';
 
 const LearnWordsForm = (props) => {
   const {
@@ -34,6 +34,7 @@ const LearnWordsForm = (props) => {
     wordsCount,
     currentWordIndex,
     audiosDuration,
+    showButtons,
   } = props;
 
   const {
@@ -42,8 +43,6 @@ const LearnWordsForm = (props) => {
     isTextExample,
     isTranscription,
     isImageAssociation,
-    deleteButton,
-    addDificultWordsButton,
   } = settings.settings;
   const {
     textExample,
@@ -60,7 +59,7 @@ const LearnWordsForm = (props) => {
     if (isCorrect) {
       reset('wordLearn');
     }
-  });
+  }, [isCorrect, reset]);
 
   const customHandleSubmit = (type) => {
     return () => {
@@ -73,7 +72,7 @@ const LearnWordsForm = (props) => {
   const textMeaningFormatted = textMeaning.replace(/<i>|<\/i>/g, ``);
   const wordRegExp = new RegExp(`${word.word}`, 'i');
   return (
-    <LearnFormStyled
+    <RepeatFormStyled
       onSubmit={handleSubmit((values) =>
         onSubmit({
           ...values,
@@ -81,7 +80,7 @@ const LearnWordsForm = (props) => {
         })
       )}
     >
-      <LearnCardsContainer>
+      <RepeatCardsContainer>
         <StyledRoundButton
           onClick={customHandleSubmit('sound')}
           type="button"
@@ -103,7 +102,7 @@ const LearnWordsForm = (props) => {
             type="text"
             placeholder={isRightAnswerShow ? word.word : ''}
             size="5"
-            component={LearnWordsInput}
+            component={RepeatWordsInput}
             autoFocus
             autocomplete={autocomplete}
             word={word.word}
@@ -127,22 +126,32 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && isTextMeaning && (
           <TextMeaningTranslateStyled>{textMeaningTranslate}</TextMeaningTranslateStyled>
         )}
-      </LearnCardsContainer>
-      <LearnButtonsContainer>
-        <StyledButton className="button-next">Next</StyledButton>
-        {deleteButton && (
-          <StyledButton onClick={customHandleSubmit('deleted')} type="button">
-            Delete
-          </StyledButton>
+      </RepeatCardsContainer>
+      <RepeatButtonsContainer>
+        {!showButtons && <StyledButton className="button-next">Check</StyledButton>}
+        {showButtons && (
+          <>
+            <StyledButton onClick={customHandleSubmit('easy')} type="button">
+              Easy
+            </StyledButton>
+            <StyledButton onClick={customHandleSubmit('simply')} type="button">
+              Simply
+            </StyledButton>
+            <StyledButton onClick={customHandleSubmit('medium')} type="button">
+              Medium
+            </StyledButton>
+            <StyledButton onClick={customHandleSubmit('difficult')} type="button">
+              Difficult
+            </StyledButton>
+            <StyledButton onClick={customHandleSubmit('hard')} type="button">
+              Hard
+            </StyledButton>
+            <StyledButton className="button-next" onClick={customHandleSubmit('repeat')}>
+              repeat
+            </StyledButton>
+          </>
         )}
-        {addDificultWordsButton && (
-          <StyledButton onClick={customHandleSubmit('hard')} type="button">
-            Hard
-          </StyledButton>
-        )}
-        <StyledButton onClick={customHandleSubmit('unknown')} type="button">
-          Unknow
-        </StyledButton>
+
         <p>{currentWordIndex}</p>
         <Line
           percent={Math.round((currentWordIndex / wordsCount) * 100)}
@@ -150,8 +159,8 @@ const LearnWordsForm = (props) => {
           strokeColor="#404497"
         />
         <p>{wordsCount}</p>
-      </LearnButtonsContainer>
-    </LearnFormStyled>
+      </RepeatButtonsContainer>
+    </RepeatFormStyled>
   );
 };
 
@@ -178,8 +187,6 @@ LearnWordsForm.propTypes = {
       isTextExample: PropTypes.bool.isRequired,
       isTranscription: PropTypes.bool.isRequired,
       isImageAssociation: PropTypes.bool.isRequired,
-      deleteButton: PropTypes.bool.isRequired,
-      addDificultWordsButton: PropTypes.bool.isRequired,
     }).isRequired,
   }).isRequired,
   isCorrect: PropTypes.bool.isRequired,
@@ -190,6 +197,7 @@ LearnWordsForm.propTypes = {
   isRightAnswerShow: PropTypes.bool.isRequired,
   answer: PropTypes.string,
   isResultShow: PropTypes.bool,
+  showButtons: PropTypes.bool.isRequired,
   wordsCount: PropTypes.number,
   currentWordIndex: PropTypes.number,
   audiosDuration: PropTypes.number.isRequired,

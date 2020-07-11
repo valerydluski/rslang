@@ -46,6 +46,7 @@ const translations = {
       isBackground: 'Background',
       timeForWord: 'Time for a word',
       errorCounter: 'Maximum number of errors',
+      cardsPerDayRepeat: 'Сards per day interval repetition',
     },
     Auth: {
       signIn: 'Sign In',
@@ -198,6 +199,7 @@ const translations = {
       isBackground: 'Фоновая картинка',
       timeForWord: 'Времени на слово',
       errorCounter: 'Максимальное число ошибок',
+      cardsPerDayRepeat: 'Карточек на день интервальное повторение',
     },
     Auth: {
       signIn: 'Войти',

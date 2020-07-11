@@ -6,11 +6,11 @@ import {
   InputStyled,
   InputWordsBgContainer,
   InputLetterContainer,
-} from './Styled/LearnWordsInput';
+} from './Styled/RepeatWordsInput';
 import getStringWidth from '../../utils/getStringWidth';
-import { showResult } from '../../redux/LearnWords/actions';
+import { showResult } from '../../redux/RepeatWords/actions';
 
-const LearnWordsInput = (props) => {
+const RepeatWordsInput = (props) => {
   const {
     name,
     type,
@@ -80,7 +80,7 @@ const LearnWordsInput = (props) => {
   );
 };
 
-LearnWordsInput.propTypes = {
+RepeatWordsInput.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
@@ -98,7 +98,7 @@ LearnWordsInput.propTypes = {
   audiosDuration: PropTypes.number.isRequired,
 };
 
-LearnWordsInput.defaultProps = {
+RepeatWordsInput.defaultProps = {
   type: 'text',
   name: '',
   placeholder: '',
@@ -115,7 +115,7 @@ LearnWordsInput.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    isShowResult: state.newLearnCardShow.showResult,
+    isShowResult: state.repeatWords.showResult,
   };
 };
 
@@ -123,4 +123,4 @@ const mapDispatchToProps = {
   showResultHander: showResult,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LearnWordsInput);
+export default connect(mapStateToProps, mapDispatchToProps)(RepeatWordsInput);

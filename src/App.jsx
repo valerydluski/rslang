@@ -9,6 +9,7 @@ import PrivateNavigationRoute from './components/Navigation/PrivateNavigationRou
 import GlobalStyle from './styles/globalStyles';
 import HomePageContainer from './containers/Homepage/HomePageContainer';
 import LearnWords from './pages/LearnWords/LearnWords';
+import RepeatWords from './pages/RepeatWords/RepeatWords';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <PrivateNavigationRoute path="/StartGame/:gameId" exact component={StartGamePage} />
         <PrivateNavigationRoute path="/Game/:gameId" exact component={GamePage} />
         <PrivateNavigationRoute path="/learn" exact component={LearnWords} />
+        <PrivateNavigationRoute path="/repeat" exact component={RepeatWords} />
         <PrivateNavigationRoute path="/" component={HomePageContainer} />
         <Redirect to="/home" />
       </Switch>

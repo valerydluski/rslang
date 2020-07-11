@@ -13,11 +13,10 @@ const TranslationPartStyled = styled.div`
   width: ${(props) => props.width}px;
   margin: 0 5px;
   padding: 5px 10px;
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid grey;
+  background: #6550de;
   cursor: pointer;
   user-select: none;
+  color: #fff;
 
   @media ${DEVICE.laptopL} {
     font-size: 15px;

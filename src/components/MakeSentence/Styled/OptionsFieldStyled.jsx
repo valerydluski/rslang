@@ -4,7 +4,7 @@ import { DEVICE } from '../../../config';
 const OptionsFieldStyled = styled.div`
   display: flex;
   width: 1200px;
-  margin: 30px 0;
+  margin-bottom: 30px;
 
   @media ${DEVICE.laptopL} {
     width: 924px;
@@ -12,12 +12,12 @@ const OptionsFieldStyled = styled.div`
 
   @media ${DEVICE.laptop} {
     width: 668px;
-    margin: 20px 0;
+    margin-bottom: 20px;
   }
 
   @media ${DEVICE.tablet} {
     width: 528px;
-    margin: 10px 0;
+    margin-bottom: 10px;
   }
 `;
 
