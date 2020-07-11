@@ -131,6 +131,10 @@ const translations = {
       repeats: 'Repeats',
       prevRepeat: 'Previous repeat',
       nextRepeat: 'Next repeat',
+      emptyList: "There aren't words in this dictionary",
+      learningWords: 'Learning words',
+      difficultWords: 'Difficult words',
+      deletedWords: 'Deleted words',
     },
   },
   ru: {
@@ -265,6 +269,10 @@ const translations = {
       repeats: 'Количество повторений',
       prevRepeat: 'Предыдущее повторение',
       nextRepeat: 'Следующее повторение',
+      emptyList: 'В этом словаре нету слов',
+      learningWords: 'Выученные слова',
+      difficultWords: 'Сложные слова',
+      deletedWords: 'Удаленные слова',
     },
   },
 };

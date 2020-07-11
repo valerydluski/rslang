@@ -14,16 +14,16 @@ const Center = styled.div`
   }
   & > p.additional {
     margin: 0;
-    font-size: 12px;
+    font-size: 10px;
     color: #929292;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
   }
 
   & > p.info {
     margin: 0;
-    font-size: 12px;
+    font-size: 10px;
     color: #929292;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
   }
 `;
 

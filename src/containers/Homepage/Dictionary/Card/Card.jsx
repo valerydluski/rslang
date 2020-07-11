@@ -44,6 +44,8 @@ function Card(props) {
     isTextExample,
     isTranscription,
     isImageAssociation,
+    difficultBtn,
+    deletedBtn,
     lang,
   } = props;
   const sound = new Audio();
@@ -67,6 +69,7 @@ function Card(props) {
     const wordOptions = { ...item.userWord };
     wordOptions.optional.difficult = isDifficult;
     wordOptions.optional.deleted = isDeleted;
+    console.log(wordOptions);
     // eslint-disable-next-line no-underscore-dangle
     updateOneWord(item._id, wordOptions, user);
   };
@@ -105,12 +108,16 @@ function Card(props) {
             <Button onClick={play}>
               <Icon src={speechIcoGray} />
             </Button>
-            <Button onClick={putInDifficult}>
-              <Icon src={difficultIco} />
-            </Button>
-            <Button onClick={deleteFromLearning}>
-              <Icon src={trashIco} />
-            </Button>
+            {difficultBtn ? (
+              <Button onClick={putInDifficult}>
+                <Icon src={difficultIco} />
+              </Button>
+            ) : null}
+            {deletedBtn ? (
+              <Button onClick={deleteFromLearning}>
+                <Icon src={trashIco} />
+              </Button>
+            ) : null}
           </Right>
         );
         break;
@@ -123,9 +130,11 @@ function Card(props) {
             <Button onClick={restoreFromDifficult}>
               <Icon src={restoreIco} />
             </Button>
-            <Button onClick={deleteFromDifficult}>
-              <Icon src={trashIco} />
-            </Button>
+            {deletedBtn ? (
+              <Button onClick={deleteFromDifficult}>
+                <Icon src={trashIco} />
+              </Button>
+            ) : null}
           </Right>
         );
         break;
@@ -197,6 +206,8 @@ Card.propTypes = {
   isTextExample: PropTypes.bool,
   isTranscription: PropTypes.bool,
   isImageAssociation: PropTypes.bool,
+  difficultBtn: PropTypes.bool,
+  deletedBtn: PropTypes.bool,
   lang: PropTypes.string,
 };
 
@@ -215,6 +226,8 @@ Card.defaultProps = {
   isTextExample: false,
   isTranscription: false,
   isImageAssociation: false,
+  difficultBtn: true,
+  deletedBtn: true,
   lang: 'en',
 };
 
@@ -229,6 +242,8 @@ const mapStateToProps = (state) => {
     isTextExample: state.userSettings.settings.isTextExample,
     isTranscription: state.userSettings.settings.isTranscription,
     isImageAssociation: state.userSettings.settings.isImageAssociation,
+    difficultBtn: state.userSettings.settings.isDictionaryDifficultButton,
+    deletedBtn: state.userSettings.settings.isDictionaryDeletedButton,
     lang: state.i18n.locale,
   };
 };

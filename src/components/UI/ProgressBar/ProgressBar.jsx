@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Container, Circle } from './Styled/ProgressBarStyled';
 
 const difficulties = ['new', 'easy', 'simple', 'medium', 'difficult', 'hard'];
-const colors = ['#404497', '#389929', '#38c9d1', '#FEC246', '#fa9e25', '#F56748'];
-const defaultColor = '#C4C4C4';
+const colors = ['#F56748', '#FEC246', '#2C9AFF', '#AB9FF1', '#6550DE', '#404497'];
+const defaultColor = '#EDF0F3';
 
 const ProgressBar = ({ difficulty }) => {
   const curIndex = difficulties.indexOf(difficulty);

@@ -2,6 +2,7 @@
 import React from 'react';
 import Swiper from 'react-id-swiper';
 import PropTypes from 'prop-types';
+import { Translate } from 'react-redux-i18n';
 import SwiperContainer from './Styled/SwiperContainer';
 import EmptyListMessage from './Styled/EmptyListMessage';
 import Card from '../../../../../containers/Homepage/Dictionary/Card/Card';
@@ -24,7 +25,9 @@ function List({ wordsList, type }) {
   return (
     <SwiperContainer>
       {wordsList.length === 0 ? (
-        <EmptyListMessage>There aren&apos;t words in this dictionary</EmptyListMessage>
+        <EmptyListMessage>
+          <Translate value="Dictionary.emptyList" />
+        </EmptyListMessage>
       ) : (
         <Swiper {...params}>
           {wordsList.map((item) => (
