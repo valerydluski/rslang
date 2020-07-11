@@ -5,7 +5,7 @@ import { WORDS_PER_PAGE } from '../../../config';
 import { setLearnWordsStatistic } from '../../Statistic/action';
 import { addToShowedWordsList, loadingWordToServer } from '../actions';
 import findObjInArray from '../../../utils/findObjInArray';
-import { saveUserWords } from '../../Dictionary/actions';
+import { saveUserWords, saveOneUserWords } from '../../Dictionary/actions';
 import { SAVE_FULL_STATISTIC_TO_STORE } from '../../Statistic/types';
 
 function* addNewWordSagaWorker(action) {
@@ -17,8 +17,9 @@ function* addNewWordSagaWorker(action) {
   );
 
   const getDisplayedList = (state) => state.newLearnCardShow.displayedWordsList;
-  const getUserWords = (state) => state.userWords.words[0].paginatedResults;
-  const userWords = yield select(getUserWords);
+  const getUserWords = (state) => state.userWords.words;
+  const words = yield select(getUserWords);
+  const userWords = words[0].paginatedResults;
   const displayedWordsList = yield select(getDisplayedList);
   let nextLevel = LearnLastLevel;
   let nextWord = LearnLastWords;
@@ -41,8 +42,12 @@ function* addNewWordSagaWorker(action) {
     yield call(saveOneWord, wordId, config, sessionData);
     nextWord = +LearnLastWords + 1 > +WORDS_PER_PAGE ? 1 : +LearnLastWords + 1;
     nextLevel = +LearnLastWords + 1 > +WORDS_PER_PAGE ? +LearnLastLevel + 1 : +LearnLastLevel;
-    yield saveUserWords([...userWords, action.payload]);
+    const elForStore = action.payload;
+    elForStore.userWord = config;
+    words[0].paginatedResults = words[0].paginatedResults.concat(elForStore);
+    yield saveUserWords(words);
   }
+
   const cardsShow = +CountCardsShow + 1;
   let countNewWordsShow = CountNewWordsToday;
   if (isNew) countNewWordsShow = +CountNewWordsToday + 1;
