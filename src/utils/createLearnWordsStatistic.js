@@ -7,6 +7,7 @@ const createLearnWordsStatistic = (statistic, learnData, repeatWordsToday) => {
   newStatistic.CountNewWordsToday = countNewWordsShow;
   newStatistic.lastTrain = lastDateTraining;
   newStatistic.RepeatWordsToday = JSON.stringify(repeatWordsToday);
+  console.log(newStatistic);
   return newStatistic;
 };
 
