@@ -25,11 +25,8 @@ const ContentContainer = styled.main`
     grid-row-start: 3;
     grid-row-end: 4;
   }
-
-  @media (max-width: 380px) {
-    width: 94vw;
-  }
-  overflow: auto;
+  
+low: auto;
   max-height: 100vh;
 `;
 
