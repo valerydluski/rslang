@@ -136,6 +136,23 @@ const AppSettings = ({ checkboxes }) => {
         type="checkbox"
         label={I18n.t('Settings.isAudioTextExample')}
       />
+      <BlackHeader>
+        <Translate value="HomePage.dictionary" />
+      </BlackHeader>
+      <Field
+        name="isDictionaryDeletedButton"
+        id="isDictionaryDeletedButton"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.deleteButton')}
+      />
+      <Field
+        name="isDictionaryDifficultButton"
+        id="isDictionaryDifficultButton"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.difficultButton')}
+      />
     </>
   );
 };

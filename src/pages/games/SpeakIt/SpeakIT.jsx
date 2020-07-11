@@ -21,7 +21,6 @@ const SpeakIT = (props) => {
     switchAppMode(gameName);
     return null;
   }
-
   return (
     <SpeakITContainerStyled>
       <div>
