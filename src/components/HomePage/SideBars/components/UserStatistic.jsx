@@ -10,7 +10,6 @@ import TotalProgress from './TotalProgress';
 import { TOTAL_WORDS } from '../../../../config';
 
 function UserStatistic({ wordsInDay, cardsInDay, totalWordsInDay, totalCardsInDay, totalWords }) {
-  console.log(totalWords);
   return (
     <UserStatisticContainer>
       <DayInfoContainer>
