@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Sound from 'react-sound';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {
   ActiveAudioPlayButtonStyled,
   AudioPlayButtonStyled,
@@ -8,11 +9,16 @@ import {
   ActiveSlowAudioPlayButtonStyled,
 } from './Styled/AudioPlayButtonsStyled';
 
+const AudioPlayContainer = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+`;
+
 const AudioPlayControls = ({ audioSrc }) => {
   const [isAudioActive, toggleAudioMode] = useState(false);
   const [isSlowAudioActive, toggleSlowAudioMode] = useState(false);
   return (
-    <>
+    <AudioPlayContainer>
       {isAudioActive ? (
         <ActiveAudioPlayButtonStyled onClick={() => toggleAudioMode(false)}>
           <Sound
@@ -47,7 +53,7 @@ const AudioPlayControls = ({ audioSrc }) => {
           }}
         />
       )}
-    </>
+    </AudioPlayContainer>
   );
 };
 

@@ -9,6 +9,7 @@ const StyledContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 40px;
+  background: #fafafa;
 
   @media ${DEVICE.tablet} {
     padding: 20px;
