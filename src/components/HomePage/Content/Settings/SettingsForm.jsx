@@ -8,7 +8,9 @@ import WordsPerPageValidator from '../../../../utils/validators/wordsPerPageVali
 import { CHECKBOXES } from '../../../../config';
 import { BlackHeader } from './Styled/Header';
 import timeForWordValidator from '../../../../utils/validators/timeForWordValidator';
+import timeForSavannahWordValidator from '../../../../utils/validators/timeForSavannahWordValidator';
 import { SettingsFormStyled } from './Styled/SettingsContainerStyled';
+import StyledSettingsRoundButton from '../../../UI/Button/Styled/StyledSettingsRoundButton';
 
 const SettingsForm = (props) => {
   const { handleSubmit } = props;
@@ -45,6 +47,30 @@ const SettingsForm = (props) => {
         classNameSpan="span_none"
         className="settings"
       />
+      <Field
+        name="savannahTimeForWord"
+        key="savannahTimeForWord"
+        type="number"
+        placeholder={I18n.t('Settings.timeForWord')}
+        validate={timeForSavannahWordValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
+        label={I18n.t('Settings.timeForWord')}
+        classNameSpan="span_none"
+        className="settings"
+      />
+      <Field
+        name="savannahMaxErrorCounter"
+        key="savannahMaxErrorCounter"
+        type="number"
+        placeholder={I18n.t('Settings.errorCounter')}
+        validate={timeForWordValidator}
+        parse={(val) => parseInt(val, 10)}
+        component={Input}
+        label={I18n.t('Settings.errorCounter')}
+        classNameSpan="span_none"
+        className="settings"
+      />
       <BlackHeader>
         <Translate value="Games.speakIT" />
       </BlackHeader>
@@ -76,8 +102,8 @@ const SettingsForm = (props) => {
         className="settings"
       />
       <Field
-        name="timeForWord"
-        key="timeForWord"
+        name="sprintTimeForWord"
+        key="sprintTimeForWord"
         type="number"
         placeholder={I18n.t('Settings.timeForWord')}
         validate={timeForWordValidator}
@@ -126,9 +152,9 @@ const SettingsForm = (props) => {
         type="checkbox"
         label={I18n.t('Settings.isBackground')}
       />
-      <button type="submit" aria-label="Save">
+      <StyledSettingsRoundButton type="submit" aria-label="Save">
         <Translate value="Buttons.save" />
-      </button>
+      </StyledSettingsRoundButton>
     </SettingsFormStyled>
   );
 };

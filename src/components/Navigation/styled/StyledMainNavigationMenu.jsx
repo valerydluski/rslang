@@ -46,17 +46,16 @@ const StyledMainNavigationMenu = styled.div`
     }
   }
 
-
   @media (max-width: 767px) {
     display: none;
 
     li {
-      margin-bottom: 8vh;
+      margin-bottom: 50px;
       margin-left: 65%;
     }
 
     li:first-of-type {
-    margin-top: 23vh;
+      margin-top: 20vh;
     }
 
     span {
@@ -70,25 +69,24 @@ const StyledMainNavigationMenu = styled.div`
     li a:hover {
       color: #fec246;
     }
-  }
   li .active_link {
-    color: #fec246;
     position: relative;
   }
 
   li .active_link::before {
     background-color: #fec246;
   }
+}
 
   @media (max-width: 600px) {
     li {
-    margin-left: 55%;
+      margin-left: 55%;
     }
   }
 
   @media (max-width: 400px) {
     li {
-    margin-left: 45%;
+      margin-left: 45%;
     }
   }
 `;

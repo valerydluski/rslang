@@ -14,15 +14,14 @@ import {
   AUDIOCALL_CHANGE_PAGE,
   MAKESENTENCE_CHANGE_LEVEL,
   MAKESENTENCE_CHANGE_PAGE,
-  LEARN_WORDS_CHANGE_PAGE,
-  LEARN_WORDS_CHANGE_LEVEL,
 } from '../../ChangeRounds/types';
 import { CHANGE_APP_MODE } from '../../AppMode/types';
 import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getWordsFromAPI';
 import { configureData } from '../../../services/configureEnglishPuzzleData';
 import { updateState, updateSource } from '../../EnglishPuzzle/actions';
-import { changeIDontKnowWords } from '../../Games/action';
+import { changeIDontKnowWords, changeGameMode } from '../../Games/action';
+import getRandomValuesFromArray from '../../../utils/getRandomValuesFromArray';
 
 function* workerGetWords() {
   try {
@@ -30,7 +29,27 @@ function* workerGetWords() {
     const state = yield select();
     yield put(changeIDontKnowWords([]));
     const { appMode } = state.changeAppMode;
-    const payload = yield call(wordsFetch, state);
+    const { gameMode } = state.gamesReducer;
+    const userWords = state.userWords.words;
+    const wordsPerPage = state.userSettings.settings[`${appMode}WordsPerPage`] || 10;
+    let payload;
+    if (!gameMode && userWords[0] && userWords[0].paginatedResults.length >= +wordsPerPage) {
+      const arr = userWords[0].paginatedResults;
+      if (appMode === 'EnglishPuzzle' || appMode === 'MakeSentence') {
+        const arrForPuzzle = arr.filter((el) => el.wordsPerExampleSentence <= 10);
+        if (arrForPuzzle.length >= 10) {
+          payload = getRandomValuesFromArray(arrForPuzzle, 9);
+        } else {
+          payload = yield call(wordsFetch, state);
+          yield put(changeGameMode(true));
+        }
+      } else {
+        payload = getRandomValuesFromArray(arr, +wordsPerPage - 1);
+      }
+    } else {
+      payload = yield call(wordsFetch, state);
+      yield put(changeGameMode(true));
+    }
     yield put(fetchWords(payload));
     if (appMode === 'EnglishPuzzle') {
       const { EnglishPuzzleLevel, EnglishPuzzlePage } = state.changeRound;
@@ -61,8 +80,6 @@ export default function* watchGetWords() {
       MAKESENTENCE_CHANGE_LEVEL,
       MAKESENTENCE_CHANGE_PAGE,
       CHANGE_APP_MODE,
-      LEARN_WORDS_CHANGE_PAGE,
-      LEARN_WORDS_CHANGE_LEVEL,
     ],
     workerGetWords
   );

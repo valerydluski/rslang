@@ -12,6 +12,8 @@ import Logo from '../../../UI/Logo/Logo';
 import LoginPageTitle from '../LoginPageTitle/LoginPageTitle';
 import FormNameStyled from './Styled/FormNameStyled';
 import PatternStyled from './Styled/PatternStyled';
+import StyledFormNamesContainer from '../../Styled/StyledFormNamesContainer';
+import SignInAnimation from '../../Animation/SignInAnimation';
 
 const LoginForm = (props) => {
   const { handleSubmit } = props;
@@ -19,7 +21,12 @@ const LoginForm = (props) => {
     <LoginFormWrapperStyled>
       <Logo className="login-form_logo" />
       <LoginPageTitle />
-      <FormNameStyled>{I18n.t('Auth.signIn')}</FormNameStyled>
+      <StyledFormNamesContainer>
+        <FormNameStyled>{I18n.t('Auth.signIn')}</FormNameStyled>
+        <Link to="/registration">
+          <Translate value="Buttons.register" />
+        </Link>
+      </StyledFormNamesContainer>
       <FormStyled onSubmit={handleSubmit}>
         <Field
           name="email"
@@ -28,6 +35,7 @@ const LoginForm = (props) => {
           placeholder="email"
           component={Input}
           validate={emailValidator}
+          className="auth"
         />
         <Field
           name="password"
@@ -36,17 +44,15 @@ const LoginForm = (props) => {
           placeholder="password"
           component={Input}
           validate={passwordValidator}
+          className="auth"
         />
-        <div>
-          <Link to="/registration">
-            <Translate value="Buttons.register" />
-          </Link>
-        </div>
         <button className="button_sign-in" type="submit" aria-label="Sign In">
           <Translate value="Buttons.OK" />
         </button>
       </FormStyled>
-      <PatternStyled />
+      <PatternStyled>
+        <SignInAnimation />
+      </PatternStyled>
     </LoginFormWrapperStyled>
   );
 };

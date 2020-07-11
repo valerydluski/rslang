@@ -29,6 +29,7 @@ const ModalResult = (props) => {
     currentAppMode,
     getOldGameWords,
     loading,
+    gameMode,
   } = props;
 
   const [srcForImage, setSrcForImage] = useState(imageSrc);
@@ -83,7 +84,6 @@ const ModalResult = (props) => {
     toogleIsShowStatistic(false);
     toogleIsOldResult(false);
   };
-
   const showContent = () => {
     if (isShowStatistic && isOldResult) {
       return (
@@ -132,7 +132,9 @@ const ModalResult = (props) => {
         <ModalButtonsContainerStyled>
           <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
           <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
-          <Button buttonHandler={showStatisticHandler} text={I18n.t('Buttons.statistic')} />
+          {gameMode ? (
+            <Button buttonHandler={showStatisticHandler} text={I18n.t('Buttons.statistic')} />
+          ) : null}
         </ModalButtonsContainerStyled>
       </>
     );
@@ -158,6 +160,7 @@ ModalResult.propTypes = {
   currentAppMode: PropTypes.string.isRequired,
   getOldGameWords: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 ModalResult.defaultProps = {
@@ -175,6 +178,7 @@ const mapStateToProps = (state) => {
     Statistic: state.changeStatistic.statistic,
     currentAppMode: state.changeAppMode.appMode,
     loading: state.loadOldGameWords.loadingOldGame,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 

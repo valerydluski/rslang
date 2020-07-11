@@ -67,8 +67,20 @@ const ButtonStyled = styled.button`
     }
   }
 
+  &.settings {
+    margin: 20px 0;
+  }
+
   &.active {
     background-color: #fec246;
+  }
+
+  &.button-next {
+    background-color: #f56748;
+
+    &:hover {
+      background: #fec246;
+    }
   }
 `;
 

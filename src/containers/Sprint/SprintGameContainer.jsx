@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import SprintGameContainerStyled from './Styled/SprintGameContainerStyled';
 import SprintScoreContainer from '../../components/Sprint/SprintScoreContainer';
 import { WordStyled, TranslationStyled } from './Styled/WordInfoStyled';
@@ -24,6 +25,7 @@ const SprintGameContainer = (props) => {
     page,
     gameName,
     newGame,
+    gameMode,
   } = props;
   const [currentWordIndex, changeWordIndex] = useState(0);
   const [isWordFinished, toggleWordStatus] = useState(false);
@@ -38,13 +40,15 @@ const SprintGameContainer = (props) => {
 
   if (isGameFinished) {
     addWrongWordsToStore(wrongAnsweredWords);
-    saveStatistic({
-      Level: level,
-      Page: page,
-      wordsCollection,
-      wrongWordsState: wrongAnsweredWords,
-      gameName,
-    });
+    if (gameMode) {
+      saveStatistic({
+        Level: level,
+        Page: page,
+        wordsCollection,
+        wrongWordsState: wrongAnsweredWords,
+        gameName,
+      });
+    }
     return (
       <ResultModal
         correctWords={correctAnsweredWords}
@@ -110,11 +114,17 @@ const SprintGameContainer = (props) => {
         <SprintControlsContainer
           isAnswerCorrect={isAnswerCorrect}
           isWordFinished={isWordFinished}
-          clickHandler={processAnswer}
+          processAnswer={processAnswer}
         />
       ) : (
-        <SprintControlsContainer clickHandler={processAnswer} />
+        <SprintControlsContainer processAnswer={processAnswer} />
       )}
+      <KeyboardEventHandler
+        handleKeys={['right', 'left']}
+        onKeyEvent={(key) => {
+          processAnswer(key === 'right');
+        }}
+      />
     </SprintGameContainerStyled>
   );
 };
@@ -129,6 +139,7 @@ SprintGameContainer.propTypes = {
   page: PropTypes.string.isRequired,
   gameName: PropTypes.string.isRequired,
   newGame: PropTypes.func,
+  gameMode: PropTypes.bool.isRequired,
 };
 
 SprintGameContainer.defaultProps = {
@@ -139,9 +150,15 @@ SprintGameContainer.defaultProps = {
   newGame: () => {},
 };
 
+const mapStateToProps = (state) => {
+  return {
+    gameMode: state.gamesReducer.gameMode,
+  };
+};
+
 const mapDispatchToProps = {
   addWrongWordsToStore: changeIDontKnowWords,
   saveStatistic: saveFullStatistic,
 };
 
-export default connect(null, mapDispatchToProps)(SprintGameContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SprintGameContainer);

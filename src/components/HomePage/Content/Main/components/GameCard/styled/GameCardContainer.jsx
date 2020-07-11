@@ -1,8 +1,7 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../../../../config'
 
 const GameCardContainer = styled.div`
-  width: 15vw;
-
   h3 {
     font-weight: bold;
     font-size: 18px;
@@ -15,7 +14,8 @@ const GameCardContainer = styled.div`
   }
 
   p {
-    width: 15vw;
+    height: 100px;
+    flex-grow: 1;
     font-size: 14px;
     line-height: 17px;
     color: #000000;
@@ -30,61 +30,33 @@ const GameCardContainer = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 1100px) {
-    h3 {
-    font-size: 13px;
-    height: 35px;
-    }
+  @media ${DEVICE.laptopL} {
     p {
-      width: 13vw;
-      font-size: 12px;
+      width: 100%;
+      height: 75px;
     }
   }
 
-  @media (max-width: 950px) {
-    width: 13vw;
-  }
-
-  @media (max-width: 830px) {
-    width: 12vw;
-  }
-
-  @media (max-width: 767px) {
+  @media ${DEVICE.laptop} {
     width: 100%;
-    height: 75vh;
-    h3 {
-      font-size: 26px;
-      height: 35px;
-      }
+    height: auto;
+  }
+
+  @media ${DEVICE.tablet} {
+    width: 100%;
     p {
-        width: 70vw;
-      }
-    span {
-        font-size: 19px;
-        line-height: 27px;
-      }
+      height: auto;
+      font-size: 20px;
+      line-height: 30px;
+    }
   }
 
-  @media (max-width: 620px) {
-    height: 65vh;
-  }
-
-  @media (max-width: 500px) {
-    width: 97%;
-    height: 55vh;
-  }
-
-  @media (max-width: 420px) {
-    height: 45vh;
-    width: 80vw;
-  }
-
-  @media (max-width: 390px) {
-    width: 80vw;
-  }
-
-  @media (max-width: 340px) {
-    width: 77vw;
+  @media ${DEVICE.mobileL} {
+    width: 100%;
+    p {
+      font-size: 16px;
+      line-height: 20px;
+    }
   }
 `;
 

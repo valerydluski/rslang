@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
 import { Translate } from 'react-redux-i18n';
 import MainNavigationMenu from '../../../../../containers/Navigation/MainNavigationMenu';
 import StyledButtonWithIcon from '../../../../UI/Button/Styled/StyledButtonWithIcon';
@@ -9,7 +9,6 @@ import iconLogoutHover from '../../../../UI/Icon/iconLogoutHover.svg';
 import iconSettingsHover from '../../../../UI/Icon/iconSettingsHover.svg';
 import getRedirectFunction from '../../../../../utils/getRedirectFunction';
 import { resetSessionData } from '../../../../../redux/Auth/Login/actions';
-import Logo from '../../../../UI/Logo/Logo';
 
 const BurgerMenuContainer = styled.div`
   cursor: pointer;
@@ -52,23 +51,29 @@ const BurgerMenuContainer = styled.div`
   input:checked ~ label .one {
     opacity: 0;
     transition: 0.3s ease-in-out;
+    position: fixed;
   }
 
   input:checked ~ label .two {
     transform: rotate(-45deg);
     margin-bottom: 0;
     transition: 0.3s all ease;
+    position: fixed;
+    background-color: #FFFFFF;
   }
 
   input:checked ~ label .three {
     transform: rotate(45deg);
     margin-bottom: 0;
     transition: 0.3s all ease;
+    position: fixed;
+    background-color: #FFFFFF;
   }
 
   input:checked ~ label .four {
     opacity: 0;
     transition: 0.3s all ease;
+    position: fixed;
   }
 
   @media (max-width: 767px) {
@@ -79,16 +84,16 @@ const BurgerMenuContainer = styled.div`
     button {
       position: fixed;
       display: block;
-      margin-top: 85vh;
-      margin-left: 7vw;
+      margin-top: 88vh;
+      margin-left: 17px;
     }
 
     button: first-of-type {
-      margin-top: 77vh;
+      margin-top: 80vh;
     }
 
     button span {
-      margin-left: 7vw;
+      margin-left: 17px;
     }
 
     span {
@@ -97,15 +102,9 @@ const BurgerMenuContainer = styled.div`
     }
   }
 
-  @media (max-width: 700px) {
-    button {
-      margin-left: 4vw;
-    }
-  }
-
   @media (max-width: 600px) {
     button {
-      margin-left: -13vw;
+      margin-left: -75px;
     }
   }
 `;
@@ -134,7 +133,7 @@ const BurgerMenuFirstLine = styled.div`
   width: 30px;
   height: 4px;
   left: 90%;
-  background-color: grey;
+  background-color: #6550de;
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
@@ -142,8 +141,47 @@ const BurgerMenuFirstLine = styled.div`
   @media (max-width: 767px) {
     display: block;
   }
-  @media (max-width: 450px) {
+
+  @media (max-width: 620px) {
+    left: 89%;
+  }
+
+  @media (max-width: 530px) {
+    left: 87%;
+  }
+
+  @media (max-width: 460px) {
+    left: 84%;
+  }
+
+  @media (max-width: 320px) {
     left: 83%;
+  }
+`;
+
+const BurgerMenuFirstLineSmall = styled.div`
+  display: none;
+  cursor: pointer;
+  z-index: 20;
+  position: absolute;
+  width: 5px;
+  height: 4px;
+  left: 94.5%;
+  background-color: #fec246;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s all ease;
+  margin-top: 5px;
+  @media (max-width: 767px) {
+    display: block;
+  }
+
+  @media (max-width: 720px) {
+    left: 95%;
+  }
+
+  @media (max-width: 530px) {
+    left: 94%;
   }
 `;
 
@@ -152,11 +190,11 @@ const BurgerMenuSecondLine = styled.div`
   cursor: pointer;
 
   z-index: 20;
-  left: 90%;
+  left: 91.3%;
   position: absolute;
   width: 30px;
   height: 4px;
-  background-color: grey;
+  background-color: #f56748;
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
@@ -166,7 +204,59 @@ const BurgerMenuSecondLine = styled.div`
     display: block;
   }
 
+  @media (max-width: 650px) {
+    left: 91%;
+  }
+
+  @media (max-width: 550px) {
+    left: 90.5%;
+  }
+
+  @media (max-width: 530px) {
+    left: 88.8%;
+  }
+
   @media (max-width: 450px) {
+    left: 87.4%;
+  }
+
+  @media (max-width: 360px) {
+    left: 86.4%;
+  }
+`;
+
+const BurgerMenuSecondLineSmall = styled.div`
+  display: none;
+  cursor: pointer;
+
+  z-index: 20;
+  left: 90%;
+  position: absolute;
+  width: 5px;
+  height: 4px;
+  background-color: #6550de;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s all ease;
+  margin-top: 15px;
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+
+  @media (max-width: 620px) {
+    left: 89%;
+  }
+
+  @media (max-width: 530px) {
+    left: 87%;
+  }
+
+  @media (max-width: 460px) {
+    left: 84%;
+  }
+
+  @media (max-width: 320px) {
     left: 83%;
   }
 `;
@@ -176,11 +266,11 @@ const BurgerMenuThirdLine = styled.div`
   cursor: pointer;
 
   z-index: 20;
-  left: 90%;
+  left: 91.3%;
   position: absolute;
   width: 30px;
   height: 4px;
-  background-color: grey;
+  background-color: #f56748;
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
@@ -190,8 +280,24 @@ const BurgerMenuThirdLine = styled.div`
     display: block;
   }
 
+  @media (max-width: 650px) {
+    left: 91%;
+  }
+
+  @media (max-width: 550px) {
+    left: 90.5%;
+  }
+
+  @media (max-width: 530px) {
+    left: 88.8%;
+  }
+
   @media (max-width: 450px) {
-    left: 83%;
+    left: 87.4%;
+  }
+
+  @media (max-width: 360px) {
+    left: 86.4%;
   }
 `;
 
@@ -203,7 +309,7 @@ const BurgerMenuFourthLine = styled.div`
   position: absolute;
   width: 30px;
   height: 4px;
-  background-color: grey;
+  background-color: #fec246;
   border-radius: 10px;
   cursor: pointer;
   transition: 1s all ease;
@@ -213,21 +319,83 @@ const BurgerMenuFourthLine = styled.div`
     display: block;
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: 620px) {
+    left: 89%;
+  }
+
+  @media (max-width: 530px) {
+    left: 87%;
+  }
+
+  @media (max-width: 460px) {
+    left: 84%;
+  }
+
+  @media (max-width: 320px) {
     left: 83%;
+  }
+`;
+
+const BurgerMenuFourthLineSmall = styled.div`
+  display: none;
+  cursor: pointer;
+  z-index: 20;
+  position: absolute;
+  width: 5px;
+  height: 4px;
+  left: 94.5%;
+  background-color: #f56748;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s all ease;
+  margin-top: 25px;
+  @media (max-width: 767px) {
+    display: block;
+  }
+
+  @media (max-width: 720px) {
+    left: 95%;
+  }
+
+  @media (max-width: 530px) {
+    left: 94%;
   }
 `;
 
 const BurgerMenu = (props) => {
   const { resetSessionData } = props;
+
+  const [checkboxType, changeCheckbox] = useState(false);
+  const [isMenuClicked, changeMenuClick] = useState(false);
+
+  const clickHandler = () => {
+    if (isMenuClicked) {
+    changeCheckbox(!checkboxType);
+    }
+  };
+
+  const pageClose = () => {
+    if (checkboxType) {
+      changeCheckbox(false);
+      changeMenuClick(false);
+    }
+  };
+
+  const isCLicked = () => {
+    changeMenuClick(true);
+  }
+
   return (
-    <BurgerMenuContainer>
-      <BurgerMenuInput id="check-nav" type="checkbox" />
-      <BurgerMenuLabel for="check-nav">
+    <BurgerMenuContainer onClick={pageClose} >
+      <BurgerMenuInput id="check-nav" type="checkbox" onChange={clickHandler} checked={checkboxType} />
+      <BurgerMenuLabel htmlFor="check-nav">
         <BurgerMenuFirstLine className="one" />
-        <BurgerMenuSecondLine className="two" />
-        <BurgerMenuThirdLine className="three" />
+        <BurgerMenuFirstLineSmall className="one"/>
+        <BurgerMenuSecondLineSmall className="one"/>
+        <BurgerMenuSecondLine className="two" onClick={isCLicked}/>
+        <BurgerMenuThirdLine className="three" onClick={isCLicked}/>
         <BurgerMenuFourthLine className="four" />
+        <BurgerMenuFourthLineSmall className="four"/>
       </BurgerMenuLabel>
       <MainNavigationMenu />
       <StyledButtonWithIcon

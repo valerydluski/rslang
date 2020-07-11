@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import { InputContainer, InputStyled, SpanStyled, LabelStyled } from './Styled/InputStyled';
 
 const Input = (props) => {
@@ -16,10 +17,10 @@ const Input = (props) => {
     autocomplete,
     className,
     classNameSpan,
-    classNameContainer,
   } = props;
+
   return (
-    <InputContainer className={classNameContainer}>
+    <InputContainer>
       <InputStyled
         type={type}
         name={name}
@@ -33,8 +34,13 @@ const Input = (props) => {
         {...input}
         className={className}
       />
-      {error && touched && <SpanStyled className={classNameSpan}>{error}</SpanStyled>}
-      {label && <LabelStyled htmlFor={name}>{label}</LabelStyled>}
+      {classNameSpan
+        ? error &&
+          touched &&
+          toast.warning(error) && <SpanStyled className={classNameSpan}>{error}</SpanStyled>
+        : error && touched && <SpanStyled className={classNameSpan}>{error}</SpanStyled>}
+
+      {label && <LabelStyled htmlFor={label}>{label}</LabelStyled>}
     </InputContainer>
   );
 };
@@ -53,7 +59,6 @@ Input.propTypes = {
   autocomplete: PropTypes.string,
   className: PropTypes.string,
   classNameSpan: PropTypes.string,
-  classNameContainer: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -69,7 +74,6 @@ Input.defaultProps = {
   autocomplete: 'on',
   className: '',
   classNameSpan: '',
-  classNameContainer: '',
 };
 
 export default Input;

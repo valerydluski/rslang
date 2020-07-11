@@ -10,7 +10,7 @@ const OverlayStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99;
+  z-index: 110;
 
   &.hidden {
     opacity: 0;

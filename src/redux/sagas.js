@@ -13,6 +13,10 @@ import statistic from './Statistic/sagas/statisticSaga';
 import watchLoadData from './LoadDataFromApi/sagas/loadDataSaga';
 import oldWordsSaga from './GetWordsFromAPI/sagas/oldWordsSaga';
 import aggregatedWordsSagaWatcher from './Dictionary/sagas/aggregatedWordsSaga';
+import watchGetLearnWords from './GetWordsFromAPI/sagas/getWordsForLearn';
+import nextNewCardShowWatcher from './LearnWords/sagas/nextNewCardShow';
+import generateLearnWordsCollectionWatcher from './LearnWords/sagas/generateLearnWordsCollection';
+import saveUserWordsFromGamesSagaWatcher from './Dictionary/sagas/saveWordsFromGamesSaga';
 
 export default function* watchSaga() {
   yield all([
@@ -30,5 +34,9 @@ export default function* watchSaga() {
     fork(watchLoadData),
     fork(oldWordsSaga),
     fork(aggregatedWordsSagaWatcher),
+    fork(watchGetLearnWords),
+    fork(nextNewCardShowWatcher),
+    fork(generateLearnWordsCollectionWatcher),
+    fork(saveUserWordsFromGamesSagaWatcher),
   ]);
 }

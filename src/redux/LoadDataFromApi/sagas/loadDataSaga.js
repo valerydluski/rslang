@@ -1,16 +1,19 @@
 import { takeEvery, call, put, select } from 'redux-saga/effects';
+import { setLocale } from 'react-redux-i18n';
 import { LOAD_DATA_FROM_API } from '../types';
 import { isDataLoadFromApi } from '../actions';
 import { saveFullStatisticToStore } from '../../Statistic/action';
 import getSettings from '../../../utils/getSettings';
 import getStatisticFromApi from '../../../services/getStatisticFromApi';
 import getSettingsFromApi from '../../../services/getSettingsFromApi';
-import { getUserWords } from '../../Dictionary/actions';
 import { saveUserSettingsToStore } from '../../UserSettings/actions';
 import { loadDataLoaderShow, loadDataLoaderHide } from '../../Loader/LoadDataLoader/action';
 import createInitialRounds from '../../../utils/createInitialRounds';
 import { changeInitialRound } from '../../ChangeRounds/action';
+import { addToShowedWordsList } from '../../LearnWords/actions';
 import { puzzleSettingsFromServer } from '../../EnglishPuzzle/actions';
+import getAllUserWords from '../../../services/getAllUserWords';
+import { saveUserWords } from '../../Dictionary/actions';
 
 function* workerLoadData() {
   yield put(loadDataLoaderShow());
@@ -22,6 +25,7 @@ function* workerLoadData() {
     const statisticFromApi = getSettings(statistic);
     const initialRound = createInitialRounds(statisticFromApi);
     yield put(changeInitialRound(initialRound));
+    yield put(addToShowedWordsList(JSON.parse(statisticFromApi.RepeatWordsToday)));
     yield put(saveFullStatisticToStore(statisticFromApi));
   }
 
@@ -36,9 +40,13 @@ function* workerLoadData() {
         isBackground: settingsFromApi.isBackground,
       })
     );
+    yield put(setLocale(settingsFromApi.language));
   }
 
-  yield put(getUserWords());
+  const payload = yield call(getAllUserWords, sessionData);
+  if (payload) {
+    yield put(saveUserWords(payload));
+  }
 
   yield put(isDataLoadFromApi(true));
   yield put(loadDataLoaderHide());

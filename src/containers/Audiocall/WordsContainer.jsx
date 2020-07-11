@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import Word from '../../components/Audiocall/styled/StyledWords';
 import errorSound from '../../assets/audio/error.mp3';
 import correctSound from '../../assets/audio/correct.mp3';
@@ -45,10 +46,10 @@ const WordsContainer = (props) => {
     wordAudio.play();
   };
 
-  const clickHandler = (e) => {
-    if (e.target.matches('[data-index]')) {
+  const clickHandler = (e, key) => {
+    if (key || e.target.matches('[data-index]')) {
       changeBackgroundOpacity(backgroundOpacity + 100 / wordsAmount);
-      const selectedWordIndex = +e.target.dataset.index;
+      const selectedWordIndex = key ? key - 1 : +e.target.dataset.index;
       const result = currentStepWords[selectedWordIndex].word === correctWord;
       playResultSound(result);
       const correctWordIndex = currentStepWords.findIndex((a) => a.word === correctWord);
@@ -56,7 +57,15 @@ const WordsContainer = (props) => {
     }
   };
 
-  return <WordsContainerStyled onClick={clickHandler}>{wordsCards}</WordsContainerStyled>;
+  return (
+    <>
+      <WordsContainerStyled onClick={clickHandler}>{wordsCards}</WordsContainerStyled>
+      <KeyboardEventHandler
+        handleKeys={['1', '2', '3', '4', '5']}
+        onKeyEvent={(key) => clickHandler(null, +key)}
+      />
+    </>
+  );
 };
 
 WordsContainer.propTypes = {

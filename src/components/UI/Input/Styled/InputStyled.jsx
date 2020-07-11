@@ -19,6 +19,24 @@ export const InputStyled = styled.input`
     font-size: 23px;
     line-height: 28px;
     color: #929292;
+    outline: none;
+  }
+  &.auth {
+    border: 1px solid #c4c4c4;
+    box-sizing: border-box;
+    color: #c4c4c4;
+    font-size: 23px;
+    line-height: 27px;
+    outline: none;
+    &::placeholder {
+      color: #c4c4c4;
+    }
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    -webkit-autofill:focus,
+    -internal-autofill-selected {
+      -webkit-text-fill-color: #c4c4c4;
+    }
   }
 `;
 
@@ -33,11 +51,6 @@ export const LabelStyled = styled.label`
 
 export const SpanStyled = styled.span`
   &.span_none {
-    position: absolute;
-    bottom: 20px;
-    right: 40px;
-    width: 200px;
-    height: 50px;
-    background-color: red;
+    display: none;
   }
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const InitialSentenceWordsStyled = styled.div`
   text-align: center;
@@ -7,6 +8,19 @@ const InitialSentenceWordsStyled = styled.div`
   font-weight: 500;
   font-size: 30px;
   margin-left: 10px;
+
+  @media ${DEVICE.laptop} {
+    font-size: 20px;
+    line-height: 36px;
+    height: 36px;
+    margin-left: 5px;
+  }
+
+  @media ${DEVICE.tablet} {
+    font-size: 14px;
+    line-height: 25px;
+    height: 25px;
+  }
 `;
 
 const MainWordStyled = styled(InitialSentenceWordsStyled)`
@@ -23,6 +37,14 @@ const MainWordStyled = styled(InitialSentenceWordsStyled)`
     font-weight: 500;
     color: rgba(0, 0, 0, 0.4);
     text-decoration: none;
+
+    @media ${DEVICE.laptop} {
+      top: 36px;
+    }
+
+    @media ${DEVICE.tablet} {
+      top: 25px;
+    }
   }
 `;
 

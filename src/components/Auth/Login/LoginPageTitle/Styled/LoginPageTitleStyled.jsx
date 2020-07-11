@@ -42,11 +42,6 @@ const LoginPageTitleStyled = styled.div`
       font-size: 35px;
       line-height: 45px;
     }
-
-    @media ${DEVICE.tablet} {
-      font-size: 26px;
-      line-height: 35px;
-    }
   }
 `;
 

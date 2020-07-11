@@ -5,6 +5,7 @@ import audioCallPoster from './assets/img/posters/audio-call.svg';
 import sprintPoster from './assets/img/posters/sprint.svg';
 import makeSentencePoster from './assets/img/posters/make-sentence.svg';
 import getRedirectFunction from './utils/getRedirectFunction';
+import Elena from './assets/img/photo.png';
 
 export const API = {
   URL: 'https://afternoon-falls-25894.herokuapp.com',
@@ -79,13 +80,49 @@ export const GAME_LIST = [
   },
 ];
 
+export const TEAM_LIST = [
+  {
+    title: 'TeamMembers.valera',
+    description: 'TeamMembers.valeraDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.marta',
+    description: 'TeamMembers.martaDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.nelly',
+    description: 'TeamMembers.nellyDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.kostya',
+    description: 'TeamMembers.kostyaDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.taras',
+    description: 'TeamMembers.tarasDescription',
+    poster: Elena,
+  },
+  {
+    title: 'TeamMembers.artsemi',
+    description: 'TeamMembers.artsemiDescription',
+    poster: Elena,
+  },
+];
+
 export const MIN_WORDS_PER_DAY = 1;
 export const MAX_WORDS_PER_DAY = 600;
 export const MAX_WORDS_PER_PAGE = 25;
 export const MIN_WORDS_PER_PAGE = 5;
+export const TOTAL_WORDS = 3600;
 
 export const GAME_MAX_PAGE = 60;
 export const GAME_MAX_LEVEL = 6;
+
+export const WORDS_PER_PAGE = 600;
 
 export const CHECKBOXES = [
   'isTranslate',
@@ -140,6 +177,10 @@ export const INITIAL_STATISTIC = {
   MakeSentencePassedRound: '0',
   LearnLastWords: '0',
   LearnLastLevel: '0',
+  RepeatWordsToday: '[]',
+  CountCardsShow: '0',
+  CountNewWordsToday: '0',
+  lastTrain: '0',
 };
 
 export const INIT_GAMES_ROUND = [

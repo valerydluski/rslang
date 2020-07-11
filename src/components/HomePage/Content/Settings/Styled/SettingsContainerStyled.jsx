@@ -16,6 +16,7 @@ export const SettingsFormStyled = styled.form`
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  width: 100%;
 `;
 
 export const SelectContainerStyled = styled.div`

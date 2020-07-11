@@ -18,6 +18,7 @@ const LoadingSpinnerStyled = styled.div`
   position: relative;
   width: 80px;
   height: 80px;
+  transform: translate(-50%, -50%);
   div {
     box-sizing: border-box;
     display: block;

@@ -12,7 +12,7 @@ import changeRoundReducer from './ChangeRounds/changeRoundReducer';
 import DefineMaxPagePerLevelReducer from './DefineMaxPagePerLevel/DefineMaxPagePerLevelReducer';
 import changeStatisticReducer from './Statistic/statisticReducer';
 import isCorrectReducer from './LearnWords/reducers/correctReducer';
-import newLearnCardShow from './LearnWords/reducers/newCardShowReducer';
+import newLearnCardShow from './LearnWords/reducer';
 import saveUserWordsReducer from './Dictionary/reducers/saveUserWordsReducer';
 import aggregatedWordsReducer from './Dictionary/reducers/aggregatedWordsReducer';
 import checkStatusloaderReducer from './Loader/CheckStatusLoader/checkStatusloaderReducer';
