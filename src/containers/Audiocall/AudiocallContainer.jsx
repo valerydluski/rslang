@@ -16,6 +16,7 @@ import { saveFullStatistic } from '../../redux/Statistic/action';
 import newRound from '../../utils/newRound';
 import StatusMenu from '../../components/StatusMenu/StatusMenu';
 import GameContainerStyled from './styled/StyledGameContainer';
+import StyledGameProgress from './styled/StyledGameProgress';
 
 let currentGameWords;
 let answerResult = {};
@@ -33,8 +34,8 @@ const AudioCallContainer = ({
   maxPage,
   gameName,
   saveStatistic,
-  backgroundOpacity,
-  changeBackgroundOpacity,
+  gameProgressLine,
+  changegameProgressLine,
   gameMode,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
@@ -92,7 +93,7 @@ const AudioCallContainer = ({
   }
 
   function autoSolve() {
-    changeBackgroundOpacity(backgroundOpacity + 100 / wordsCollection.length);
+    changegameProgressLine(gameProgressLine + 100 / wordsCollection.length);
     addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
     toggleWordStatus(true);
     answerResult.isCorrect = true;
@@ -147,6 +148,7 @@ const AudioCallContainer = ({
               audioSrc={currentGameWords[currentWordIndex].audio}
               imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
             />
+            <StyledGameProgress gameProgressLine={gameProgressLine} />
             <WordsContainer
               isWordFinished={isWordFinished}
               isCorrect={answerResult.isCorrect}
@@ -173,13 +175,14 @@ const AudioCallContainer = ({
               src={currentGameWords[currentWordIndex].audio}
               isBig={!isWordFinished}
             />
+            <StyledGameProgress gameProgressLine={gameProgressLine} />
             <WordsContainer
               words={additionalWords}
               correctWord={currentGameWords[currentWordIndex].word}
               processUserAnswer={processUserAnswer}
               isWordFinished={isWordFinished}
-              backgroundOpacity={backgroundOpacity}
-              changeBackgroundOpacity={changeBackgroundOpacity}
+              gameProgressLine={gameProgressLine}
+              changegameProgressLine={changegameProgressLine}
               wordsAmount={wordsCollection.length}
             />
             <DontKnowButton clickHandler={autoSolve} />
@@ -203,8 +206,8 @@ AudioCallContainer.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func.isRequired,
-  changeBackgroundOpacity: PropTypes.func,
-  backgroundOpacity: PropTypes.number,
+  changegameProgressLine: PropTypes.func,
+  gameProgressLine: PropTypes.number,
   gameMode: PropTypes.bool.isRequired,
 };
 
@@ -220,8 +223,8 @@ AudioCallContainer.defaultProps = {
   page: '1',
   maxPage: GAME_MAX_PAGE,
   gameName: GAME_NAME.audioCall,
-  backgroundOpacity: 0,
-  changeBackgroundOpacity: () => {},
+  gameProgressLine: 0,
+  changegameProgressLine: () => {},
 };
 
 const mapStateToProps = (state) => {
