@@ -5,7 +5,7 @@ import { WORDS_PER_PAGE } from '../../../config';
 import { setLearnWordsStatistic } from '../../Statistic/action';
 import { addToShowedWordsList, loadingWordToServer } from '../actions';
 import findObjInArray from '../../../utils/findObjInArray';
-import { saveUserWords, saveOneUserWords } from '../../Dictionary/actions';
+import { saveUserWords } from '../../Dictionary/actions';
 import { SAVE_FULL_STATISTIC_TO_STORE } from '../../Statistic/types';
 
 function* addNewWordSagaWorker(action) {

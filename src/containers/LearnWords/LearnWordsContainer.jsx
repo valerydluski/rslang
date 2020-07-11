@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LearnWords from '../../components/LearnWords/LearnWords';
@@ -12,7 +12,6 @@ import {
 import updateOneWord from '../../services/updateOneWord';
 import FinalScreen from '../../components/LearnWords/FinalScreen';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import { useEffect } from 'react';
 
 function getWord(arr, i) {
   const w = arr[i];
@@ -150,6 +149,7 @@ function LearnWordCardContainer(props) {
         updateWord(config);
         break;
       case 'unknown':
+        correctCardHandler(true);
         showResultHandler(true);
         break;
       default:
