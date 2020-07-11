@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-redux-i18n';
 import { TrueButtonStyled, FalseButtonStyled } from './Styled/AnswerButtonsStyled';
@@ -10,10 +10,16 @@ import SprintResultMarker from '../../components/Sprint/SprintResultMarker';
 const resultAudio = new Audio();
 
 const SprintControlsContainer = ({ processAnswer, isAnswerCorrect, isWordFinished }) => {
+  useEffect(() => {
+    resultAudio.pause();
+  }, []);
   const playResultSound = (isOk) => {
     resultAudio.src = isOk ? correctSound : errorSound;
     resultAudio.load();
-    resultAudio.play();
+    const playPromise = resultAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {}).catch(() => {});
+    }
   };
 
   if (isWordFinished) playResultSound(isAnswerCorrect);

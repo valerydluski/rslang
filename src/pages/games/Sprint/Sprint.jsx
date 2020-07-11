@@ -37,7 +37,12 @@ const Sprint = (props) => {
   }, [wordsCollection]);
 
   const [isGameFinished, toggleGameMode] = useState(false);
+
   if (isWordsLoading) return <LoadingSpinner />;
+  if (currentAppMode !== gameName || words.length === 0) {
+    switchAppMode(gameName);
+    return null;
+  }
 
   const secondsForGuessing = words.length * secondsForOneWord;
 
@@ -64,11 +69,6 @@ const Sprint = (props) => {
       updateLevel(level);
     }
   };
-
-  if (currentAppMode !== gameName || words.length === 0) {
-    switchAppMode(gameName);
-    return null;
-  }
 
   return (
     <SprintContainerStyled key={words.map((word) => word.word).join()}>

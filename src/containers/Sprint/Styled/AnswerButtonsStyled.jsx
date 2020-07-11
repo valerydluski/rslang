@@ -17,6 +17,7 @@ const AnswerButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
   @media (hover: hover) {
     &:hover {
       filter: contrast(1.4);
