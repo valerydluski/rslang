@@ -4,7 +4,7 @@ const SecondsContainerStyled = styled.p`
   font-weight: 500;
   font-size: 35px;
   line-height: 100px;
-  color: #c4c4c4;
+  color: #b2b2b2;
   text-align: center;
   position: relative;
   letter-spacing: 2px;

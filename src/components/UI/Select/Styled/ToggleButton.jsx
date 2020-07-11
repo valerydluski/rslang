@@ -10,7 +10,7 @@ const ToggleButton = styled.button`
   text-align: left;
   font-size: 10px;
   font-weight: bold;
-  color: #c4c4c4;
+  color: #b2b2b2;
   background-color: transparent;
   padding: 0;
   padding-left: 5px;

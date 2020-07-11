@@ -25,7 +25,7 @@ const ResultItem = styled.div`
   }
 
   & span.dimension {
-    color: #929292;
+    color: #7d7d7d;
   }
 
   & span.value {

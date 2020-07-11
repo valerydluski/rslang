@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledButtonWithIcon = styled.button`
   width: 150px;
-  color: #929292;
+  color: #7d7d7d;
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;

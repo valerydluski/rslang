@@ -19,7 +19,7 @@ const userDescriptionContainer = styled.div`
     font-weight: 500;
     font-size: 16.4706px;
     line-height: 20px;
-    color: #c4c4c4;
+    color: #b2b2b2;
     margin: 0;
     margin-top: 6px;
     margin-bottom: 30px;

@@ -18,24 +18,24 @@ export const InputStyled = styled.input`
     font-weight: normal;
     font-size: 23px;
     line-height: 28px;
-    color: #929292;
+    color: #7d7d7d;
     outline: none;
   }
   &.auth {
     border: 1px solid #c4c4c4;
     box-sizing: border-box;
-    color: #c4c4c4;
+    color: #b2b2b2;
     font-size: 23px;
     line-height: 27px;
     outline: none;
     &::placeholder {
-      color: #c4c4c4;
+      color: #b2b2b2;
     }
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     -webkit-autofill:focus,
     -internal-autofill-selected {
-      -webkit-text-fill-color: #c4c4c4;
+      -webkit-text-fill-color: #b2b2b2;
     }
   }
 `;

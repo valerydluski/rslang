@@ -35,7 +35,7 @@ const WordStyled = styled.div`
 `;
 
 const FinishedWordStyled = styled(WordStyled)`
-  color: #c4c4c4;
+  color: #b2b2b2;
 `;
 
 const WrongWordStyled = styled(FinishedWordStyled)`

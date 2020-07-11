@@ -12,10 +12,10 @@ const StyledFormNamesContainer = styled.div`
     font-size: 26px;
     line-height: 32px;
     margin-left: 60px;
-    color: #c4c4c4;
+    color: #b2b2b2;
     text-decoration: none;
     &:visited {
-      color: #c4c4c4;
+      color: #b2b2b2;
     }
   }
   @media ${DEVICE.laptop} {

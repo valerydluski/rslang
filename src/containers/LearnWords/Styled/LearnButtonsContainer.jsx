@@ -25,7 +25,7 @@ export const ProgressBarCount = styled.p`
   font-weight: bold;
   font-size: 30px;
   line-height: 35px;
-  color: #929292;
+  color: #7d7d7d;
 `;
 
 export default LearnButtonsContainer;
