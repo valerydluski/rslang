@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Line } from 'rc-progress';
+import { connect } from 'react-redux';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import StyledButton from '../../components/UI/Button/Styled/StyledButton';
 import { LINK_FOR_IMAGE } from '../../config';
@@ -17,6 +18,7 @@ import RepeatCardsContainer, {
   TextMeaningTranslateStyled,
 } from './Styled/RepeatCardsContainer';
 import RepeatButtonsContainer from './Styled/RepeatButtonsContainer';
+import { showResult } from '../../redux/RepeatWords/actions';
 
 const LearnWordsForm = (props) => {
   const {
@@ -35,6 +37,8 @@ const LearnWordsForm = (props) => {
     currentWordIndex,
     audiosDuration,
     showButtons,
+    isShowResult,
+    showResultHander,
   } = props;
 
   const {
@@ -109,6 +113,11 @@ const LearnWordsForm = (props) => {
             answer={answer}
             isShowResult={isResultShow}
             audiosDuration={audiosDuration}
+            onChange={() => {
+              if (isShowResult) {
+                showResultHander(false);
+              }
+            }}
           />
           {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
         </TextExampleStyled>
@@ -190,9 +199,11 @@ LearnWordsForm.propTypes = {
     }).isRequired,
   }).isRequired,
   isCorrect: PropTypes.bool.isRequired,
+  isShowResult: PropTypes.bool.isRequired,
   isTranslationShow: PropTypes.bool.isRequired,
   autocomplete: PropTypes.string,
   reset: PropTypes.func.isRequired,
+  showResultHander: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   isRightAnswerShow: PropTypes.bool.isRequired,
   answer: PropTypes.string,
@@ -211,4 +222,14 @@ LearnWordsForm.defaultProps = {
   currentWordIndex: 0,
 };
 
-export default ReduxLearnWordsForm;
+const mapStateToProps = (state) => {
+  return {
+    isShowResult: state.repeatWords.showResult,
+  };
+};
+
+const mapDispatchToProps = {
+  showResultHander: showResult,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReduxLearnWordsForm);
