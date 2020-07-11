@@ -17,7 +17,7 @@ const GamePage = ({ match, isLoading, isDataLoad, checkStatus }) => {
   if (isLoading) return <LoadingSpinner />;
   if (!isDataLoad) {
     checkStatus();
-    return null;
+    return <Redirect to={`/StartGame/${gameId}/`} />;
   }
   switch (gameId) {
     case 'SpeakIT':

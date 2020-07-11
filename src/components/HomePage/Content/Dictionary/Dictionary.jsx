@@ -9,6 +9,7 @@ import DictionaryNavigationMenu from '../../../../containers/Navigation/Dictiona
 import LearningList from './Lists/LearningList';
 import DifficultList from './Lists/DifficultList';
 import DeletedList from './Lists/DeletedList';
+import Title from '../../../../containers/Homepage/Content/Title/Title';
 
 function Dictionary(props) {
   const { getAggregatedWords } = props;
@@ -17,6 +18,7 @@ function Dictionary(props) {
 
   return (
     <StyledDictionary>
+      <Title />
       <StyledTitle>
         <Translate value="HomePage.dictionary" />
       </StyledTitle>

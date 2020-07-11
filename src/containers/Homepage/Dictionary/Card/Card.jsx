@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Translate } from 'react-redux-i18n';
 import StyledCard from './Styled/StyledCard';
 import Left from './Styled/Left';
 import Center from './Styled/Center';
@@ -14,11 +15,18 @@ import trashIco from '../../../../components/UI/Icon/trashIco.svg';
 import difficultIco from '../../../../components/UI/Icon/difficultIco.svg';
 import restoreIco from '../../../../components/UI/Icon/restoreIco.svg';
 import Button from '../../../../components/UI/Button/Styled/StyledPuzzleRoundWhiteButton';
+import ProgressBar from '../../../../components/UI/ProgressBar/ProgressBar';
 import {
   updateLearningWords,
   updateDifficultWords,
   updateDeletedWords,
 } from '../../../../redux/Dictionary/actions';
+
+const dateOptions = {
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+};
 
 function Card(props) {
   const {
@@ -31,8 +39,18 @@ function Card(props) {
     updateLearning,
     updateDifficult,
     updateDeleted,
+    isTranslate,
+    isTextMeaning,
+    isTextExample,
+    isTranscription,
+    isImageAssociation,
+    difficultBtn,
+    deletedBtn,
+    lang,
   } = props;
   const sound = new Audio();
+  const prevRepeat = new Date(item.userWord.optional.time);
+  const nextRepeat = new Date(item.userWord.optional.nextRepeat);
 
   const play = () => {
     sound.src = `${LINK_FOR_AUDIO}${item.audio}`;
@@ -47,36 +65,37 @@ function Card(props) {
     action(list);
   };
 
-  const updateWord = (difficulty) => {
+  const updateWord = (isDifficult, isDeleted) => {
     const wordOptions = { ...item.userWord };
-    wordOptions.difficulty = difficulty;
+    wordOptions.optional.difficult = isDifficult;
+    wordOptions.optional.deleted = isDeleted;
     // eslint-disable-next-line no-underscore-dangle
     updateOneWord(item._id, wordOptions, user);
   };
 
   const putInDifficult = () => {
     updateList(learningWords, updateLearning);
-    updateWord('difficult');
+    updateWord(true, false);
   };
 
   const deleteFromLearning = () => {
     updateList(learningWords, updateLearning);
-    updateWord('deleted');
+    updateWord(false, true);
   };
 
   const deleteFromDifficult = () => {
     updateList(difficultWords, updateDifficult);
-    updateWord('deleted');
+    updateWord(true, true);
   };
 
   const restoreFromDifficult = () => {
     updateList(difficultWords, updateDifficult);
-    updateWord('medium');
+    updateWord(false, false);
   };
 
   const restoreFromDeleted = () => {
     updateList(deletedWords, updateDeleted);
-    updateWord('medium');
+    updateWord(false, false);
   };
 
   const controls = () => {
@@ -88,12 +107,16 @@ function Card(props) {
             <Button onClick={play}>
               <Icon src={speechIcoGray} />
             </Button>
-            <Button onClick={putInDifficult}>
-              <Icon src={difficultIco} />
-            </Button>
-            <Button onClick={deleteFromLearning}>
-              <Icon src={trashIco} />
-            </Button>
+            {difficultBtn ? (
+              <Button onClick={putInDifficult}>
+                <Icon src={difficultIco} />
+              </Button>
+            ) : null}
+            {deletedBtn ? (
+              <Button onClick={deleteFromLearning}>
+                <Icon src={trashIco} />
+              </Button>
+            ) : null}
           </Right>
         );
         break;
@@ -106,9 +129,11 @@ function Card(props) {
             <Button onClick={restoreFromDifficult}>
               <Icon src={restoreIco} />
             </Button>
-            <Button onClick={deleteFromDifficult}>
-              <Icon src={trashIco} />
-            </Button>
+            {deletedBtn ? (
+              <Button onClick={deleteFromDifficult}>
+                <Icon src={trashIco} />
+              </Button>
+            ) : null}
           </Right>
         );
         break;
@@ -132,12 +157,33 @@ function Card(props) {
 
   return (
     <StyledCard>
-      <Left>
+      <Left isImageAssociation={isImageAssociation}>
         <Image src={`${LINK_FOR_IMAGE}${item.image}`} className="small-img" />
       </Left>
       <Center>
-        <p>{item.word}</p>
-        <p>{item.textExample.replace(/<\w+>|<\/\w+>/g, '')}</p>
+        <ProgressBar difficulty={item.userWord.difficulty} />
+        <p className="word">
+          {item.word}
+          {isTranslate ? <span> - {item.wordTranslate}</span> : null}
+        </p>
+        {isTranscription ? <p className="additional">{item.transcription}</p> : null}
+        {isTextMeaning ? (
+          <p className="additional">{item.textMeaning.replace(/<\w+>|<\/\w+>/g, '')}</p>
+        ) : null}
+        {isTextExample ? (
+          <p className="additional">{item.textExample.replace(/<\w+>|<\/\w+>/g, '')}</p>
+        ) : null}
+        <p className="info">
+          <Translate value="Dictionary.repeats" />: {item.userWord.optional.repeats}
+        </p>
+        <p className="info">
+          <Translate value="Dictionary.prevRepeat" />:{' '}
+          {prevRepeat.toLocaleString(lang, dateOptions)}
+        </p>
+        <p className="info">
+          <Translate value="Dictionary.nextRepeat" />:{' '}
+          {nextRepeat.toLocaleString(lang, dateOptions)}
+        </p>
       </Center>
       {controls()}
     </StyledCard>
@@ -154,6 +200,14 @@ Card.propTypes = {
   updateLearning: PropTypes.func,
   updateDifficult: PropTypes.func,
   updateDeleted: PropTypes.func,
+  isTranslate: PropTypes.bool,
+  isTextMeaning: PropTypes.bool,
+  isTextExample: PropTypes.bool,
+  isTranscription: PropTypes.bool,
+  isImageAssociation: PropTypes.bool,
+  difficultBtn: PropTypes.bool,
+  deletedBtn: PropTypes.bool,
+  lang: PropTypes.string,
 };
 
 Card.defaultProps = {
@@ -166,6 +220,14 @@ Card.defaultProps = {
   updateLearning: () => {},
   updateDifficult: () => {},
   updateDeleted: () => {},
+  isTranslate: false,
+  isTextMeaning: false,
+  isTextExample: false,
+  isTranscription: false,
+  isImageAssociation: false,
+  difficultBtn: true,
+  deletedBtn: true,
+  lang: 'en',
 };
 
 const mapStateToProps = (state) => {
@@ -174,6 +236,14 @@ const mapStateToProps = (state) => {
     learningWords: state.dictionary.learningWords,
     difficultWords: state.dictionary.difficultWords,
     deletedWords: state.dictionary.deletedWords,
+    isTranslate: state.userSettings.settings.isTranslate,
+    isTextMeaning: state.userSettings.settings.isTextMeaning,
+    isTextExample: state.userSettings.settings.isTextExample,
+    isTranscription: state.userSettings.settings.isTranscription,
+    isImageAssociation: state.userSettings.settings.isImageAssociation,
+    difficultBtn: state.userSettings.settings.isDictionaryDifficultButton,
+    deletedBtn: state.userSettings.settings.isDictionaryDeletedButton,
+    lang: state.i18n.locale,
   };
 };
 

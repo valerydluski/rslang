@@ -199,4 +199,6 @@ export const INITIAL_SETTINGS = {
   savannahTimeForWord: '2',
   savannahMaxErrorCounter: '5',
   cardsPerDayRepeat: 20,
+  isDictionaryDeletedButton: true,
+  isDictionaryDifficultButton: true,
 };

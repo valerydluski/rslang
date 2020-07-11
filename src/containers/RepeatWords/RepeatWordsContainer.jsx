@@ -102,7 +102,7 @@ function RepeatWordCardContainer(props) {
       optional: {
         deleted: false,
         difficult: false,
-        time: new Date(),
+        time: new Date().valueOf(),
         nextRepeat: new Date().valueOf() + addTime,
         repeats: currentWord.userWord.optional.repeats + 1,
       },
