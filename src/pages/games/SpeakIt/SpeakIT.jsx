@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
-import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import GameContainerSpeakIT from '../../../containers/SpeakIT/GameContainerSpeakIT';
 import SpeakITContainerStyled from '../../../containers/SpeakIT/Styled/StyledSpeakIT';
 import { GAME_NAME } from '../../../config';
@@ -24,10 +23,6 @@ const SpeakIT = (props) => {
 
   return (
     <SpeakITContainerStyled>
-      <div>
-        <GoToHomePageButton />
-      </div>
-
       <GameContainerSpeakIT key={wordsCollection.join()} wordsCollection={words} />
     </SpeakITContainerStyled>
   );
