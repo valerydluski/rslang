@@ -26,7 +26,7 @@ function* addNewWordSagaWorker(action) {
   const sessionData = yield select(getLoginState);
   // eslint-disable-next-line no-underscore-dangle
   const wordId = action.payload.id || action.payload._id;
-  const { isNew, word } = action.payload;
+  const { isNew, word, image } = action.payload;
   const isKnown = findObjInArray(userWords, '_id', wordId);
   if (isNew || !isKnown) {
     const config = {
@@ -40,8 +40,10 @@ function* addNewWordSagaWorker(action) {
       },
     };
     yield call(saveOneWord, wordId, config, sessionData);
-    nextWord = +LearnLastWords + 1 > +WORDS_PER_PAGE ? 1 : +LearnLastWords + 1;
-    nextLevel = +LearnLastWords + 1 > +WORDS_PER_PAGE ? +LearnLastLevel + 1 : +LearnLastLevel;
+    [nextLevel, nextWord] = image
+      .replace(/0|.jpg/g, '')
+      .split('/')[1]
+      .split('_');
     const elForStore = action.payload;
     elForStore.userWord = config;
     words[0].paginatedResults = words[0].paginatedResults.concat(elForStore);
@@ -54,13 +56,14 @@ function* addNewWordSagaWorker(action) {
   const lastDateTraining = new Date();
   const obj = {
     learnData: {
-      nextWord,
-      nextLevel,
+      nextWord: +nextWord,
+      nextLevel: +nextLevel,
       cardsShow,
       countNewWordsShow,
       lastDateTraining,
     },
   };
+  console.log('function*addNewWordSagaWorker -> obj', obj);
   displayedWordsList.push(word);
   yield put(addToShowedWordsList(displayedWordsList));
   yield put(setLearnWordsStatistic(obj));
