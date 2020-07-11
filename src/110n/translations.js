@@ -86,6 +86,7 @@ const translations = {
       OK: 'OK',
       back: 'Back',
       login: 'Log In',
+      hard: 'Hard',
     },
     Languages: {
       en: 'English',
@@ -224,6 +225,7 @@ const translations = {
       OK: 'OK',
       back: 'Назад',
       login: 'Войти',
+      hard: 'Тяжело',
     },
     Languages: {
       en: 'Английский',

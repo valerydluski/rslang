@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const LearnCardsContainer = styled.div`
   position: relative;
@@ -14,6 +15,10 @@ const LearnCardsContainer = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   width: 1280px;
+
+  @media ${DEVICE.laptopL} {
+    width: 1020px;
+  }
 `;
 
 export const TranslateStyled = styled.p`
