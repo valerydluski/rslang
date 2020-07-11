@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Translate } from 'react-redux-i18n';
 import StyledCard from './Styled/StyledCard';
 import Left from './Styled/Left';
 import Center from './Styled/Center';
@@ -14,11 +15,18 @@ import trashIco from '../../../../components/UI/Icon/trashIco.svg';
 import difficultIco from '../../../../components/UI/Icon/difficultIco.svg';
 import restoreIco from '../../../../components/UI/Icon/restoreIco.svg';
 import Button from '../../../../components/UI/Button/Styled/StyledPuzzleRoundWhiteButton';
+import ProgressBar from '../../../../components/UI/ProgressBar/ProgressBar';
 import {
   updateLearningWords,
   updateDifficultWords,
   updateDeletedWords,
 } from '../../../../redux/Dictionary/actions';
+
+const dateOptions = {
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+};
 
 function Card(props) {
   const {
@@ -36,9 +44,11 @@ function Card(props) {
     isTextExample,
     isTranscription,
     isImageAssociation,
+    lang,
   } = props;
   const sound = new Audio();
-  console.log(item);
+  const prevRepeat = new Date(item.userWord.optional.time);
+  const nextRepeat = new Date(item.userWord.optional.nextRepeat);
 
   const play = () => {
     sound.src = `${LINK_FOR_AUDIO}${item.audio}`;
@@ -143,13 +153,29 @@ function Card(props) {
         <Image src={`${LINK_FOR_IMAGE}${item.image}`} className="small-img" />
       </Left>
       <Center>
-        <p>
+        <ProgressBar difficulty={item.userWord.difficulty} />
+        <p className="word">
           {item.word}
           {isTranslate ? <span> - {item.wordTranslate}</span> : null}
         </p>
-        {isTranscription ? <p>{item.transcription}</p> : null}
-        {isTextMeaning ? <p>{item.textMeaning.replace(/<\w+>|<\/\w+>/g, '')}</p> : null}
-        {isTextExample ? <p>{item.textExample.replace(/<\w+>|<\/\w+>/g, '')}</p> : null}
+        {isTranscription ? <p className="additional">{item.transcription}</p> : null}
+        {isTextMeaning ? (
+          <p className="additional">{item.textMeaning.replace(/<\w+>|<\/\w+>/g, '')}</p>
+        ) : null}
+        {isTextExample ? (
+          <p className="additional">{item.textExample.replace(/<\w+>|<\/\w+>/g, '')}</p>
+        ) : null}
+        <p className="info">
+          <Translate value="Dictionary.repeats" />: {item.userWord.optional.repeats}
+        </p>
+        <p className="info">
+          <Translate value="Dictionary.prevRepeat" />:{' '}
+          {prevRepeat.toLocaleString(lang, dateOptions)}
+        </p>
+        <p className="info">
+          <Translate value="Dictionary.nextRepeat" />:{' '}
+          {nextRepeat.toLocaleString(lang, dateOptions)}
+        </p>
       </Center>
       {controls()}
     </StyledCard>
@@ -171,6 +197,7 @@ Card.propTypes = {
   isTextExample: PropTypes.bool,
   isTranscription: PropTypes.bool,
   isImageAssociation: PropTypes.bool,
+  lang: PropTypes.string,
 };
 
 Card.defaultProps = {
@@ -188,6 +215,7 @@ Card.defaultProps = {
   isTextExample: false,
   isTranscription: false,
   isImageAssociation: false,
+  lang: 'en',
 };
 
 const mapStateToProps = (state) => {
@@ -201,6 +229,7 @@ const mapStateToProps = (state) => {
     isTextExample: state.userSettings.settings.isTextExample,
     isTranscription: state.userSettings.settings.isTranscription,
     isImageAssociation: state.userSettings.settings.isImageAssociation,
+    lang: state.i18n.locale,
   };
 };
 

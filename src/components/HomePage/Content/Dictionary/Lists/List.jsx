@@ -10,8 +10,8 @@ import 'swiper/css/swiper.css';
 function List({ wordsList, type }) {
   const params = {
     direction: 'vertical',
-    slidesPerView: 3,
-    slidesPerGroup: 3,
+    slidesPerView: 2,
+    slidesPerGroup: 2,
     spaceBetween: 10,
     mousewheel: true,
     shouldSwiperUpdate: true,
