@@ -2,6 +2,7 @@ import { call, select, put, takeLatest } from 'redux-saga/effects';
 import { GET_USER_WORDS } from '../types';
 import getAllUserWords from '../../../services/getAllUserWords';
 import { saveUserWords, loadUserWords } from '../actions';
+import { isWordsCollectionLoadedHandler } from '../../RepeatWords/actions';
 
 function* saveUserWordsSagaWorker() {
   yield put(loadUserWords(true));
@@ -11,6 +12,7 @@ function* saveUserWordsSagaWorker() {
   if (payload) {
     yield put(saveUserWords(payload));
   }
+  yield put(isWordsCollectionLoadedHandler(true));
   yield put(loadUserWords(false));
 }
 

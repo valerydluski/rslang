@@ -31,6 +31,8 @@ function* addNewWordSagaWorker(action) {
         time: new Date().valueOf(),
         deleted: false,
         difficult: false,
+        nextRepeat: new Date().valueOf(),
+        repeats: 1,
       },
     };
     yield call(saveOneWord, wordId, config, sessionData);
