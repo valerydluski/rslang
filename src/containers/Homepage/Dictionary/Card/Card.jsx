@@ -47,36 +47,37 @@ function Card(props) {
     action(list);
   };
 
-  const updateWord = (difficulty) => {
+  const updateWord = (isDifficult, isDeleted) => {
     const wordOptions = { ...item.userWord };
-    wordOptions.difficulty = difficulty;
+    wordOptions.optional.difficult = isDifficult;
+    wordOptions.optional.deleted = isDeleted;
     // eslint-disable-next-line no-underscore-dangle
     updateOneWord(item._id, wordOptions, user);
   };
 
   const putInDifficult = () => {
     updateList(learningWords, updateLearning);
-    updateWord('difficult');
+    updateWord(true, false);
   };
 
   const deleteFromLearning = () => {
     updateList(learningWords, updateLearning);
-    updateWord('deleted');
+    updateWord(false, true);
   };
 
   const deleteFromDifficult = () => {
     updateList(difficultWords, updateDifficult);
-    updateWord('deleted');
+    updateWord(true, true);
   };
 
   const restoreFromDifficult = () => {
     updateList(difficultWords, updateDifficult);
-    updateWord('medium');
+    updateWord(false, false);
   };
 
   const restoreFromDeleted = () => {
     updateList(deletedWords, updateDeleted);
-    updateWord('medium');
+    updateWord(false, false);
   };
 
   const controls = () => {
