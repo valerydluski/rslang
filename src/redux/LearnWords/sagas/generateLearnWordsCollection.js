@@ -28,6 +28,10 @@ const fn2 = (LearnLastLevel, LearnLastWords) => {
   else newLevel = LearnLastLevel;
   if (+LearnLastWords === 0) newWords = 1 + 50;
   else newWords = +LearnLastWords + 50;
+  if (+LearnLastWords >= 600) {
+    newLevel = +LearnLastLevel + 1;
+    newWords = 1;
+  }
   return { level: newLevel, words: newWords };
 };
 
@@ -45,7 +49,8 @@ const filterFn = (data, LearnLastWords, wordsPerDay, payload) => {
 const filterFn2 = (data, filterData, wordsPerDay, payload) => {
   if (wordsPerDay < 1) return [];
   const newElCount = wordsPerDay - filterData.length;
-  const newData = data.slice(0, newElCount);
+  const dataWithoutOldWords = data.filter((el) => !payload.includes(el.id));
+  const newData = dataWithoutOldWords.slice(0, newElCount);
   return filterData.concat(newData);
 };
 
@@ -59,8 +64,14 @@ function* generateLearnWordsCollectionWorker() {
   // eslint-disable-next-line no-underscore-dangle
   const userWordsID = payload[0].paginatedResults.map((el) => el.id || el._id);
   const { cardsPerDay, howToLearnWords, wordsPerDay } = yield select(getSettings);
-  let { CountCardsShow, CountNewWordsToday, RepeatWordsToday } = yield select(getStatistic);
-  const { LearnLastWords, LearnLastLevel, lastTrain } = yield select(getStatistic);
+  let {
+    CountCardsShow,
+    CountNewWordsToday,
+    RepeatWordsToday,
+    LearnLastWords,
+    LearnLastLevel,
+  } = yield select(getStatistic);
+  const { lastTrain } = yield select(getStatistic);
   let obj;
   if (new Date(lastTrain).getDate() !== new Date().getDate() && lastTrain !== '0') {
     CountCardsShow = '0';
@@ -85,8 +96,11 @@ function* generateLearnWordsCollectionWorker() {
     case 'allWords':
       data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastWords));
       filterData = filterFn(data, LearnLastWords, wordsPerDay - CountNewWordsToday, userWordsID);
-      if (filterData.length < wordsPerDay - CountNewWordsToday) {
-        data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastWords));
+      while (filterData.length < wordsPerDay - CountNewWordsToday) {
+        const newData = fn2(LearnLastLevel, LearnLastWords);
+        LearnLastLevel = newData.level;
+        LearnLastWords = newData.words;
+        data = yield call(wordsFetch, newData);
         filterData = filterFn2(data, filterData, wordsPerDay - CountNewWordsToday, userWordsID);
       }
       filterData = filterData.map((el) => {
@@ -106,8 +120,11 @@ function* generateLearnWordsCollectionWorker() {
     case 'newWords':
       data = yield call(wordsFetch, fn(LearnLastLevel, LearnLastWords));
       filterData = filterFn(data, LearnLastWords, wordsPerDay - CountNewWordsToday, userWordsID);
-      if (filterData.length < wordsPerDay - CountNewWordsToday) {
-        data = yield call(wordsFetch, fn2(LearnLastLevel, LearnLastWords));
+      while (filterData.length < wordsPerDay - CountNewWordsToday) {
+        const newData = fn2(LearnLastLevel, LearnLastWords);
+        LearnLastLevel = newData.level;
+        LearnLastWords = newData.words;
+        data = yield call(wordsFetch, newData);
         filterData = filterFn2(data, filterData, wordsPerDay - CountNewWordsToday, userWordsID);
       }
       filterData = filterData.map((el) => {
