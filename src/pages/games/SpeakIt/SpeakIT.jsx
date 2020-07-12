@@ -16,10 +16,10 @@ const SpeakIT = (props) => {
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
-  if (currentAppMode !== gameName) {
-    switchAppMode(gameName);
-    return null;
-  }
+  // if (currentAppMode !== gameName) {
+  //   switchAppMode(gameName);
+  //   return null;
+  // }
   return (
     <SpeakITContainerStyled>
       <GameContainerSpeakIT key={wordsCollection.join()} wordsCollection={words} />

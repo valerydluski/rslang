@@ -98,9 +98,9 @@ const EnglishPuzzle = (props) => {
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (currentAppMode !== gameName) {
-    switchAppMode(gameName);
-  }
+  // if (currentAppMode !== gameName) {
+  //   switchAppMode(gameName);
+  // }
 
   if (isBreakpoint) {
     return (

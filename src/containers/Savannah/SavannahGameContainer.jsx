@@ -62,10 +62,10 @@ const SavannaGameContainer = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (currentAppMode !== gameName || wordsCollection.length === 0) {
-    switchAppMode(gameName);
-    return null;
-  }
+  // if (currentAppMode !== gameName || wordsCollection.length === 0) {
+  //   switchAppMode(gameName);
+  //   return null;
+  // }
 
   function finishGame() {
     addWordsWithMistakesToStore(wrongAnsweredWords);

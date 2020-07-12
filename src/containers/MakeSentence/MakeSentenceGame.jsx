@@ -48,10 +48,10 @@ const MakeSentenceGame = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (currentAppMode !== gameName || wordsCollection.length === 0) {
-    switchAppMode(gameName);
-    return null;
-  }
+  // if (currentAppMode !== gameName || wordsCollection.length === 0) {
+  //   switchAppMode(gameName);
+  //   return null;
+  // }
 
   if (!currentWordIndex && !isWordFinished) {
     currentGameWords = shuffleArray(wordsCollection);
