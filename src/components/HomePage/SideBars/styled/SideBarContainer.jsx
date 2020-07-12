@@ -13,6 +13,7 @@ const SideBarContainer = styled.div`
 
   span {
     font-size: 16px;
+    margin-left: 20px;
   }
 
   @media ${DEVICE.laptopL} {
@@ -25,6 +26,7 @@ const SideBarContainer = styled.div`
 
     span {
       font-size: 13px;
+      margin-left: 0;
     }
   }
 

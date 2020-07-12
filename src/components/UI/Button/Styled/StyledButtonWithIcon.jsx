@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledButtonWithIcon = styled.button`
-  margin-left: 40px;
+  margin-left: 45px;
   width: 150px;
   color: #929292;
   font-family: Montserrat;
