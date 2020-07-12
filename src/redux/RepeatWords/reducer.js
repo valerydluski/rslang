@@ -8,6 +8,8 @@ import {
   SAVE_REPEAT_WORDS,
   IS_WORD_COLLECTION_LOADED,
   IS_REPEAT_WORDS_LOADED,
+  SET_DIFFICULT_WORDS,
+  IS_MORE_CARDS_TODAY,
 } from './types';
 import RESET_STORE from '../resetStore/types';
 
@@ -19,6 +21,8 @@ const initialState = {
   isWordsCollectionLoaded: false,
   showResult: false,
   isRepeatWordsLoaded: false,
+  isDifficultMode: false,
+  isMoreCardsToday: false,
 };
 
 function repeatWords(state = initialState, action) {
@@ -39,6 +43,10 @@ function repeatWords(state = initialState, action) {
       return { ...state, isWordsCollectionLoaded: action.payload };
     case IS_REPEAT_WORDS_LOADED:
       return { ...state, isRepeatWordsLoaded: true };
+    case SET_DIFFICULT_WORDS:
+      return { ...state, isDifficultMode: action.payload };
+    case IS_MORE_CARDS_TODAY:
+      return { ...state, isMoreCardsToday: action.payload };
     case RESET_STORE:
       return { ...initialState };
     case RESET_STORE_REPEAT_WORDS:

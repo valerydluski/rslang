@@ -16,6 +16,6 @@ function* workerStatus({ payload }) {
   yield put(saveFullStatisticToStore(newStatistic));
 }
 
-export default function* watchStatus() {
+export default function* repeatStatisticsWatcher() {
   yield takeLatest(SAVE_REPEAT_STATISTIC, workerStatus);
 }
