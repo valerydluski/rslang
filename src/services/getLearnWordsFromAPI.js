@@ -1,5 +1,6 @@
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
+import getpartOfSpeechCode from './getPartOfSpeechCode';
 
 const {
   URL,
@@ -34,11 +35,34 @@ const createData = (level, words) => {
   };
 };
 
+async function getpartOfSpeechCodeForAllWords(el) {
+  const word = { ...el };
+  const data = await getpartOfSpeechCode(word.word);
+  const { partOfSpeechCode } = data[0].meanings[0];
+  word.userWord = {
+    optional: {
+      partOfSpeechCode,
+    },
+  };
+  word.partOfSpeechCode = partOfSpeechCode;
+  return word;
+}
+
 async function wordsFetchForLearn({ level, words }) {
   try {
     const { linkLevel, linkPage, wordsPerSentence, wordsPerPage } = createData(level, words);
     const link = `${URL}/${WORDS}?${linkLevel}&${linkPage}&${wordsPerSentence}&${wordsPerPage}`;
-    return await fetchData(link);
+    const arr = await fetchData(link);
+    const promises = [];
+    arr.forEach((element) => {
+      promises.push(getpartOfSpeechCodeForAllWords(element));
+    });
+    const results = await Promise.all(promises);
+    const newArr = arr.map((element) => {
+      const el = results.find((resEL) => resEL.word === element.word);
+      return el;
+    });
+    return newArr;
   } catch (e) {
     throw new Error('problem with API');
   }
