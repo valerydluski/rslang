@@ -11,7 +11,7 @@ async function saveOneWord(wordId, wordOptions, user, word) {
       const { partOfSpeechCode } = data[0].meanings[0];
       newOptions.optional.partOfSpeechCode = partOfSpeechCode;
     }
-    newOptions.optional.addDate = new Date().valueOf();
+    newOptions.optional.addDate = new Date().setHours(0, 0, 0, 0).valueOf();
     const {
       URL,
       ENDPOINTS: { USERS, WORDS },

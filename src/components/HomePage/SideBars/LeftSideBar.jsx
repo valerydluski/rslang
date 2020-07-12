@@ -10,6 +10,7 @@ import iconSettings from '../../UI/Icon/iconSettings.svg';
 import iconLogoutHover from '../../UI/Icon/iconLogoutHover.svg';
 import iconSettingsHover from '../../UI/Icon/iconSettingsHover.svg';
 import getRedirectFunction from '../../../utils/getRedirectFunction';
+import BurgerMenu from '../SideBars/components/styled/BurgerMenuContainer'
 
 export default function LeftSideBar(props) {
   const { resetSessionData, resetStore } = props;
@@ -19,7 +20,8 @@ export default function LeftSideBar(props) {
   };
   return (
     <SideBarContainer>
-      <Logo />
+      <Logo/>
+      <BurgerMenu />
       <MainNavigationMenu />
       <div>
         <StyledButtonWithIcon

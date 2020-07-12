@@ -1,18 +1,20 @@
 import scaleFunction from './scaleFunction';
 
-function configureChartData() {
-  const reduxData = [];
-  for (let i = 0; i < 25; i += 1) {
-    const date = new Date(Date.now());
-    date.setDate(date.getDate() + i);
-    const count = Math.ceil(Math.random() * 50);
-    reduxData.push({
-      date,
-      count,
+function configureChartData(times) {
+  const daysMap = new Map();
+  times.forEach((item) => {
+    daysMap.set(item, daysMap.has(item) ? daysMap.get(item) + 1 : 1);
+  });
+  const days = [];
+  Array.from(daysMap.keys()).forEach((item) => {
+    days.push({
+      date: new Date(item),
+      count: daysMap.get(item),
     });
-  }
-  let acc = reduxData[0].count;
-  const points = reduxData.map((item, index) => {
+  });
+
+  let acc = days[0].count;
+  const points = days.map((item, index) => {
     if (index === 0) return item;
     acc += item.count;
     return {
@@ -20,6 +22,7 @@ function configureChartData() {
       count: acc,
     };
   });
+
   const chartPoints = points.map((item, index) => {
     return {
       x: index,
@@ -28,11 +31,11 @@ function configureChartData() {
   });
 
   return {
-    reduxData,
+    days,
     points,
     chartPoints,
     xMin: 0,
-    xMax: chartPoints.length - 1 < 10 ? 10 : chartPoints.length - 1,
+    xMax: chartPoints.length <= 5 ? 5 : chartPoints.length,
     yMin: 0,
     yMax: 1,
   };

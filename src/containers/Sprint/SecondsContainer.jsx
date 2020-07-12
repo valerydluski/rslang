@@ -19,8 +19,9 @@ const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinishe
     }
     return () => {
       clearInterval(tick);
+      if (countdownAudio) countdownAudio.pause();
     };
-  });
+  }, [seconds]);
 
   if (isGameFinished) {
     if (countdownAudio) countdownAudio.pause();
@@ -33,8 +34,12 @@ const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinishe
     audio.src = isFinished ? timeIsUpSound : countdownSound;
     audio.load();
     if (seconds === countdownSoundStart) countdownAudio = audio;
-    audio.play();
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {}).catch(() => {});
+    }
   };
+
   if (seconds === 0) {
     return null;
   }

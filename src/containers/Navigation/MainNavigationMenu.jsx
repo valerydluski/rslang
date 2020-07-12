@@ -12,8 +12,8 @@ export default function MainNavigationMenu() {
   ];
 
   return (
-    <StyledMainNavigationMenu>
-      <NavigationMenu links={links} activeLinkClass="active_link" />
+    <StyledMainNavigationMenu className='navbar-list'>
+      <NavigationMenu links={links} activeLinkClass="active_link"/>
     </StyledMainNavigationMenu>
   );
 }

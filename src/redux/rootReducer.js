@@ -23,6 +23,7 @@ import loadOldGameWords from './Loader/LoadOldWords/loaderReducer';
 import dictionaryLoaderReducer from './Loader/DictionaryLoader/DictionaryLoaderReducer';
 import repeatWords from './RepeatWords/reducer';
 import isCorrectRepeatReducer from './RepeatWords/reducers/correctReducer';
+import chartReducer from './Chart/chartReducer';
 
 const rootReducer = combineReducers({
   gamesReducer,
@@ -49,6 +50,7 @@ const rootReducer = combineReducers({
   loadOldGameWords,
   repeatWords,
   isCorrectRepeatReducer,
+  chartReducer,
 });
 
 export default rootReducer;
