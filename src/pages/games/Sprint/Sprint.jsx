@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
@@ -30,10 +30,21 @@ const Sprint = (props) => {
     gameName,
     gameMode,
   } = props;
-  const [isGameFinished, toggleGameMode] = useState(false);
-  if (isWordsLoading) return <LoadingSpinner />;
+  const [words, changeWords] = useState(wordsCollection);
 
-  const secondsForGuessing = wordsCollection.length * secondsForOneWord;
+  useEffect(() => {
+    changeWords(wordsCollection);
+  }, [wordsCollection]);
+
+  const [isGameFinished, toggleGameMode] = useState(false);
+
+  if (isWordsLoading) return <LoadingSpinner />;
+  if (currentAppMode !== gameName || words.length === 0) {
+    switchAppMode(gameName);
+    return null;
+  }
+
+  const secondsForGuessing = words.length * secondsForOneWord;
 
   const finishGameHandler = () => {
     toggleGameMode(true);
@@ -59,13 +70,8 @@ const Sprint = (props) => {
     }
   };
 
-  if (currentAppMode !== gameName || wordsCollection.length === 0) {
-    switchAppMode(gameName);
-    return null;
-  }
-
   return (
-    <SprintContainerStyled>
+    <SprintContainerStyled key={words.map((word) => word.word).join()}>
       <GoToHomePageButton />
       <StatusMenu
         page={page}
@@ -82,7 +88,7 @@ const Sprint = (props) => {
         />
         <SprintGameContainer
           isGameFinished={isGameFinished}
-          wordsCollection={wordsCollection}
+          wordsCollection={words}
           finishGameHandler={finishGameHandler}
           level={level}
           page={page}
