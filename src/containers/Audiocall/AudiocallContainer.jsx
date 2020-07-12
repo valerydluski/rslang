@@ -16,7 +16,6 @@ import { saveFullStatistic } from '../../redux/Statistic/action';
 import newRound from '../../utils/newRound';
 import StatusMenu from '../../components/StatusMenu/StatusMenu';
 import GameContainerStyled from './styled/StyledGameContainer';
-import GameModeToggle from '../../components/GameModeToggle/GameModeToggle';
 import StyledGameProgress from './styled/StyledGameProgress';
 
 let currentGameWords;
@@ -171,7 +170,6 @@ const AudioCallContainer = ({
             updateLevel={updateLevel}
             updatePage={updatePage}
           />
-          <GameModeToggle gameName={gameName} />
           <GameContainerStyled>
             <AudioPlayButton
               src={currentGameWords[currentWordIndex].audio}
