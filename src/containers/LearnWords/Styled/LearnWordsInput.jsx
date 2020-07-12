@@ -15,11 +15,12 @@ export const InputWordsBgContainer = styled.span`
   padding: 5px 10px;
   background-color: transparent;
   border: 2px solid transparent;
-  transition: 0.3s linear;
+  transition: 0.1s linear;
 `;
 
 export const InputLetterContainer = styled.span`
-  color: ${(props) => (props.isIncorrect ? 'red' : '#000')};
+  color: ${(props) => (props.isIncorrect ? 'red' : 'green')};
+  opacity: 0.5;
 `;
 
 export const InputStyled = styled.input`

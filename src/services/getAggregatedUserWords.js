@@ -11,10 +11,40 @@ async function getAgreggatedUserWords(user, difficulty) {
         WORDS: { FILTER, WORDS_PER_PAGE },
       },
     } = API;
-
-    const filter = {
-      'userWord.difficulty': difficulty,
-    };
+    let filter;
+    switch (difficulty) {
+      case 'medium':
+        filter = {
+          $and: [
+            {
+              'userWord.optional.deleted': false,
+            },
+            {
+              'userWord.optional.difficult': false,
+            },
+          ],
+        };
+        break;
+      case 'difficult':
+        filter = {
+          $and: [
+            {
+              'userWord.optional.deleted': false,
+            },
+            {
+              'userWord.optional.difficult': true,
+            },
+          ],
+        };
+        break;
+      case 'deleted':
+        filter = {
+          'userWord.optional.deleted': true,
+        };
+        break;
+      default:
+        break;
+    }
 
     const wordsPerPage = 3600;
 

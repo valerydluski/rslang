@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LearnWords from '../../components/LearnWords/LearnWords';
@@ -11,6 +11,7 @@ import {
 } from '../../redux/LearnWords/actions';
 import updateOneWord from '../../services/updateOneWord';
 import FinalScreen from '../../components/LearnWords/FinalScreen';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 function getWord(arr, i) {
   const w = arr[i];
@@ -29,12 +30,14 @@ function LearnWordCardContainer(props) {
     resetSaveWord,
     wordsCollection,
     showResultHandler,
+    loadingWord,
   } = props;
   const { isAudioTranslate, isAudioTextMeaning, isAudioTextExample } = settings.settings;
   const [currentWord, setCurrentWord] = useState();
   const [isTranslationShow, setIsTranslationShow] = useState(false);
   const [isSoundPlay, setIsSoundPlay] = useState(true);
   const [isRightAnswerShow, setIsRightAnswerShow] = useState(false);
+  const [showLoader, isShowLoader] = useState(false);
   const needNewWord = useRef(true);
   const [audios, setAudios] = useState([]);
   const [answerToForm, setAnswerToForm] = useState('');
@@ -45,7 +48,21 @@ function LearnWordCardContainer(props) {
   const newWordCount = useRef(0);
   const currentWordIndex = useRef(0);
   const audiosDuration = useRef(-1);
+  const longestSeries = useRef(0);
+  const rightSeries = useRef(0);
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
+
+  useEffect(() => {
+    if (loadingWord) {
+      isShowLoader(true);
+    } else {
+      isShowLoader(false);
+    }
+  }, [loadingWord]);
+
+  if (showLoader) {
+    return <LoadingSpinner />;
+  }
 
   if (wordsCollection.length < 1 && !isGameStart.current) {
     return <FinalScreen noWords />;
@@ -58,7 +75,7 @@ function LearnWordCardContainer(props) {
     setCurrentWord(getWord(wordsCollection, currentWordIndex.current));
   }
 
-  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord.current) {
+  if (currentWord && !isCorrect && !isRightAnswerShow && needNewWord.current && !loadingWord) {
     if (currentWord.isNew) newWordCount.current += 1;
     isGameStart.current = true;
     showNewCardHandler(currentWord);
@@ -89,6 +106,11 @@ function LearnWordCardContainer(props) {
     return undefined;
   };
 
+  const updateWord = (config) => {
+    updateOneWord(currentWord.id, config, user);
+    nextWord();
+  };
+
   const onSubmit = async (formData) => {
     const { buttonType } = formData;
     setAnswerToForm(formData.word);
@@ -104,38 +126,40 @@ function LearnWordCardContainer(props) {
         config = {
           difficulty: 'new',
           optional: {
-            time: new Date(),
+            time: new Date().valueOf(),
             deleted: true,
             difficult: false,
             nextRepeat: new Date().valueOf(),
             repeats: 1,
           },
         };
-        updateOneWord(currentWord.id, config, user);
-        setCurrentWord(getWord(wordsCollection));
+        updateWord(config);
         break;
       case 'hard':
         config = {
           difficulty: 'hard',
           optional: {
-            time: new Date(),
+            time: new Date().valueOf(),
+            deleted: false,
             difficult: true,
-            delete: false,
             nextRepeat: new Date().valueOf(),
             repeats: 1,
           },
         };
-        updateOneWord(currentWord.id, config, user);
-        setCurrentWord(getWord(wordsCollection));
+        updateWord(config);
         break;
       case 'unknown':
+        correctCardHandler(true);
         showResultHandler(true);
         break;
       default:
         if (!answer) break;
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
-          if (firstAnswer.current) rightAnswer.current += 1;
+          if (firstAnswer.current) {
+            rightSeries.current += 1;
+            rightAnswer.current += 1;
+          }
           audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
@@ -154,15 +178,23 @@ function LearnWordCardContainer(props) {
           }
         } else {
           firstAnswer.current = false;
+          if (longestSeries.current < rightSeries.current) {
+            longestSeries.current = rightSeries.current;
+            rightSeries.current = 0;
+          }
         }
         correctCardHandler(true);
     }
   };
+
   return isFinalScreen ? (
     <FinalScreen
       wordsCount={wordsCount.current}
       newWordCount={newWordCount.current}
       rightAnswer={rightAnswer.current}
+      longestSeries={
+        longestSeries.current < rightAnswer.current ? rightAnswer.current : longestSeries.current
+      }
     />
   ) : (
     <LearnWords
@@ -173,8 +205,8 @@ function LearnWordCardContainer(props) {
       word={currentWord}
       isCorrect={isCorrect}
       answer={answerToForm}
-      wordsCount={wordsCount.current + 1}
-      currentWordIndex={currentWordIndex.current + 1}
+      wordsCount={wordsCount.current}
+      currentWordIndex={currentWordIndex.current}
       audiosDuration={audiosDuration.current}
     />
   );
@@ -186,6 +218,7 @@ LearnWordCardContainer.propTypes = {
   resetSaveWord: PropTypes.func.isRequired,
   wordsCollection: PropTypes.instanceOf(Array).isRequired,
   isCorrect: PropTypes.bool,
+  loadingWord: PropTypes.bool,
   settings: PropTypes.shape({
     settings: PropTypes.shape({
       deleteButton: PropTypes.bool,
@@ -204,6 +237,7 @@ LearnWordCardContainer.propTypes = {
 
 LearnWordCardContainer.defaultProps = {
   isCorrect: false,
+  loadingWord: false,
   settings: PropTypes.shape({
     settings: PropTypes.shape({
       deleteButton: true,
@@ -223,6 +257,7 @@ const mapStateToProps = (state) => {
     settings: state.userSettings,
     user: state.login,
     wordsCollection: state.newLearnCardShow.wordsCollection,
+    loadingWord: state.newLearnCardShow.loadingWord,
   };
 };
 

@@ -4,6 +4,7 @@ import {
   SAVE_FULL_STATISTIC_TO_STORE,
   SET_LEARN_WORDS_STATISTIC,
   SAVE_FULL_STATISTIC_TO_SERVER,
+  SAVE_REPEAT_STATISTIC,
 } from './types';
 
 export function saveFullStatisticToApi() {
@@ -38,5 +39,12 @@ export function setLearnWordsStatistic(obj) {
     type: SET_LEARN_WORDS_STATISTIC,
     payload: obj,
     from: 'LearnWords',
+  };
+}
+
+export function setRepeatStatistic(num) {
+  return {
+    type: SAVE_REPEAT_STATISTIC,
+    payload: num,
   };
 }

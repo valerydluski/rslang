@@ -16,8 +16,8 @@ const WordsContainer = (props) => {
     selectedIndex,
     correctIndex,
     isAutoSolved,
-    backgroundOpacity,
-    changeBackgroundOpacity,
+    gameProgressLine,
+    changegameProgressLine,
     wordsAmount,
   } = props;
 
@@ -32,7 +32,9 @@ const WordsContainer = (props) => {
       if ((!isCorrect && index === correctIndex) || (isAutoSolved && word.word === correctWord)) {
         type = '';
       }
-      return <Word key={word.word} wordStyleType={type} translation={word.wordTranslate} />;
+      return (
+        <Word key={word.word} index={index} wordStyleType={type} translation={word.wordTranslate} />
+      );
     }
 
     return <Word key={word.word} index={index} translation={word.wordTranslate} />;
@@ -48,7 +50,7 @@ const WordsContainer = (props) => {
 
   const clickHandler = (e, key) => {
     if (key || e.target.matches('[data-index]')) {
-      changeBackgroundOpacity(backgroundOpacity + 100 / wordsAmount);
+      changegameProgressLine(gameProgressLine + 100 / wordsAmount);
       const selectedWordIndex = key ? key - 1 : +e.target.dataset.index;
       const result = currentStepWords[selectedWordIndex].word === correctWord;
       playResultSound(result);
@@ -77,8 +79,8 @@ WordsContainer.propTypes = {
   selectedIndex: PropTypes.number,
   correctIndex: PropTypes.number,
   isAutoSolved: PropTypes.bool,
-  changeBackgroundOpacity: PropTypes.func,
-  backgroundOpacity: PropTypes.number,
+  changegameProgressLine: PropTypes.func,
+  gameProgressLine: PropTypes.number,
   wordsAmount: PropTypes.number,
 };
 
@@ -91,8 +93,8 @@ WordsContainer.defaultProps = {
   selectedIndex: null,
   correctIndex: null,
   isAutoSolved: false,
-  backgroundOpacity: 0,
-  changeBackgroundOpacity: () => {},
+  gameProgressLine: 0,
+  changegameProgressLine: () => {},
   wordsAmount: 0,
 };
 
