@@ -7,7 +7,7 @@ import HomePageContainer from './styled/HomePageContainer';
 import MainContainer from '../../containers/Homepage/Content/Main';
 import PrivateNavigationRoute from '../../components/Navigation/PrivateNavigationRoute';
 import Promo from '../../components/HomePage/Content/Promo/Promo';
-import AboutUs from '../../components/HomePage/Content/AboutUs/AboutUs';
+import AboutUsContainer from '../../containers/Homepage/Content/AboutUs/Content/AboutUs';
 import Statistics from '../../components/HomePage/Content/Statistics/Statistics';
 import Settings from '../../components/HomePage/Content/Settings/Settings';
 import LeftSideBarContainer from '../../containers/Homepage/SideBars/LeftSideBarContainer';
@@ -27,7 +27,7 @@ function HomePage(props) {
       <LeftSideBarContainer />
       <Switch>
         <PrivateNavigationRoute path="/promo" exact component={Promo} />
-        <PrivateNavigationRoute path="/about-us" exact component={AboutUs} />
+        <PrivateNavigationRoute path="/about-us" exact component={AboutUsContainer} />
         <PrivateNavigationRoute path="/dictionary" component={DictionaryContainer} />
         <PrivateNavigationRoute path="/statistics" exact component={Statistics} />
         <PrivateNavigationRoute path="/settings" exact component={Settings} />

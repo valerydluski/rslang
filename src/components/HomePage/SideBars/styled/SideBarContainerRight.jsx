@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { DEVICE } from '../../../../config';
 
-const SideBarContainer = styled.div`
+const SideBarContainerRight = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 280px;
+  width: 100%;
   background-color: #f3f3f3;
   padding: 30px;
   min-height: 100%;
@@ -13,12 +13,15 @@ const SideBarContainer = styled.div`
 
   span {
     font-size: 16px;
-    margin-left: 20px;
   }
 
   @media ${DEVICE.laptopL} {
-    width: 100%;
     padding: 20px;
+
+    div {
+      border-bottom: none;
+    }
+
     img {
       width: 100px;
       height: 100px;
@@ -26,20 +29,30 @@ const SideBarContainer = styled.div`
 
     span {
       font-size: 13px;
-      margin-left: 0;
     }
   }
 
   @media ${DEVICE.laptop} {
+    grid-column-start: 2;
     grid-row-start: 1;
-    grid-row-end: 3;
-    max-height: auto;
+    width: auto;
+    background-color: #ffffff;
+    nav {
+      display: none;
+    }
+    min-height: auto;
+  }
+
+  @media ${DEVICE.laptop} {
+    width: auto;
   }
 
   @media ${DEVICE.tablet} {
+    display: flex;
+    width: auto;
+    grid-column-start: auto;
     grid-row-start: auto;
-    grid-row-end: auto;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #ffffff;
     width: 100%;
     height: fit-content;
@@ -52,15 +65,11 @@ const SideBarContainer = styled.div`
       color: #ffffff;
       background-color: #404497;
       position: fixed;
-      width: 100%;
+      width: 93vw;
       right: 0%;
-      top: 0%;
-      margin: 0;
       height: 100vh;
-      } 
+    }
   }
-
-  
 `;
 
-export default SideBarContainer;
+export default SideBarContainerRight;
