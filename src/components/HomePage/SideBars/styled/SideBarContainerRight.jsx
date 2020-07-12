@@ -101,6 +101,10 @@ const SideBarContainerRight = styled.div`
       @media ${DEVICE.laptop} {
         margin-right: 20px;
       }
+      @media ${DEVICE.mobileL} {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
     }
 
     & a[href='/repeat'] {

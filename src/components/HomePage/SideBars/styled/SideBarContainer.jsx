@@ -15,6 +15,10 @@ const SideBarContainer = styled.div`
     margin-left: 20px;
   }
 
+  & > .menu-i {
+    display: none;
+  }
+
   @media ${DEVICE.laptop} {
     height: 100vh;
     position: fixed;
@@ -24,25 +28,15 @@ const SideBarContainer = styled.div`
   }
 
   @media ${DEVICE.tablet} {
-    grid-row-start: auto;
-    grid-row-end: auto;
-    flex-direction: row;
-    background-color: #ffffff;
-    width: 100%;
-    height: fit-content;
-    grid-template-columns: 1fr 1fr 1fr;
-    height: auto;
+    padding: 30px 30px 0 30px;
     position: static;
-    width: auto;
-    ul {
-      color: #ffffff;
-      background-color: #404497;
-      position: fixed;
-      width: 100%;
-      right: 0%;
-      top: 0%;
-      margin: 0;
-      height: 100vh;
+    flex-direction: row;
+    height: 90px;
+    width: 100%;
+    background-color: #ffffff;
+
+    & > .menu-i {
+      display: block;
     }
   }
 `;
