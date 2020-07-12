@@ -58,11 +58,14 @@ function Card(props) {
     sound.play();
   };
 
-  const updateList = (arr, action) => {
-    const list = [...arr];
-    const index = list.findIndex((word) => word === item);
-    list.splice(index, 1);
-    action(list);
+  const updateList = (arr1, arr2, action1, action2) => {
+    const list1 = [...arr1];
+    const list2 = [...arr2];
+    const index = list1.findIndex((word) => word === item);
+    list1.splice(index, 1);
+    list2.push(item);
+    action1(list1);
+    action2(list2);
   };
 
   const updateWord = (isDifficult, isDeleted) => {
@@ -74,27 +77,27 @@ function Card(props) {
   };
 
   const putInDifficult = () => {
-    updateList(learningWords, updateLearning);
+    updateList(learningWords, difficultWords, updateLearning, updateDifficult);
     updateWord(true, false);
   };
 
   const deleteFromLearning = () => {
-    updateList(learningWords, updateLearning);
+    updateList(learningWords, deletedWords, updateLearning, updateDeleted);
     updateWord(false, true);
   };
 
   const deleteFromDifficult = () => {
-    updateList(difficultWords, updateDifficult);
+    updateList(difficultWords, deletedWords, updateDifficult, updateDeleted);
     updateWord(true, true);
   };
 
   const restoreFromDifficult = () => {
-    updateList(difficultWords, updateDifficult);
+    updateList(difficultWords, learningWords, updateDifficult, updateLearning);
     updateWord(false, false);
   };
 
   const restoreFromDeleted = () => {
-    updateList(deletedWords, updateDeleted);
+    updateList(deletedWords, learningWords, updateDeleted, updateLearning);
     updateWord(false, false);
   };
 
