@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Translate } from 'react-redux-i18n';
 import PropTypes from 'prop-types';
 import { Switch, Redirect } from 'react-router-dom';
-import { useEffect } from 'react';
 import PrivateNavigationRoute from '../../../Navigation/PrivateNavigationRoute';
 import StyledDictionary from './Styled/StyledDictionary';
 import StyledTitle from './Styled/StyledTitle';

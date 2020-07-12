@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
-async function getAgreggatedUserWords(user, difficulty) {
+async function getAggregatedUserWords(user, difficulty) {
   try {
     const {
       URL,
@@ -42,6 +42,32 @@ async function getAgreggatedUserWords(user, difficulty) {
           'userWord.optional.deleted': true,
         };
         break;
+      case 'all':
+        filter = {
+          $and: [
+            {
+              $or: [
+                {
+                  'userWord.optional.deleted': false,
+                },
+                {
+                  'userWord.optional.deleted': true,
+                },
+              ],
+            },
+            {
+              $or: [
+                {
+                  'userWord.optional.difficult': false,
+                },
+                {
+                  'userWord.optional.difficult': true,
+                },
+              ],
+            },
+          ],
+        };
+        break;
       default:
         break;
     }
@@ -67,4 +93,4 @@ async function getAgreggatedUserWords(user, difficulty) {
   }
 }
 
-export default getAgreggatedUserWords;
+export default getAggregatedUserWords;

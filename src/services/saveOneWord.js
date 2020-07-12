@@ -4,7 +4,7 @@ import fetchData from '../utils/fetchData';
 
 async function saveOneWord(wordId, wordOptions, user) {
   const newOptions = { ...wordOptions };
-  newOptions.optional.addDate = new Date().valueOf();
+  newOptions.optional.addDate = new Date().setHours(0, 0, 0, 0).valueOf();
   try {
     const {
       URL,
