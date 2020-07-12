@@ -47,6 +47,7 @@ const translations = {
       timeForWord: 'Time for a word',
       errorCounter: 'Maximum number of errors',
       cardsPerDayRepeat: 'Сards per day interval repetition',
+      showButtonTrainHardWords: 'Show button repeat hard words',
     },
     Auth: {
       signIn: 'Sign In',
@@ -69,7 +70,8 @@ const translations = {
         'Check the correctness of your pronunciation of English words in the exciting game!',
       sprintDescription:
         'This game will help you to translate English words into your native language.',
-      makeSentenceDescription: 'This game will help you enjoy reading, writing, speaking English with pleasure.',
+      makeSentenceDescription:
+        'This game will help you enjoy reading, writing, speaking English with pleasure.',
     },
     Buttons: {
       save: 'Save',
@@ -215,6 +217,7 @@ const translations = {
       timeForWord: 'Времени на слово',
       errorCounter: 'Максимальное число ошибок',
       cardsPerDayRepeat: 'Карточек на день интервальное повторение',
+      showButtonTrainHardWords: 'Показать кнопку повторение сложных слов',
     },
     Auth: {
       signIn: 'Войти',
@@ -239,7 +242,8 @@ const translations = {
         'Проверьте правильность вашего произношения английских слов в увлекательной игре!',
       sprintDescription:
         'С помощью данной игры вы научитесь быстро переводить слова на ваш родной язык.',
-      makeSentenceDescription: 'Данная игра позволит вам научиться читать, писать, говорить легко и непринужденно.',
+      makeSentenceDescription:
+        'Данная игра позволит вам научиться читать, писать, говорить легко и непринужденно.',
     },
     Buttons: {
       save: 'Сохранить',
