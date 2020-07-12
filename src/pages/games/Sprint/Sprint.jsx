@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
-import { changeAppMode } from '../../../redux/AppMode/action';
 import SprintContainerStyled from '../../../containers/Sprint/Styled/SprintContainerStyled';
 import SprintGameContainer from '../../../containers/Sprint/SprintGameContainer';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
@@ -18,9 +17,7 @@ import StyledPattern from '../../../components/Sprint/Styled/StyledPattern';
 const Sprint = (props) => {
   const {
     wordsCollection,
-    switchAppMode,
     isWordsLoading,
-    currentAppMode,
     updateLevel,
     updatePage,
     page,
@@ -39,10 +36,6 @@ const Sprint = (props) => {
   const [isGameFinished, toggleGameMode] = useState(false);
 
   if (isWordsLoading) return <LoadingSpinner />;
-  // if (currentAppMode !== gameName || words.length === 0) {
-  //   switchAppMode(gameName);
-  //   return null;
-  // }
 
   const secondsForGuessing = words.length * secondsForOneWord;
 
@@ -105,9 +98,7 @@ const Sprint = (props) => {
 
 Sprint.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
-  switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
-  currentAppMode: PropTypes.string,
   updateLevel: PropTypes.func,
   updatePage: PropTypes.func,
   level: PropTypes.string,
@@ -120,9 +111,7 @@ Sprint.propTypes = {
 
 Sprint.defaultProps = {
   wordsCollection: [],
-  switchAppMode: () => {},
   isWordsLoading: false,
-  currentAppMode: '',
   updatePage: () => {},
   updateLevel: () => {},
   level: '1',
@@ -146,7 +135,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  switchAppMode: changeAppMode,
   updateLevel: changeSprintLevel,
   updatePage: changeSprintPage,
 };

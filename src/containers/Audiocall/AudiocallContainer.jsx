@@ -8,7 +8,6 @@ import { DontKnowButton, NextButton } from '../../components/Audiocall/Audiocall
 import { changeIDontKnowWords } from '../../redux/Games/action';
 import ResultModal from '../Modal/ResultModal';
 import shuffleArray from '../../utils/shuffleArray';
-import { changeAppMode } from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { changeAudioCallLevel, changeAudioCallPage } from '../../redux/ChangeRounds/action';
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../config';
@@ -24,9 +23,7 @@ let answerResult = {};
 const AudioCallContainer = ({
   wordsCollection,
   addWordsWithMistakesToStore,
-  switchAppMode,
   isWordsLoading,
-  currentAppMode,
   updateLevel,
   updatePage,
   page,
@@ -51,11 +48,6 @@ const AudioCallContainer = ({
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
-
-  // if (currentAppMode !== gameName || wordsCollection.length === 0) {
-  //   switchAppMode(gameName);
-  //   return null;
-  // }
 
   if (!currentWordIndex && !isWordFinished) {
     currentGameWords = shuffleArray(wordsCollection);
@@ -196,9 +188,7 @@ const AudioCallContainer = ({
 AudioCallContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   addWordsWithMistakesToStore: PropTypes.func,
-  switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
-  currentAppMode: PropTypes.string,
   updateLevel: PropTypes.func,
   updatePage: PropTypes.func,
   level: PropTypes.string,
@@ -214,9 +204,7 @@ AudioCallContainer.propTypes = {
 AudioCallContainer.defaultProps = {
   wordsCollection: [],
   addWordsWithMistakesToStore: () => {},
-  switchAppMode: () => {},
   isWordsLoading: false,
-  currentAppMode: '',
   updatePage: () => {},
   updateLevel: () => {},
   level: '1',
@@ -240,7 +228,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addWordsWithMistakesToStore: changeIDontKnowWords,
-  switchAppMode: changeAppMode,
+
   updateLevel: changeAudioCallLevel,
   updatePage: changeAudioCallPage,
   saveStatistic: saveFullStatistic,
