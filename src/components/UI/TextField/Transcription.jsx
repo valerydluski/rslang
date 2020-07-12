@@ -9,7 +9,7 @@ const TranscriptionStyled = styled.div`
   font-weight: 500;
   font-size: 17.5009px;
   line-height: 21px;
-  color: #c4c4c4;
+  color: #b2b2b2;
 
   @media ${DEVICE.laptopL} {
     font-size: 18px;

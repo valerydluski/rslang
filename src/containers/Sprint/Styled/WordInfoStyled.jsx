@@ -13,7 +13,7 @@ const WordStyled = styled.p`
 
 const TranslationStyled = styled(WordStyled)`
   text-transform: lowercase;
-  color: #c4c4c4;
+  color: #b2b2b2;
   margin: 0 0 70px;
 `;
 

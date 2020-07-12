@@ -27,7 +27,7 @@ export const TranslateStyled = styled.p`
   font-weight: bold;
   font-size: 30px;
   line-height: 35px;
-  color: #929292;
+  color: #7d7d7d;
   grid-area: translate;
   place-self: center;
 `;
@@ -39,7 +39,7 @@ export const TextExampleStyled = styled.div`
   font-weight: bold;
   font-size: 30px;
   line-height: 35px;
-  color: #929292;
+  color: #7d7d7d;
   display: inline;
   border-bottom: 1px solid #c4c4c4;
   margin-left: 10px;
@@ -52,7 +52,7 @@ export const TextExampleTranslateStyled = styled.div`
   font-weight: 500;
   font-size: 25.1118px;
   line-height: 31px;
-  color: #c4c4c4;
+  color: #b2b2b2;
   margin-left: 10px;
 `;
 
@@ -63,7 +63,7 @@ export const TextMeaningStyled = styled.div`
   font-weight: 500;
   font-size: 25.1118px;
   line-height: 31px;
-  color: #c4c4c4;
+  color: #b2b2b2;
   margin-left: 10px;
 `;
 
@@ -74,7 +74,7 @@ export const TextMeaningTranslateStyled = styled.div`
   font-weight: 500;
   font-size: 25.1118px;
   line-height: 31px;
-  color: #c4c4c4;
+  color: #b2b2b2;
   margin-left: 10px;
 `;
 

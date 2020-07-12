@@ -61,12 +61,15 @@ const translations = {
       speakIT: 'SpeakIT',
       sprint: 'Sprint',
       makeSentence: 'Make sentence',
-      puzzleDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      audioCallDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      savannahDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      speakITDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      sprintDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      makeSentenceDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      puzzleDescription: 'Make sentences from English words placed in random order.',
+      audioCallDescription: 'AudioCall helps to improve the undestanding of English speech.',
+      savannahDescription:
+        'The game improves the understanding of English words, helps not to forget words that have already been learned.',
+      speakITDescription:
+        'Check the correctness of your pronunciation of English words in the exciting game!',
+      sprintDescription:
+        'This game will help you to translate English words into your native language.',
+      makeSentenceDescription: 'This game will help you enjoy reading, writing, speaking English with pleasure.',
     },
     Buttons: {
       save: 'Save',
@@ -113,6 +116,27 @@ const translations = {
       correct: 'Correct answers:',
       count: 'Total words:',
     },
+
+    TeamMembers: {
+      valera: 'Valera',
+      nelly: 'Nelly',
+      kostya: 'Kostya',
+      taras: 'Taras',
+      marta: 'Marta',
+      artsemi: 'Artsemi',
+      valeraDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      nellyDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      kostyaDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      tarasDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      martaDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      artsemiDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+    },
     Errors: {
       empty: 'Fields cannot be empty',
       number: 'Must be a number',
@@ -136,6 +160,12 @@ const translations = {
       learningWords: 'Learning words',
       difficultWords: 'Difficult words',
       deletedWords: 'Deleted words',
+    },
+    Chart: {
+      learned: 'Learned words: %{count}',
+      learnedAll: 'Total words learned: %{count}',
+      date: 'Date: ',
+      learnedBefore: 'Previously learned words',
     },
   },
   ru: {
@@ -200,12 +230,17 @@ const translations = {
       speakIT: 'Произнеси слово',
       sprint: 'Спринт',
       makeSentence: 'Собери предложение',
-      puzzleDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      audioCallDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      savannahDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      speakITDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      sprintDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      makeSentenceDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      puzzleDescription:
+        'Собери предложение из английских слов, расположенных в случайном порядке.',
+      audioCallDescription:
+        'Игра `АудиоВызов` помогает улучшить восприятие английской речи на слух.',
+      savannahDescription:
+        'Данная игра улучшает навык понимания английских слов, помогает не забыть выученные слова.',
+      speakITDescription:
+        'Проверьте правильность вашего произношения английских слов в увлекательной игре!',
+      sprintDescription:
+        'С помощью данной игры вы научитесь быстро переводить слова на ваш родной язык.',
+      makeSentenceDescription: 'Данная игра позволит вам научиться читать, писать, говорить легко и непринужденно.',
     },
     Buttons: {
       save: 'Сохранить',
@@ -252,6 +287,26 @@ const translations = {
       correct: 'Правильных ответов:',
       count: 'Всего слов:',
     },
+    TeamMembers: {
+      valera: 'Валера',
+      nelly: 'Нелли',
+      kostya: 'Костя',
+      taras: 'Тарас',
+      marta: 'Марта',
+      artsemi: 'Артемий',
+      valeraDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      nellyDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      kostyaDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      tarasDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      martaDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      artsemiDescription:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+    },
     Errors: {
       empty: 'Поля настроек не могут быть пустыми',
       number: 'Должно быть число',
@@ -275,6 +330,12 @@ const translations = {
       learningWords: 'Выученные слова',
       difficultWords: 'Сложные слова',
       deletedWords: 'Удаленные слова',
+    },
+    Chart: {
+      learned: 'Изучено слов: %{count}',
+      learnedAll: 'Всего изучено слов: %{count}',
+      date: 'Дата: ',
+      learnedBefore: 'Ранее изученные слова',
     },
   },
 };

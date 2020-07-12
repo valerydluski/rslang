@@ -10,7 +10,7 @@ const StyledGameProgress = styled.div`
   );
   margin: 0 auto;
   width: 90%;
-  max-width: 1000px;
+  max-width: 1200px;
 `;
 
 export default StyledGameProgress;

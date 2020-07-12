@@ -1,11 +1,17 @@
 import { toast } from 'react-toastify';
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
+import getPartOfSpeechCode from './getPartOfSpeechCode';
 
-async function saveOneWord(wordId, wordOptions, user) {
-  const newOptions = { ...wordOptions };
-  newOptions.addDate = new Date().valueOf();
+async function saveOneWord(wordId, wordOptions, user, word) {
   try {
+    const data = await getPartOfSpeechCode(word);
+    const newOptions = { ...wordOptions };
+    if (data && data[0] && data[0].meanings) {
+      const { partOfSpeechCode } = data[0].meanings[0];
+      newOptions.optional.partOfSpeechCode = partOfSpeechCode;
+    }
+    newOptions.optional.addDate = new Date().setHours(0, 0, 0, 0).valueOf();
     const {
       URL,
       ENDPOINTS: { USERS, WORDS },

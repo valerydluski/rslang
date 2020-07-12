@@ -11,6 +11,19 @@ const MarkerStyled = styled.div`
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
+  animation: fade 1s ease-in-out forwards;
+
+  @keyframes fade {
+    0% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
   @media ${DEVICE.tablet} {
     width: 36px;
