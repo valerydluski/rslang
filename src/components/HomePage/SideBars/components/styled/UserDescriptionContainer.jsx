@@ -4,7 +4,6 @@ import { DEVICE } from '../../../../../config';
 const userDescriptionContainer = styled.div`
   flex-direction: column;
   text-align: center;
-  padding-top: 40px;
   border-bottom: 1px solid #c4c4c4;
 
   h2 {
