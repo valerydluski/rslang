@@ -22,7 +22,7 @@ const StyledDictionaryNavigationMenu = styled.div`
       font-weight: bold;
       font-size: 16px;
       line-height: 26px;
-      color: #929292;
+      color: #7d7d7d;
       transition: 0.3s linear;
 
       &:hover {

@@ -8,7 +8,7 @@ const InitialSentenceWordsStyled = styled.div`
   font-weight: 500;
   font-size: 30px;
   margin-left: 10px;
-  color: #929292;
+  color: #7d7d7d;
 
   @media ${DEVICE.laptop} {
     font-size: 20px;

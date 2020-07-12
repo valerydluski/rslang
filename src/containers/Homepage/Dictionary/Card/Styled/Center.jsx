@@ -15,14 +15,14 @@ const Center = styled.div`
   & > p.additional {
     margin: 0;
     font-size: 10px;
-    color: #929292;
+    color: #7d7d7d;
     margin-bottom: 3px;
   }
 
   & > p.info {
     margin: 0;
     font-size: 10px;
-    color: #929292;
+    color: #7d7d7d;
     margin-bottom: 3px;
   }
 `;

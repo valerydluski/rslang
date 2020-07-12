@@ -19,7 +19,7 @@ const WordStyled = styled.div`
 `;
 
 const WordFinishedStyled = styled(WordStyled)`
-  color: #929292;
+  color: #7d7d7d;
   &:hover {
     background-color: none;
   }
