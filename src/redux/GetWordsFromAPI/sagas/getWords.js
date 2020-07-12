@@ -22,6 +22,41 @@ import { configureData } from '../../../services/configureEnglishPuzzleData';
 import { updateState, updateSource } from '../../EnglishPuzzle/actions';
 import { changeIDontKnowWords, changeGameMode } from '../../Games/action';
 import getRandomValuesFromArray from '../../../utils/getRandomValuesFromArray';
+import { GAME_NAME } from '../../../config';
+
+const getSimilarWords = (payload, appMode, userWords) => {
+  if (appMode !== GAME_NAME.audioCall && appMode !== GAME_NAME.savannah) {
+    return payload;
+  }
+  const collection = payload.map((el) => {
+    let simillar = userWords[0].paginatedResults.filter(
+      (element) => el.PartOfSpeechCode === element.PartOfSpeechCode && element.word !== el.word
+    );
+    if (simillar.length < 4) {
+      payload.forEach((element) => {
+        if (el.PartOfSpeechCode === element.PartOfSpeechCode && element.word !== el.word) {
+          simillar.push(element);
+        }
+      });
+    }
+    if (simillar.length < 4) {
+      const simillarWord = simillar.map((word) => word.word);
+      const restWords = payload.filter(
+        (element) => el.word !== element.word && !simillarWord.includes(element.word)
+      );
+      const restCount = 4 - simillar.length - 1;
+      const newRest = getRandomValuesFromArray(restWords, restCount);
+      simillar = simillar.concat(newRest);
+    }
+    if (simillar.length > 4) {
+      simillar = getRandomValuesFromArray(simillar, 3);
+    }
+    const newEl = el;
+    newEl.simillarWord = simillar.map((elem) => elem.wordTranslate);
+    return newEl;
+  });
+  return collection;
+};
 
 function* workerGetWords() {
   try {
@@ -50,7 +85,8 @@ function* workerGetWords() {
       payload = yield call(wordsFetch, state);
       yield put(changeGameMode(true));
     }
-    yield put(fetchWords(payload));
+    const collection = getSimilarWords(payload, appMode, userWords);
+    yield put(fetchWords(collection));
     if (appMode === 'EnglishPuzzle') {
       const { EnglishPuzzleLevel, EnglishPuzzlePage } = state.changeRound;
       const data = yield call(configureData, payload, EnglishPuzzleLevel, EnglishPuzzlePage);

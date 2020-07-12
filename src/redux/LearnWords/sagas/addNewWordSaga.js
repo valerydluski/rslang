@@ -1,7 +1,6 @@
 import { select, call, put, takeEvery, take } from 'redux-saga/effects';
 import { NEW_CARD_SHOW } from '../types';
 import saveOneWord from '../../../services/saveOneWord';
-import { WORDS_PER_PAGE } from '../../../config';
 import { setLearnWordsStatistic } from '../../Statistic/action';
 import { addToShowedWordsList, loadingWordToServer } from '../actions';
 import findObjInArray from '../../../utils/findObjInArray';
@@ -39,7 +38,7 @@ function* addNewWordSagaWorker(action) {
         repeats: 1,
       },
     };
-    yield call(saveOneWord, wordId, config, sessionData);
+    yield call(saveOneWord, wordId, config, sessionData, action.payload.word);
     [nextLevel, nextWord] = image
       .replace(/0|.jpg/g, '')
       .split('/')[1]
@@ -63,7 +62,6 @@ function* addNewWordSagaWorker(action) {
       lastDateTraining,
     },
   };
-  console.log('function*addNewWordSagaWorker -> obj', obj);
   displayedWordsList.push(word);
   yield put(addToShowedWordsList(displayedWordsList));
   yield put(setLearnWordsStatistic(obj));
