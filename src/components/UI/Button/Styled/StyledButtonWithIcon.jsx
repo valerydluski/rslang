@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const StyledButtonWithIcon = styled.button`
+  margin-left: 45px;
   width: 150px;
-  color: #929292;
+  color: #7d7d7d;
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
@@ -34,6 +35,10 @@ const StyledButtonWithIcon = styled.button`
     &::before {
       background-image: url(${(props) => props.iconHover});
     }
+  }
+
+  @media (max-width: 768px) {
+   display: none;
   }
 `;
 

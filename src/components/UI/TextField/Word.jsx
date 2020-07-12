@@ -14,7 +14,7 @@ const WordStyled = styled.div`
     font-size: 20px;
   }
   &.spoken-word {
-    color: #c4c4c4;
+    color: #b2b2b2;
   }
 `;
 
