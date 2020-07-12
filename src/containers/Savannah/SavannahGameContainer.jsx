@@ -5,7 +5,6 @@ import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { changeIDontKnowWords } from '../../redux/Games/action';
 import ResultModal from '../Modal/ResultModal';
 import shuffleArray from '../../utils/shuffleArray';
-import { changeAppMode } from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { changeSavannahLevel, changeSavannahPage } from '../../redux/ChangeRounds/action';
 import { GAME_NAME, GAME_MAX_PAGE } from '../../config';
@@ -28,9 +27,7 @@ let currentMainWord;
 const SavannaGameContainer = ({
   wordsCollection,
   addWordsWithMistakesToStore,
-  switchAppMode,
   isWordsLoading,
-  currentAppMode,
   gameName,
   saveStatistic,
   level,
@@ -61,11 +58,6 @@ const SavannaGameContainer = ({
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
-
-  if (currentAppMode !== gameName || wordsCollection.length === 0) {
-    switchAppMode(gameName);
-    return null;
-  }
 
   function finishGame() {
     addWordsWithMistakesToStore(wrongAnsweredWords);
@@ -190,9 +182,7 @@ const SavannaGameContainer = ({
 SavannaGameContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   addWordsWithMistakesToStore: PropTypes.func,
-  switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
-  currentAppMode: PropTypes.string,
   level: PropTypes.string,
   page: PropTypes.string,
   updateLevel: PropTypes.func,
@@ -207,9 +197,7 @@ SavannaGameContainer.propTypes = {
 SavannaGameContainer.defaultProps = {
   wordsCollection: [],
   addWordsWithMistakesToStore: () => {},
-  switchAppMode: () => {},
   isWordsLoading: false,
-  currentAppMode: '',
   saveStatistic: () => {},
   updatePage: () => {},
   updateLevel: () => {},
@@ -234,7 +222,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addWordsWithMistakesToStore: changeIDontKnowWords,
-  switchAppMode: changeAppMode,
   saveStatistic: saveFullStatistic,
   updateLevel: changeSavannahLevel,
   updatePage: changeSavannahPage,
