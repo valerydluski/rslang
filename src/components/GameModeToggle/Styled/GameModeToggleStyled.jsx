@@ -1,45 +1,45 @@
 import styled from 'styled-components';
 
 const RuGameModeToggleStyled = styled.div`
-  position: relative;
+  border-radius: 75px;
   margin-top: 20px;
-  border-radius: 5px;
-  color: #c4c4c4;
   font-weight: 500;
+  position: relative;
   input {
     -webkit-appearance: none;
-    height: 50px;
-    width: 225px;
-    background-image: linear-gradient(180deg, #fff 40%, #f0f0f0);
-    border-radius: 5px;
-    position: relative;
+    height: 60px;
+    width: 255px;
+    border: 1px solid #b2b2b2;
+    border-radius: 75px;
     cursor: pointer;
+    position: relative;
+    outline: none;
     &::after {
       content: '';
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 44px;
-      height: 44px;
+      top: 5px;
+      left: 6px;
+      width: 48px;
+      height: 48px;
       z-index: 1;
       transition: 0.3s;
-      background: #404496;
-      border-radius: 5px;
-      box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
+      background: #6550de;
+      border-radius: 100%;
     }
     & + span:after {
       position: absolute;
       content: attr(data-on);
-      font-size: 2rem;
+      color: #7d7d7d;
+      font-size: 22px;
       text-transform: uppercase;
-      left: 60px;
-      top: 13px;
+      left: 70px;
+      top: 18px;
       cursor: pointer;
       transition: 0.3s;
     }
     &:checked {
       &::after {
-        transform: translateX(175px);
+        transform: translateX(193px);
       }
       & + span:after {
         content: attr(data-off);
@@ -54,10 +54,10 @@ const RuGameModeToggleStyled = styled.div`
 
 const EnGameModeToggleStyled = styled(RuGameModeToggleStyled)`
   input {
-    width: 140px;
+    width: 160px;
     &:checked {
       &::after {
-        transform: translateX(90px);
+        transform: translateX(98px);
       }
     }
   }

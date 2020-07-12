@@ -69,7 +69,8 @@ const translations = {
         'Check the correctness of your pronunciation of English words in the exciting game!',
       sprintDescription:
         'This game will help you to translate English words into your native language.',
-      makeSentenceDescription: 'This game will help you enjoy reading, writing, speaking English with pleasure.',
+      makeSentenceDescription:
+        'This game will help you enjoy reading, writing, speaking English with pleasure.',
     },
     Buttons: {
       save: 'Save',
@@ -89,6 +90,8 @@ const translations = {
       OK: 'OK',
       back: 'Back',
       login: 'Log In',
+      train: 'Train',
+      play: 'Play',
     },
     Languages: {
       en: 'English',
@@ -239,7 +242,8 @@ const translations = {
         'Проверьте правильность вашего произношения английских слов в увлекательной игре!',
       sprintDescription:
         'С помощью данной игры вы научитесь быстро переводить слова на ваш родной язык.',
-      makeSentenceDescription: 'Данная игра позволит вам научиться читать, писать, говорить легко и непринужденно.',
+      makeSentenceDescription:
+        'Данная игра позволит вам научиться читать, писать, говорить легко и непринужденно.',
     },
     Buttons: {
       save: 'Сохранить',
@@ -259,6 +263,8 @@ const translations = {
       OK: 'OK',
       back: 'Назад',
       login: 'Войти',
+      train: 'Тренировать',
+      play: 'Играть',
     },
     Languages: {
       en: 'Английский',
