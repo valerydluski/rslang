@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DEVICE } from '../../../../../config'
+import { DEVICE } from '../../../../../config';
 
 const ProgressBarContainer = styled.div`
   flex-grow: 1;
@@ -37,17 +37,6 @@ const ProgressBarContainer = styled.div`
   }
 
   @media ${DEVICE.laptop} {
-    .total-progress {
-    width: 150px;
-    height: 150px;
-    }
-
-    h3 {
-      text-align: center;
-    }
-  }
-
-  @media ${DEVICE.tablet} {
     display: none;
   }
 `;

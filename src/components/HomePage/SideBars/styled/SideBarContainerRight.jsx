@@ -11,43 +11,20 @@ const SideBarContainerRight = styled.div`
   min-height: 100%;
   box-sizing: border-box;
 
-  span {
-    font-size: 16px;
-  }
-
-  @media ${DEVICE.laptopL} {
-    padding: 20px;
-
-    div {
-      border-bottom: none;
-    }
-
-    img {
-      width: 100px;
-      height: 100px;
-    }
-
-    span {
-      font-size: 13px;
-    }
-  }
-
   @media ${DEVICE.laptop} {
+    padding: 40px 40px 0 290px;
     grid-column-start: 2;
     grid-row-start: 1;
     width: auto;
-    background-color: #ffffff;
-    nav {
-      display: none;
-    }
     min-height: auto;
-  }
-
-  @media ${DEVICE.laptop} {
-    width: auto;
+    background-color: #ffffff;
+    & > .user-title {
+      display: block;
+    }
   }
 
   @media ${DEVICE.tablet} {
+    padding: 30px 30px 0 30px;
     display: flex;
     width: auto;
     grid-column-start: auto;
@@ -56,18 +33,83 @@ const SideBarContainerRight = styled.div`
     background-color: #ffffff;
     width: 100%;
     height: fit-content;
-    grid-template-columns: 1fr 1fr 1fr;
-    img {
-      width: 130px;
-      height: 130px;
+  }
+
+  & > .user-title {
+    display: none;
+    margin-bottom: 30px;
+    @media ${DEVICE.laptop} {
+      display: block;
     }
-    ul {
+  }
+
+  & > div:last-child {
+    display: flex;
+  }
+
+  & nav {
+    width: 100%;
+  }
+
+  & ul {
+    border-top: 1px solid #c4c4c4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    padding-top: 15px;
+    @media ${DEVICE.laptop} {
+      justify-content: center;
+    }
+    @media ${DEVICE.tablet} {
+      margin: 0;
+      width: 100%;
+    }
+
+    & li {
+      margin-bottom: 25px;
+      @media ${DEVICE.laptop} {
+        margin: 0 !important;
+      }
+    }
+
+    & a {
+      padding-left: 0 !important;
+      height: 40px;
+      width: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s linear;
+      &:hover {
+        background-color: #fec246;
+      }
+
+      & > span {
+        font-size: 19px;
+      }
+    }
+
+    & a[href='/learn'] {
+      padding-left: 0;
+      font-size: 19px;
+      line-height: 19px;
+      font-weight: 600;
       color: #ffffff;
-      background-color: #404497;
-      position: fixed;
-      width: 93vw;
-      right: 0%;
-      height: 100vh;
+      background-color: #f56748;
+      @media ${DEVICE.laptop} {
+        margin-right: 20px;
+      }
+    }
+
+    & a[href='/repeat'] {
+      padding-left: 0;
+      font-size: 19px;
+      line-height: 19px;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: #6550de;
     }
   }
 `;

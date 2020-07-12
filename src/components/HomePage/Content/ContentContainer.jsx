@@ -5,29 +5,29 @@ const ContentContainer = styled.main`
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  padding: 75px 75px 0;
-  overflow: auto;
+  padding: 30px;
+  overflow-y: auto;
   max-height: 100vh;
 
-  @media ${DEVICE.laptopL} {
-    padding: 30px;
-  }
-
   @media ${DEVICE.laptop} {
-    padding: 40px 40px 0;
     grid-column-start: 2;
     grid-column-end: 3;
+    padding-left: 290px;
+    overflow-y: visible;
+    max-height: 100%;
+    & > .user-title {
+      display: none;
+    }
   }
 
   @media ${DEVICE.tablet} {
+    padding-left: 30px;
     grid-column-start: auto;
     grid-column-end: auto;
     grid-row-start: 3;
     grid-row-end: 4;
+    height: auto;
   }
-
-  overflow: auto;
-  max-height: 100vh;
 `;
 
 export default ContentContainer;
