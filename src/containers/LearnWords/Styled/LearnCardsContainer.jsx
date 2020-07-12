@@ -14,10 +14,16 @@ const LearnCardsContainer = styled.div`
     'textMeaningTranslate textMeaningTranslate';
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  width: 1280px;
+  width: 100%;
 
-  @media ${DEVICE.laptopL} {
-    width: 1020px;
+  @media ${DEVICE.tablet} {
+    grid-template-areas:
+      'image image'
+      'translate translate'
+      'textExample textExample'
+      'textExampleTranslate trancription'
+      'textMeaning textMeaning'
+      'textMeaningTranslate textMeaningTranslate';
   }
 `;
 
@@ -30,6 +36,11 @@ export const TranslateStyled = styled.p`
   color: #7d7d7d;
   grid-area: translate;
   place-self: center;
+  height: 100%;
+
+  @media (max-width: 1280px) {
+    font-size: 24px;
+  }
 `;
 
 export const TextExampleStyled = styled.div`
@@ -43,6 +54,11 @@ export const TextExampleStyled = styled.div`
   display: inline;
   border-bottom: 1px solid #c4c4c4;
   margin-left: 10px;
+  height: 100%;
+
+  @media (max-width: 1280px) {
+    font-size: 24px;
+  }
 `;
 
 export const TextExampleTranslateStyled = styled.div`
@@ -54,6 +70,11 @@ export const TextExampleTranslateStyled = styled.div`
   line-height: 31px;
   color: #b2b2b2;
   margin-left: 10px;
+  height: 100%;
+
+  @media (max-width: 1280px) {
+    font-size: 20px;
+  }
 `;
 
 export const TextMeaningStyled = styled.div`
@@ -65,6 +86,11 @@ export const TextMeaningStyled = styled.div`
   line-height: 31px;
   color: #b2b2b2;
   margin-left: 10px;
+  height: 100%;
+
+  @media (max-width: 1280px) {
+    font-size: 20px;
+  }
 `;
 
 export const TextMeaningTranslateStyled = styled.div`
@@ -76,6 +102,11 @@ export const TextMeaningTranslateStyled = styled.div`
   line-height: 31px;
   color: #b2b2b2;
   margin-left: 10px;
+  height: 100%;
+
+  @media (max-width: 1280px) {
+    font-size: 20px;
+  }
 `;
 
 export default LearnCardsContainer;

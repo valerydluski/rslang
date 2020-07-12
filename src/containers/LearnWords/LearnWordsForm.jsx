@@ -101,6 +101,7 @@ const LearnWordsForm = (props) => {
             alt={word.word}
             src={`${LINK_FOR_IMAGE}${image}`}
             classNameContainer="image_learn"
+            className="image_learn"
           />
         )}
         <TextExampleStyled>
@@ -142,20 +143,35 @@ const LearnWordsForm = (props) => {
         )}
       </LearnCardsContainer>
       <LearnButtonsContainer>
-        <StyledButton className="button-next" onClick={customHandleSubmit('form')}>
+        <StyledButton
+          className="button-next lear_button learn_all-buttons"
+          onClick={customHandleSubmit('form')}
+        >
           <Translate value="Buttons.next" />
         </StyledButton>
         {deleteButton && (
-          <StyledButton onClick={customHandleSubmit('deleted')} type="button">
+          <StyledButton
+            className="lear_button learn_all-buttons"
+            onClick={customHandleSubmit('deleted')}
+            type="button"
+          >
             <Translate value="Buttons.delete" />
           </StyledButton>
         )}
         {addDificultWordsButton && (
-          <StyledButton onClick={customHandleSubmit('hard')} type="button">
+          <StyledButton
+            className="lear_button learn_all-buttons"
+            onClick={customHandleSubmit('hard')}
+            type="button"
+          >
             <Translate value="Buttons.hard" />
           </StyledButton>
         )}
-        <StyledButton onClick={customHandleSubmit('unknown')} type="button">
+        <StyledButton
+          className="lear_button learn_i-dont-know"
+          onClick={customHandleSubmit('unknown')}
+          type="button"
+        >
           <Translate value="Buttons.dontKnow" />
         </StyledButton>
 

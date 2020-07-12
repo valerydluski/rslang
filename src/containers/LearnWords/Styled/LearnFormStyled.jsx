@@ -5,11 +5,17 @@ const LearnFormStyled = styled.form`
   margin: 0 auto;
   display: grid;
   grid-template-rows: 80% 20%;
-  width: 1280px;
-  height: 800px;
+  max-width: 1280px;
+  width: 80%;
+  height: 700px;
 
-  @media ${DEVICE.laptopL} {
-    width: 1020px;
+  @media (max-width: 1280px) {
+    grid-template-rows: 70% 30%;
+    height: 900px;
+  }
+
+  @media ${DEVICE.tablet} {
+    grid-template-rows: 70% 30%;
   }
 `;
 
