@@ -15,9 +15,10 @@ const AudioPlayButtonStyled = styled.div`
 `;
 
 const BigAudioPlayButtonStyled = styled(AudioPlayButtonStyled)`
-  width: 200px;
-  height: 200px;
-  margin: 50px auto 120px;
+  width: 210px;
+  height: 210px;
+  margin: 0 auto 140px;
+  margin-top: calc(100vh / 8);
   &:hover {
     transform: scale(0.98);
   }

@@ -47,7 +47,6 @@ const createGameEndData = (
   }
   newStatistic[`${gameName}LastRound`] = lastRound;
   newStatistic[`${gameName}PassedRound`] = newRoundStatistics.join(';');
-  console.log('newStatistic', newStatistic);
 
   return newStatistic;
 };
