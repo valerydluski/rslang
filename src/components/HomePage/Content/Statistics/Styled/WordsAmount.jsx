@@ -5,6 +5,7 @@ const WordsAmount = styled.p`
   font-size: 16px;
   font-weight: bold;
   color: #929292;
+  margin-bottom: 20px;
 `;
 
 export default WordsAmount;

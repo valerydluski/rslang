@@ -136,6 +136,12 @@ const translations = {
       difficultWords: 'Difficult words',
       deletedWords: 'Deleted words',
     },
+    Chart: {
+      learned: 'Learned words: %{count}',
+      learnedAll: 'Total words learned: %{count}',
+      date: 'Date: ',
+      learnedBefore: 'Previously learned words',
+    },
   },
   ru: {
     HomePage: {
@@ -273,6 +279,12 @@ const translations = {
       learningWords: 'Выученные слова',
       difficultWords: 'Сложные слова',
       deletedWords: 'Удаленные слова',
+    },
+    Chart: {
+      learned: 'Изучено слов: %{count}',
+      learnedAll: 'Всего изучено слов: %{count}',
+      date: 'Дата: ',
+      learnedBefore: 'Ранее изученные слова',
     },
   },
 };

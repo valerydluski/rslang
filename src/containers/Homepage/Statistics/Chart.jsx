@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { I18n } from 'react-redux-i18n';
+import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import './Styled/styles.css';
 
-function Chart({ width, height, padding, data }) {
+function Chart({ width, height, padding, data, lang }) {
   let value = d3.max(data.chartPoints, (d) => d.x);
   const xScale = d3
     .scaleLinear()
@@ -49,13 +51,15 @@ function Chart({ width, height, padding, data }) {
 
     canvas.selectAll('path').remove();
     canvas.selectAll('g').remove();
-
-    const count = `Изучено: ${data.days[value].count} слов`;
-    const date = `Дата: ${data.days[value].date.toLocaleDateString('ru-RU', {
-      month: 'long',
-      day: 'numeric',
-    })}`;
-    const learnedWords = `Всего изучено: ${data.points[value].count} слов`;
+    const count = I18n.t('Chart.learned', { count: data.days[value].count });
+    const date =
+      data.days[value].date === 'Invalid Date'
+        ? `${I18n.t('Chart.date')}${data.days[value].date.toLocaleDateString(lang, {
+            month: 'long',
+            day: 'numeric',
+          })}`
+        : I18n.t('Chart.learnedBefore');
+    const learnedWords = I18n.t('Chart.learnedAll', { count: data.points[value].count });
 
     canvas
       .append('path')
@@ -178,12 +182,20 @@ Chart.propTypes = {
   height: PropTypes.number,
   padding: PropTypes.number,
   data: PropTypes.instanceOf(Object).isRequired,
+  lang: PropTypes.string,
 };
 
 Chart.defaultProps = {
   width: 700,
   height: 500,
   padding: 50,
+  lang: 'en',
 };
 
-export default Chart;
+const mapStateToProps = (state) => {
+  return {
+    lang: state.i18n.locale,
+  };
+};
+
+export default connect(mapStateToProps, null)(Chart);

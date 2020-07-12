@@ -9,6 +9,8 @@ import WordsAmount from './Styled/WordsAmount';
 import Chart from '../../../../containers/Homepage/Statistics/Chart';
 import Title from '../../../../containers/Homepage/Content/Title/Title';
 import Loader from './Loader/Loader';
+import ChartContainer from './Styled/ChartContainer';
+import { TOTAL_WORDS } from '../../../../config';
 
 function Statistics({ getAllWords, data, isLoading }) {
   useEffect(() => {
@@ -23,9 +25,9 @@ function Statistics({ getAllWords, data, isLoading }) {
       </StyledTitle>
       <Container>
         <WordsAmount>
-          <Translate value="HomePage.wordsAmount" />: 3600
+          <Translate value="HomePage.wordsAmount" />: {TOTAL_WORDS}
         </WordsAmount>
-        {isLoading ? <Loader /> : <Chart data={data} />}
+        <ChartContainer>{isLoading ? <Loader /> : <Chart data={data} />}</ChartContainer>
       </Container>
     </StyledStatistics>
   );
