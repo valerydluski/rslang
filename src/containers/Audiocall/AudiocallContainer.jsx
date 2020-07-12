@@ -16,6 +16,7 @@ import newRound from '../../utils/newRound';
 import StatusMenu from '../../components/StatusMenu/StatusMenu';
 import GameContainerStyled from './styled/StyledGameContainer';
 import StyledGameProgress from './styled/StyledGameProgress';
+import GameModeToggle from '../../components/GameModeToggle/GameModeToggle';
 
 let currentGameWords;
 let answerResult = {};
@@ -126,13 +127,16 @@ const AudioCallContainer = ({
               newGame={newGame}
             />
           ) : (
-            <StatusMenu
-              page={page}
-              level={level}
-              maxPage={maxPage}
-              updateLevel={updateLevel}
-              updatePage={updatePage}
-            />
+            <>
+              <GameModeToggle gameName={gameName} />
+              <StatusMenu
+                page={page}
+                level={level}
+                maxPage={maxPage}
+                updateLevel={updateLevel}
+                updatePage={updatePage}
+              />
+            </>
           )}
           <GameContainerStyled>
             <FinishedWordInfo
@@ -155,6 +159,7 @@ const AudioCallContainer = ({
         </>
       ) : (
         <>
+          <GameModeToggle gameName={gameName} />
           <StatusMenu
             page={page}
             level={level}

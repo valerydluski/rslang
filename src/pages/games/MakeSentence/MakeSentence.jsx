@@ -8,15 +8,24 @@ import {
   changeMakeSentenceLevel,
   changeMakeSentencePage,
 } from '../../../redux/ChangeRounds/action';
-import { GAME_MAX_PAGE } from '../../../config';
+import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
 import MakeSentenceGame from '../../../containers/MakeSentence/MakeSentenceGame';
 import StyledContainer from './Styled/StyledContainer';
 import StyledGameContainer from './Styled/StyledGameContainer';
 import getScreenWidth from '../../../utils/getScreenWidth';
 import Image from '../../../components/UI/Image/Image';
 import screenRotateIcon from '../../../assets/img/rotate-screen.svg';
+import GameModeToggle from '../../../components/GameModeToggle/GameModeToggle';
 
-const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, maxPage }) => {
+const MakeSentence = ({
+  wordsCollection,
+  updateLevel,
+  updatePage,
+  page,
+  level,
+  maxPage,
+  gameName,
+}) => {
   const [words, changeWords] = useState(wordsCollection);
 
   useEffect(() => {
@@ -54,6 +63,7 @@ const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, m
         <Image src={screenRotateIcon} />
       ) : (
         <>
+          <GameModeToggle gameName={gameName} />
           <StatusMenu
             page={page}
             level={level}
@@ -83,6 +93,7 @@ MakeSentence.propTypes = {
   level: PropTypes.string,
   page: PropTypes.string,
   maxPage: PropTypes.number,
+  gameName: PropTypes.string,
 };
 
 MakeSentence.defaultProps = {
@@ -92,6 +103,7 @@ MakeSentence.defaultProps = {
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
+  gameName: GAME_NAME.makeSentence,
 };
 
 const mapStateToProps = (state) => {
