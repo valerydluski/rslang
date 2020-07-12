@@ -1,6 +1,6 @@
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
-import getPartOfSpeechCode from './getPartOfSpeechCode';
+import getpartOfSpeechCode from './getPartOfSpeechCode';
 
 const {
   URL,
@@ -36,11 +36,16 @@ const createData = ({ changeRound, changeAppMode, userSettings }) => {
     wordsPerPage,
   };
 };
-async function getPartOfSpeechCodeForAllWords(el) {
+async function getpartOfSpeechCodeForAllWords(el) {
   const word = { ...el };
-  const data = await getPartOfSpeechCode(word.word);
+  const data = await getpartOfSpeechCode(word.word);
   const { partOfSpeechCode } = data[0].meanings[0];
-  word.PartOfSpeechCode = partOfSpeechCode;
+  word.userWord = {
+    optional: {
+      partOfSpeechCode,
+    },
+  };
+  word.partOfSpeechCode = partOfSpeechCode;
   return word;
 }
 
@@ -52,7 +57,7 @@ async function wordsFetch(state) {
     const arr = await fetchData(link);
     const promises = [];
     arr.forEach((element) => {
-      promises.push(getPartOfSpeechCodeForAllWords(element));
+      promises.push(getpartOfSpeechCodeForAllWords(element));
     });
     const results = await Promise.all(promises);
     const newArr = arr.map((element) => {

@@ -39,6 +39,7 @@ function* saveUserWordsFromGamesSagaWorker({ payload }) {
               difficult: false,
               nextRepeat: new Date().valueOf(),
               repeats: 1,
+              partOfSpeechCode: element.partOfSpeechCode,
             },
           };
           const elForStore = element;

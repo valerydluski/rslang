@@ -36,6 +36,7 @@ function* addNewWordSagaWorker(action) {
         difficult: false,
         nextRepeat: new Date().valueOf(),
         repeats: 1,
+        partOfSpeechCode: action.payload.partOfSpeechCode,
       },
     };
     yield call(saveOneWord, wordId, config, sessionData, action.payload.word);

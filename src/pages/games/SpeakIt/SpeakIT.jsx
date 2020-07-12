@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GameContainerSpeakIT from '../../../containers/SpeakIT/GameContainerSpeakIT';
 import SpeakITContainerStyled from '../../../containers/SpeakIT/Styled/StyledSpeakIT';
-import { GAME_NAME } from '../../../config';
 import { changeAppMode } from '../../../redux/AppMode/action';
 
 const SpeakIT = (props) => {
-  const { switchAppMode, isWordsLoading, currentAppMode, gameName, wordsCollection } = props;
+  const { isWordsLoading, wordsCollection } = props;
 
   const [words, changeWords] = useState(wordsCollection);
   useEffect(() => {
@@ -16,10 +15,7 @@ const SpeakIT = (props) => {
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
-  if (currentAppMode !== gameName) {
-    switchAppMode(gameName);
-    return null;
-  }
+
   return (
     <SpeakITContainerStyled>
       <GameContainerSpeakIT key={wordsCollection.join()} wordsCollection={words} />
@@ -28,15 +24,11 @@ const SpeakIT = (props) => {
 };
 
 SpeakIT.propTypes = {
-  switchAppMode: PropTypes.func.isRequired,
   isWordsLoading: PropTypes.bool.isRequired,
-  currentAppMode: PropTypes.string.isRequired,
-  gameName: PropTypes.string,
   wordsCollection: PropTypes.instanceOf(Array),
 };
 
 SpeakIT.defaultProps = {
-  gameName: GAME_NAME.speakIT,
   wordsCollection: [],
 };
 

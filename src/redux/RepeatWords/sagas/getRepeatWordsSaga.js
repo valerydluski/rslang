@@ -1,4 +1,4 @@
-import { put, takeEvery, select } from 'redux-saga/effects';
+import { put, takeEvery, select, call } from 'redux-saga/effects';
 import { GET_REPEAT_WORDS } from '../types';
 import {
   getRepeatWordsLoaderShow,
@@ -8,26 +8,42 @@ import {
   setIsMoreCardsShowToday,
 } from '../actions';
 import getRandomValuesFromArray from '../../../utils/getRandomValuesFromArray';
+import getAggregatedUserWords from '../../../services/getAggregatedUserWords';
 
 function* getRepeatWordsWorker() {
   yield put(getRepeatWordsLoaderShow());
-  const getUserWords = (state) => state.userWords.words[0].paginatedResults;
-  const userWords = yield select(getUserWords);
+  let repeatWords;
 
-  const getCardsShowCount = (state) => state.userSettings.settings.cardsPerDayRepeat;
-  const cardsShowCount = yield select(getCardsShowCount);
+  const getIsDifficultMode = (state) => state.repeatWords.isDifficultMode;
+  const isDifficultMode = yield select(getIsDifficultMode);
 
-  const getCardsShowedCountToday = (state) => state.changeStatistic.statistic.countRepeatToday;
-  const cardsShowedCountToday = yield select(getCardsShowedCountToday);
+  if (isDifficultMode) {
+    const getSessionData = (state) => state.login;
+    const sessionData = yield select(getSessionData);
 
-  const cardsToShow = cardsShowCount - cardsShowedCountToday;
+    const payload = yield call(getAggregatedUserWords, sessionData, 'difficult');
+    repeatWords = payload[0].paginatedResults;
 
-  const now = new Date().valueOf();
-  let repeatWords = userWords.filter((data) => data.userWord.optional.nextRepeat < now);
+    yield put(setIsMoreCardsShowToday(false));
+  } else {
+    const getUserWords = (state) => state.userWords.words[0].paginatedResults;
+    const userWords = yield select(getUserWords);
 
-  if (cardsShowCount > repeatWords.length) {
-    repeatWords = getRandomValuesFromArray(repeatWords, cardsToShow);
-    yield put(setIsMoreCardsShowToday(true));
+    const getCardsShowCount = (state) => state.userSettings.settings.cardsPerDayRepeat;
+    const cardsShowCount = yield select(getCardsShowCount);
+
+    const getCardsShowedCountToday = (state) => state.changeStatistic.statistic.countRepeatToday;
+    const cardsShowedCountToday = yield select(getCardsShowedCountToday);
+
+    const cardsToShow = cardsShowCount - cardsShowedCountToday;
+
+    const now = new Date().valueOf();
+    repeatWords = userWords.filter((data) => data.userWord.optional.nextRepeat < now);
+
+    if (cardsShowCount > repeatWords.length) {
+      repeatWords = getRandomValuesFromArray(repeatWords, cardsToShow);
+      yield put(setIsMoreCardsShowToday(true));
+    }
   }
 
   yield put(saveRepeatWords(repeatWords));
