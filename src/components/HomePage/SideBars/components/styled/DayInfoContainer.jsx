@@ -19,7 +19,7 @@ const DayInfoContainer = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-    color: #c4c4c4;
+    color: #b2b2b2;
   }
 
   & p {

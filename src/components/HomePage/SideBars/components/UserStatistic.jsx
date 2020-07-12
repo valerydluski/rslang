@@ -25,7 +25,7 @@ function UserStatistic({ wordsInDay, cardsInDay, totalWordsInDay, totalCardsInDa
           count={
             totalWords.length === 0 || totalWords[0].paginatedResults.length === 0
               ? 0
-              : totalWords[0].totalCount[0].count
+              : totalWords[0].paginatedResults.length
           }
           total={TOTAL_WORDS}
         />

@@ -6,9 +6,10 @@ import { changeAppMode } from '../../../redux/AppMode/action';
 import StyledGoHomeButton from '../../../components/UI/Button/Styled/StyledGoHomeButton';
 import { changeGameMode } from '../../../redux/Games/action';
 
-const GoHomePageButton = ({ switchAppMode, switchGameMode }) => {
+const GoHomePageButton = ({ switchAppMode, switchGameMode, reset }) => {
   const history = useHistory();
   function goHome() {
+    reset();
     switchAppMode('MainPage');
     switchGameMode(false);
     history.push('/home');
@@ -19,6 +20,11 @@ const GoHomePageButton = ({ switchAppMode, switchGameMode }) => {
 GoHomePageButton.propTypes = {
   switchAppMode: PropTypes.func.isRequired,
   switchGameMode: PropTypes.func.isRequired,
+  reset: PropTypes.func,
+};
+
+GoHomePageButton.defaultProps = {
+  reset: () => {},
 };
 
 const mapDispatchToProps = {

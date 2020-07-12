@@ -17,7 +17,10 @@ import LearnCardsContainer, {
   TextMeaningStyled,
   TextMeaningTranslateStyled,
 } from './Styled/LearnCardsContainer';
-import LearnButtonsContainer from './Styled/LearnButtonsContainer';
+import LearnButtonsContainer, {
+  ProgressBarCount,
+  ProgressBarContainer,
+} from './Styled/LearnButtonsContainer';
 import { showResult } from '../../redux/LearnWords/actions';
 
 const LearnWordsForm = (props) => {
@@ -154,13 +157,16 @@ const LearnWordsForm = (props) => {
         <StyledButton onClick={customHandleSubmit('unknown')} type="button">
           Unknow
         </StyledButton>
-        <p>{currentWordIndex}</p>
-        <Line
-          percent={Math.round((currentWordIndex / wordsCount) * 100)}
-          strokeWidth="1"
-          strokeColor="#404497"
-        />
-        <p>{wordsCount}</p>
+
+        <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
+        <ProgressBarContainer>
+          <Line
+            percent={Math.round((currentWordIndex / wordsCount) * 100)}
+            strokeWidth="4"
+            strokeColor="#404497"
+          />
+        </ProgressBarContainer>
+        <ProgressBarCount>{wordsCount}</ProgressBarCount>
       </LearnButtonsContainer>
     </LearnFormStyled>
   );

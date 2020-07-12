@@ -17,15 +17,16 @@ function* addNewWordSagaWorker(action) {
   );
 
   const getDisplayedList = (state) => state.newLearnCardShow.displayedWordsList;
-  const getUserWords = (state) => state.userWords.words[0].paginatedResults;
-  const userWords = yield select(getUserWords);
+  const getUserWords = (state) => state.userWords.words;
+  const words = yield select(getUserWords);
+  const userWords = words[0].paginatedResults;
   const displayedWordsList = yield select(getDisplayedList);
   let nextLevel = LearnLastLevel;
   let nextWord = LearnLastWords;
   const sessionData = yield select(getLoginState);
   // eslint-disable-next-line no-underscore-dangle
   const wordId = action.payload.id || action.payload._id;
-  const { isNew, word } = action.payload;
+  const { isNew, word, image } = action.payload;
   const isKnown = findObjInArray(userWords, '_id', wordId);
   if (isNew || !isKnown) {
     const config = {
@@ -39,23 +40,30 @@ function* addNewWordSagaWorker(action) {
       },
     };
     yield call(saveOneWord, wordId, config, sessionData);
-    nextWord = +LearnLastWords + 1 > +WORDS_PER_PAGE ? 1 : +LearnLastWords + 1;
-    nextLevel = +LearnLastWords + 1 > +WORDS_PER_PAGE ? +LearnLastLevel + 1 : +LearnLastLevel;
-    yield saveUserWords([...userWords, action.payload]);
+    [nextLevel, nextWord] = image
+      .replace(/0|.jpg/g, '')
+      .split('/')[1]
+      .split('_');
+    const elForStore = action.payload;
+    elForStore.userWord = config;
+    words[0].paginatedResults = words[0].paginatedResults.concat(elForStore);
+    yield saveUserWords(words);
   }
+
   const cardsShow = +CountCardsShow + 1;
   let countNewWordsShow = CountNewWordsToday;
   if (isNew) countNewWordsShow = +CountNewWordsToday + 1;
   const lastDateTraining = new Date();
   const obj = {
     learnData: {
-      nextWord,
-      nextLevel,
+      nextWord: +nextWord,
+      nextLevel: +nextLevel,
       cardsShow,
       countNewWordsShow,
       lastDateTraining,
     },
   };
+  console.log('function*addNewWordSagaWorker -> obj', obj);
   displayedWordsList.push(word);
   yield put(addToShowedWordsList(displayedWordsList));
   yield put(setLearnWordsStatistic(obj));

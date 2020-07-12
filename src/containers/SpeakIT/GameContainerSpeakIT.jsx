@@ -19,6 +19,7 @@ import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../config';
 import newRound from '../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../redux/Statistic/action';
+import GoToHomePageButton from '../Buttons/GoHomePageButton/GoHomePageButton';
 
 const micro = new Microphone();
 
@@ -168,9 +169,16 @@ const GameContainerSpeakIT = (props) => {
     setListening(false);
   }
 
+  const reset = () => {
+    micro.stopMicrophone();
+  };
+
   if (!isListening) {
     return (
       <>
+        <div>
+          <GoToHomePageButton reset={reset} />
+        </div>
         {isGameFinished ? (
           <ResultModal
             audioForPlay="audio"
@@ -208,6 +216,9 @@ const GameContainerSpeakIT = (props) => {
 
   return (
     <>
+      <div>
+        <GoToHomePageButton reset={reset} />
+      </div>
       {isGameFinished ? (
         <ResultModal
           playAudio={playAudio}
