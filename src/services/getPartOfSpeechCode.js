@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { DICTIONARY_API } from '../config';
 import fetchData from '../utils/fetchData';
 
-async function getPartOfSpeechCode(word) {
+async function getpartOfSpeechCode(word) {
   try {
     const {
       LINK,
@@ -14,4 +14,4 @@ async function getPartOfSpeechCode(word) {
   }
 }
 
-export default getPartOfSpeechCode;
+export default getpartOfSpeechCode;
