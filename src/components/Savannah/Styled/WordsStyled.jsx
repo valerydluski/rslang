@@ -7,7 +7,6 @@ const WordStyled = styled.div`
   line-height: 42px;
   padding: 10px;
   color: #000000;
-  color: #000000;
   cursor: pointer;
   &:not(:first-child) {
     margin-left: 20px;
@@ -20,22 +19,14 @@ const WordStyled = styled.div`
 
 const WordFinishedStyled = styled(WordStyled)`
   color: #7d7d7d;
-  &:hover {
-    background-color: none;
-  }
 `;
 
 const WordCorrectStyled = styled(WordStyled)`
-  background-color: rgb(101, 80, 222);
-  &:hover {
-    background-color: rgb(101, 80, 222);
-  }
+  color: #000000;
 `;
+
 const WordWrongStyled = styled(WordFinishedStyled)`
-  background-color: rgb(245, 103, 72);
-  &:hover {
-    background-color: rgb(245, 103, 72);
-  }
+  color: #f56748;
 `;
 
 export { WordStyled, WordFinishedStyled, WordCorrectStyled, WordWrongStyled };
