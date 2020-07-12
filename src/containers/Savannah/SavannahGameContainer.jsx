@@ -190,7 +190,7 @@ const SavannaGameContainer = ({
         key={currentWord.word}
         animationState={isWordFinished ? 'paused' : 'running'}
       >
-        {currentWord.word}
+        <span>{currentWord.word}</span>
       </FallingWordStyled>
       {!isWordFinished ? (
         <KeyboardEventHandler
