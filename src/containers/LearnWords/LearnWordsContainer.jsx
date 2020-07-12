@@ -51,6 +51,7 @@ function LearnWordCardContainer(props) {
   const longestSeries = useRef(0);
   const rightSeries = useRef(0);
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
+  const [isInputActive, setIsInputActive] = useState(true);
 
   useEffect(() => {
     if (loadingWord) {
@@ -103,7 +104,7 @@ function LearnWordCardContainer(props) {
     } else {
       setCurrentWord(null);
     }
-    return undefined;
+    setIsInputActive(true);
   };
 
   const updateWord = (config) => {
@@ -112,6 +113,7 @@ function LearnWordCardContainer(props) {
   };
 
   const onSubmit = async (formData) => {
+    if (formData.buttonType === 'form_enter' && !isInputActive) return undefined;
     const { buttonType } = formData;
     setAnswerToForm(formData.word);
     const answer = formData.word;
@@ -156,6 +158,7 @@ function LearnWordCardContainer(props) {
         if (!answer) break;
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
+          setIsInputActive(false);
           if (firstAnswer.current) {
             rightSeries.current += 1;
             rightAnswer.current += 1;
@@ -185,6 +188,7 @@ function LearnWordCardContainer(props) {
         }
         correctCardHandler(true);
     }
+    return undefined;
   };
 
   return isFinalScreen ? (
@@ -205,6 +209,7 @@ function LearnWordCardContainer(props) {
       word={currentWord}
       isCorrect={isCorrect}
       answer={answerToForm}
+      isInputActive={isInputActive}
       wordsCount={wordsCount.current}
       currentWordIndex={currentWordIndex.current}
       audiosDuration={audiosDuration.current}

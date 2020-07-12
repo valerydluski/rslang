@@ -41,6 +41,7 @@ const LearnWordsForm = (props) => {
     audiosDuration,
     isShowResult,
     showResultHander,
+    isInputActive,
   } = props;
 
   const {
@@ -84,7 +85,7 @@ const LearnWordsForm = (props) => {
       onSubmit={handleSubmit((values) =>
         onSubmit({
           ...values,
-          buttonType: 'form',
+          buttonType: 'form_enter',
         })
       )}
     >
@@ -117,6 +118,7 @@ const LearnWordsForm = (props) => {
             answer={answer}
             isShowResult={isResultShow}
             audiosDuration={audiosDuration}
+            isInputActive={isInputActive}
             onChange={() => {
               if (isShowResult) {
                 showResultHander(false);
@@ -141,20 +143,36 @@ const LearnWordsForm = (props) => {
         )}
       </LearnCardsContainer>
       <LearnButtonsContainer>
-        <StyledButton className="button-next" onClick={customHandleSubmit('form')}>
+        <StyledButton
+          className="button-next"
+          onClick={customHandleSubmit('form')}
+          disabled={!isInputActive}
+        >
           Next
         </StyledButton>
         {deleteButton && (
-          <StyledButton onClick={customHandleSubmit('deleted')} type="button">
+          <StyledButton
+            onClick={customHandleSubmit('deleted')}
+            type="button"
+            disabled={!isInputActive}
+          >
             Delete
           </StyledButton>
         )}
         {addDificultWordsButton && (
-          <StyledButton onClick={customHandleSubmit('hard')} type="button">
+          <StyledButton
+            onClick={customHandleSubmit('hard')}
+            type="button"
+            disabled={!isInputActive}
+          >
             Hard
           </StyledButton>
         )}
-        <StyledButton onClick={customHandleSubmit('unknown')} type="button">
+        <StyledButton
+          onClick={customHandleSubmit('unknown')}
+          type="button"
+          disabled={!isInputActive}
+        >
           Unknow
         </StyledButton>
 
@@ -202,6 +220,7 @@ LearnWordsForm.propTypes = {
   isCorrect: PropTypes.bool.isRequired,
   isShowResult: PropTypes.bool.isRequired,
   isTranslationShow: PropTypes.bool.isRequired,
+  isInputActive: PropTypes.bool.isRequired,
   autocomplete: PropTypes.string,
   reset: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

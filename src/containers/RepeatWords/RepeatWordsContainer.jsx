@@ -49,6 +49,7 @@ function RepeatWordCardContainer(props) {
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
   const [isShowButtons, setIsShowButtons] = useState(false);
   const isErrorAnswer = useRef(false);
+  const [isInputActive, setIsInputActive] = useState(true);
 
   if (wordsCollection.length < 1 && !isGameStart.current) {
     return <FinalScreenContainer noWords />;
@@ -97,6 +98,7 @@ function RepeatWordCardContainer(props) {
     } else {
       setCurrentWord(null);
     }
+    setIsInputActive(true);
   };
 
   const customUpdateOneWord = (dufficulty, addTime, saveDifficult = false) => {
@@ -121,6 +123,7 @@ function RepeatWordCardContainer(props) {
   };
 
   const onSubmit = async (formData) => {
+    if (formData.buttonType === 'form_enter' && !isInputActive) return undefined;
     const { buttonType } = formData;
     setAnswerToForm(formData.word);
     const answer = formData.word;
@@ -148,14 +151,15 @@ function RepeatWordCardContainer(props) {
       case 'repeat':
         customUpdateOneWord(currentWord.userWord.difficulty, 0);
         addWordToWordsCollection(currentWord);
-
         break;
       default:
         if (!answer) break;
+
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
           audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
           setIsTranslationShow(true);
+          setIsInputActive(false);
           if (!isSoundPlay || !audios[0]) {
             setIsShowButtons(true);
           } else {
@@ -177,6 +181,7 @@ function RepeatWordCardContainer(props) {
         }
         correctCardHandler(true);
     }
+    return undefined;
   };
   return isFinalScreen ? (
     <FinalScreenContainer wordsCount={wordsCount.current} />
@@ -184,6 +189,7 @@ function RepeatWordCardContainer(props) {
     <RepeatWords
       isTranslationShow={isTranslationShow}
       isRightAnswerShow={isRightAnswerShow}
+      isInputActive={isInputActive}
       settings={settings}
       onSubmit={onSubmit}
       word={currentWord}
