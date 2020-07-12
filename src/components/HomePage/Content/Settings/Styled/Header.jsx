@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const HeaderStyled = styled.h2`
-  color: #929292;
+  color: #7d7d7d;
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;

@@ -6,7 +6,7 @@ const TitleWithUnderline = styled.h3`
   font-weight: bold;
   font-size: 23px;
   line-height: 28px;
-  color: #929292;
+  color: #7d7d7d;
   text-align: right;
   border-bottom: 1px solid #c4c4c4;
 `;
