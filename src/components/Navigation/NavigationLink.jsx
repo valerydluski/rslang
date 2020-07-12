@@ -14,7 +14,7 @@ const NavigationLink = (props) => {
 
 NavigationLink.propTypes = {
   name: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
+  href: PropTypes.oneOfType([PropTypes.string, PropTypes.shape()]).isRequired,
   activeLinkClass: PropTypes.string.isRequired,
 };
 

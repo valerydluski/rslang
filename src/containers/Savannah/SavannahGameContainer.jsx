@@ -118,7 +118,7 @@ const SavannaGameContainer = ({
   if (!isWordFinished) {
     if (currentMainWord !== currentWord.word) {
       currentMainWord = currentWord.word;
-      currentStepWords = currentWord.simillarWord.slice(0, 3);
+      currentStepWords = currentWord.similarWords.slice(0, 3);
       currentStepWords.push(currentWord.wordTranslate);
       currentStepWords = shuffleArray(currentStepWords);
     }
