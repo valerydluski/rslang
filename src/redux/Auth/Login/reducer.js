@@ -23,7 +23,7 @@ function loginReducer(state = initialState, action) {
       localStorage.removeItem('userId');
       localStorage.removeItem('token');
       localStorage.removeItem('isLogin');
-      return initialState;
+      return { ...initialState };
     case RESET_STORE:
       return { ...initialState };
     default:
