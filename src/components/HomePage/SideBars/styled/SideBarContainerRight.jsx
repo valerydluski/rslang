@@ -60,7 +60,8 @@ const SideBarContainerRight = styled.div`
     padding: 0;
     padding-top: 15px;
     @media ${DEVICE.laptop} {
-      justify-content: center;
+      justify-content: space-between;
+      padding-top: 0;
     }
     @media ${DEVICE.tablet} {
       margin: 0;
@@ -70,12 +71,15 @@ const SideBarContainerRight = styled.div`
     & li {
       margin-bottom: 25px;
       @media ${DEVICE.laptop} {
-        margin: 0 !important;
+        margin-bottom: 0;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
 
     & a {
-      padding-left: 0 !important;
+      padding-left: 0;
       height: 40px;
       width: 150px;
       display: flex;
@@ -98,13 +102,6 @@ const SideBarContainerRight = styled.div`
       font-weight: 600;
       color: #ffffff;
       background-color: #f56748;
-      @media ${DEVICE.laptop} {
-        margin-right: 20px;
-      }
-      @media ${DEVICE.mobileL} {
-        margin-right: 0;
-        margin-bottom: 15px;
-      }
     }
 
     & a[href='/repeat'] {
