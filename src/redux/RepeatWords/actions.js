@@ -15,6 +15,8 @@ import {
   IS_REPEAT_WORDS_LOADED,
   IS_MORE_CARDS_TODAY,
   SHOW_CARD,
+  SET_DIFFICULT_WORDS,
+  ADD_COUNTER,
 } from './types';
 
 export function showNewCard(card) {
@@ -120,5 +122,12 @@ export function setIsMoreCardsShowToday(bool) {
 export function showCard() {
   return {
     type: SHOW_CARD,
+  };
+}
+
+export function setDifficultWordsMode(bool) {
+  return {
+    type: SET_DIFFICULT_WORDS,
+    payload: bool,
   };
 }
