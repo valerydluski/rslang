@@ -17,6 +17,8 @@ const Input = (props) => {
     autocomplete,
     className,
     classNameSpan,
+    max,
+    min,
   } = props;
 
   return (
@@ -33,6 +35,8 @@ const Input = (props) => {
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
         className={className}
+        max={max}
+        min={min}
       />
       {classNameSpan
         ? error &&
@@ -59,6 +63,8 @@ Input.propTypes = {
   autocomplete: PropTypes.string,
   className: PropTypes.string,
   classNameSpan: PropTypes.string,
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Input.defaultProps = {
@@ -74,6 +80,8 @@ Input.defaultProps = {
   autocomplete: 'on',
   className: '',
   classNameSpan: '',
+  max: '',
+  min: '',
 };
 
 export default Input;
