@@ -11,6 +11,7 @@ const translations = {
       logout: 'Log Out',
       start: "Let's play!",
       wordsAmount: 'Total words',
+      videoLesson: 'Video tutorial',
     },
     StartPage: {
       game: 'GAME',
@@ -75,24 +76,27 @@ const translations = {
         'This game will help you enjoy reading, writing, speaking English with pleasure.',
     },
     Promo: {
-      text: `Bored with textbook exercises? Not sure how to start and what with? We have a solution - the RSLang application 
+      firstLineText: `Bored with textbook exercises?`,
+      firstLineSecondPart: `Not sure how to start and what with?`,
+      secondLineText: `We have a solution - the RSLang application 
       from our development team! This is a great opportunity to get a language practice that you are not likely to meet 
-      at school lesson. Our app will help you:
-      To get acquainted with various accents of English, including accents of those for whom English is also a second language;
-      to learn slang and spoken English;
-      to get used to perceiving slow and fast speech.
-      Our program consist of 6 exciting and entertaining mini-games, such as: “Savannah”,
+      at school lesson. Our app will help you:`,
+      firstList: `To get acquainted with various accents of English, including accents of those for whom English is also a second language`,
+      secondList: `to learn slang and spoken English`,
+      thirdList: `to get used to perceiving slow and fast speech`,
+      fourthList: `Our program consist of 6 exciting and entertaining mini-games, such as: “Savannah”,
       "SpeakIT", "Puzzle", "Audiocall", "Sprint", "Make Sentence". You will not only have a good time while playing them,
-      but also expand the vocabulary, revise grammar, improve your pronunciation. 
-      The main feature of our project is the use of interval repetition system, that can adapt to your current level of English. 
+      but also expand the vocabulary, revise grammar, improve your pronunciation.`,
+      thirdLineText: `The main feature of our project is the use of interval repetition system, that can adapt to your current level of English. 
       Repetition includes 5 difficulty levels. When choosing the maximum difficulty level, 
       the repetition will last 10 minutes, 
       the duration of the second step is four times the duration of the first level. Each next step is calculated as the sum 
-      of the previous step + 50% of the total repeat time. If in the game you meet a card with a certain word 
-      and make a mistake, then it will be displayed the next time the words are repeated. 
-      Have fun practicing English. No matter what you are interested in and how you spend time, 
-      among our mini-games you will definitely find something that suits you. Play, enjoy and never give up!
-      `
+      of the previous step + 50% of the total repeat time.`,
+      fourthLineText: ` If in the game you meet a card with a certain word 
+      and make a mistake, then it will be displayed the next time the words are repeated. `,
+      fifthLineText: `Have fun practicing English. No matter what you are interested in and how you spend time, 
+      among our mini-games you will definitely find something that suits you.`,
+      sixthLineText: `Play, enjoy and never give up!`,
     },
     Buttons: {
       save: 'Save',
@@ -205,6 +209,7 @@ const translations = {
       logout: 'Выход',
       start: 'Начни играть!',
       wordsAmount: 'Всего слов',
+      videoLesson: 'Видеоурок',
     },
     StartPage: {
       game: 'ИГРА',
@@ -271,25 +276,27 @@ const translations = {
         'Данная игра позволит вам научиться читать, писать, говорить легко и непринужденно.',
     },
     Promo: {
-      text: `Устали от скучных упражнений из учебника? Не знаете, как и с чего начать?
-      У нас есть решение - приложение RSLang от нашей команды разработчиков! Это отличная возможность
-      получить такую языковую практику, которую вы не встретите в школе на уроке, например:
-      Вы познакомитесь с  различными акцентами английского, в том числе акцентами тех, для кого английский тоже
-      является вторым языком. 
-      Изучите сленг и разговорный английский.
-      Привыкните воспринимать медленную и быструю речь.
-      Основой нашей программы являются 6 увлекательных и занимательных мини-игр, таких как : "Саванна",
+      firstLineText: `Устали от скучных упражнений из учебника?`,
+      firstLineSecondPart: `Не знаете, как и с чего начать?`,
+      secondLineText: `У нас есть решение - приложение RSLang от нашей команды разработчиков! Это отличная возможность
+      получить такую языковую практику, которую вы не встретите в школе на уроке, например:`,
+      firstList: `Вы познакомитесь с  различными акцентами английского, в том числе акцентами тех, для кого английский тоже
+      является вторым языком`,
+      secondList: `Изучите сленг и разговорный английский`,
+      thirdList: `Привыкните воспринимать медленную и быструю речь`,
+      fourthList: `Основой нашей программы являются 6 увлекательных и занимательных мини-игр, таких как : "Саванна",
       "Произнеси слово", "Паззл", "Аудиовызов", "Спринт", "Собери предложение", которые помогут не только приятно
-      провести время, но и расширить словарный запас, подтянуть знание грамматики, улучшить произношение.
-      Основной особенностью нашего проекта является использование системы интервального повторения, которая 
+      провести время, но и расширить словарный запас, подтянуть знание грамматики, улучшить произношение`,
+      thirdLineText: `Основной особенностью нашего проекта является использование системы интервального повторения, которая 
       подстроится под ваш текущий уровень английского языка. Повторение включает в себя
       5 уровней сложности. При выборе максимального уровня сложности повторение будет длиться 10 минут, продолжительность второго
       шага в четыре раза превышает длительность первого уровня.
-      Каждый следующий шаг расчитывается как сумма предыдущего шага + 50% от общего времени повторения.
-      Если в игре вы встретите карточку с определенным словом и совершите ошибку, то оно обязательно будет выведено при 
-      следующем повторении слов. 
-      Развлекайтесь и практикуйте английский язык. Неважно, чем вы интересуетесь и как проводите время, 
-      среди наших мини-игр вы обязательно найдете что-нибудь по душе. Играйте, наслаждайтесь и не бойтесь ошибаться!`
+      Каждый следующий шаг расчитывается как сумма предыдущего шага + 50% от общего времени повторения.`,
+      fourthLineText: `Если в игре вы встретите карточку с определенным словом и совершите ошибку, то оно обязательно будет выведено при 
+      следующем повторении слов. `,
+      fifthLineText: `Развлекайтесь и практикуйте английский язык. Неважно, чем вы интересуетесь и как проводите время, 
+      среди наших мини-игр вы обязательно найдете что-нибудь по душе.`,
+      sixthLineText: `Играйте, наслаждайтесь и не бойтесь ошибаться!`,
     },
     Buttons: {
       save: 'Сохранить',
