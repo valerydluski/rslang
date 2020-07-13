@@ -40,11 +40,16 @@ const AudioCallContainer = ({
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
 
-  useEffect(() => {
+  const removeGameData = () => {
     changeIndex(0);
     addWordToWrong([]);
     toggleWordStatus(false);
     toggleGameMode(false);
+    changegameProgressLine(0);
+  };
+
+  useEffect(() => {
+    removeGameData();
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
@@ -115,25 +120,29 @@ const AudioCallContainer = ({
     }
   };
 
+  if (isGameFinished) {
+    return (
+      <ResultModal
+        showProperties={['word', 'wordTranslate']}
+        audioForPlay="audio"
+        newGame={newGame}
+        restartGame={removeGameData}
+      />
+    );
+  }
+
   return (
     <>
       {isWordFinished ? (
         <>
-          {isGameFinished ? (
-            <ResultModal
-              showProperties={['word', 'wordTranslate']}
-              audioForPlay="audio"
-              newGame={newGame}
-            />
-          ) : (
-            <StatusMenu
-              page={page}
-              level={level}
-              maxPage={maxPage}
-              updateLevel={updateLevel}
-              updatePage={updatePage}
-            />
-          )}
+          <StatusMenu
+            page={page}
+            level={level}
+            maxPage={maxPage}
+            updateLevel={updateLevel}
+            updatePage={updatePage}
+          />
+
           <GameContainerStyled>
             <FinishedWordInfo
               word={currentGameWords[currentWordIndex].word}
@@ -218,7 +227,6 @@ AudioCallContainer.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isWordsLoading: state.loader.loading,
-    currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.AudioCallLevel,
     page: state.changeRound.AudioCallPage,
     maxPage: state.maxPage.maxPage,
