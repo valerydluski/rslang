@@ -21,29 +21,29 @@ const SavannahWordsContainer = ({
   if (!isWordFinished) {
     words = currentStepWords.map((word, i) => {
       return (
-        <WordStyled key={word.wordTranslate} onClick={() => processAnswer(i)}>{`${i + 1}.
-  ${word.wordTranslate}`}</WordStyled>
+        <WordStyled key={word} onClick={() => processAnswer(i)}>{`${i + 1}.
+  ${word}`}</WordStyled>
       );
     });
   }
 
   if (isWordFinished) {
     finishedWords = currentStepWords.map((word, i) => {
-      if (word.word === currentWord) {
+      if (word === currentWord) {
         return (
-          <WordCorrectStyled key={word.wordTranslate}>{`${i + 1}.
-      ${word.wordTranslate}`}</WordCorrectStyled>
+          <WordCorrectStyled key={word}>{`${i + 1}.
+      ${word}`}</WordCorrectStyled>
         );
       }
-      if (word.word === selectedWord) {
+      if (word === selectedWord) {
         return (
-          <WordWrongStyled key={word.wordTranslate}>{`${i + 1}.
-        ${word.wordTranslate}`}</WordWrongStyled>
+          <WordWrongStyled key={word}>{`${i + 1}.
+        ${word}`}</WordWrongStyled>
         );
       }
       return (
-        <WordFinishedStyled key={word.wordTranslate}>{`${i + 1}.
-      ${word.wordTranslate}`}</WordFinishedStyled>
+        <WordFinishedStyled key={word}>{`${i + 1}.
+      ${word}`}</WordFinishedStyled>
       );
     });
   }

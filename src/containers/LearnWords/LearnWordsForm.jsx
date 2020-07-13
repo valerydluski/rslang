@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Line } from 'rc-progress';
 import { connect } from 'react-redux';
+import { Translate } from 'react-redux-i18n';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import StyledButton from '../../components/UI/Button/Styled/StyledButton';
 import { LINK_FOR_IMAGE } from '../../config';
@@ -41,6 +42,7 @@ const LearnWordsForm = (props) => {
     audiosDuration,
     isShowResult,
     showResultHander,
+    isInputActive,
   } = props;
 
   const {
@@ -84,7 +86,7 @@ const LearnWordsForm = (props) => {
       onSubmit={handleSubmit((values) =>
         onSubmit({
           ...values,
-          buttonType: 'form',
+          buttonType: 'form_enter',
         })
       )}
     >
@@ -100,6 +102,7 @@ const LearnWordsForm = (props) => {
             alt={word.word}
             src={`${LINK_FOR_IMAGE}${image}`}
             classNameContainer="image_learn"
+            className="image_learn"
           />
         )}
         <TextExampleStyled>
@@ -117,6 +120,7 @@ const LearnWordsForm = (props) => {
             answer={answer}
             isShowResult={isResultShow}
             audiosDuration={audiosDuration}
+            isInputActive={isInputActive}
             onChange={() => {
               if (isShowResult) {
                 showResultHander(false);
@@ -141,28 +145,48 @@ const LearnWordsForm = (props) => {
         )}
       </LearnCardsContainer>
       <LearnButtonsContainer>
-        <StyledButton className="button-next" onClick={customHandleSubmit('form')}>
-          Next
+        <StyledButton
+          className="button-next lear_button learn_all-buttons"
+          onClick={customHandleSubmit('form')}
+          disabled={!isInputActive}
+        >
+          <Translate value="Buttons.next" />
         </StyledButton>
         {deleteButton && (
-          <StyledButton onClick={customHandleSubmit('deleted')} type="button">
-            Delete
+          <StyledButton
+            className="lear_button learn_all-buttons"
+            onClick={customHandleSubmit('deleted')}
+            type="button"
+            disabled={!isInputActive}
+          >
+            <Translate value="Buttons.delete" />
           </StyledButton>
         )}
         {addDificultWordsButton && (
-          <StyledButton onClick={customHandleSubmit('hard')} type="button">
-            Hard
+          <StyledButton
+            onClick={customHandleSubmit('hard')}
+            type="button"
+            disabled={!isInputActive}
+            className="lear_button learn_all-buttons"
+          >
+            <Translate value="Buttons.hard" />
           </StyledButton>
         )}
-        <StyledButton onClick={customHandleSubmit('unknown')} type="button">
-          Unknow
+        <StyledButton
+          onClick={customHandleSubmit('unknown')}
+          type="button"
+          disabled={!isInputActive}
+          className="lear_button learn_i-dont-know"
+        >
+          <Translate value="Buttons.dontKnow" />
         </StyledButton>
 
         <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
         <ProgressBarContainer>
           <Line
             percent={Math.round((currentWordIndex / wordsCount) * 100)}
-            strokeWidth="4"
+            strokeWidth="3"
+            trailWidth="2"
             strokeColor="#404497"
           />
         </ProgressBarContainer>
@@ -202,6 +226,7 @@ LearnWordsForm.propTypes = {
   isCorrect: PropTypes.bool.isRequired,
   isShowResult: PropTypes.bool.isRequired,
   isTranslationShow: PropTypes.bool.isRequired,
+  isInputActive: PropTypes.bool.isRequired,
   autocomplete: PropTypes.string,
   reset: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

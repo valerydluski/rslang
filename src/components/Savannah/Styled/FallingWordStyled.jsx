@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const FallingWordStyled = styled.div`
   width: 180px;
@@ -16,16 +17,33 @@ const FallingWordStyled = styled.div`
   animation-play-state: ${(props) => props.animationState};
   position: absolute;
   top: 0;
-  margin: 0 50%;
+  left: 50%;
   transform: translate(-50%, 0);
   text-align: center;
-}
+  span {
+    padding: 0 5px;
+  }
   @keyframes falling {
     0% {
       top: -20px;
     }
     100% {
       top: calc(100vh - 180px);
+    }
+  }
+
+  @media ${DEVICE.laptop} {
+    width: 120px;
+    height: 120px;
+    font-size: 20px;
+    line-height: 120px;
+    @keyframes falling {
+      0% {
+        top: -20px;
+      }
+      100% {
+        top: calc(100vh - 120px);
+      }
     }
   }
 `;

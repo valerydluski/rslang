@@ -13,6 +13,7 @@ import newRound from '../../../utils/newRound';
 import GameContainerStyled from './Styled/StyledGameContainer';
 import SprintAnimation from '../../../components/Sprint/Animation/SprintAnimation';
 import StyledPattern from '../../../components/Sprint/Styled/StyledPattern';
+import GameModeToggle from '../../../containers/GameModeToggle/GameModeToggle';
 
 const Sprint = (props) => {
   const {
@@ -66,6 +67,7 @@ const Sprint = (props) => {
   return (
     <SprintContainerStyled key={words.map((word) => word.word).join()}>
       <GoToHomePageButton />
+      <GameModeToggle gameName={gameName} />
       <StatusMenu
         page={page}
         level={level}
@@ -75,6 +77,7 @@ const Sprint = (props) => {
       />
       <GameContainerStyled>
         <Timer
+          key={new Date()}
           initialTime={secondsForGuessing}
           timeIsUpHandler={timeIsUpHandler}
           isGameFinished={isGameFinished}
@@ -87,6 +90,7 @@ const Sprint = (props) => {
           page={page}
           gameName={gameName}
           newGame={newGame}
+          toggleGameMode={toggleGameMode}
         />
       </GameContainerStyled>
       <StyledPattern>

@@ -10,7 +10,6 @@ import StatusMenu from '../../components/StatusMenu/StatusMenu';
 import CardsContainerSpeakIT from './CardsContainerSpeakIT';
 import ButtonsContainerSpeakIT from '../../components/SpeakIT/ButtonsContainerSpeakIt';
 import RecognationTranscriptContainer from '../../components/SpeakIT/RecognationTranscriptContainer';
-import ScoreContainerSpeakIT from './ScoreContainerSpeakIT';
 import Microphone from '../../utils/Microphone';
 import ResultModal from '../Modal/ResultModal';
 import { changeIDontKnowWords, changeScoreGame } from '../../redux/Games/action';
@@ -20,6 +19,7 @@ import newRound from '../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../redux/Statistic/action';
 import GoToHomePageButton from '../Buttons/GoHomePageButton/GoHomePageButton';
+import GameModeToggle from '../../containers/GameModeToggle/GameModeToggle';
 
 const micro = new Microphone();
 
@@ -101,7 +101,7 @@ const GameContainerSpeakIT = (props) => {
         if (IDontKnowWords.length === 0) {
           micro.stopMicrophone();
           toggleGameMode(true);
-          if (gameMode) saveStatistic({ Level, Page, wordsCollection, IDontKnowWords, gameName });
+          if (gameMode) saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
         }
       }
     }
@@ -187,19 +187,21 @@ const GameContainerSpeakIT = (props) => {
             newGame={newGame}
           />
         ) : (
-          <StatusMenu
-            page={Page}
-            level={Level}
-            maxPage={maxPage}
-            updateLevel={changeLevel}
-            updatePage={changePage}
-            className="status-menu_speakIT"
-          />
+          <>
+            <GameModeToggle gameName={gameName} />
+            <StatusMenu
+              page={Page}
+              level={Level}
+              maxPage={maxPage}
+              updateLevel={changeLevel}
+              updatePage={changePage}
+              className="status-menu_speakIT"
+            />
+          </>
         )}
 
         <Image src={srcForImage} classNameContainer="image_speakIT" />
         <TextField text={textForTextField} className="text-field_speakIT" />
-        <ScoreContainerSpeakIT />
         <CardsContainerSpeakIT
           cardHandler={cardHandler}
           wordsCollection={wordsCollection}
@@ -228,14 +230,17 @@ const GameContainerSpeakIT = (props) => {
           newGame={newGame}
         />
       ) : (
-        <StatusMenu
-          page={Page}
-          level={Level}
-          maxPage={maxPage}
-          updateLevel={changeLevel}
-          updatePage={changePage}
-          className="status-menu_speakIT"
-        />
+        <>
+          <GameModeToggle gameName={gameName} />
+          <StatusMenu
+            page={Page}
+            level={Level}
+            maxPage={maxPage}
+            updateLevel={changeLevel}
+            updatePage={changePage}
+            className="status-menu_speakIT"
+          />
+        </>
       )}
 
       <Image src={srcForImage} classNameContainer="image_speakIT" />
@@ -243,7 +248,6 @@ const GameContainerSpeakIT = (props) => {
         transcript={transcriptFromMicrophone}
         className="text-field_speakIT"
       />
-      <ScoreContainerSpeakIT />
       <CardsContainerSpeakIT
         wordsCollection={wordsCollection}
         correctWords={correctWordsState}
