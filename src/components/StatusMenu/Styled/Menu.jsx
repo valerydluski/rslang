@@ -19,6 +19,10 @@ const Menu = styled.div`
   @media ${DEVICE.tablet} {
     height: 56px;
   }
+
+  &.none {
+    visibility: hidden;
+  }
 `;
 
 export default Menu;

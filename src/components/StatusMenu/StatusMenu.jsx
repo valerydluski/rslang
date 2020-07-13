@@ -23,6 +23,7 @@ const StatusMenu = (props) => {
     className,
     restartGame,
     changeMode,
+    currentGameMode,
   } = props;
 
   const [isLevelOpen, toggleLevel] = useState(false);
@@ -57,8 +58,15 @@ const StatusMenu = (props) => {
     togglePage(false);
   };
 
+  const detectClassName = () => {
+    if (currentGameMode) {
+      return className;
+    }
+    return 'none';
+  };
+
   return (
-    <Menu className={className}>
+    <Menu className={detectClassName()}>
       <MenuItem type={ITEM_LEVEL} className={className}>
         <Title>
           <Translate value="GameStatus.level" />
@@ -104,6 +112,7 @@ StatusMenu.propTypes = {
   className: PropTypes.string,
   restartGame: PropTypes.func,
   changeMode: PropTypes.func.isRequired,
+  currentGameMode: PropTypes.bool.isRequired,
 };
 
 StatusMenu.defaultProps = {
@@ -114,7 +123,13 @@ StatusMenu.defaultProps = {
   restartGame: () => {},
 };
 
+const mapStateToProps = (state) => {
+  return {
+    currentGameMode: state.gamesReducer.gameMode,
+  };
+};
+
 const mapDispatchToProps = {
   changeMode: changeGameMode,
 };
-export default connect(null, mapDispatchToProps)(StatusMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(StatusMenu);
