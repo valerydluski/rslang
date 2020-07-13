@@ -28,6 +28,7 @@ const MenuContainer = styled.div`
 
     & li {
       text-align: right;
+      margin-bottom: 30px;
       & a {
         color: #ffffff;
         padding-right: 30px;
@@ -45,12 +46,11 @@ const MenuContainer = styled.div`
       }
       & span {
         margin: 0;
-        margin-right: 20px;
       }
     }
 
     & button:last-of-type {
-      margin-bottom: 150px;
+      margin-bottom: 30px;
     }
   }
 `;

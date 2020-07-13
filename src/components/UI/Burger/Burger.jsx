@@ -46,7 +46,7 @@ export default function Burger({ clickHandler, isOpen }) {
           className={rectLeftClasses}
           width="30"
           height="5"
-          viewbox="0 0 30 5"
+          viewBox="0 0 30 5"
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect className={rectWhiteClasses} width="30" height="5" rx="2.5" fill="#7033FF" />
@@ -55,7 +55,7 @@ export default function Burger({ clickHandler, isOpen }) {
           className={circleRightClasses}
           width="5"
           height="5"
-          viewbox="0 0 5 5"
+          viewBox="0 0 5 5"
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect className={rectRedClasses} width="5" height="5" rx="2.5" fill="#FFBC29" />
@@ -66,7 +66,7 @@ export default function Burger({ clickHandler, isOpen }) {
           className={circleLeftClasses}
           width="5"
           height="5"
-          viewbox="0 0 5 5"
+          viewBox="0 0 5 5"
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect className={rectWhiteClasses} width="5" height="5" rx="2.5" fill="#7033FF" />
@@ -76,7 +76,7 @@ export default function Burger({ clickHandler, isOpen }) {
           className={rectRightClasses}
           width="30"
           height="5"
-          viewbox="0 0 30 5"
+          viewBox="0 0 30 5"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -88,7 +88,7 @@ export default function Burger({ clickHandler, isOpen }) {
           className={rectLeftClasses}
           width="30"
           height="5"
-          viewbox="0 0 30 5"
+          viewBox="0 0 30 5"
           fill="#FF6024"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -98,7 +98,7 @@ export default function Burger({ clickHandler, isOpen }) {
           className={circleRightClasses}
           width="5"
           height="5"
-          viewbox="0 0 5 5"
+          viewBox="0 0 5 5"
           fill="#FF6024"
           xmlns="http://www.w3.org/2000/svg"
         >
