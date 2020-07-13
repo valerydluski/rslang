@@ -19,6 +19,7 @@ import StyledGameProgress from './styled/StyledGameProgress';
 
 let currentGameWords;
 let answerResult = {};
+let currentMainWord = '';
 
 const AudioCallContainer = ({
   wordsCollection,
@@ -40,16 +41,17 @@ const AudioCallContainer = ({
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
 
-  const removeGameData = () => {
+  const resetGameData = () => {
     changeIndex(0);
     addWordToWrong([]);
     toggleWordStatus(false);
     toggleGameMode(false);
     changegameProgressLine(0);
+    currentMainWord = '';
   };
 
   useEffect(() => {
-    removeGameData();
+    resetGameData();
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
@@ -80,13 +82,17 @@ const AudioCallContainer = ({
     }
   }
 
+  const currentWord = currentGameWords[currentWordIndex];
+
   let additionalWords = [];
+
   if (!isWordFinished) {
-    additionalWords = currentGameWords.slice();
-    additionalWords.splice(currentWordIndex, 1);
-    additionalWords = shuffleArray(additionalWords).slice(0, 4);
-    additionalWords.push(currentGameWords[currentWordIndex]);
-    additionalWords = shuffleArray(additionalWords);
+    if (currentMainWord !== currentWord.word) {
+      currentMainWord = currentWord.word;
+      additionalWords = [...currentWord.similarWords];
+      additionalWords.push(currentWord.wordTranslate);
+      additionalWords = shuffleArray(additionalWords);
+    }
   }
 
   function autoSolve() {
@@ -126,7 +132,7 @@ const AudioCallContainer = ({
         showProperties={['word', 'wordTranslate']}
         audioForPlay="audio"
         newGame={newGame}
-        restartGame={removeGameData}
+        restartGame={resetGameData}
       />
     );
   }
@@ -153,7 +159,7 @@ const AudioCallContainer = ({
             <WordsContainer
               isWordFinished={isWordFinished}
               isCorrect={answerResult.isCorrect}
-              correctWord={currentGameWords[currentWordIndex].word}
+              correctWord={currentGameWords[currentWordIndex].wordTranslate}
               words={answerResult.words}
               selectedIndex={answerResult.selectedIndex}
               correctIndex={answerResult.correctIndex}
@@ -179,7 +185,7 @@ const AudioCallContainer = ({
             <StyledGameProgress gameProgressLine={gameProgressLine} />
             <WordsContainer
               words={additionalWords}
-              correctWord={currentGameWords[currentWordIndex].word}
+              correctWord={currentGameWords[currentWordIndex].wordTranslate}
               processUserAnswer={processUserAnswer}
               isWordFinished={isWordFinished}
               gameProgressLine={gameProgressLine}

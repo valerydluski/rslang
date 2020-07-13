@@ -29,15 +29,15 @@ const WordsContainer = (props) => {
       if (index === selectedIndex && !isAutoSolved) {
         type = isCorrect ? 'correct' : 'wrong';
       }
-      if ((!isCorrect && index === correctIndex) || (isAutoSolved && word.word === correctWord)) {
+      if ((!isCorrect && index === correctIndex) || (isAutoSolved && word === correctWord)) {
         type = '';
       }
       return (
-        <Word key={word.word} index={index} wordStyleType={type} translation={word.wordTranslate} />
+        <Word key={`finished:${word}`} index={index} wordStyleType={type} translation={word} />
       );
     }
 
-    return <Word key={word.word} index={index} translation={word.wordTranslate} />;
+    return <Word key={word} index={index} translation={word} />;
   });
 
   const wordAudio = new Audio();
@@ -45,16 +45,19 @@ const WordsContainer = (props) => {
   const playResultSound = (isOk) => {
     wordAudio.src = isOk ? correctSound : errorSound;
     wordAudio.load();
-    wordAudio.play();
+    const playPromise = wordAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {}).catch(() => {});
+    }
   };
 
   const clickHandler = (e, key) => {
     if (key || e.target.matches('[data-index]')) {
       changegameProgressLine(gameProgressLine + 100 / wordsAmount);
       const selectedWordIndex = key ? key - 1 : +e.target.dataset.index;
-      const result = currentStepWords[selectedWordIndex].word === correctWord;
+      const result = currentStepWords[selectedWordIndex] === correctWord;
       playResultSound(result);
-      const correctWordIndex = currentStepWords.findIndex((a) => a.word === correctWord);
+      const correctWordIndex = currentStepWords.findIndex((a) => a === correctWord);
       processUserAnswer(result, words, selectedWordIndex, correctWordIndex);
     }
   };
