@@ -22,7 +22,7 @@ const RuGameModeToggleStyled = styled.div`
       width: 48px;
       height: 48px;
       z-index: 1;
-      transition: 0.3s;
+      transition: 0.6s;
       background: #6550de;
       border-radius: 100%;
     }
@@ -35,11 +35,13 @@ const RuGameModeToggleStyled = styled.div`
       left: 70px;
       top: 18px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.6s;
     }
     &:checked {
       &::after {
         transform: translateX(193px);
+        background-color: #f56748;
+        transition: 0.6s ease-out;
       }
       &::before {
         content: attr(data-off);
