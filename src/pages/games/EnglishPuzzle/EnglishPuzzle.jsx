@@ -17,14 +17,24 @@ import {
   changeEnglishPuzzleLevel,
   changeEnglishPuzzlePage,
 } from '../../../redux/ChangeRounds/action';
-import { GAME_MAX_PAGE, SCREEN_SIZE } from '../../../config';
+import { GAME_MAX_PAGE, SCREEN_SIZE, GAME_NAME } from '../../../config';
 import screenRotateIcon from '../../../assets/img/rotate-screen.svg';
 import getScreenWidth from '../../../utils/getScreenWidth';
 import Image from '../../../components/UI/Image/Image';
 import newRound from '../../../utils/newRound';
+import GameModeToggle from '../../../containers/GameModeToggle/GameModeToggle';
 
 const EnglishPuzzle = (props) => {
-  const { isWordsLoading, page, level, maxPage, updatePage, updateLevel, gameMode } = props;
+  const {
+    isWordsLoading,
+    page,
+    level,
+    maxPage,
+    updatePage,
+    updateLevel,
+    gameMode,
+    gameName,
+  } = props;
   const [isModalOpen, toggleModal] = useState(false);
   const [isBreakpoint, changeBreakpoint] = useState(false);
 
@@ -108,6 +118,7 @@ const EnglishPuzzle = (props) => {
       ) : (
         <Container>
           <MenuContainer>
+            <GameModeToggle gameName={gameName} />
             <StatusMenu
               page={page}
               level={level}
@@ -135,6 +146,7 @@ EnglishPuzzle.propTypes = {
   updatePage: PropTypes.func.isRequired,
   updateLevel: PropTypes.func.isRequired,
   gameMode: PropTypes.bool.isRequired,
+  gameName: PropTypes.string,
 };
 
 EnglishPuzzle.defaultProps = {
@@ -142,6 +154,7 @@ EnglishPuzzle.defaultProps = {
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
+  gameName: GAME_NAME.englishPuzzle,
 };
 
 const mapStateToProps = (state) => {

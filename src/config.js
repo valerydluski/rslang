@@ -237,6 +237,7 @@ export const INITIAL_SETTINGS = {
   cardsPerDayRepeat: 20,
   isDictionaryDeletedButton: true,
   isDictionaryDifficultButton: true,
+  showIdontKhowButton: true,
 };
 
 export const DICTIONARY_API = {
