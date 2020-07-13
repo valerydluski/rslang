@@ -14,6 +14,7 @@ const GameFieldsContainer = ({
   isWordFinished,
   isAutoSolve,
   autoSolve,
+  playResultSound,
   switchToNextSentence,
 }) => {
   const [optionParts, changeOptionParts] = useState(shuffleArray(sentenceTranslation.split(' ')));
@@ -34,6 +35,7 @@ const GameFieldsContainer = ({
     const result = answerParts.join(' ') === sentenceTranslation;
     if (result) {
       toggleWordStatus(true);
+      playResultSound(true);
     }
   };
 
@@ -136,12 +138,14 @@ GameFieldsContainer.propTypes = {
   isWordFinished: PropTypes.bool,
   isAutoSolve: PropTypes.bool,
   autoSolve: PropTypes.func,
+  playResultSound: PropTypes.func,
   switchToNextSentence: PropTypes.func,
 };
 
 GameFieldsContainer.defaultProps = {
   isWordFinished: false,
   isAutoSolve: false,
+  playResultSound: () => {},
   autoSolve: () => {},
   toggleWordStatus: () => {},
   switchToNextSentence: () => {},

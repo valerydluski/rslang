@@ -11,8 +11,11 @@ import { GAME_MAX_PAGE, GAME_NAME, LINK_FOR_AUDIO } from '../../config';
 import GameFieldsContainer from './GameFieldsContainer';
 import newRound from '../../utils/newRound';
 import { saveFullStatistic } from '../../redux/Statistic/action';
+import errorSound from '../../assets/audio/error.mp3';
+import correctSound from '../../assets/audio/correct.mp3';
 
 let currentGameWords;
+const audio = new Audio();
 
 const MakeSentenceGame = ({
   wordsCollection,
@@ -39,10 +42,12 @@ const MakeSentenceGame = ({
     toggleWordStatus(false);
     toggleGameMode(false);
     toggleAutoSolveMode(false);
+    currentGameWords = [];
   };
 
   useEffect(() => {
     resetGameData();
+    return resetGameData();
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
@@ -88,6 +93,15 @@ const MakeSentenceGame = ({
     );
   }
 
+  const playResultSound = (isOk) => {
+    audio.src = isOk ? correctSound : errorSound;
+    audio.load();
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {}).catch(() => {});
+    }
+  };
+
   const switchToNextSentence = () => {
     if (isAutoSolve) toggleAutoSolveMode(false);
     if (currentWordIndex === wordsCollection.length - 1) toggleGameMode(true);
@@ -99,6 +113,7 @@ const MakeSentenceGame = ({
     addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
     toggleAutoSolveMode(true);
     toggleWordStatus(true);
+    playResultSound();
   }
 
   const audioSrc = `${LINK_FOR_AUDIO}${currentGameWords[currentWordIndex].audioExample}`;
@@ -121,6 +136,7 @@ const MakeSentenceGame = ({
         isAutoSolve={isAutoSolve}
         switchToNextSentence={switchToNextSentence}
         isWordFinished={isWordFinished}
+        playResultSound={playResultSound}
       />
     </>
   );
