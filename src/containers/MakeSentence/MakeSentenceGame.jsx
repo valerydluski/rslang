@@ -52,6 +52,7 @@ const MakeSentenceGame = ({
   }
 
   const newGame = () => {
+    resetGameData();
     let newLevel;
     let newPage;
     let obj;
