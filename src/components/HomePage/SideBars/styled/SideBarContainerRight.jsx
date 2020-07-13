@@ -54,13 +54,12 @@ const SideBarContainerRight = styled.div`
     border-top: 1px solid #c4c4c4;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     margin: 0;
     padding: 0;
     padding-top: 15px;
     @media ${DEVICE.laptop} {
-      justify-content: space-between;
-      padding-top: 0;
+      padding-top: 30px;
     }
     @media ${DEVICE.tablet} {
       margin: 0;
@@ -68,29 +67,28 @@ const SideBarContainerRight = styled.div`
     }
 
     & li {
-      margin-bottom: 25px;
+      margin: 5px;
+      &:last-child {
+        margin-bottom: 30px;
+      }
       @media ${DEVICE.laptop} {
-        margin-bottom: 0;
-        margin-top: 30px;
-        margin-left: auto;
-        margin-right: auto;
+        &:last-child {
+          margin-bottom: 5px;
+        }
       }
     }
 
     & a {
       padding-left: 0;
       height: 40px;
-      width: 150px;
+      width: 140px;
       display: flex;
       justify-content: center;
       align-items: center;
       transition: 0.3s linear;
-      &:hover {
-        background-color: #fec246;
-      }
 
       & > span {
-        font-size: 19px;
+        font-size: 16px;
       }
     }
 
@@ -101,6 +99,10 @@ const SideBarContainerRight = styled.div`
       font-weight: 600;
       color: #ffffff;
       background-color: #f56748;
+      &:hover {
+        background-color: #fec246;
+        color: #ffffff;
+      }
     }
 
     & a[href='/repeat'] {
@@ -110,6 +112,10 @@ const SideBarContainerRight = styled.div`
       font-weight: 600;
       color: #ffffff;
       background-color: #6550de;
+      &:hover {
+        background-color: #fec246;
+        color: #ffffff;
+      }
     }
   }
 `;
