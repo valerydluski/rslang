@@ -20,7 +20,7 @@ import newRound from '../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../redux/Statistic/action';
 import GoToHomePageButton from '../Buttons/GoHomePageButton/GoHomePageButton';
-import GameModeToggle from '../../components/GameModeToggle/GameModeToggle';
+import GameModeToggle from '../../containers/GameModeToggle/GameModeToggle';
 
 const micro = new Microphone();
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const RuGameModeToggleStyled = styled.div`
   border-radius: 75px;
-  margin-top: 20px;
+  margin: 15px 0;
   font-weight: 500;
   position: relative;
   input {
