@@ -17,6 +17,7 @@ import LearnCardsContainer, {
   TextExampleTranslateStyled,
   TextMeaningStyled,
   TextMeaningTranslateStyled,
+  TopContnentStyled,
 } from './Styled/LearnCardsContainer';
 import LearnButtonsContainer, {
   ProgressBarCount,
@@ -99,39 +100,41 @@ const LearnWordsForm = (props) => {
           type="button"
           className="learn_sound-button"
         />
-        {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
-        {isImageAssociation && (
-          <Image
-            alt={word.word}
-            src={`${LINK_FOR_IMAGE}${image}`}
-            classNameContainer="image_learn"
-            className="image_learn"
-          />
-        )}
-        <TextExampleStyled>
-          {isTextExample && <p style={{ display: 'inline' }}>{firstPart}</p>}
-          <Field
-            name="word"
-            key="word"
-            type="text"
-            placeholder={isRightAnswerShow ? word.word : ''}
-            size="5"
-            component={LearnWordsInput}
-            autoFocus
-            autocomplete={autocomplete}
-            word={word.word}
-            answer={answer}
-            isShowResult={isResultShow}
-            audiosDuration={audiosDuration}
-            isInputActive={isInputActive}
-            onChange={() => {
-              if (isShowResult) {
-                showResultHander(false);
-              }
-            }}
-          />
-          {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
-        </TextExampleStyled>
+        <TopContnentStyled>
+          {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
+          {isImageAssociation && (
+            <Image
+              alt={word.word}
+              src={`${LINK_FOR_IMAGE}${image}`}
+              classNameContainer="image_learn"
+              className="image_learn"
+            />
+          )}
+          <TextExampleStyled>
+            {isTextExample && <p style={{ display: 'inline' }}>{firstPart}</p>}
+            <Field
+              name="word"
+              key="word"
+              type="text"
+              placeholder={isRightAnswerShow ? word.word : ''}
+              size="5"
+              component={LearnWordsInput}
+              autoFocus
+              autocomplete={autocomplete}
+              word={word.word}
+              answer={answer}
+              isShowResult={isResultShow}
+              audiosDuration={audiosDuration}
+              isInputActive={isInputActive}
+              onChange={() => {
+                if (isShowResult) {
+                  showResultHander(false);
+                }
+              }}
+            />
+            {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
+          </TextExampleStyled>
+        </TopContnentStyled>
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
         )}
