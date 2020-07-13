@@ -3,7 +3,7 @@ import FinalScreen from '../../components/RepeatWords/FinalScreen';
 
 const mapStateToProps = (state) => {
   return {
-    isRepeatWordsLoaded: state.repeatWords.isRepeatWordsLoaded,
+    isMoreCardsToday: state.repeatWords.isMoreCardsToday,
   };
 };
 

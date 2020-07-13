@@ -7,7 +7,7 @@ export default function NavigationMenu(props) {
 
   return (
     <nav>
-      <ul> 
+      <ul>
         {links.map((link) => {
           const { name, href } = link;
           return (

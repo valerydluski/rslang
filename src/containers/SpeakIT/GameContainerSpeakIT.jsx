@@ -20,6 +20,7 @@ import newRound from '../../utils/newRound';
 import { changeSpeakItPage, changeSpeakItLevel } from '../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../redux/Statistic/action';
 import GoToHomePageButton from '../Buttons/GoHomePageButton/GoHomePageButton';
+import GameModeToggle from '../../components/GameModeToggle/GameModeToggle';
 
 const micro = new Microphone();
 
@@ -187,14 +188,17 @@ const GameContainerSpeakIT = (props) => {
             newGame={newGame}
           />
         ) : (
-          <StatusMenu
-            page={Page}
-            level={Level}
-            maxPage={maxPage}
-            updateLevel={changeLevel}
-            updatePage={changePage}
-            className="status-menu_speakIT"
-          />
+          <>
+            <GameModeToggle gameName={gameName} />
+            <StatusMenu
+              page={Page}
+              level={Level}
+              maxPage={maxPage}
+              updateLevel={changeLevel}
+              updatePage={changePage}
+              className="status-menu_speakIT"
+            />
+          </>
         )}
 
         <Image src={srcForImage} classNameContainer="image_speakIT" />
@@ -228,14 +232,17 @@ const GameContainerSpeakIT = (props) => {
           newGame={newGame}
         />
       ) : (
-        <StatusMenu
-          page={Page}
-          level={Level}
-          maxPage={maxPage}
-          updateLevel={changeLevel}
-          updatePage={changePage}
-          className="status-menu_speakIT"
-        />
+        <>
+          <GameModeToggle gameName={gameName} />
+          <StatusMenu
+            page={Page}
+            level={Level}
+            maxPage={maxPage}
+            updateLevel={changeLevel}
+            updatePage={changePage}
+            className="status-menu_speakIT"
+          />
+        </>
       )}
 
       <Image src={srcForImage} classNameContainer="image_speakIT" />
