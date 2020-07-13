@@ -132,7 +132,7 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
         )}
-        {isTranscription && <Transcription>{transcription}</Transcription>}
+        {isTranslationShow && isTranscription && <Transcription transcription={transcription} />}
         {isTextMeaning && isTranslationShow ? (
           <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
@@ -145,19 +145,29 @@ const LearnWordsForm = (props) => {
         )}
       </LearnCardsContainer>
       <LearnButtonsContainer>
-        <StyledButton
-          className="button-next lear_button learn_all-buttons"
-          onClick={customHandleSubmit('form')}
-          disabled={!isInputActive}
-        >
-          <Translate value="Buttons.next" />
-        </StyledButton>
+        {isInputActive ? (
+          <StyledButton
+            className="button-next lear_button learn_all-buttons"
+            onClick={customHandleSubmit('form')}
+            disabled={!isInputActive}
+          >
+            <Translate value="Buttons.check" />
+          </StyledButton>
+        ) : (
+          <StyledButton
+            className="button-next lear_button learn_all-buttons"
+            onClick={customHandleSubmit('next')}
+            disabled={!isInputActive}
+          >
+            <Translate value="Buttons.next" />
+          </StyledButton>
+        )}
         {deleteButton && (
           <StyledButton
             className="lear_button learn_all-buttons"
             onClick={customHandleSubmit('deleted')}
             type="button"
-            disabled={!isInputActive}
+            disabled={isInputActive}
           >
             <Translate value="Buttons.delete" />
           </StyledButton>
@@ -166,7 +176,7 @@ const LearnWordsForm = (props) => {
           <StyledButton
             onClick={customHandleSubmit('hard')}
             type="button"
-            disabled={!isInputActive}
+            disabled={isInputActive}
             className="lear_button learn_all-buttons"
           >
             <Translate value="Buttons.hard" />

@@ -93,6 +93,7 @@ const translations = {
       hard: 'Hard',
       train: 'Train',
       play: 'Play',
+      check: 'Check',
     },
     Languages: {
       en: 'English',
@@ -267,6 +268,7 @@ const translations = {
       hard: 'Тяжело',
       train: 'Тренировать',
       play: 'Играть',
+      check: 'Проверить',
     },
     Languages: {
       en: 'Английский',

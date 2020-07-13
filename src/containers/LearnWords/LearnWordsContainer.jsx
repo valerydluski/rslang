@@ -52,6 +52,7 @@ function LearnWordCardContainer(props) {
   const rightSeries = useRef(0);
   const isFinalScreen = currentWordIndex.current === wordsCount.current;
   const [isInputActive, setIsInputActive] = useState(true);
+  const [audioIsPlaying, setAudioIsPlaing] = useState(false);
 
   useEffect(() => {
     if (loadingWord) {

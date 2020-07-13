@@ -19,6 +19,7 @@ import RepeatCardsContainer, {
 } from './Styled/RepeatCardsContainer';
 import RepeatButtonsContainer from './Styled/RepeatButtonsContainer';
 import { showResult } from '../../redux/RepeatWords/actions';
+import { useRef } from 'react';
 
 const LearnWordsForm = (props) => {
   const {
@@ -49,6 +50,7 @@ const LearnWordsForm = (props) => {
     isTranscription,
     isImageAssociation,
   } = settings.settings;
+
   const {
     textExample,
     textExampleTranslate,
@@ -58,7 +60,9 @@ const LearnWordsForm = (props) => {
     transcription,
     textMeaningTranslate,
   } = word;
+
   const [firstPart, secondPart] = textExample;
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (isCorrect) {
@@ -105,10 +109,11 @@ const LearnWordsForm = (props) => {
             name="word"
             key="word"
             type="text"
+            ref={inputRef}
             placeholder={isRightAnswerShow ? word.word : ''}
             size="5"
             component={RepeatWordsInput}
-            autoFocus
+            autoFocus={isInputActive}
             autocomplete={autocomplete}
             word={word.word}
             answer={answer}
@@ -126,7 +131,7 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
         )}
-        {isTranscription && <Transcription>{transcription}</Transcription>}
+        {isTranslationShow && isTranscription && <Transcription transcription={transcription} />}
         {isTextMeaning && isTranslationShow ? (
           <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
