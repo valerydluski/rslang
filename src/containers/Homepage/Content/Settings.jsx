@@ -11,12 +11,16 @@ import {
 import checkboxesValidator from '../../../utils/validators/checkboxesValidator';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import { puzzleSettingsFromServer } from '../../../redux/EnglishPuzzle/actions';
+import newWordsAndAllWordsValidator from '../../../utils/validators/newWordsAndAllWordsValidator';
+import getRedirectFunction from '../../../utils/getRedirectFunction';
 
 function SettingContent(props) {
   const { saveToStore, saveToAPI, initialValues, isLoadingData, puzzleSettingsSave } = props;
   const onSubmit = (formData) => {
     if (!checkboxesValidator(formData)) {
       toast.warning(<Translate value="Settings.checkboxMessage" />);
+    } else if (!newWordsAndAllWordsValidator(formData.wordsPerDay, formData.cardsPerDay)) {
+      toast.warning(<Translate value="Settings.newWordsAndAllWords" />);
     } else {
       saveToStore(formData);
       saveToAPI();
@@ -26,6 +30,8 @@ function SettingContent(props) {
         isTranslation: formData.isTranslation,
         isBackground: formData.isBackground,
       });
+      const redirect = getRedirectFunction('/main');
+      redirect();
     }
   };
   if (isLoadingData) return <LoadingSpinner />;
