@@ -16,9 +16,6 @@ const WordsContainer = (props) => {
     selectedIndex,
     correctIndex,
     isAutoSolved,
-    gameProgressLine,
-    changegameProgressLine,
-    wordsAmount,
   } = props;
 
   const currentStepWords = words;
@@ -53,7 +50,6 @@ const WordsContainer = (props) => {
 
   const clickHandler = (e, key) => {
     if (key || e.target.matches('[data-index]')) {
-      changegameProgressLine(gameProgressLine + 100 / wordsAmount);
       const selectedWordIndex = key ? key - 1 : +e.target.dataset.index;
       const result = currentStepWords[selectedWordIndex] === correctWord;
       playResultSound(result);
@@ -82,9 +78,6 @@ WordsContainer.propTypes = {
   selectedIndex: PropTypes.number,
   correctIndex: PropTypes.number,
   isAutoSolved: PropTypes.bool,
-  changegameProgressLine: PropTypes.func,
-  gameProgressLine: PropTypes.number,
-  wordsAmount: PropTypes.number,
 };
 
 WordsContainer.defaultProps = {
@@ -96,9 +89,6 @@ WordsContainer.defaultProps = {
   selectedIndex: null,
   correctIndex: null,
   isAutoSolved: false,
-  gameProgressLine: 0,
-  changegameProgressLine: () => {},
-  wordsAmount: 0,
 };
 
 export default WordsContainer;

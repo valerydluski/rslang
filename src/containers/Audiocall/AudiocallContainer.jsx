@@ -20,6 +20,7 @@ import StyledGameProgress from './styled/StyledGameProgress';
 let currentGameWords;
 let answerResult = {};
 let currentMainWord = '';
+let currentWord;
 
 const AudioCallContainer = ({
   wordsCollection,
@@ -48,6 +49,7 @@ const AudioCallContainer = ({
     toggleGameMode(false);
     changegameProgressLine(0);
     currentMainWord = '';
+    currentWord = [];
   };
 
   useEffect(() => {
@@ -56,7 +58,7 @@ const AudioCallContainer = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (!currentWordIndex && !isWordFinished) {
+  if (!currentWordIndex && !isWordFinished && !currentMainWord.length) {
     currentGameWords = shuffleArray(wordsCollection);
   }
 
@@ -82,7 +84,7 @@ const AudioCallContainer = ({
     }
   }
 
-  const currentWord = currentGameWords[currentWordIndex];
+  if (!isWordFinished) currentWord = currentGameWords[currentWordIndex];
 
   let additionalWords = [];
 
@@ -105,6 +107,7 @@ const AudioCallContainer = ({
   }
 
   function processUserAnswer(isCorrect, words, selectedIndex, correctIndex) {
+    changegameProgressLine(gameProgressLine + 100 / wordsCollection.length);
     if (!isCorrect) addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
     answerResult = { isCorrect, words, selectedIndex, correctIndex };
     toggleWordStatus(true);
@@ -151,9 +154,9 @@ const AudioCallContainer = ({
 
           <GameContainerStyled>
             <FinishedWordInfo
-              word={currentGameWords[currentWordIndex].word}
-              audioSrc={currentGameWords[currentWordIndex].audio}
-              imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
+              word={currentWord.word}
+              audioSrc={currentWord.audio}
+              imageSrc={`${LINK_FOR_IMAGE}${currentWord.image}`}
             />
             <StyledGameProgress gameProgressLine={gameProgressLine} />
             <WordsContainer
@@ -188,9 +191,6 @@ const AudioCallContainer = ({
               correctWord={currentGameWords[currentWordIndex].wordTranslate}
               processUserAnswer={processUserAnswer}
               isWordFinished={isWordFinished}
-              gameProgressLine={gameProgressLine}
-              changegameProgressLine={changegameProgressLine}
-              wordsAmount={wordsCollection.length}
             />
             <DontKnowButton clickHandler={autoSolve} />
           </GameContainerStyled>

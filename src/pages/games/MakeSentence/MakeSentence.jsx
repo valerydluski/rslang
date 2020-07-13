@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
-import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import {
   changeMakeSentenceLevel,
   changeMakeSentencePage,
@@ -23,13 +22,9 @@ const MakeSentence = ({ wordsCollection, updateLevel, updatePage, page, level, m
     changeWords(wordsCollection);
   }, [wordsCollection]);
 
-  checkStatusSession();
-
   const [isBreakpoint, changeBreakpoint] = useState(false);
 
   const breakpoint = 568;
-
-  checkStatusSession();
 
   const onResize = useCallback(() => {
     changeBreakpoint(getScreenWidth() < breakpoint);
