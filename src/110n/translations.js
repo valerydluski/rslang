@@ -72,6 +72,26 @@ const translations = {
       makeSentenceDescription:
         'This game will help you enjoy reading, writing, speaking English with pleasure.',
     },
+    Promo: {
+      text: `Bored with textbook exercises? Not sure how to start and what with? We have a solution - the RSLang application 
+      from our development team! This is a great opportunity to get a language practice that you are not likely to meet 
+      at school lesson. Our app will help you:
+      To get acquainted with various accents of English, including accents of those for whom English is also a second language;
+      to learn slang and spoken English;
+      to get used to perceiving slow and fast speech.
+      Our program consist of 6 exciting and entertaining mini-games, such as: “Savannah”,
+      "SpeakIT", "Puzzle", "Audiocall", "Sprint", "Make Sentence". You will not only have a good time while playing them,
+      but also expand the vocabulary, revise grammar, improve your pronunciation. 
+      The main feature of our project is the use of interval repetition system, that can adapt to your current level of English. 
+      Repetition includes 5 difficulty levels. When choosing the maximum difficulty level, 
+      the repetition will last 10 minutes, 
+      the duration of the second step is four times the duration of the first level. Each next step is calculated as the sum 
+      of the previous step + 50% of the total repeat time. If in the game you meet a card with a certain word 
+      and make a mistake, then it will be displayed the next time the words are repeated. 
+      Have fun practicing English. No matter what you are interested in and how you spend time, 
+      among our mini-games you will definitely find something that suits you. Play, enjoy and never give up!
+      `
+    },
     Buttons: {
       save: 'Save',
       delete: 'Delete',
