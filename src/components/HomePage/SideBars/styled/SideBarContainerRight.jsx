@@ -12,6 +12,7 @@ const SideBarContainerRight = styled.div`
   box-sizing: border-box;
 
   @media ${DEVICE.laptop} {
+    display: ${(props) => (props.pathName === '/home' ? 'flex' : 'none')};
     order: -1;
     padding: 30px 30px 0 290px;
     width: auto;
@@ -24,7 +25,6 @@ const SideBarContainerRight = styled.div`
 
   @media ${DEVICE.tablet} {
     padding: 30px 30px 0 30px;
-    display: flex;
     width: auto;
     grid-column-start: auto;
     grid-row-start: auto;

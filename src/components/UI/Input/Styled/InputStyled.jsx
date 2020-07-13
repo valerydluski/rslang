@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../config';
 
 export const InputContainer = styled.div`
   margin: 10px 0;
@@ -20,6 +21,10 @@ export const InputStyled = styled.input`
     line-height: 28px;
     color: #7d7d7d;
     outline: none;
+
+    @media ${DEVICE.mobileL} {
+      font-size: 20px;
+    }
   }
   &.auth {
     border: 1px solid #c4c4c4;
@@ -47,6 +52,10 @@ export const LabelStyled = styled.label`
   font-weight: normal;
   font-size: 20px;
   line-height: 28px;
+
+  @media ${DEVICE.mobileL} {
+    font-size: 18px;
+  }
 `;
 
 export const SpanStyled = styled.span`

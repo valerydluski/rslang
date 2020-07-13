@@ -15,9 +15,6 @@ const ContentContainer = styled.main`
     padding-left: 290px;
     overflow-y: visible;
     max-height: 100%;
-    & .user-title {
-      display: none;
-    }
   }
 
   @media ${DEVICE.tablet} {
