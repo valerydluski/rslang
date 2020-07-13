@@ -39,6 +39,7 @@ const LearnWordsForm = (props) => {
     showButtons,
     isShowResult,
     showResultHander,
+    isInputActive,
   } = props;
 
   const {
@@ -80,7 +81,7 @@ const LearnWordsForm = (props) => {
       onSubmit={handleSubmit((values) =>
         onSubmit({
           ...values,
-          buttonType: 'form',
+          buttonType: 'form_enter',
         })
       )}
     >
@@ -113,6 +114,7 @@ const LearnWordsForm = (props) => {
             answer={answer}
             isShowResult={isResultShow}
             audiosDuration={audiosDuration}
+            isInputActive={isInputActive}
             onChange={() => {
               if (isShowResult) {
                 showResultHander(false);
@@ -137,7 +139,9 @@ const LearnWordsForm = (props) => {
         )}
       </RepeatCardsContainer>
       <RepeatButtonsContainer>
-        {!showButtons && <StyledButton className="button-next">Check</StyledButton>}
+        {!showButtons && isInputActive && (
+          <StyledButton className="button-next">Check</StyledButton>
+        )}
         {showButtons && (
           <>
             <StyledButton onClick={customHandleSubmit('easy')} type="button">
@@ -209,6 +213,7 @@ LearnWordsForm.propTypes = {
   answer: PropTypes.string,
   isResultShow: PropTypes.bool,
   showButtons: PropTypes.bool.isRequired,
+  isInputActive: PropTypes.bool.isRequired,
   wordsCount: PropTypes.number,
   currentWordIndex: PropTypes.number,
   audiosDuration: PropTypes.number.isRequired,

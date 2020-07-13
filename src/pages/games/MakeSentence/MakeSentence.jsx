@@ -14,7 +14,7 @@ import StyledGameContainer from './Styled/StyledGameContainer';
 import getScreenWidth from '../../../utils/getScreenWidth';
 import Image from '../../../components/UI/Image/Image';
 import screenRotateIcon from '../../../assets/img/rotate-screen.svg';
-import GameModeToggle from '../../../components/GameModeToggle/GameModeToggle';
+import GameModeToggle from '../../../containers/GameModeToggle/GameModeToggle';
 
 const MakeSentence = ({
   wordsCollection,

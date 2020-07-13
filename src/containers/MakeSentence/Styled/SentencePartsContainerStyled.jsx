@@ -8,6 +8,7 @@ const SentencePartsContainerStyled = styled.div`
   width: 70%;
   align-items: center;
   justify-content: center;
+  user-select: none;
   div:first-child {
     margin-left: 0;
   }
