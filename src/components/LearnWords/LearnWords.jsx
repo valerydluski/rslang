@@ -20,6 +20,7 @@ export default function LearnWords(props) {
     currentWordIndex,
     audiosDuration,
     isInputActive,
+    audioIsPlaying,
   } = props;
   return (
     <LearnWordsContainer>
@@ -39,6 +40,7 @@ export default function LearnWords(props) {
           currentWordIndex={currentWordIndex}
           audiosDuration={audiosDuration}
           isInputActive={isInputActive}
+          audioIsPlaying={audioIsPlaying}
         />
       </LearnWordCardContainer>
       <Line percent="30" strokeWidth="400" strokeColor="#404497" />
@@ -50,6 +52,7 @@ LearnWords.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   word: PropTypes.shape({}),
   isTranslationShow: PropTypes.bool.isRequired,
+  audioIsPlaying: PropTypes.bool.isRequired,
   isCorrect: PropTypes.bool.isRequired,
   isInputActive: PropTypes.bool.isRequired,
   isRightAnswerShow: PropTypes.bool.isRequired,

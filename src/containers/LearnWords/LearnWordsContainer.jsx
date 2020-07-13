@@ -154,21 +154,29 @@ function LearnWordCardContainer(props) {
       case 'unknown':
         correctCardHandler(true);
         showResultHandler(true);
+        setIsInputActive(false);
+        break;
+      case 'next':
+        correctCardHandler(true);
+        nextWord();
         break;
       default:
         if (!answer) break;
         showResultHandler(true);
+
         if (answer.toLowerCase() === word.toLowerCase()) {
           setIsInputActive(false);
           if (firstAnswer.current) {
             rightSeries.current += 1;
             rightAnswer.current += 1;
           }
-          audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
           setIsTranslationShow(true);
+
           if (!isSoundPlay || !audios[0]) {
-            nextWord();
+            setAudioIsPlaing(false);
           } else {
+            audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
+            setAudioIsPlaing(true);
             audios[0].play();
             for (let i = 0; i < audios.length; i += 1) {
               if (audios[i + 1]) {
@@ -176,7 +184,7 @@ function LearnWordCardContainer(props) {
                   audios[i + 1].play();
                 };
               } else {
-                audios[i].onended = nextWord;
+                audios[i].onended = setAudioIsPlaing(false);
               }
             }
           }
@@ -214,6 +222,7 @@ function LearnWordCardContainer(props) {
       wordsCount={wordsCount.current}
       currentWordIndex={currentWordIndex.current}
       audiosDuration={audiosDuration.current}
+      audioIsPlaying={audioIsPlaying}
     />
   );
 }
