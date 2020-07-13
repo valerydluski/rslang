@@ -51,7 +51,7 @@ const SprintGameContainer = (props) => {
     changeScore(0);
   };
 
-  if (isGameFinished) {
+  const finishGame = () => {
     addWrongWordsToStore(wrongAnsweredWords);
     if (gameMode) {
       const wrongWords = wordsCollection
@@ -67,6 +67,9 @@ const SprintGameContainer = (props) => {
         gameName,
       });
     }
+  };
+
+  if (isGameFinished) {
     return (
       <ResultModal
         correctWords={correctAnsweredWords}
@@ -118,6 +121,7 @@ const SprintGameContainer = (props) => {
     } else addWordToCorrect([...correctAnsweredWords, currentWord]);
     if (currentWordIndex === currentGameWords.length - 1) {
       setTimeout(() => finishGameHandler(), 500);
+      finishGame();
     } else changeWordIndex(currentWordIndex + 1);
   };
   return (
