@@ -25,6 +25,7 @@ const LearnWordsInput = (props) => {
     isShowResult,
     showResultHander,
     audiosDuration,
+    isInputActive,
   } = props;
 
   const [show, setShow] = useState(false);
@@ -80,6 +81,7 @@ const LearnWordsInput = (props) => {
         size={size}
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={autoFocus}
+        readOnly={!isInputActive}
         autoComplete={autocomplete}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
@@ -104,6 +106,7 @@ LearnWordsInput.propTypes = {
   answer: PropTypes.string,
   attemptsNumber: PropTypes.number,
   isShowResult: PropTypes.bool,
+  isInputActive: PropTypes.bool,
   showResultHander: PropTypes.func.isRequired,
   audiosDuration: PropTypes.number.isRequired,
 };
@@ -120,6 +123,7 @@ LearnWordsInput.defaultProps = {
   word: '',
   answer: '',
   isShowResult: false,
+  isInputActive: true,
   attemptsNumber: 0,
 };
 

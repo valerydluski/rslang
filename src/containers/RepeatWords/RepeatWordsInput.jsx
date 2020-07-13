@@ -25,6 +25,7 @@ const RepeatWordsInput = (props) => {
     isShowResult,
     showResultHander,
     audiosDuration,
+    isInputActive,
   } = props;
 
   const FONT_SIZE = 30;
@@ -83,6 +84,7 @@ const RepeatWordsInput = (props) => {
         autoComplete={autocomplete}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
+        readOnly={!isInputActive}
         width={width}
       />
       {error && touched && <span>{error}</span>}
@@ -104,6 +106,7 @@ RepeatWordsInput.propTypes = {
   answer: PropTypes.string,
   attemptsNumber: PropTypes.number,
   isShowResult: PropTypes.bool,
+  isInputActive: PropTypes.bool,
   showResultHander: PropTypes.func.isRequired,
   audiosDuration: PropTypes.number.isRequired,
 };
@@ -116,6 +119,7 @@ RepeatWordsInput.defaultProps = {
   touched: false,
   meta: {},
   autoFocus: false,
+  isInputActive: true,
   autocomplete: 'on',
   word: '',
   answer: '',

@@ -9,6 +9,7 @@ import nameValidator from '../../../../../utils/validators/nameValidator';
 import { LabelStyled } from '../../../../UI/Input/Styled/InputStyled';
 import { BlackHeader } from '../Styled/Header';
 import { SelectContainerStyled } from '../Styled/SettingsContainerStyled';
+import newWordsValidator from '../../../../../utils/validators/newWordsValidator';
 
 const AppSettings = ({ checkboxes }) => {
   return (
@@ -44,12 +45,14 @@ const AppSettings = ({ checkboxes }) => {
         key="wordsPerDay"
         type="number"
         placeholder={I18n.t('Settings.wordsPerDay')}
-        validate={WordsPerDayValidator}
+        validate={newWordsValidator}
         parse={(val) => parseInt(val, 10)}
         component={Input}
         label={I18n.t('Settings.wordsPerDay')}
         classNameSpan="span_none"
         className="settings"
+        min={1}
+        max={50}
       />
       <Field
         name="cardsPerDay"
@@ -62,6 +65,8 @@ const AppSettings = ({ checkboxes }) => {
         label={I18n.t('Settings.cardsPerDay')}
         classNameSpan="span_none"
         className="settings"
+        min={1}
+        max={600}
       />
       <Field
         name="cardsPerDayRepeat"
@@ -74,6 +79,15 @@ const AppSettings = ({ checkboxes }) => {
         label={I18n.t('Settings.cardsPerDayRepeat')}
         classNameSpan="span_none"
         className="settings"
+        min={1}
+        max={600}
+      />
+      <Field
+        name="showIdontKhowButton"
+        id="showIdontKhowButton"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.showIdontKhowButton')}
       />
       <Field
         name="deleteButton"
