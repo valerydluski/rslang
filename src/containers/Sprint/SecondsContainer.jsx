@@ -21,7 +21,7 @@ const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinishe
       clearInterval(tick);
       if (countdownAudio) countdownAudio.pause();
     };
-  }, [seconds]);
+  }, [seconds, timeIsUpHandler]);
 
   if (isGameFinished) {
     if (countdownAudio) countdownAudio.pause();

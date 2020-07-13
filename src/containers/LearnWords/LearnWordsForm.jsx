@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Line } from 'rc-progress';
 import { connect } from 'react-redux';
+import { Translate } from 'react-redux-i18n';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import StyledButton from '../../components/UI/Button/Styled/StyledButton';
 import { LINK_FOR_IMAGE } from '../../config';
@@ -101,6 +102,7 @@ const LearnWordsForm = (props) => {
             alt={word.word}
             src={`${LINK_FOR_IMAGE}${image}`}
             classNameContainer="image_learn"
+            className="image_learn"
           />
         )}
         <TextExampleStyled>
@@ -144,19 +146,20 @@ const LearnWordsForm = (props) => {
       </LearnCardsContainer>
       <LearnButtonsContainer>
         <StyledButton
-          className="button-next"
+          className="button-next lear_button learn_all-buttons"
           onClick={customHandleSubmit('form')}
           disabled={!isInputActive}
         >
-          Next
+          <Translate value="Buttons.next" />
         </StyledButton>
         {deleteButton && (
           <StyledButton
+            className="lear_button learn_all-buttons"
             onClick={customHandleSubmit('deleted')}
             type="button"
             disabled={!isInputActive}
           >
-            Delete
+            <Translate value="Buttons.delete" />
           </StyledButton>
         )}
         {addDificultWordsButton && (
@@ -164,23 +167,26 @@ const LearnWordsForm = (props) => {
             onClick={customHandleSubmit('hard')}
             type="button"
             disabled={!isInputActive}
+            className="lear_button learn_all-buttons"
           >
-            Hard
+            <Translate value="Buttons.hard" />
           </StyledButton>
         )}
         <StyledButton
           onClick={customHandleSubmit('unknown')}
           type="button"
           disabled={!isInputActive}
+          className="lear_button learn_i-dont-know"
         >
-          Unknow
+          <Translate value="Buttons.dontKnow" />
         </StyledButton>
 
         <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
         <ProgressBarContainer>
           <Line
             percent={Math.round((currentWordIndex / wordsCount) * 100)}
-            strokeWidth="4"
+            strokeWidth="3"
+            trailWidth="2"
             strokeColor="#404497"
           />
         </ProgressBarContainer>

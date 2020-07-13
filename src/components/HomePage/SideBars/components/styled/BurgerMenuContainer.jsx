@@ -9,6 +9,7 @@ import iconLogoutHover from '../../../../UI/Icon/iconLogoutHover.svg';
 import iconSettingsHover from '../../../../UI/Icon/iconSettingsHover.svg';
 import getRedirectFunction from '../../../../../utils/getRedirectFunction';
 import { resetSessionData } from '../../../../../redux/Auth/Login/actions';
+import { connect } from 'react-redux';
 
 const BurgerMenuContainer = styled.div`
   cursor: pointer;
@@ -59,7 +60,7 @@ const BurgerMenuContainer = styled.div`
     margin-bottom: 0;
     transition: 0.3s all ease;
     position: fixed;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
   }
 
   input:checked ~ label .three {
@@ -67,7 +68,7 @@ const BurgerMenuContainer = styled.div`
     margin-bottom: 0;
     transition: 0.3s all ease;
     position: fixed;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
   }
 
   input:checked ~ label .four {
@@ -373,14 +374,14 @@ const BurgerMenuFourthLineSmall = styled.div`
 `;
 
 const BurgerMenu = (props) => {
-  const { resetSessionData } = props;
+  const { resetSessionDataHandler } = props;
 
   const [checkboxType, changeCheckbox] = useState(false);
   const [isMenuClicked, changeMenuClick] = useState(false);
 
   const clickHandler = () => {
     if (isMenuClicked) {
-    changeCheckbox(!checkboxType);
+      changeCheckbox(!checkboxType);
     }
   };
 
@@ -393,19 +394,24 @@ const BurgerMenu = (props) => {
 
   const isCLicked = () => {
     changeMenuClick(true);
-  }
+  };
 
   return (
-    <BurgerMenuContainer onClick={pageClose} >
-      <BurgerMenuInput id="check-nav" type="checkbox" onChange={clickHandler} checked={checkboxType} />
+    <BurgerMenuContainer onClick={pageClose}>
+      <BurgerMenuInput
+        id="check-nav"
+        type="checkbox"
+        onChange={clickHandler}
+        checked={checkboxType}
+      />
       <BurgerMenuLabel htmlFor="check-nav">
         <BurgerMenuFirstLine className="one" />
-        <BurgerMenuFirstLineSmall className="one"/>
-        <BurgerMenuSecondLineSmall className="one"/>
-        <BurgerMenuSecondLine className="two" onClick={isCLicked}/>
-        <BurgerMenuThirdLine className="three" onClick={isCLicked}/>
+        <BurgerMenuFirstLineSmall className="one" />
+        <BurgerMenuSecondLineSmall className="one" />
+        <BurgerMenuSecondLine className="two" onClick={isCLicked} />
+        <BurgerMenuThirdLine className="three" onClick={isCLicked} />
         <BurgerMenuFourthLine className="four" />
-        <BurgerMenuFourthLineSmall className="four"/>
+        <BurgerMenuFourthLineSmall className="four" />
       </BurgerMenuLabel>
       <MainNavigationMenu />
       <StyledButtonWithIcon
@@ -418,7 +424,7 @@ const BurgerMenu = (props) => {
       <StyledButtonWithIcon
         icon={iconLogout}
         iconHover={iconLogoutHover}
-        onClick={resetSessionData}
+        onClick={resetSessionDataHandler}
       >
         <Translate value="HomePage.logout" />
       </StyledButtonWithIcon>
@@ -426,4 +432,8 @@ const BurgerMenu = (props) => {
   );
 };
 
-export default BurgerMenu;
+const mapDispatchToProps = {
+  resetSessionDataHandler: resetSessionData,
+};
+
+export default connect(null, mapDispatchToProps)(BurgerMenu);
