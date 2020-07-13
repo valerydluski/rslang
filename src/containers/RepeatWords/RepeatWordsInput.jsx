@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -17,7 +17,6 @@ const RepeatWordsInput = (props) => {
     placeholder,
     size,
     input,
-    autoFocus,
     meta: { error, touched },
     autocomplete,
     word,
@@ -27,6 +26,8 @@ const RepeatWordsInput = (props) => {
     audiosDuration,
     isInputActive,
   } = props;
+
+  const inputRef = useRef(null);
 
   const FONT_SIZE = 30;
   const DEFAUL_TIME_SHOW = 2000;
@@ -52,6 +53,12 @@ const RepeatWordsInput = (props) => {
     }
     return () => clearTimeout(timer);
   }, [isShowResult, showResultHander, audiosDuration]);
+
+  useEffect(() => {
+    if (isInputActive) {
+      inputRef.current.focus();
+    }
+  }, [isInputActive]);
 
   const hideResult = () => {
     setShow(false);
@@ -80,12 +87,13 @@ const RepeatWordsInput = (props) => {
         placeholder={placeholder}
         size={size}
         // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus={autoFocus}
+        autoFocus
         autoComplete={autocomplete}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
         readOnly={!isInputActive}
         width={width}
+        ref={inputRef}
       />
       {error && touched && <span>{error}</span>}
     </InputContainer>
@@ -100,7 +108,6 @@ RepeatWordsInput.propTypes = {
   input: PropTypes.shape().isRequired,
   touched: PropTypes.bool,
   meta: PropTypes.shape(),
-  autoFocus: PropTypes.bool,
   autocomplete: PropTypes.string,
   word: PropTypes.string,
   answer: PropTypes.string,
@@ -118,7 +125,6 @@ RepeatWordsInput.defaultProps = {
   size: '20',
   touched: false,
   meta: {},
-  autoFocus: false,
   isInputActive: true,
   autocomplete: 'on',
   word: '',

@@ -19,7 +19,6 @@ import RepeatCardsContainer, {
 } from './Styled/RepeatCardsContainer';
 import RepeatButtonsContainer from './Styled/RepeatButtonsContainer';
 import { showResult } from '../../redux/RepeatWords/actions';
-import { useRef } from 'react';
 
 const LearnWordsForm = (props) => {
   const {
@@ -62,7 +61,6 @@ const LearnWordsForm = (props) => {
   } = word;
 
   const [firstPart, secondPart] = textExample;
-  const inputRef = useRef(null);
 
   useEffect(() => {
     if (isCorrect) {
@@ -109,11 +107,9 @@ const LearnWordsForm = (props) => {
             name="word"
             key="word"
             type="text"
-            ref={inputRef}
             placeholder={isRightAnswerShow ? word.word : ''}
             size="5"
             component={RepeatWordsInput}
-            autoFocus={isInputActive}
             autocomplete={autocomplete}
             word={word.word}
             answer={answer}
