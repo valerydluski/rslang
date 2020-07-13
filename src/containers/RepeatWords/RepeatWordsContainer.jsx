@@ -82,13 +82,13 @@ function RepeatWordCardContainer(props) {
   };
 
   const nextWord = () => {
+    showResultHandler(false);
     if (isErrorAnswer.current) {
       addWordToWordsCollection(currentWord);
     }
     setIsShowButtons(false);
     resetSaveWord(null);
     currentWordIndex.current += 1;
-    showResultHandler(false);
     setIsTranslationShow(false);
     setIsRightAnswerShow(false);
     audiosDuration.current = -1;
