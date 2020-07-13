@@ -48,6 +48,7 @@ const translations = {
       errorCounter: 'Maximum number of errors',
       cardsPerDayRepeat: 'Сards per day interval repetition',
       newWordsAndAllWords: 'Cards per day cannot be less than the number of new words per day',
+      showIdontKhowButton: 'Show button i dont know button',
     },
     Auth: {
       signIn: 'Sign In',
@@ -221,6 +222,7 @@ const translations = {
       errorCounter: 'Максимальное число ошибок',
       cardsPerDayRepeat: 'Карточек на день интервальное повторение',
       newWordsAndAllWords: 'Карточек в день не может быть меньше, чем количество новых слов в день',
+      showIdontKhowButton: 'Показать кнопку я не знаю',
     },
     Auth: {
       signIn: 'Войти',

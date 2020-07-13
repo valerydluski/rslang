@@ -20,6 +20,7 @@ export default function RepeatWords(props) {
     currentWordIndex,
     audiosDuration,
     showButtons,
+    isInputActive,
   } = props;
   return (
     <RepeatWordsContainer>
@@ -39,6 +40,7 @@ export default function RepeatWords(props) {
           wordsCount={wordsCount}
           currentWordIndex={currentWordIndex}
           audiosDuration={audiosDuration}
+          isInputActive={isInputActive}
         />
       </RepeatWordCardContainer>
       <Line percent="30" strokeWidth="400" strokeColor="#404497" />
@@ -56,6 +58,7 @@ RepeatWords.propTypes = {
   settings: PropTypes.shape().isRequired,
   answer: PropTypes.string,
   isResultShow: PropTypes.bool,
+  isInputActive: PropTypes.bool.isRequired,
   wordsCount: PropTypes.number,
   currentWordIndex: PropTypes.number,
   audiosDuration: PropTypes.number,

@@ -83,6 +83,13 @@ const AppSettings = ({ checkboxes }) => {
         max={600}
       />
       <Field
+        name="showIdontKhowButton"
+        id="showIdontKhowButton"
+        component={Input}
+        type="checkbox"
+        label={I18n.t('Settings.showIdontKhowButton')}
+      />
+      <Field
         name="deleteButton"
         id="deleteButton"
         component={Input}

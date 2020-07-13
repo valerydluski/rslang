@@ -6,9 +6,10 @@ import SavannahContainerStyled from './Styled/SavannahContainerStyled';
 import SavannaGameContainer from '../../../containers/Savannah/SavannahGameContainer';
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { changeSavannahLevel, changeSavannahPage } from '../../../redux/ChangeRounds/action';
-import { GAME_MAX_PAGE } from '../../../config';
+import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
+import GameModeToggle from '../../../containers/GameModeToggle/GameModeToggle';
 
-const Savannah = ({ wordsCollection, page, level, maxPage, updateLevel, updatePage }) => {
+const Savannah = ({ wordsCollection, page, level, maxPage, updateLevel, updatePage, gameName }) => {
   const [words, changeWords] = useState(wordsCollection);
 
   useEffect(() => {
@@ -18,6 +19,7 @@ const Savannah = ({ wordsCollection, page, level, maxPage, updateLevel, updatePa
   return (
     <SavannahContainerStyled>
       <GoToHomePageButton />
+      <GameModeToggle gameName={gameName} />
       <StatusMenu
         page={page}
         level={level}
@@ -42,6 +44,7 @@ Savannah.propTypes = {
   level: PropTypes.string,
   page: PropTypes.string,
   maxPage: PropTypes.number,
+  gameName: PropTypes.string,
 };
 
 Savannah.defaultProps = {
@@ -51,6 +54,7 @@ Savannah.defaultProps = {
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
+  gameName: GAME_NAME.savannah,
 };
 
 const mapStateToProps = (state) => {
