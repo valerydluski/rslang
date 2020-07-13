@@ -42,10 +42,7 @@ function* addNewWordSagaWorker(action) {
       },
     };
     yield call(saveOneWord, wordId, config, sessionData, action.payload.word);
-    [, nextWord] = image
-      .replace(/0|.jpg/g, '')
-      .split('/')[1]
-      .split('_');
+    [, nextWord] = image.replace(/.jpg/g, '').split('/')[1].split('_');
     if (+nextWord === 3600) {
       nextWord = 600;
       nextLevel = 6;
