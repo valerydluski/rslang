@@ -34,11 +34,16 @@ const MakeSentenceGame = ({
   const [isGameFinished, toggleGameMode] = useState(false);
   const [isAutoSolve, toggleAutoSolveMode] = useState(false);
 
-  useEffect(() => {
+  const resetGameData = () => {
     changeIndex(0);
     addWordToWrong([]);
     toggleWordStatus(false);
     toggleGameMode(false);
+    toggleAutoSolveMode(false);
+  };
+
+  useEffect(() => {
+    resetGameData();
   }, [wordsCollection]);
 
   checkStatusSession();
@@ -80,6 +85,7 @@ const MakeSentenceGame = ({
         showProperties={['word', 'wordTranslate']}
         audioForPlay="audio"
         newGame={newGame}
+        restartGame={resetGameData}
       />
     );
   }

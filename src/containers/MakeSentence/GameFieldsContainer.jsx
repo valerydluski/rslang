@@ -114,7 +114,11 @@ const GameFieldsContainer = ({
   return (
     <GameFieldsContainerStyled onClick={clickFieldHandler}>
       <DragDropContext onDragEnd={dragHandler}>
-        <AnswerField isDragging answerParts={answerParts} wordsWidth={wordsWidth} />
+        <AnswerField
+          isDragging={!isWordFinished}
+          answerParts={answerParts}
+          wordsWidth={wordsWidth}
+        />
         <OptionsField isDragging optionsParts={optionParts} wordsWidth={wordsWidth} />
       </DragDropContext>
       {isWordFinished ? (
