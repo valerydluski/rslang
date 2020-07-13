@@ -99,18 +99,22 @@ function RepeatWordCardContainer(props) {
     }
   };
 
-  const customUpdateOneWord = (dufficulty, addTime) => {
+  const customUpdateOneWord = (dufficulty, addTime, saveDifficult = false) => {
+    let difficult = saveDifficult;
+    if (saveDifficult && currentWord.userWord.optional.difficult) {
+      difficult = true;
+    }
     const config = {
       difficulty: dufficulty,
       optional: {
         deleted: false,
-        difficult: false,
+        difficult,
         time: new Date().valueOf(),
         nextRepeat: new Date().valueOf() + addTime,
         repeats: currentWord.userWord.optional.repeats + 1,
       },
     };
-    showCardHandler();
+    if (!currentWord.isRepeat) showCardHandler();
     // eslint-disable-next-line no-underscore-dangle
     updateOneWord(currentWord._id, config, user);
     nextWord();
@@ -136,21 +140,20 @@ function RepeatWordCardContainer(props) {
         customUpdateOneWord('medium', MEDIUM);
         break;
       case 'difficult':
-        customUpdateOneWord('difficult', DIFFICULT);
+        customUpdateOneWord('difficult', DIFFICULT, true);
         break;
       case 'hard':
-        customUpdateOneWord('hard', HARD);
+        customUpdateOneWord('hard', HARD, true);
         break;
       case 'repeat':
-        addWordToWordsCollection(currentWord);
         customUpdateOneWord(currentWord.userWord.difficulty, 0);
-        if (!currentWord.isRepeat) showCardHandler();
+        addWordToWordsCollection(currentWord);
+
         break;
       default:
         if (!answer) break;
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
-          if (!currentWord.isRepeat) showCardHandler();
           audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
           setIsTranslationShow(true);
           if (!isSoundPlay || !audios[0]) {
@@ -187,8 +190,8 @@ function RepeatWordCardContainer(props) {
       isCorrect={isCorrect}
       showButtons={isShowButtons}
       answer={answerToForm}
-      wordsCount={wordsCount.current + 1}
-      currentWordIndex={currentWordIndex.current + 1}
+      wordsCount={wordsCount.current}
+      currentWordIndex={currentWordIndex.current}
       audiosDuration={audiosDuration.current}
     />
   );

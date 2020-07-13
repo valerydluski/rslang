@@ -5,7 +5,24 @@ import StyledMainNavigationMenu from '../../components/Navigation/styled/StyledM
 export default function MainNavigationMenu() {
   const links = [
     { name: 'Learn Words', href: '/learn' },
-    { name: 'Repeat Words', href: '/repeat' },
+    {
+      name: 'Repeat Words',
+      href: {
+        pathname: '/repeat',
+        state: {
+          difficultWords: false,
+        },
+      },
+    },
+    {
+      name: 'Difficult Words',
+      href: {
+        pathname: '/repeat',
+        state: {
+          difficultWords: true,
+        },
+      },
+    },
   ];
 
   return (
