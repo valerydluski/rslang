@@ -49,6 +49,7 @@ const LearnWordsForm = (props) => {
     isTranscription,
     isImageAssociation,
   } = settings.settings;
+
   const {
     textExample,
     textExampleTranslate,
@@ -58,6 +59,7 @@ const LearnWordsForm = (props) => {
     transcription,
     textMeaningTranslate,
   } = word;
+
   const [firstPart, secondPart] = textExample;
 
   useEffect(() => {
@@ -108,7 +110,6 @@ const LearnWordsForm = (props) => {
             placeholder={isRightAnswerShow ? word.word : ''}
             size="5"
             component={RepeatWordsInput}
-            autoFocus
             autocomplete={autocomplete}
             word={word.word}
             answer={answer}
@@ -126,7 +127,7 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
         )}
-        {isTranscription && <Transcription>{transcription}</Transcription>}
+        {isTranslationShow && isTranscription && <Transcription transcription={transcription} />}
         {isTextMeaning && isTranslationShow ? (
           <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
