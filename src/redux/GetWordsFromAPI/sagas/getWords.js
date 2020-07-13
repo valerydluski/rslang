@@ -28,31 +28,50 @@ const getSimilarWords = (payload, appMode, userWords) => {
   if (appMode !== GAME_NAME.audioCall && appMode !== GAME_NAME.savannah) {
     return payload;
   }
+
   const collection = payload.map((el) => {
-    let simillar = userWords[0].paginatedResults.filter(
-      (element) => el.PartOfSpeechCode === element.PartOfSpeechCode && element.word !== el.word
+    let similar = userWords[0].paginatedResults.filter(
+      (element) =>
+        el.userWord.optional.partOfSpeechCode === element.userWord.optional.partOfSpeechCode &&
+        element.word !== el.word
     );
-    if (simillar.length < 4) {
+    if (similar.length < 4) {
       payload.forEach((element) => {
-        if (el.PartOfSpeechCode === element.PartOfSpeechCode && element.word !== el.word) {
-          simillar.push(element);
+        if (
+          el.userWord.optional.partOfSpeechCode === element.userWord.optional.partOfSpeechCode &&
+          element.word !== el.word
+        ) {
+          similar.push(element);
         }
       });
     }
-    if (simillar.length < 4) {
-      const simillarWord = simillar.map((word) => word.word);
-      const restWords = payload.filter(
-        (element) => el.word !== element.word && !simillarWord.includes(element.word)
+    if (similar.length > 4) {
+      const newsimilar = similar.filter(
+        (element) =>
+          el.wordTranslate.substr(-2) === element.wordTranslate.substr(-2) &&
+          element.word !== el.word
       );
-      const restCount = 4 - simillar.length - 1;
-      const newRest = getRandomValuesFromArray(restWords, restCount);
-      simillar = simillar.concat(newRest);
+      if (newsimilar.length > 4) {
+        similar = getRandomValuesFromArray(newsimilar, 3);
+        const newEl = el;
+        newEl.similarWords = similar.map((elem) => elem.wordTranslate);
+        return newEl;
+      }
     }
-    if (simillar.length > 4) {
-      simillar = getRandomValuesFromArray(simillar, 3);
+    if (similar.length < 4) {
+      const similarWord = similar.map((word) => word.word);
+      const restWords = payload.filter(
+        (element) => el.word !== element.word && !similarWord.includes(element.word)
+      );
+      const restCount = 4 - similar.length - 1;
+      const newRest = getRandomValuesFromArray(restWords, restCount);
+      similar = similar.concat(newRest);
+    }
+    if (similar.length > 4) {
+      similar = getRandomValuesFromArray(similar, 3);
     }
     const newEl = el;
-    newEl.simillarWord = simillar.map((elem) => elem.wordTranslate);
+    newEl.similarWords = similar.map((elem) => elem.wordTranslate);
     return newEl;
   });
   return collection;
@@ -97,6 +116,7 @@ function* workerGetWords() {
   } catch (e) {
     toast.error('error get words');
     yield put(hideLoader());
+    throw new Error(e);
   }
 }
 

@@ -8,7 +8,6 @@ import { DontKnowButton, NextButton } from '../../components/Audiocall/Audiocall
 import { changeIDontKnowWords } from '../../redux/Games/action';
 import ResultModal from '../Modal/ResultModal';
 import shuffleArray from '../../utils/shuffleArray';
-import { changeAppMode } from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { changeAudioCallLevel, changeAudioCallPage } from '../../redux/ChangeRounds/action';
 import { LINK_FOR_IMAGE, GAME_MAX_PAGE, GAME_NAME } from '../../config';
@@ -20,13 +19,13 @@ import StyledGameProgress from './styled/StyledGameProgress';
 
 let currentGameWords;
 let answerResult = {};
+let currentMainWord = '';
+let currentWord;
 
 const AudioCallContainer = ({
   wordsCollection,
   addWordsWithMistakesToStore,
-  switchAppMode,
   isWordsLoading,
-  currentAppMode,
   updateLevel,
   updatePage,
   page,
@@ -43,21 +42,23 @@ const AudioCallContainer = ({
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
 
-  useEffect(() => {
+  const resetGameData = () => {
     changeIndex(0);
     addWordToWrong([]);
     toggleWordStatus(false);
     toggleGameMode(false);
+    changegameProgressLine(0);
+    currentMainWord = '';
+    currentWord = [];
+  };
+
+  useEffect(() => {
+    resetGameData();
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (currentAppMode !== gameName || wordsCollection.length === 0) {
-    switchAppMode(gameName);
-    return null;
-  }
-
-  if (!currentWordIndex && !isWordFinished) {
+  if (!currentWordIndex && !isWordFinished && !currentMainWord.length) {
     currentGameWords = shuffleArray(wordsCollection);
   }
 
@@ -83,13 +84,17 @@ const AudioCallContainer = ({
     }
   }
 
+  if (!isWordFinished) currentWord = currentGameWords[currentWordIndex];
+
   let additionalWords = [];
+
   if (!isWordFinished) {
-    additionalWords = currentGameWords.slice();
-    additionalWords.splice(currentWordIndex, 1);
-    additionalWords = shuffleArray(additionalWords).slice(0, 4);
-    additionalWords.push(currentGameWords[currentWordIndex]);
-    additionalWords = shuffleArray(additionalWords);
+    if (currentMainWord !== currentWord.word) {
+      currentMainWord = currentWord.word;
+      additionalWords = [...currentWord.similarWords];
+      additionalWords.push(currentWord.wordTranslate);
+      additionalWords = shuffleArray(additionalWords);
+    }
   }
 
   function autoSolve() {
@@ -102,6 +107,7 @@ const AudioCallContainer = ({
   }
 
   function processUserAnswer(isCorrect, words, selectedIndex, correctIndex) {
+    changegameProgressLine(gameProgressLine + 100 / wordsCollection.length);
     if (!isCorrect) addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
     answerResult = { isCorrect, words, selectedIndex, correctIndex };
     toggleWordStatus(true);
@@ -123,36 +129,40 @@ const AudioCallContainer = ({
     }
   };
 
+  if (isGameFinished) {
+    return (
+      <ResultModal
+        showProperties={['word', 'wordTranslate']}
+        audioForPlay="audio"
+        newGame={newGame}
+        restartGame={resetGameData}
+      />
+    );
+  }
+
   return (
     <>
       {isWordFinished ? (
         <>
-          {isGameFinished ? (
-            <ResultModal
-              showProperties={['word', 'wordTranslate']}
-              audioForPlay="audio"
-              newGame={newGame}
-            />
-          ) : (
-            <StatusMenu
-              page={page}
-              level={level}
-              maxPage={maxPage}
-              updateLevel={updateLevel}
-              updatePage={updatePage}
-            />
-          )}
+          <StatusMenu
+            page={page}
+            level={level}
+            maxPage={maxPage}
+            updateLevel={updateLevel}
+            updatePage={updatePage}
+          />
+
           <GameContainerStyled>
             <FinishedWordInfo
-              word={currentGameWords[currentWordIndex].word}
-              audioSrc={currentGameWords[currentWordIndex].audio}
-              imageSrc={`${LINK_FOR_IMAGE}${currentGameWords[currentWordIndex].image}`}
+              word={currentWord.word}
+              audioSrc={currentWord.audio}
+              imageSrc={`${LINK_FOR_IMAGE}${currentWord.image}`}
             />
             <StyledGameProgress gameProgressLine={gameProgressLine} />
             <WordsContainer
               isWordFinished={isWordFinished}
               isCorrect={answerResult.isCorrect}
-              correctWord={currentGameWords[currentWordIndex].word}
+              correctWord={currentGameWords[currentWordIndex].wordTranslate}
               words={answerResult.words}
               selectedIndex={answerResult.selectedIndex}
               correctIndex={answerResult.correctIndex}
@@ -178,12 +188,9 @@ const AudioCallContainer = ({
             <StyledGameProgress gameProgressLine={gameProgressLine} />
             <WordsContainer
               words={additionalWords}
-              correctWord={currentGameWords[currentWordIndex].word}
+              correctWord={currentGameWords[currentWordIndex].wordTranslate}
               processUserAnswer={processUserAnswer}
               isWordFinished={isWordFinished}
-              gameProgressLine={gameProgressLine}
-              changegameProgressLine={changegameProgressLine}
-              wordsAmount={wordsCollection.length}
             />
             <DontKnowButton clickHandler={autoSolve} />
           </GameContainerStyled>
@@ -196,9 +203,7 @@ const AudioCallContainer = ({
 AudioCallContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   addWordsWithMistakesToStore: PropTypes.func,
-  switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
-  currentAppMode: PropTypes.string,
   updateLevel: PropTypes.func,
   updatePage: PropTypes.func,
   level: PropTypes.string,
@@ -214,9 +219,7 @@ AudioCallContainer.propTypes = {
 AudioCallContainer.defaultProps = {
   wordsCollection: [],
   addWordsWithMistakesToStore: () => {},
-  switchAppMode: () => {},
   isWordsLoading: false,
-  currentAppMode: '',
   updatePage: () => {},
   updateLevel: () => {},
   level: '1',
@@ -230,7 +233,6 @@ AudioCallContainer.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isWordsLoading: state.loader.loading,
-    currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.AudioCallLevel,
     page: state.changeRound.AudioCallPage,
     maxPage: state.maxPage.maxPage,
@@ -240,7 +242,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addWordsWithMistakesToStore: changeIDontKnowWords,
-  switchAppMode: changeAppMode,
+
   updateLevel: changeAudioCallLevel,
   updatePage: changeAudioCallPage,
   saveStatistic: saveFullStatistic,

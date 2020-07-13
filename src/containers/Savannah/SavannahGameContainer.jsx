@@ -5,7 +5,6 @@ import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { changeIDontKnowWords } from '../../redux/Games/action';
 import ResultModal from '../Modal/ResultModal';
 import shuffleArray from '../../utils/shuffleArray';
-import { changeAppMode } from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import { changeSavannahLevel, changeSavannahPage } from '../../redux/ChangeRounds/action';
 import { GAME_NAME, GAME_MAX_PAGE } from '../../config';
@@ -28,9 +27,7 @@ let currentMainWord;
 const SavannaGameContainer = ({
   wordsCollection,
   addWordsWithMistakesToStore,
-  switchAppMode,
   isWordsLoading,
-  currentAppMode,
   gameName,
   saveStatistic,
   level,
@@ -40,6 +37,7 @@ const SavannaGameContainer = ({
   updatePage,
   secondsForOneWord,
   initialErrorsAmount,
+  gameMode,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -51,8 +49,10 @@ const SavannaGameContainer = ({
   useEffect(() => {
     changeIndex(0);
     addWordToWrong([]);
+    addWordToCorrect([]);
     toggleWordStatus(false);
     toggleGameMode(false);
+    changeWrongAmount(0);
     currentGameWords = [];
     currentMainWord = '';
     return () => {
@@ -60,45 +60,66 @@ const SavannaGameContainer = ({
     };
   }, [wordsCollection]);
 
-  if (isWordsLoading) return <LoadingSpinner />;
+  const restartGame = () => {
+    toggleGameMode(false);
+    changeIndex(0);
+    addWordToWrong([]);
+    addWordToCorrect([]);
+    toggleWordStatus(false);
+    toggleGameMode(false);
+    changeWrongAmount(0);
+    currentGameWords = [];
+    currentMainWord = '';
+  };
 
-  if (currentAppMode !== gameName || wordsCollection.length === 0) {
-    switchAppMode(gameName);
-    return null;
-  }
+  if (isWordsLoading) return <LoadingSpinner />;
 
   function finishGame() {
     addWordsWithMistakesToStore(wrongAnsweredWords);
     toggleGameMode(true);
-    saveStatistic({
-      Level: level,
-      Page: page,
-      wordsCollection,
-      wrongWordsState: wrongAnsweredWords,
-      gameName,
-    });
+    if (gameMode) {
+      const wrongWords = wordsCollection
+        .filter(
+          (word) => !correctAnsweredWords.find((correctWord) => correctWord.word === word.word)
+        )
+        .map((word) => word.word);
+      saveStatistic({
+        Level: level,
+        Page: page,
+        wordsCollection,
+        wrongWordsState: wrongWords,
+        gameName,
+      });
+    }
   }
 
   if (!currentWordIndex && !isWordFinished && !currentGameWords.length) {
     currentGameWords = shuffleArray(wordsCollection);
   }
 
+  const currentWord = currentGameWords[currentWordIndex];
+
   const newGame = () => {
     toggleGameMode(false);
-    const { newLevel, newPage } = newRound(level, page, maxPage);
-    if (newLevel !== level) updateLevel(newLevel);
-    if (newPage !== page) updatePage(newPage);
+    let newLevel;
+    let newPage;
+    let obj;
+    if (gameMode) {
+      obj = newRound(level, page, maxPage);
+      newLevel = obj.newLevel;
+      newPage = obj.newPage;
+      if (newLevel !== level) updateLevel(newLevel);
+      if (newPage !== page) updatePage(newPage);
+    } else {
+      updateLevel(level);
+    }
   };
-
-  const currentWord = currentGameWords[currentWordIndex];
 
   if (!isWordFinished) {
     if (currentMainWord !== currentWord.word) {
       currentMainWord = currentWord.word;
-      currentStepWords = currentGameWords.slice();
-      currentStepWords.splice(currentWordIndex, 1);
-      currentStepWords = shuffleArray(currentStepWords).slice(0, 3);
-      currentStepWords.push(currentGameWords[currentWordIndex]);
+      currentStepWords = currentWord.similarWords.slice(0, 3);
+      currentStepWords.push(currentWord.wordTranslate);
       currentStepWords = shuffleArray(currentStepWords);
     }
   }
@@ -110,6 +131,7 @@ const SavannaGameContainer = ({
         correctWords={correctAnsweredWords}
         audioForPlay="audio"
         newGame={newGame}
+        restartGame={restartGame}
       />
     );
   }
@@ -140,9 +162,9 @@ const SavannaGameContainer = ({
   };
 
   const processAnswer = (selectedWordIndex) => {
-    selectedWord = selectedWordIndex === null ? null : currentStepWords[selectedWordIndex].word;
+    selectedWord = selectedWordIndex === null ? null : currentStepWords[selectedWordIndex];
     const word = currentStepWords[selectedWordIndex];
-    const isCorrect = selectedWordIndex === null ? false : word.word === currentWord.word;
+    const isCorrect = selectedWordIndex === null ? false : word === currentWord.wordTranslate;
     if (!isCorrect) {
       changeWrongAmount(wrongAmount + 1);
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
@@ -158,7 +180,9 @@ const SavannaGameContainer = ({
   };
 
   return (
-    <SavannahGameContainerStyled>
+    <SavannahGameContainerStyled
+      key={wordsCollection.reduce((string, word) => string + word.word, '')}
+    >
       <SavannahLivesContainer wrongAmount={wrongAmount} wholeLives={initialErrorsAmount} />
       <FallingWordStyled
         animationDuration={secondsForOneWord}
@@ -166,7 +190,7 @@ const SavannaGameContainer = ({
         key={currentWord.word}
         animationState={isWordFinished ? 'paused' : 'running'}
       >
-        {currentWord.word}
+        <span>{currentWord.word}</span>
       </FallingWordStyled>
       {!isWordFinished ? (
         <KeyboardEventHandler
@@ -181,7 +205,7 @@ const SavannaGameContainer = ({
         isWordFinished={isWordFinished}
         processAnswer={processAnswer}
         selectedWord={selectedWord}
-        currentWord={currentWord.word}
+        currentWord={currentWord.wordTranslate}
       />
     </SavannahGameContainerStyled>
   );
@@ -190,9 +214,7 @@ const SavannaGameContainer = ({
 SavannaGameContainer.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   addWordsWithMistakesToStore: PropTypes.func,
-  switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
-  currentAppMode: PropTypes.string,
   level: PropTypes.string,
   page: PropTypes.string,
   updateLevel: PropTypes.func,
@@ -200,6 +222,7 @@ SavannaGameContainer.propTypes = {
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func,
+  gameMode: PropTypes.bool.isRequired,
   secondsForOneWord: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   initialErrorsAmount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
@@ -207,9 +230,7 @@ SavannaGameContainer.propTypes = {
 SavannaGameContainer.defaultProps = {
   wordsCollection: [],
   addWordsWithMistakesToStore: () => {},
-  switchAppMode: () => {},
   isWordsLoading: false,
-  currentAppMode: '',
   saveStatistic: () => {},
   updatePage: () => {},
   updateLevel: () => {},
@@ -229,12 +250,12 @@ const mapStateToProps = (state) => {
     gameName: GAME_NAME.savannah,
     secondsForOneWord: state.userSettings.settings.savannahTimeForWord,
     initialErrorsAmount: state.userSettings.settings.savannahMaxErrorCounter,
+    gameMode: state.gamesReducer.gameMode,
   };
 };
 
 const mapDispatchToProps = {
   addWordsWithMistakesToStore: changeIDontKnowWords,
-  switchAppMode: changeAppMode,
   saveStatistic: saveFullStatistic,
   updateLevel: changeSavannahLevel,
   updatePage: changeSavannahPage,

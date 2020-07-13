@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { changeIDontKnowWords } from '../../redux/Games/action';
 import ResultModal from '../Modal/ResultModal';
 import shuffleArray from '../../utils/shuffleArray';
-import { changeAppMode } from '../../redux/AppMode/action';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import { checkStatusSession } from '../../redux/Auth/Login/actions';
 import { changeMakeSentenceLevel, changeMakeSentencePage } from '../../redux/ChangeRounds/action';
 import InitialSentenceContainer from './InitialSentenceContainer';
 import { GAME_MAX_PAGE, GAME_NAME, LINK_FOR_AUDIO } from '../../config';
@@ -19,9 +17,7 @@ let currentGameWords;
 const MakeSentenceGame = ({
   wordsCollection,
   addWordsWithMistakesToStore,
-  switchAppMode,
   isWordsLoading,
-  currentAppMode,
   updateLevel,
   updatePage,
   page,
@@ -44,14 +40,7 @@ const MakeSentenceGame = ({
     toggleGameMode(false);
   }, [wordsCollection]);
 
-  checkStatusSession();
-
   if (isWordsLoading) return <LoadingSpinner />;
-
-  if (currentAppMode !== gameName || wordsCollection.length === 0) {
-    switchAppMode(gameName);
-    return null;
-  }
 
   if (!currentWordIndex && !isWordFinished) {
     currentGameWords = shuffleArray(wordsCollection);
@@ -133,9 +122,7 @@ const MakeSentenceGame = ({
 MakeSentenceGame.propTypes = {
   wordsCollection: PropTypes.instanceOf(Array),
   addWordsWithMistakesToStore: PropTypes.func,
-  switchAppMode: PropTypes.func,
   isWordsLoading: PropTypes.bool,
-  currentAppMode: PropTypes.string,
   updateLevel: PropTypes.func,
   updatePage: PropTypes.func,
   level: PropTypes.string,
@@ -149,9 +136,7 @@ MakeSentenceGame.propTypes = {
 MakeSentenceGame.defaultProps = {
   wordsCollection: [],
   addWordsWithMistakesToStore: () => {},
-  switchAppMode: () => {},
   isWordsLoading: false,
-  currentAppMode: '',
   updatePage: () => {},
   updateLevel: () => {},
   level: '1',
@@ -170,7 +155,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addWordsWithMistakesToStore: changeIDontKnowWords,
-  switchAppMode: changeAppMode,
   updateLevel: changeMakeSentenceLevel,
   updatePage: changeMakeSentencePage,
   saveStatistic: saveFullStatistic,
