@@ -22,7 +22,7 @@ import screenRotateIcon from '../../../assets/img/rotate-screen.svg';
 import getScreenWidth from '../../../utils/getScreenWidth';
 import Image from '../../../components/UI/Image/Image';
 import newRound from '../../../utils/newRound';
-import GameModeToggle from '../../../components/GameModeToggle/GameModeToggle';
+import GameModeToggle from '../../../containers/GameModeToggle/GameModeToggle';
 
 const EnglishPuzzle = (props) => {
   const {
