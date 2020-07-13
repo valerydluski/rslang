@@ -32,7 +32,7 @@ const initialState = {
     cardsPerDayRepeat: 20,
     isDictionaryDeletedButton: true,
     isDictionaryDifficultButton: true,
-    showButtonTrainHardWords: true,
+    showIdontKhowButton: true,
   },
 };
 

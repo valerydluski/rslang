@@ -47,7 +47,7 @@ const translations = {
       timeForWord: 'Time for a word',
       errorCounter: 'Maximum number of errors',
       cardsPerDayRepeat: 'Сards per day interval repetition',
-      showButtonTrainHardWords: 'Show button repeat hard words',
+      showIdontKhowButton: 'Show button i dont know button',
     },
     Auth: {
       signIn: 'Sign In',
@@ -220,7 +220,7 @@ const translations = {
       timeForWord: 'Времени на слово',
       errorCounter: 'Максимальное число ошибок',
       cardsPerDayRepeat: 'Карточек на день интервальное повторение',
-      showButtonTrainHardWords: 'Показать кнопку повторение сложных слов',
+      showIdontKhowButton: 'Показать кнопку я не знаю',
     },
     Auth: {
       signIn: 'Войти',

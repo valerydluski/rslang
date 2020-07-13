@@ -76,11 +76,11 @@ const AppSettings = ({ checkboxes }) => {
         className="settings"
       />
       <Field
-        name="showButtonTrainHardWords"
-        id="showButtonTrainHardWords"
+        name="showIdontKhowButton"
+        id="showIdontKhowButton"
         component={Input}
         type="checkbox"
-        label={I18n.t('Settings.showButtonTrainHardWords')}
+        label={I18n.t('Settings.showIdontKhowButton')}
       />
       <Field
         name="deleteButton"
