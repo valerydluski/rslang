@@ -47,6 +47,7 @@ const translations = {
       timeForWord: 'Time for a word',
       errorCounter: 'Maximum number of errors',
       cardsPerDayRepeat: 'Сards per day interval repetition',
+      newWordsAndAllWords: 'Cards per day cannot be less than the number of new words per day',
     },
     Auth: {
       signIn: 'Sign In',
@@ -219,6 +220,7 @@ const translations = {
       timeForWord: 'Времени на слово',
       errorCounter: 'Максимальное число ошибок',
       cardsPerDayRepeat: 'Карточек на день интервальное повторение',
+      newWordsAndAllWords: 'Карточек в день не может быть меньше, чем количество новых слов в день',
     },
     Auth: {
       signIn: 'Войти',
