@@ -17,15 +17,14 @@ const LearnCardsContainer = styled.div`
   width: 100%;
 
   @media ${DEVICE.tablet} {
-    grid-template-rows: 15% 15% 20% 20% 20%;
-    grid-template-columns: 70% 30%;
+    grid-template-rows: 40% 15% 15% 15% 15%;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      'top top'
-      'top top'
-      'top top'
-      'textExampleTranslate trancription'
-      'textMeaning textMeaning'
-      'textMeaningTranslate textMeaningTranslate';
+      'top'
+      'trancription'
+      'textExampleTranslate'
+      'textMeaning'
+      'textMeaningTranslate';
   }
 `;
 
@@ -33,8 +32,8 @@ export const TranslateStyled = styled.p`
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
-  line-height: 25px;
+  font-size: 30px;
+  line-height: 34px;
   color: #7d7d7d;
   grid-area: translate;
   place-self: center;
@@ -42,6 +41,11 @@ export const TranslateStyled = styled.p`
 
   @media (max-width: 1280px) {
     font-size: 24px;
+    line-height: 28px;
+  }
+  @media ${DEVICE.tablet} {
+    font-size: 18px;
+    line-height: 22px;
   }
 `;
 

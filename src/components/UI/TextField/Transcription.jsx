@@ -11,22 +11,28 @@ const TranscriptionStyled = styled.div`
   line-height: 21px;
   color: #b2b2b2;
 
+  &.learn {
+    place-self: center;
+    grid-area: trancription;
+  }
   @media ${DEVICE.laptopL} {
     font-size: 18px;
   }
 `;
 
 const Transcription = (props) => {
-  const { transcription } = props;
-  return <TranscriptionStyled>{transcription}</TranscriptionStyled>;
+  const { transcription, className } = props;
+  return <TranscriptionStyled className={className}>{transcription}</TranscriptionStyled>;
 };
 
 Transcription.propTypes = {
   transcription: PropTypes.string,
+  className: PropTypes.string,
 };
 
 Transcription.defaultProps = {
   transcription: '',
+  className: '',
 };
 
 export default Transcription;

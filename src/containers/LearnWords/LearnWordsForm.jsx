@@ -138,7 +138,9 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
         )}
-        {isTranslationShow && isTranscription && <Transcription transcription={transcription} />}
+        {isTranslationShow && isTranscription && (
+          <Transcription className="learn" transcription={transcription} />
+        )}
         {isTextMeaning && isTranslationShow ? (
           <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
