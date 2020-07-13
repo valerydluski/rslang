@@ -10,7 +10,6 @@ import StatusMenu from '../../components/StatusMenu/StatusMenu';
 import CardsContainerSpeakIT from './CardsContainerSpeakIT';
 import ButtonsContainerSpeakIT from '../../components/SpeakIT/ButtonsContainerSpeakIt';
 import RecognationTranscriptContainer from '../../components/SpeakIT/RecognationTranscriptContainer';
-import ScoreContainerSpeakIT from './ScoreContainerSpeakIT';
 import Microphone from '../../utils/Microphone';
 import ResultModal from '../Modal/ResultModal';
 import { changeIDontKnowWords, changeScoreGame } from '../../redux/Games/action';
@@ -102,7 +101,7 @@ const GameContainerSpeakIT = (props) => {
         if (IDontKnowWords.length === 0) {
           micro.stopMicrophone();
           toggleGameMode(true);
-          if (gameMode) saveStatistic({ Level, Page, wordsCollection, IDontKnowWords, gameName });
+          if (gameMode) saveStatistic({ Level, Page, wordsCollection, wrongWordsState, gameName });
         }
       }
     }
@@ -203,7 +202,6 @@ const GameContainerSpeakIT = (props) => {
 
         <Image src={srcForImage} classNameContainer="image_speakIT" />
         <TextField text={textForTextField} className="text-field_speakIT" />
-        <ScoreContainerSpeakIT />
         <CardsContainerSpeakIT
           cardHandler={cardHandler}
           wordsCollection={wordsCollection}
@@ -250,7 +248,6 @@ const GameContainerSpeakIT = (props) => {
         transcript={transcriptFromMicrophone}
         className="text-field_speakIT"
       />
-      <ScoreContainerSpeakIT />
       <CardsContainerSpeakIT
         wordsCollection={wordsCollection}
         correctWords={correctWordsState}
