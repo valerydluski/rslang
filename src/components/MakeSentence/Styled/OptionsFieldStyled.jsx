@@ -5,6 +5,7 @@ const OptionsFieldStyled = styled.div`
   display: flex;
   width: 1200px;
   margin-bottom: 30px;
+  height: 60px;
 
   @media ${DEVICE.laptopL} {
     width: 924px;
