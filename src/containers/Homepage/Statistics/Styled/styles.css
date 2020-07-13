@@ -29,6 +29,12 @@
   font-size: 13px;
 }
 
+@media screen and (max-width: 1440px) {
+  .info-text {
+    font-size: 10px;
+  }
+}
+
 .pointer-line {
   fill: #000;
 }
