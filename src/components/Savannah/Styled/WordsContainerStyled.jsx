@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../config';
 
 const WordsContainerStyled = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ const WordsContainerStyled = styled.div`
   position: relative;
   bottom: 80px;
   flex-wrap: wrap;
+  @media ${DEVICE.tablet} {
+    justify-content: flex-start;
+    bottom: 30px;
+  }
 `;
 
 export default WordsContainerStyled;

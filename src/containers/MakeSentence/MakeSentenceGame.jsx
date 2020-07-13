@@ -5,7 +5,6 @@ import { changeIDontKnowWords } from '../../redux/Games/action';
 import ResultModal from '../Modal/ResultModal';
 import shuffleArray from '../../utils/shuffleArray';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import { checkStatusSession } from '../../redux/Auth/Login/actions';
 import { changeMakeSentenceLevel, changeMakeSentencePage } from '../../redux/ChangeRounds/action';
 import InitialSentenceContainer from './InitialSentenceContainer';
 import { GAME_MAX_PAGE, GAME_NAME, LINK_FOR_AUDIO } from '../../config';
@@ -40,8 +39,6 @@ const MakeSentenceGame = ({
     toggleWordStatus(false);
     toggleGameMode(false);
   }, [wordsCollection]);
-
-  checkStatusSession();
 
   if (isWordsLoading) return <LoadingSpinner />;
 
