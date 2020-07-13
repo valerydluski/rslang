@@ -15,7 +15,7 @@ const ContentContainer = styled.main`
     padding-left: 290px;
     overflow-y: visible;
     max-height: 100%;
-    & > .user-title {
+    & .user-title {
       display: none;
     }
   }

@@ -12,9 +12,8 @@ const SideBarContainerRight = styled.div`
   box-sizing: border-box;
 
   @media ${DEVICE.laptop} {
-    padding: 40px 40px 0 290px;
-    grid-column-start: 2;
-    grid-row-start: 1;
+    order: -1;
+    padding: 30px 30px 0 290px;
     width: auto;
     min-height: auto;
     background-color: #ffffff;

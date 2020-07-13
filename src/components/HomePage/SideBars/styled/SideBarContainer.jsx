@@ -28,9 +28,13 @@ const SideBarContainer = styled.div`
   }
 
   @media ${DEVICE.tablet} {
+    order: -2;
+    flex-shrink: 0;
     padding: 30px 30px 0 30px;
     position: static;
     flex-direction: row;
+    align-items: center;
+    min-height: auto;
     height: 90px;
     width: 100%;
     background-color: #ffffff;

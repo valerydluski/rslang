@@ -10,6 +10,8 @@ const HomePageContainer = styled.div`
 
   @media ${DEVICE.laptop} {
     grid-template-columns: auto;
+    display: flex;
+    flex-direction: column;
   }
 
   @media ${DEVICE.tablet} {
