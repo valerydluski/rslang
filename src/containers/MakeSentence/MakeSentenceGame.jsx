@@ -109,16 +109,28 @@ const MakeSentenceGame = ({
     toggleWordStatus(false);
   };
 
-  function autoSolve() {
+  const autoSolve = () => {
     addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
     toggleAutoSolveMode(true);
     toggleWordStatus(true);
     playResultSound();
-  }
+  };
 
   const audioSrc = `${LINK_FOR_AUDIO}${currentGameWords[currentWordIndex].audioExample}`;
   const sentence = currentGameWords[currentWordIndex].textExample;
   const sentenceTranslation = currentGameWords[currentWordIndex].textExampleTranslate;
+
+  const checkSentence = (answerParts) => {
+    const result = answerParts.join(' ') === sentenceTranslation;
+    if (result) {
+      toggleWordStatus(true);
+      playResultSound(true);
+    } else {
+      playResultSound();
+      addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
+    }
+  };
+
   return (
     <>
       {isGameFinished ? <ResultModal showProperties={['word', 'translation']} /> : null}
@@ -137,6 +149,7 @@ const MakeSentenceGame = ({
         switchToNextSentence={switchToNextSentence}
         isWordFinished={isWordFinished}
         playResultSound={playResultSound}
+        checkSentence={checkSentence}
       />
     </>
   );
