@@ -17,7 +17,7 @@ const SavannahContainerStyled = styled.div`
         background-position-y: 0%;
       }
       100% {
-        background-position-y: -100%;
+        background-position-y: -50%;
       }
     }
   }

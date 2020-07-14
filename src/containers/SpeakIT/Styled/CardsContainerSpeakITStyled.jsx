@@ -16,8 +16,8 @@ const CardsContainerSpeakITStyled = styled.div`
 
   @media ${DEVICE.laptop} {
     grid-template-areas:
-      'word word word word'
-      'word word word word';
+      'word word word'
+      'word word word';
   }
 
   @media ${DEVICE.tablet} {

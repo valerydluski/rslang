@@ -57,6 +57,7 @@ const SavannaGameContainer = ({
     toggleGameMode(false);
     changeWrongAmount(0);
     currentGameWords = [];
+    currentStepWords = [];
     currentMainWord = '';
     return () => {
       if (timer) clearTimeout(timer);
