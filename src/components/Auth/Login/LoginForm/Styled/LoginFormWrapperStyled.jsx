@@ -6,7 +6,7 @@ const LoginFormWrapperStyled = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 10% 30% 10% 50%;
+  grid-template-rows: 10% 20% 10% 60%;
   grid-template-areas:
     'logo background'
     'title background'

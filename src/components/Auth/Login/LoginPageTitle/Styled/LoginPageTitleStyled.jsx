@@ -6,6 +6,7 @@ const LoginPageTitleStyled = styled.div`
   align-self: center;
   justify-self: start;
   margin-left: 150px;
+  width: 70%;
 
   @media ${DEVICE.laptopL} {
     width: calc(100% - 210px);
@@ -38,9 +39,14 @@ const LoginPageTitleStyled = styled.div`
     text-transform: uppercase;
     margin: 0;
 
-    @media ${DEVICE.laptop} {
+    @media ${DEVICE.laptopL} {
       font-size: 35px;
       line-height: 45px;
+    }
+
+    @media ${DEVICE.laptopS} {
+      font-size: 25px;
+      line-height: 35px;
     }
   }
 `;
