@@ -69,7 +69,7 @@ const SideBarContainerRight = styled.div`
     & li {
       margin: 5px;
       &:last-child {
-        margin-bottom: 30px;
+        margin-bottom: 25px;
       }
       @media ${DEVICE.laptop} {
         &:last-child {
@@ -81,7 +81,7 @@ const SideBarContainerRight = styled.div`
     & a {
       padding-left: 0;
       height: 40px;
-      width: 140px;
+      width: 160px;
       display: flex;
       justify-content: center;
       align-items: center;

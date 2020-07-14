@@ -1,12 +1,13 @@
 import React from 'react';
+import { I18n } from 'react-redux-i18n';
 import NavigationMenu from '../../components/Navigation/NavigationMenu';
 import StyledMainNavigationMenu from '../../components/Navigation/styled/StyledMainNavigationMenu';
 
 export default function MainNavigationMenu() {
   const links = [
-    { name: 'Learn Words', href: '/learn' },
+    { name: `${I18n.t('Buttons.learnWords')}`, href: '/learn' },
     {
-      name: 'Repeat Words',
+      name: `${I18n.t('Buttons.repeatWords')}`,
       href: {
         pathname: '/repeat',
         state: {
@@ -15,7 +16,7 @@ export default function MainNavigationMenu() {
       },
     },
     {
-      name: 'Difficult Words',
+      name: `${I18n.t('Buttons.difficultWords')}`,
       href: {
         pathname: '/repeat',
         state: {
