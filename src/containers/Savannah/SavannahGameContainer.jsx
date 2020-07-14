@@ -16,6 +16,8 @@ import correctSound from '../../assets/audio/correct.mp3';
 import SavannahLivesContainer from '../../components/Savannah/SavannahLivesContainer';
 import FallingWordStyled from '../../components/Savannah/Styled/FallingWordStyled';
 import SavannahWordsContainer from '../../components/Savannah/SavannahWordsContainer';
+import GameModeToggle from '../GameModeToggle/GameModeToggle';
+import StatusMenu from '../../components/StatusMenu/StatusMenu';
 
 const wordAudio = new Audio();
 let currentGameWords = [];
@@ -183,6 +185,14 @@ const SavannaGameContainer = ({
     <SavannahGameContainerStyled
       key={wordsCollection.reduce((string, word) => string + word.word, '')}
     >
+      <GameModeToggle gameName={gameName} />
+      <StatusMenu
+        page={page}
+        level={level}
+        maxPage={maxPage}
+        updateLevel={updateLevel}
+        updatePage={updatePage}
+      />
       <SavannahLivesContainer wrongAmount={wrongAmount} wholeLives={initialErrorsAmount} />
       <FallingWordStyled
         animationDuration={secondsForOneWord}
