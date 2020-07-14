@@ -12,8 +12,13 @@ const TranscriptionStyled = styled.div`
   color: #b2b2b2;
 
   &.learn {
-    place-self: center;
-    grid-area: trancription;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @media ${DEVICE.laptop} {
+      font-size: 14px;
+    }
   }
   @media ${DEVICE.laptopL} {
     font-size: 18px;

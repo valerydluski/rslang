@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../config';
 
 const ImageContainer = styled.div`
   display: flex;
@@ -11,14 +12,16 @@ const ImageContainer = styled.div`
   }
 
   &.image_learn {
-    grid-area: image;
-    justify-self: center;
-    align-self: center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    position: relative;
+    width: 210px;
+    height: 210px;
+    & > img {
+      width: 100%;
+      height: 100%;
+    }
+    @media ${DEVICE.tablet} {
+      width: 140px;
+      height: 140px;
+    }
   }
 `;
 

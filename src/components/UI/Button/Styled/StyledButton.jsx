@@ -84,22 +84,8 @@ const ButtonStyled = styled.button`
   }
 
   &.learn_all-buttons {
-    @media (max-width: 1280px) {
-      font-size: 18px;
-      width: 180px;
-    }
-
-    @media ${DEVICE.tablet} {
-      font-size: 18px;
-      width: 90%;
-      height: 40px;
-    }
   }
   &.learn_i-dont-know {
-    @media (max-width: 1280px) {
-      grid-column: 1 / 5;
-      width: 90%;
-    }
   }
 
   &.not-active {

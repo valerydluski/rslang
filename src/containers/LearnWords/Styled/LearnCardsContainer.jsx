@@ -3,153 +3,148 @@ import { DEVICE } from '../../../config';
 
 const LearnCardsContainer = styled.div`
   position: relative;
-  display: grid;
-  grid-template-rows: 20% 20% 15% 20% 25%;
-  grid-template-columns: 70% 30%;
-  grid-template-areas:
-    'top top'
-    'top top'
-    'textExampleTranslate trancription'
-    'textMeaning textMeaning'
-    'textMeaningTranslate textMeaningTranslate';
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   width: 100%;
+  padding: 80px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  @media ${DEVICE.laptop} {
+    padding: 40px;
+  }
 
   @media ${DEVICE.tablet} {
-    margin-top: 65px;
-    grid-template-rows: 40% 15% 15% 15% 15%;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'top'
-      'trancription'
-      'textExampleTranslate'
-      'textMeaning'
-      'textMeaningTranslate';
+    padding: 20px;
+    height: 500px;
   }
 `;
 
 export const TranslateStyled = styled.p`
-  font-family: Montserrat;
-  font-style: normal;
+  margin: 10px 0;
   font-weight: bold;
   font-size: 30px;
-  line-height: 34px;
+  line-height: 40px;
   color: #7d7d7d;
-  grid-area: translate;
-  place-self: center;
-  height: 100%;
 
-  @media (max-width: 1280px) {
-    font-size: 24px;
-    line-height: 28px;
+  @media ${DEVICE.laptop} {
+    font-size: 22px;
+    line-height: 30px;
   }
+
   @media ${DEVICE.tablet} {
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 18px;
+    line-height: 30px;
+  }
+
+  @media ${DEVICE.mobileL} {
+    margin-top: 30px;
   }
 `;
 
-export const TextExampleStyled = styled.div`
-  grid-area: textExample;
-  font-family: Montserrat;
-  font-style: normal;
+export const TextExampleStyled = styled.p`
   font-weight: bold;
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 30px;
+  line-height: 40px;
   color: #7d7d7d;
-  display: inline-block;
-  margin-left: 10px;
-  margin-right: 10px;
-  height: 100%;
+  display: inline;
+  margin: 0;
+
+  @media ${DEVICE.laptop} {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  @media ${DEVICE.tablet} {
+    font-size: 18px;
+    line-height: 25px;
+  }
 `;
 
 export const TextExampleTranslateStyled = styled.div`
-  grid-area: textExampleTranslate;
-  font-family: Montserrat;
-  font-style: normal;
   font-weight: 500;
   font-size: 25.1118px;
   line-height: 31px;
   color: #b2b2b2;
-  margin-left: 10px;
-  margin-right: 10px;
-  height: 100%;
 
-  @media (max-width: 1280px) {
-    font-size: 20px;
+  @media ${DEVICE.laptop} {
+    font-size: 18px;
+    line-height: 22px;
   }
 
   @media ${DEVICE.tablet} {
     font-size: 14px;
-    line-height: 16px;
+    line-height: 20px;
   }
 `;
 
 export const TextMeaningStyled = styled.div`
-  grid-area: textMeaning;
-  font-family: Montserrat;
-  font-style: normal;
   font-weight: 500;
   font-size: 25.1118px;
   line-height: 31px;
   color: #b2b2b2;
-  margin-left: 10px;
-  margin-right: 10px;
-  height: 100%;
 
-  @media (max-width: 1280px) {
-    font-size: 16px;
-    line-height: 18px;
+  @media ${DEVICE.laptop} {
+    font-size: 18px;
+    line-height: 22px;
   }
 
   @media ${DEVICE.tablet} {
     font-size: 14px;
-    line-height: 16px;
+    line-height: 20px;
   }
 `;
 
 export const TextMeaningTranslateStyled = styled.div`
-  grid-area: textMeaningTranslate;
-  font-family: Montserrat;
-  font-style: normal;
   font-weight: 500;
   font-size: 25.1118px;
   line-height: 31px;
   color: #b2b2b2;
-  margin-left: 10px;
-  margin-right: 10px;
-  height: 100%;
 
-  @media (max-width: 1280px) {
-    font-size: 20px;
+  @media ${DEVICE.laptop} {
+    font-size: 18px;
+    line-height: 22px;
   }
 
   @media ${DEVICE.tablet} {
     font-size: 14px;
-    line-height: 16px;
+    line-height: 20px;
   }
 `;
 
-export const TopContnentStyled = styled.div`
+export const TopContentStyled = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  @media ${DEVICE.laptop} {
+    flex-direction: column;
+  }
+`;
+
+export const CenterContentStyled = styled.div`
+  padding-bottom: 10px;
   border-bottom: 1px solid #c4c4c4;
   width: 100%;
-  height: 100%;
-  grid-area: top;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 70% 30%;
-  grid-template-areas:
-    'translate image'
-    'textExample image';
+  height: auto;
+  vertical-align: middle;
+`;
 
-  @media ${DEVICE.tablet} {
-    grid-template-rows: 40% 20% 40%;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'image'
-      'translate'
-      'textExample';
-  }
+export const BottomContentStyled = styled.div`
+  margin-top: 10px;
+  padding-top: 20px;
+  width: 100%;
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 export default LearnCardsContainer;
