@@ -8,10 +8,22 @@ import Container from './Styled/Container';
 import Text from './Styled/Text';
 
 class Translation extends Component {
-  componentDidUpdate() {
+  componentDidMount() {
     const { autoSpeech, isRowCorrect } = this.props;
     if ((autoSpeech && !isRowCorrect) || (!autoSpeech && isRowCorrect)) {
       this.play();
+    }
+  }
+
+  componentDidUpdate(nextProps) {
+    const { autoSpeech, isRowCorrect } = this.props;
+    const { speech, translation } = nextProps;
+
+    if ((autoSpeech && !isRowCorrect) || (!autoSpeech && isRowCorrect)) {
+      // eslint-disable-next-line react/destructuring-assignment
+      if (speech === this.props.speech && translation === this.props.translation) {
+        this.play();
+      }
     }
   }
 
