@@ -22,6 +22,9 @@ const ModalWordTextStyled = styled.div`
 
   @media ${DEVICE.laptop} {
     margin-bottom: 10px;
+    div {
+      margin: 5px 0 5px 16px;
+    }
   }
 
   @media ${DEVICE.tablet} {

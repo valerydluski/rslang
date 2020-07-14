@@ -19,7 +19,19 @@ const ModalStyled = styled.div`
 
   @media ${DEVICE.tablet} {
     width: 70%;
+    .modalPageButton {
+      font-size: 14px;
+      width: 140px;
+      height: 37px;
+      }
   }
+
+  @media (max-width: 500px) {
+    .modalPageButton {
+    font-size: 10px;
+    width: 74px;
+    height: 37px;
+    }
 `;
 
 export default ModalStyled;

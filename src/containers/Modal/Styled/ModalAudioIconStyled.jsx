@@ -14,8 +14,8 @@ const ModalAudioIconStyled = styled.span`
     width: 32px;
   }
 
-  @media ${DEVICE.laptopL} {
-    width: 33px;
+  @media ${DEVICE.laptop} {
+    width: 32px;
     height: 30px;
   }
 

@@ -106,17 +106,6 @@ const ButtonStyled = styled.button`
     background-color: #b2b2b2;
     cursor: not-allowed;
   }
-
-  @media ${DEVICE.tablet} {
-    font-size: 14px;
-    width: 140px;
-    height: 37px;
-  }
-
-  @media (max-width: 500px) {
-    font-size: 10px;
-    width: 74px;
-    height: 37px;
   }
 `;
 

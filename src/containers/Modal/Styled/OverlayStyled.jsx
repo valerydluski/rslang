@@ -6,7 +6,7 @@ const OverlayStyled = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(252, 212, 212);
+  background-color: rgba(250, 250, 250, 0.87);
   display: flex;
   align-items: center;
   justify-content: center;
