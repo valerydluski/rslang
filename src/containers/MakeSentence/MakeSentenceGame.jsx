@@ -35,6 +35,7 @@ const MakeSentenceGame = ({
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
   const [isAutoSolve, toggleAutoSolveMode] = useState(false);
+  const [isCheckShow, toggleShowCheck] = useState(false);
 
   const resetGameData = () => {
     changeIndex(0);
@@ -42,6 +43,7 @@ const MakeSentenceGame = ({
     toggleWordStatus(false);
     toggleGameMode(false);
     toggleAutoSolveMode(false);
+    toggleShowCheck(false);
     currentGameWords = [];
   };
 
@@ -103,6 +105,7 @@ const MakeSentenceGame = ({
   };
 
   const switchToNextSentence = () => {
+    if (isCheckShow) toggleShowCheck(false);
     if (isAutoSolve) toggleAutoSolveMode(false);
     if (currentWordIndex === wordsCollection.length - 1) toggleGameMode(true);
     else changeIndex(currentWordIndex + 1);
@@ -122,6 +125,7 @@ const MakeSentenceGame = ({
 
   const checkSentence = (answerParts) => {
     const result = answerParts.join(' ') === sentenceTranslation;
+    toggleShowCheck(true);
     if (result) {
       toggleWordStatus(true);
       playResultSound(true);
@@ -150,6 +154,7 @@ const MakeSentenceGame = ({
         isWordFinished={isWordFinished}
         playResultSound={playResultSound}
         checkSentence={checkSentence}
+        isCheckShow={isCheckShow}
       />
     </>
   );

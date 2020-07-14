@@ -20,11 +20,12 @@ const GameFieldsContainer = ({
   autoSolve,
   switchToNextSentence,
   checkSentence,
+  isCheckShow,
 }) => {
   const [optionParts, changeOptionParts] = useState(shuffleArray(sentenceTranslation.split(' ')));
   const [answerParts, changeAnswerParts] = useState([]);
   const [wordsWidth, changeWordsWidth] = useState({});
-  const [isCheckShow, changeShowMode] = useState(false);
+  const [isCheckButtonShow, changeShowMode] = useState(false);
 
   const onResize = useCallback(() => {
     const widths = calcOwnWordsSentenceWidth(sentenceTranslation);
@@ -44,7 +45,7 @@ const GameFieldsContainer = ({
   useEffect(() => {
     if (optionParts.length === 0) {
       changeShowMode(true);
-    } else if (isCheckShow) {
+    } else if (isCheckButtonShow) {
       changeShowMode(false);
     }
   });
@@ -52,6 +53,7 @@ const GameFieldsContainer = ({
   useEffect(() => {
     const widths = calcOwnWordsSentenceWidth(sentenceTranslation);
     changeWordsWidth(widths);
+    // changeShowMode(false);
   }, [sentenceTranslation]);
 
   const swapPart = (type, index) => {
@@ -119,6 +121,8 @@ const GameFieldsContainer = ({
           isDragging={!isWordFinished}
           answerParts={answerParts}
           wordsWidth={wordsWidth}
+          isCheckShow={isCheckShow}
+          sentenceTranslationParts={sentenceTranslation.split(' ')}
         />
         <OptionsField isDragging optionsParts={optionParts} wordsWidth={wordsWidth} />
       </DragDropContext>
@@ -127,7 +131,9 @@ const GameFieldsContainer = ({
       ) : (
         <ButtonsContainerStyled>
           <DontKnowButton clickHandler={autoSolve} />
-          {isCheckShow ? <CheckButton checkSentence={() => checkSentence(answerParts)} /> : null}
+          {isCheckButtonShow ? (
+            <CheckButton checkSentence={() => checkSentence(answerParts)} />
+          ) : null}
         </ButtonsContainerStyled>
       )}
     </GameFieldsContainerStyled>
@@ -138,6 +144,7 @@ GameFieldsContainer.propTypes = {
   sentenceTranslation: PropTypes.string.isRequired,
   isWordFinished: PropTypes.bool,
   isAutoSolve: PropTypes.bool,
+  isCheckShow: PropTypes.bool,
   autoSolve: PropTypes.func,
   checkSentence: PropTypes.func,
   switchToNextSentence: PropTypes.func,
@@ -146,6 +153,7 @@ GameFieldsContainer.propTypes = {
 GameFieldsContainer.defaultProps = {
   isWordFinished: false,
   isAutoSolve: false,
+  isCheckShow: false,
   checkSentence: () => {},
   autoSolve: () => {},
   switchToNextSentence: () => {},
