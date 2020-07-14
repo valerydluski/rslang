@@ -50,6 +50,9 @@ export const LabelStyled = styled.label`
 `;
 
 export const SpanStyled = styled.span`
+  color: red;
+  font-size: 1.2rem;
+
   &.span_none {
     display: none;
   }
