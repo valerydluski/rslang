@@ -243,7 +243,6 @@ SavannaGameContainer.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isWordsLoading: state.loader.loading,
-    currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.SavannahLevel,
     page: state.changeRound.SavannahPage,
     maxPage: state.maxPage.maxPage,

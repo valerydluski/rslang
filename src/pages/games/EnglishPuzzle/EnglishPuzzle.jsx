@@ -157,7 +157,6 @@ EnglishPuzzle.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isWordsLoading: state.loader.loading,
-    currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.EnglishPuzzleLevel,
     page: state.changeRound.EnglishPuzzlePage,
     maxPage: state.maxPage.maxPage,
