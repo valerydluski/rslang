@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import UserDescriptionContainer from './styled/UserDescriptionContainer';
 import StyledUserPhoto from './styled/StyledUserPhoto';
-import photo from '../../../../assets/img/photo.png';
+import photo from '../../../../assets/img/user.svg';
 
 function UserDescription({ name }) {
   return (
