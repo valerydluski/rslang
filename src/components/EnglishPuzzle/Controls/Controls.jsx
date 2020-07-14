@@ -6,12 +6,7 @@ import { Translate } from 'react-redux-i18n';
 import { pickRow, updatePageStatus, changePageStatus } from '../../../redux/EnglishPuzzle/actions';
 import StyledRectangleButton from '../../UI/Button/Styled/StyledRectangleButton';
 import { changeIDontKnowWords } from '../../../redux/Games/action';
-import {
-  changeEnglishPuzzleLevel,
-  changeEnglishPuzzlePage,
-} from '../../../redux/ChangeRounds/action';
 import { saveFullStatistic } from '../../../redux/Statistic/action';
-import newRound from '../../../utils/newRound';
 import { GAME_NAME } from '../../../config';
 import { ROWS_IN_PAGE } from '../../../containers/EnglishPuzzle/Game/constants';
 
@@ -27,12 +22,9 @@ class Controls extends Component {
       isPageFill,
       row,
       updateRow,
-      updatePage,
-      updateLevel,
       fillRow,
       page,
       level,
-      maxPage,
       words,
       addWrongAnswersToStore,
       wrongWords,
@@ -40,12 +32,11 @@ class Controls extends Component {
       gameName,
       setPageFill,
       gameMode,
+      newGame,
     } = this.props;
     const { word } = words[row];
     if (isPageFill) {
-      const { newLevel, newPage } = newRound(level, page, maxPage);
-      if (newLevel !== level) updateLevel(newLevel);
-      if (newPage !== page) updatePage(newPage);
+      newGame();
     } else if (isRowCorrect) {
       const newRow = row + 1;
       if (newRow === ROWS_IN_PAGE) {
@@ -86,7 +77,6 @@ class Controls extends Component {
 }
 
 Controls.propTypes = {
-  maxPage: PropTypes.number,
   level: PropTypes.string,
   page: PropTypes.string,
   row: PropTypes.number,
@@ -94,8 +84,6 @@ Controls.propTypes = {
   isRowFill: PropTypes.bool,
   isPageFill: PropTypes.bool,
   updateRow: PropTypes.func,
-  updatePage: PropTypes.func,
-  updateLevel: PropTypes.func,
   fillRow: PropTypes.func,
   saveStatistic: PropTypes.func,
   setPageFill: PropTypes.func,
@@ -104,19 +92,17 @@ Controls.propTypes = {
   wrongWords: PropTypes.arrayOf(PropTypes.string),
   gameName: PropTypes.string,
   gameMode: PropTypes.bool.isRequired,
+  newGame: PropTypes.func,
 };
 
 Controls.defaultProps = {
   level: '1',
   page: '1',
   row: 0,
-  maxPage: 60,
   isRowCorrect: false,
   isRowFill: false,
   isPageFill: false,
   updateRow: () => {},
-  updatePage: () => {},
-  updateLevel: () => {},
   fillRow: () => {},
   addWrongAnswersToStore: () => {},
   saveStatistic: () => {},
@@ -124,6 +110,7 @@ Controls.defaultProps = {
   words: [],
   wrongWords: [],
   gameName: GAME_NAME.englishPuzzle,
+  newGame: () => {},
 };
 
 function mapStateToProps(state) {
@@ -144,8 +131,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     updateRow: (row) => dispatch(updatePageStatus(row)),
-    updateLevel: (level) => dispatch(changeEnglishPuzzleLevel(level)),
-    updatePage: (page) => dispatch(changeEnglishPuzzlePage(page)),
     fillRow: () => dispatch(pickRow()),
     addWrongAnswersToStore: (wrongWords) => dispatch(changeIDontKnowWords(wrongWords)),
     saveStatistic: (data) => dispatch(saveFullStatistic(data)),

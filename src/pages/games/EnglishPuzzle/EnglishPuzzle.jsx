@@ -11,7 +11,6 @@ import Game from '../../../containers/EnglishPuzzle/Game/Game';
 import Info from '../../../components/EnglishPuzzle/Info/Info';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 import GoToHomePageButton from '../../../containers/Buttons/GoHomePageButton/GoHomePageButton';
-import { checkStatusSession } from '../../../redux/Auth/Login/actions';
 import ResultModal from '../../../containers/Modal/ResultModal';
 import {
   changeEnglishPuzzleLevel,
@@ -41,8 +40,6 @@ const EnglishPuzzle = (props) => {
   const breakpoint = 568;
 
   const prevWidth = getScreenWidth();
-
-  checkStatusSession();
 
   const onResize = useCallback(() => {
     const width = getScreenWidth();
@@ -131,7 +128,7 @@ const EnglishPuzzle = (props) => {
             <Game />
             <TipsMenu toggleModal={toggleModal} />
           </Main>
-          <Info />
+          <Info newGame={newGame} />
         </Container>
       )}
     </Content>
