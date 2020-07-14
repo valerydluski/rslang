@@ -15,18 +15,13 @@ const ModalAudioIconStyled = styled.span`
   }
 
   @media ${DEVICE.laptopL} {
-    width: 35px;
-    height: 31px;
+    width: 33px;
+    height: 30px;
   }
 
   @media ${DEVICE.tablet} {
-    width: 35px;
-    height: 31px;
-  }
-
-  @media (max-width: 460px) {
-    height: 25px;
-    width: 35px;
+    height: 23px;
+    width: 24px;
   }
 `;
 

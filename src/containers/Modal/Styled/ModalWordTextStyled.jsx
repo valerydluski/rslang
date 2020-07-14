@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DEVICE } from '../../../config'
+import { DEVICE } from '../../../config';
 
 const ModalWordTextStyled = styled.div`
   display: flex;
@@ -20,16 +20,21 @@ const ModalWordTextStyled = styled.div`
     }
   }
 
+  @media ${DEVICE.laptop} {
+    margin-bottom: 10px;
+  }
+
   @media ${DEVICE.tablet} {
     font-size: 18px;
+    div {
+      margin: 5px 0 5px 10px;
+    }
   }
 
   @media (max-width: 680px) {
     font-size: 10px;
-    margin-bottom: 5px;
     div {
-      margin: 5px 0 5px 10px;
-      width: calc(100% / ${(props) => props.amount});
+      margin: 5px 0 5px 5px;
     }
   }
 `;
