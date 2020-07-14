@@ -11,7 +11,9 @@ export default function AboutUs(props) {
   const { userName, team } = props;
   return (
     <ContentContainer>
-      <Title userName={userName} />
+      <div style={{ marginBottom: '40px' }}>
+        <Title userName={userName} />
+      </div>
       <TitleWithUnderline>
         <Translate value="HomePage.about" />
       </TitleWithUnderline>

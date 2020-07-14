@@ -5,6 +5,39 @@ import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import './Styled/styles.css';
 
+const sizes = {
+  '700': {
+    paddingX: 20,
+    paddingY: 20,
+    width: 250,
+    height: 95,
+    rx: 20,
+    ry: 20,
+    textX: 50,
+    text1Y: 30,
+    text2Y: 50,
+    text3Y: 70,
+    pointerPosX: 25,
+    pointerPosY: 30,
+    pointerHeight: 40,
+  },
+  '480': {
+    paddingX: 10,
+    paddingY: 10,
+    width: 180,
+    height: 65,
+    rx: 10,
+    ry: 10,
+    textX: 30,
+    text1Y: 20,
+    text2Y: 35,
+    text3Y: 50,
+    pointerPosX: 15,
+    pointerPosY: 20,
+    pointerHeight: 28,
+  },
+};
+
 function Chart({ width, height, padding, data, lang }) {
   let value = d3.max(data.chartPoints, (d) => d.x);
   const xScale = d3
@@ -89,29 +122,47 @@ function Chart({ width, height, padding, data, lang }) {
 
     const info = canvas
       .append('g')
-      .attr('transform', `translate(${padding + 20}, ${padding + 20})`);
+      .attr(
+        'transform',
+        `translate(${padding + sizes[width].paddingX}, ${padding + sizes[width].paddingY})`
+      );
     info
       .append('rect')
-      .attr('width', 250)
-      .attr('height', 95)
-      .attr('rx', 20)
-      .attr('ry', 20)
+      .attr('width', sizes[width].width)
+      .attr('height', sizes[width].height)
+      .attr('rx', sizes[width].rx)
+      .attr('ry', sizes[width].ry)
       .attr('class', 'info-rect');
-    info.append('text').attr('x', 50).attr('y', 50).text(count).attr('class', 'info-text');
-    info.append('text').attr('x', 50).attr('y', 30).text(date).attr('class', 'info-text');
-    info.append('text').attr('x', 50).attr('y', 70).text(learnedWords).attr('class', 'info-text');
+    info
+      .append('text')
+      .attr('x', sizes[width].textX)
+      .attr('y', sizes[width].text1Y)
+      .text(date)
+      .attr('class', 'info-text');
+    info
+      .append('text')
+      .attr('x', sizes[width].textX)
+      .attr('y', sizes[width].text2Y)
+      .text(count)
+      .attr('class', 'info-text');
+    info
+      .append('text')
+      .attr('x', sizes[width].textX)
+      .attr('y', sizes[width].text3Y)
+      .text(learnedWords)
+      .attr('class', 'info-text');
     info
       .append('rect')
-      .attr('x', 25)
-      .attr('y', 30)
+      .attr('x', sizes[width].pointerPosX)
+      .attr('y', sizes[width].pointerPosY)
       .attr('width', 4)
-      .attr('height', 40)
+      .attr('height', sizes[width].pointerHeight)
       .attr('class', 'pointer-line')
       .attr('transform', 'translate(-2, 0)');
     info
       .append('circle')
-      .attr('cx', 25)
-      .attr('cy', 30)
+      .attr('cx', sizes[width].pointerPosX)
+      .attr('cy', sizes[width].pointerPosY)
       .attr('r', 7)
       .attr('class', 'pointer-circle');
 

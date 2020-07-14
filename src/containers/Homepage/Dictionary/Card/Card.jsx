@@ -164,7 +164,7 @@ function Card(props) {
         <Image src={`${LINK_FOR_IMAGE}${item.image}`} className="small-img" />
       </Left>
       <Center>
-        <ProgressBar difficulty={item.userWord.difficulty} />
+        <ProgressBar difficulty={item.userWord.difficulty} className="progress-bar" />
         <p className="word">
           {item.word}
           {isTranslate ? <span> - {item.wordTranslate}</span> : null}

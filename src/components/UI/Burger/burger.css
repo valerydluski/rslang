@@ -1,0 +1,65 @@
+.menu-i {
+  width: 39px;
+  cursor: pointer;
+  position: relative;
+  z-index: 12;
+}
+
+.menu-i-open {
+  position: fixed;
+  top: 40px;
+  right: 30px;
+}
+
+.menu-line {
+  padding: 7px 0;
+}
+
+.rect-left {
+  transition: 0.5s ease;
+  position: absolute;
+  left: 0;
+}
+
+.circle-right {
+  transition: 0.5s ease;
+  position: absolute;
+  right: 0;
+}
+
+.circle-left {
+  transition: 0.5s ease;
+  position: absolute;
+  left: 0;
+}
+
+.rect-right {
+  transition: 0.5s ease;
+  position: absolute;
+  right: 0;
+}
+
+.right-86 {
+  right: 87%;
+}
+
+.left-86 {
+  left: 87%;
+}
+
+.left-22 {
+  left: 22%;
+}
+
+.right-22 {
+  right: 22%;
+}
+
+.fill-white {
+  fill: white;
+  transition: 0.5 ease;
+}
+
+.fill-red {
+  fill: #FF6024;
+}
