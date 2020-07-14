@@ -16,7 +16,7 @@ import newRound from '../../utils/newRound';
 import StatusMenu from '../../components/StatusMenu/StatusMenu';
 import GameContainerStyled from './styled/StyledGameContainer';
 import StyledGameProgress from './styled/StyledGameProgress';
-import GameModeToggle from '../../containers/GameModeToggle/GameModeToggle';
+import GameModeToggle from '../GameModeToggle/GameModeToggle';
 
 let currentGameWords;
 let answerResult = {};
@@ -55,7 +55,7 @@ const AudioCallContainer = ({
 
   useEffect(() => {
     resetGameData();
-  }, [wordsCollection, resetGameData]);
+  }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
 
