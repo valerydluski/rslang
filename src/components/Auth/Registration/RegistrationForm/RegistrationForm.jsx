@@ -24,7 +24,7 @@ const RegistrationForm = (props) => {
       <StyledFormNamesContainer>
         <FormNameStyled>{I18n.t('Auth.signUp')}</FormNameStyled>
         <Link to="/login">
-          <Translate value="Buttons.login" />
+          <Translate value="Auth.signIn" />
         </Link>
       </StyledFormNamesContainer>
       <FormStyled onSubmit={handleSubmit}>

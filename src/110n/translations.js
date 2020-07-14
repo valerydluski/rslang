@@ -268,7 +268,6 @@ const translations = {
       choose: 'Выбрать',
       OK: 'OK',
       back: 'Назад',
-      login: 'Войти',
       hard: 'Тяжело',
       train: 'Тренировать',
       play: 'Играть',
