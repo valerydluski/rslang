@@ -86,7 +86,7 @@ function Chart({ width, height, padding, data, lang }) {
     canvas.selectAll('g').remove();
     const count = I18n.t('Chart.learned', { count: data.days[value].count });
     const date =
-      data.days[value].date === 'Invalid Date'
+      data.days[value].date.toLocaleDateString() !== 'Invalid Date'
         ? `${I18n.t('Chart.date')}${data.days[value].date.toLocaleDateString(lang, {
             month: 'long',
             day: 'numeric',
