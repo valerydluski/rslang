@@ -12,17 +12,21 @@ const PromoContentContainer = styled.div`
   text-align: justify;
 `;
 
-const FirstParagraph = styled.p`
+const VioletSpan = styled.span`
   width: 100%;
   color: #6550de;
 `;
 
-const FirstParagraphSecondPart = styled.p`
+const BlackSpan = styled.span`
+  width: 100%;
+`;
+
+const VioletParagraph = styled.p`
   width: 100%;
   color: #6550de;
 `;
 
-const SecondParagraph = styled.p`
+const BlackParagraph = styled.p`
   width: 100%;
 `;
 
@@ -40,19 +44,7 @@ const FirstUL = styled.ul`
   }
 `;
 
-const ThirdParagraph = styled.p`
-  width: 100%;
-`;
-
-const FourthParagraph = styled.p`
-  width: 100%;
-`;
-
-const FifthParagraph = styled.p`
-  width: 100%;
-`;
-
-const SixthParagraph = styled.p`
+const RedParagraph = styled.p`
   width: 100%;
   color: #f56748;
 `;
@@ -60,15 +52,21 @@ const SixthParagraph = styled.p`
 const PromoText = () => {
   return (
     <PromoContentContainer>
-      <FirstParagraph>
+      <VioletParagraph>
         <Translate value="Promo.firstLineText" />
-      </FirstParagraph>
-      <FirstParagraphSecondPart>
+      </VioletParagraph>
+      <VioletParagraph>
         <Translate value="Promo.firstLineSecondPart" />
-      </FirstParagraphSecondPart>
-      <SecondParagraph>
-        <Translate value="Promo.secondLineText" />
-      </SecondParagraph>
+      </VioletParagraph>
+      <BlackSpan>
+        <Translate value="Promo.secondLineFirstPart" />
+      </BlackSpan>
+      <VioletSpan>
+        <Translate value="Promo.secondLineSecondPart" />
+      </VioletSpan>
+      <BlackSpan>
+        <Translate value="Promo.secondLineThirdPart" />
+      </BlackSpan>
       <FirstUL>
         <li>
           <Translate value="Promo.firstList" />
@@ -83,18 +81,24 @@ const PromoText = () => {
           <Translate value="Promo.fourthList" />
         </li>
       </FirstUL>
-      <ThirdParagraph>
-        <Translate value="Promo.thirdLineText" />
-      </ThirdParagraph>
-      <FourthParagraph>
+      <BlackSpan>
+        <Translate value="Promo.thirdLineFirstPart" />
+      </BlackSpan>
+      <VioletSpan>
+        <Translate value="Promo.thirdLineSecondPart" />
+      </VioletSpan>
+      <BlackSpan>
+        <Translate value="Promo.thirdLineThirdPart" />
+      </BlackSpan>
+      <BlackParagraph>
         <Translate value="Promo.fourthLineText" />
-      </FourthParagraph>
-      <FifthParagraph>
+      </BlackParagraph>
+      <BlackParagraph>
         <Translate value="Promo.fifthLineText" />
-      </FifthParagraph>
-      <SixthParagraph>
+      </BlackParagraph>
+      <RedParagraph>
         <Translate value="Promo.sixthLineText" />
-      </SixthParagraph>
+      </RedParagraph>
     </PromoContentContainer>
   );
 };

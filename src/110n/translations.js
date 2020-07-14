@@ -12,6 +12,7 @@ const translations = {
       start: "Let's play!",
       wordsAmount: 'Total words',
       videoLesson: 'Video tutorial',
+      sourceRepo: 'Source repository',
     },
     StartPage: {
       game: 'GAME',
@@ -78,8 +79,9 @@ const translations = {
     Promo: {
       firstLineText: `Bored with textbook exercises?`,
       firstLineSecondPart: `Not sure how to start and what with?`,
-      secondLineText: `We have a solution - the RSLang application 
-      from our development team! This is a great opportunity to get a language practice that you are not likely to meet 
+      secondLineFirstPart: `We have a solution -`,
+      secondLineSecondPart: ` the RSLang application`,
+      secondLineThirdPart: ` from our development team! This is a great opportunity to get a language practice that you are not likely to meet 
       at school lesson. Our app will help you:`,
       firstList: `To get acquainted with various accents of English, including accents of those for whom English is also a second language`,
       secondList: `to learn slang and spoken English`,
@@ -87,7 +89,9 @@ const translations = {
       fourthList: `Our program consist of 6 exciting and entertaining mini-games, such as: “Savannah”,
       "SpeakIT", "Puzzle", "Audiocall", "Sprint", "Make Sentence". You will not only have a good time while playing them,
       but also expand the vocabulary, revise grammar, improve your pronunciation.`,
-      thirdLineText: `The main feature of our project is the use of interval repetition system, that can adapt to your current level of English. 
+      thirdLineFirstPart: `The main feature of our project is the use of`,
+      thirdLineSecondPart: ` interval repetition system`,
+      thirdLineThirdPart: `, that can adapt to your current level of English. 
       Repetition includes 5 difficulty levels. When choosing the maximum difficulty level, 
       the repetition will last 10 minutes, 
       the duration of the second step is four times the duration of the first level. Each next step is calculated as the sum 
@@ -97,6 +101,9 @@ const translations = {
       fifthLineText: `Have fun practicing English. No matter what you are interested in and how you spend time, 
       among our mini-games you will definitely find something that suits you.`,
       sixthLineText: `Play, enjoy and never give up!`,
+      linkDescriptionFirstPart: `By this `,
+      linkDescriptionSecondPart: ` link`,
+      linkDescriptionThirdPart: ` you can find the source code of the application.`,
     },
     Buttons: {
       save: 'Save',
@@ -210,6 +217,7 @@ const translations = {
       start: 'Начни играть!',
       wordsAmount: 'Всего слов',
       videoLesson: 'Видеоурок',
+      sourceRepo: 'Исходный репозиторий',
     },
     StartPage: {
       game: 'ИГРА',
@@ -278,7 +286,9 @@ const translations = {
     Promo: {
       firstLineText: `Устали от скучных упражнений из учебника?`,
       firstLineSecondPart: `Не знаете, как и с чего начать?`,
-      secondLineText: `У нас есть решение - приложение RSLang от нашей команды разработчиков! Это отличная возможность
+      secondLineFirstPart: `У нас есть решение -`,
+      secondLineSecondPart: ` приложение RSLang`,
+      secondLineThirdPart: ` от нашей команды разработчиков! Это отличная возможность
       получить такую языковую практику, которую вы не встретите в школе на уроке, например:`,
       firstList: `Вы познакомитесь с  различными акцентами английского, в том числе акцентами тех, для кого английский тоже
       является вторым языком`,
@@ -287,7 +297,9 @@ const translations = {
       fourthList: `Основой нашей программы являются 6 увлекательных и занимательных мини-игр, таких как : "Саванна",
       "Произнеси слово", "Паззл", "Аудиовызов", "Спринт", "Собери предложение", которые помогут не только приятно
       провести время, но и расширить словарный запас, подтянуть знание грамматики, улучшить произношение`,
-      thirdLineText: `Основной особенностью нашего проекта является использование системы интервального повторения, которая 
+      thirdLineFirstPart: `Основной особенностью нашего проекта является использование`,
+      thirdLineSecondPart: ` системы интервального повторения`,
+      thirdLineThirdPart: `, которая 
       подстроится под ваш текущий уровень английского языка. Повторение включает в себя
       5 уровней сложности. При выборе максимального уровня сложности повторение будет длиться 10 минут, продолжительность второго
       шага в четыре раза превышает длительность первого уровня.
@@ -297,6 +309,9 @@ const translations = {
       fifthLineText: `Развлекайтесь и практикуйте английский язык. Неважно, чем вы интересуетесь и как проводите время, 
       среди наших мини-игр вы обязательно найдете что-нибудь по душе.`,
       sixthLineText: `Играйте, наслаждайтесь и не бойтесь ошибаться!`,
+      linkDescriptionFirstPart: `По этой `,
+      linkDescriptionSecondPart: ` ссылке`,
+      linkDescriptionThirdPart: ` вы можете ознакомиться с исходным кодом приложения.`,
     },
     Buttons: {
       save: 'Сохранить',
