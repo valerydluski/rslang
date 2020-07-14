@@ -1,10 +1,15 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../../../../config';
 
 const UserTitleContainer = styled.div`
   width: 100%;
-  height: 205px;
+  height: 250px;
   position: relative;
   background-size: cover;
+
+  @media ${DEVICE.laptopL} {
+    height: 205px;
+  }
 
   h2 {
     margin: 0;
