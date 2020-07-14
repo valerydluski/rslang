@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Redirect, Switch } from 'react-router-dom';
 import getLoginStatus from '../../utils/getLoginStatus';
 import RightSideBar from '../../components/HomePage/SideBars/RightSideBar';
@@ -12,11 +13,16 @@ import Settings from '../../components/HomePage/Content/Settings/Settings';
 import LeftSideBarContainer from '../../containers/Homepage/SideBars/LeftSideBarContainer';
 import DictionaryContainer from '../../containers/Homepage/Dictionary/DictionaryContainer';
 import StatisticContainer from '../../containers/Homepage/Statistics/StatisticContainer';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 function HomePage(props) {
-  const { checkStatusSession } = props;
+  const { checkStatusSession, isLoading, isDataLoad } = props;
 
-  checkStatusSession();
+  if (isLoading) return <LoadingSpinner />;
+  if (!isDataLoad) {
+    checkStatusSession();
+    return null;
+  }
 
   if (!getLoginStatus()) {
     return <Redirect to="/" />;
@@ -41,6 +47,14 @@ function HomePage(props) {
 
 HomePage.propTypes = {
   checkStatusSession: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isDataLoad: PropTypes.bool.isRequired,
 };
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.loadDataLoaderReducer.loading,
+    isDataLoad: state.dataLoad.isDataLoadFromApi,
+  };
+};
+export default connect(mapStateToProps, null)(HomePage);
