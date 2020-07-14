@@ -106,6 +106,12 @@ const ButtonStyled = styled.button`
     background-color: #b2b2b2;
     cursor: not-allowed;
   }
+
+  @media (max-width: 680px) {
+    font-size: 14px;
+    width: 140px;
+    height: 37px;
+  }
 `;
 
 export default ButtonStyled;
