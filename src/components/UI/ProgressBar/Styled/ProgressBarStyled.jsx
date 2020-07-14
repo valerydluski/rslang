@@ -1,7 +1,12 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../config';
 
 export const Container = styled.div`
   display: flex;
+
+  @media ${DEVICE.mobileL} {
+    justify-content: center;
+  }
 `;
 
 export const Circle = styled.div`
