@@ -17,7 +17,6 @@ const LearnWordsInput = (props) => {
     placeholder,
     size,
     input,
-    autoFocus,
     meta: { error, touched },
     autocomplete,
     word,
