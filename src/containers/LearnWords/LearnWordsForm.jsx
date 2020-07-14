@@ -17,6 +17,7 @@ import LearnCardsContainer, {
   TextExampleTranslateStyled,
   TextMeaningStyled,
   TextMeaningTranslateStyled,
+  TopContnentStyled,
 } from './Styled/LearnCardsContainer';
 import LearnButtonsContainer, {
   ProgressBarCount,
@@ -44,6 +45,7 @@ const LearnWordsForm = (props) => {
     showResultHander,
     isInputActive,
     audioIsPlaying,
+    isSoundPlay,
   } = props;
 
   const {
@@ -97,45 +99,47 @@ const LearnWordsForm = (props) => {
         <StyledRoundButton
           onClick={customHandleSubmit('sound')}
           type="button"
-          className="learn_sound-button"
+          className={!isSoundPlay ? 'learn_sound-button not-active' : 'learn_sound-button'}
         />
-        {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
-        {isImageAssociation && (
-          <Image
-            alt={word.word}
-            src={`${LINK_FOR_IMAGE}${image}`}
-            classNameContainer="image_learn"
-            className="image_learn"
-          />
-        )}
-        <TextExampleStyled>
-          {isTextExample && <p style={{ display: 'inline' }}>{firstPart}</p>}
-          <Field
-            name="word"
-            key="word"
-            type="text"
-            placeholder={isRightAnswerShow ? word.word : ''}
-            size="5"
-            component={LearnWordsInput}
-            autoFocus
-            autocomplete={autocomplete}
-            word={word.word}
-            answer={answer}
-            isShowResult={isResultShow}
-            audiosDuration={audiosDuration}
-            isInputActive={isInputActive}
-            onChange={() => {
-              if (isShowResult) {
-                showResultHander(false);
-              }
-            }}
-          />
-          {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
-        </TextExampleStyled>
+        <TopContnentStyled>
+          {isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
+          {isImageAssociation && (
+            <Image
+              alt={word.word}
+              src={`${LINK_FOR_IMAGE}${image}`}
+              classNameContainer="image_learn"
+              className="image_learn"
+            />
+          )}
+          <TextExampleStyled>
+            {isTextExample && <p style={{ display: 'inline' }}>{firstPart}</p>}
+            <Field
+              name="word"
+              key="word"
+              type="text"
+              placeholder={isRightAnswerShow ? word.word : ''}
+              size="5"
+              component={LearnWordsInput}
+              autoFocus
+              autocomplete={autocomplete}
+              word={word.word}
+              answer={answer}
+              isShowResult={isResultShow}
+              audiosDuration={audiosDuration}
+              isInputActive={isInputActive}
+              onChange={() => {
+                if (isShowResult) {
+                  showResultHander(false);
+                }
+              }}
+            />
+            {isTextExample && <p style={{ display: 'inline', marginLeft: '10px' }}>{secondPart}</p>}
+          </TextExampleStyled>
+        </TopContnentStyled>
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
         )}
-        {isTranslationShow && isTranscription && <Transcription transcription={transcription} />}
+        {isTranscription && <Transcription className="learn" transcription={transcription} />}
         {isTextMeaning && isTranslationShow ? (
           <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
@@ -151,9 +155,13 @@ const LearnWordsForm = (props) => {
         {isInputActive ? (
           <StyledButton
             type="button"
-            className="button-next lear_button learn_all-buttons"
             onClick={customHandleSubmit('form')}
             disabled={!isInputActive}
+            className={
+              !isInputActive
+                ? 'button-next lear_button learn_all-buttons not-active'
+                : 'button-next lear_button learn_all-buttons'
+            }
           >
             <Translate value="Buttons.check" />
           </StyledButton>
@@ -168,10 +176,14 @@ const LearnWordsForm = (props) => {
         )}
         {deleteButton && (
           <StyledButton
-            className="lear_button learn_all-buttons"
             onClick={customHandleSubmit('deleted')}
             type="button"
             disabled={isInputActive && !audioIsPlaying}
+            className={
+              isInputActive && !audioIsPlaying
+                ? 'lear_button learn_all-buttons not-active'
+                : 'lear_button learn_all-buttons'
+            }
           >
             <Translate value="Buttons.delete" />
           </StyledButton>
@@ -181,7 +193,11 @@ const LearnWordsForm = (props) => {
             onClick={customHandleSubmit('hard')}
             type="button"
             disabled={isInputActive && !audioIsPlaying}
-            className="lear_button learn_all-buttons"
+            className={
+              isInputActive && !audioIsPlaying
+                ? 'lear_button learn_all-buttons not-active'
+                : 'lear_button learn_all-buttons'
+            }
           >
             <Translate value="Buttons.hard" />
           </StyledButton>
@@ -191,7 +207,11 @@ const LearnWordsForm = (props) => {
             onClick={customHandleSubmit('unknown')}
             type="button"
             disabled={!isInputActive}
-            className="lear_button learn_i-dont-know"
+            className={
+              !isInputActive
+                ? 'lear_button learn_i-dont-know not-active'
+                : 'lear_button learn_i-dont-know'
+            }
           >
             <Translate value="Buttons.dontKnow" />
           </StyledButton>
@@ -255,6 +275,7 @@ LearnWordsForm.propTypes = {
   wordsCount: PropTypes.number,
   currentWordIndex: PropTypes.number,
   audiosDuration: PropTypes.number.isRequired,
+  isSoundPlay: PropTypes.bool.isRequired,
 };
 
 LearnWordsForm.defaultProps = {

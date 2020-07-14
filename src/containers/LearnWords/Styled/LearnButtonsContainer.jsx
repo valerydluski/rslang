@@ -33,6 +33,7 @@ export const ProgressBarContainer = styled.div`
 
   @media ${DEVICE.tablet} {
     grid-column: none;
+    height: auto;
   }
 `;
 export const ProgressBarCount = styled.p`

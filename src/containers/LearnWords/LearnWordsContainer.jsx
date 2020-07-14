@@ -223,6 +223,7 @@ function LearnWordCardContainer(props) {
       currentWordIndex={currentWordIndex.current}
       audiosDuration={audiosDuration.current}
       audioIsPlaying={audioIsPlaying}
+      isSoundPlay={isSoundPlay}
     />
   );
 }

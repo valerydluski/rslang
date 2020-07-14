@@ -28,7 +28,7 @@ const LearnWordsInput = (props) => {
   const [show, setShow] = useState(false);
   const inputRef = useRef(null);
 
-  const FONT_SIZE = 30;
+  const FONT_SIZE = 20;
 
   useEffect(() => {
     if (isShowResult) {
@@ -53,7 +53,7 @@ const LearnWordsInput = (props) => {
   const width = getStringWidth(word, FONT_SIZE);
 
   return (
-    <InputContainer style={{ display: 'inline' }}>
+    <InputContainer width={width} style={{ display: 'inline-block' }}>
       <InputWordsBgContainer showResult={show} width={width} onClick={hideResult}>
         {word
           .toLowerCase()

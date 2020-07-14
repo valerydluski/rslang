@@ -16,6 +16,7 @@ const LearnFormStyled = styled.form`
 
   @media ${DEVICE.tablet} {
     grid-template-rows: 70% 30%;
+    height: 1200px;
   }
 `;
 
