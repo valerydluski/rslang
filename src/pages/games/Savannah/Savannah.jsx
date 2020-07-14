@@ -7,19 +7,21 @@ import SavannaGameContainer from '../../../containers/Savannah/SavannahGameConta
 
 const Savannah = ({ wordsCollection, page, level }) => {
   const [words, changeWords] = useState(wordsCollection);
+  const [isMoveBackground, moveBackground] = useState(false);
 
   useEffect(() => {
     changeWords(wordsCollection);
   }, [wordsCollection]);
 
   return (
-    <SavannahContainerStyled>
+    <SavannahContainerStyled className={isMoveBackground ? 'movingBackground' : ''}>
       <GoToHomePageButton />
       <SavannaGameContainer
         key={`level-${level}:page-${page}`}
         wordsCollection={words}
         level={level}
         page={page}
+        moveBackground={moveBackground}
       />
     </SavannahContainerStyled>
   );

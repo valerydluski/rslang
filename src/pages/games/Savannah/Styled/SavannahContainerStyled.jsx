@@ -8,6 +8,19 @@ const SavannahContainerStyled = styled.div`
   box-sizing: border-box;
   padding: 30px;
   background-image: url(${background});
+  background-size: 100% auto;
+  &.movingBackground {
+    background-repeat: repeat-y;
+    animation: moveBackground 1s linear forwards;
+    @keyframes moveBackground {
+      0% {
+        background-position-y: 0%;
+      }
+      100% {
+        background-position-y: -100%;
+      }
+    }
+  }
 `;
 
 export default SavannahContainerStyled;

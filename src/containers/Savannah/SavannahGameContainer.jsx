@@ -40,6 +40,7 @@ const SavannaGameContainer = ({
   secondsForOneWord,
   initialErrorsAmount,
   gameMode,
+  moveBackground,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -139,6 +140,7 @@ const SavannaGameContainer = ({
   }
 
   function switchToNextWord() {
+    moveBackground(false);
     if (
       initialErrorsAmount - wrongAmount === 0 ||
       currentWordIndex === wordsCollection.length - 1
@@ -172,6 +174,7 @@ const SavannaGameContainer = ({
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
     } else {
       addWordToCorrect([...correctAnsweredWords, currentWord]);
+      moveBackground(true);
     }
     playResultAudio(isCorrect);
     toggleWordStatus(true);
@@ -229,6 +232,7 @@ SavannaGameContainer.propTypes = {
   page: PropTypes.string,
   updateLevel: PropTypes.func,
   updatePage: PropTypes.func,
+  moveBackground: PropTypes.func,
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func,
@@ -244,6 +248,7 @@ SavannaGameContainer.defaultProps = {
   saveStatistic: () => {},
   updatePage: () => {},
   updateLevel: () => {},
+  moveBackground: () => {},
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
