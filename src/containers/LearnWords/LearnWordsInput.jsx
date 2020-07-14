@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -17,44 +17,37 @@ const LearnWordsInput = (props) => {
     placeholder,
     size,
     input,
-    autoFocus,
     meta: { error, touched },
     autocomplete,
     word,
     answer,
     isShowResult,
-    showResultHander,
-    audiosDuration,
     isInputActive,
   } = props;
 
   const [show, setShow] = useState(false);
+  const inputRef = useRef(null);
 
   const FONT_SIZE = 30;
-  const DEFAUL_TIME_SHOW = 2000;
-  const MILLISEC_IN_SEC = 1000;
-  const CORRECTION_FACTOR = 500;
 
   useEffect(() => {
-    let timer;
     if (isShowResult) {
-      const duration =
-        audiosDuration < 0
-          ? DEFAUL_TIME_SHOW
-          : audiosDuration * MILLISEC_IN_SEC - CORRECTION_FACTOR;
       setShow(true);
-      timer = setTimeout(() => {
-        setShow(false);
-        showResultHander(false);
-      }, duration);
     } else {
       setShow(false);
     }
-    return () => clearTimeout(timer);
-  }, [isShowResult, showResultHander, audiosDuration]);
+  }, [isShowResult]);
+
+  useEffect(() => {
+    if (isInputActive) {
+      inputRef.current.focus();
+    }
+  }, [isInputActive]);
 
   const hideResult = () => {
-    setShow(false);
+    if (isInputActive) {
+      setShow(false);
+    }
   };
 
   const width = getStringWidth(word, FONT_SIZE);
@@ -80,12 +73,13 @@ const LearnWordsInput = (props) => {
         placeholder={placeholder}
         size={size}
         // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus={autoFocus}
+        autoFocus
         readOnly={!isInputActive}
         autoComplete={autocomplete}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
         width={width}
+        ref={inputRef}
       />
       {error && touched && <span>{error}</span>}
     </InputContainer>

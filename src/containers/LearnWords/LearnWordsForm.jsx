@@ -43,6 +43,7 @@ const LearnWordsForm = (props) => {
     isShowResult,
     showResultHander,
     isInputActive,
+    audioIsPlaying,
   } = props;
 
   const {
@@ -53,6 +54,7 @@ const LearnWordsForm = (props) => {
     isImageAssociation,
     deleteButton,
     addDificultWordsButton,
+    showIdontKhowButton,
   } = settings.settings;
   const {
     textExample,
@@ -72,8 +74,9 @@ const LearnWordsForm = (props) => {
   }, [isCorrect, reset]);
 
   const customHandleSubmit = (type) => {
-    return () => {
+    return (values) => {
       onSubmit({
+        ...values,
         buttonType: type,
       });
     };
@@ -132,7 +135,7 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
         )}
-        {isTranscription && <Transcription>{transcription}</Transcription>}
+        {isTranslationShow && isTranscription && <Transcription transcription={transcription} />}
         {isTextMeaning && isTranslationShow ? (
           <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
@@ -145,19 +148,30 @@ const LearnWordsForm = (props) => {
         )}
       </LearnCardsContainer>
       <LearnButtonsContainer>
-        <StyledButton
-          className="button-next lear_button learn_all-buttons"
-          onClick={customHandleSubmit('form')}
-          disabled={!isInputActive}
-        >
-          <Translate value="Buttons.next" />
-        </StyledButton>
+        {isInputActive ? (
+          <StyledButton
+            type="button"
+            className="button-next lear_button learn_all-buttons"
+            onClick={customHandleSubmit('form')}
+            disabled={!isInputActive}
+          >
+            <Translate value="Buttons.check" />
+          </StyledButton>
+        ) : (
+          <StyledButton
+            className="lear_button learn_all-buttons"
+            onClick={customHandleSubmit('next')}
+            disabled={isInputActive && !audioIsPlaying}
+          >
+            <Translate value="Buttons.next" />
+          </StyledButton>
+        )}
         {deleteButton && (
           <StyledButton
             className="lear_button learn_all-buttons"
             onClick={customHandleSubmit('deleted')}
             type="button"
-            disabled={!isInputActive}
+            disabled={isInputActive && !audioIsPlaying}
           >
             <Translate value="Buttons.delete" />
           </StyledButton>
@@ -166,20 +180,22 @@ const LearnWordsForm = (props) => {
           <StyledButton
             onClick={customHandleSubmit('hard')}
             type="button"
-            disabled={!isInputActive}
+            disabled={isInputActive && !audioIsPlaying}
             className="lear_button learn_all-buttons"
           >
             <Translate value="Buttons.hard" />
           </StyledButton>
         )}
-        <StyledButton
-          onClick={customHandleSubmit('unknown')}
-          type="button"
-          disabled={!isInputActive}
-          className="lear_button learn_i-dont-know"
-        >
-          <Translate value="Buttons.dontKnow" />
-        </StyledButton>
+        {showIdontKhowButton && (
+          <StyledButton
+            onClick={customHandleSubmit('unknown')}
+            type="button"
+            disabled={!isInputActive}
+            className="lear_button learn_i-dont-know"
+          >
+            <Translate value="Buttons.dontKnow" />
+          </StyledButton>
+        )}
 
         <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
         <ProgressBarContainer>
@@ -221,11 +237,13 @@ LearnWordsForm.propTypes = {
       isImageAssociation: PropTypes.bool.isRequired,
       deleteButton: PropTypes.bool.isRequired,
       addDificultWordsButton: PropTypes.bool.isRequired,
+      showIdontKhowButton: PropTypes.bool.isRequired,
     }).isRequired,
   }).isRequired,
   isCorrect: PropTypes.bool.isRequired,
   isShowResult: PropTypes.bool.isRequired,
   isTranslationShow: PropTypes.bool.isRequired,
+  audioIsPlaying: PropTypes.bool.isRequired,
   isInputActive: PropTypes.bool.isRequired,
   autocomplete: PropTypes.string,
   reset: PropTypes.func.isRequired,
