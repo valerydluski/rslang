@@ -7,13 +7,7 @@ const Menu = styled.div`
   width: 100%;
 
   &.status-menu_speakIT {
-    margin-top: 55px;
-    justify-content: flex-start;
-    width: 400px;
-
-    @media ${DEVICE.tablet} {
-      width: 70%;
-    }
+    justify-content: center;
   }
 
   @media ${DEVICE.tablet} {

@@ -10,4 +10,14 @@ const SpeakITContainerStyled = styled.div`
   box-sizing: border-box;
 `;
 
+export const MenuContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 450px) {
+    margin-top: 70px;
+  }
+`;
+
 export default SpeakITContainerStyled;
