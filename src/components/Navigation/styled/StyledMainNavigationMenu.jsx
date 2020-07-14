@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 const StyledMainNavigationMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   li {
     list-style: none;
     margin-bottom: 50px;
@@ -33,70 +36,6 @@ const StyledMainNavigationMenu = styled.div`
         left: 0;
         top: 4px;
       }
-    }
-  }
-
-  @media (max-width: 1200px) {
-    li a {
-      padding-left: 0;
-    }
-
-    li .active_link::before {
-      left: -20px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-
-    li {
-      margin-bottom: 50px;
-      margin-left: 65%;
-    }
-
-    li:first-of-type {
-      margin-top: 20vh;
-    }
-
-    span {
-      font-size: 22px;
-    }
-
-    li a {
-      color: #ffffff;
-    }
-
-    li a:hover {
-      color: #fec246;
-    }
-  li .active_link {
-    position: relative;
-  }
-
-  li .active_link::before {
-    background-color: #fec246;
-  }
-}
-
-  @media (max-width: 600px) {
-    li {
-      margin-left: 55%;
-    }
-  }
-
-  @media (max-width: 400px) {
-    li {
-      margin-left: 45%;
-    }
-  }
-
-  @media (max-height: 600px) {
-    li {
-      margin-bottom: 4vh;
-    }
-
-    li:first-of-type {
-      margin-top: 10vh;
     }
   }
 `;

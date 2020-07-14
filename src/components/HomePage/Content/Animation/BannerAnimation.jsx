@@ -5,10 +5,10 @@ import animationDataMobile from '../../../../assets/animation/banner-mobile/data
 import AnimationContainerStyled from './Styled/AnimationContainerStyled';
 import getScreenWidth from '../../../../utils/getScreenWidth';
 
+const breakpoint = 1024;
+
 function SignInAnimation() {
   const [isBreakpoint, changeBreakpoint] = useState(false);
-
-  const breakpoint = 768;
 
   const onResize = useCallback(() => {
     changeBreakpoint(getScreenWidth() < breakpoint);

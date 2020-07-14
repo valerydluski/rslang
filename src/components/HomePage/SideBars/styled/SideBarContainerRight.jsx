@@ -11,44 +11,20 @@ const SideBarContainerRight = styled.div`
   min-height: 100%;
   box-sizing: border-box;
 
-  span {
-    font-size: 16px;
-  }
-
-  @media ${DEVICE.laptopL} {
-    padding: 20px;
-
-    div {
-      border-bottom: none;
-    }
-
-    img {
-      width: 100px;
-      height: 100px;
-    }
-
-    span {
-      font-size: 13px;
-    }
-  }
-
   @media ${DEVICE.laptop} {
-    grid-column-start: 2;
-    grid-row-start: 1;
+    display: ${(props) => (props.pathName === '/home' ? 'flex' : 'none')};
+    order: -1;
+    padding: 30px 30px 0 290px;
     width: auto;
-    background-color: #ffffff;
-    nav {
-      display: none;
-    }
     min-height: auto;
-  }
-
-  @media ${DEVICE.laptop} {
-    width: auto;
+    background-color: #ffffff;
+    & > .user-title {
+      display: block;
+    }
   }
 
   @media ${DEVICE.tablet} {
-    display: flex;
+    padding: 30px 30px 0 30px;
     width: auto;
     grid-column-start: auto;
     grid-row-start: auto;
@@ -56,18 +32,90 @@ const SideBarContainerRight = styled.div`
     background-color: #ffffff;
     width: 100%;
     height: fit-content;
-    grid-template-columns: 1fr 1fr 1fr;
-    img {
-      width: 130px;
-      height: 130px;
+  }
+
+  & > .user-title {
+    display: none;
+    margin-bottom: 30px;
+    @media ${DEVICE.laptop} {
+      display: block;
     }
-    ul {
+  }
+
+  & > div:last-child {
+    display: flex;
+  }
+
+  & nav {
+    width: 100%;
+  }
+
+  & ul {
+    border-top: 1px solid #c4c4c4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    padding-top: 15px;
+    @media ${DEVICE.laptop} {
+      padding-top: 30px;
+    }
+    @media ${DEVICE.tablet} {
+      margin: 0;
+      width: 100%;
+    }
+
+    & li {
+      margin: 5px;
+      &:last-child {
+        margin-bottom: 30px;
+      }
+      @media ${DEVICE.laptop} {
+        &:last-child {
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    & a {
+      padding-left: 0;
+      height: 40px;
+      width: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s linear;
+
+      & > span {
+        font-size: 16px;
+      }
+    }
+
+    & a[href='/learn'] {
+      padding-left: 0;
+      font-size: 19px;
+      line-height: 19px;
+      font-weight: 600;
       color: #ffffff;
-      background-color: #404497;
-      position: fixed;
-      width: 93vw;
-      right: 0%;
-      height: 100vh;
+      background-color: #f56748;
+      &:hover {
+        background-color: #fec246;
+        color: #ffffff;
+      }
+    }
+
+    & a[href='/repeat'] {
+      padding-left: 0;
+      font-size: 19px;
+      line-height: 19px;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: #6550de;
+      &:hover {
+        background-color: #fec246;
+        color: #ffffff;
+      }
     }
   }
 `;

@@ -6,6 +6,10 @@ import { DEVICE } from '../../../config';
 const LogoContainer = styled.div`
   display: flex;
   cursor: pointer;
+  position: ${(props) => (props.isOpen ? 'fixed' : 'relative')};
+  z-index: 12;
+  top: ${(props) => (props.isOpen ? '30px' : 'auto')};
+  left: ${(props) => (props.isOpen ? '30px' : 'auto')};
 
   &.login-form_logo {
     grid-area: logo;
@@ -50,10 +54,10 @@ const LogoImageText = styled.p`
 `;
 
 function Logo(props) {
-  const { onClick, className } = props;
+  const { onClick, className, isOpen } = props;
   return (
-    <LogoContainer onClick={onClick} className={className}>
-      <LogoImage className={'logo'}>
+    <LogoContainer onClick={onClick} className={className} isOpen={isOpen}>
+      <LogoImage className="logo">
         <LogoImageText>RS</LogoImageText>
       </LogoImage>
       <LogoTitle>Lang</LogoTitle>
@@ -64,11 +68,13 @@ function Logo(props) {
 Logo.propTypes = {
   onClick: PropTypes.func,
   className: PropTypes.string,
+  isOpen: PropTypes.bool,
 };
 
 Logo.defaultProps = {
   onClick: () => {},
   className: '',
+  isOpen: false,
 };
 
 export default Logo;

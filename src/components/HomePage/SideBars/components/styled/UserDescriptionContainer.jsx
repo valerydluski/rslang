@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../../config';
 
 const userDescriptionContainer = styled.div`
   flex-direction: column;
   text-align: center;
-  padding-top: 40px;
   border-bottom: 1px solid #c4c4c4;
 
   h2 {
@@ -24,7 +24,7 @@ const userDescriptionContainer = styled.div`
     margin-bottom: 30px;
   }
 
-  @media (max-width: 768px) {
+  @media ${DEVICE.tablet} {
     width: auto;
     margin-left: 0;
     padding-top: 0;

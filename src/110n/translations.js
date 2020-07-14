@@ -182,6 +182,7 @@ const translations = {
     LearnWords: {
       newWords: 'New words',
       cardsShowed: 'Cards showed',
+      repeatCards: 'Cards repeated',
       correctWords: 'Correct words',
       completed: 'Series completed',
       theLongestSeries: 'The longest series of correct answers',
@@ -388,7 +389,8 @@ const translations = {
     },
     LearnWords: {
       newWords: 'Новые слова',
-      cardsShowed: 'Карточек завершено',
+      cardsShowed: 'Карточек показано',
+      repeatCards: 'Повторили карточек',
       correctWords: 'Правильные слова',
       completed: 'Cерия завершена',
       theLongestSeries: 'Самая длинная серия правильных ответов',

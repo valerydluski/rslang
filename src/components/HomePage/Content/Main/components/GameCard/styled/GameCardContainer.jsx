@@ -1,19 +1,24 @@
 import styled from 'styled-components';
-import { DEVICE } from '../../../../../../../config'
+import { DEVICE } from '../../../../../../../config';
 
 const GameCardContainer = styled.div`
   h3 {
     font-weight: bold;
     font-size: 18px;
-    height: 35px;
     line-height: 22px;
     text-transform: uppercase;
     color: #000000;
-    margin: 13px 0 3px;
+    margin: 20px 0 15px;
     text-transform: uppercase;
+
+    @media ${DEVICE.laptop} {
+      font-size: 22px;
+      margin: 27px 0 20px;
+    }
   }
 
   p {
+    margin: 0;
     height: 100px;
     flex-grow: 1;
     font-size: 14px;
