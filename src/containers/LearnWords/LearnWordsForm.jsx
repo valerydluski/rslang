@@ -102,7 +102,7 @@ const LearnWordsForm = (props) => {
           className={!isSoundPlay ? 'learn_sound-button not-active' : 'learn_sound-button'}
         />
         <TopContnentStyled>
-          {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
+          {isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
           {isImageAssociation && (
             <Image
               alt={word.word}
@@ -139,9 +139,7 @@ const LearnWordsForm = (props) => {
         {isTranslationShow && isTranslate && (
           <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
         )}
-        {isTranslationShow && isTranscription && (
-          <Transcription className="learn" transcription={transcription} />
-        )}
+        {isTranscription && <Transcription className="learn" transcription={transcription} />}
         {isTextMeaning && isTranslationShow ? (
           <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
         ) : (
