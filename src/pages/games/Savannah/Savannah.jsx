@@ -7,7 +7,7 @@ import SavannaGameContainer from '../../../containers/Savannah/SavannahGameConta
 import StatusMenu from '../../../components/StatusMenu/StatusMenu';
 import { changeSavannahLevel, changeSavannahPage } from '../../../redux/ChangeRounds/action';
 import { GAME_MAX_PAGE, GAME_NAME } from '../../../config';
-import GameModeToggle from '../../../components/GameModeToggle/GameModeToggle';
+import GameModeToggle from '../../../containers/GameModeToggle/GameModeToggle';
 
 const Savannah = ({ wordsCollection, page, level, maxPage, updateLevel, updatePage, gameName }) => {
   const [words, changeWords] = useState(wordsCollection);

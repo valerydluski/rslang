@@ -26,35 +26,57 @@ const SprintGameContainer = (props) => {
     gameName,
     newGame,
     gameMode,
+    toggleGameMode,
   } = props;
   const [currentWordIndex, changeWordIndex] = useState(0);
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [correctAnsweredWords, addWordToCorrect] = useState([]);
-  const [isAnswerCorrect, setAnswer] = useState(true);
+  const [isAnswerCorrect, setAnswer] = useState(false);
   const [correctAnswers, changeAnswersAmount] = useState(0);
   const [scoreStep, changeScoreStep] = useState(10);
   const [score, changeScore] = useState(0);
 
   if (!currentWordIndex) currentGameWords = shuffleArray(wordsCollection);
 
-  if (isGameFinished) {
+  const restartGame = () => {
+    toggleGameMode(false);
+    changeWordIndex(0);
+    toggleWordStatus(false);
+    addWordToWrong([]);
+    addWordToCorrect([]);
+    setAnswer(false);
+    changeAnswersAmount(0);
+    changeScoreStep(10);
+    changeScore(0);
+  };
+
+  const finishGame = () => {
     addWrongWordsToStore(wrongAnsweredWords);
     if (gameMode) {
+      const wrongWords = wordsCollection
+        .filter(
+          (word) => !correctAnsweredWords.find((correctWord) => correctWord.word === word.word)
+        )
+        .map((word) => word.word);
       saveStatistic({
         Level: level,
         Page: page,
         wordsCollection,
-        wrongWordsState: wrongAnsweredWords,
+        wrongWordsState: wrongWords,
         gameName,
       });
     }
+  };
+
+  if (isGameFinished) {
     return (
       <ResultModal
         correctWords={correctAnsweredWords}
         showProperties={['word', 'wordTranslate']}
         audioForPlay="audio"
         newGame={newGame}
+        restartGame={restartGame}
       />
     );
   }
@@ -98,7 +120,8 @@ const SprintGameContainer = (props) => {
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
     } else addWordToCorrect([...correctAnsweredWords, currentWord]);
     if (currentWordIndex === currentGameWords.length - 1) {
-      finishGameHandler();
+      setTimeout(() => finishGameHandler(), 500);
+      finishGame();
     } else changeWordIndex(currentWordIndex + 1);
   };
   return (
@@ -139,6 +162,7 @@ SprintGameContainer.propTypes = {
   page: PropTypes.string.isRequired,
   gameName: PropTypes.string.isRequired,
   newGame: PropTypes.func,
+  toggleGameMode: PropTypes.func,
   gameMode: PropTypes.bool.isRequired,
 };
 
@@ -147,6 +171,7 @@ SprintGameContainer.defaultProps = {
   isGameFinished: false,
   finishGameHandler: () => {},
   addWrongWordsToStore: () => {},
+  toggleGameMode: () => {},
   newGame: () => {},
 };
 

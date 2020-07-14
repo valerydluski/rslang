@@ -31,6 +31,8 @@ const SettingsForm = (props) => {
         label={I18n.t('Settings.wordsPerPage')}
         classNameSpan="span_none"
         className="settings"
+        min={5}
+        max={25}
       />
       <BlackHeader>
         <Translate value="Games.savannah" />
@@ -46,6 +48,8 @@ const SettingsForm = (props) => {
         label={I18n.t('Settings.wordsPerPage')}
         classNameSpan="span_none"
         className="settings"
+        min={5}
+        max={25}
       />
       <Field
         name="savannahTimeForWord"
@@ -58,6 +62,8 @@ const SettingsForm = (props) => {
         label={I18n.t('Settings.timeForWord')}
         classNameSpan="span_none"
         className="settings"
+        min={1}
+        max={10}
       />
       <Field
         name="savannahMaxErrorCounter"
@@ -70,6 +76,8 @@ const SettingsForm = (props) => {
         label={I18n.t('Settings.errorCounter')}
         classNameSpan="span_none"
         className="settings"
+        min={1}
+        max={5}
       />
       <BlackHeader>
         <Translate value="Games.speakIT" />
@@ -85,6 +93,8 @@ const SettingsForm = (props) => {
         label={I18n.t('Settings.wordsPerPage')}
         classNameSpan="span_none"
         className="settings"
+        min={5}
+        max={25}
       />
       <BlackHeader>
         <Translate value="Games.sprint" />
@@ -100,6 +110,8 @@ const SettingsForm = (props) => {
         label={I18n.t('Settings.wordsPerPage')}
         classNameSpan="span_none"
         className="settings"
+        min={5}
+        max={25}
       />
       <Field
         name="sprintTimeForWord"
@@ -112,6 +124,8 @@ const SettingsForm = (props) => {
         label={I18n.t('Settings.timeForWord')}
         classNameSpan="span_none"
         className="settings"
+        min={1}
+        max={5}
       />
       <BlackHeader>
         <Translate value="Games.makeSentence" />
@@ -127,6 +141,8 @@ const SettingsForm = (props) => {
         label={I18n.t('Settings.wordsPerPage')}
         classNameSpan="span_none"
         className="settings"
+        min={5}
+        max={25}
       />
       <BlackHeader>
         <Translate value="Games.puzzle" />

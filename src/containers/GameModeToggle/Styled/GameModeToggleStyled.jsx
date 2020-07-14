@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const RuGameModeToggleStyled = styled.div`
   border-radius: 75px;
-  margin-top: 20px;
+  margin: 15px 0;
   font-weight: 500;
   position: relative;
   input {
@@ -22,11 +22,11 @@ const RuGameModeToggleStyled = styled.div`
       width: 48px;
       height: 48px;
       z-index: 1;
-      transition: 0.3s;
+      transition: 0.6s;
       background: #6550de;
       border-radius: 100%;
     }
-    & + span:after {
+    &::before {
       position: absolute;
       content: attr(data-on);
       color: #7d7d7d;
@@ -35,13 +35,15 @@ const RuGameModeToggleStyled = styled.div`
       left: 70px;
       top: 18px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.6s;
     }
     &:checked {
       &::after {
         transform: translateX(193px);
+        background-color: #f56748;
+        transition: 0.6s ease-out;
       }
-      & + span:after {
+      &::before {
         content: attr(data-off);
         left: 20px;
       }

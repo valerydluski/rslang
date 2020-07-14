@@ -16,13 +16,14 @@ const GameModeToggle = (props) => {
           <input
             type="checkbox"
             checked={isChecked}
+            data-on={I18n.t('Buttons.train')}
+            data-off={I18n.t('Buttons.play')}
             onChange={() => {
               toggleCheck(!currentGameMode);
               switchGameMode(!currentGameMode);
               switchAppMode(gameName);
             }}
           />
-          <span data-on={I18n.t('Buttons.train')} data-off={I18n.t('Buttons.play')} />
         </label>
       </RuGameModeToggleStyled>
     );
@@ -33,13 +34,14 @@ const GameModeToggle = (props) => {
         <input
           type="checkbox"
           checked={isChecked}
+          data-on={I18n.t('Buttons.train')}
+          data-off={I18n.t('Buttons.play')}
           onChange={() => {
             toggleCheck(!currentGameMode);
             switchGameMode(!currentGameMode);
             switchAppMode(gameName);
           }}
         />
-        <span data-on={I18n.t('Buttons.train')} data-off={I18n.t('Buttons.play')} />
       </label>
     </EnGameModeToggleStyled>
   );
