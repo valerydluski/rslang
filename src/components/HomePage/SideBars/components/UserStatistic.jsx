@@ -21,14 +21,10 @@ function UserStatistic({
   return (
     <UserStatisticContainer>
       <DayInfoContainer>
-        <DayInfo title={I18n.t('LearnWords.newWords')} count={wordsInDay} total={totalWordsInDay} />
+        <DayInfo title="LearnWords.newWords" count={wordsInDay} total={totalWordsInDay} />
+        <DayInfo title="LearnWords.cardsShowed" count={cardsInDay} total={totalCardsInDay} />
         <DayInfo
-          title={I18n.t('LearnWords.cardsShowed')}
-          count={cardsInDay}
-          total={totalCardsInDay}
-        />
-        <DayInfo
-          title={I18n.t('LearnWords.repeatCards')}
+          title="LearnWords.repeatCards"
           count={repeatedWordsInDay}
           total={totalRepeatCardsInDay}
         />
