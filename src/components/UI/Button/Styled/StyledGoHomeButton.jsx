@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import iconExit from '../../Icon/iconExit.svg';
 import iconExitHover from '../../Icon/iconExitHover.svg';
+import { DEVICE } from '../../../../config';
 
 const StyledGoHomeButton = styled.button`
   position: absolute;
@@ -14,7 +15,7 @@ const StyledGoHomeButton = styled.button`
   outline: none;
   transition: all 0.3s ease-in-out;
   background-size: cover;
-  z-index: 1;
+  z-index: 160;
   &:hover {
     background: url(${iconExitHover});
     background-size: cover;

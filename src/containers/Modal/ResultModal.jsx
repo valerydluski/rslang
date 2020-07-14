@@ -39,7 +39,6 @@ const ModalResult = (props) => {
   if (loading) {
     return (
       <OverlayStyled id="overlay">
-        <GoToHomePageButton />
         <ModalStyled>
           <LoadingSpinner />
         </ModalStyled>
@@ -142,7 +141,6 @@ const ModalResult = (props) => {
 
   return (
     <OverlayStyled id="overlay">
-      <GoToHomePageButton />
       <ModalStyled>{showContent()}</ModalStyled>
     </OverlayStyled>
   );
