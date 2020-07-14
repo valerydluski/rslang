@@ -22,7 +22,11 @@ const createData = ({ level, page, count }, gameName) => {
   let wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;
   if (gameName === GAME_NAME.englishPuzzle || gameName === GAME_NAME.makeSentence) {
     wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentencePuzzle}`;
-    wordsPerPage = `${WORDS_PER_PAGE}=${wordsPerSentencePuzzle}`;
+    if (gameName === GAME_NAME.makeSentence) {
+      wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;
+    } else {
+      wordsPerPage = `${WORDS_PER_PAGE}=${wordsPerSentencePuzzle}`;
+    }
   }
   return {
     linkLevel,

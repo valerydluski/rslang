@@ -24,7 +24,11 @@ const createData = ({ changeRound, changeAppMode, userSettings }) => {
   let wordsPerPage;
   if (appMode === 'EnglishPuzzle' || appMode === 'MakeSentence') {
     wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentencePuzzle}`;
-    wordsPerPage = `${WORDS_PER_PAGE}=${wordsPerSentencePuzzle}`;
+    if (appMode === 'MakeSentence') {
+      wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;
+    } else {
+      wordsPerPage = `${WORDS_PER_PAGE}=${wordsPerSentencePuzzle}`;
+    }
   } else {
     wordsPerSentence = `${WORDS_PER_SENTENCE}=${wordsPerSentenceGames}`;
     wordsPerPage = `${WORDS_PER_PAGE}=${gameWordsPerPage}`;
