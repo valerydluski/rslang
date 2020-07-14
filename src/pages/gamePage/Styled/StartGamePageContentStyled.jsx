@@ -24,6 +24,8 @@ const StartGamePageContent = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 80px;
+  box-sizing; border-box;
+  padding: 30px 30px 0 30px;
 
   @media ${DEVICE.tablet} {
     flex-direction: column;
