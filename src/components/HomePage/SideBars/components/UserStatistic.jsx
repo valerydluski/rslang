@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { I18n } from 'react-redux-i18n';
 import UserStatisticContainer from './styled/UserStatisticContainer';
 import ProgressBarContainer from './styled/ProgressBarContainer';
 import DayInfoContainer from './styled/DayInfoContainer';
