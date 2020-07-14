@@ -41,7 +41,7 @@ function Statistics({ getAllWords, data, isLoading }) {
   const onOrientationChange = useCallback(() => {
     const screenWidth = getScreenWidth();
     changeBreakpoint(screenWidth < breakpoints[1]);
-  }, [changeBreakpoint, changeChartSize]);
+  }, [changeBreakpoint]);
 
   useEffect(() => {
     const screenWidth = getScreenWidth();
