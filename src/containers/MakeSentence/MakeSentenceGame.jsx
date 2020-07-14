@@ -171,7 +171,6 @@ MakeSentenceGame.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isWordsLoading: state.loader.loading,
-    currentAppMode: state.changeAppMode.appMode,
     gameMode: state.gamesReducer.gameMode,
   };
 };
