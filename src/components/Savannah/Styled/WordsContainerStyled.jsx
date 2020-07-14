@@ -8,12 +8,11 @@ const WordsContainerStyled = styled.div`
   justify-content: center;
   border-top: 1px solid #c4c4c4;
   user-select: none;
-  position: relative;
-  bottom: 80px;
+  width: 100%;
+  margin-top: 10px;
   flex-wrap: wrap;
   @media ${DEVICE.tablet} {
     justify-content: flex-start;
-    bottom: 30px;
   }
 `;
 
