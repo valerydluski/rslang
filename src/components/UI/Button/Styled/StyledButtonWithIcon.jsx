@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DEVICE } from '../../../../config';
 
 const StyledButtonWithIcon = styled.button`
   margin-left: 45px;
@@ -17,6 +18,10 @@ const StyledButtonWithIcon = styled.button`
   margin-bottom: 25px;
   transition: 0.3s linear;
 
+  @media ${DEVICE.tablet} {
+    color: #ffffff;
+  }
+
   &::before {
     content: '';
     width: 28px;
@@ -27,6 +32,10 @@ const StyledButtonWithIcon = styled.button`
     background-image: url(${(props) => props.icon});
     background-repeat: no-repeat;
     transition: 0.3s linear;
+
+    @media ${DEVICE.tablet} {
+      background-image: url(${(props) => props.iconTablet});
+    }
   }
 
   &:hover {
@@ -35,10 +44,6 @@ const StyledButtonWithIcon = styled.button`
     &::before {
       background-image: url(${(props) => props.iconHover});
     }
-  }
-
-  @media (max-width: 768px) {
-   display: none;
   }
 `;
 

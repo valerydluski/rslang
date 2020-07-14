@@ -47,6 +47,7 @@ const translations = {
       timeForWord: 'Time for a word',
       errorCounter: 'Maximum number of errors',
       cardsPerDayRepeat: 'Сards per day interval repetition',
+      newWordsAndAllWords: 'Cards per day cannot be less than the number of new words per day',
       showIdontKhowButton: 'Show button i dont know button',
     },
     Auth: {
@@ -151,6 +152,7 @@ const translations = {
     LearnWords: {
       newWords: 'New words',
       cardsShowed: 'Cards showed',
+      repeatCards: 'Cards repeated',
       correctWords: 'Correct words',
       completed: 'Series completed',
       theLongestSeries: 'The longest series of correct answers',
@@ -221,6 +223,7 @@ const translations = {
       timeForWord: 'Времени на слово',
       errorCounter: 'Максимальное число ошибок',
       cardsPerDayRepeat: 'Карточек на день интервальное повторение',
+      newWordsAndAllWords: 'Карточек в день не может быть меньше, чем количество новых слов в день',
       showIdontKhowButton: 'Показать кнопку я не знаю',
     },
     Auth: {
@@ -266,7 +269,6 @@ const translations = {
       choose: 'Выбрать',
       OK: 'OK',
       back: 'Назад',
-      login: 'Войти',
       hard: 'Тяжело',
       train: 'Тренировать',
       play: 'Играть',
@@ -325,7 +327,8 @@ const translations = {
     },
     LearnWords: {
       newWords: 'Новые слова',
-      cardsShowed: 'Карточек завершено',
+      cardsShowed: 'Карточек показано',
+      repeatCards: 'Повторили карточек',
       correctWords: 'Правильные слова',
       completed: 'Cерия завершена',
       theLongestSeries: 'Самая длинная серия правильных ответов',

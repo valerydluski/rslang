@@ -15,7 +15,6 @@ export const InputWordsBgContainer = styled.span`
   padding: 5px 10px;
   background-color: transparent;
   border: 2px solid transparent;
-  transition: 0.1s linear;
 `;
 
 export const InputLetterContainer = styled.span`

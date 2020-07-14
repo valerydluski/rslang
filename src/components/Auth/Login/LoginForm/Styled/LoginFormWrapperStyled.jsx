@@ -15,7 +15,7 @@ const LoginFormWrapperStyled = styled.div`
   place-items: center;
   background: #fafafa;
   box-sizing: border-box;
-  min-height: 900px;
+  min-height: 100%;
   max-height: 1080px;
 
   @media (max-width: 1800px) {

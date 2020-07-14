@@ -8,7 +8,7 @@ import BannerAnimation from '../../../../components/HomePage/Content/Animation/B
 function Title(props) {
   const { userName } = props;
   return (
-    <UserTitleContainer>
+    <UserTitleContainer className="user-title">
       <h2>
         <Translate value="HomePage.greeting" />, {userName}
       </h2>

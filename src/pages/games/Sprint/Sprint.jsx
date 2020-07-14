@@ -77,6 +77,7 @@ const Sprint = (props) => {
       />
       <GameContainerStyled>
         <Timer
+          key={new Date()}
           initialTime={secondsForGuessing}
           timeIsUpHandler={timeIsUpHandler}
           isGameFinished={isGameFinished}
@@ -89,6 +90,7 @@ const Sprint = (props) => {
           page={page}
           gameName={gameName}
           newGame={newGame}
+          toggleGameMode={toggleGameMode}
         />
       </GameContainerStyled>
       <StyledPattern>

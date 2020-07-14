@@ -13,6 +13,7 @@ const GamesContainer = styled.div`
 
   @media ${DEVICE.tablet} {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
 `;
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { I18n } from 'react-redux-i18n';
 import UserStatisticContainer from './styled/UserStatisticContainer';
 import ProgressBarContainer from './styled/ProgressBarContainer';
 import DayInfoContainer from './styled/DayInfoContainer';
@@ -9,15 +8,24 @@ import DayInfo from './DayInfo';
 import TotalProgress from './TotalProgress';
 import { TOTAL_WORDS } from '../../../../config';
 
-function UserStatistic({ wordsInDay, cardsInDay, totalWordsInDay, totalCardsInDay, totalWords }) {
+function UserStatistic({
+  wordsInDay,
+  cardsInDay,
+  totalWordsInDay,
+  totalCardsInDay,
+  totalWords,
+  repeatedWordsInDay,
+  totalRepeatCardsInDay,
+}) {
   return (
     <UserStatisticContainer>
       <DayInfoContainer>
-        <DayInfo title={I18n.t('LearnWords.newWords')} count={wordsInDay} total={totalWordsInDay} />
+        <DayInfo title="LearnWords.newWords" count={wordsInDay} total={totalWordsInDay} />
+        <DayInfo title="LearnWords.cardsShowed" count={cardsInDay} total={totalCardsInDay} />
         <DayInfo
-          title={I18n.t('LearnWords.cardsShowed')}
-          count={cardsInDay}
-          total={totalCardsInDay}
+          title="LearnWords.repeatCards"
+          count={repeatedWordsInDay}
+          total={totalRepeatCardsInDay}
         />
       </DayInfoContainer>
       <ProgressBarContainer>
@@ -39,6 +47,8 @@ UserStatistic.propTypes = {
   cardsInDay: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   totalWordsInDay: PropTypes.number,
   totalCardsInDay: PropTypes.number,
+  repeatedWordsInDay: PropTypes.number,
+  totalRepeatCardsInDay: PropTypes.number,
   totalWords: PropTypes.instanceOf(Array),
 };
 
@@ -47,6 +57,8 @@ UserStatistic.defaultProps = {
   cardsInDay: 0,
   totalWordsInDay: 0,
   totalCardsInDay: 0,
+  repeatedWordsInDay: 0,
+  totalRepeatCardsInDay: 0,
   totalWords: [],
 };
 
@@ -56,6 +68,8 @@ const mapStateToProps = (state) => {
     cardsInDay: state.changeStatistic.statistic.CountCardsShow,
     totalWordsInDay: state.userSettings.settings.wordsPerDay,
     totalCardsInDay: state.userSettings.settings.cardsPerDay,
+    repeatedWordsInDay: state.changeStatistic.statistic.countRepeatToday,
+    totalRepeatCardsInDay: state.userSettings.settings.cardsPerDayRepeat,
     totalWords: state.userWords.words,
   };
 };
