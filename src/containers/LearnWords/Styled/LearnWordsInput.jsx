@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const InputContainer = styled.div`
-  margin-top: 10px;
   position: relative;
+  padding: 5px 10px;
+  width: ${(props) => props.width}px;
+  display: inline-block;
 `;
 
 export const InputWordsBgContainer = styled.span`
@@ -24,6 +26,7 @@ export const InputLetterContainer = styled.span`
 `;
 
 export const InputStyled = styled.input`
+  display: inline-block;
   width: ${(props) => props.width}px;
   padding: 5px 10px;
   color: #000;

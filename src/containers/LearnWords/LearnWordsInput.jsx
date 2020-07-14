@@ -67,7 +67,7 @@ const LearnWordsInput = (props) => {
   const width = getStringWidth(word, FONT_SIZE);
 
   return (
-    <InputContainer style={{ display: 'inline' }}>
+    <InputContainer width={width} style={{ display: 'inline-block' }}>
       <InputWordsBgContainer showResult={show} width={width} onClick={hideResult}>
         {word
           .toLowerCase()

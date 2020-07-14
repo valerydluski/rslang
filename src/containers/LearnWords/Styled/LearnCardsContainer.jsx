@@ -17,6 +17,7 @@ const LearnCardsContainer = styled.div`
   width: 100%;
 
   @media ${DEVICE.tablet} {
+    margin-top: 60px;
     grid-template-rows: 40% 15% 15% 15% 15%;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -57,13 +58,18 @@ export const TextExampleStyled = styled.div`
   font-size: 30px;
   line-height: 35px;
   color: #7d7d7d;
-  display: inline;
+  display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
   height: 100%;
 
   @media (max-width: 1280px) {
     font-size: 24px;
+  }
+
+  @media ${DEVICE.tablet} {
+    font-size: 18px;
+    line-height: 22px;
   }
 `;
 
@@ -82,6 +88,11 @@ export const TextExampleTranslateStyled = styled.div`
   @media (max-width: 1280px) {
     font-size: 20px;
   }
+
+  @media ${DEVICE.tablet} {
+    font-size: 18px;
+    line-height: 22px;
+  }
 `;
 
 export const TextMeaningStyled = styled.div`
@@ -99,6 +110,11 @@ export const TextMeaningStyled = styled.div`
   @media (max-width: 1280px) {
     font-size: 20px;
   }
+
+  @media ${DEVICE.tablet} {
+    font-size: 18px;
+    line-height: 22px;
+  }
 `;
 
 export const TextMeaningTranslateStyled = styled.div`
@@ -115,6 +131,11 @@ export const TextMeaningTranslateStyled = styled.div`
 
   @media (max-width: 1280px) {
     font-size: 20px;
+  }
+
+  @media ${DEVICE.tablet} {
+    font-size: 18px;
+    line-height: 22px;
   }
 `;
 
