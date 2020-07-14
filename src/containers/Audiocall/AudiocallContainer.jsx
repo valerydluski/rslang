@@ -100,7 +100,7 @@ const AudioCallContainer = ({
 
   function autoSolve() {
     changegameProgressLine(gameProgressLine + 100 / wordsCollection.length);
-    addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
+    addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
     toggleWordStatus(true);
     answerResult.isCorrect = true;
     answerResult.words = additionalWords;
@@ -109,7 +109,9 @@ const AudioCallContainer = ({
 
   function processUserAnswer(isCorrect, words, selectedIndex, correctIndex) {
     changegameProgressLine(gameProgressLine + 100 / wordsCollection.length);
-    if (!isCorrect) addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
+    if (!isCorrect) {
+      addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
+    }
     answerResult = { isCorrect, words, selectedIndex, correctIndex };
     toggleWordStatus(true);
   }
