@@ -107,9 +107,15 @@ const ButtonStyled = styled.button`
     cursor: not-allowed;
   }
 
-  @media (max-width: 680px) {
+  @media ${DEVICE.tablet} {
     font-size: 14px;
     width: 140px;
+    height: 37px;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 10px;
+    width: 74px;
     height: 37px;
   }
 `;
