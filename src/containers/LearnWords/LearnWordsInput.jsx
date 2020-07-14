@@ -31,7 +31,7 @@ const LearnWordsInput = (props) => {
   const [show, setShow] = useState(false);
   const inputRef = useRef(null);
 
-  const FONT_SIZE = 30;
+  const FONT_SIZE = 20;
   const DEFAUL_TIME_SHOW = 2000;
   const MILLISEC_IN_SEC = 1000;
   const CORRECTION_FACTOR = 500;

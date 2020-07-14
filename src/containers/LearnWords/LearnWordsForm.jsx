@@ -45,6 +45,7 @@ const LearnWordsForm = (props) => {
     showResultHander,
     isInputActive,
     audioIsPlaying,
+    isSoundPlay,
   } = props;
 
   const {
@@ -98,7 +99,7 @@ const LearnWordsForm = (props) => {
         <StyledRoundButton
           onClick={customHandleSubmit('sound')}
           type="button"
-          className="learn_sound-button"
+          className={!isSoundPlay ? 'learn_sound-button not-active' : 'learn_sound-button'}
         />
         <TopContnentStyled>
           {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
@@ -132,7 +133,7 @@ const LearnWordsForm = (props) => {
                 }
               }}
             />
-            {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
+            {isTextExample && <p style={{ display: 'inline', marginLeft: '10px' }}>{secondPart}</p>}
           </TextExampleStyled>
         </TopContnentStyled>
         {isTranslationShow && isTranslate && (
@@ -156,9 +157,13 @@ const LearnWordsForm = (props) => {
         {isInputActive ? (
           <StyledButton
             type="button"
-            className="button-next lear_button learn_all-buttons"
             onClick={customHandleSubmit('form')}
             disabled={!isInputActive}
+            className={
+              !isInputActive
+                ? 'button-next lear_button learn_all-buttons not-active'
+                : 'button-next lear_button learn_all-buttons'
+            }
           >
             <Translate value="Buttons.check" />
           </StyledButton>
@@ -173,10 +178,14 @@ const LearnWordsForm = (props) => {
         )}
         {deleteButton && (
           <StyledButton
-            className="lear_button learn_all-buttons"
             onClick={customHandleSubmit('deleted')}
             type="button"
             disabled={isInputActive && !audioIsPlaying}
+            className={
+              isInputActive && !audioIsPlaying
+                ? 'lear_button learn_all-buttons not-active'
+                : 'lear_button learn_all-buttons'
+            }
           >
             <Translate value="Buttons.delete" />
           </StyledButton>
@@ -186,7 +195,11 @@ const LearnWordsForm = (props) => {
             onClick={customHandleSubmit('hard')}
             type="button"
             disabled={isInputActive && !audioIsPlaying}
-            className="lear_button learn_all-buttons"
+            className={
+              isInputActive && !audioIsPlaying
+                ? 'lear_button learn_all-buttons not-active'
+                : 'lear_button learn_all-buttons'
+            }
           >
             <Translate value="Buttons.hard" />
           </StyledButton>
@@ -196,7 +209,11 @@ const LearnWordsForm = (props) => {
             onClick={customHandleSubmit('unknown')}
             type="button"
             disabled={!isInputActive}
-            className="lear_button learn_i-dont-know"
+            className={
+              !isInputActive
+                ? 'lear_button learn_i-dont-know not-active'
+                : 'lear_button learn_i-dont-know'
+            }
           >
             <Translate value="Buttons.dontKnow" />
           </StyledButton>
@@ -260,6 +277,7 @@ LearnWordsForm.propTypes = {
   wordsCount: PropTypes.number,
   currentWordIndex: PropTypes.number,
   audiosDuration: PropTypes.number.isRequired,
+  isSoundPlay: PropTypes.bool.isRequired,
 };
 
 LearnWordsForm.defaultProps = {

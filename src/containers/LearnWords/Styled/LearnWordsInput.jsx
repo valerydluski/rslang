@@ -5,6 +5,7 @@ export const InputContainer = styled.div`
   padding: 5px 10px;
   width: ${(props) => props.width}px;
   display: inline-block;
+  margi: 0 10px;
 `;
 
 export const InputWordsBgContainer = styled.span`
@@ -30,4 +31,5 @@ export const InputStyled = styled.input`
   width: ${(props) => props.width}px;
   padding: 5px 10px;
   color: #000;
+  margi: 0 10px;
 `;

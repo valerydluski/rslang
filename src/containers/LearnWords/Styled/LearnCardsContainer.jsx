@@ -17,7 +17,7 @@ const LearnCardsContainer = styled.div`
   width: 100%;
 
   @media ${DEVICE.tablet} {
-    margin-top: 60px;
+    margin-top: 65px;
     grid-template-rows: 40% 15% 15% 15% 15%;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -45,8 +45,8 @@ export const TranslateStyled = styled.p`
     line-height: 28px;
   }
   @media ${DEVICE.tablet} {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 14px;
+    line-height: 16px;
   }
 `;
 
@@ -55,22 +55,13 @@ export const TextExampleStyled = styled.div`
   font-family: Montserrat;
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
-  line-height: 35px;
+  font-size: 20px;
+  line-height: 20px;
   color: #7d7d7d;
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
   height: 100%;
-
-  @media (max-width: 1280px) {
-    font-size: 24px;
-  }
-
-  @media ${DEVICE.tablet} {
-    font-size: 18px;
-    line-height: 22px;
-  }
 `;
 
 export const TextExampleTranslateStyled = styled.div`
@@ -90,8 +81,8 @@ export const TextExampleTranslateStyled = styled.div`
   }
 
   @media ${DEVICE.tablet} {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 14px;
+    line-height: 16px;
   }
 `;
 
@@ -108,12 +99,13 @@ export const TextMeaningStyled = styled.div`
   height: 100%;
 
   @media (max-width: 1280px) {
-    font-size: 20px;
+    font-size: 16px;
+    line-height: 18px;
   }
 
   @media ${DEVICE.tablet} {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 14px;
+    line-height: 16px;
   }
 `;
 
@@ -134,8 +126,8 @@ export const TextMeaningTranslateStyled = styled.div`
   }
 
   @media ${DEVICE.tablet} {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 14px;
+    line-height: 16px;
   }
 `;
 

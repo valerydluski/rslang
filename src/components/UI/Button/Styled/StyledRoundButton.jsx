@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { DEVICE } from '../../../../config';
 import audioIco from '../../Icon/audioIco.svg';
+import audiNotActive from '../../Icon/audiNotActive.svg';
 
 const StyledRoundButton = styled.button`
   margin-left: 20px;
@@ -51,6 +52,10 @@ const StyledRoundButton = styled.button`
     @media ${DEVICE.tablet} {
       top: -50px;
     }
+  }
+
+  &.not-active {
+    background: url(${audiNotActive});
   }
 `;
 
