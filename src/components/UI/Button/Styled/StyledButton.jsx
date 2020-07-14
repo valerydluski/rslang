@@ -101,6 +101,11 @@ const ButtonStyled = styled.button`
       width: 90%;
     }
   }
+
+  &.not-active {
+    background-color: #b2b2b2;
+    cursor: not-allowed;
+  }
 `;
 
 export default ButtonStyled;

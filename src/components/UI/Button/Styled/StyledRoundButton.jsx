@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { DEVICE } from '../../../../config';
 import audioIco from '../../Icon/audioIco.svg';
+import audiNotActive from '../../Icon/audiNotActive.svg';
 
 const StyledRoundButton = styled.button`
   margin-left: 20px;
@@ -25,11 +26,11 @@ const StyledRoundButton = styled.button`
   }
 
   @media ${DEVICE.tablet} {
-  width: 70px;
-  height: 70px;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 26px;
+    width: 70px;
+    height: 70px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 26px;
   }
 
   @media ${DEVICE.mobileL} {
@@ -37,7 +38,7 @@ const StyledRoundButton = styled.button`
     height: 42px;
     font-size: 13px;
     line-height: 16px;
-    }
+  }
   &.learn_sound-button {
     position: absolute;
     top: 10px;
@@ -47,6 +48,14 @@ const StyledRoundButton = styled.button`
     background: url(${audioIco});
     background-repeat: no-repeat;
     background-size: cover;
+
+    @media ${DEVICE.tablet} {
+      top: -50px;
+    }
+  }
+
+  &.not-active {
+    background: url(${audiNotActive});
   }
 `;
 

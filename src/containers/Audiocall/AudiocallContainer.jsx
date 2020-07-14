@@ -55,7 +55,7 @@ const AudioCallContainer = ({
 
   useEffect(() => {
     resetGameData();
-  }, [wordsCollection]);
+  }, [wordsCollection, resetGameData]);
 
   if (isWordsLoading) return <LoadingSpinner />;
 

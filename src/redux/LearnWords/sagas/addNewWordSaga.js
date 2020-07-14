@@ -7,6 +7,8 @@ import findObjInArray from '../../../utils/findObjInArray';
 import { saveUserWords } from '../../Dictionary/actions';
 import { SAVE_FULL_STATISTIC_TO_STORE } from '../../Statistic/types';
 
+const WORDS_PER_LEVEL = 600;
+
 function* addNewWordSagaWorker(action) {
   yield put(loadingWordToServer(true));
   const getLoginState = (state) => state.login;
@@ -40,10 +42,14 @@ function* addNewWordSagaWorker(action) {
       },
     };
     yield call(saveOneWord, wordId, config, sessionData, action.payload.word);
-    [nextLevel, nextWord] = image
-      .replace(/0|.jpg/g, '')
-      .split('/')[1]
-      .split('_');
+    [, nextWord] = image.replace(/.jpg/g, '').split('/')[1].split('_');
+    if (+nextWord === 3600) {
+      nextWord = 600;
+      nextLevel = 6;
+    } else {
+      nextLevel = Math.ceil(nextWord / WORDS_PER_LEVEL);
+      nextWord %= WORDS_PER_LEVEL;
+    }
     const elForStore = action.payload;
     elForStore.userWord = config;
     words[0].paginatedResults = words[0].paginatedResults.concat(elForStore);

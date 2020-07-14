@@ -16,7 +16,6 @@ import {
   IS_MORE_CARDS_TODAY,
   SHOW_CARD,
   SET_DIFFICULT_WORDS,
-  ADD_COUNTER,
 } from './types';
 
 export function showNewCard(card) {
