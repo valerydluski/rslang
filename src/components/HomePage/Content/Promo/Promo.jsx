@@ -6,6 +6,7 @@ import TitleWithUnderline from '../Main/components/Title/styled/TitleWithUnderli
 import ContentContainer from '../ContentContainer';
 import PromoText from './Container/PromoContentContainer';
 import RepoLink from './Container/PromoRepoLinkContainer';
+import VideoPlayer from './Container/VideoPlayer/VideoPlayerContainer';
 
 export default function Promo(props) {
   const { userName } = props;
@@ -19,6 +20,7 @@ export default function Promo(props) {
       <TitleWithUnderline>
         <Translate value="HomePage.videoLesson" />
       </TitleWithUnderline>
+      <VideoPlayer />
       <TitleWithUnderline>
         <Translate value="HomePage.sourceRepo" />
       </TitleWithUnderline>
