@@ -19,7 +19,6 @@ const ProgressBarContainer = styled.div`
     color: #7d7d7d;
     padding-bottom: 5px;
     border-bottom: 1px solid #c4c4c4;
-    margin-bottom: 30px;
     align-self: stretch;
   }
 
@@ -32,22 +31,11 @@ const ProgressBarContainer = styled.div`
   }
 
   & .total-progress {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
   }
 
   @media ${DEVICE.laptop} {
-    .total-progress {
-      width: 150px;
-      height: 150px;
-    }
-
-    h3 {
-      text-align: center;
-    }
-  }
-
-  @media ${DEVICE.tablet} {
     display: none;
   }
 `;

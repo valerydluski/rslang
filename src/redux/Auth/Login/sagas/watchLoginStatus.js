@@ -11,6 +11,7 @@ import {
 import { loadDataFromApi } from '../../../LoadDataFromApi/actions';
 
 function* workerStatus() {
+  const isLoginForm = checkHistoryLocation(['/login', '/registration']);
   yield put(checkStatusShowLoader());
   const getLoginState = (state) => state.login;
   const getLoadDataStatus = (state) => state.dataLoad.isDataLoadFromApi;
@@ -20,10 +21,10 @@ function* workerStatus() {
   if (sessionData.token) data = yield call(checkToken, sessionData);
   if (!data) {
     yield put(resetSessionData());
-    if (!checkHistoryLocation(['/login', '/registration'])) {
+    if (!isLoginForm) {
       yield call(history.push, '/login');
     }
-  } else if (!isDataLoad) {
+  } else if (!isDataLoad && !isLoginForm) {
     yield put(loadDataFromApi());
     yield put(isAlreadyCheckStatusSession());
   }

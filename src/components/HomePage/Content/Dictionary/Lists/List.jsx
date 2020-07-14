@@ -20,6 +20,16 @@ function List({ wordsList, type }) {
       el: '.swiper-scrollbar',
       hide: false,
     },
+    breakpoints: {
+      425: {
+        slidesPerView: 3,
+        slidesPerGroup: 3,
+      },
+      1024: {
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+      },
+    },
   };
 
   return (
