@@ -14,7 +14,7 @@ import { saveFullStatistic } from '../../redux/Statistic/action';
 import errorSound from '../../assets/audio/error.mp3';
 import correctSound from '../../assets/audio/correct.mp3';
 
-let currentGameWords;
+let currentGameWords = [];
 const audio = new Audio();
 
 const MakeSentenceGame = ({
@@ -35,6 +35,7 @@ const MakeSentenceGame = ({
   const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
   const [isAutoSolve, toggleAutoSolveMode] = useState(false);
+  const [isCheckShow, toggleShowCheck] = useState(false);
 
   const resetGameData = () => {
     changeIndex(0);
@@ -42,6 +43,7 @@ const MakeSentenceGame = ({
     toggleWordStatus(false);
     toggleGameMode(false);
     toggleAutoSolveMode(false);
+    toggleShowCheck(false);
     currentGameWords = [];
   };
 
@@ -52,7 +54,7 @@ const MakeSentenceGame = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (!currentWordIndex && !isWordFinished) {
+  if (!currentWordIndex && !isWordFinished && !currentGameWords.length) {
     currentGameWords = shuffleArray(wordsCollection);
   }
 
@@ -103,22 +105,36 @@ const MakeSentenceGame = ({
   };
 
   const switchToNextSentence = () => {
+    if (isCheckShow) toggleShowCheck(false);
     if (isAutoSolve) toggleAutoSolveMode(false);
     if (currentWordIndex === wordsCollection.length - 1) toggleGameMode(true);
     else changeIndex(currentWordIndex + 1);
     toggleWordStatus(false);
   };
 
-  function autoSolve() {
+  const autoSolve = () => {
     addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
     toggleAutoSolveMode(true);
     toggleWordStatus(true);
     playResultSound();
-  }
+  };
 
   const audioSrc = `${LINK_FOR_AUDIO}${currentGameWords[currentWordIndex].audioExample}`;
   const sentence = currentGameWords[currentWordIndex].textExample;
   const sentenceTranslation = currentGameWords[currentWordIndex].textExampleTranslate;
+
+  const checkSentence = (answerParts) => {
+    const result = answerParts.join(' ') === sentenceTranslation;
+    toggleShowCheck(true);
+    if (result) {
+      toggleWordStatus(true);
+      playResultSound(true);
+    } else {
+      playResultSound();
+      addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
+    }
+  };
+
   return (
     <>
       {isGameFinished ? <ResultModal showProperties={['word', 'translation']} /> : null}
@@ -137,6 +153,9 @@ const MakeSentenceGame = ({
         switchToNextSentence={switchToNextSentence}
         isWordFinished={isWordFinished}
         playResultSound={playResultSound}
+        checkSentence={checkSentence}
+        isCheckShow={isCheckShow}
+        toggleShowCheck={toggleShowCheck}
       />
     </>
   );

@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { Translate } from 'react-redux-i18n';
-import { NextButtonStyled, DontKnowButtonStyled } from './Styled/StyledMakeSentenceControls';
+import {
+  NextButtonStyled,
+  DontKnowButtonStyled,
+  CheckButtonStyled,
+} from './Styled/StyledMakeSentenceControls';
 
 const DontKnowButton = ({ clickHandler }) => (
   <DontKnowButtonStyled onClick={clickHandler}>
@@ -16,6 +20,13 @@ const NextButton = ({ switchToNextSentence }) => (
   </NextButtonStyled>
 );
 
+const CheckButton = ({ checkSentence }) => (
+  <CheckButtonStyled onClick={checkSentence}>
+    <Translate value="Buttons.check" />
+    <KeyboardEventHandler handleKeys={['enter']} onKeyEvent={() => checkSentence()} />
+  </CheckButtonStyled>
+);
+
 DontKnowButton.propTypes = {
   clickHandler: PropTypes.func.isRequired,
 };
@@ -24,4 +35,8 @@ NextButton.propTypes = {
   switchToNextSentence: PropTypes.func.isRequired,
 };
 
-export { DontKnowButton, NextButton };
+CheckButton.propTypes = {
+  checkSentence: PropTypes.func.isRequired,
+};
+
+export { DontKnowButton, NextButton, CheckButton };
