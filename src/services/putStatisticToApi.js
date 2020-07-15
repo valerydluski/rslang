@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { I18n } from 'react-redux-i18n';
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
@@ -20,7 +21,7 @@ async function putStatisticToApi(statistic, user) {
       body: JSON.stringify(statistic),
     });
   } catch (e) {
-    toast.error('Did not put statistic');
+    toast.error(I18n.t('Errors.statisticsProblems'));
     throw new Error('Did not put statistic');
   }
 }

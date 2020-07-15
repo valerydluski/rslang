@@ -1,5 +1,6 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import { I18n } from 'react-redux-i18n';
 import { fetchWords } from '../action';
 import {
   SPEAKIT_CHANGE_LEVEL,
@@ -123,7 +124,7 @@ function* workerGetWords() {
     }
     yield put(hideLoader());
   } catch (e) {
-    toast.error('error get words');
+    toast.error(I18n.t('Errors.getWords'));
     yield put(hideLoader());
     throw new Error(e);
   }

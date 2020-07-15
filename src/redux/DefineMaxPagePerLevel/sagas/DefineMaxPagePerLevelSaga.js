@@ -1,5 +1,6 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import { I18n } from 'react-redux-i18n';
 import {
   SPEAKIT_CHANGE_LEVEL,
   SPRINT_CHANGE_LEVEL,
@@ -18,7 +19,7 @@ function* workerDefineMaxPagePerLevel() {
     const payload = yield call(maxPage, state);
     yield put(fetchMaxPage(payload.count));
   } catch (e) {
-    toast.error('error define max page');
+    toast.error(I18n.t('Errors.maxPage'));
   }
 }
 

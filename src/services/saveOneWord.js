@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { I18n } from 'react-redux-i18n';
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
 
@@ -21,7 +22,7 @@ async function saveOneWord(wordId, wordOptions, user) {
       body: JSON.stringify(newOptions),
     });
   } catch (e) {
-    toast.error(e.message);
+    toast.error(I18n.t('Errors.saveWord'));
   }
 }
 
