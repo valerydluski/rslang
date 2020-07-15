@@ -409,7 +409,7 @@ const translations = {
       prevRepeat: 'Предыдущее повторение',
       nextRepeat: 'Следующее повторение',
       emptyList: 'В этом словаре нету слов',
-      learningWords: 'Выученные слова',
+      learningWords: 'Слова на изучении',
       difficultWords: 'Сложные слова',
       deletedWords: 'Удаленные слова',
     },

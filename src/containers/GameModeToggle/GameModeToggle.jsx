@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { I18n } from 'react-redux-i18n';
@@ -7,11 +7,24 @@ import { changeGameMode } from '../../redux/Games/action';
 import { changeAppMode } from '../../redux/AppMode/action';
 
 const GameModeToggle = (props) => {
-  const { currentGameMode, switchGameMode, lang, gameName, switchAppMode } = props;
+  const {
+    currentGameMode,
+    switchGameMode,
+    lang,
+    gameName,
+    switchAppMode,
+    userWords,
+    settings,
+  } = props;
+  const wordsForGame = settings[`${gameName}WordsPerPage`];
   const [isChecked, toggleCheck] = useState(currentGameMode);
-  useEffect(() => {
-    toggleCheck();
-  }, [currentGameMode]);
+  const switchToggle = () => {
+    if (userWords.length >= +wordsForGame) {
+      toggleCheck(!currentGameMode);
+      switchGameMode(!currentGameMode);
+      switchAppMode(gameName);
+    }
+  };
   if (lang === 'ru')
     return (
       <RuGameModeToggleStyled>
@@ -21,11 +34,7 @@ const GameModeToggle = (props) => {
             checked={isChecked}
             data-on={I18n.t('Buttons.train')}
             data-off={I18n.t('Buttons.play')}
-            onChange={() => {
-              toggleCheck(!currentGameMode);
-              switchGameMode(!currentGameMode);
-              switchAppMode(gameName);
-            }}
+            onChange={() => switchToggle()}
           />
         </label>
       </RuGameModeToggleStyled>
@@ -39,11 +48,7 @@ const GameModeToggle = (props) => {
           checked={isChecked}
           data-on={I18n.t('Buttons.train')}
           data-off={I18n.t('Buttons.play')}
-          onChange={() => {
-            toggleCheck(!currentGameMode);
-            switchGameMode(!currentGameMode);
-            switchAppMode(gameName);
-          }}
+          onChange={() => switchToggle()}
         />
       </label>
     </EnGameModeToggleStyled>
@@ -55,13 +60,17 @@ GameModeToggle.propTypes = {
   currentGameMode: PropTypes.bool.isRequired,
   switchAppMode: PropTypes.func.isRequired,
   lang: PropTypes.string.isRequired,
+  userWords: PropTypes.instanceOf(Array).isRequired,
   gameName: PropTypes.string.isRequired,
+  settings: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     currentGameMode: state.gamesReducer.gameMode,
     lang: state.userSettings.settings.language,
+    userWords: state.userWords.words[0].paginatedResults,
+    settings: state.userSettings.settings,
   };
 };
 
