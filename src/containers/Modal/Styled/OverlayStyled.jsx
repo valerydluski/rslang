@@ -1,12 +1,14 @@
 import styled from 'styled-components';
+import pattern from '../../../assets/img/pattern.svg';
 
 const OverlayStyled = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(250, 250, 250, 0.87);
+  height: 100vh;
+  background-image: url(${pattern});
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;

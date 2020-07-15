@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { DEVICE } from '../../../config'
 
 const ModalButtonsContainerStyled = styled.div`
   display: flex;

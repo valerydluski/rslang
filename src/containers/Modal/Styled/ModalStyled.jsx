@@ -16,6 +16,8 @@ const ModalStyled = styled.div`
   background-color: white;
   z-index: 111;
   transition: all 0.5s;
+  box-shadow: 7.2203px 7.2203px 9.92791px rgba(0, 0, 0, 0.05);
+  border-radius: 20.7584px;
 
   @media ${DEVICE.tablet} {
     width: 70%;
