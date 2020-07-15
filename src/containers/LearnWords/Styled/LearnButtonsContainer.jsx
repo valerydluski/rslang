@@ -27,15 +27,11 @@ export const ButtonsRow = styled.div`
   @media ${DEVICE.laptop} {
     flex-wrap: wrap;
     & > button {
-      width: 30%;
+      width: 100%;
       &:last-child {
         width: 100%;
         margin-left: 0;
         margin-top: 10px;
-      }
-      &:nth-child(2),
-      &:nth-child(3) {
-        margin-left: 10px;
       }
 
       @media ${DEVICE.tablet} {
