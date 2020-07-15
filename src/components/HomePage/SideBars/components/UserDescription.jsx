@@ -10,7 +10,6 @@ function UserDescription({ name }) {
     <UserDescriptionContainer>
       <StyledUserPhoto src={photo} alt="User Photo" />
       <h2>{name}</h2>
-      <p>Earth</p>
     </UserDescriptionContainer>
   );
 }
