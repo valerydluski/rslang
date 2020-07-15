@@ -155,6 +155,7 @@ const MakeSentenceGame = ({
         playResultSound={playResultSound}
         checkSentence={checkSentence}
         isCheckShow={isCheckShow}
+        toggleShowCheck={toggleShowCheck}
       />
     </>
   );

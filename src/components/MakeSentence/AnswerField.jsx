@@ -10,6 +10,7 @@ const AnswerField = ({
   wordsWidth,
   isCheckShow,
   sentenceTranslationParts,
+  toggleShowCheck,
 }) => {
   const parts = answerParts.map((part, i) => {
     const key = `${part}${i}`;
@@ -40,6 +41,7 @@ const AnswerField = ({
       {(provided, snapshot) => (
         <AnswerFieldStyled
           ref={provided.innerRef}
+          onClick={() => toggleShowCheck(false)}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...provided.droppableProps}
           isDraggingOver={snapshot.isDraggingOver}

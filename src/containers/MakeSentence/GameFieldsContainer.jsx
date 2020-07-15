@@ -21,11 +21,12 @@ const GameFieldsContainer = ({
   switchToNextSentence,
   checkSentence,
   isCheckShow,
+  toggleShowCheck,
 }) => {
   const [optionParts, changeOptionParts] = useState(shuffleArray(sentenceTranslation.split(' ')));
   const [answerParts, changeAnswerParts] = useState([]);
   const [wordsWidth, changeWordsWidth] = useState({});
-  const [isCheckButtonShow, changeShowMode] = useState(false);
+  const [isCheckButtonShow, changeCheckButtonShowMode] = useState(false);
 
   const onResize = useCallback(() => {
     const widths = calcOwnWordsSentenceWidth(sentenceTranslation);
@@ -44,16 +45,15 @@ const GameFieldsContainer = ({
 
   useEffect(() => {
     if (optionParts.length === 0) {
-      changeShowMode(true);
+      changeCheckButtonShowMode(true);
     } else if (isCheckButtonShow) {
-      changeShowMode(false);
+      changeCheckButtonShowMode(false);
     }
   });
 
   useEffect(() => {
     const widths = calcOwnWordsSentenceWidth(sentenceTranslation);
     changeWordsWidth(widths);
-    // changeShowMode(false);
   }, [sentenceTranslation]);
 
   const swapPart = (type, index) => {
@@ -122,6 +122,7 @@ const GameFieldsContainer = ({
           answerParts={answerParts}
           wordsWidth={wordsWidth}
           isCheckShow={isCheckShow}
+          toggleShowCheck={toggleShowCheck}
           sentenceTranslationParts={sentenceTranslation.split(' ')}
         />
         <OptionsField isDragging optionsParts={optionParts} wordsWidth={wordsWidth} />
