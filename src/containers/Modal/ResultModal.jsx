@@ -95,9 +95,21 @@ const ModalResult = (props) => {
             isOldResult={isOldResult}
           />
           <ModalButtonsContainerStyled>
-            <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} className={'modalPageButton'}/>
-            <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} className={'modalPageButton'}/>
-            <Button buttonHandler={backHandler} text={I18n.t('Buttons.back')} className={'modalPageButton'}/>
+            <Button
+              buttonHandler={restartHandler}
+              text={I18n.t('Buttons.restart')}
+              className="modalPageButton"
+            />
+            <Button
+              buttonHandler={newGameHandler}
+              text={I18n.t('Buttons.newGame')}
+              className="modalPageButton"
+            />
+            <Button
+              buttonHandler={backHandler}
+              text={I18n.t('Buttons.back')}
+              className="modalPageButton"
+            />
           </ModalButtonsContainerStyled>
         </>
       );
@@ -110,9 +122,21 @@ const ModalResult = (props) => {
             <RoundStatistic key={round} data={round} roundHandler={roundHandler} />
           ))}
           <ModalButtonsContainerStyled>
-            <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} className={'modalPageButton'}/>
-            <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} className={'modalPageButton'}/>
-            <Button buttonHandler={backHandler} text={I18n.t('Buttons.back')} className={'modalPageButton'}/>
+            <Button
+              buttonHandler={restartHandler}
+              text={I18n.t('Buttons.restart')}
+              className="modalPageButton"
+            />
+            <Button
+              buttonHandler={newGameHandler}
+              text={I18n.t('Buttons.newGame')}
+              className="modalPageButton"
+            />
+            <Button
+              buttonHandler={backHandler}
+              text={I18n.t('Buttons.back')}
+              className="modalPageButton"
+            />
           </ModalButtonsContainerStyled>
         </>
       );
@@ -128,10 +152,22 @@ const ModalResult = (props) => {
           isOldResult={isOldResult}
         />
         <ModalButtonsContainerStyled>
-          <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} className={'modalPageButton'}/>
-          <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} className={'modalPageButton'}/>
+          <Button
+            buttonHandler={restartHandler}
+            text={I18n.t('Buttons.restart')}
+            className="modalPageButton"
+          />
+          <Button
+            buttonHandler={newGameHandler}
+            text={I18n.t('Buttons.newGame')}
+            className="modalPageButton"
+          />
           {gameMode ? (
-            <Button buttonHandler={showStatisticHandler} text={I18n.t('Buttons.statistic')} className={'modalPageButton'}/>
+            <Button
+              buttonHandler={showStatisticHandler}
+              text={I18n.t('Buttons.statistic')}
+              className="modalPageButton"
+            />
           ) : null}
         </ModalButtonsContainerStyled>
       </>
