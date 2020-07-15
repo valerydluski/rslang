@@ -9,7 +9,6 @@ const WordStyled = styled.div`
   padding: 10px;
   color: #000000;
   cursor: pointer;
-  white-space: nowrap;
   &:not(:first-child) {
     margin-left: 20px;
   }
