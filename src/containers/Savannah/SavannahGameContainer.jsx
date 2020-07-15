@@ -20,7 +20,6 @@ import GameModeToggle from '../GameModeToggle/GameModeToggle';
 import StatusMenu from '../../components/StatusMenu/StatusMenu';
 
 const wordAudio = new Audio();
-let currentGameWords = [];
 let currentStepWords = [];
 let selectedWord;
 let timer;
@@ -56,7 +55,6 @@ const SavannaGameContainer = ({
     toggleWordStatus(false);
     toggleGameMode(false);
     changeWrongAmount(0);
-    currentGameWords = [];
     currentStepWords = [];
     currentMainWord = '';
     return () => {
@@ -72,7 +70,6 @@ const SavannaGameContainer = ({
     toggleWordStatus(false);
     toggleGameMode(false);
     changeWrongAmount(0);
-    currentGameWords = [];
     currentMainWord = '';
   };
 
@@ -97,11 +94,7 @@ const SavannaGameContainer = ({
     }
   }
 
-  if (!currentWordIndex && !isWordFinished && !currentGameWords.length) {
-    currentGameWords = shuffleArray(wordsCollection);
-  }
-
-  const currentWord = currentGameWords[currentWordIndex];
+  const currentWord = wordsCollection[currentWordIndex];
 
   const newGame = () => {
     toggleGameMode(false);
