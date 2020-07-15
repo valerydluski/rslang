@@ -35,6 +35,7 @@ const getSimilarWords = (payload, appMode, userWords) => {
         el.userWord.optional.partOfSpeechCode === element.userWord.optional.partOfSpeechCode &&
         element.word !== el.word
     );
+    similar = Array.from(new Set(similar));
     if (similar.length < 4) {
       payload.forEach((element) => {
         if (
@@ -45,12 +46,14 @@ const getSimilarWords = (payload, appMode, userWords) => {
         }
       });
     }
+    similar = Array.from(new Set(similar));
     if (similar.length > 4) {
-      const newsimilar = similar.filter(
+      let newsimilar = similar.filter(
         (element) =>
           el.wordTranslate.substr(-2) === element.wordTranslate.substr(-2) &&
           element.word !== el.word
       );
+      newsimilar = Array.from(new Set(similar));
       if (newsimilar.length > 4) {
         similar = getRandomValuesFromArray(newsimilar, 3);
         const newEl = el;
@@ -67,6 +70,7 @@ const getSimilarWords = (payload, appMode, userWords) => {
       const newRest = getRandomValuesFromArray(restWords, restCount);
       similar = similar.concat(newRest);
     }
+    similar = Array.from(new Set(similar));
     if (similar.length > 4) {
       similar = getRandomValuesFromArray(similar, 3);
     }
