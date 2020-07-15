@@ -16,6 +16,8 @@ import correctSound from '../../assets/audio/correct.mp3';
 import SavannahLivesContainer from '../../components/Savannah/SavannahLivesContainer';
 import FallingWordStyled from '../../components/Savannah/Styled/FallingWordStyled';
 import SavannahWordsContainer from '../../components/Savannah/SavannahWordsContainer';
+import GameModeToggle from '../GameModeToggle/GameModeToggle';
+import StatusMenu from '../../components/StatusMenu/StatusMenu';
 
 const wordAudio = new Audio();
 let currentGameWords = [];
@@ -38,6 +40,7 @@ const SavannaGameContainer = ({
   secondsForOneWord,
   initialErrorsAmount,
   gameMode,
+  moveBackground,
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
@@ -54,6 +57,7 @@ const SavannaGameContainer = ({
     toggleGameMode(false);
     changeWrongAmount(0);
     currentGameWords = [];
+    currentStepWords = [];
     currentMainWord = '';
     return () => {
       if (timer) clearTimeout(timer);
@@ -137,6 +141,7 @@ const SavannaGameContainer = ({
   }
 
   function switchToNextWord() {
+    moveBackground(false);
     if (
       initialErrorsAmount - wrongAmount === 0 ||
       currentWordIndex === wordsCollection.length - 1
@@ -170,6 +175,7 @@ const SavannaGameContainer = ({
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
     } else {
       addWordToCorrect([...correctAnsweredWords, currentWord]);
+      moveBackground(true);
     }
     playResultAudio(isCorrect);
     toggleWordStatus(true);
@@ -183,6 +189,14 @@ const SavannaGameContainer = ({
     <SavannahGameContainerStyled
       key={wordsCollection.reduce((string, word) => string + word.word, '')}
     >
+      <GameModeToggle gameName={gameName} />
+      <StatusMenu
+        page={page}
+        level={level}
+        maxPage={maxPage}
+        updateLevel={updateLevel}
+        updatePage={updatePage}
+      />
       <SavannahLivesContainer wrongAmount={wrongAmount} wholeLives={initialErrorsAmount} />
       <FallingWordStyled
         animationDuration={secondsForOneWord}
@@ -219,6 +233,7 @@ SavannaGameContainer.propTypes = {
   page: PropTypes.string,
   updateLevel: PropTypes.func,
   updatePage: PropTypes.func,
+  moveBackground: PropTypes.func,
   maxPage: PropTypes.number,
   gameName: PropTypes.string,
   saveStatistic: PropTypes.func,
@@ -234,6 +249,7 @@ SavannaGameContainer.defaultProps = {
   saveStatistic: () => {},
   updatePage: () => {},
   updateLevel: () => {},
+  moveBackground: () => {},
   level: '1',
   page: '1',
   maxPage: GAME_MAX_PAGE,
@@ -243,7 +259,6 @@ SavannaGameContainer.defaultProps = {
 const mapStateToProps = (state) => {
   return {
     isWordsLoading: state.loader.loading,
-    currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.SavannahLevel,
     page: state.changeRound.SavannahPage,
     maxPage: state.maxPage.maxPage,

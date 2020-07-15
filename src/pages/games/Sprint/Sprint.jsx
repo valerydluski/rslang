@@ -128,7 +128,6 @@ const mapStateToProps = (state) => {
   return {
     wordsCollection: state.getWordsFromAPI.wordsFromAPI,
     isWordsLoading: state.loader.loading,
-    currentAppMode: state.changeAppMode.appMode,
     level: state.changeRound.SprintLevel,
     page: state.changeRound.SprintPage,
     maxPage: state.maxPage.maxPage,
