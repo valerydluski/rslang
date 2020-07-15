@@ -7,11 +7,12 @@ const StartGamePageStyled = styled.div`
   min-height: 100vh;
   box-sizing: border-box;
   color: #000000;
-
+  overflow: hidden;
   @media ${DEVICE.laptopL} {
     & > div:last-of-type {
       margin-top: -200px;
     }
+    overflow: visible;
   }
 `;
 
