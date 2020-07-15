@@ -16,7 +16,7 @@ const StyledRoundButton = styled.button`
   outline: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: 0.3s linear;
+  transition: 0.1s linear;
   flex-grow: 1;
   align-self: flex-start;
   flex-shrink: 0;
@@ -50,6 +50,12 @@ const StyledRoundButton = styled.button`
     background-repeat: no-repeat;
     background-size: cover;
 
+    &:hover {
+      background: url(${audiNotActive});
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
     @media ${DEVICE.tablet} {
       top: 15px;
       left: 10px;
@@ -58,6 +64,14 @@ const StyledRoundButton = styled.button`
 
   &.not-active {
     background: url(${audiNotActive});
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &:hover {
+      background: url(${audioIco});
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 `;
 

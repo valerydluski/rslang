@@ -20,7 +20,7 @@ const LearnCardsContainer = styled.div`
 
   @media ${DEVICE.tablet} {
     padding: 20px;
-    height: 500px;
+    height: 100%;
   }
 `;
 
@@ -120,7 +120,7 @@ export const TopContentStyled = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 10px;
 
