@@ -48,6 +48,7 @@ const LearnWordsForm = (props) => {
     isShowResult,
     showResultHander,
     isInputActive,
+    isSoundPlay,
   } = props;
 
   const {
@@ -99,7 +100,7 @@ const LearnWordsForm = (props) => {
         <StyledRoundButton
           onClick={customHandleSubmit('sound')}
           type="button"
-          className="learn_sound-button"
+          className={!isSoundPlay ? 'learn_sound-button not-active' : 'learn_sound-button'}
         />
         <TopContentStyled>
           {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
@@ -225,6 +226,7 @@ LearnWordsForm.propTypes = {
   }).isRequired,
   isCorrect: PropTypes.bool.isRequired,
   isShowResult: PropTypes.bool.isRequired,
+  isSoundPlay: PropTypes.bool.isRequired,
   isTranslationShow: PropTypes.bool.isRequired,
   autocomplete: PropTypes.string,
   reset: PropTypes.func.isRequired,

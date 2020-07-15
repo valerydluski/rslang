@@ -118,8 +118,8 @@ function RepeatWordCardContainer(props) {
       },
     };
     if (!currentWord.isRepeat) showCardHandler();
-    // eslint-disable-next-line no-underscore-dangle
     if (currentWord) {
+      // eslint-disable-next-line no-underscore-dangle
       updateOneWord(currentWord._id, config, user);
     }
     nextWord();
@@ -140,8 +140,6 @@ function RepeatWordCardContainer(props) {
         customUpdateOneWord('easy', EASY);
         break;
       case 'simply':
-        console.log(1);
-        console.log('onSubmit -> formData', formData);
         customUpdateOneWord('simply', SIMPLY);
         break;
       case 'medium':
@@ -205,6 +203,7 @@ function RepeatWordCardContainer(props) {
       wordsCount={wordsCount.current}
       currentWordIndex={currentWordIndex.current}
       audiosDuration={audiosDuration.current}
+      isSoundPlay={isSoundPlay}
     />
   );
 }
