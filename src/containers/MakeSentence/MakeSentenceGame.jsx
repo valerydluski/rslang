@@ -14,7 +14,6 @@ import { saveFullStatistic } from '../../redux/Statistic/action';
 import errorSound from '../../assets/audio/error.mp3';
 import correctSound from '../../assets/audio/correct.mp3';
 
-let currentGameWords = [];
 const audio = new Audio();
 
 const MakeSentenceGame = ({
@@ -44,7 +43,6 @@ const MakeSentenceGame = ({
     toggleGameMode(false);
     toggleAutoSolveMode(false);
     toggleShowCheck(false);
-    currentGameWords = [];
   };
 
   useEffect(() => {
@@ -53,10 +51,6 @@ const MakeSentenceGame = ({
   }, [wordsCollection]);
 
   if (isWordsLoading) return <LoadingSpinner />;
-
-  if (!currentWordIndex && !isWordFinished && !currentGameWords.length) {
-    currentGameWords = shuffleArray(wordsCollection);
-  }
 
   const newGame = () => {
     resetGameData();
@@ -113,15 +107,15 @@ const MakeSentenceGame = ({
   };
 
   const autoSolve = () => {
-    addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
+    addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
     toggleAutoSolveMode(true);
     toggleWordStatus(true);
     playResultSound();
   };
 
-  const audioSrc = `${LINK_FOR_AUDIO}${currentGameWords[currentWordIndex].audioExample}`;
-  const sentence = currentGameWords[currentWordIndex].textExample;
-  const sentenceTranslation = currentGameWords[currentWordIndex].textExampleTranslate;
+  const audioSrc = `${LINK_FOR_AUDIO}${wordsCollection[currentWordIndex].audioExample}`;
+  const sentence = wordsCollection[currentWordIndex].textExample;
+  const sentenceTranslation = wordsCollection[currentWordIndex].textExampleTranslate;
 
   const checkSentence = (answerParts) => {
     const result = answerParts.join(' ') === sentenceTranslation;
@@ -131,7 +125,7 @@ const MakeSentenceGame = ({
       playResultSound(true);
     } else {
       playResultSound();
-      addWordToWrong([...wrongAnsweredWords, currentGameWords[currentWordIndex].word]);
+      addWordToWrong([...wrongAnsweredWords, wordsCollection[currentWordIndex].word]);
     }
   };
 
@@ -141,10 +135,10 @@ const MakeSentenceGame = ({
       <InitialSentenceContainer
         audioSrc={audioSrc}
         sentence={sentence}
-        mainWordTranslation={currentGameWords[currentWordIndex].wordTranslate}
+        mainWordTranslation={wordsCollection[currentWordIndex].wordTranslate}
       />
       <GameFieldsContainer
-        key={currentGameWords[currentWordIndex].word}
+        key={wordsCollection[currentWordIndex].word}
         sentenceTranslationParts={shuffleArray(sentenceTranslation.split(' '))}
         toggleWordStatus={toggleWordStatus}
         sentenceTranslation={sentenceTranslation}
