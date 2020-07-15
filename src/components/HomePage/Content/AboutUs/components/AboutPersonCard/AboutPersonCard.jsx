@@ -24,9 +24,3 @@ AboutPersonCardContainer.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
-
-AboutPersonCardContainer.defaultProps = {
-  poster: '',
-  title: '',
-  description: '',
-};

@@ -5,7 +5,6 @@ const AboutPersonCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
-  
   h3 {
     align-self: center;
     width: fit-content;
@@ -26,7 +25,7 @@ const AboutPersonCardContainer = styled.div`
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
-    text-align: justify;
+    text-align: center;
     color: #929292;
   }
 

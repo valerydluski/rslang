@@ -5,7 +5,13 @@ import audioCallPoster from './assets/img/posters/audio-call.svg';
 import sprintPoster from './assets/img/posters/sprint.svg';
 import makeSentencePoster from './assets/img/posters/make-sentence.svg';
 import getRedirectFunction from './utils/getRedirectFunction';
-import Elena from './assets/img/photo.png';
+import Valery from './assets/img/team/valery.png';
+import Maxim from './assets/img/team/maxim.png';
+import Artsemi from './assets/img/team/artsemi.png';
+import Marta from './assets/img/team/marta.png';
+import Konstantin from './assets/img/team/konstantin.png';
+import Taras from './assets/img/team/taras.png';
+import Nelly from './assets/img/team/nelly.png';
 
 export const API = {
   URL: 'https://afternoon-falls-25894.herokuapp.com',
@@ -82,34 +88,40 @@ export const GAME_LIST = [
 
 export const TEAM_LIST = [
   {
-    title: 'TeamMembers.valera',
-    description: 'TeamMembers.valeraDescription',
-    poster: Elena,
+    title: 'TeamMembers.maxim',
+    description: 'TeamMembersDescriptions.maximDescription',
+    poster: Maxim,
+  },
+  {
+    title: 'TeamMembers.valery',
+    description: 'TeamMembersDescriptions.valeryDescription',
+    poster: Valery,
+  },
+  {
+    title: 'TeamMembers.konstantin',
+    description: 'TeamMembersDescriptions.konstantinDescription',
+    poster: Konstantin,
   },
   {
     title: 'TeamMembers.marta',
-    description: 'TeamMembers.martaDescription',
-    poster: Elena,
+    description: 'TeamMembersDescriptions.martaDescription',
+    poster: Marta,
   },
   {
     title: 'TeamMembers.nelly',
-    description: 'TeamMembers.nellyDescription',
-    poster: Elena,
+    description: 'TeamMembersDescriptions.nellyDescription',
+    poster: Nelly,
   },
-  {
-    title: 'TeamMembers.kostya',
-    description: 'TeamMembers.kostyaDescription',
-    poster: Elena,
-  },
+
   {
     title: 'TeamMembers.taras',
-    description: 'TeamMembers.tarasDescription',
-    poster: Elena,
+    description: 'TeamMembersDescriptions.tarasDescription',
+    poster: Taras,
   },
   {
     title: 'TeamMembers.artsemi',
-    description: 'TeamMembers.artsemiDescription',
-    poster: Elena,
+    description: 'TeamMembersDescriptions.artsemiDescription',
+    poster: Artsemi,
   },
 ];
 
