@@ -92,7 +92,11 @@ function* workerGetWords() {
       if (appMode === 'EnglishPuzzle' || appMode === 'MakeSentence') {
         const arrForPuzzle = arr.filter((el) => el.wordsPerExampleSentence <= 10);
         if (arrForPuzzle.length >= 10) {
-          payload = getRandomValuesFromArray(arrForPuzzle, 9);
+          if (appMode === 'EnglishPuzzle') {
+            payload = getRandomValuesFromArray(arrForPuzzle, 9);
+          } else {
+            payload = getRandomValuesFromArray(arr, +wordsPerPage - 1);
+          }
         } else {
           payload = yield call(wordsFetch, state);
           yield put(changeGameMode(true));
