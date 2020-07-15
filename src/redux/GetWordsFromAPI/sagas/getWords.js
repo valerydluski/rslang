@@ -63,14 +63,14 @@ const getSimilarWords = (payload, appMode, userWords) => {
     }
     if (similar.length < 4) {
       const similarWord = similar.map((word) => word.word);
-      const restWords = payload.filter(
+      let restWords = payload.filter(
         (element) => el.word !== element.word && !similarWord.includes(element.word)
       );
+      restWords = Array.from(new Set(restWords));
       const restCount = 4 - similar.length - 1;
       const newRest = getRandomValuesFromArray(restWords, restCount);
       similar = similar.concat(newRest);
     }
-    similar = Array.from(new Set(similar));
     if (similar.length > 4) {
       similar = getRandomValuesFromArray(similar, 3);
     }
