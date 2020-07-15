@@ -4,7 +4,7 @@ import { GAME_NAME } from '../config';
 const createAllGamesStat = (stat, wordsPerPage, countCorrect) => {
   const newStat = stat.split('_');
   newStat[0] = +newStat[0] + 1;
-  if (wordsPerPage === countCorrect) {
+  if (+wordsPerPage === countCorrect) {
     newStat[1] = +newStat[1] + 1;
   }
   return newStat.join('_');
