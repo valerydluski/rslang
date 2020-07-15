@@ -40,9 +40,10 @@ const getSimilarWords = (payload, appMode, userWords) => {
       payload.forEach((element) => {
         if (
           el.userWord.optional.partOfSpeechCode === element.userWord.optional.partOfSpeechCode &&
-          element.word !== el.word
+          element.word !== el.word &&
+          !similar.includes(element)
         ) {
-          similar.push(element);
+          similar.concat(element);
         }
       });
     }
