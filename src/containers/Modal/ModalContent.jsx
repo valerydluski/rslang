@@ -39,7 +39,7 @@ const ModalContent = (props) => {
 
   const fn = () => {
     switch (iKnowWords.length) {
-      case 10:
+      case wordsCollection.length:
         return (
           <ModalWordsBlock
             showProperties={showProperties}
