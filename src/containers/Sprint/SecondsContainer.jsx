@@ -5,8 +5,6 @@ import SecondsContainerStyled from './Styled/SecondsContainerStyled';
 import timeIsUpSound from '../../assets/audio/timeIsUpSound.mp3';
 import countdownSound from '../../assets/audio/countdownSound.mp3';
 
-let countdownAudio;
-
 const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinished }) => {
   const [seconds, setSeconds] = useState(initialSecondsAmount);
 
@@ -19,12 +17,10 @@ const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinishe
     }
     return () => {
       clearInterval(tick);
-      if (countdownAudio) countdownAudio.pause();
     };
   }, [seconds, timeIsUpHandler]);
 
   if (isGameFinished) {
-    if (countdownAudio) countdownAudio.pause();
     return null;
   }
 
