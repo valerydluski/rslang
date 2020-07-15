@@ -28,6 +28,7 @@ export const ButtonsRow = styled.div`
     flex-wrap: wrap;
     & > button {
       width: 100%;
+      margin: 10px 0 !important;
       &:last-child {
         width: 100%;
         margin-left: 0;
