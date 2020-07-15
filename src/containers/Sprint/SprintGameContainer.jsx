@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
@@ -33,6 +33,7 @@ const SprintGameContainer = (props) => {
   const [correctAnswers, changeAnswersAmount] = useState(0);
   const [scoreStep, changeScoreStep] = useState(10);
   const [score, changeScore] = useState(0);
+  const mustSaveStat = useRef(false);
 
   const restartGame = () => {
     toggleGameMode(false);
@@ -47,12 +48,18 @@ const SprintGameContainer = (props) => {
 
   useEffect(() => restartGame(), [wordsCollection]);
 
+  useEffect(() => {
+    if (isGameFinished) {
+      mustSaveStat.current = true;
+    }
+  }, [isGameFinished]);
+
   if (isGameFinished) {
     const wrongWords = wordsCollection
       .filter((word) => !correctAnsweredWords.find((correctWord) => correctWord.word === word.word))
       .map((word) => word.word);
     addWrongWordsToStore(wrongWords);
-    if (gameMode) {
+    if (gameMode && mustSaveStat.current) {
       saveStatistic({
         Level: level,
         Page: page,
@@ -60,6 +67,7 @@ const SprintGameContainer = (props) => {
         wrongWordsState: wrongWords,
         gameName,
       });
+      mustSaveStat.current = false;
     }
     return (
       <ResultModal
@@ -112,6 +120,7 @@ const SprintGameContainer = (props) => {
       finishGameHandler();
     } else changeWordIndex(currentWordIndex + 1);
   };
+
   return (
     <SprintGameContainerStyled>
       <SprintScoreContainer
