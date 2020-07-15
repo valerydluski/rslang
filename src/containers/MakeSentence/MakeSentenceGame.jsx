@@ -14,7 +14,7 @@ import { saveFullStatistic } from '../../redux/Statistic/action';
 import errorSound from '../../assets/audio/error.mp3';
 import correctSound from '../../assets/audio/correct.mp3';
 
-let currentGameWords;
+let currentGameWords = [];
 const audio = new Audio();
 
 const MakeSentenceGame = ({
@@ -54,7 +54,7 @@ const MakeSentenceGame = ({
 
   if (isWordsLoading) return <LoadingSpinner />;
 
-  if (!currentWordIndex && !isWordFinished) {
+  if (!currentWordIndex && !isWordFinished && !currentGameWords.length) {
     currentGameWords = shuffleArray(wordsCollection);
   }
 
