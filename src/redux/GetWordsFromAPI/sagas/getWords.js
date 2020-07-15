@@ -56,7 +56,7 @@ const getSimilarWords = (payload, appMode, userWords) => {
       );
       newsimilar = Array.from(new Set(similar));
       if (newsimilar.length > 4) {
-        similar = getRandomValuesFromArray(newsimilar, 3);
+        similar = getRandomValuesFromArray(newsimilar, 4);
         const newEl = el;
         newEl.similarWords = similar.map((elem) => elem.wordTranslate);
         return newEl;
@@ -68,12 +68,12 @@ const getSimilarWords = (payload, appMode, userWords) => {
         (element) => el.word !== element.word && !similarWord.includes(element.word)
       );
       restWords = Array.from(new Set(restWords));
-      const restCount = 4 - similar.length - 1;
+      const restCount = 4 - similar.length;
       const newRest = getRandomValuesFromArray(restWords, restCount);
       similar = similar.concat(newRest);
     }
     if (similar.length > 4) {
-      similar = getRandomValuesFromArray(similar, 3);
+      similar = getRandomValuesFromArray(similar, 4);
     }
     const newEl = el;
     newEl.similarWords = similar.map((elem) => elem.wordTranslate);
@@ -98,16 +98,16 @@ function* workerGetWords() {
         const arrForPuzzle = arr.filter((el) => el.wordsPerExampleSentence <= 10);
         if (arrForPuzzle.length >= 10) {
           if (appMode === 'EnglishPuzzle') {
-            payload = getRandomValuesFromArray(arrForPuzzle, 9);
+            payload = getRandomValuesFromArray(arrForPuzzle, 10);
           } else {
-            payload = getRandomValuesFromArray(arr, +wordsPerPage - 1);
+            payload = getRandomValuesFromArray(arr, +wordsPerPage);
           }
         } else {
           payload = yield call(wordsFetch, state);
           yield put(changeGameMode(true));
         }
       } else {
-        payload = getRandomValuesFromArray(arr, +wordsPerPage - 1);
+        payload = getRandomValuesFromArray(arr, +wordsPerPage);
       }
     } else {
       payload = yield call(wordsFetch, state);
