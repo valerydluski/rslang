@@ -128,6 +128,11 @@ const translations = {
       train: 'Train',
       play: 'Play',
       check: 'Check',
+      easy: 'Easy',
+      simply: 'Simply',
+      medium: 'Medium',
+      difficult: 'Difficult',
+      repeat: 'Repeat',
       learnWords: 'Learn Words',
       repeatWords: 'Repeat Words',
       difficultWords: 'Difficult Words',
@@ -216,6 +221,9 @@ const translations = {
       learnedAll: 'Total words learned: %{count}',
       date: 'Date: ',
       learnedBefore: 'Previously learned words',
+    },
+    RepeatWords: {
+      more: 'There are still cards left. You can change the number of cards in the settings',
     },
   },
   ru: {
@@ -349,6 +357,11 @@ const translations = {
       train: 'Тренировать',
       play: 'Играть',
       check: 'Проверить',
+      easy: 'Легко',
+      simply: 'Просто',
+      medium: 'Средне',
+      difficult: 'Трудно',
+      repeat: 'Повторить',
       learnWords: 'Учить слова',
       repeatWords: 'Повторить слова',
       difficultWords: 'Сложные слова',
@@ -436,6 +449,9 @@ const translations = {
       learnedAll: 'Всего изучено слов: %{count}',
       date: 'Дата: ',
       learnedBefore: 'Ранее изученные слова',
+    },
+    RepeatWords: {
+      more: 'Остались ещё карточки. Количество карточек можно изменить в настройках',
     },
   },
 };

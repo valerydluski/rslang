@@ -40,9 +40,10 @@ const StyledRoundButton = styled.button`
     line-height: 16px;
   }
   &.learn_sound-button {
+    margin: 0;
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 40px;
+    left: 40px;
     width: 40px;
     height: 40px;
     background: url(${audioIco});
@@ -50,7 +51,8 @@ const StyledRoundButton = styled.button`
     background-size: cover;
 
     @media ${DEVICE.tablet} {
-      top: -50px;
+      top: 15px;
+      left: 10px;
     }
   }
 

@@ -2,43 +2,53 @@ import styled from 'styled-components';
 import { DEVICE } from '../../../config';
 
 const LearnButtonsContainer = styled.div`
-  display: grid;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  place-items: center;
-  height: 100%;
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows: 60% 40%;
-
-  @media (max-width: 1280px) {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-  }
 
   @media ${DEVICE.tablet} {
-    display: flex;
-    flex-direction: column;
+    margin-top: 10px;
+  }
+`;
+
+export const ButtonsRow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  & > button {
+    flex-grow: 1;
+  }
+  &:last-child {
+    margin-top: 20px;
+  }
+
+  @media ${DEVICE.laptop} {
+    flex-wrap: wrap;
+    & > button {
+      width: 100%;
+      margin: 10px 0 !important;
+      &:last-child {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+      }
+
+      @media ${DEVICE.tablet} {
+        font-size: 18px;
+      }
+    }
   }
 `;
 
 export const ProgressBarContainer = styled.div`
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  grid-column: 2 / 4;
-
-  @media (max-width: 1280px) {
-    grid-column: 2 / 3;
-  }
-
-  @media ${DEVICE.tablet} {
-    grid-column: none;
-    height: auto;
-  }
+  margin: 0 20px;
+  flex-grow: 1;
 `;
+
 export const ProgressBarCount = styled.p`
-  font-family: Montserrat;
-  font-style: normal;
+  margin: 0;
   font-weight: bold;
   font-size: 30px;
   line-height: 35px;

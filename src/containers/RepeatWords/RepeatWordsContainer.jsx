@@ -34,6 +34,7 @@ function RepeatWordCardContainer(props) {
     saveRepeatWordsHandler,
     showCardHandler,
   } = props;
+
   const { isAudioTranslate, isAudioTextMeaning, isAudioTextExample } = settings.settings;
   const [currentWord, setCurrentWord] = useState();
   const [isTranslationShow, setIsTranslationShow] = useState(false);
@@ -118,7 +119,9 @@ function RepeatWordCardContainer(props) {
     };
     if (!currentWord.isRepeat) showCardHandler();
     // eslint-disable-next-line no-underscore-dangle
-    updateOneWord(currentWord._id, config, user);
+    if (currentWord) {
+      updateOneWord(currentWord._id, config, user);
+    }
     nextWord();
   };
 
@@ -137,6 +140,8 @@ function RepeatWordCardContainer(props) {
         customUpdateOneWord('easy', EASY);
         break;
       case 'simply':
+        console.log(1);
+        console.log('onSubmit -> formData', formData);
         customUpdateOneWord('simply', SIMPLY);
         break;
       case 'medium':
@@ -158,6 +163,7 @@ function RepeatWordCardContainer(props) {
         showResultHandler(true);
         if (answer.toLowerCase() === word.toLowerCase()) {
           audiosDuration.current = audios.reduce((acc, val) => acc + val.duration, 0);
+          isErrorAnswer.current = false;
           setIsTranslationShow(true);
           setIsInputActive(false);
           if (!isSoundPlay || !audios[0]) {

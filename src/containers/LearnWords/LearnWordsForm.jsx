@@ -17,9 +17,12 @@ import LearnCardsContainer, {
   TextExampleTranslateStyled,
   TextMeaningStyled,
   TextMeaningTranslateStyled,
-  TopContnentStyled,
+  TopContentStyled,
+  CenterContentStyled,
+  BottomContentStyled,
 } from './Styled/LearnCardsContainer';
 import LearnButtonsContainer, {
+  ButtonsRow,
   ProgressBarCount,
   ProgressBarContainer,
 } from './Styled/LearnButtonsContainer';
@@ -101,132 +104,141 @@ const LearnWordsForm = (props) => {
           type="button"
           className={!isSoundPlay ? 'learn_sound-button not-active' : 'learn_sound-button'}
         />
-        <TopContnentStyled>
-          {isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
+        <TopContentStyled>
+          {isTranslate && isTranslationShow && <TranslateStyled>{wordTranslate}</TranslateStyled>}
           {isImageAssociation && (
             <Image
               alt={word.word}
               src={`${LINK_FOR_IMAGE}${image}`}
               classNameContainer="image_learn"
-              className="image_learn"
             />
           )}
-          <TextExampleStyled>
-            {isTextExample && <p style={{ display: 'inline' }}>{firstPart}</p>}
-            <Field
-              name="word"
-              key="word"
-              type="text"
-              placeholder={isRightAnswerShow ? word.word : ''}
-              size="5"
-              component={LearnWordsInput}
-              autoFocus
-              autocomplete={autocomplete}
-              word={word.word}
-              answer={answer}
-              isShowResult={isResultShow}
-              audiosDuration={audiosDuration}
-              isInputActive={isInputActive}
-              onChange={() => {
-                if (isShowResult) {
-                  showResultHander(false);
-                }
-              }}
-            />
-            {isTextExample && <p style={{ display: 'inline', marginLeft: '10px' }}>{secondPart}</p>}
-          </TextExampleStyled>
-        </TopContnentStyled>
-        {isTranslationShow && isTranslate && (
-          <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
-        )}
-        {isTranscription && <Transcription className="learn" transcription={transcription} />}
-        {isTextMeaning && isTranslationShow ? (
-          <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
-        ) : (
-          <TextMeaningStyled>
-            {textMeaningFormatted.replace(wordRegExp, '*'.repeat(word.word.length))}
-          </TextMeaningStyled>
-        )}
-        {isTranslationShow && isTextMeaning && (
-          <TextMeaningTranslateStyled>{textMeaningTranslate}</TextMeaningTranslateStyled>
-        )}
+        </TopContentStyled>
+        <CenterContentStyled>
+          {isTextExample && <TextExampleStyled>{firstPart}</TextExampleStyled>}
+          <Field
+            name="word"
+            key="word"
+            type="text"
+            placeholder={isRightAnswerShow ? word.word : ''}
+            size="5"
+            component={LearnWordsInput}
+            autoFocus
+            autocomplete={autocomplete}
+            word={word.word}
+            answer={answer}
+            isShowResult={isResultShow}
+            audiosDuration={audiosDuration}
+            isInputActive={isInputActive}
+            onChange={() => {
+              if (isShowResult) {
+                showResultHander(false);
+              }
+            }}
+          />
+          {isTextExample && <TextExampleStyled>{secondPart}</TextExampleStyled>}
+        </CenterContentStyled>
+        <BottomContentStyled>
+          {isTranslationShow && isTranslate && (
+            <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
+          )}
+          {isTranscription && <Transcription className="learn" transcription={transcription} />}
+          {isTextMeaning && isTranslationShow ? (
+            <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
+          ) : (
+            <TextMeaningStyled>
+              {textMeaningFormatted.replace(wordRegExp, '*'.repeat(word.word.length))}
+            </TextMeaningStyled>
+          )}
+          {isTranslationShow && isTextMeaning && (
+            <TextMeaningTranslateStyled>{textMeaningTranslate}</TextMeaningTranslateStyled>
+          )}
+        </BottomContentStyled>
       </LearnCardsContainer>
       <LearnButtonsContainer>
-        {isInputActive ? (
-          <StyledButton
-            type="button"
-            onClick={customHandleSubmit('form')}
-            disabled={!isInputActive}
-            className={
-              !isInputActive
-                ? 'button-next lear_button learn_all-buttons not-active'
-                : 'button-next lear_button learn_all-buttons'
-            }
-          >
-            <Translate value="Buttons.check" />
-          </StyledButton>
-        ) : (
-          <StyledButton
-            className="lear_button learn_all-buttons"
-            onClick={customHandleSubmit('next')}
-            disabled={isInputActive && !audioIsPlaying}
-          >
-            <Translate value="Buttons.next" />
-          </StyledButton>
-        )}
-        {deleteButton && (
-          <StyledButton
-            onClick={customHandleSubmit('deleted')}
-            type="button"
-            disabled={isInputActive && !audioIsPlaying}
-            className={
-              isInputActive && !audioIsPlaying
-                ? 'lear_button learn_all-buttons not-active'
-                : 'lear_button learn_all-buttons'
-            }
-          >
-            <Translate value="Buttons.delete" />
-          </StyledButton>
-        )}
-        {addDificultWordsButton && (
-          <StyledButton
-            onClick={customHandleSubmit('hard')}
-            type="button"
-            disabled={isInputActive && !audioIsPlaying}
-            className={
-              isInputActive && !audioIsPlaying
-                ? 'lear_button learn_all-buttons not-active'
-                : 'lear_button learn_all-buttons'
-            }
-          >
-            <Translate value="Buttons.hard" />
-          </StyledButton>
-        )}
-        {showIdontKhowButton && (
-          <StyledButton
-            onClick={customHandleSubmit('unknown')}
-            type="button"
-            disabled={!isInputActive}
-            className={
-              !isInputActive
-                ? 'lear_button learn_i-dont-know not-active'
-                : 'lear_button learn_i-dont-know'
-            }
-          >
-            <Translate value="Buttons.dontKnow" />
-          </StyledButton>
-        )}
-
-        <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
-        <ProgressBarContainer>
-          <Line
-            percent={Math.round((currentWordIndex / wordsCount) * 100)}
-            strokeWidth="3"
-            trailWidth="2"
-            strokeColor="#404497"
-          />
-        </ProgressBarContainer>
-        <ProgressBarCount>{wordsCount}</ProgressBarCount>
+        <ButtonsRow>
+          {isInputActive ? (
+            <StyledButton
+              type="button"
+              onClick={handleSubmit((values) =>
+                onSubmit({
+                  ...values,
+                  buttonType: 'form_enter',
+                })
+              )}
+              disabled={!isInputActive}
+              className={
+                !isInputActive
+                  ? 'button-next lear_button learn_all-buttons not-active'
+                  : 'button-next lear_button learn_all-buttons'
+              }
+            >
+              <Translate value="Buttons.check" />
+            </StyledButton>
+          ) : (
+            <StyledButton
+              className="lear_button learn_all-buttons"
+              onClick={customHandleSubmit('next')}
+              disabled={isInputActive && !audioIsPlaying}
+            >
+              <Translate value="Buttons.next" />
+            </StyledButton>
+          )}
+          {deleteButton && (
+            <StyledButton
+              onClick={customHandleSubmit('deleted')}
+              type="button"
+              disabled={isInputActive && !audioIsPlaying}
+              className={
+                isInputActive && !audioIsPlaying
+                  ? 'lear_button learn_all-buttons not-active'
+                  : 'lear_button learn_all-buttons'
+              }
+            >
+              <Translate value="Buttons.delete" />
+            </StyledButton>
+          )}
+          {addDificultWordsButton && (
+            <StyledButton
+              onClick={customHandleSubmit('hard')}
+              type="button"
+              disabled={isInputActive && !audioIsPlaying}
+              className={
+                isInputActive && !audioIsPlaying
+                  ? 'lear_button learn_all-buttons not-active'
+                  : 'lear_button learn_all-buttons'
+              }
+            >
+              <Translate value="Buttons.hard" />
+            </StyledButton>
+          )}
+          {showIdontKhowButton && (
+            <StyledButton
+              onClick={customHandleSubmit('unknown')}
+              type="button"
+              disabled={!isInputActive}
+              className={
+                !isInputActive
+                  ? 'lear_button learn_i-dont-know not-active'
+                  : 'lear_button learn_i-dont-know'
+              }
+            >
+              <Translate value="Buttons.dontKnow" />
+            </StyledButton>
+          )}
+        </ButtonsRow>
+        <ButtonsRow>
+          <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
+          <ProgressBarContainer>
+            <Line
+              percent={Math.round((currentWordIndex / wordsCount) * 100)}
+              strokeWidth="3"
+              trailWidth="2"
+              strokeColor="#404497"
+            />
+          </ProgressBarContainer>
+          <ProgressBarCount>{wordsCount}</ProgressBarCount>
+        </ButtonsRow>
       </LearnButtonsContainer>
     </LearnFormStyled>
   );

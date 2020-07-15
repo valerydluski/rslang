@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -8,7 +8,11 @@ import {
   InputLetterContainer,
 } from './Styled/LearnWordsInput';
 import getStringWidth from '../../utils/getStringWidth';
+import getScreenWidth from '../../utils/getScreenWidth';
 import { showResult } from '../../redux/LearnWords/actions';
+
+const breakpoints = [1024, 768, 0];
+const sizes = [30, 22, 18];
 
 const LearnWordsInput = (props) => {
   const {
@@ -25,10 +29,23 @@ const LearnWordsInput = (props) => {
     isInputActive,
   } = props;
 
+  const [fontSize, changeFontSize] = useState(sizes[0]);
   const [show, setShow] = useState(false);
   const inputRef = useRef(null);
 
-  const FONT_SIZE = 20;
+  const calculateFontSize = useCallback(() => {
+    const screenWidth = getScreenWidth();
+    const index = breakpoints.findIndex((bp) => screenWidth > bp);
+    if (fontSize !== sizes[index]) {
+      changeFontSize(sizes[index]);
+    }
+  }, [changeFontSize, fontSize]);
+
+  useEffect(() => {
+    calculateFontSize();
+    window.addEventListener('resize', calculateFontSize);
+    window.addEventListener('orientationchange', calculateFontSize);
+  }, [calculateFontSize]);
 
   useEffect(() => {
     if (isShowResult) {
@@ -50,11 +67,11 @@ const LearnWordsInput = (props) => {
     }
   };
 
-  const width = getStringWidth(word, FONT_SIZE);
+  const width = getStringWidth(word, fontSize);
 
   return (
-    <InputContainer width={width} style={{ display: 'inline-block' }}>
-      <InputWordsBgContainer showResult={show} width={width} onClick={hideResult}>
+    <InputContainer width={width} style={{ display: 'inline-block' }} height={fontSize}>
+      <InputWordsBgContainer showResult={show} width={width} onClick={hideResult} height={fontSize}>
         {word
           .toLowerCase()
           .split('')
@@ -79,6 +96,7 @@ const LearnWordsInput = (props) => {
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...input}
         width={width}
+        height={fontSize}
         ref={inputRef}
       />
       {error && touched && <span>{error}</span>}

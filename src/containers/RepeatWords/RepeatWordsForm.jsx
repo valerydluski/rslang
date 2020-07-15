@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Line } from 'rc-progress';
 import { connect } from 'react-redux';
+import { Translate } from 'react-redux-i18n';
 import StyledRoundButton from '../../components/UI/Button/Styled/StyledRoundButton';
 import StyledButton from '../../components/UI/Button/Styled/StyledButton';
 import { LINK_FOR_IMAGE } from '../../config';
@@ -16,8 +17,15 @@ import RepeatCardsContainer, {
   TextExampleTranslateStyled,
   TextMeaningStyled,
   TextMeaningTranslateStyled,
+  TopContentStyled,
+  CenterContentStyled,
+  BottomContentStyled,
 } from './Styled/RepeatCardsContainer';
-import RepeatButtonsContainer from './Styled/RepeatButtonsContainer';
+import RepeatButtonsContainer, {
+  ButtonsRow,
+  ProgressBarCount,
+  ProgressBarContainer,
+} from './Styled/RepeatButtonsContainer';
 import { showResult } from '../../redux/RepeatWords/actions';
 
 const LearnWordsForm = (props) => {
@@ -93,16 +101,18 @@ const LearnWordsForm = (props) => {
           type="button"
           className="learn_sound-button"
         />
-        {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
-        {isImageAssociation && (
-          <Image
-            alt={word.word}
-            src={`${LINK_FOR_IMAGE}${image}`}
-            classNameContainer="image_learn"
-          />
-        )}
-        <TextExampleStyled>
-          {isTextExample && <p style={{ display: 'inline' }}>{firstPart}</p>}
+        <TopContentStyled>
+          {isTranslationShow && isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
+          {isImageAssociation && (
+            <Image
+              alt={word.word}
+              src={`${LINK_FOR_IMAGE}${image}`}
+              classNameContainer="image_learn"
+            />
+          )}
+        </TopContentStyled>
+        <CenterContentStyled>
+          {isTextExample && <TextExampleStyled>{firstPart}</TextExampleStyled>}
           <Field
             name="word"
             key="word"
@@ -122,57 +132,67 @@ const LearnWordsForm = (props) => {
               }
             }}
           />
-          {isTextExample && <p style={{ display: 'inline' }}>{secondPart}</p>}
-        </TextExampleStyled>
-        {isTranslationShow && isTranslate && (
-          <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
-        )}
-        {isTranslationShow && isTranscription && <Transcription transcription={transcription} />}
-        {isTextMeaning && isTranslationShow ? (
-          <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
-        ) : (
-          <TextMeaningStyled>
-            {textMeaningFormatted.replace(wordRegExp, '*'.repeat(word.word.length))}
-          </TextMeaningStyled>
-        )}
-        {isTranslationShow && isTextMeaning && (
-          <TextMeaningTranslateStyled>{textMeaningTranslate}</TextMeaningTranslateStyled>
-        )}
+          {isTextExample && <TextExampleStyled>{secondPart}</TextExampleStyled>}
+        </CenterContentStyled>
+        <BottomContentStyled>
+          {isTranslationShow && isTranslate && (
+            <TextExampleTranslateStyled>{textExampleTranslate}</TextExampleTranslateStyled>
+          )}
+          {isTranslationShow && isTranscription && <Transcription transcription={transcription} />}
+          {isTextMeaning && isTranslationShow ? (
+            <TextMeaningStyled>{textMeaningFormatted}</TextMeaningStyled>
+          ) : (
+            <TextMeaningStyled>
+              {textMeaningFormatted.replace(wordRegExp, '*'.repeat(word.word.length))}
+            </TextMeaningStyled>
+          )}
+          {isTranslationShow && isTextMeaning && (
+            <TextMeaningTranslateStyled>{textMeaningTranslate}</TextMeaningTranslateStyled>
+          )}
+        </BottomContentStyled>
       </RepeatCardsContainer>
       <RepeatButtonsContainer>
-        {!showButtons && isInputActive && (
-          <StyledButton className="button-next">Check</StyledButton>
-        )}
-        {showButtons && (
-          <>
-            <StyledButton onClick={customHandleSubmit('easy')} type="button">
-              Easy
+        <ButtonsRow>
+          {!showButtons && isInputActive && (
+            <StyledButton className="button-next">
+              <Translate value="Buttons.check" />
             </StyledButton>
-            <StyledButton onClick={customHandleSubmit('simply')} type="button">
-              Simply
-            </StyledButton>
-            <StyledButton onClick={customHandleSubmit('medium')} type="button">
-              Medium
-            </StyledButton>
-            <StyledButton onClick={customHandleSubmit('difficult')} type="button">
-              Difficult
-            </StyledButton>
-            <StyledButton onClick={customHandleSubmit('hard')} type="button">
-              Hard
-            </StyledButton>
-            <StyledButton className="button-next" onClick={customHandleSubmit('repeat')}>
-              repeat
-            </StyledButton>
-          </>
-        )}
-
-        <p>{currentWordIndex}</p>
-        <Line
-          percent={Math.round((currentWordIndex / wordsCount) * 100)}
-          strokeWidth="1"
-          strokeColor="#404497"
-        />
-        <p>{wordsCount}</p>
+          )}
+          {showButtons && (
+            <>
+              <StyledButton onClick={customHandleSubmit('easy')} type="button">
+                <Translate value="Buttons.easy" />
+              </StyledButton>
+              <StyledButton onClick={customHandleSubmit('simply')} type="button">
+                <Translate value="Buttons.simply" />
+              </StyledButton>
+              <StyledButton onClick={customHandleSubmit('medium')} type="button">
+                <Translate value="Buttons.medium" />
+              </StyledButton>
+              <StyledButton onClick={customHandleSubmit('difficult')} type="button">
+                <Translate value="Buttons.difficult" />
+              </StyledButton>
+              <StyledButton onClick={customHandleSubmit('hard')} type="button">
+                <Translate value="Buttons.hard" />
+              </StyledButton>
+              <StyledButton className="button-next" onClick={customHandleSubmit('repeat')}>
+                <Translate value="Buttons.repeat" />
+              </StyledButton>
+            </>
+          )}
+        </ButtonsRow>
+        <ButtonsRow>
+          <ProgressBarCount>{currentWordIndex}</ProgressBarCount>
+          <ProgressBarContainer>
+            <Line
+              percent={Math.round((currentWordIndex / wordsCount) * 100)}
+              strokeWidth="3"
+              trailWidth="2"
+              strokeColor="#404497"
+            />
+          </ProgressBarContainer>
+          <ProgressBarCount>{wordsCount}</ProgressBarCount>
+        </ButtonsRow>
       </RepeatButtonsContainer>
     </RepeatFormStyled>
   );

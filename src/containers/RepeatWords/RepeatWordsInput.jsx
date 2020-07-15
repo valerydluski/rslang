@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -8,7 +8,11 @@ import {
   InputLetterContainer,
 } from './Styled/RepeatWordsInput';
 import getStringWidth from '../../utils/getStringWidth';
+import getScreenWidth from '../../utils/getScreenWidth';
 import { showResult } from '../../redux/RepeatWords/actions';
+
+const breakpoints = [1024, 768, 0];
+const sizes = [30, 22, 18];
 
 const RepeatWordsInput = (props) => {
   const {
@@ -27,9 +31,23 @@ const RepeatWordsInput = (props) => {
 
   const inputRef = useRef(null);
 
-  const FONT_SIZE = 30;
+  const [fontSize, changeFontSize] = useState(sizes[0]);
 
   const [show, setShow] = useState(false);
+
+  const calculateFontSize = useCallback(() => {
+    const screenWidth = getScreenWidth();
+    const index = breakpoints.findIndex((bp) => screenWidth > bp);
+    if (fontSize !== sizes[index]) {
+      changeFontSize(sizes[index]);
+    }
+  }, [changeFontSize, fontSize]);
+
+  useEffect(() => {
+    calculateFontSize();
+    window.addEventListener('resize', calculateFontSize);
+    window.addEventListener('orientationchange', calculateFontSize);
+  }, [calculateFontSize]);
 
   useEffect(() => {
     if (isShowResult) {
@@ -51,11 +69,11 @@ const RepeatWordsInput = (props) => {
     }
   };
 
-  const width = getStringWidth(word, FONT_SIZE);
+  const width = getStringWidth(word, fontSize);
 
   return (
-    <InputContainer style={{ display: 'inline' }}>
-      <InputWordsBgContainer showResult={show} width={width} onClick={hideResult}>
+    <InputContainer width={width} style={{ display: 'inline-block' }} height={fontSize}>
+      <InputWordsBgContainer showResult={show} width={width} onClick={hideResult} height={fontSize}>
         {word
           .toLowerCase()
           .split('')
@@ -80,6 +98,7 @@ const RepeatWordsInput = (props) => {
         {...input}
         readOnly={!isInputActive}
         width={width}
+        height={fontSize}
         ref={inputRef}
       />
       {error && touched && <span>{error}</span>}

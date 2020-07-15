@@ -40,7 +40,7 @@ function* getRepeatWordsWorker() {
     const now = new Date().valueOf();
     repeatWords = userWords.filter((data) => data.userWord.optional.nextRepeat < now);
 
-    if (cardsShowCount > repeatWords.length) {
+    if (cardsShowCount < repeatWords.length) {
       repeatWords = getRandomValuesFromArray(repeatWords, cardsToShow);
       yield put(setIsMoreCardsShowToday(true));
     }
