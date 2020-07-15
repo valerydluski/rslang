@@ -172,24 +172,23 @@ const translations = {
     },
 
     TeamMembers: {
-      valera: 'Valera',
+      valery: 'Valery',
       nelly: 'Nelly',
-      kostya: 'Kostya',
+      kostya: 'Konstantin',
       taras: 'Taras',
       marta: 'Marta',
       artsemi: 'Artsemi',
-      valeraDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      nellyDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      kostyaDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      tarasDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      martaDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      artsemiDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      maxim: 'Maxim',
+    },
+    TeamMembersDescriptions: {
+      valeryDescription: 'Team Lead. Speak It. Settings. Statistics. Styles.',
+      nellyDescription: 'AudioCall. Savannah. Make Sentence. Sprint. Styles.',
+      konstantinDescription:
+        'Authorization. Registration. Main Page. Learning and repetition words. Styles.',
+      tarasDescription: 'English Puzzle. Dictionary. Statistics. Drag & drop. Styles.',
+      martaDescription: 'Design.',
+      artsemiDescription: 'Testing. Styles. Translations. Promo.',
+      maximDescription: 'Our mentor. Thanks very much for all the advice and sharing knowleges.',
     },
     Errors: {
       empty: 'Fields cannot be empty',
@@ -400,24 +399,24 @@ const translations = {
       allGames: 'из',
     },
     TeamMembers: {
-      valera: 'Валера',
+      valery: 'Валерий',
       nelly: 'Нелли',
-      kostya: 'Костя',
+      konstantin: 'Константин',
       taras: 'Тарас',
       marta: 'Марта',
       artsemi: 'Артемий',
-      valeraDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      nellyDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      kostyaDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      tarasDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      martaDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
-      artsemiDescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce mollis sollicitudin feugiat. Mauris eget est massa. Praesent dui ex, viverra in tortor at, egestas facilisis eros. Suspendisse elementum nisl turpis, et commodo urna aliquam a. Proin augue risus, sollicitu',
+      maxim: 'Максим',
+    },
+    TeamMembersDescriptions: {
+      valeryDescription: 'Тимлид. Произнеси слово. Настройки. Статистика. Стили.',
+      nellyDescription: 'Аудиовызов. Саванна. Собери предложение. Спринт. Стили.',
+      konstantinDescription:
+        'Авторизация. Регистрация. Главная страница. Изучение и повторение слов. Стили.',
+      tarasDescription: 'Пазл. Словарь. Статистика. Драг и дроп. Стили.',
+      martaDescription: 'Дизайн.',
+      artsemiDescription: 'Тестирование. Переводы. Промо. Стили.',
+      maximDescription:
+        'Наш ментор. Большое спасибо, за то что поделился опытом и знаниями. А также за дельные советы и замечания насчёт качества кода.',
     },
     Errors: {
       empty: 'Поля настроек не могут быть пустыми',
