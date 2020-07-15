@@ -105,7 +105,7 @@ const LearnWordsForm = (props) => {
           className={!isSoundPlay ? 'learn_sound-button not-active' : 'learn_sound-button'}
         />
         <TopContentStyled>
-          {isTranslate && <TranslateStyled>{wordTranslate}</TranslateStyled>}
+          {isTranslate && isTranslationShow && <TranslateStyled>{wordTranslate}</TranslateStyled>}
           {isImageAssociation && (
             <Image
               alt={word.word}
@@ -160,7 +160,12 @@ const LearnWordsForm = (props) => {
           {isInputActive ? (
             <StyledButton
               type="button"
-              onClick={customHandleSubmit('form')}
+              onClick={handleSubmit((values) =>
+                onSubmit({
+                  ...values,
+                  buttonType: 'form_enter',
+                })
+              )}
               disabled={!isInputActive}
               className={
                 !isInputActive

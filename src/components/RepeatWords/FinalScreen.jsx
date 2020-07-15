@@ -1,15 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from '../UI/TextField/TextField';
+import { Translate } from 'react-redux-i18n';
+import FinalScreenContainer from './styled/FinalScreenContainer';
+import ResultAnimation from './Animation/ResultAnimation';
+import ResultItem from './styled/ResultItem';
+import GoToHomePageButton from '../../containers/Buttons/GoHomePageButton/GoHomePageButton';
 
 export default function FinalScreen(props) {
   const { noWords, wordsCount, isMoreCardsToday } = props;
-  const str = `words count = ${wordsCount}`;
+
+  const values = [
+    {
+      dimension: 'LearnWords.cardsShowed',
+      value: wordsCount,
+    },
+  ];
+
   return (
-    <>
-      {noWords ? <TextField text="Нету больше слов" /> : <TextField text={str} />}
-      {isMoreCardsToday && <TextField text="Ещё есть карточки" />}
-    </>
+    <FinalScreenContainer>
+      <GoToHomePageButton />
+      <ResultAnimation />
+      <h2>
+        <Translate value={noWords ? 'LearnWords.noWords' : 'LearnWords.completed'} />
+      </h2>
+      {!noWords
+        ? values.map((item) => (
+            <ResultItem key={item.dimension}>
+              <Translate className="correct" value={item.dimension} />
+              <span className="value">{item.value}</span>
+            </ResultItem>
+          ))
+        : null}
+      {isMoreCardsToday && <Translate className="description" value="RepeatWords.more" />}
+    </FinalScreenContainer>
+    // <>
+    //   {noWords ? <TextField text="Нету больше слов" /> : <TextField text={str} />}
+    //   {isMoreCardsToday && <TextField text="Ещё есть карточки" />}
+    // </>
   );
 }
 

@@ -35,7 +35,7 @@ function* getRepeatWordsWorker() {
     const getCardsShowedCountToday = (state) => state.changeStatistic.statistic.countRepeatToday;
     const cardsShowedCountToday = yield select(getCardsShowedCountToday);
 
-    const cardsToShow = cardsShowCount - cardsShowedCountToday - 1;
+    const cardsToShow = cardsShowCount - cardsShowedCountToday;
 
     const now = new Date().valueOf();
     repeatWords = userWords.filter((data) => data.userWord.optional.nextRepeat < now);

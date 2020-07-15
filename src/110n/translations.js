@@ -210,6 +210,9 @@ const translations = {
       date: 'Date: ',
       learnedBefore: 'Previously learned words',
     },
+    RepeatWords: {
+      more: 'There are still cards left. You can change the number of cards in the settings',
+    },
   },
   ru: {
     HomePage: {
@@ -422,6 +425,9 @@ const translations = {
       learnedAll: 'Всего изучено слов: %{count}',
       date: 'Дата: ',
       learnedBefore: 'Ранее изученные слова',
+    },
+    RepeatWords: {
+      more: 'Остались ещё карточки. Количество карточек можно изменить в настройках',
     },
   },
 };
