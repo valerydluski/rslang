@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 import { I18n } from 'react-redux-i18n';
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
+import { resetSessionData } from '../redux/Auth/Login/actions';
 
 async function putSettingsToApi(settings, user) {
   try {
@@ -22,7 +23,7 @@ async function putSettingsToApi(settings, user) {
     });
   } catch (e) {
     toast.error(I18n.t('Errors.settingProblems'));
-    throw new Error('Did not put settings');
+    resetSessionData();
   }
 }
 
