@@ -16,7 +16,7 @@ const GameModeToggle = (props) => {
     userWords,
     settings,
   } = props;
-  const wordsForGame = settings[`${gameName}WordsPerPage`];
+  const wordsForGame = settings[`${gameName}WordsPerPage`] || 20;
   const [isChecked, toggleCheck] = useState(currentGameMode);
   const switchToggle = () => {
     if (userWords.length >= +wordsForGame) {
