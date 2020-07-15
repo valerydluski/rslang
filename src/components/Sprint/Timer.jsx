@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TimerStyled from './Styled/TimerStyled';
 import SecondsContainer from '../../containers/Sprint/SecondsContainer';
 
-const Timer = ({ initialTime, timeIsUpHandler, isGameFinished }) => {
+const Timer = ({ initialTime, finishGameHandler, isGameFinished }) => {
   return (
     <TimerStyled animationDuration={initialTime}>
       <div className="timer">
@@ -12,7 +12,7 @@ const Timer = ({ initialTime, timeIsUpHandler, isGameFinished }) => {
         <div className="mask" />
         <SecondsContainer
           initialSecondsAmount={initialTime}
-          timeIsUpHandler={timeIsUpHandler}
+          finishGameHandler={finishGameHandler}
           isGameFinished={isGameFinished}
         />
       </div>
@@ -22,12 +22,12 @@ const Timer = ({ initialTime, timeIsUpHandler, isGameFinished }) => {
 
 Timer.propTypes = {
   initialTime: PropTypes.number.isRequired,
-  timeIsUpHandler: PropTypes.func,
+  finishGameHandler: PropTypes.func,
   isGameFinished: PropTypes.bool,
 };
 
 Timer.defaultProps = {
-  timeIsUpHandler: () => {},
+  finishGameHandler: () => {},
   isGameFinished: false,
 };
 

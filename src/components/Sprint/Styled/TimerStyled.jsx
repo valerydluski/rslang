@@ -12,7 +12,7 @@ const TimerStyled = styled.div`
     height: 100px;
     margin: 0 auto;
     position: relative;
-    background: white;
+    background: #fafafa;
   }
 
   .pie {
@@ -33,7 +33,7 @@ const TimerStyled = styled.div`
     position: absolute;
     width: 10px;
     height: 10px;
-    background: #fff;
+    background: #fafafa;
     border: 1px solid rgba(0, 0, 0, 0.5);
     box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
     border-radius: 50%;
