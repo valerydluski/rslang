@@ -1,6 +1,15 @@
 import newRound from './newRound';
 import { GAME_NAME } from '../config';
 
+const createAllGamesStat = (stat, wordsPerPage, countCorrect) => {
+  const newStat = stat.split('_');
+  newStat[0] = +newStat[0] + 1;
+  if (+wordsPerPage === countCorrect) {
+    newStat[1] = +newStat[1] + 1;
+  }
+  return newStat.join('_');
+};
+
 const createGameEndData = (
   level,
   page,
@@ -47,7 +56,11 @@ const createGameEndData = (
   }
   newStatistic[`${gameName}LastRound`] = lastRound;
   newStatistic[`${gameName}PassedRound`] = newRoundStatistics.join(';');
-
+  newStatistic[`${gameName}All`] = createAllGamesStat(
+    newStatistic[`${gameName}All`],
+    wordsPerPage,
+    wordsPerPage - wrongWords.length
+  );
   return newStatistic;
 };
 

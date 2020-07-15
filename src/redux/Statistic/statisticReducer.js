@@ -23,6 +23,12 @@ const initialState = {
     lastTrain: '0',
     lastUpdateDate: '0',
     countRepeatToday: 0,
+    SpeakITAll: '0_0',
+    EnglishPuzzleAll: '0_0',
+    SavannahAll: '0_0',
+    AudioCallAll: '0_0',
+    SprintAll: '0_0',
+    MakeSentenceAll: '0_0',
   },
 };
 

@@ -13,6 +13,7 @@ const translations = {
       wordsAmount: 'Total words',
       videoLesson: 'Video tutorial',
       sourceRepo: 'Source repository',
+      statisticsGames: 'Games statistic',
     },
     StartPage: {
       game: 'GAME',
@@ -155,6 +156,14 @@ const translations = {
       page: 'Page:',
       correct: 'Correct answers:',
       count: 'Total words:',
+      EnglishPuzzle: 'Puzzle: ',
+      AudioCall: 'Audioсall: ',
+      Savannah: 'Savannah: ',
+      SpeakIT: 'SpeakIT: ',
+      Sprint: 'Sprint: ',
+      MakeSentence: 'Make sentence: ',
+      winGames: 'Games won ',
+      allGames: 'out of ',
     },
 
     TeamMembers: {
@@ -223,6 +232,7 @@ const translations = {
       wordsAmount: 'Всего слов',
       videoLesson: 'Видеоурок',
       sourceRepo: 'Исходный репозиторий',
+      statisticsGames: 'Статистика игр',
     },
     StartPage: {
       game: 'ИГРА',
@@ -367,6 +377,14 @@ const translations = {
       page: 'Страница:',
       correct: 'Правильных ответов:',
       count: 'Всего слов:',
+      EnglishPuzzle: 'Пазл: ',
+      AudioCall: 'Аудиовызов: ',
+      Savannah: 'Саванна: ',
+      SpeakIT: 'Произнеси слово: ',
+      Sprint: 'Спринт: ',
+      MakeSentence: 'Собери предложение: ',
+      winGames: 'Выйграно игр ',
+      allGames: 'из',
     },
     TeamMembers: {
       valera: 'Валера',
