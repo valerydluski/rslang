@@ -43,14 +43,12 @@ const SavannaGameContainer = ({
 }) => {
   const [isWordFinished, toggleWordStatus] = useState(false);
   const [currentWordIndex, changeIndex] = useState(0);
-  const [wrongAnsweredWords, addWordToWrong] = useState([]);
   const [correctAnsweredWords, addWordToCorrect] = useState([]);
   const [isGameFinished, toggleGameMode] = useState(false);
   const [wrongAmount, changeWrongAmount] = useState(0);
 
   useEffect(() => {
     changeIndex(0);
-    addWordToWrong([]);
     addWordToCorrect([]);
     toggleWordStatus(false);
     toggleGameMode(false);
@@ -65,25 +63,23 @@ const SavannaGameContainer = ({
   const restartGame = () => {
     toggleGameMode(false);
     changeIndex(0);
-    addWordToWrong([]);
     addWordToCorrect([]);
     toggleWordStatus(false);
     toggleGameMode(false);
     changeWrongAmount(0);
+    currentStepWords = [];
     currentMainWord = '';
   };
 
   if (isWordsLoading) return <LoadingSpinner />;
 
   function finishGame() {
-    addWordsWithMistakesToStore(wrongAnsweredWords);
+    const wrongWords = wordsCollection
+      .filter((word) => !correctAnsweredWords.find((correctWord) => correctWord.word === word.word))
+      .map((word) => word.word);
+    addWordsWithMistakesToStore(wrongWords);
     toggleGameMode(true);
     if (gameMode) {
-      const wrongWords = wordsCollection
-        .filter(
-          (word) => !correctAnsweredWords.find((correctWord) => correctWord.word === word.word)
-        )
-        .map((word) => word.word);
       saveStatistic({
         Level: level,
         Page: page,
@@ -125,7 +121,6 @@ const SavannaGameContainer = ({
     return (
       <ResultModal
         showProperties={['word', 'wordTranslate']}
-        correctWords={correctAnsweredWords}
         audioForPlay="audio"
         newGame={newGame}
         restartGame={restartGame}
@@ -165,7 +160,6 @@ const SavannaGameContainer = ({
     const isCorrect = selectedWordIndex === null ? false : word === currentWord.wordTranslate;
     if (!isCorrect) {
       changeWrongAmount(wrongAmount + 1);
-      addWordToWrong([...wrongAnsweredWords, currentWord.word]);
     } else {
       addWordToCorrect([...correctAnsweredWords, currentWord]);
       moveBackground(true);
@@ -208,6 +202,7 @@ const SavannaGameContainer = ({
         />
       ) : null}
       <SavannahWordsContainer
+        key={currentStepWords.join()}
         currentStepWords={currentStepWords}
         isWordFinished={isWordFinished}
         processAnswer={processAnswer}

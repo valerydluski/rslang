@@ -8,11 +8,8 @@ import { WordStyled, TranslationStyled } from './Styled/WordInfoStyled';
 import SprintControlsContainer from './SprintControlsContainer';
 import randomIntegerGenerator from '../../utils/randomIntegerGenerator';
 import { changeIDontKnowWords } from '../../redux/Games/action';
-import shuffleArray from '../../utils/shuffleArray';
 import ResultModal from '../Modal/ResultModal';
 import { saveFullStatistic } from '../../redux/Statistic/action';
-
-let currentGameWords;
 
 const SprintGameContainer = (props) => {
   const {
@@ -36,8 +33,6 @@ const SprintGameContainer = (props) => {
   const [correctAnswers, changeAnswersAmount] = useState(0);
   const [scoreStep, changeScoreStep] = useState(10);
   const [score, changeScore] = useState(0);
-
-  if (!currentWordIndex) currentGameWords = shuffleArray(wordsCollection);
 
   const restartGame = () => {
     toggleGameMode(false);
@@ -80,7 +75,7 @@ const SprintGameContainer = (props) => {
       />
     );
   }
-  const currentWord = currentGameWords[currentWordIndex];
+  const currentWord = wordsCollection[currentWordIndex];
   const currentRightAnswer = Boolean(randomIntegerGenerator(0, 1));
   let supposedAnswerWord;
 
@@ -93,7 +88,7 @@ const SprintGameContainer = (props) => {
       supposedAnswerWord = wordsCollection[supposedAnswerWordIndex];
     }
   } else {
-    supposedAnswerWord = currentGameWords[currentWordIndex];
+    supposedAnswerWord = wordsCollection[currentWordIndex];
   }
 
   const setResultScore = (isCorrect) => {
@@ -119,7 +114,7 @@ const SprintGameContainer = (props) => {
     if (!isResultCorrect) {
       addWordToWrong([...wrongAnsweredWords, currentWord.word]);
     } else addWordToCorrect([...correctAnsweredWords, currentWord]);
-    if (currentWordIndex === currentGameWords.length - 1) {
+    if (currentWordIndex === wordsCollection.length - 1) {
       setTimeout(() => finishGameHandler(), 500);
       finishGame();
     } else changeWordIndex(currentWordIndex + 1);
