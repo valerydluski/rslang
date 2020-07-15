@@ -1,5 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import { I18n } from 'react-redux-i18n';
 import { LEARN_WORDS_CHANGE_PAGE, LEARN_WORDS_CHANGE_LEVEL } from '../../ChangeRounds/types';
 import { hideLoader, showLoader } from '../../Loader/action';
 import wordsFetch from '../../../services/getLearnWordsFromAPI';
@@ -12,7 +13,7 @@ function* workerGetWords({ payload }) {
     yield put(saveWordToState(data[0]));
     yield put(hideLoader());
   } catch (e) {
-    toast.error('error get words');
+    toast.error(I18n.t('Errors.getWords'));
     yield put(hideLoader());
   }
 }

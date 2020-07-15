@@ -1,5 +1,6 @@
 import { takeEvery, call, put, select, take } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import { I18n } from 'react-redux-i18n';
 import REGISTER_TO_SERVER from './types';
 import { authToServer } from '../Login/actions';
 import signUp from '../../../services/signUp';
@@ -22,7 +23,7 @@ function* workerRegistration(action) {
     yield put(saveUserSettingsToAPI(settings));
     yield put(saveFullStatistic(statistic.statistic || statistic));
   } catch (e) {
-    toast.error('error registration');
+    toast.error(I18n.t('Errors.registrationError'));
   }
 }
 

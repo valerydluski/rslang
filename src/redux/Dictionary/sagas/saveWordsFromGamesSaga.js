@@ -4,6 +4,7 @@ import { SAVE_WORDS_FROM_GAMES } from '../types';
 import { saveOneUserWords } from '../actions';
 import saveOneWord from '../../../services/saveOneWord';
 import updateOneWord from '../../../services/updateOneWord';
+import { I18n } from 'react-redux-i18n';
 
 function* saveUserWordsFromGamesSagaWorker({ payload }) {
   try {
@@ -53,7 +54,7 @@ function* saveUserWordsFromGamesSagaWorker({ payload }) {
       })
     );
   } catch (error) {
-    toast.error('error define max page');
+    toast.error(I18n.t('Errors.maxPage'));
   }
 }
 

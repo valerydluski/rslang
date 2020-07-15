@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import { API } from '../config';
 import fetchData from '../utils/fetchData';
+import { I18n } from 'react-redux-i18n';
 
 const WORDS_ON_PAGE = 3600;
 
@@ -32,7 +33,7 @@ async function getAllUserWords(user) {
       }
     );
   } catch (e) {
-    toast.error(e.message);
+    toast.error(I18n.t('Errors.APIProblem'));
     return null;
   }
 }

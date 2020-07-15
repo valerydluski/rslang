@@ -1,5 +1,6 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import { I18n } from 'react-redux-i18n';
 import { AUTH_TO_SERVER } from '../types';
 import { saveSessionData } from '../actions';
 import signIn from '../../../../services/signIn';
@@ -14,7 +15,7 @@ function* workerLogin(action) {
       yield call(history.push, '/home');
     }
   } catch (e) {
-    toast.error('login error');
+    toast.error(I18n.t('Errors.loginError'));
   }
 }
 
