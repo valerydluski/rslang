@@ -46,8 +46,8 @@ const FormStyled = styled.form`
 
   .button_sign-in {
     border-radius: 50%;
-    width: 178px;
-    height: 178px;
+    width: 150px;
+    height: 150px;
     border: none;
     outline: none;
     justify-self: flex-end;
@@ -58,7 +58,7 @@ const FormStyled = styled.form`
     font-size: 34px;
     transform: translateX(-50%);
     margin-left: 70%;
-    margin-top: 40px;
+    margin-top: 10px;
 
     @media ${DEVICE.laptop} {
       transform: translateX(-50%);

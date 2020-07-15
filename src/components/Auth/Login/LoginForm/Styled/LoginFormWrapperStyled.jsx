@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { DEVICE } from '../../../../../config';
 
 const LoginFormWrapperStyled = styled.div`
-  max-width: 1920px;
+  max-width: 100%;
+  width: 100%;
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 10% 30% 10% 50%;
+  grid-template-rows: 10% 20% 10% 60%;
   grid-template-areas:
     'logo background'
     'title background'
@@ -16,7 +17,7 @@ const LoginFormWrapperStyled = styled.div`
   background: #fafafa;
   box-sizing: border-box;
   min-height: 100%;
-  max-height: 1080px;
+  max-height: 100%;
 
   @media (max-width: 1800px) {
     grid-template-columns: 40% 60%;
