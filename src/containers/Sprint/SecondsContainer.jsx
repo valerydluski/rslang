@@ -5,7 +5,7 @@ import SecondsContainerStyled from './Styled/SecondsContainerStyled';
 import timeIsUpSound from '../../assets/audio/timeIsUpSound.mp3';
 import countdownSound from '../../assets/audio/countdownSound.mp3';
 
-const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinished }) => {
+const SecondsContainer = ({ initialSecondsAmount, finishGameHandler, isGameFinished }) => {
   const [seconds, setSeconds] = useState(initialSecondsAmount);
 
   useEffect(() => {
@@ -13,12 +13,12 @@ const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinishe
       setSeconds((second) => second - 1);
     }, 1000);
     if (seconds === 0) {
-      timeIsUpHandler();
+      finishGameHandler();
     }
     return () => {
       clearInterval(tick);
     };
-  }, [seconds, timeIsUpHandler]);
+  }, [seconds, finishGameHandler]);
 
   if (isGameFinished) {
     return null;
@@ -37,12 +37,12 @@ const SecondsContainer = ({ initialSecondsAmount, timeIsUpHandler, isGameFinishe
 
 SecondsContainer.propTypes = {
   initialSecondsAmount: PropTypes.number.isRequired,
-  timeIsUpHandler: PropTypes.func,
+  finishGameHandler: PropTypes.func,
   isGameFinished: PropTypes.bool,
 };
 
 SecondsContainer.defaultProps = {
-  timeIsUpHandler: () => {},
+  finishGameHandler: () => {},
   isGameFinished: false,
 };
 

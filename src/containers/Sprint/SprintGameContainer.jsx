@@ -26,7 +26,6 @@ const SprintGameContainer = (props) => {
     newGame,
     gameMode,
     toggleGameMode,
-    isTimeIsUp,
   } = props;
   const [currentWordIndex, changeWordIndex] = useState(0);
   const [isWordFinished, toggleWordStatus] = useState(false);
@@ -48,7 +47,7 @@ const SprintGameContainer = (props) => {
 
   useEffect(() => restartGame(), [wordsCollection]);
 
-  const finishGame = () => {
+  if (isGameFinished) {
     const wrongWords = wordsCollection
       .filter((word) => !correctAnsweredWords.find((correctWord) => correctWord.word === word.word))
       .map((word) => word.word);
@@ -62,11 +61,6 @@ const SprintGameContainer = (props) => {
         gameName,
       });
     }
-  };
-
-  if (isTimeIsUp) finishGame();
-
-  if (isGameFinished) {
     return (
       <ResultModal
         showProperties={['word', 'wordTranslate']}
@@ -76,6 +70,7 @@ const SprintGameContainer = (props) => {
       />
     );
   }
+
   const currentWord = wordsCollection[currentWordIndex];
   const currentRightAnswer = Boolean(randomIntegerGenerator(0, 1));
   let supposedAnswerWord;
@@ -114,8 +109,7 @@ const SprintGameContainer = (props) => {
     setResultScore(isResultCorrect);
     if (isResultCorrect) correctAnsweredWords.push(currentWord);
     if (currentWordIndex === wordsCollection.length - 1) {
-      setTimeout(() => finishGameHandler(), 500);
-      finishGame();
+      finishGameHandler();
     } else changeWordIndex(currentWordIndex + 1);
   };
   return (
@@ -156,7 +150,6 @@ SprintGameContainer.propTypes = {
   page: PropTypes.string.isRequired,
   gameName: PropTypes.string.isRequired,
   newGame: PropTypes.func,
-  isTimeIsUp: PropTypes.bool,
   toggleGameMode: PropTypes.func,
   gameMode: PropTypes.bool.isRequired,
 };
@@ -164,7 +157,6 @@ SprintGameContainer.propTypes = {
 SprintGameContainer.defaultProps = {
   wordsCollection: [],
   isGameFinished: false,
-  isTimeIsUp: false,
   finishGameHandler: () => {},
   addWrongWordsToStore: () => {},
   toggleGameMode: () => {},
