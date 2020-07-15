@@ -8,7 +8,6 @@ import ModalContent from './ModalContent';
 import Image from '../../components/UI/Image/Image';
 import ModalButtonsContainerStyled from './Styled/ModalButtonsContainerStyled';
 import Button from '../../components/UI/Button/Button';
-import GoToHomePageButton from '../Buttons/GoHomePageButton/GoHomePageButton';
 import { LINK_FOR_IMAGE, LINK_FOR_AUDIO } from '../../config';
 import createStatisticForGames from '../../utils/createStatisticForGames';
 import StatisticsHeader from '../../components/Modal/Statistics/StatisticsHeader';
@@ -39,7 +38,6 @@ const ModalResult = (props) => {
   if (loading) {
     return (
       <OverlayStyled id="overlay">
-        <GoToHomePageButton />
         <ModalStyled>
           <LoadingSpinner />
         </ModalStyled>
@@ -97,9 +95,9 @@ const ModalResult = (props) => {
             isOldResult={isOldResult}
           />
           <ModalButtonsContainerStyled>
-            <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
-            <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
-            <Button buttonHandler={backHandler} text={I18n.t('Buttons.back')} />
+            <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} className={'modalPageButton'}/>
+            <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} className={'modalPageButton'}/>
+            <Button buttonHandler={backHandler} text={I18n.t('Buttons.back')} className={'modalPageButton'}/>
           </ModalButtonsContainerStyled>
         </>
       );
@@ -112,9 +110,9 @@ const ModalResult = (props) => {
             <RoundStatistic key={round} data={round} roundHandler={roundHandler} />
           ))}
           <ModalButtonsContainerStyled>
-            <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
-            <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
-            <Button buttonHandler={backHandler} text={I18n.t('Buttons.back')} />
+            <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} className={'modalPageButton'}/>
+            <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} className={'modalPageButton'}/>
+            <Button buttonHandler={backHandler} text={I18n.t('Buttons.back')} className={'modalPageButton'}/>
           </ModalButtonsContainerStyled>
         </>
       );
@@ -130,10 +128,10 @@ const ModalResult = (props) => {
           isOldResult={isOldResult}
         />
         <ModalButtonsContainerStyled>
-          <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} />
-          <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} />
+          <Button buttonHandler={restartHandler} text={I18n.t('Buttons.restart')} className={'modalPageButton'}/>
+          <Button buttonHandler={newGameHandler} text={I18n.t('Buttons.newGame')} className={'modalPageButton'}/>
           {gameMode ? (
-            <Button buttonHandler={showStatisticHandler} text={I18n.t('Buttons.statistic')} />
+            <Button buttonHandler={showStatisticHandler} text={I18n.t('Buttons.statistic')} className={'modalPageButton'}/>
           ) : null}
         </ModalButtonsContainerStyled>
       </>
@@ -142,7 +140,6 @@ const ModalResult = (props) => {
 
   return (
     <OverlayStyled id="overlay">
-      <GoToHomePageButton />
       <ModalStyled>{showContent()}</ModalStyled>
     </OverlayStyled>
   );

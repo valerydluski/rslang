@@ -106,6 +106,7 @@ const ButtonStyled = styled.button`
     background-color: #b2b2b2;
     cursor: not-allowed;
   }
+  }
 `;
 
 export default ButtonStyled;

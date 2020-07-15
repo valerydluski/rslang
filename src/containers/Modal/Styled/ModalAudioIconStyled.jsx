@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import audioIcon from '../../../components/UI/Icon/audioIco.svg';
+import { DEVICE } from '../../../config';
 
 const ModalAudioIconStyled = styled.span`
   display: block;
@@ -8,6 +9,20 @@ const ModalAudioIconStyled = styled.span`
   background-image: url(${audioIcon});
   background-size: cover;
   cursor: pointer;
+
+  @media ${DEVICE.laptopL} {
+    width: 32px;
+  }
+
+  @media ${DEVICE.laptop} {
+    width: 32px;
+    height: 30px;
+  }
+
+  @media ${DEVICE.tablet} {
+    height: 23px;
+    width: 24px;
+  }
 `;
 
 export default ModalAudioIconStyled;
