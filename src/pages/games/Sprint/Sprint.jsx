@@ -29,6 +29,7 @@ const Sprint = (props) => {
     gameMode,
   } = props;
   const [words, changeWords] = useState(wordsCollection);
+  const [isTimeIsUp, changeTimeMode] = useState(false);
 
   useEffect(() => {
     changeWords(wordsCollection);
@@ -45,6 +46,7 @@ const Sprint = (props) => {
   };
 
   const timeIsUpHandler = () => {
+    changeTimeMode(true);
     finishGameHandler();
   };
 
@@ -81,6 +83,7 @@ const Sprint = (props) => {
           initialTime={secondsForGuessing}
           timeIsUpHandler={timeIsUpHandler}
           isGameFinished={isGameFinished}
+          changeTimeMode={changeTimeMode}
         />
         <SprintGameContainer
           isGameFinished={isGameFinished}
@@ -91,6 +94,7 @@ const Sprint = (props) => {
           gameName={gameName}
           newGame={newGame}
           toggleGameMode={toggleGameMode}
+          isTimeIsUp={isTimeIsUp}
         />
       </GameContainerStyled>
       <StyledPattern>

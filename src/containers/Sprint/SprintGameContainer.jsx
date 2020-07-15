@@ -26,6 +26,7 @@ const SprintGameContainer = (props) => {
     newGame,
     gameMode,
     toggleGameMode,
+    isTimeIsUp,
   } = props;
   const [currentWordIndex, changeWordIndex] = useState(0);
   const [isWordFinished, toggleWordStatus] = useState(false);
@@ -62,6 +63,8 @@ const SprintGameContainer = (props) => {
       });
     }
   };
+
+  if (isTimeIsUp) finishGame();
 
   if (isGameFinished) {
     return (
@@ -153,6 +156,7 @@ SprintGameContainer.propTypes = {
   page: PropTypes.string.isRequired,
   gameName: PropTypes.string.isRequired,
   newGame: PropTypes.func,
+  isTimeIsUp: PropTypes.bool,
   toggleGameMode: PropTypes.func,
   gameMode: PropTypes.bool.isRequired,
 };
@@ -160,6 +164,7 @@ SprintGameContainer.propTypes = {
 SprintGameContainer.defaultProps = {
   wordsCollection: [],
   isGameFinished: false,
+  isTimeIsUp: false,
   finishGameHandler: () => {},
   addWrongWordsToStore: () => {},
   toggleGameMode: () => {},
