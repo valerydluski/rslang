@@ -81,7 +81,7 @@ const translations = {
       firstLineSecondPart: `Not sure how to start and what with?`,
       secondLineFirstPart: `We have a solution -`,
       secondLineSecondPart: ` the RSLang application`,
-      secondLineThirdPart: ` from our development team! This is a great opportunity to get a language practice that you are not likely to meet 
+      secondLineThirdPart: ` from our development team! This is a great opportunity to get a language practice that you are not likely to meet
       at school lesson. Our app will help you:`,
       firstList: `To get acquainted with various accents of English, including accents of those for whom English is also a second language`,
       secondList: `to learn slang and spoken English`,
@@ -91,14 +91,14 @@ const translations = {
       but also expand the vocabulary, revise grammar, improve your pronunciation.`,
       thirdLineFirstPart: `The main feature of our project is the use of`,
       thirdLineSecondPart: ` interval repetition system`,
-      thirdLineThirdPart: `, that can adapt to your current level of English. 
-      Repetition includes 5 difficulty levels. When choosing the maximum difficulty level, 
-      the repetition will last 10 minutes, 
-      the duration of the second step is four times the duration of the first level. Each next step is calculated as the sum 
+      thirdLineThirdPart: `, that can adapt to your current level of English.
+      Repetition includes 5 difficulty levels. When choosing the maximum difficulty level,
+      the repetition will last 10 minutes,
+      the duration of the second step is four times the duration of the first level. Each next step is calculated as the sum
       of the previous step + 50% of the total repeat time.`,
-      fourthLineText: ` If in the game you meet a card with a certain word 
+      fourthLineText: ` If in the game you meet a card with a certain word
       and make a mistake, then it will be displayed the next time the words are repeated. `,
-      fifthLineText: `Have fun practicing English. No matter what you are interested in and how you spend time, 
+      fifthLineText: `Have fun practicing English. No matter what you are interested in and how you spend time,
       among our mini-games you will definitely find something that suits you.`,
       sixthLineText: `Play, enjoy and never give up!`,
       linkDescriptionFirstPart: `By this `,
@@ -127,6 +127,11 @@ const translations = {
       train: 'Train',
       play: 'Play',
       check: 'Check',
+      easy: 'Easy',
+      simply: 'Simply',
+      medium: 'Medium',
+      difficult: 'Difficult',
+      repeat: 'Repeat',
     },
     Languages: {
       en: 'English',
@@ -301,14 +306,14 @@ const translations = {
       провести время, но и расширить словарный запас, подтянуть знание грамматики, улучшить произношение`,
       thirdLineFirstPart: `Основной особенностью нашего проекта является использование`,
       thirdLineSecondPart: ` системы интервального повторения`,
-      thirdLineThirdPart: `, которая 
+      thirdLineThirdPart: `, которая
       подстроится под ваш текущий уровень английского языка. Повторение включает в себя
       5 уровней сложности. При выборе максимального уровня сложности повторение будет длиться 10 минут, продолжительность второго
       шага в четыре раза превышает длительность первого уровня.
       Каждый следующий шаг расчитывается как сумма предыдущего шага + 50% от общего времени повторения.`,
-      fourthLineText: `Если в игре вы встретите карточку с определенным словом и совершите ошибку, то оно обязательно будет выведено при 
+      fourthLineText: `Если в игре вы встретите карточку с определенным словом и совершите ошибку, то оно обязательно будет выведено при
       следующем повторении слов. `,
-      fifthLineText: `Развлекайтесь и практикуйте английский язык. Неважно, чем вы интересуетесь и как проводите время, 
+      fifthLineText: `Развлекайтесь и практикуйте английский язык. Неважно, чем вы интересуетесь и как проводите время,
       среди наших мини-игр вы обязательно найдете что-нибудь по душе.`,
       sixthLineText: `Играйте, наслаждайтесь и не бойтесь ошибаться!`,
       linkDescriptionFirstPart: `По этой `,
@@ -336,6 +341,11 @@ const translations = {
       train: 'Тренировать',
       play: 'Играть',
       check: 'Проверить',
+      easy: 'Легко',
+      simply: 'Просто',
+      medium: 'Средне',
+      difficult: 'Трудно',
+      repeat: 'Повторить',
     },
     Languages: {
       en: 'Английский',
