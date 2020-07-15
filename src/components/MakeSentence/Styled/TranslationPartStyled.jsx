@@ -18,6 +18,14 @@ const TranslationPartStyled = styled.div`
   user-select: none;
   color: #fff;
 
+  &.correct {
+    border-bottom: 4px solid #5da271;
+  }
+
+  &.wrong {
+    border-bottom: 4px solid #f56748;
+  }
+
   @media ${DEVICE.laptopL} {
     font-size: 15px;
   }

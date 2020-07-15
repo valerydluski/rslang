@@ -34,6 +34,5 @@ Promo.propTypes = {
 };
 
 Promo.defaultProps = {
-  team: [],
   userName: 'user',
 };

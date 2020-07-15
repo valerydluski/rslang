@@ -13,6 +13,7 @@ const translations = {
       wordsAmount: 'Total words',
       videoLesson: 'Video tutorial',
       sourceRepo: 'Source repository',
+      statisticsGames: 'Games statistic',
     },
     StartPage: {
       game: 'GAME',
@@ -132,6 +133,9 @@ const translations = {
       medium: 'Medium',
       difficult: 'Difficult',
       repeat: 'Repeat',
+      learnWords: 'Learn Words',
+      repeatWords: 'Repeat Words',
+      difficultWords: 'Difficult Words',
     },
     Languages: {
       en: 'English',
@@ -157,6 +161,14 @@ const translations = {
       page: 'Page:',
       correct: 'Correct answers:',
       count: 'Total words:',
+      EnglishPuzzle: 'Puzzle: ',
+      AudioCall: 'Audioсall: ',
+      Savannah: 'Savannah: ',
+      SpeakIT: 'SpeakIT: ',
+      Sprint: 'Sprint: ',
+      MakeSentence: 'Make sentence: ',
+      winGames: 'Games won ',
+      allGames: 'out of ',
     },
 
     TeamMembers: {
@@ -228,6 +240,7 @@ const translations = {
       wordsAmount: 'Всего слов',
       videoLesson: 'Видеоурок',
       sourceRepo: 'Исходный репозиторий',
+      statisticsGames: 'Статистика игр',
     },
     StartPage: {
       game: 'ИГРА',
@@ -349,6 +362,9 @@ const translations = {
       medium: 'Средне',
       difficult: 'Трудно',
       repeat: 'Повторить',
+      learnWords: 'Учить слова',
+      repeatWords: 'Повторить слова',
+      difficultWords: 'Сложные слова',
     },
     Languages: {
       en: 'Английский',
@@ -374,6 +390,14 @@ const translations = {
       page: 'Страница:',
       correct: 'Правильных ответов:',
       count: 'Всего слов:',
+      EnglishPuzzle: 'Пазл: ',
+      AudioCall: 'Аудиовызов: ',
+      Savannah: 'Саванна: ',
+      SpeakIT: 'Произнеси слово: ',
+      Sprint: 'Спринт: ',
+      MakeSentence: 'Собери предложение: ',
+      winGames: 'Выйграно игр ',
+      allGames: 'из',
     },
     TeamMembers: {
       valera: 'Валера',

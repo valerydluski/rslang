@@ -4,22 +4,29 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import GameFieldsContainerStyled from './Styled/GameFieldsContainerStyled';
 import AnswerField from '../../components/MakeSentence/AnswerField';
 import OptionsField from '../../components/MakeSentence/OptionsField';
+import ButtonsContainerStyled from './Styled/ButtonsContainerStyled';
 import shuffleArray from '../../utils/shuffleArray';
-import { DontKnowButton, NextButton } from '../../components/MakeSentence/MakeSentenceControls';
+import {
+  DontKnowButton,
+  NextButton,
+  CheckButton,
+} from '../../components/MakeSentence/MakeSentenceControls';
 import calcOwnWordsSentenceWidth from '../../utils/calcOwnWordsSentenceWidth';
 
 const GameFieldsContainer = ({
-  toggleWordStatus,
   sentenceTranslation,
   isWordFinished,
   isAutoSolve,
   autoSolve,
-  playResultSound,
   switchToNextSentence,
+  checkSentence,
+  isCheckShow,
+  toggleShowCheck,
 }) => {
   const [optionParts, changeOptionParts] = useState(shuffleArray(sentenceTranslation.split(' ')));
   const [answerParts, changeAnswerParts] = useState([]);
   const [wordsWidth, changeWordsWidth] = useState({});
+  const [isCheckButtonShow, changeCheckButtonShowMode] = useState(false);
 
   const onResize = useCallback(() => {
     const widths = calcOwnWordsSentenceWidth(sentenceTranslation);
@@ -31,14 +38,6 @@ const GameFieldsContainer = ({
     changeWordsWidth(widths);
   }, [changeWordsWidth, sentenceTranslation]);
 
-  const checkAnswer = () => {
-    const result = answerParts.join(' ') === sentenceTranslation;
-    if (result) {
-      toggleWordStatus(true);
-      playResultSound(true);
-    }
-  };
-
   useEffect(() => {
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', onOrientationChange);
@@ -46,7 +45,9 @@ const GameFieldsContainer = ({
 
   useEffect(() => {
     if (optionParts.length === 0) {
-      checkAnswer();
+      changeCheckButtonShowMode(true);
+    } else if (isCheckButtonShow) {
+      changeCheckButtonShowMode(false);
     }
   });
 
@@ -120,13 +121,21 @@ const GameFieldsContainer = ({
           isDragging={!isWordFinished}
           answerParts={answerParts}
           wordsWidth={wordsWidth}
+          isCheckShow={isCheckShow}
+          toggleShowCheck={toggleShowCheck}
+          sentenceTranslationParts={sentenceTranslation.split(' ')}
         />
         <OptionsField isDragging optionsParts={optionParts} wordsWidth={wordsWidth} />
       </DragDropContext>
       {isWordFinished ? (
         <NextButton switchToNextSentence={switchToNextSentence} />
       ) : (
-        <DontKnowButton clickHandler={autoSolve} />
+        <ButtonsContainerStyled>
+          <DontKnowButton clickHandler={autoSolve} />
+          {isCheckButtonShow ? (
+            <CheckButton checkSentence={() => checkSentence(answerParts)} />
+          ) : null}
+        </ButtonsContainerStyled>
       )}
     </GameFieldsContainerStyled>
   );
@@ -134,20 +143,20 @@ const GameFieldsContainer = ({
 
 GameFieldsContainer.propTypes = {
   sentenceTranslation: PropTypes.string.isRequired,
-  toggleWordStatus: PropTypes.func,
   isWordFinished: PropTypes.bool,
   isAutoSolve: PropTypes.bool,
+  isCheckShow: PropTypes.bool,
   autoSolve: PropTypes.func,
-  playResultSound: PropTypes.func,
+  checkSentence: PropTypes.func,
   switchToNextSentence: PropTypes.func,
 };
 
 GameFieldsContainer.defaultProps = {
   isWordFinished: false,
   isAutoSolve: false,
-  playResultSound: () => {},
+  isCheckShow: false,
+  checkSentence: () => {},
   autoSolve: () => {},
-  toggleWordStatus: () => {},
   switchToNextSentence: () => {},
 };
 

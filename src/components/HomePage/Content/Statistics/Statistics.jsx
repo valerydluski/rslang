@@ -14,6 +14,7 @@ import { TOTAL_WORDS } from '../../../../config';
 import getScreenWidth from '../../../../utils/getScreenWidth';
 import Image from '../../../UI/Image/Image';
 import screenRotateIcon from '../../../../assets/img/rotate-screen.svg';
+import GamesStatistic from './GamesStatistic';
 
 const breakpoints = [1440, 568];
 const widths = [700, 480];
@@ -41,7 +42,7 @@ function Statistics({ getAllWords, data, isLoading }) {
   const onOrientationChange = useCallback(() => {
     const screenWidth = getScreenWidth();
     changeBreakpoint(screenWidth < breakpoints[1]);
-  }, [changeBreakpoint, changeChartSize]);
+  }, [changeBreakpoint]);
 
   useEffect(() => {
     const screenWidth = getScreenWidth();
@@ -79,6 +80,7 @@ function Statistics({ getAllWords, data, isLoading }) {
           )}
         </ChartContainer>
       </Container>
+      <GamesStatistic />
     </StyledStatistics>
   );
 }

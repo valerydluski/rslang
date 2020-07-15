@@ -11,6 +11,7 @@ const WordsContainerStyled = styled.div`
   width: 100%;
   margin-top: 10px;
   flex-wrap: wrap;
+  position: relative;
   @media ${DEVICE.tablet} {
     justify-content: flex-start;
   }

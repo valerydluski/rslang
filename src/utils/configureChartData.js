@@ -6,13 +6,17 @@ function configureChartData(times) {
     daysMap.set(item, daysMap.has(item) ? daysMap.get(item) + 1 : 1);
   });
   const days = [];
-  Array.from(daysMap.keys()).forEach((item) => {
-    days.push({
-      date: new Date(item),
-      count: daysMap.get(item),
+  Array.from(daysMap.keys())
+    .sort((a, b) => a - b)
+    .forEach((item) => {
+      days.push({
+        date: new Date(item),
+        count: daysMap.get(item),
+      });
     });
-  });
-
+  if (daysMap.has(undefined)) {
+    days.unshift(days.pop());
+  }
   let acc = days[0].count;
   const points = days.map((item, index) => {
     if (index === 0) return item;
