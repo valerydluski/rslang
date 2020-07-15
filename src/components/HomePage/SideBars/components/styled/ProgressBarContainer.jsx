@@ -31,8 +31,15 @@ const ProgressBarContainer = styled.div`
   }
 
   & .total-progress {
-    width: 120px;
-    height: 120px;
+    width: 250px;
+    height: 250px;
+  }
+
+  @media ${DEVICE.laptopS} {
+    & .total-progress {
+      width: 120px;
+      height: 120px;
+    }
   }
 
   @media ${DEVICE.laptop} {
