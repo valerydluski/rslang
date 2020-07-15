@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
@@ -8,11 +8,10 @@ import { WordStyled, TranslationStyled } from './Styled/WordInfoStyled';
 import SprintControlsContainer from './SprintControlsContainer';
 import randomIntegerGenerator from '../../utils/randomIntegerGenerator';
 import { changeIDontKnowWords } from '../../redux/Games/action';
-import shuffleArray from '../../utils/shuffleArray';
 import ResultModal from '../Modal/ResultModal';
 import { saveFullStatistic } from '../../redux/Statistic/action';
 
-let currentGameWords = [];
+let correctAnsweredWords = [];
 
 const SprintGameContainer = (props) => {
   const {
@@ -30,25 +29,23 @@ const SprintGameContainer = (props) => {
   } = props;
   const [currentWordIndex, changeWordIndex] = useState(0);
   const [isWordFinished, toggleWordStatus] = useState(false);
-  const [correctAnsweredWords, addWordToCorrect] = useState([]);
   const [isAnswerCorrect, setAnswer] = useState(false);
   const [correctAnswers, changeAnswersAmount] = useState(0);
   const [scoreStep, changeScoreStep] = useState(10);
   const [score, changeScore] = useState(0);
 
-  if (!currentGameWords.length) currentGameWords = shuffleArray(wordsCollection);
-
   const restartGame = () => {
     toggleGameMode(false);
     changeWordIndex(0);
     toggleWordStatus(false);
-    addWordToCorrect([]);
     setAnswer(false);
     changeAnswersAmount(0);
     changeScoreStep(10);
     changeScore(0);
-    currentGameWords = [];
+    correctAnsweredWords = [];
   };
+
+  useEffect(() => restartGame(), [wordsCollection]);
 
   const finishGame = () => {
     const wrongWords = wordsCollection
@@ -76,7 +73,7 @@ const SprintGameContainer = (props) => {
       />
     );
   }
-  const currentWord = currentGameWords[currentWordIndex];
+  const currentWord = wordsCollection[currentWordIndex];
   const currentRightAnswer = Boolean(randomIntegerGenerator(0, 1));
   let supposedAnswerWord;
 
@@ -89,7 +86,7 @@ const SprintGameContainer = (props) => {
       supposedAnswerWord = wordsCollection[supposedAnswerWordIndex];
     }
   } else {
-    supposedAnswerWord = currentGameWords[currentWordIndex];
+    supposedAnswerWord = wordsCollection[currentWordIndex];
   }
 
   const setResultScore = (isCorrect) => {
@@ -112,8 +109,8 @@ const SprintGameContainer = (props) => {
     toggleWordStatus(true);
     setAnswer(isResultCorrect);
     setResultScore(isResultCorrect);
-    if (isResultCorrect) addWordToCorrect([...correctAnsweredWords, currentWord]);
-    if (currentWordIndex === currentGameWords.length - 1) {
+    if (isResultCorrect) correctAnsweredWords.push(currentWord);
+    if (currentWordIndex === wordsCollection.length - 1) {
       setTimeout(() => finishGameHandler(), 500);
       finishGame();
     } else changeWordIndex(currentWordIndex + 1);
