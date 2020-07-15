@@ -28,18 +28,18 @@ const StyledLink = styled.a`
 const RepoLink = () => {
   return (
     <RepoLinkContainer>
-        <BlackParagraph>
-      <BlackSpan>
-        <Translate value="Promo.linkDescriptionFirstPart" />
-      </BlackSpan>
-      <BlackSpan>
-        <StyledLink href="https://github.com/valerydluski/rslang">
-        <Translate value="Promo.linkDescriptionSecondPart" />
-        </StyledLink>
-      </BlackSpan>
-      <BlackSpan>
-        <Translate value="Promo.linkDescriptionThirdPart" />
-      </BlackSpan>
+      <BlackParagraph>
+        <BlackSpan>
+          <Translate value="Promo.linkDescriptionFirstPart" />
+        </BlackSpan>
+        <BlackSpan>
+          <StyledLink href="https://github.com/valerydluski/rslang">
+            <Translate value="Promo.linkDescriptionSecondPart" />
+          </StyledLink>
+        </BlackSpan>
+        <BlackSpan>
+          <Translate value="Promo.linkDescriptionThirdPart" />
+        </BlackSpan>
       </BlackParagraph>
     </RepoLinkContainer>
   );
