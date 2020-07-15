@@ -35,22 +35,26 @@ const getSimilarWords = (payload, appMode, userWords) => {
         el.userWord.optional.partOfSpeechCode === element.userWord.optional.partOfSpeechCode &&
         element.word !== el.word
     );
+    similar = Array.from(new Set(similar));
     if (similar.length < 4) {
       payload.forEach((element) => {
         if (
           el.userWord.optional.partOfSpeechCode === element.userWord.optional.partOfSpeechCode &&
-          element.word !== el.word
+          element.word !== el.word &&
+          !similar.includes(element)
         ) {
-          similar.push(element);
+          similar.concat(element);
         }
       });
     }
+    similar = Array.from(new Set(similar));
     if (similar.length > 4) {
-      const newsimilar = similar.filter(
+      let newsimilar = similar.filter(
         (element) =>
           el.wordTranslate.substr(-2) === element.wordTranslate.substr(-2) &&
           element.word !== el.word
       );
+      newsimilar = Array.from(new Set(similar));
       if (newsimilar.length > 4) {
         similar = getRandomValuesFromArray(newsimilar, 3);
         const newEl = el;
@@ -60,9 +64,10 @@ const getSimilarWords = (payload, appMode, userWords) => {
     }
     if (similar.length < 4) {
       const similarWord = similar.map((word) => word.word);
-      const restWords = payload.filter(
+      let restWords = payload.filter(
         (element) => el.word !== element.word && !similarWord.includes(element.word)
       );
+      restWords = Array.from(new Set(restWords));
       const restCount = 4 - similar.length - 1;
       const newRest = getRandomValuesFromArray(restWords, restCount);
       similar = similar.concat(newRest);
