@@ -1,2 +1,0 @@
-export const UPDATE_CHART_DATA = 'UPDATE_CHART_DATA';
-export const GET_ALL_WORDS = 'GET_ALL_WORDS';
